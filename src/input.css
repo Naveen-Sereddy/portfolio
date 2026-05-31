@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------- base */
+@layer base {
+  /* Dark theme (default) = deep WINE burgundy, cream text, xanthous accents */
+  :root {
+    --ink-950: 94 15 26;     /* #5E0F1A deeper, richer wine (less "alert red") */
+    --ink-900: 82 12 22;     /* nav */
+    --ink-800: 72 10 19;     /* cards / frames (darker = inset) */
+    --ink-700: 56 7 14;      /* browser bar */
+    --ink-600: 120 26 42;    /* lighter wine for hovers */
+    --bone: 247 236 207;     /* cream body text */
+    --bone-muted: 232 214 186;
+    --bone-dim: 221 201 175;  /* legible small mono labels on wine */
+    --line: 247 236 207;     /* cream hairlines at low opacity */
+    --gold: 247 181 56;      /* accent + headings = Xanthous */
+    --btn-fg: 94 15 26;      /* wine text on the xanthous button */
+    --grain-opacity: 0.03;
+
+    --sb-track: #3A070E;
+    --sb-thumb: #6e1828;
+    --sb-thumb-hover: #8a2436;
+  }
+
+  /* Poster color blocks: re-map tokens so inner classes recolor automatically.
+     Same in both themes (these are brand blocks). */
+  .on-burgundy {
+    --ink-950: 120 1 22; --ink-900: 90 0 17; --ink-800: 90 0 17;
+    --ink-700: 70 0 13;  --ink-600: 60 0 11;
+    --bone: 247 236 207; --bone-muted: 228 206 175; --bone-dim: 201 177 151;
+    --line: 247 236 207; --gold: 247 181 56; --btn-fg: 120 1 22;
+  }
+  .on-xanthous {
+    --ink-950: 247 181 56; --ink-900: 247 181 56; --ink-800: 120 1 22;
+    --ink-700: 120 1 22;   --ink-600: 110 1 20;
+    --bone: 36 8 12; --bone-muted: 92 12 26; --bone-dim: 120 40 50;
+    --line: 36 8 12; --gold: 120 1 22; --btn-fg: 247 236 207;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Smooth theme cross-fade */
+  body, .card, .browser-frame, .browser-bar, nav, header, .chip, .process-step {
+    transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+  }
+
+  body {
+    @apply bg-ink-950 text-bone font-sans antialiased;
+    overflow-x: hidden;
+    font-feature-settings: "cv11", "ss01";
+    /* Subtle top-to-bottom depth (lifts the top, deepens the base). Theme-safe. */
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.025) 0%, rgba(0, 0, 0, 0) 22%, rgba(0, 0, 0, 0.18) 100%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    @apply bg-gold/30 text-bone;
+  }
+
+  /* Headlines */
+  h1, h2, h3 {
+    @apply font-serif tracking-tightest;
+    font-optical-sizing: auto;
+  }
+
+  /* Focus visibility for keyboard users */
+  :focus-visible {
+    @apply outline-none ring-2 ring-gold ring-offset-2 ring-offset-ink-950 rounded-sm;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--sb-track); }
+  ::-webkit-scrollbar-thumb { background: var(--sb-thumb); border-radius: 99px; border: 2px solid var(--sb-track); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--sb-thumb-hover); }
+}
+
+/* ---------------------------------------------------------------- components */
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-container px-6 sm:px-8;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[0.7rem] uppercase tracking-[0.22em] text-bone-dim;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3
+           text-sm font-medium cursor-pointer select-none
+           transition-all duration-300 ease-out-expo
+           min-h-[44px]
+           hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] active:duration-100;
+  }
+  /* Primary = xanthous with a soft glass sheen (top highlight + light edge) */
+  .btn-primary {
+    @apply btn bg-gold font-semibold
+           shadow-[0_8px_24px_-12px_rgba(247,181,56,0.55)]
+           hover:shadow-[0_16px_44px_-12px_rgba(247,181,56,0.7)];
+    color: rgb(var(--btn-fg));
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0) 48%);
+    border: 1px solid rgba(255,255,255,0.28);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), 0 8px 24px -12px rgba(247,181,56,0.55);
+  }
+  .btn-primary:hover { background-color: rgb(var(--gold)); }
+  /* Frosted glass — theme-aware (cream frost on burgundy, burgundy frost on yellow) */
+  .btn-ghost {
+    @apply btn text-bone;
+    background: rgb(var(--bone) / 0.08);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgb(var(--bone) / 0.2);
+    box-shadow: inset 0 1px 0 rgb(var(--bone) / 0.18), 0 10px 30px -16px rgba(0,0,0,0.55);
+  }
+  .btn-ghost:hover {
+    background: rgb(var(--bone) / 0.14);
+    border-color: rgb(var(--bone) / 0.34);
+  }
+  /* Burgundy fill — for use on xanthous backgrounds */
+  .btn-burgundy {
+    @apply btn bg-burgundy text-cream font-semibold
+           hover:bg-burgundy-soft;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line/10
+           bg-line/[0.03] px-3 py-1.5 font-mono text-[0.7rem] uppercase tracking-wider text-bone-muted;
+  }
+
+  .link-underline {
+    @apply relative cursor-pointer transition-colors duration-200 hover:text-bone;
+  }
+  .link-underline::after {
+    content: "";
+    @apply absolute left-0 -bottom-0.5 h-px w-full origin-right scale-x-0 bg-gold
+           transition-transform duration-300 ease-out-expo;
+  }
+  .link-underline:hover::after { @apply origin-left scale-x-100; }
+
+  /* Active nav section */
+  .link-underline.nav-active { @apply text-bone; }
+  .link-underline.nav-active::after { transform: scaleX(1); transform-origin: left; }
+
+  /* Button arrow nudge */
+  .btn-primary svg, .btn-ghost svg { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); }
+  .btn-primary:hover svg { transform: translateX(2px); }
+
+  .card {
+    @apply rounded-2xl backdrop-blur-md;
+    background: rgb(var(--bone) / 0.05);
+    border: 1px solid rgb(var(--bone) / 0.12);
+    box-shadow: inset 0 1px 0 rgb(var(--bone) / 0.1), 0 16px 40px -24px rgba(0,0,0,0.55);
+  }
+
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-line/[0.12] to-transparent;
+  }
+
+  /* Form fields */
+  .field-label {
+    @apply mb-2 flex items-center gap-2 font-mono text-[0.66rem] uppercase tracking-[0.18em] text-bone-muted;
+  }
+  .field-label svg { @apply h-3.5 w-3.5 text-gold; }
+  .input {
+    @apply w-full rounded-xl px-4 py-3 text-sm text-bone outline-none transition-all duration-200;
+    background: rgb(var(--bone) / 0.05);
+    border: 1px solid rgb(var(--bone) / 0.16);
+  }
+  .input::placeholder { color: rgb(var(--bone-dim)); }
+  .input:focus {
+    border-color: rgb(var(--gold));
+    box-shadow: 0 0 0 3px rgb(var(--gold) / 0.2);
+    background: rgb(var(--bone) / 0.08);
+  }
+
+  .process-step {
+    @apply relative rounded-xl border border-line/[0.07] bg-line/[0.02] px-3 py-3
+           text-center font-mono text-[0.72rem] uppercase tracking-[0.14em] text-bone-muted
+           transition-colors duration-300 hover:border-gold/40 hover:text-bone;
+  }
+
+  /* project gallery pieces */
+  .browser-frame {
+    @apply overflow-hidden rounded-2xl border border-line/10 bg-ink-800 shadow-2xl shadow-black/40;
+  }
+  .browser-bar {
+    @apply flex items-center gap-1.5 border-b border-line/[0.06] bg-ink-700/60 px-4 py-2.5;
+  }
+  .thumb {
+    @apply relative shrink-0 overflow-hidden rounded-lg border border-line/[0.08] bg-ink-800
+           cursor-pointer transition-all duration-300 hover:border-gold/50;
+  }
+  .thumb img { @apply transition-transform duration-500 ease-out-expo; }
+  .thumb:hover img { @apply scale-105; }
+}
+
+/* ---------------------------------------------------------------- utilities */
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-br from-bone via-bone to-bone-dim bg-clip-text text-transparent;
+  }
+  .gold-gradient {
+    background: linear-gradient(120deg, #FFD37A 0%, #F7B538 45%, #D6951F 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  /* On a xanthous (yellow) block, the headline accent must be burgundy in both themes */
+  .on-xanthous .gold-gradient {
+    background: linear-gradient(120deg, #94122A 0%, #780116 55%, #5A0011 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  /* On a burgundy block, the headline accent must be xanthous in both themes */
+  .on-burgundy .gold-gradient {
+    background: linear-gradient(120deg, #FFD37A 0%, #F7B538 50%, #D6951F 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Reveal-on-scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-in { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.08s; }
+  .reveal-delay-2 { transition-delay: 0.16s; }
+  .reveal-delay-3 { transition-delay: 0.24s; }
+  .reveal-delay-4 { transition-delay: 0.32s; }
+
+  /* Clip-reveal for headlines */
+  .line-mask { overflow: hidden; }
+  .line-mask > span {
+    display: block;
+    transform: translateY(110%);
+    transition: transform 1s cubic-bezier(0.16,1,0.3,1);
+  }
+  .line-mask.is-in > span { transform: translateY(0); }
+
+  .grain::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .radial-fade {
+    -webkit-mask-image: radial-gradient(circle at center, black 55%, transparent 78%);
+    mask-image: radial-gradient(circle at center, black 55%, transparent 78%);
+  }
+
+  .no-scroll { overflow: hidden; }
+}
+
+/* ---------------------------------------------------------------- lenis smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ---------------------------------------------------------------- reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal, .line-mask > span { opacity: 1 !important; transform: none !important; }
+}
