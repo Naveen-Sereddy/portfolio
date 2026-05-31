@@ -1,0 +1,14 @@
+{
+  "name": "naveen-madhav-portfolio",
+  "version": "1.0.0",
+  "description": "Personal portfolio — Naveen Madhav, UX/UI Designer",
+  "private": true,
+  "scripts": {
+    "dev": "tailwindcss -i ./src/input.css -o ./dist/styles.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./dist/styles.css --minify",
+    "serve": "python3 -m http.server 8080"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
