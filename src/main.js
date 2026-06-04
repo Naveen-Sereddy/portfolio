@@ -178,10 +178,10 @@
       url: "https://binsanddeals.com",
       urlLabel: "binsanddeals.com",
       shots: [
-        { src: "assets/projects/bins-and-deals/bins-1.png", cap: "Landing hero, bold type, a clear offer, and a fast first paint" },
+        { src: "assets/projects/bins-and-deals/bins-1.png", cap: "Landing hero, bold display type and a clear deals-from-$2 offer" },
         { src: "assets/projects/bins-and-deals/bins-2.png", cap: "Color-tag pricing system, every item priced by its tag, no haggling" },
-        { src: "assets/projects/bins-and-deals/bins-4.png", cap: "What we sell, category grid with a weekly-inventory CTA" },
-        { src: "assets/projects/bins-and-deals/bins-6.png", cap: "Visit our store, address, hours and an embedded map" },
+        { src: "assets/projects/bins-and-deals/bins-3.png", cap: "In-store claw machine, a playful reason to come browse" },
+        { src: "assets/projects/bins-and-deals/bins-4.png", cap: "Store hours and weekly schedule, with contact details" },
         { src: "assets/projects/bins-and-deals/bins-5.png", cap: "Find us online, Facebook and Marketplace funnels" },
       ],
     },
@@ -244,7 +244,7 @@
           </div>
           <figure class="mt-9 rounded-2xl border-l-2 border-gold bg-line/[0.05] p-6 sm:p-7">
             <p class="eyebrow mb-3 text-gold">What made it hard</p>
-            <blockquote class="font-serif text-lg font-light leading-relaxed text-bone sm:text-xl">${p.study.credibility}</blockquote>
+            <blockquote class="font-serif text-lg font-normal leading-relaxed text-bone sm:text-xl">${p.study.credibility}</blockquote>
           </figure>
         </div>`
         : "";
@@ -261,7 +261,7 @@
             <span class="font-mono text-[0.66rem] uppercase tracking-[0.18em] text-bone-dim">${p.meta}</span>
           </div>
 
-          <h3 class="mt-5 text-[clamp(2rem,4.5vw,3rem)] font-light leading-none">${p.title}</h3>
+          <h3 class="mt-5 text-[clamp(2rem,4.5vw,3rem)] font-normal leading-none">${p.title}</h3>
 
           <p class="mt-5 max-w-md leading-relaxed text-bone-muted">${p.desc}</p>
 
@@ -296,10 +296,7 @@
             </div>
             <div class="relative overflow-hidden">
               <img src="${p.shots[0].src}" alt="${p.shots[0].cap.replace(/"/g, "")}" loading="lazy" decoding="async" width="1760" height="1100"
-                   class="aspect-[16/10] w-full object-cover object-top transition-transform duration-700 ease-out-expo group-hover/frame:scale-[1.02]" />
-              <div class="pointer-events-none absolute inset-0 flex items-center justify-center bg-ink-950/0 opacity-0 transition-all duration-300 group-hover/frame:bg-ink-950/20 group-hover/frame:opacity-100">
-                <span class="rounded-full border border-line/20 bg-ink-900/80 px-4 py-2 font-mono text-[0.7rem] uppercase tracking-widest text-bone backdrop-blur">Open gallery</span>
-              </div>
+                   class="aspect-[16/10] w-full object-cover object-top transition-transform duration-[800ms] ease-out-expo group-hover/frame:scale-[1.035]" />
             </div>
           </div>
           <div class="mt-3 grid grid-cols-3 gap-2.5 sm:grid-cols-4 sm:gap-3">${thumbs}</div>
@@ -415,6 +412,30 @@
   if (menuClose) menuClose.addEventListener("click", closeMenu);
   $$(".mobile-link").forEach((a) => a.addEventListener("click", closeMenu));
 
+  /* ------------------------------------------------------------ theme toggle */
+  const root = document.documentElement;
+  const themeBtn = $("#themeBtn");
+  const moonIcon = $(".theme-moon");
+  const sunIcon = $(".theme-sun");
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+  const syncTheme = () => {
+    const isDark = root.classList.contains("dark");
+    if (moonIcon) moonIcon.classList.toggle("hidden", isDark); // moon shows in light (go dark)
+    if (sunIcon) sunIcon.classList.toggle("hidden", !isDark);  // sun shows in dark (go light)
+    if (metaTheme) metaTheme.setAttribute("content", isDark ? "#0E1B2C" : "#E9E4D8");
+    if (themeBtn) themeBtn.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
+  };
+  syncTheme(); // reflect the theme applied pre-paint by the head script
+
+  if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+      const isDark = root.classList.toggle("dark");
+      try { localStorage.setItem("theme", isDark ? "dark" : "light"); } catch (e) {}
+      syncTheme();
+    });
+  }
+
 
   /* ------------------------------------------------------------ lightbox */
   const lb = $("#lightbox");
@@ -491,7 +512,7 @@
           background: { color: { value: "transparent" } },
           particles: {
             number: { value: 90, density: { enable: true, width: 400, height: 400 } },
-            color: { value: ["#D8A657", "#E8C593", "#F5F3EF"] },
+            color: { value: ["#D9B47E", "#E8CFA0", "#F5EFE3"] },
             shape: { type: "circle" },
             size: { value: { min: 0.4, max: 1.7 } },
             opacity: {
@@ -576,15 +597,16 @@
 
     // Subtle 3D tilt on project frames
     $$(".browser-frame").forEach((frame) => {
-      frame.addEventListener("pointerenter", () => { frame.style.transition = "none"; });
+      // transform follows instantly (no transition), shadow animates separately via CSS
+      frame.addEventListener("pointerenter", () => { frame.style.transition = "box-shadow 0.4s ease"; });
       frame.addEventListener("pointermove", (e) => {
         const r = frame.getBoundingClientRect();
         const px = (e.clientX - r.left) / r.width - 0.5;
         const py = (e.clientY - r.top) / r.height - 0.5;
-        frame.style.transform = `perspective(1000px) rotateY(${px * 4.5}deg) rotateX(${-py * 4.5}deg)`;
+        frame.style.transform = `perspective(1000px) rotateY(${px * 4.5}deg) rotateX(${-py * 4.5}deg) translateY(-4px)`;
       });
       frame.addEventListener("pointerleave", () => {
-        frame.style.transition = "transform 0.5s cubic-bezier(0.16,1,0.3,1)";
+        frame.style.transition = "transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease";
         frame.style.transform = "";
       });
     });

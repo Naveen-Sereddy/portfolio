@@ -20,11 +20,11 @@ module.exports = {
           dim: "rgb(var(--bone-dim) / <alpha-value>)",
         },
         line: "rgb(var(--line) / <alpha-value>)",
-        // `gold` = theme accent (xanthous in dark, burgundy in light) via CSS var
+        // `gold` = theme accent (champagne) via CSS var
         gold: {
           DEFAULT: "rgb(var(--gold) / <alpha-value>)",
-          soft: "#FFC95A",
-          deep: "#C98A1E",
+          soft: "#E8CFA0",
+          deep: "#C49A5C",
         },
         // Fixed brand colors for poster-style blocks (same in both themes)
         xanthous: "#F7B538",
@@ -40,6 +40,7 @@ module.exports = {
         serif: ['Fraunces', 'Georgia', 'serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        ancola: ['Ancola', 'system-ui', 'sans-serif'],
       },
       letterSpacing: {
         tightest: '-0.04em',
