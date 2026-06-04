@@ -2,50 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Ancola display font (local file) — used for the logo + the name */
+@font-face {
+  font-family: "Ancola";
+  src: url("../assets/fonts/ancola-regular.ttf") format("truetype"),
+       url("../assets/fonts/ancola-regular.otf") format("opentype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ---------------------------------------------------------------- base */
 @layer base {
-  /* Dark theme (default) = deep WINE burgundy, cream text, xanthous accents */
+  /* Light theme = Serenade cream (60%), Vermilion accent (30%), charcoal text (10%) */
   :root {
-    --ink-950: 94 15 26;     /* #5E0F1A deeper, richer wine (less "alert red") */
-    --ink-900: 82 12 22;     /* nav */
-    --ink-800: 72 10 19;     /* cards / frames (darker = inset) */
-    --ink-700: 56 7 14;      /* browser bar */
-    --ink-600: 120 26 42;    /* lighter wine for hovers */
-    --bone: 247 236 207;     /* cream body text */
-    --bone-muted: 232 214 186;
-    --bone-dim: 221 201 175;  /* legible small mono labels on wine */
-    --line: 247 236 207;     /* cream hairlines at low opacity */
-    --gold: 247 181 56;      /* accent + headings = Xanthous */
-    --btn-fg: 94 15 26;      /* wine text on the xanthous button */
-    --grain-opacity: 0.03;
+    --ink-950: 255 237 227;  /* #FFEDE3 Serenade page background */
+    --ink-900: 253 230 219;  /* nav (slightly deeper cream) */
+    --ink-800: 255 251 247;  /* cards / frames = near-white so they lift */
+    --ink-700: 251 234 225;  /* browser bar */
+    --ink-600: 240 210 195;  /* muted surface / hovers */
+    --bone: 38 33 29;        /* warm charcoal body text */
+    --bone-muted: 92 84 77;
+    --bone-dim: 128 118 109;  /* legible small labels on cream */
+    --line: 38 33 29;        /* charcoal hairlines at low opacity */
+    --gold: 250 77 1;        /* accent = Vermilion #FA4D01 */
+    --btn-fg: 255 241 233;   /* cream text on the vermilion button */
+    --band: 246 217 199;     /* alternating section band (deeper peach) */
+    --grain-opacity: 0.02;
 
-    --sb-track: #3A070E;
-    --sb-thumb: #6e1828;
-    --sb-thumb-hover: #8a2436;
+    --sb-track: #F4DFD2;
+    --sb-thumb: #E2BCA9;
+    --sb-thumb-hover: #D0A38C;
   }
 
-  /* Poster color blocks: re-map tokens so inner classes recolor automatically.
-     Same in both themes (these are brand blocks). */
+  /* Dark theme = warm near-black, cream text, same Vermilion accent */
+  .dark {
+    --ink-950: 23 18 15;     /* warm near-black background */
+    --ink-900: 34 28 23;     /* nav */
+    --ink-800: 40 32 26;     /* cards / frames */
+    --ink-700: 28 22 18;     /* browser bar */
+    --ink-600: 62 50 42;     /* hovers */
+    --bone: 243 231 220;     /* warm cream text */
+    --bone-muted: 201 184 172;
+    --bone-dim: 156 140 128;
+    --line: 243 231 220;     /* cream hairlines */
+    --gold: 250 77 1;        /* Vermilion accent (same) */
+    --btn-fg: 255 241 233;   /* cream text on the vermilion button */
+    --band: 33 26 21;        /* alternating section band (darker) */
+    --grain-opacity: 0.04;
+
+    --sb-track: #1A1512;
+    --sb-thumb: #3a302a;
+    --sb-thumb-hover: #4d4038;
+  }
+  .dark body {
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.28) 100%);
+  }
+
+  /* Dark anchor block (footer): charcoal surface, cream text, vermilion accent. */
   .on-burgundy {
-    --ink-950: 120 1 22; --ink-900: 90 0 17; --ink-800: 90 0 17;
-    --ink-700: 70 0 13;  --ink-600: 60 0 11;
-    --bone: 247 236 207; --bone-muted: 228 206 175; --bone-dim: 201 177 151;
-    --line: 247 236 207; --gold: 247 181 56; --btn-fg: 120 1 22;
-  }
-  .on-xanthous {
-    --ink-950: 247 181 56; --ink-900: 247 181 56; --ink-800: 120 1 22;
-    --ink-700: 120 1 22;   --ink-600: 110 1 20;
-    --bone: 36 8 12; --bone-muted: 92 12 26; --bone-dim: 120 40 50;
-    --line: 36 8 12; --gold: 120 1 22; --btn-fg: 247 236 207;
+    --ink-950: 36 31 28; --ink-900: 30 26 23; --ink-800: 44 38 34;
+    --ink-700: 30 26 23;  --ink-600: 56 49 44;
+    --bone: 255 237 227; --bone-muted: 226 210 200; --bone-dim: 190 174 163;
+    --line: 255 237 227; --gold: 250 77 1; --btn-fg: 255 241 233;
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    font-size: 17px; /* global bump so all rem-based text reads a touch larger */
   }
 
   /* Smooth theme cross-fade */
-  body, .card, .browser-frame, .browser-bar, nav, header, .chip, .process-step {
+  body, .band, .card, .browser-frame, .browser-bar, nav, header, .chip, .process-step {
     transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
   }
 
@@ -53,8 +82,8 @@
     @apply bg-ink-950 text-bone font-sans antialiased;
     overflow-x: hidden;
     font-feature-settings: "cv11", "ss01";
-    /* Subtle top-to-bottom depth (lifts the top, deepens the base). Theme-safe. */
-    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.025) 0%, rgba(0, 0, 0, 0) 22%, rgba(0, 0, 0, 0.18) 100%);
+    /* Subtle warm top-to-bottom depth. */
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0) 30%, rgba(180, 90, 40, 0.06) 100%);
     background-attachment: fixed;
   }
 
@@ -98,29 +127,20 @@
            min-h-[44px]
            hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] active:duration-100;
   }
-  /* Primary = xanthous with a soft glass sheen (top highlight + light edge) */
+  /* Primary = clean solid gold fill */
   .btn-primary {
-    @apply btn bg-gold font-semibold
-           shadow-[0_8px_24px_-12px_rgba(247,181,56,0.55)]
-           hover:shadow-[0_16px_44px_-12px_rgba(247,181,56,0.7)];
+    @apply btn bg-gold font-semibold hover:bg-gold-soft;
     color: rgb(var(--btn-fg));
-    background-image: linear-gradient(180deg, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0) 48%);
-    border: 1px solid rgba(255,255,255,0.28);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), 0 8px 24px -12px rgba(247,181,56,0.55);
   }
-  .btn-primary:hover { background-color: rgb(var(--gold)); }
-  /* Frosted glass — theme-aware (cream frost on burgundy, burgundy frost on yellow) */
+  /* Secondary = simple bordered button */
   .btn-ghost {
     @apply btn text-bone;
-    background: rgb(var(--bone) / 0.08);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgb(var(--bone) / 0.2);
-    box-shadow: inset 0 1px 0 rgb(var(--bone) / 0.18), 0 10px 30px -16px rgba(0,0,0,0.55);
+    background: transparent;
+    border: 1px solid rgb(var(--bone) / 0.22);
   }
   .btn-ghost:hover {
-    background: rgb(var(--bone) / 0.14);
-    border-color: rgb(var(--bone) / 0.34);
+    background: rgb(var(--bone) / 0.06);
+    border-color: rgb(var(--bone) / 0.4);
   }
   /* Burgundy fill — for use on xanthous backgrounds */
   .btn-burgundy {
@@ -152,11 +172,13 @@
   .btn-primary:hover svg { transform: translateX(2px); }
 
   .card {
-    @apply rounded-2xl backdrop-blur-md;
-    background: rgb(var(--bone) / 0.05);
-    border: 1px solid rgb(var(--bone) / 0.12);
-    box-shadow: inset 0 1px 0 rgb(var(--bone) / 0.1), 0 16px 40px -24px rgba(0,0,0,0.55);
+    @apply rounded-2xl;
+    background: rgb(var(--ink-800));
+    border: 1px solid rgb(var(--bone) / 0.1);
+    box-shadow: 0 18px 44px -26px rgba(90, 45, 20, 0.35);
   }
+
+  .band { background-color: rgb(var(--band)); }
 
   .hairline {
     @apply h-px w-full bg-gradient-to-r from-transparent via-line/[0.12] to-transparent;
@@ -187,7 +209,8 @@
 
   /* project gallery pieces */
   .browser-frame {
-    @apply overflow-hidden rounded-2xl border border-line/10 bg-ink-800 shadow-2xl shadow-black/40;
+    @apply overflow-hidden rounded-2xl border border-line/10 bg-ink-800 shadow-2xl shadow-black/40
+           transition-shadow duration-500 ease-out-expo hover:shadow-[0_36px_80px_-24px_rgba(0,0,0,0.65)];
   }
   .browser-bar {
     @apply flex items-center gap-1.5 border-b border-line/[0.06] bg-ink-700/60 px-4 py-2.5;
@@ -206,21 +229,7 @@
     @apply bg-gradient-to-br from-bone via-bone to-bone-dim bg-clip-text text-transparent;
   }
   .gold-gradient {
-    background: linear-gradient(120deg, #FFD37A 0%, #F7B538 45%, #D6951F 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  /* On a xanthous (yellow) block, the headline accent must be burgundy in both themes */
-  .on-xanthous .gold-gradient {
-    background: linear-gradient(120deg, #94122A 0%, #780116 55%, #5A0011 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  /* On a burgundy block, the headline accent must be xanthous in both themes */
-  .on-burgundy .gold-gradient {
-    background: linear-gradient(120deg, #FFD37A 0%, #F7B538 50%, #D6951F 100%);
+    background: linear-gradient(120deg, #FF6A2A 0%, #FA4D01 55%, #D84200 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
