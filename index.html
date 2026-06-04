@@ -3,7 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#5E0F1A" />
+  <meta name="theme-color" content="#17120F" />
+  <!-- Apply saved theme before paint to avoid flash. Default: dark. -->
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("theme") !== "light") {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (e) {
+        document.documentElement.classList.add("dark");
+      }
+    })();
+  </script>
   <title>Naveen Madhav, UX/UI Designer</title>
   <meta name="description" content="Naveen Madhav is a UX/UI designer who turns research, wireframes, and Figma files into products people actually want to use. Selected work, case studies, and contact." />
 
@@ -32,7 +44,7 @@
       <nav class="flex items-center justify-between rounded-xl border border-line/[0.07] bg-ink-900/70 px-3 py-2.5 backdrop-blur-xl sm:px-4">
         <!-- Logo mark -->
         <a href="#top" aria-label="Home · Naveen Madhav" class="group flex items-center">
-          <span class="grid h-9 min-w-[2.75rem] place-items-center rounded-xl bg-gold/15 font-serif text-[0.82rem] font-semibold tracking-wide text-gold transition-colors group-hover:bg-gold/25">NM</span>
+          <span class="grid h-11 min-w-[3.1rem] place-items-center rounded-xl bg-gold/15 font-ancola text-[1.05rem] tracking-wide text-bone transition-colors group-hover:bg-gold/25">NM</span>
         </a>
 
         <!-- Center links (desktop) -->
@@ -54,6 +66,12 @@
           </a>
 
           <span class="mx-1 hidden h-5 w-px bg-line/15 sm:block"></span>
+
+          <!-- Theme toggle -->
+          <button id="themeBtn" aria-label="Switch to dark theme" class="grid h-9 w-9 place-items-center rounded-full text-bone-muted transition-colors hover:text-gold cursor-pointer">
+            <svg class="theme-moon h-[1.15rem] w-[1.15rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="theme-sun hidden h-[1.2rem] w-[1.2rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.22 4.22l1.77 1.77M18.01 18.01l1.77 1.77M2 12h2.5M19.5 12H22M4.22 19.78l1.77-1.77M18.01 5.99l1.77-1.77"/></svg>
+          </button>
 
           <a href="#contact" class="ml-1 hidden md:inline-flex btn-primary !px-5 !py-2 !min-h-0 text-[0.8rem]">
             Get in touch
@@ -94,7 +112,7 @@
     <section class="relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
       <!-- ambient glows -->
       <div class="pointer-events-none absolute -top-40 right-[-10%] h-[520px] w-[520px] rounded-full bg-gold/10 blur-[120px]"></div>
-      <div class="pointer-events-none absolute top-1/3 left-[-15%] h-[440px] w-[440px] rounded-full bg-[#3A000A]/40 blur-[130px]"></div>
+      <div class="pointer-events-none absolute top-1/3 left-[-15%] h-[440px] w-[440px] rounded-full bg-[#FA4D01]/[0.07] blur-[130px]"></div>
 
       <div class="wrap relative grid items-stretch gap-12 lg:grid-cols-12 lg:gap-10">
         <!-- copy -->
@@ -108,18 +126,18 @@
               Available for work · Open to relocate
             </span>
             <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <span class="font-serif text-xl text-bone sm:text-2xl">Naveen Madhav</span>
+              <span class="font-ancola text-2xl text-gold sm:text-[1.7rem]">Naveen Madhav</span>
               <span class="h-3.5 w-px bg-line/25"></span>
               <span class="font-mono text-[0.74rem] uppercase tracking-[0.16em] text-gold">UX / UI Designer · Front-End Dev</span>
             </div>
           </div>
 
-          <h1 class="text-[clamp(2.7rem,8vw,5.6rem)] font-light leading-[0.96]">
+          <h1 class="text-[clamp(2.7rem,8vw,5.6rem)] font-normal leading-[0.96]">
             <span class="line-mask block"><span>Designing clarity</span></span>
             <span class="line-mask block"><span>into <em class="gold-gradient not-italic font-normal italic">complex</em> products.</span></span>
           </h1>
 
-          <p class="reveal reveal-delay-2 mt-7 max-w-xl text-lg leading-relaxed text-bone-muted">
+          <p class="reveal reveal-delay-2 mt-7 max-w-xl text-xl leading-relaxed text-bone-muted">
             I turn research, wireframes, and Figma files into things people
             <span class="text-bone">actually want to use</span>, across healthcare portals and fintech dashboards.
           </p>
@@ -152,9 +170,10 @@
         <!-- portrait -->
         <div class="reveal reveal-delay-2 lg:relative lg:col-span-5">
           <!-- On lg: absolutely positioned so it never inflates the row height.
-               inset-y-0 makes the box span the full text-column height (eyebrow -> stats),
-               width follows the photo's aspect ratio so the box hugs the photo, centered. -->
-          <div class="group relative mx-auto h-full w-full max-w-[380px] lg:absolute lg:inset-y-0 lg:left-1/2 lg:w-auto lg:max-w-none lg:-translate-x-1/2 lg:aspect-[1100/1536]">
+               top-0 -> bottom 9rem makes the box span from the top of the copy down to
+               about the buttons row (not all the way to the stats). Width follows the
+               photo's aspect ratio so the box hugs the photo, centered. -->
+          <div class="group relative mx-auto h-full w-full max-w-[380px] lg:absolute lg:h-auto lg:bottom-[9rem] lg:top-0 lg:left-1/2 lg:w-auto lg:max-w-none lg:-translate-x-1/2 lg:aspect-[1100/1536]">
             <div class="pointer-events-none absolute -inset-4 rounded-[1.75rem] bg-gradient-to-br from-gold/25 via-transparent to-[#5E0F1A]/45 opacity-60 blur-2xl transition-opacity duration-700 group-hover:opacity-100"></div>
             <!-- sparkles field (tsParticles, vanilla) -->
             <div id="sparkles" class="pointer-events-none absolute -inset-10 z-0 radial-fade"></div>
@@ -180,13 +199,13 @@
     </section>
 
     <!-- ===================================================== WORK -->
-    <section id="work" class="relative bg-black/[0.08] py-24 shadow-[inset_0_1px_0_rgb(255_255_255/0.04)] sm:py-32">
+    <section id="work" class="relative band py-24 shadow-[inset_0_1px_0_rgb(0_0_0/0.05)] sm:py-32">
       <div class="pointer-events-none absolute right-[-8%] top-24 h-[420px] w-[420px] rounded-full bg-gold/[0.05] blur-[140px]"></div>
       <div class="wrap relative">
         <div class="mb-16 flex flex-wrap items-end justify-between gap-6">
           <div>
             <p class="eyebrow reveal mb-4">01 · Selected Work</p>
-            <h2 class="reveal reveal-delay-1 text-[clamp(2.2rem,5vw,3.6rem)] font-light leading-tight">
+            <h2 class="reveal reveal-delay-1 text-[clamp(2.2rem,5vw,3.6rem)] font-normal leading-tight">
               Three problems,<br>solved end to end.
             </h2>
           </div>
@@ -207,7 +226,7 @@
 
         <div class="grid gap-14 lg:grid-cols-12">
           <div class="lg:col-span-7">
-            <h2 class="reveal reveal-delay-1 max-w-2xl text-[clamp(1.8rem,4vw,2.8rem)] font-light leading-[1.15]">
+            <h2 class="reveal reveal-delay-1 max-w-2xl text-[clamp(1.8rem,4vw,2.8rem)] font-normal leading-[1.15]">
               I’m a designer who treats <em class="gold-gradient italic">research</em> as the first draft of the interface.
             </h2>
             <div class="reveal reveal-delay-2 mt-8 max-w-xl space-y-5 text-bone-muted leading-relaxed">
@@ -276,13 +295,13 @@
     </section>
 
     <!-- ===================================================== TESTIMONIALS -->
-    <section id="praise" class="relative bg-black/[0.08] py-24 shadow-[inset_0_1px_0_rgb(255_255_255/0.04)] sm:py-28">
+    <section id="praise" class="relative band py-24 shadow-[inset_0_1px_0_rgb(0_0_0/0.05)] sm:py-28">
       <div class="pointer-events-none absolute left-[-10%] top-10 h-[360px] w-[360px] rounded-full bg-gold/[0.06] blur-[130px]"></div>
       <div class="wrap relative">
         <div class="mb-12 flex flex-wrap items-end justify-between gap-6">
           <div>
             <p class="eyebrow reveal mb-4">02.5 · Kind words</p>
-            <h2 class="reveal reveal-delay-1 text-[clamp(2rem,4.5vw,3.2rem)] font-light leading-tight">
+            <h2 class="reveal reveal-delay-1 text-[clamp(2rem,4.5vw,3.2rem)] font-normal leading-tight">
               What people<br><em class="gold-gradient italic">say</em> about working with me.
             </h2>
           </div>
@@ -294,7 +313,7 @@
         <div class="grid gap-6 md:grid-cols-3">
           <figure class="reveal card flex flex-col p-7">
             <svg class="mb-5 h-7 w-7 text-gold/60" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.5 7C6.5 7 4 9.5 4 12.5S6.2 18 9 18c.3 0 .6 0 .9-.1C8.8 19.2 7 20 5 20v2c5 0 9-4 9-9V7H9.5zm11 0c-3 0-5.5 2.5-5.5 5.5S17.2 18 20 18c.3 0 .6 0 .9-.1-1.1 1.3-2.9 2.1-4.9 2.1v2c5 0 9-4 9-9V7h-4.5z"/></svg>
-            <blockquote class="flex-1 font-serif text-lg font-light leading-relaxed text-bone">
+            <blockquote class="flex-1 font-serif text-lg font-normal leading-relaxed text-bone">
               Naveen is the rare designer who starts with the research and ends with something shippable. He untangled a messy set of flows and made the obvious path feel obvious.
             </blockquote>
             <figcaption class="mt-6 border-t border-line/[0.08] pt-5">
@@ -305,7 +324,7 @@
 
           <figure class="reveal reveal-delay-1 card flex flex-col p-7">
             <svg class="mb-5 h-7 w-7 text-gold/60" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.5 7C6.5 7 4 9.5 4 12.5S6.2 18 9 18c.3 0 .6 0 .9-.1C8.8 19.2 7 20 5 20v2c5 0 9-4 9-9V7H9.5zm11 0c-3 0-5.5 2.5-5.5 5.5S17.2 18 20 18c.3 0 .6 0 .9-.1-1.1 1.3-2.9 2.1-4.9 2.1v2c5 0 9-4 9-9V7h-4.5z"/></svg>
-            <blockquote class="flex-1 font-serif text-lg font-light leading-relaxed text-bone">
+            <blockquote class="flex-1 font-serif text-lg font-normal leading-relaxed text-bone">
               Handoff was effortless. Clean components, thought-through edge cases, and accessibility baked in rather than bolted on. Half my usual back-and-forth disappeared.
             </blockquote>
             <figcaption class="mt-6 border-t border-line/[0.08] pt-5">
@@ -316,7 +335,7 @@
 
           <figure class="reveal reveal-delay-2 card flex flex-col p-7">
             <svg class="mb-5 h-7 w-7 text-gold/60" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.5 7C6.5 7 4 9.5 4 12.5S6.2 18 9 18c.3 0 .6 0 .9-.1C8.8 19.2 7 20 5 20v2c5 0 9-4 9-9V7H9.5zm11 0c-3 0-5.5 2.5-5.5 5.5S17.2 18 20 18c.3 0 .6 0 .9-.1-1.1 1.3-2.9 2.1-4.9 2.1v2c5 0 9-4 9-9V7h-4.5z"/></svg>
-            <blockquote class="flex-1 font-serif text-lg font-light leading-relaxed text-bone">
+            <blockquote class="flex-1 font-serif text-lg font-normal leading-relaxed text-bone">
               Naveen turned our confusing pricing into something customers actually get. Fewer “how does this work” questions, and more people walking in ready to shop.
             </blockquote>
             <figcaption class="mt-6 border-t border-line/[0.08] pt-5">
@@ -334,7 +353,7 @@
       <div class="wrap relative">
         <div class="mx-auto max-w-2xl text-center">
           <p class="eyebrow reveal mb-6">03 · Contact</p>
-          <h2 class="reveal reveal-delay-1 text-[clamp(2.2rem,6vw,4rem)] font-light leading-[1.04]">
+          <h2 class="reveal reveal-delay-1 text-[clamp(2.2rem,6vw,4rem)] font-normal leading-[1.04]">
             Let’s build something<br><em class="gold-gradient italic">people love</em> to use.
           </h2>
           <p class="reveal reveal-delay-2 mx-auto mt-6 max-w-md text-bone-muted">
@@ -412,15 +431,15 @@
   </main>
 
   <!-- ===================================================== FOOTER -->
-  <footer class="on-burgundy relative overflow-hidden bg-[#3A000A] pb-10 pt-16 text-bone">
+  <footer class="on-burgundy relative overflow-hidden bg-[#241F1C] pb-10 pt-16 text-bone">
     <div class="pointer-events-none absolute -bottom-40 left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-gold/[0.06] blur-[150px]"></div>
     <div class="wrap relative">
       <!-- top: closing CTA + quick nav -->
       <div class="flex flex-col gap-10 border-b border-line/10 pb-10 md:flex-row md:items-end md:justify-between">
         <div>
-          <a href="#contact" class="group inline-flex items-end font-serif text-[clamp(2rem,5vw,3.4rem)] font-light leading-none">
-            Let’s work together
-            <span class="ml-3 text-gold transition-transform duration-300 ease-out-expo group-hover:translate-x-1">&rarr;</span>
+          <a href="#contact" class="group inline-flex flex-col items-start font-serif text-[clamp(2rem,5vw,3.4rem)] font-normal leading-none">
+            <span>Let’s work together</span>
+            <span class="mt-3 h-[3px] w-10 rounded-full bg-gold transition-all duration-500 ease-out-expo group-hover:w-full"></span>
           </a>
           <p class="mt-4 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-bone-dim">Available for product design &amp; front-end</p>
         </div>
@@ -472,6 +491,6 @@
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
   <!-- tsParticles (vanilla slim bundle) registers global `tsParticles` -->
   <script src="https://cdn.jsdelivr.net/npm/@tsparticles/slim@3.8.1/tsparticles.slim.bundle.min.js" defer></script>
-  <script src="src/main.js?v=5" defer></script>
+  <script src="src/main.js?v=8" defer></script>
 </body>
 </html>
