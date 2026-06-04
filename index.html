@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#17120F" />
+  <meta name="theme-color" content="#0E1B2C" />
   <!-- Apply saved theme before paint to avoid flash. Default: dark. -->
   <script>
     (function () {
@@ -31,8 +31,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="dist/styles.css" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230A0A0B'/%3E%3Ctext x='16' y='21' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23D8A657' text-anchor='middle'%3ENM%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="dist/styles.css?v=2" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230E1B2C'/%3E%3Ctext x='16' y='21' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23D9B47E' text-anchor='middle'%3ENM%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
   <!-- Scroll progress -->
@@ -112,7 +112,7 @@
     <section class="relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
       <!-- ambient glows -->
       <div class="pointer-events-none absolute -top-40 right-[-10%] h-[520px] w-[520px] rounded-full bg-gold/10 blur-[120px]"></div>
-      <div class="pointer-events-none absolute top-1/3 left-[-15%] h-[440px] w-[440px] rounded-full bg-[#FA4D01]/[0.07] blur-[130px]"></div>
+      <div class="pointer-events-none absolute top-1/3 left-[-15%] h-[440px] w-[440px] rounded-full bg-[#D9B47E]/[0.07] blur-[130px]"></div>
 
       <div class="wrap relative grid items-stretch gap-12 lg:grid-cols-12 lg:gap-10">
         <!-- copy -->
@@ -174,7 +174,7 @@
                about the buttons row (not all the way to the stats). Width follows the
                photo's aspect ratio so the box hugs the photo, centered. -->
           <div class="group relative mx-auto h-full w-full max-w-[380px] lg:absolute lg:h-auto lg:bottom-[9rem] lg:top-0 lg:left-1/2 lg:w-auto lg:max-w-none lg:-translate-x-1/2 lg:aspect-[1100/1536]">
-            <div class="pointer-events-none absolute -inset-4 rounded-[1.75rem] bg-gradient-to-br from-gold/25 via-transparent to-[#5E0F1A]/45 opacity-60 blur-2xl transition-opacity duration-700 group-hover:opacity-100"></div>
+            <div class="pointer-events-none absolute -inset-4 rounded-[1.75rem] bg-gradient-to-br from-gold/25 via-transparent to-[#0A1626]/55 opacity-60 blur-2xl transition-opacity duration-700 group-hover:opacity-100"></div>
             <!-- sparkles field (tsParticles, vanilla) -->
             <div id="sparkles" class="pointer-events-none absolute -inset-10 z-0 radial-fade"></div>
             <div class="relative z-10 h-full w-full overflow-hidden rounded-3xl border border-line/10 ring-1 ring-inset ring-black/25">
@@ -431,7 +431,7 @@
   </main>
 
   <!-- ===================================================== FOOTER -->
-  <footer class="on-burgundy relative overflow-hidden bg-[#241F1C] pb-10 pt-16 text-bone">
+  <footer class="on-burgundy relative overflow-hidden bg-[#0A1626] pb-10 pt-16 text-bone">
     <div class="pointer-events-none absolute -bottom-40 left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-gold/[0.06] blur-[150px]"></div>
     <div class="wrap relative">
       <!-- top: closing CTA + quick nav -->
@@ -491,6 +491,6 @@
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
   <!-- tsParticles (vanilla slim bundle) registers global `tsParticles` -->
   <script src="https://cdn.jsdelivr.net/npm/@tsparticles/slim@3.8.1/tsparticles.slim.bundle.min.js" defer></script>
-  <script src="src/main.js?v=8" defer></script>
+  <script src="src/main.js?v=9" defer></script>
 </body>
 </html>
