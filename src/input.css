@@ -14,57 +14,57 @@
 
 /* ---------------------------------------------------------------- base */
 @layer base {
-  /* Light theme = Serenade cream (60%), Vermilion accent (30%), charcoal text (10%) */
+  /* Light theme = Stone (60%), Champagne accent (30%), Navy text (10%) */
   :root {
-    --ink-950: 255 237 227;  /* #FFEDE3 Serenade page background */
-    --ink-900: 253 230 219;  /* nav (slightly deeper cream) */
-    --ink-800: 255 251 247;  /* cards / frames = near-white so they lift */
-    --ink-700: 251 234 225;  /* browser bar */
-    --ink-600: 240 210 195;  /* muted surface / hovers */
-    --bone: 38 33 29;        /* warm charcoal body text */
-    --bone-muted: 92 84 77;
-    --bone-dim: 128 118 109;  /* legible small labels on cream */
-    --line: 38 33 29;        /* charcoal hairlines at low opacity */
-    --gold: 250 77 1;        /* accent = Vermilion #FA4D01 */
-    --btn-fg: 255 241 233;   /* cream text on the vermilion button */
-    --band: 246 217 199;     /* alternating section band (deeper peach) */
+    --ink-950: 233 228 216;  /* #E9E4D8 Stone page background */
+    --ink-900: 225 219 204;  /* #E1DBCC nav (slightly deeper stone) */
+    --ink-800: 246 242 233;  /* #F6F2E9 cards / frames = near-white so they lift */
+    --ink-700: 237 232 220;  /* #EDE8DC browser bar */
+    --ink-600: 216 208 190;  /* #D8D0BE muted surface / hovers */
+    --bone: 28 43 64;        /* #1C2B40 navy body text */
+    --bone-muted: 74 88 107;
+    --bone-dim: 110 122 138;  /* legible small labels on stone */
+    --line: 28 43 64;        /* navy hairlines at low opacity */
+    --gold: 176 138 78;      /* accent = Champagne #B08A4E (deepened for light contrast) */
+    --btn-fg: 246 242 233;   /* near-white text on the champagne button */
+    --band: 225 219 204;     /* #E1DBCC alternating section band */
     --grain-opacity: 0.02;
 
-    --sb-track: #F4DFD2;
-    --sb-thumb: #E2BCA9;
-    --sb-thumb-hover: #D0A38C;
+    --sb-track: #DCD5C6;
+    --sb-thumb: #C2B49A;
+    --sb-thumb-hover: #AE9E80;
   }
 
-  /* Dark theme = warm near-black, cream text, same Vermilion accent */
+  /* Dark theme = deep navy, stone text, champagne accent */
   .dark {
-    --ink-950: 23 18 15;     /* warm near-black background */
-    --ink-900: 34 28 23;     /* nav */
-    --ink-800: 40 32 26;     /* cards / frames */
-    --ink-700: 28 22 18;     /* browser bar */
-    --ink-600: 62 50 42;     /* hovers */
-    --bone: 243 231 220;     /* warm cream text */
-    --bone-muted: 201 184 172;
-    --bone-dim: 156 140 128;
-    --line: 243 231 220;     /* cream hairlines */
-    --gold: 250 77 1;        /* Vermilion accent (same) */
-    --btn-fg: 255 241 233;   /* cream text on the vermilion button */
-    --band: 33 26 21;        /* alternating section band (darker) */
+    --ink-950: 14 27 44;     /* #0E1B2C navy background */
+    --ink-900: 19 36 58;     /* #13243A nav */
+    --ink-800: 26 45 69;     /* #1A2D45 cards / frames */
+    --ink-700: 17 32 48;     /* #112030 browser bar */
+    --ink-600: 41 64 92;     /* #29405C hovers */
+    --bone: 230 223 210;     /* #E6DFD2 stone text */
+    --bone-muted: 179 174 159;
+    --bone-dim: 138 134 118;
+    --line: 230 223 210;     /* stone hairlines */
+    --gold: 217 180 126;     /* Champagne accent #D9B47E */
+    --btn-fg: 16 27 42;      /* navy text on the champagne button */
+    --band: 18 34 54;        /* #122236 alternating section band (deeper navy) */
     --grain-opacity: 0.04;
 
-    --sb-track: #1A1512;
-    --sb-thumb: #3a302a;
-    --sb-thumb-hover: #4d4038;
+    --sb-track: #14222F;
+    --sb-thumb: #2c3e52;
+    --sb-thumb-hover: #3c5168;
   }
   .dark body {
-    background-image: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.28) 100%);
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.30) 100%);
   }
 
-  /* Dark anchor block (footer): charcoal surface, cream text, vermilion accent. */
+  /* Dark anchor block (footer): deep navy surface, stone text, champagne accent. */
   .on-burgundy {
-    --ink-950: 36 31 28; --ink-900: 30 26 23; --ink-800: 44 38 34;
-    --ink-700: 30 26 23;  --ink-600: 56 49 44;
-    --bone: 255 237 227; --bone-muted: 226 210 200; --bone-dim: 190 174 163;
-    --line: 255 237 227; --gold: 250 77 1; --btn-fg: 255 241 233;
+    --ink-950: 10 22 38; --ink-900: 8 18 32; --ink-800: 20 35 54;
+    --ink-700: 8 18 32;  --ink-600: 34 52 76;
+    --bone: 230 223 210; --bone-muted: 186 190 198; --bone-dim: 150 158 170;
+    --line: 230 223 210; --gold: 217 180 126; --btn-fg: 16 27 42;
   }
 
   html {
@@ -82,8 +82,8 @@
     @apply bg-ink-950 text-bone font-sans antialiased;
     overflow-x: hidden;
     font-feature-settings: "cv11", "ss01";
-    /* Subtle warm top-to-bottom depth. */
-    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0) 30%, rgba(180, 90, 40, 0.06) 100%);
+    /* Subtle cool top-to-bottom depth. */
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0) 30%, rgba(40, 70, 110, 0.05) 100%);
     background-attachment: fixed;
   }
 
@@ -229,7 +229,7 @@
     @apply bg-gradient-to-br from-bone via-bone to-bone-dim bg-clip-text text-transparent;
   }
   .gold-gradient {
-    background: linear-gradient(120deg, #FF6A2A 0%, #FA4D01 55%, #D84200 100%);
+    background: linear-gradient(120deg, #EBD3A6 0%, #D9B47E 55%, #C49A5C 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;

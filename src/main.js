@@ -423,7 +423,7 @@
     const isDark = root.classList.contains("dark");
     if (moonIcon) moonIcon.classList.toggle("hidden", isDark); // moon shows in light (go dark)
     if (sunIcon) sunIcon.classList.toggle("hidden", !isDark);  // sun shows in dark (go light)
-    if (metaTheme) metaTheme.setAttribute("content", isDark ? "#17120F" : "#FFEDE3");
+    if (metaTheme) metaTheme.setAttribute("content", isDark ? "#0E1B2C" : "#E9E4D8");
     if (themeBtn) themeBtn.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
   };
   syncTheme(); // reflect the theme applied pre-paint by the head script
@@ -512,7 +512,7 @@
           background: { color: { value: "transparent" } },
           particles: {
             number: { value: 90, density: { enable: true, width: 400, height: 400 } },
-            color: { value: ["#D8A657", "#E8C593", "#F5F3EF"] },
+            color: { value: ["#D9B47E", "#E8CFA0", "#F5EFE3"] },
             shape: { type: "circle" },
             size: { value: { min: 0.4, max: 1.7 } },
             opacity: {
