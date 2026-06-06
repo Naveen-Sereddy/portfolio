@@ -178,10 +178,10 @@
       url: "https://binsanddeals.com",
       urlLabel: "binsanddeals.com",
       shots: [
-        { src: "assets/projects/bins-and-deals/bins-1.png", cap: "Landing hero, bold type, a clear offer, and a fast first paint" },
+        { src: "assets/projects/bins-and-deals/bins-1.png", cap: "Landing hero, bold display type and a clear deals-from-$2 offer" },
         { src: "assets/projects/bins-and-deals/bins-2.png", cap: "Color-tag pricing system, every item priced by its tag, no haggling" },
-        { src: "assets/projects/bins-and-deals/bins-4.png", cap: "What we sell, category grid with a weekly-inventory CTA" },
-        { src: "assets/projects/bins-and-deals/bins-6.png", cap: "Visit our store, address, hours and an embedded map" },
+        { src: "assets/projects/bins-and-deals/bins-3.png", cap: "In-store claw machine, a playful reason to come browse" },
+        { src: "assets/projects/bins-and-deals/bins-4.png", cap: "Store hours and weekly schedule, with contact details" },
         { src: "assets/projects/bins-and-deals/bins-5.png", cap: "Find us online, Facebook and Marketplace funnels" },
       ],
     },
