@@ -12,3 +12,7 @@ Thumbs.db
 PROJECT-CONTEXT.md
 
 # Keep dist/styles.css committed so Vercel serves it with no build step.
+
+# staging for case-study source (never ship)
+_incoming:*/
+_incoming/

@@ -59,30 +59,85 @@
   }
 
   /* ------------------------------------------------------------ contact form (no backend) */
-  // On submit, compose a prefilled email and open the visitor's mail app.
-  // No server, no error states — just a graceful hand-off to email.
+  // Client-side validation, then compose a prefilled email and hand off to the
+  // visitor's mail app. No server by design.
   const contactForm = $("#contactForm");
   if (contactForm) {
+    const fields = {
+      cName: (v) => v.length > 0,
+      cEmail: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+      cMessage: (v) => v.length > 1,
+    };
+    const get = (id) => (document.getElementById(id)?.value || "").trim();
+
+    const setError = (id, show) => {
+      const input = document.getElementById(id);
+      const err = document.getElementById(id + "-err");
+      if (!input || !err) return;
+      input.setAttribute("aria-invalid", show ? "true" : "false");
+      err.classList.toggle("hidden", !show);
+    };
+
+    // Clear an error as soon as the field becomes valid.
+    Object.keys(fields).forEach((id) => {
+      const input = document.getElementById(id);
+      if (input) input.addEventListener("input", () => {
+        if (fields[id](get(id))) setError(id, false);
+      });
+    });
+
     contactForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      const get = (id) => (document.getElementById(id)?.value || "").trim();
-      const name = get("cName");
-      const email = get("cEmail");
-      const message = get("cMessage");
-      const subject = encodeURIComponent(name ? `Portfolio inquiry from ${name}` : "Portfolio inquiry");
-      const bodyLines = [
-        message || "(your message)",
-        "",
-        "—",
-        name ? `From: ${name}` : "",
-        email ? `Reply to: ${email}` : "",
-      ].filter(Boolean);
-      const body = encodeURIComponent(bodyLines.join("\n"));
+      let firstInvalid = null;
+      Object.keys(fields).forEach((id) => {
+        const ok = fields[id](get(id));
+        setError(id, !ok);
+        if (!ok && !firstInvalid) firstInvalid = document.getElementById(id);
+      });
+      if (firstInvalid) { firstInvalid.focus(); return; }
+
+      const name = get("cName"), email = get("cEmail"), message = get("cMessage");
+      const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
+      const body = encodeURIComponent([message, "", "·", `From: ${name}`, `Reply to: ${email}`].join("\n"));
       const note = $("#formNote");
       if (note) note.classList.remove("hidden");
       window.location.href = `mailto:naveen.workpath@gmail.com?subject=${subject}&body=${body}`;
     });
   }
+
+  /* ------------------------------------------------------------ contact email */
+  const emailEl = $("#contactEmail");
+  const copiedEl = $("#emailCopied");
+
+  const highlightEmail = () => {
+    if (!emailEl) return;
+    emailEl.classList.remove("email-highlight");
+    void emailEl.offsetWidth; // restart the animation
+    emailEl.classList.add("email-highlight");
+    setTimeout(() => emailEl.classList.remove("email-highlight"), 2700);
+  };
+
+  if (emailEl) {
+    emailEl.addEventListener("click", () => {
+      const addr = emailEl.dataset.email || "";
+      if (addr && navigator.clipboard) {
+        navigator.clipboard.writeText(addr).then(() => {
+          if (copiedEl) {
+            copiedEl.style.opacity = "1";
+            setTimeout(() => { copiedEl.style.opacity = "0"; }, 1600);
+          }
+        }).catch(() => {});
+      }
+      // mailto still opens (no preventDefault)
+    });
+  }
+
+  // Any CTA that jumps to the contact section pulses the email into view.
+  $$('a[href="#contact"]').forEach((a) => {
+    a.addEventListener("click", () => {
+      setTimeout(highlightEmail, reduceMotion ? 150 : 900);
+    });
+  });
 
   /* ------------------------------------------------------------ project data */
   const projects = [
@@ -91,6 +146,7 @@
       index: "01",
       title: "MedBridge",
       meta: "UX Case Study · Healthcare · 2026",
+      kind: "Concept",
       desc:
         "End-to-end redesign of a patient portal, appointments, prescriptions, records, and billing unified into one calm, secure experience.",
       roles: ["Product Design", "Information Architecture", "Design System", "WCAG 2.1"],
@@ -111,12 +167,13 @@
       },
       url: null,
       urlLabel: null,
+      caseUrl: "case-medbridge/index.html",
       shots: [
-        { src: "assets/projects/medbridge/medbridge-2.png", cap: "Patient dashboard, appointments, prescriptions & health summary at a glance" },
-        { src: "assets/projects/medbridge/medbridge-3.png", cap: "Find a doctor, filterable provider directory with instant booking" },
-        { src: "assets/projects/medbridge/medbridge-5.png", cap: "Billing, invoices, balances and insurance in plain language" },
-        { src: "assets/projects/medbridge/medbridge-4.png", cap: "Account & accessibility preferences" },
-        { src: "assets/projects/medbridge/medbridge-1.png", cap: "Secure sign-in with contrast-verified inputs" },
+        { src: "case-medbridge/img/08.png", cap: "Final UI, the unified patient dashboard across desktop, tablet and mobile" },
+        { src: "case-medbridge/img/06.png", cap: "Design system, color, type, spacing and components" },
+        { src: "case-medbridge/img/02.png", cap: "Journey map for the appointment flow" },
+        { src: "case-medbridge/img/01.png", cap: "User personas" },
+        { src: "case-medbridge/img/07.png", cap: "Accessibility audit, WCAG 2.1 AA" },
       ],
     },
     {
@@ -124,6 +181,7 @@
       index: "02",
       title: "FinFlow",
       meta: "UX Case Study · B2B Fintech · 2026",
+      kind: "Concept",
       desc:
         "A B2B expense-management platform designed from research through usability testing across three roles, admin, manager, and employee.",
       roles: ["User Research", "Usability Testing", "Data Visualisation", "Design System"],
@@ -144,12 +202,13 @@
       },
       url: null,
       urlLabel: null,
+      caseUrl: "case-finflow/index.html",
       shots: [
-        { src: "assets/projects/finflow/finflow-2.png", cap: "Finance admin, spend, approvals and runway in a single view" },
-        { src: "assets/projects/finflow/finflow-3.png", cap: "All expenses, a sortable, filterable ledger with clear status tags" },
-        { src: "assets/projects/finflow/finflow-4.png", cap: "Corporate cards, issue, freeze and track spend per holder" },
-        { src: "assets/projects/finflow/finflow-5.png", cap: "Manager view, team spend and a focused approvals queue" },
-        { src: "assets/projects/finflow/finflow-6.png", cap: "Employee view, personal spend, receipts and reimbursements" },
+        { src: "case-finflow/img/08.png", cap: "Final UI, the role-based expense platform" },
+        { src: "case-finflow/img/06.png", cap: "Design system, color, type, spacing and components" },
+        { src: "case-finflow/img/02.png", cap: "Journey map, submission to approval" },
+        { src: "case-finflow/img/01.png", cap: "User personas, admin, manager and employee" },
+        { src: "case-finflow/img/07.png", cap: "Accessibility audit" },
       ],
     },
     {
@@ -157,6 +216,7 @@
       index: "03",
       title: "Bins & Deals",
       meta: "Design & Development · Live Site · 2026",
+      kind: "Live · Client",
       desc:
         "Brand, design, and front-end build for a real retail liquidation store, from blank canvas to a live marketing site that drives store visits.",
       roles: ["Web Design", "Front-End Dev", "React", "Tailwind CSS"],
@@ -199,12 +259,34 @@
       const thumbs = p.shots
         .slice(1)
         .map(
-          (s, k) => `
+          (s, k) => p.caseUrl
+            ? `
+          <a href="${p.caseUrl}" class="thumb aspect-[16/10] block" aria-label="${p.title} case study: ${s.cap.replace(/"/g, "")}">
+            <img src="${s.src}" alt="${s.cap.replace(/"/g, "")}" loading="lazy" decoding="async" width="1760" height="1100" class="h-full w-full object-cover object-top" />
+          </a>`
+            : `
           <button class="thumb aspect-[16/10]" data-gallery="${p.id}" data-idx="${k + 1}" aria-label="View: ${s.cap.replace(/"/g, "")}">
             <img src="${s.src}" alt="${s.cap.replace(/"/g, "")}" loading="lazy" decoding="async" width="1760" height="1100" class="h-full w-full object-cover object-top" />
           </button>`
         )
         .join("");
+
+      // Primary action: case-study link for concept projects, gallery for the rest.
+      const primaryBtn = p.caseUrl
+        ? `<a href="${p.caseUrl}" class="btn-primary !px-5 !py-2.5 text-[0.8rem]">
+             View case study
+             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+           </a>`
+        : `<button class="btn-ghost text-[0.8rem] !px-5 !py-2.5" data-gallery="${p.id}" data-idx="0">
+             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 5h18v14H3zM3 9h18"/></svg>
+             View gallery
+           </button>`;
+
+      // Big preview frame: link to the case study, or open the lightbox gallery.
+      const bigFrame = p.caseUrl
+        ? `<a href="${p.caseUrl}" class="browser-frame group/frame block cursor-pointer" aria-label="Open ${p.title} case study">`
+        : `<div class="browser-frame group/frame cursor-pointer" data-gallery="${p.id}" data-idx="0" role="button" tabindex="0" aria-label="Open ${p.title} gallery">`;
+      const bigFrameClose = p.caseUrl ? `</a>` : `</div>`;
 
       const liveBtn = p.url
         ? `<a href="${p.url}" target="_blank" rel="noopener" class="btn-primary !px-5 !py-2.5 text-[0.8rem]">
@@ -213,7 +295,7 @@
            </a>`
         : "";
 
-      const study = p.study
+      const study = (p.study && !p.caseUrl)
         ? `
         <!-- case study -->
         <div class="case-study border-t border-line/[0.08] pt-9">
@@ -255,10 +337,11 @@
         <div class="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
         <!-- info -->
         <div class="lg:col-span-5 ${flip ? "lg:order-2 lg:pl-4" : ""}">
-          <div class="flex items-center gap-4">
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
             <span class="font-mono text-sm text-gold">${p.index}</span>
-            <span class="h-px flex-1 max-w-[60px] bg-line/15"></span>
-            <span class="font-mono text-[0.66rem] uppercase tracking-[0.18em] text-bone-dim">${p.meta}</span>
+            <span class="h-px w-10 bg-line/15"></span>
+            <span class="font-mono text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-bone-muted">${p.meta}</span>
+            ${p.kind ? `<span class="rounded-full border border-gold/30 bg-gold/10 px-2.5 py-0.5 font-mono text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-gold">${p.kind}</span>` : ""}
           </div>
 
           <h3 class="mt-5 text-[clamp(2rem,4.5vw,3rem)] font-normal leading-none">${p.title}</h3>
@@ -272,33 +355,30 @@
           <div class="mt-8 flex items-center gap-5 border-t border-line/[0.08] pt-6">
             <div>
               <div class="font-serif text-2xl text-gold">${p.outcome.value}</div>
-              <div class="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-bone-dim">${p.outcome.label}</div>
+              <div class="font-mono text-[0.7rem] font-medium uppercase tracking-[0.14em] text-bone-muted">${p.outcome.label}</div>
             </div>
           </div>
 
           <div class="mt-7 flex flex-wrap items-center gap-3">
-            <button class="btn-ghost text-[0.8rem] !px-5 !py-2.5" data-gallery="${p.id}" data-idx="0">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 5h18v14H3zM3 9h18"/></svg>
-              View gallery
-            </button>
+            ${primaryBtn}
             ${liveBtn}
           </div>
         </div>
 
         <!-- gallery -->
         <div class="lg:col-span-7 ${flip ? "lg:order-1" : ""}">
-          <div class="browser-frame group/frame cursor-pointer" data-gallery="${p.id}" data-idx="0" role="button" tabindex="0" aria-label="Open ${p.title} gallery">
-            <div class="browser-bar">
+          ${bigFrame}
+            ${p.caseUrl ? "" : `<div class="browser-bar">
               <span class="h-2.5 w-2.5 rounded-full bg-[#ff5f57]/70"></span>
               <span class="h-2.5 w-2.5 rounded-full bg-[#febc2e]/70"></span>
               <span class="h-2.5 w-2.5 rounded-full bg-[#28c840]/70"></span>
-              <span class="ml-3 truncate font-mono text-[0.62rem] text-bone-dim">${p.id}, ${p.shots[0].cap.split(",")[0].trim().toLowerCase()}</span>
-            </div>
+              <span class="ml-3 truncate font-mono text-[0.66rem] font-medium text-bone-dim">${p.id}, ${p.shots[0].cap.split(",")[0].trim().toLowerCase()}</span>
+            </div>`}
             <div class="relative overflow-hidden">
               <img src="${p.shots[0].src}" alt="${p.shots[0].cap.replace(/"/g, "")}" loading="lazy" decoding="async" width="1760" height="1100"
                    class="aspect-[16/10] w-full object-cover object-top transition-transform duration-[800ms] ease-out-expo group-hover/frame:scale-[1.035]" />
             </div>
-          </div>
+          ${bigFrameClose}
           <div class="mt-3 grid grid-cols-3 gap-2.5 sm:grid-cols-4 sm:gap-3">${thumbs}</div>
         </div>
         </div>
@@ -412,29 +492,6 @@
   if (menuClose) menuClose.addEventListener("click", closeMenu);
   $$(".mobile-link").forEach((a) => a.addEventListener("click", closeMenu));
 
-  /* ------------------------------------------------------------ theme toggle */
-  const root = document.documentElement;
-  const themeBtn = $("#themeBtn");
-  const moonIcon = $(".theme-moon");
-  const sunIcon = $(".theme-sun");
-  const metaTheme = document.querySelector('meta[name="theme-color"]');
-
-  const syncTheme = () => {
-    const isDark = root.classList.contains("dark");
-    if (moonIcon) moonIcon.classList.toggle("hidden", isDark); // moon shows in light (go dark)
-    if (sunIcon) sunIcon.classList.toggle("hidden", !isDark);  // sun shows in dark (go light)
-    if (metaTheme) metaTheme.setAttribute("content", isDark ? "#0E1B2C" : "#E9E4D8");
-    if (themeBtn) themeBtn.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
-  };
-  syncTheme(); // reflect the theme applied pre-paint by the head script
-
-  if (themeBtn) {
-    themeBtn.addEventListener("click", () => {
-      const isDark = root.classList.toggle("dark");
-      try { localStorage.setItem("theme", isDark ? "dark" : "light"); } catch (e) {}
-      syncTheme();
-    });
-  }
 
 
   /* ------------------------------------------------------------ lightbox */
@@ -501,36 +558,51 @@
   /* ------------------------------------------------------------ sparkles (tsParticles) */
   // Gold sparkle field behind the hero portrait. Vanilla tsParticles, no React.
   // Skipped entirely when the user prefers reduced motion.
-  if (!reduceMotion && $("#sparkles") && window.tsParticles) {
-    window.tsParticles
-      .load({
-        id: "sparkles",
-        options: {
-          fullScreen: { enable: false },
-          fpsLimit: 120,
-          detectRetina: true,
-          background: { color: { value: "transparent" } },
-          particles: {
-            number: { value: 90, density: { enable: true, width: 400, height: 400 } },
-            color: { value: ["#D9B47E", "#E8CFA0", "#F5EFE3"] },
-            shape: { type: "circle" },
-            size: { value: { min: 0.4, max: 1.7 } },
-            opacity: {
-              value: { min: 0.1, max: 0.9 },
-              animation: { enable: true, speed: 3, sync: false, startValue: "random" },
+  // Desktop only: phones never download or run the particle library (big mobile win).
+  const wantSparkles = !reduceMotion
+    && $("#sparkles")
+    && window.matchMedia("(min-width: 1024px)").matches
+    && window.matchMedia("(pointer: fine)").matches;
+
+  if (wantSparkles) {
+    const initSparkles = () => {
+      if (!window.tsParticles) return;
+      window.tsParticles
+        .load({
+          id: "sparkles",
+          options: {
+            fullScreen: { enable: false },
+            fpsLimit: 60,
+            detectRetina: true,
+            background: { color: { value: "transparent" } },
+            particles: {
+              number: { value: 90, density: { enable: true, width: 400, height: 400 } },
+              color: { value: ["#D9B47E", "#E8CFA0", "#F5EFE3"] },
+              shape: { type: "circle" },
+              size: { value: { min: 0.4, max: 1.7 } },
+              opacity: {
+                value: { min: 0.1, max: 0.9 },
+                animation: { enable: true, speed: 3, sync: false, startValue: "random" },
+              },
+              move: {
+                enable: true,
+                direction: "none",
+                speed: { min: 0.05, max: 0.45 },
+                straight: false,
+                outModes: { default: "out" },
+              },
+              links: { enable: false },
             },
-            move: {
-              enable: true,
-              direction: "none",
-              speed: { min: 0.05, max: 0.45 },
-              straight: false,
-              outModes: { default: "out" },
-            },
-            links: { enable: false },
           },
-        },
-      })
-      .catch(() => {/* CDN blocked / offline, portrait still has its static glow */});
+        })
+        .catch(() => {/* CDN blocked / offline, portrait still has its static glow */});
+    };
+    // Load the particle library on demand, after first paint.
+    const s = document.createElement("script");
+    s.src = "https://cdn.jsdelivr.net/npm/@tsparticles/slim@3.8.1/tsparticles.slim.bundle.min.js";
+    s.defer = true;
+    s.onload = initSparkles;
+    document.head.appendChild(s);
   }
 
   /* ------------------------------------------------------------ smooth scroll (Lenis) */

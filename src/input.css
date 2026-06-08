@@ -27,7 +27,7 @@
     --line: 28 43 64;        /* navy hairlines at low opacity */
     --gold: 176 138 78;      /* accent = Champagne #B08A4E (deepened for light contrast) */
     --btn-fg: 246 242 233;   /* near-white text on the champagne button */
-    --band: 225 219 204;     /* #E1DBCC alternating section band */
+    --band: 222 214 195;     /* #DED6C3 alternating section band (subtle lift) */
     --grain-opacity: 0.02;
 
     --sb-track: #DCD5C6;
@@ -48,7 +48,7 @@
     --line: 230 223 210;     /* stone hairlines */
     --gold: 217 180 126;     /* Champagne accent #D9B47E */
     --btn-fg: 16 27 42;      /* navy text on the champagne button */
-    --band: 18 34 54;        /* #122236 alternating section band (deeper navy) */
+    --band: 22 40 62;        /* #16283E alternating section band (subtle lift) */
     --grain-opacity: 0.04;
 
     --sb-track: #14222F;
@@ -116,7 +116,27 @@
   }
 
   .eyebrow {
-    @apply font-mono text-[0.7rem] uppercase tracking-[0.22em] text-bone-dim;
+    @apply font-mono text-[0.8rem] font-semibold uppercase tracking-[0.18em] text-bone-muted;
+  }
+
+  /* Contact email: click-to-copy target + attention pulse when a CTA jumps here */
+  .email-link {
+    display: inline-block;
+    border-radius: 8px;
+    padding: 2px 8px;
+    margin-left: -8px;
+  }
+  @keyframes emailPulse {
+    0%   { box-shadow: 0 0 0 0 rgb(var(--gold) / 0.5), 0 0 0 0 rgb(var(--gold) / 0); background: rgb(var(--gold) / 0); }
+    18%  { box-shadow: 0 0 0 4px rgb(var(--gold) / 0.4), 0 0 26px 2px rgb(var(--gold) / 0.45); background: rgb(var(--gold) / 0.16); }
+    100% { box-shadow: 0 0 0 16px rgb(var(--gold) / 0), 0 0 0 0 rgb(var(--gold) / 0); background: rgb(var(--gold) / 0); }
+  }
+  .email-highlight {
+    animation: emailPulse 1.3s ease-out 2;
+    color: rgb(var(--gold));
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .email-highlight { animation: none; background: rgb(var(--gold) / 0.16); }
   }
 
   /* Buttons */
@@ -184,9 +204,19 @@
     @apply h-px w-full bg-gradient-to-r from-transparent via-line/[0.12] to-transparent;
   }
 
+  /* Skip to content (keyboard / screen-reader users) */
+  .skip-link {
+    @apply fixed left-4 top-4 z-[100] rounded-lg px-4 py-2.5 font-mono text-sm font-medium;
+    background: rgb(var(--gold));
+    color: rgb(var(--btn-fg));
+    transform: translateY(-150%);
+    transition: transform 0.2s ease;
+  }
+  .skip-link:focus { transform: translateY(0); }
+
   /* Form fields */
   .field-label {
-    @apply mb-2 flex items-center gap-2 font-mono text-[0.66rem] uppercase tracking-[0.18em] text-bone-muted;
+    @apply mb-2 flex items-center gap-2 font-mono text-[0.72rem] font-medium uppercase tracking-[0.16em] text-bone-muted;
   }
   .field-label svg { @apply h-3.5 w-3.5 text-gold; }
   .input {
@@ -199,6 +229,14 @@
     border-color: rgb(var(--gold));
     box-shadow: 0 0 0 3px rgb(var(--gold) / 0.2);
     background: rgb(var(--bone) / 0.08);
+  }
+  .input[aria-invalid="true"] {
+    border-color: #E89A7C;
+    box-shadow: 0 0 0 3px rgb(232 154 124 / 0.18);
+  }
+  .field-error {
+    @apply mt-1.5 font-mono text-[0.72rem] tracking-[0.01em];
+    color: #E89A7C;
   }
 
   .process-step {
