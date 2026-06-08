@@ -4,17 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0E1B2C" />
-  <!-- Apply saved theme before paint to avoid flash. Default: dark. -->
+  <!-- Dark-only site. -->
   <script>
-    (function () {
-      try {
-        if (localStorage.getItem("theme") !== "light") {
-          document.documentElement.classList.add("dark");
-        }
-      } catch (e) {
-        document.documentElement.classList.add("dark");
-      }
-    })();
+    document.documentElement.classList.add("dark");
   </script>
   <title>Naveen Madhav, UX/UI Designer</title>
   <meta name="description" content="Naveen Madhav is a UX/UI designer who turns research, wireframes, and Figma files into products people actually want to use. Selected work, case studies, and contact." />
@@ -31,10 +23,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="dist/styles.css?v=2" />
+  <link rel="stylesheet" href="dist/styles.css?v=7" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230E1B2C'/%3E%3Ctext x='16' y='21' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23D9B47E' text-anchor='middle'%3ENM%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
+  <a href="#work" class="skip-link">Skip to content</a>
   <!-- Scroll progress -->
   <div id="progress" class="fixed left-0 top-0 z-50 h-[2px] w-0 bg-gold/80"></div>
 
@@ -48,9 +41,10 @@
         </a>
 
         <!-- Center links (desktop) -->
-        <div class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 font-mono text-[0.72rem] uppercase tracking-[0.18em] text-bone-muted md:flex">
+        <div class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 font-mono text-[0.72rem] font-medium uppercase tracking-[0.16em] text-bone-muted md:flex">
           <a href="#work" class="link-underline">Work</a>
           <a href="#about" class="link-underline">About</a>
+          <a href="assets/resume/naveen-madhav-resume.pdf" target="_blank" rel="noopener" class="link-underline">Résumé</a>
           <a href="#contact" class="link-underline">Contact</a>
         </div>
 
@@ -66,12 +60,6 @@
           </a>
 
           <span class="mx-1 hidden h-5 w-px bg-line/15 sm:block"></span>
-
-          <!-- Theme toggle -->
-          <button id="themeBtn" aria-label="Switch to dark theme" class="grid h-9 w-9 place-items-center rounded-full text-bone-muted transition-colors hover:text-gold cursor-pointer">
-            <svg class="theme-moon h-[1.15rem] w-[1.15rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            <svg class="theme-sun hidden h-[1.2rem] w-[1.2rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.22 4.22l1.77 1.77M18.01 18.01l1.77 1.77M2 12h2.5M19.5 12H22M4.22 19.78l1.77-1.77M18.01 5.99l1.77-1.77"/></svg>
-          </button>
 
           <a href="#contact" class="ml-1 hidden md:inline-flex btn-primary !px-5 !py-2 !min-h-0 text-[0.8rem]">
             Get in touch
@@ -98,6 +86,7 @@
     <nav class="flex flex-1 flex-col justify-center gap-2 px-8">
       <a href="#work" class="mobile-link font-serif text-5xl tracking-tightest">Work</a>
       <a href="#about" class="mobile-link font-serif text-5xl tracking-tightest">About</a>
+      <a href="assets/resume/naveen-madhav-resume.pdf" target="_blank" rel="noopener" class="mobile-link font-serif text-5xl tracking-tightest">Résumé</a>
       <a href="#contact" class="mobile-link font-serif text-5xl tracking-tightest">Contact</a>
       <div class="mt-10 flex gap-4 font-mono text-xs uppercase tracking-widest text-bone-muted">
         <a href="https://linkedin.com/in/naveensereddy" target="_blank" rel="noopener" class="link-underline">LinkedIn</a>
@@ -118,7 +107,7 @@
         <!-- copy -->
         <div class="lg:col-span-7">
           <div class="reveal mb-7 flex flex-col items-start gap-4">
-            <span class="inline-flex items-center gap-2 rounded-full border border-line/15 bg-line/[0.04] px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-bone-muted backdrop-blur-sm">
+            <span class="inline-flex items-center gap-2 rounded-full border border-line/15 bg-line/[0.04] px-3 py-1.5 font-mono text-[0.7rem] font-medium uppercase tracking-[0.12em] text-bone-muted backdrop-blur-sm">
               <span class="relative flex h-1.5 w-1.5">
                 <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold/70"></span>
                 <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold"></span>
@@ -127,8 +116,8 @@
             </span>
             <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
               <span class="font-ancola text-2xl text-gold sm:text-[1.7rem]">Naveen Madhav</span>
-              <span class="h-3.5 w-px bg-line/25"></span>
-              <span class="font-mono text-[0.74rem] uppercase tracking-[0.16em] text-gold">UX / UI Designer · Front-End Dev</span>
+              <span class="hidden h-3.5 w-px bg-line/25 sm:block"></span>
+              <span class="font-mono text-[0.74rem] font-medium uppercase tracking-[0.16em] text-gold">UX / UI Designer · Front-End Dev</span>
             </div>
           </div>
 
@@ -147,6 +136,10 @@
               View selected work
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
+            <a href="assets/resume/naveen-madhav-resume.pdf" download class="btn-ghost">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+              Download résumé
+            </a>
             <a href="#contact" class="btn-ghost">Get in touch</a>
           </div>
 
@@ -154,15 +147,15 @@
           <dl class="reveal reveal-delay-4 mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-line/[0.08] pt-7">
             <div>
               <dt class="font-serif text-3xl text-bone" data-count="2" data-suffix="+">0</dt>
-              <dd class="mt-1 font-mono text-[0.62rem] uppercase tracking-[0.2em] text-bone-dim">Years<br>experience</dd>
+              <dd class="mt-1 font-mono text-[0.68rem] font-medium uppercase tracking-[0.18em] text-bone-muted">Years<br>experience</dd>
             </div>
             <div>
               <dt class="font-serif text-3xl text-bone" data-count="89" data-suffix="%">0</dt>
-              <dd class="mt-1 font-mono text-[0.62rem] uppercase tracking-[0.2em] text-bone-dim">Task<br>completion</dd>
+              <dd class="mt-1 font-mono text-[0.68rem] font-medium uppercase tracking-[0.18em] text-bone-muted">Task<br>completion</dd>
             </div>
             <div>
               <dt class="font-serif text-3xl text-bone">AA</dt>
-              <dd class="mt-1 font-mono text-[0.62rem] uppercase tracking-[0.2em] text-bone-dim">WCAG 2.1<br>accessible</dd>
+              <dd class="mt-1 font-mono text-[0.68rem] font-medium uppercase tracking-[0.18em] text-bone-muted">WCAG 2.1<br>accessible</dd>
             </div>
           </dl>
         </div>
@@ -179,7 +172,7 @@
             <div id="sparkles" class="pointer-events-none absolute -inset-10 z-0 radial-fade"></div>
             <div class="relative z-10 h-full w-full overflow-hidden rounded-3xl border border-line/10 ring-1 ring-inset ring-black/25">
               <img src="assets/profile/naveen.jpg" alt="Portrait of Naveen Madhav"
-                   width="1100" height="1536" fetchpriority="high" decoding="async"
+                   width="950" height="1327" fetchpriority="high" decoding="async"
                    class="aspect-[4/5] w-full object-cover object-top transition-transform duration-700 ease-out-expo group-hover:scale-[1.03] lg:aspect-auto lg:h-full lg:w-full lg:object-contain lg:object-center" />
             </div>
           </div>
@@ -318,7 +311,7 @@
             </blockquote>
             <figcaption class="mt-6 border-t border-line/[0.08] pt-5">
               <div class="font-medium text-bone">Riya Krishnan</div>
-              <div class="font-mono text-[0.66rem] uppercase tracking-[0.16em] text-bone-dim">Product Manager</div>
+              <div class="font-mono text-[0.72rem] font-medium uppercase tracking-[0.14em] text-bone-muted">Product Manager</div>
             </figcaption>
           </figure>
 
@@ -329,7 +322,7 @@
             </blockquote>
             <figcaption class="mt-6 border-t border-line/[0.08] pt-5">
               <div class="font-medium text-bone">Toby Schweiger</div>
-              <div class="font-mono text-[0.66rem] uppercase tracking-[0.16em] text-bone-dim">Software Engineer</div>
+              <div class="font-mono text-[0.72rem] font-medium uppercase tracking-[0.14em] text-bone-muted">Software Engineer</div>
             </figcaption>
           </figure>
 
@@ -340,7 +333,7 @@
             </blockquote>
             <figcaption class="mt-6 border-t border-line/[0.08] pt-5">
               <div class="font-medium text-bone">Jasper Xu</div>
-              <div class="font-mono text-[0.66rem] uppercase tracking-[0.16em] text-bone-dim">Owner, Bins &amp; Deals</div>
+              <div class="font-mono text-[0.72rem] font-medium uppercase tracking-[0.14em] text-bone-muted">Owner, Bins &amp; Deals</div>
             </figcaption>
           </figure>
         </div>
@@ -366,7 +359,9 @@
           <div class="reveal card flex flex-col gap-7 p-7 sm:p-8 lg:col-span-2">
             <div>
               <p class="field-label">Email</p>
-              <a href="mailto:naveen.workpath@gmail.com" class="break-all font-serif text-lg text-bone transition-colors hover:text-gold">naveen.workpath@gmail.com</a>
+              <a id="contactEmail" href="mailto:naveen.workpath@gmail.com" data-email="naveen.workpath@gmail.com"
+                 class="email-link break-all font-serif text-lg text-bone transition-colors hover:text-gold">naveen.workpath@gmail.com</a>
+              <span id="emailCopied" class="ml-2 inline-block translate-y-0.5 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-gold opacity-0 transition-opacity duration-300" aria-live="polite">Copied</span>
             </div>
             <div class="hairline"></div>
             <div>
@@ -400,29 +395,32 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
                 Name
               </label>
-              <input id="cName" name="name" type="text" class="input" placeholder="Your name" autocomplete="name" />
+              <input id="cName" name="name" type="text" class="input" placeholder="Your name" autocomplete="name" aria-required="true" aria-describedby="cName-err" />
+              <p id="cName-err" class="field-error hidden" role="alert">Please enter your name.</p>
             </div>
             <div>
               <label for="cEmail" class="field-label">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 7l9 6 9-6M3 7v10a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V7M3 7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1"/></svg>
                 Email
               </label>
-              <input id="cEmail" name="email" type="email" class="input" placeholder="you@email.com" autocomplete="email" />
+              <input id="cEmail" name="email" type="email" class="input" placeholder="you@email.com" autocomplete="email" aria-required="true" aria-describedby="cEmail-err" />
+              <p id="cEmail-err" class="field-error hidden" role="alert">Please enter a valid email address.</p>
             </div>
             <div>
               <label for="cMessage" class="field-label">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 Message
               </label>
-              <textarea id="cMessage" name="message" rows="5" class="input resize-none" placeholder="Tell me about your project, role, or idea…"></textarea>
+              <textarea id="cMessage" name="message" rows="5" class="input resize-none" placeholder="Tell me about your project, role, or idea…" aria-required="true" aria-describedby="cMessage-err"></textarea>
+              <p id="cMessage-err" class="field-error hidden" role="alert">Please add a short message.</p>
             </div>
             <button type="submit" class="btn-primary mt-1 w-full text-base !py-3.5">
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
               Send message
             </button>
-            <p id="formNote" class="hidden text-center text-sm text-bone-muted">
-              Opening your email app… if nothing happens, write to
-              <a href="mailto:naveen.workpath@gmail.com" class="text-gold hover:underline">naveen.workpath@gmail.com</a>.
+            <p id="formNote" class="hidden text-center text-sm text-bone-muted" role="status">
+              Opening your email app with your message ready to send. If nothing happens, email
+              <a href="mailto:naveen.workpath@gmail.com" class="text-gold hover:underline">naveen.workpath@gmail.com</a> directly.
             </p>
           </form>
         </div>
@@ -443,9 +441,10 @@
           </a>
           <p class="mt-4 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-bone-dim">Available for product design &amp; front-end</p>
         </div>
-        <nav class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-[0.72rem] uppercase tracking-[0.18em] text-bone-muted">
+        <nav class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-[0.72rem] font-medium uppercase tracking-[0.16em] text-bone-muted">
           <a href="#work" class="link-underline">Work</a>
           <a href="#about" class="link-underline">About</a>
+          <a href="assets/resume/naveen-madhav-resume.pdf" target="_blank" rel="noopener" class="link-underline">Résumé</a>
           <a href="#contact" class="link-underline">Contact</a>
           <a href="https://github.com/Naveen-Madhav" target="_blank" rel="noopener" class="link-underline">GitHub</a>
           <a href="https://linkedin.com/in/naveensereddy" target="_blank" rel="noopener" class="link-underline">LinkedIn</a>
@@ -454,10 +453,10 @@
       <!-- bottom row -->
       <div class="mt-8 flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
         <p class="font-serif text-lg">Naveen Madhav<span class="text-gold">.</span></p>
-        <p class="font-mono text-[0.66rem] uppercase tracking-[0.18em] text-bone-dim">
+        <p class="font-mono text-[0.7rem] font-medium uppercase tracking-[0.16em] text-bone-muted">
           Designed &amp; built by Naveen · © <span id="year">2026</span>
         </p>
-        <a href="#top" class="group flex items-center gap-2 font-mono text-[0.66rem] uppercase tracking-[0.18em] text-bone-muted">
+        <a href="#top" class="group flex items-center gap-2 font-mono text-[0.7rem] font-medium uppercase tracking-[0.16em] text-bone-muted">
           Back to top
           <span class="grid h-8 w-8 place-items-center rounded-full border border-line/15 transition-colors group-hover:border-gold/60 group-hover:text-gold">
             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
@@ -489,8 +488,7 @@
 
   <!-- Lenis smooth scroll (vanilla) registers global `Lenis` -->
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
-  <!-- tsParticles (vanilla slim bundle) registers global `tsParticles` -->
-  <script src="https://cdn.jsdelivr.net/npm/@tsparticles/slim@3.8.1/tsparticles.slim.bundle.min.js" defer></script>
-  <script src="src/main.js?v=10" defer></script>
+  <!-- tsParticles is loaded on demand by main.js (desktop only). -->
+  <script src="src/main.js?v=18" defer></script>
 </body>
 </html>
