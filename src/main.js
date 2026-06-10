@@ -148,7 +148,7 @@
       meta: "UX Case Study · Healthcare · 2026",
       kind: "Concept",
       desc:
-        "End-to-end redesign of a patient portal, appointments, prescriptions, records, and billing unified into one calm, secure experience.",
+        "End-to-end redesign of a patient portal: appointments, prescriptions, records, and billing unified into one calm, secure experience.",
       roles: ["Product Design", "Information Architecture", "Design System", "WCAG 2.1"],
       outcome: { value: "5 core flows", label: "redesigned & unified" },
       study: {
@@ -183,7 +183,7 @@
       meta: "UX Case Study · B2B Fintech · 2026",
       kind: "Concept",
       desc:
-        "A B2B expense-management platform designed from research through usability testing across three roles, admin, manager, and employee.",
+        "A B2B expense-management platform designed from research through usability testing across three roles: admin, manager, and employee.",
       roles: ["User Research", "Usability Testing", "Data Visualisation", "Design System"],
       outcome: { value: "73% → 89%", label: "task completion in testing" },
       study: {
