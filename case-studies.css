@@ -71,7 +71,7 @@ p { color: var(--muted); max-width: 70ch; }
 .lead { font-size: 1.18rem; color: var(--navy); }
 
 /* ---- hero -------------------------------------------------------------- */
-.hero { padding: 72px 0 40px; }
+.hero { padding-top: 72px; padding-bottom: 40px; }
 .hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.02; margin: 0 0 18px; font-weight: 500; }
 .hero .sub { font-size: 1.25rem; color: var(--muted); max-width: 60ch; margin: 0 0 32px; }
 .meta {
@@ -116,11 +116,43 @@ p { color: var(--muted); max-width: 70ch; }
 .btn-ghost { border: 1px solid var(--line); color: var(--navy); }
 .btn-ghost:hover { border-color: var(--champ); }
 .cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+.proto-note { font-family: var(--mono); font-size: 12px; color: var(--dim); margin: 12px 0 0; letter-spacing: .02em; }
 
 /* ---- two-col text ------------------------------------------------------ */
 .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 48px; }
 .cols .eyebrow { color: var(--dim); }
 @media (max-width: 760px) { .cols { grid-template-columns: 1fr; } section { padding: 48px 0; } }
+
+/* ---- key-decision pull quote -------------------------------------------- */
+.pullquote {
+  margin: 44px 0 0;
+  max-width: 880px;
+  border-left: 3px solid var(--champ);
+  padding: 6px 0 6px 28px;
+}
+.pullquote .eyebrow { margin-bottom: 10px; }
+.pullquote blockquote {
+  margin: 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+  line-height: 1.45;
+  color: var(--navy);
+}
+
+/* ---- next case study ----------------------------------------------------- */
+.next-case { padding: 72px 0; }
+.next-link {
+  display: inline-flex; align-items: baseline; gap: 18px;
+  font-family: var(--serif); font-weight: 500; letter-spacing: -0.01em;
+  font-size: clamp(2.2rem, 5.5vw, 3.6rem); line-height: 1.05;
+  color: var(--navy); text-decoration: none;
+  transition: color .25s ease;
+}
+.next-link span { transition: transform .3s ease; display: inline-block; }
+.next-link:hover { color: var(--champ); }
+.next-link:hover span { transform: translateX(8px); }
+.next-sub { margin-top: 14px; }
 
 /* ---- footer ------------------------------------------------------------ */
 .cs-foot { background: var(--navy-deep); color: #E6DFD2; padding: 56px 0; margin-top: 0; }
