@@ -21,7 +21,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: var(--stone); }
 body {
   margin: 0; background: var(--stone); color: var(--navy);
   font-family: var(--sans); font-size: 17px; line-height: 1.6;

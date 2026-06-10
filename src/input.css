@@ -71,6 +71,9 @@
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     font-size: 17px; /* global bump so all rem-based text reads a touch larger */
+    /* Root background so overscroll rubber-banding shows the page color,
+       not the browser theme color. */
+    background-color: rgb(var(--ink-950));
   }
 
   /* Smooth theme cross-fade */
