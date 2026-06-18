@@ -2,96 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Ancola display font (local file) · used for the logo + the name */
-@font-face {
-  font-family: "Ancola";
-  src: url("../assets/fonts/ancola-regular.ttf") format("truetype"),
-       url("../assets/fonts/ancola-regular.otf") format("opentype");
-  font-weight: 400 700;
-  font-style: normal;
-  font-display: swap;
-}
+/* =========================================================================
+   Naveen Madhav, Portfolio
+   Charcoal + off-white + a single warm accent. Two fonts only:
+   Fraunces (editorial serif display) + Inter (everything else).
+   60 / 30 / 10:  #0D0D0D surface · #F4F1EA content · #D4A85A accent (sparingly)
+   ========================================================================= */
 
 /* ---------------------------------------------------------------- base */
 @layer base {
-  /* Light theme = Stone (60%), Champagne accent (30%), Navy text (10%) */
+  /* :root = light theme. .dark = the default charcoal theme (set pre-paint). */
   :root {
-    --ink-950: 233 228 216;  /* #E9E4D8 Stone page background */
-    --ink-900: 225 219 204;  /* #E1DBCC nav (slightly deeper stone) */
-    --ink-800: 246 242 233;  /* #F6F2E9 cards / frames = near-white so they lift */
-    --ink-700: 237 232 220;  /* #EDE8DC browser bar */
-    --ink-600: 216 208 190;  /* #D8D0BE muted surface / hovers */
-    --bone: 28 43 64;        /* #1C2B40 navy body text */
-    --bone-muted: 74 88 107;
-    --bone-dim: 110 122 138;  /* legible small labels on stone */
-    --line: 28 43 64;        /* navy hairlines at low opacity */
-    --gold: 176 138 78;      /* accent = Champagne #B08A4E (deepened for light contrast) */
-    --btn-fg: 246 242 233;   /* near-white text on the champagne button */
-    --band: 222 214 195;     /* #DED6C3 alternating section band (subtle lift) */
-    --grain-opacity: 0.02;
+    --ink-950: 244 241 234;  /* #F4F1EA page background */
+    --ink-900: 236 232 223;  /* #ECE8DF nav / elevated */
+    --ink-800: 255 255 255;  /* #FFFFFF cards / frames */
+    --ink-700: 249 247 242;  /* #F9F7F2 inset / browser bar */
+    --ink-600: 230 226 216;  /* #E6E2D8 hover surface */
+    --bone: 26 26 26;        /* #1A1A1A primary text */
+    --bone-muted: 91 88 83;  /* #5B5853 secondary text */
+    --bone-dim: 108 104 97;  /* #6C6861 faint labels (AA on cream) */
+    --line: 26 26 26;        /* hairlines at low opacity */
+    --gold: 158 116 38;      /* #9E7426 accent, deepened so it reads on cream */
+    --btn-fg: 244 241 234;   /* off-white text on the deep-gold button */
+    --band: 236 232 222;     /* #ECE8DE alternating section band */
+    --grain-opacity: 0.014;
 
-    --sb-track: #DCD5C6;
-    --sb-thumb: #C2B49A;
-    --sb-thumb-hover: #AE9E80;
+    --sb-track: #E6E1D6;
+    --sb-thumb: #C9C2B2;
+    --sb-thumb-hover: #B4AC99;
   }
 
-  /* Dark theme = deep navy, stone text, champagne accent */
+  /* Charcoal theme (default). Neutral, no brown. */
   .dark {
-    --ink-950: 14 27 44;     /* #0E1B2C navy background */
-    --ink-900: 19 36 58;     /* #13243A nav */
-    --ink-800: 26 45 69;     /* #1A2D45 cards / frames */
-    --ink-700: 17 32 48;     /* #112030 browser bar */
-    --ink-600: 41 64 92;     /* #29405C hovers */
-    --bone: 230 223 210;     /* #E6DFD2 stone text */
-    --bone-muted: 179 174 159;
-    --bone-dim: 138 134 118;
-    --line: 230 223 210;     /* stone hairlines */
-    --gold: 217 180 126;     /* Champagne accent #D9B47E */
-    --btn-fg: 16 27 42;      /* navy text on the champagne button */
-    --band: 22 40 62;        /* #16283E alternating section band (subtle lift) */
-    --grain-opacity: 0.04;
+    --ink-950: 13 13 13;     /* #0D0D0D page background */
+    --ink-900: 20 20 20;     /* #141414 nav / elevated */
+    --ink-800: 24 24 24;     /* #181818 cards / frames */
+    --ink-700: 30 30 30;     /* #1E1E1E inset / browser bar */
+    --ink-600: 42 42 42;     /* #2A2A2A hover surface */
+    --bone: 244 241 234;     /* #F4F1EA primary text */
+    --bone-muted: 161 158 151; /* #A19E97 secondary text */
+    --bone-dim: 134 131 124;   /* #86837C faint labels (AA on charcoal) */
+    --line: 244 241 234;     /* hairlines at low opacity */
+    --gold: 212 168 90;      /* #D4A85A accent */
+    --btn-fg: 13 13 13;      /* near-black text on the accent button */
+    --band: 18 18 18;        /* #121212 alternating section band */
+    --grain-opacity: 0.028;
 
-    --sb-track: #14222F;
-    --sb-thumb: #2c3e52;
-    --sb-thumb-hover: #3c5168;
-  }
-  .dark body {
-    background-image: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.30) 100%);
-  }
-
-  /* Dark anchor block (footer): deep navy surface, stone text, champagne accent. */
-  .on-burgundy {
-    --ink-950: 10 22 38; --ink-900: 8 18 32; --ink-800: 20 35 54;
-    --ink-700: 8 18 32;  --ink-600: 34 52 76;
-    --bone: 230 223 210; --bone-muted: 186 190 198; --bone-dim: 150 158 170;
-    --line: 230 223 210; --gold: 217 180 126; --btn-fg: 16 27 42;
+    --sb-track: #141414;
+    --sb-thumb: #2E2E2E;
+    --sb-thumb-hover: #3D3D3D;
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    font-size: 17px; /* global bump so all rem-based text reads a touch larger */
-    /* Root background so overscroll rubber-banding shows the page color,
-       not the browser theme color. */
+    font-size: 17px;
+    /* Root background so overscroll shows the page color, not the browser chrome. */
     background-color: rgb(var(--ink-950));
   }
 
   /* Smooth theme cross-fade */
-  body, .band, .card, .browser-frame, .browser-bar, nav, header, .chip, .process-step {
+  body, .band, .card, .browser-frame, .browser-bar, nav, header, .chip, .process-step, .exp-row {
     transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
   }
 
   body {
     @apply bg-ink-950 text-bone font-sans antialiased;
     overflow-x: hidden;
+    line-height: 1.7;
     font-feature-settings: "cv11", "ss01";
-    /* Subtle cool top-to-bottom depth. */
-    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0) 30%, rgba(40, 70, 110, 0.05) 100%);
-    background-attachment: fixed;
   }
 
   ::selection {
-    @apply bg-gold/30 text-bone;
+    @apply bg-gold/25 text-bone;
   }
 
   /* Headlines */
@@ -118,9 +101,11 @@
     @apply mx-auto w-full max-w-container px-6 sm:px-8;
   }
 
+  /* Small uppercase label (replaces the old mono eyebrow) */
   .eyebrow {
-    @apply font-mono text-[0.8rem] font-semibold uppercase tracking-[0.18em] text-bone-muted;
+    @apply font-sans text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-bone-dim;
   }
+  .eyebrow-accent { color: rgb(var(--gold)); }
 
   /* Contact email: click-to-copy target + attention pulse when a CTA jumps here */
   .email-link {
@@ -142,38 +127,59 @@
     .email-highlight { animation: none; background: rgb(var(--gold) / 0.16); }
   }
 
-  /* Buttons */
+  /* ----------------------------------------------------------- buttons
+     Clear three-step hierarchy:
+       .btn-primary  filled accent (the one true CTA)
+       .btn-ghost    outline / transparent (secondary)
+       .btn-text     text link with growing underline (tertiary) */
   .btn {
-    @apply relative inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3
-           text-sm font-medium cursor-pointer select-none
+    @apply relative inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5
+           text-[0.92rem] font-medium cursor-pointer select-none
            transition-all duration-300 ease-out-expo
-           min-h-[44px]
+           min-h-[48px]
            hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] active:duration-100;
   }
-  /* Primary = clean solid gold fill */
   .btn-primary {
-    @apply btn bg-gold font-semibold hover:bg-gold-soft;
+    @apply btn font-semibold;
+    background: rgb(var(--gold));
     color: rgb(var(--btn-fg));
+    box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.12) inset;
   }
-  /* Secondary = simple bordered button */
+  .btn-primary:hover {
+    filter: brightness(1.07);
+    box-shadow: 0 12px 30px -12px rgb(var(--gold) / 0.6);
+  }
   .btn-ghost {
     @apply btn text-bone;
     background: transparent;
-    border: 1px solid rgb(var(--bone) / 0.22);
+    border: 1px solid rgb(var(--bone) / 0.2);
   }
   .btn-ghost:hover {
-    background: rgb(var(--bone) / 0.06);
-    border-color: rgb(var(--bone) / 0.4);
+    background: rgb(var(--bone) / 0.05);
+    border-color: rgb(var(--bone) / 0.38);
   }
-  /* Burgundy fill · for use on xanthous backgrounds */
-  .btn-burgundy {
-    @apply btn bg-burgundy text-cream font-semibold
-           hover:bg-burgundy-soft;
+  .btn-text {
+    @apply relative inline-flex items-center gap-2 text-[0.92rem] font-medium cursor-pointer
+           transition-colors duration-200;
+    color: rgb(var(--gold));
   }
+  .btn-text::after {
+    content: "";
+    @apply absolute left-0 -bottom-0.5 h-px w-full origin-right scale-x-0
+           transition-transform duration-300 ease-out-expo;
+    background: rgb(var(--gold));
+  }
+  .btn-text:hover::after { @apply origin-left scale-x-100; }
+  .btn-text svg { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); }
+  .btn-text:hover svg { transform: translateX(2px); }
+
+  /* arrow nudge on filled / outline buttons */
+  .btn-primary svg, .btn-ghost svg { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); }
+  .btn-primary:hover svg { transform: translateX(2px); }
 
   .chip {
     @apply inline-flex items-center gap-1.5 rounded-full border border-line/10
-           bg-line/[0.03] px-3 py-1.5 font-mono text-[0.7rem] uppercase tracking-wider text-bone-muted;
+           bg-line/[0.03] px-3.5 py-1.5 font-sans text-[0.78rem] font-medium text-bone-muted;
   }
 
   .link-underline {
@@ -186,19 +192,15 @@
   }
   .link-underline:hover::after { @apply origin-left scale-x-100; }
 
-  /* Active nav section */
-  .link-underline.nav-active { @apply text-bone; }
+  /* Active nav item */
+  .link-underline.nav-active { color: rgb(var(--gold)); }
   .link-underline.nav-active::after { transform: scaleX(1); transform-origin: left; }
-
-  /* Button arrow nudge */
-  .btn-primary svg, .btn-ghost svg { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); }
-  .btn-primary:hover svg { transform: translateX(2px); }
 
   .card {
     @apply rounded-2xl;
     background: rgb(var(--ink-800));
-    border: 1px solid rgb(var(--bone) / 0.1);
-    box-shadow: 0 18px 44px -26px rgba(90, 45, 20, 0.35);
+    border: 1px solid rgb(var(--bone) / 0.08);
+    box-shadow: 0 24px 60px -34px rgb(0 0 0 / 0.55);
   }
 
   .band { background-color: rgb(var(--band)); }
@@ -207,9 +209,9 @@
     @apply h-px w-full bg-gradient-to-r from-transparent via-line/[0.12] to-transparent;
   }
 
-  /* Skip to content (keyboard / screen-reader users) */
+  /* Skip to content */
   .skip-link {
-    @apply fixed left-4 top-4 z-[100] rounded-lg px-4 py-2.5 font-mono text-sm font-medium;
+    @apply fixed left-4 top-4 z-[100] rounded-lg px-4 py-2.5 font-sans text-sm font-semibold;
     background: rgb(var(--gold));
     color: rgb(var(--btn-fg));
     transform: translateY(-150%);
@@ -219,40 +221,59 @@
 
   /* Form fields */
   .field-label {
-    @apply mb-2 flex items-center gap-2 font-mono text-[0.72rem] font-medium uppercase tracking-[0.16em] text-bone-muted;
+    @apply mb-2 flex items-center gap-2 font-sans text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-bone-muted;
   }
-  .field-label svg { @apply h-3.5 w-3.5 text-gold; }
+  .field-label svg { @apply h-3.5 w-3.5; color: rgb(var(--gold)); }
   .input {
-    @apply w-full rounded-xl px-4 py-3 text-sm text-bone outline-none transition-all duration-200;
-    background: rgb(var(--bone) / 0.05);
-    border: 1px solid rgb(var(--bone) / 0.16);
+    @apply w-full rounded-xl px-4 py-3 text-[0.95rem] text-bone outline-none transition-all duration-200;
+    background: rgb(var(--bone) / 0.04);
+    border: 1px solid rgb(var(--bone) / 0.14);
   }
   .input::placeholder { color: rgb(var(--bone-dim)); }
   .input:focus {
     border-color: rgb(var(--gold));
     box-shadow: 0 0 0 3px rgb(var(--gold) / 0.2);
-    background: rgb(var(--bone) / 0.08);
+    background: rgb(var(--bone) / 0.07);
   }
   .input[aria-invalid="true"] {
-    border-color: #E89A7C;
-    box-shadow: 0 0 0 3px rgb(232 154 124 / 0.18);
+    border-color: #E08763;
+    box-shadow: 0 0 0 3px rgb(224 135 99 / 0.18);
   }
   .field-error {
-    @apply mt-1.5 font-mono text-[0.72rem] tracking-[0.01em];
-    color: #E89A7C;
+    @apply mt-1.5 font-sans text-[0.76rem];
+    color: #E08763;
   }
 
   .process-step {
     @apply relative rounded-xl border border-line/[0.07] bg-line/[0.02] px-3 py-3
-           text-center font-mono text-[0.72rem] uppercase tracking-[0.14em] text-bone-muted
+           text-center font-sans text-[0.78rem] font-medium tracking-[0.02em] text-bone-muted
            transition-colors duration-300 hover:border-gold/40 hover:text-bone;
+  }
+
+  /* Experience timeline rows */
+  .exp-row {
+    @apply relative rounded-2xl border border-line/[0.07] bg-line/[0.015] p-6 sm:p-7
+           transition-colors duration-300 hover:border-gold/30;
+  }
+
+  /* Skill category lines (no tag cloud) */
+  .skill-line {
+    @apply flex flex-col gap-1.5 border-t border-line/[0.08] py-4 sm:flex-row sm:items-baseline sm:gap-6;
+  }
+  .skill-cat {
+    @apply shrink-0 font-sans text-[0.74rem] font-semibold uppercase tracking-[0.18em] text-bone-dim sm:w-40;
+  }
+  .skill-items {
+    @apply text-[0.98rem] leading-relaxed text-bone;
   }
 
   /* project gallery pieces */
   .browser-frame {
-    @apply overflow-hidden rounded-2xl border border-line/10 bg-ink-800 shadow-2xl shadow-black/40
-           transition-shadow duration-500 ease-out-expo hover:shadow-[0_36px_80px_-24px_rgba(0,0,0,0.65)];
+    @apply overflow-hidden rounded-2xl border border-line/10 bg-ink-800
+           transition-shadow duration-500 ease-out-expo;
+    box-shadow: 0 30px 70px -34px rgb(0 0 0 / 0.6);
   }
+  .browser-frame:hover { box-shadow: 0 40px 90px -30px rgb(0 0 0 / 0.7); }
   .browser-bar {
     @apply flex items-center gap-1.5 border-b border-line/[0.06] bg-ink-700/60 px-4 py-2.5;
   }
@@ -266,20 +287,22 @@
 
 /* ---------------------------------------------------------------- utilities */
 @layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-br from-bone via-bone to-bone-dim bg-clip-text text-transparent;
-  }
+  /* Single highlighted keyword in the accent color (no gradient). */
   .gold-gradient {
-    background: linear-gradient(120deg, #EBD3A6 0%, #D9B47E 55%, #C49A5C 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: rgb(var(--gold));
+    font-style: inherit;
+  }
+
+  /* Subtle monochromatic grade for the hero portrait so it supports, not steals.
+     Pulls the green out toward a warm neutral and lifts contrast. */
+  .portrait-grade {
+    filter: grayscale(0.82) contrast(1.08) brightness(1.02) sepia(0.18);
   }
 
   /* Reveal-on-scroll */
   .reveal {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(26px);
     transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
     will-change: opacity, transform;
   }
@@ -306,11 +329,6 @@
     pointer-events: none;
     opacity: var(--grain-opacity);
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  .radial-fade {
-    -webkit-mask-image: radial-gradient(circle at center, black 55%, transparent 78%);
-    mask-image: radial-gradient(circle at center, black 55%, transparent 78%);
   }
 
   .no-scroll { overflow: hidden; }

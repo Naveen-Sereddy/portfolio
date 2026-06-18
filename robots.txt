@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://naveen-madhav.vercel.app/sitemap.xml
+Sitemap: https://naveen-sereddy.vercel.app/sitemap.xml

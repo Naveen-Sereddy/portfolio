@@ -42,7 +42,7 @@
   border-color: var(--ff-rejected);
   color: #fff;
 }
-[data-theme="dark"] .ff-btn--danger { color: oklch(0.16 0.012 255); }
+[data-theme="dark"] .ff-btn--danger { color: oklch(0.16 0.012 60); }
 
 .ff-btn--accent {
   background: var(--ff-accent);
