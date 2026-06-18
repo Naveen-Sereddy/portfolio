@@ -16,24 +16,24 @@
   --brand-800: #634819;
 
   /* ---- NEUTRALS (Navy ink on warm stone) -------------------------------- */
-  --n-900: #1C2B40;   /* primary text / headings (navy) */
-  --n-800: #293548;
-  --n-700: #334155;   /* secondary headings, strong body */
-  --n-600: #475569;   /* body text */
-  --n-500: #64748B;   /* muted text, labels (AA on white) */
-  --n-400: #94A3B8;   /* placeholder, tertiary, disabled text */
-  --n-300: #CBD5E1;   /* borders-strong, dividers */
-  --n-200: #E2E8F0;   /* default border */
-  --n-100: #F1F5F9;   /* subtle fill, hover bg */
-  --n-50:  #ECE7DC;   /* page background, table header (stone) */
+  --n-900: #1C1A17;   /* primary text */
+  --n-800: #2C2823;
+  --n-700: #3D3833;   /* secondary headings, strong body */
+  --n-600: #57514A;   /* body text */
+  --n-500: #6B6459;   /* muted text, labels (AA on white) */
+  --n-400: #948B7E;   /* placeholder, tertiary, disabled text */
+  --n-300: #CBC3B5;   /* borders-strong, dividers */
+  --n-200: #E2DDD2;   /* default border */
+  --n-100: #F1ECE2;   /* subtle fill, hover bg */
+  --n-50:  #EEE9DF;   /* page background, table header (stone) */
   --white: #FFFFFF;
 
   /* ---- SIDEBAR (deep navy) ---------------------------------------------- */
-  --sidebar-bg:   #0F1B2D;
-  --sidebar-bg-2: #142339;   /* hover row */
-  --sidebar-div:  #1E2E48;
-  --sidebar-text: #94A3B8;
-  --sidebar-text-strong: #E2E8F0;
+  --sidebar-bg:   #1A1610;
+  --sidebar-bg-2: #221C14;   /* hover row */
+  --sidebar-div:  #2E2820;
+  --sidebar-text: #948B7E;
+  --sidebar-text-strong: #E2DDD2;
 
   /* ---- SEMANTIC ACCENTS -------------------------------------------------- */
   --teal-600:   #0D9488;   --teal-bg:   #EFFCFB;
@@ -107,12 +107,12 @@
   --radius-pill: 999px;
 
   /* ---- ELEVATION (layered, soft) ---------------------------------------- */
-  --shadow-xs: 0 1px 2px rgba(15, 27, 45, 0.05);
-  --shadow-sm: 0 1px 3px rgba(15, 27, 45, 0.06), 0 1px 2px rgba(15, 27, 45, 0.04);
-  --shadow-md: 0 4px 12px rgba(15, 27, 45, 0.07), 0 2px 4px rgba(15, 27, 45, 0.04);
-  --shadow-lg: 0 12px 28px rgba(15, 27, 45, 0.10), 0 4px 8px rgba(15, 27, 45, 0.05);
-  --shadow-xl: 0 24px 48px rgba(15, 27, 45, 0.14), 0 8px 16px rgba(15, 27, 45, 0.06);
-  --shadow-focus: 0 0 0 3px rgba(46, 128, 230, 0.35);
+  --shadow-xs: 0 1px 2px rgba(28, 24, 18, 0.05);
+  --shadow-sm: 0 1px 3px rgba(28, 24, 18, 0.06), 0 1px 2px rgba(28, 24, 18, 0.04);
+  --shadow-md: 0 4px 12px rgba(28, 24, 18, 0.07), 0 2px 4px rgba(28, 24, 18, 0.04);
+  --shadow-lg: 0 12px 28px rgba(28, 24, 18, 0.10), 0 4px 8px rgba(28, 24, 18, 0.05);
+  --shadow-xl: 0 24px 48px rgba(28, 24, 18, 0.14), 0 8px 16px rgba(28, 24, 18, 0.06);
+  --shadow-focus: 0 0 0 3px rgba(138, 106, 46, 0.35);
 
   /* ---- LAYOUT METRICS ---------------------------------------------------- */
   --sidebar-w: 264px;

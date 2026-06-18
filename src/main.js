@@ -1,5 +1,5 @@
 /* =========================================================================
-   Naveen Madhav, Portfolio interactions
+   Naveen Sereddy, Portfolio interactions
    ========================================================================= */
 (function () {
   "use strict";
@@ -11,6 +11,28 @@
   /* ------------------------------------------------------------ year */
   const yearEl = $("#year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* ------------------------------------------------------------ theme toggle */
+  const root = document.documentElement;
+  const themeBtn = $("#themeBtn");
+  const moonIcon = $(".theme-moon");
+  const sunIcon = $(".theme-sun");
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  const syncTheme = () => {
+    const isDark = root.classList.contains("dark");
+    if (moonIcon) moonIcon.classList.toggle("hidden", isDark);
+    if (sunIcon) sunIcon.classList.toggle("hidden", !isDark);
+    if (metaTheme) metaTheme.setAttribute("content", isDark ? "#0D0D0D" : "#F4F1EA");
+    if (themeBtn) themeBtn.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
+  };
+  syncTheme();
+  if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+      const isDark = root.classList.toggle("dark");
+      try { localStorage.setItem("theme", isDark ? "dark" : "light"); } catch (e) {}
+      syncTheme();
+    });
+  }
 
   /* ------------------------------------------------------------ marquee */
   // Tools with a real brand logo roll as logos; methodology terms roll as text.
@@ -50,9 +72,9 @@
   if (marquee) {
     const render = (it) => {
       const logo = it.icon
-        ? `<svg class="h-6 w-6 shrink-0 text-gold sm:h-7 sm:w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${it.icon}"/></svg>`
+        ? `<svg class="h-5 w-5 shrink-0 text-bone-muted" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${it.icon}"/></svg>`
         : "";
-      return `<span class="flex items-center gap-3.5">${logo}<span>${it.label}</span><span class="ml-3.5 text-base text-gold">✦</span></span>`;
+      return `<span class="flex items-center gap-2.5">${logo}<span>${it.label}</span><span class="ml-2.5 h-1 w-1 rounded-full bg-bone-dim/50"></span></span>`;
     };
     const set = marqueeItems.map(render).join("");
     marquee.innerHTML = set + set; // duplicate for seamless loop
@@ -145,7 +167,7 @@
       id: "medbridge",
       index: "01",
       title: "MedBridge",
-      meta: "UX Case Study · Healthcare · 2026",
+      meta: "UX Case Study · Healthcare · 2024",
       kind: "Concept",
       desc:
         "End-to-end redesign of a patient portal: appointments, prescriptions, records, and billing unified into one calm, secure experience.",
@@ -180,11 +202,11 @@
       id: "finflow",
       index: "02",
       title: "FinFlow",
-      meta: "UX Case Study · B2B Fintech · 2026",
+      meta: "UX Case Study · B2B Fintech · 2025",
       kind: "Concept",
       desc:
         "A B2B expense-management platform designed from research through usability testing across three roles: admin, manager, and employee.",
-      roles: ["User Research", "Usability Testing", "Data Visualisation", "Design System"],
+      roles: ["User Research", "Usability Testing", "Data Visualization", "Design System"],
       outcome: { value: "73% → 89%", label: "task completion in testing" },
       study: {
         problem: "Finance teams often manage expenses, approvals, reimbursements, reporting, and card programs across disconnected systems, creating inefficiency and added administrative overhead.",
@@ -215,7 +237,7 @@
       id: "bins",
       index: "03",
       title: "Bins & Deals",
-      meta: "Design & Development · Live Site · 2026",
+      meta: "Design & Development · Live Site · 2024–25",
       kind: "Live · Client",
       desc:
         "Brand, design, and front-end build for a real retail liquidation store, from blank canvas to a live marketing site that drives store visits.",
@@ -314,7 +336,7 @@
                 ${p.study.process
                   .map(
                     (s, idx) =>
-                      `<li class="flex gap-3 text-sm leading-relaxed text-bone-muted"><span class="pt-0.5 font-mono text-[0.7rem] text-gold">${String(idx + 1).padStart(2, "0")}</span><span>${s}</span></li>`
+                      `<li class="flex gap-3 text-sm leading-relaxed text-bone-muted"><span class="pt-0.5 font-sans text-[0.72rem] font-semibold text-bone-dim">${String(idx + 1).padStart(2, "0")}</span><span>${s}</span></li>`
                   )
                   .join("")}
               </ol>
@@ -338,10 +360,10 @@
         <!-- info -->
         <div class="lg:col-span-5 ${flip ? "lg:order-2 lg:pl-4" : ""}">
           <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <span class="font-mono text-sm text-gold">${p.index}</span>
+            <span class="font-sans text-sm font-semibold text-bone-dim">${p.index}</span>
             <span class="h-px w-10 bg-line/15"></span>
-            <span class="font-mono text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-bone-muted">${p.meta}</span>
-            ${p.kind ? `<span class="rounded-full border border-gold/30 bg-gold/10 px-2.5 py-0.5 font-mono text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-gold">${p.kind}</span>` : ""}
+            <span class="font-sans text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-bone-muted">${p.meta}</span>
+            ${p.kind ? `<span class="rounded-full border border-gold/30 bg-gold/10 px-2.5 py-0.5 font-sans text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-gold">${p.kind}</span>` : ""}
           </div>
 
           <h3 class="mt-5 text-[clamp(2rem,4.5vw,3rem)] font-normal leading-none">${p.title}</h3>
@@ -355,7 +377,7 @@
           <div class="mt-8 flex items-center gap-5 border-t border-line/[0.08] pt-6">
             <div>
               <div class="font-serif text-2xl text-gold">${p.outcome.value}</div>
-              <div class="font-mono text-[0.7rem] font-medium uppercase tracking-[0.14em] text-bone-muted">${p.outcome.label}</div>
+              <div class="font-sans text-[0.7rem] font-medium uppercase tracking-[0.14em] text-bone-muted">${p.outcome.label}</div>
             </div>
           </div>
 
@@ -372,7 +394,7 @@
               <span class="h-2.5 w-2.5 rounded-full bg-[#ff5f57]/70"></span>
               <span class="h-2.5 w-2.5 rounded-full bg-[#febc2e]/70"></span>
               <span class="h-2.5 w-2.5 rounded-full bg-[#28c840]/70"></span>
-              <span class="ml-3 truncate font-mono text-[0.66rem] font-medium text-bone-dim">${p.id}, ${p.shots[0].cap.split(",")[0].trim().toLowerCase()}</span>
+              <span class="ml-3 truncate font-sans text-[0.66rem] font-medium text-bone-dim">${p.id}, ${p.shots[0].cap.split(",")[0].trim().toLowerCase()}</span>
             </div>`}
             <div class="relative overflow-hidden">
               <img src="${p.shots[0].src}" alt="${p.shots[0].cap.replace(/"/g, "")}" loading="lazy" decoding="async" width="1760" height="1100"
