@@ -3,22 +3,42 @@
    light palette. Static, image-based, mobile-first. */
 
 :root {
-  --stone:      #ECE7DC;   /* page base */
-  --stone-2:    #E4DDCE;   /* alternating band */
-  --surface:    #F7F3EA;   /* cards / image frames */
-  --navy:       #1C2B40;   /* primary ink */
-  --navy-deep:  #122039;   /* header / footer */
-  --muted:      #55617A;   /* secondary text */
-  --dim:        #8A8576;   /* labels */
-  --champ:      #8A6A2E;   /* accent */
-  --champ-deep: #6F5322;   /* accent hover */
-  --line:       rgba(28, 43, 64, 0.12);
-  --line-soft:  rgba(28, 43, 64, 0.07);
+  /* Light: warm off-white, charcoal ink, single warm accent */
+  --stone:      #F4F1EA;   /* page base */
+  --stone-2:    #ECE8DE;   /* alternating band */
+  --surface:    #FFFFFF;   /* cards / image frames */
+  --navy:       #1A1A1A;   /* primary ink */
+  --navy-deep:  #141414;   /* header / footer */
+  --muted:      #5B5853;   /* secondary text */
+  --dim:        #6C6861;   /* labels (AA on cream) */
+  --champ:      #9E7426;   /* accent, deepened for contrast on cream */
+  --champ-deep: #856319;   /* accent hover */
+  --line:       rgba(26, 26, 26, 0.12);
+  --line-soft:  rgba(26, 26, 26, 0.07);
+  --header-bg:  rgba(13, 13, 13, 0.86);
+  --shadow-col: rgba(0, 0, 0, 0.4);
   --maxw: 1180px;
   --serif: "Fraunces", Georgia, serif;
   --sans: "Inter", system-ui, -apple-system, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, monospace;
 }
+.dark {
+  /* Dark: charcoal page, off-white text, single warm accent */
+  --stone:      #0D0D0D;
+  --stone-2:    #121212;
+  --surface:    #181818;
+  --navy:       #F4F1EA;
+  --navy-deep:  #0A0A0A;
+  --muted:      #A19E97;
+  --dim:        #86837C;
+  --champ:      #D4A85A;   /* accent */
+  --champ-deep: #C2974A;
+  --line:       rgba(244, 241, 234, 0.12);
+  --line-soft:  rgba(244, 241, 234, 0.07);
+  --header-bg:  rgba(13, 13, 13, 0.9);
+  --shadow-col: rgba(0, 0, 0, 0.5);
+}
+html, body { transition: background-color .4s ease, color .4s ease; }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: var(--stone); }
@@ -40,7 +60,7 @@ a:focus-visible, button:focus-visible, .btn:focus-visible {
 /* ---- header ------------------------------------------------------------ */
 .cs-head {
   position: sticky; top: 0; z-index: 40;
-  background: rgba(18, 32, 57, 0.86); backdrop-filter: blur(12px);
+  background: var(--header-bg); backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(230, 223, 210, 0.12);
 }
 .cs-head__in {
@@ -55,6 +75,15 @@ a:focus-visible, button:focus-visible, .btn:focus-visible {
   letter-spacing: .14em; opacity: .85; transition: opacity .2s;
 }
 .cs-back:hover { opacity: 1; }
+.cs-head__right { display: flex; align-items: center; gap: 16px; }
+.cs-theme {
+  display: grid; place-items: center; height: 34px; width: 34px;
+  border-radius: 999px; border: 1px solid rgba(230,223,210,0.18);
+  background: transparent; color: #E6DFD2; cursor: pointer;
+  transition: border-color .2s ease, color .2s ease;
+}
+.cs-theme:hover { border-color: rgba(230,223,210,0.4); color: #fff; }
+.hidden { display: none !important; }
 
 /* ---- layout ------------------------------------------------------------ */
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
@@ -87,7 +116,7 @@ p { color: var(--muted); max-width: 70ch; }
 .fig { margin: 28px 0 0; }
 .fig img {
   width: 100%; border-radius: 14px; border: 1px solid var(--line);
-  box-shadow: 0 18px 40px -24px rgba(18, 32, 57, 0.45);
+  box-shadow: 0 18px 40px -24px var(--shadow-col);
   background: #fff;
 }
 .fig figcaption {
