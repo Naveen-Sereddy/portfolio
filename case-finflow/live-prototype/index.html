@@ -43,20 +43,20 @@
 
   <template id="__bundler_thumbnail">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
-      <rect width="400" height="300" fill="#1C1A17"/>
+      <rect width="400" height="300" fill="#3B1A33"/>
       <g transform="translate(140,80)">
         <rect width="120" height="120" rx="26" fill="#FBF5E8"/>
-        <rect x="30" y="26" width="14" height="68" fill="#1C1A17"/>
-        <rect x="30" y="26" width="56" height="14" fill="#1C1A17"/>
-        <rect x="30" y="50" width="38" height="14" fill="#1C1A17"/>
+        <rect x="30" y="26" width="14" height="68" fill="#3B1A33"/>
+        <rect x="30" y="26" width="56" height="14" fill="#3B1A33"/>
+        <rect x="30" y="50" width="38" height="14" fill="#3B1A33"/>
         <circle cx="82" cy="86" r="8" fill="#D9BE57"/>
       </g>
       <text x="200" y="246" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="26" fill="#FBF5E8">FinFlow</text>
     </svg>
   </template>
 
-  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
   <script src="data.js"></script>
@@ -317,9 +317,15 @@
 
       const onRole = (r) => {
         setRole(r);
-        // If currently on a role-specific dashboard, switch to the new role's dashboard.
-        const cur = SCREEN_REGISTRY.find(s => s.id === screen);
-        if (cur && cur.group === "Dashboards") setScreen(DEFAULT_BY_ROLE[r]);
+        // Don't strand the user on a screen the new role can't reach from its own
+        // navigation (e.g. an Employee left looking at Vendors/Audit). Redirect to
+        // that role's home if the current screen isn't in its reachable set.
+        const REACHABLE = {
+          finance:  ["dashboard","expenses","approvals","reimburse","reports","cards","vendors","audit","settings-policies","settings-team","settings-integrations","settings-profile"],
+          manager:  ["dashboard-mgr","approvals","expenses","reports","saved-report","notif","settings-profile"],
+          employee: ["dashboard-emp","new-expense","expenses","reimburse","cards","notif","help"]
+        };
+        if (!(REACHABLE[r] || []).includes(screen)) setScreen(DEFAULT_BY_ROLE[r]);
       };
 
       const onNavigate = (id) => {
@@ -341,6 +347,11 @@
         setScreen(alias[id] || id);
       };
 
+      // Expose a stable navigation handle so any screen can route via ffGo(id).
+      const navRef = React.useRef(onNavigate);
+      navRef.current = onNavigate;
+      React.useEffect(() => { window.ffNavigate = (id) => navRef.current(id); }, []);
+
       const entry = SCREEN_REGISTRY.find(s => s.id === screen) || SCREEN_REGISTRY[0];
       const Comp = entry.Comp;
       const fullbleed = entry.chrome === "fullbleed";
@@ -358,6 +369,7 @@
                 <TopBar role={role} theme={theme}
                         onTheme={() => setTheme(theme === "light" ? "dark" : "light")}
                         onRole={onRole}
+                        onSearchClick={() => setDirOpen(true)}
                         onNotif={() => setScreen("notif")}/>
                 <div className="ff-page ff-scroll"><Comp/></div>
               </div>
@@ -369,6 +381,18 @@
             <span className="ff-kbd" style={{marginLeft:6}}>⌘K</span>
           </button>
           <ScreenDirectory open={dirOpen} onClose={() => setDirOpen(false)} current={screen} onPick={setScreen}/>
+          <TweaksPanel>
+            <TweakSection label="Brand wordmark"/>
+            <TweakSelect
+              label="Wordmark style"
+              value={t.wordmarkStyle}
+              options={Object.keys(WORDMARK_PRESETS)}
+              onChange={(v) => setTweak('wordmarkStyle', v)}
+            />
+            <div style={{padding:'12px 14px', borderTop:'1px solid rgba(0,0,0,0.08)', fontSize:12, color:'#6b6478', lineHeight:1.5}}>
+              "FinFlow" rendered in a single typeface across the whole product — sidebar mark, lockup, auth screen.
+            </div>
+          </TweaksPanel>
         </div>
       );
     };

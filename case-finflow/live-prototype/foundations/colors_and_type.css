@@ -1,7 +1,7 @@
 /* ============================================================================
    FinFlow Design System — Foundations
    Tokens for color, type, spacing, radius, elevation, motion.
-   Light + dark themes. Warm-neutral, champagne-led palette.
+   Light + dark themes. Warm-neutral, plum-led palette.
    ============================================================================ */
 
 /* ---------- Font imports ------------------------------------------------- */
@@ -11,17 +11,17 @@
 :root {
   color-scheme: light;
 
-  /* Brand — Champagne */
-  --ff-plum-50:  oklch(0.97 0.012 86);
-  --ff-plum-100: oklch(0.93 0.030 86);
-  --ff-plum-200: oklch(0.86 0.050 84);
-  --ff-plum-300: oklch(0.77 0.070 82);
-  --ff-plum-400: oklch(0.66 0.085 80);
-  --ff-plum-500: oklch(0.57 0.090 78);
-  --ff-plum-600: oklch(0.49 0.085 76);
-  --ff-plum-700: oklch(0.42 0.075 74);
-  --ff-plum-800: oklch(0.34 0.060 72);
-  --ff-plum-900: oklch(0.26 0.045 70);
+  /* Brand — Plum */
+  --ff-plum-50:  oklch(0.97 0.01 340);
+  --ff-plum-100: oklch(0.92 0.03 340);
+  --ff-plum-200: oklch(0.84 0.06 340);
+  --ff-plum-300: oklch(0.72 0.10 340);
+  --ff-plum-400: oklch(0.58 0.14 340);
+  --ff-plum-500: oklch(0.45 0.15 340);
+  --ff-plum-600: oklch(0.36 0.13 340);
+  --ff-plum-700: oklch(0.28 0.10 340);
+  --ff-plum-800: oklch(0.22 0.08 340);
+  --ff-plum-900: oklch(0.16 0.05 340);
 
   /* Accent — Citron (sharp, used sparingly) */
   --ff-citron-100: oklch(0.96 0.06 95);
@@ -40,21 +40,21 @@
   --ff-flagged-bg: oklch(0.95 0.03 250);
   --ff-info:       oklch(0.50 0.11 250);
 
-  /* Neutrals — warm */
-  --ff-ink-950: oklch(0.22 0.035 60);  /* primary text (navy) */
-  --ff-ink-800: oklch(0.32 0.030 60);
-  --ff-ink-700: oklch(0.43 0.026 60);  /* body */
-  --ff-ink-500: oklch(0.56 0.020 60);  /* muted */
-  --ff-ink-400: oklch(0.66 0.015 60);  /* placeholder */
-  --ff-ink-300: oklch(0.78 0.010 60);
-  --ff-ink-200: oklch(0.88 0.008 60);  /* borders */
-  --ff-ink-100: oklch(0.94 0.006 60);  /* subtle surface */
-  --ff-ink-50:  oklch(0.97 0.004 60);
+  /* Neutrals — warm-tinted to match plum */
+  --ff-ink-950: oklch(0.15 0.012 340);  /* primary text */
+  --ff-ink-800: oklch(0.28 0.012 340);
+  --ff-ink-700: oklch(0.40 0.010 340);  /* body */
+  --ff-ink-500: oklch(0.55 0.008 340);  /* muted */
+  --ff-ink-400: oklch(0.66 0.006 340);  /* placeholder */
+  --ff-ink-300: oklch(0.78 0.005 340);
+  --ff-ink-200: oklch(0.88 0.004 340);  /* borders */
+  --ff-ink-100: oklch(0.94 0.003 340);  /* subtle surface */
+  --ff-ink-50:  oklch(0.97 0.003 340);
 
   --ff-paper:    oklch(0.985 0.004 80); /* warm off-white background */
   --ff-surface:  #ffffff;
   --ff-surface-2: oklch(0.97 0.004 80);
-  --ff-overlay:  oklch(0.18 0.030 60 / 0.55);
+  --ff-overlay:  oklch(0.15 0.012 340 / 0.55);
 
   /* Role tokens (used by components) */
   --ff-bg: var(--ff-paper);
@@ -66,7 +66,7 @@
   --ff-card: var(--ff-surface);
   --ff-card-2: var(--ff-surface-2);
   --ff-input-bg: var(--ff-surface);
-  --ff-hover: oklch(0.96 0.008 86);
+  --ff-hover: oklch(0.96 0.004 340);
 
   --ff-primary: var(--ff-plum-700);
   --ff-primary-hover: var(--ff-plum-800);
@@ -77,7 +77,7 @@
   --ff-focus-ring: 0 0 0 2px var(--ff-bg), 0 0 0 4px var(--ff-plum-500);
 
   /* Chart palette — categorical (designed to read in both themes, no gradients) */
-  --ff-chart-1: oklch(0.52 0.10 78);   /* champagne */
+  --ff-chart-1: oklch(0.45 0.15 340);  /* plum  */
   --ff-chart-2: oklch(0.62 0.14 150);  /* moss  */
   --ff-chart-3: oklch(0.72 0.14 75);   /* amber */
   --ff-chart-4: oklch(0.55 0.14 250);  /* steel */
@@ -138,11 +138,11 @@
   --ff-radius-pill: 999px;
 
   /* Elevation — soft, low-contrast (no glassmorphism) */
-  --ff-shadow-xs: 0 1px 0 0 oklch(0.15 0.01 60 / 0.04);
-  --ff-shadow-sm: 0 1px 2px 0 oklch(0.15 0.01 60 / 0.06), 0 1px 0 0 oklch(0.15 0.01 60 / 0.03);
-  --ff-shadow-md: 0 4px 8px -2px oklch(0.15 0.01 60 / 0.08), 0 2px 4px -2px oklch(0.15 0.01 60 / 0.05);
-  --ff-shadow-lg: 0 12px 24px -6px oklch(0.15 0.01 60 / 0.10), 0 4px 8px -4px oklch(0.15 0.01 60 / 0.05);
-  --ff-shadow-xl: 0 24px 48px -12px oklch(0.15 0.01 60 / 0.18);
+  --ff-shadow-xs: 0 1px 0 0 oklch(0.15 0.01 340 / 0.04);
+  --ff-shadow-sm: 0 1px 2px 0 oklch(0.15 0.01 340 / 0.06), 0 1px 0 0 oklch(0.15 0.01 340 / 0.03);
+  --ff-shadow-md: 0 4px 8px -2px oklch(0.15 0.01 340 / 0.08), 0 2px 4px -2px oklch(0.15 0.01 340 / 0.05);
+  --ff-shadow-lg: 0 12px 24px -6px oklch(0.15 0.01 340 / 0.10), 0 4px 8px -4px oklch(0.15 0.01 340 / 0.05);
+  --ff-shadow-xl: 0 24px 48px -12px oklch(0.15 0.01 340 / 0.18);
 
   /* Motion */
   --ff-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -161,27 +161,27 @@
 [data-theme="dark"] {
   color-scheme: dark;
 
-  --ff-paper:    oklch(0.16 0.012 60);
-  --ff-surface:  oklch(0.20 0.014 60);
-  --ff-surface-2:oklch(0.23 0.014 60);
+  --ff-paper:    oklch(0.16 0.012 340);
+  --ff-surface:  oklch(0.20 0.014 340);
+  --ff-surface-2:oklch(0.23 0.014 340);
 
   --ff-bg: var(--ff-paper);
   --ff-fg: oklch(0.96 0.005 80);
-  --ff-fg-muted: oklch(0.70 0.012 60);
-  --ff-fg-subtle: oklch(0.55 0.012 60);
-  --ff-border: oklch(0.28 0.014 60);
-  --ff-border-strong: oklch(0.36 0.014 60);
+  --ff-fg-muted: oklch(0.70 0.012 340);
+  --ff-fg-subtle: oklch(0.55 0.012 340);
+  --ff-border: oklch(0.28 0.014 340);
+  --ff-border-strong: oklch(0.36 0.014 340);
   --ff-card: var(--ff-surface);
   --ff-card-2: var(--ff-surface-2);
-  --ff-input-bg: oklch(0.18 0.012 60);
-  --ff-hover: oklch(0.24 0.014 60);
-  --ff-overlay: oklch(0.06 0.005 60 / 0.70);
+  --ff-input-bg: oklch(0.18 0.012 340);
+  --ff-hover: oklch(0.24 0.014 340);
+  --ff-overlay: oklch(0.06 0.005 340 / 0.70);
 
   --ff-primary: var(--ff-plum-300);
   --ff-primary-hover: var(--ff-plum-200);
-  --ff-primary-fg: oklch(0.16 0.012 60);
+  --ff-primary-fg: oklch(0.16 0.012 340);
   --ff-accent: var(--ff-citron-300);
-  --ff-accent-fg: oklch(0.16 0.012 60);
+  --ff-accent-fg: oklch(0.16 0.012 340);
 
   --ff-approved:    oklch(0.78 0.14 150);
   --ff-approved-bg: oklch(0.28 0.06 150);
@@ -192,14 +192,14 @@
   --ff-flagged:     oklch(0.78 0.13 250);
   --ff-flagged-bg:  oklch(0.28 0.07 250);
 
-  --ff-chart-1: oklch(0.74 0.11 80);
+  --ff-chart-1: oklch(0.75 0.14 340);
   --ff-chart-2: oklch(0.78 0.14 150);
   --ff-chart-3: oklch(0.85 0.13 75);
   --ff-chart-4: oklch(0.75 0.13 250);
   --ff-chart-5: oklch(0.74 0.14 25);
   --ff-chart-6: oklch(0.72 0.11 200);
-  --ff-chart-grid: oklch(0.28 0.014 60);
-  --ff-chart-axis: oklch(0.55 0.012 60);
+  --ff-chart-grid: oklch(0.28 0.014 340);
+  --ff-chart-axis: oklch(0.55 0.012 340);
 
   --ff-shadow-xs: 0 1px 0 0 oklch(0 0 0 / 0.30);
   --ff-shadow-sm: 0 1px 2px 0 oklch(0 0 0 / 0.40);
