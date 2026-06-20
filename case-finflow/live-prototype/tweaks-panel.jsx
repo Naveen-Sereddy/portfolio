@@ -38,7 +38,7 @@
 //                        onChange={(v) => setTweak('primaryColor', v)} />
 //           <TweakColor  label="Palette" value={t.palette}
 //                        options={[['#D97757', '#29261b', '#f6f4ef'],
-//                                  ['#57514A', '#0f172a', '#f1f5f9']]}
+//                                  ['#475569', '#0f172a', '#f1f5f9']]}
 //                        onChange={(v) => setTweak('palette', v)} />
 //           <TweakToggle label="Dark mode" value={t.dark}
 //                        onChange={(v) => setTweak('dark', v)} />
