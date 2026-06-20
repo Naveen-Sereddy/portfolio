@@ -45,7 +45,7 @@
     --line: 244 241 234;     /* hairlines at low opacity */
     --gold: 212 168 90;      /* #D4A85A accent */
     --btn-fg: 13 13 13;      /* near-black text on the accent button */
-    --band: 18 18 18;        /* #121212 alternating section band */
+    --band: 20 20 20;        /* #141414 warm-gray section band (depth without pure black) */
     --grain-opacity: 0.028;
 
     --sb-track: #141414;
@@ -253,7 +253,11 @@
   /* Experience timeline rows */
   .exp-row {
     @apply relative rounded-2xl border border-line/[0.07] bg-line/[0.015] p-6 sm:p-7
-           transition-colors duration-300 hover:border-gold/30;
+           transition duration-200 ease-out hover:border-gold/30;
+  }
+  .exp-row:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 20px 46px -26px rgb(0 0 0 / 0.55);
   }
 
   /* Skill category lines (no tag cloud) */
@@ -303,7 +307,7 @@
   .reveal {
     opacity: 0;
     transform: translateY(26px);
-    transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    transition: opacity 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.4s cubic-bezier(0.16,1,0.3,1);
     will-change: opacity, transform;
   }
   .reveal.is-in { opacity: 1; transform: translateY(0); }
