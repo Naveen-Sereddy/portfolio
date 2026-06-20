@@ -360,7 +360,7 @@
         <!-- info -->
         <div class="lg:col-span-5 ${flip ? "lg:order-2 lg:pl-4" : ""}">
           <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <span class="font-sans text-sm font-semibold text-bone-dim">${p.index}</span>
+            <span class="font-sans text-sm font-semibold text-gold">${p.index}</span>
             <span class="h-px w-10 bg-line/15"></span>
             <span class="font-sans text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-bone-muted">${p.meta}</span>
             ${p.kind ? `<span class="rounded-full border border-gold/30 bg-gold/10 px-2.5 py-0.5 font-sans text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-gold">${p.kind}</span>` : ""}
@@ -401,6 +401,12 @@
                    class="aspect-[16/10] w-full object-cover object-top transition-transform duration-[800ms] ease-out-expo group-hover/frame:scale-[1.035]" />
             </div>
           ${bigFrameClose}
+          ${p.caseUrl ? `<div class="mt-3 flex justify-end">
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-gold/25 bg-gold/[0.06] px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-gold">
+              <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>
+              WCAG 2.1 AA
+            </span>
+          </div>` : ""}
           <div class="mt-3 grid grid-cols-3 gap-2.5 sm:grid-cols-4 sm:gap-3">${thumbs}</div>
         </div>
         </div>
