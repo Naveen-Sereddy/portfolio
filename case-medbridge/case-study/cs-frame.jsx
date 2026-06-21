@@ -7,46 +7,47 @@ const FRAME_H = 1100;
 const ACCENT = "var(--brand-600)";   // accent used by artifact content (real product brand)
 const CHROME_ACCENT = "var(--cs-accent)"; // accent used by the frame chrome (site identity)
 
-// ---------------------------------------------------------------- ArtifactFrame
-// Frame chrome (background, header band, typography) matches the portfolio
-// site's own identity (charcoal/off-white/gold, Fraunces/Inter). Artifact
-// content below the divider keeps MedBridge's real product tokens — those
-// panels render the actual research/wireframe/UI deliverable and shouldn't
-// be recolored to the portfolio's palette.
-function ArtifactFrame({ n, kicker, title, desc, children, padded = true }) {
+// ---------------------------------------------------------------- ScaledStage
+// The artifacts are authored at 1760px-wide pixel layouts (device mockups,
+// wireframes, dense dashboards) that can't reflow into a narrow text column.
+// In the long-scroll narrative each artifact's native visual is preserved
+// exactly and scaled to fit the page column; a ResizeObserver keeps the
+// scale in sync with the container width.
+function ScaledStage({ w = FRAME_W, h = 920, padded = true, children }) {
+  const ref = React.useRef(null);
+  const [scale, setScale] = React.useState(0.55);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const measure = () => setScale(Math.min(1, el.clientWidth / w));
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [w]);
   return (
-    <div style={{ width: "100%", height: "100%", background: "var(--cs-bg)", display: "flex",
-      flexDirection: "column", fontFamily: "var(--cs-f-sans)", color: "var(--cs-ink)", overflow: "hidden" }}>
-      {/* Header band */}
-      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between",
-        padding: "44px 56px 22px", flex: "none" }}>
-        <div style={{ display: "flex", gap: 22 }}>
-          <div style={{ width: 56, height: 56, borderRadius: 14, background: "transparent", color: CHROME_ACCENT,
-            border: "1px solid var(--cs-line)", display: "flex", alignItems: "center", justifyContent: "center", flex: "none",
-            fontFamily: "var(--cs-f-serif)", fontStyle: "italic", fontSize: 22, fontWeight: 500, letterSpacing: "-0.02em" }}>{n}</div>
-          <div>
-            <div style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase",
-              letterSpacing: "0.14em", color: "var(--cs-ink-3)" }}>{kicker}</div>
-            <h1 style={{ margin: "5px 0 0", fontFamily: "var(--cs-f-serif)", fontStyle: "italic", fontSize: 33, fontWeight: 500, letterSpacing: "-0.01em",
-              lineHeight: 1.05, color: "var(--cs-ink)" }}>{title}</h1>
-            {desc && <p style={{ margin: "9px 0 0", fontSize: 15.5, color: "var(--cs-ink-3)", lineHeight: 1.45,
-              maxWidth: 920 }}>{desc}</p>}
-          </div>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 11, flex: "none", paddingTop: 6 }}>
-          <span style={{ width: 7, height: 7, borderRadius: "50%", background: CHROME_ACCENT, display: "inline-block" }} />
-          <div style={{ lineHeight: 1.2 }}>
-            <div style={{ fontSize: 15, fontWeight: 600, letterSpacing: "0.01em", color: "var(--cs-ink)" }}>MedBridge</div>
-            <div style={{ fontSize: 11, color: "var(--cs-ink-3)", fontWeight: 500 }}>Patient Portal · UX Case Study</div>
-          </div>
-        </div>
-      </div>
-      <div style={{ height: 1, background: "var(--cs-line)", margin: "0 56px", flex: "none" }} />
-      {/* Body — real product tokens from here down */}
-      <div style={{ flex: 1, minHeight: 0, padding: padded ? "30px 56px 46px" : 0, display: "flex", flexDirection: "column",
-        fontFamily: "var(--font-sans)", color: "var(--fg-1)" }}>
+    <div ref={ref} className="csm-stage" style={{ height: h * scale }}>
+      <div className="csm-stage__inner" style={{ width: w, height: h, transform: `scale(${scale})`,
+        transformOrigin: "top left", padding: padded ? "30px 56px 46px" : 0,
+        display: "flex", flexDirection: "column", fontFamily: "var(--font-sans)", color: "var(--fg-1)" }}>
         {children}
       </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------- ArtifactFrame
+// Narrative section: a crisp, readable header (real Fraunces/Inter text at
+// full size) above the artifact's native visual, scaled to fit the column.
+function ArtifactFrame({ n, kicker, title, desc, children, padded = true }) {
+  return (
+    <div className="csm-artifact">
+      <div className="csm-head">
+        <div className="csm-eyebrow"><span className="csm-num">{n}</span>{kicker}</div>
+        <h2 className="csm-title">{title}</h2>
+        {desc && <p className="csm-desc">{desc}</p>}
+      </div>
+      <ScaledStage padded={padded}>{children}</ScaledStage>
     </div>
   );
 }

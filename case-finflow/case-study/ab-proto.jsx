@@ -15,9 +15,9 @@ function ArtboardPrototype() {
         </div>
       </div>
 
-      <div className="ab-body" style={{padding:"20px 40px 32px"}}>
+      <div className="ab-body">
         <div style={{
-          height:"100%", borderRadius:14, overflow:"hidden",
+          height:760, borderRadius:14, overflow:"hidden",
           border:"1px solid var(--c-accent-line)", background:"var(--c-surface)",
           boxShadow:"0 0 0 1px var(--c-accent-tint)",
         }}>

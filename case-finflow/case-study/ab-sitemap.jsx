@@ -40,7 +40,7 @@ function ArtboardSitemap() {
       </div>
 
       <div className="ab-body" style={{overflow:"hidden"}}>
-        <div style={{display:"grid", gridTemplateColumns:"repeat(3, 1fr) 1.1fr", gap:18, height:"100%"}}>
+        <div style={{display:"grid", gridTemplateColumns:"repeat(3, 1fr) 1.1fr", gap:18}}>
           {sidebars.map((s, i) => (
             <div key={i} style={{
               background:"var(--c-surface)", border:"1px solid var(--c-line)", borderRadius:12,

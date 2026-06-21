@@ -55,7 +55,7 @@ function ArtboardJourney() {
       </div>
 
       <div className="ab-body" style={{overflow:"hidden"}}>
-        <div style={{display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:18, height:"100%"}}>
+        <div style={{display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:18}}>
           {journeys.map((j, i) => (
             <div key={i} style={{display:"flex", flexDirection:"column", gap:10, minHeight:0}}>
               <div style={{paddingBottom:8, borderBottom:"1px solid var(--c-line)"}}>

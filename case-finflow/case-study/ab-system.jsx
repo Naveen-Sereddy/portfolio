@@ -34,7 +34,7 @@ function ArtboardDesignSystem() {
       </div>
 
       <div className="ab-body" style={{overflow:"hidden"}}>
-        <div style={{display:"grid", gridTemplateColumns:"0.9fr 1fr 1.1fr", gap:20, height:"100%"}}>
+        <div style={{display:"grid", gridTemplateColumns:"0.9fr 1fr 1.1fr", gap:20}}>
 
           <div style={{display:"flex", flexDirection:"column", gap:10}}>
             <div style={{fontFamily:"var(--f-mono)", fontSize:10, letterSpacing:"0.1em", textTransform:"uppercase", color:"var(--c-ink-4)"}}>Principles</div>

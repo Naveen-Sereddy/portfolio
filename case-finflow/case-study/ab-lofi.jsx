@@ -57,7 +57,7 @@ function ArtboardLoFi() {
       </div>
 
       <div className="ab-body" style={{overflow:"hidden"}}>
-        <div style={{display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:20, height:"100%"}}>
+        <div style={{display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:20}}>
           {screens.map((s, i) => (
             <div key={i} style={{display:"flex", flexDirection:"column", gap:8, minHeight:0}}>
               <div style={{fontFamily:"var(--f-mono)", fontSize:10, letterSpacing:"0.1em", textTransform:"uppercase", color:"var(--c-ink-4)"}}>{s.name}</div>

@@ -37,7 +37,7 @@ function ArtboardAccessibility() {
       </div>
 
       <div className="ab-body" style={{overflow:"hidden"}}>
-        <div style={{display:"grid", gridTemplateColumns:"1fr 0.9fr 0.9fr", gap:20, height:"100%"}}>
+        <div style={{display:"grid", gridTemplateColumns:"1fr 0.9fr 0.9fr", gap:20}}>
 
           <div style={{display:"flex", flexDirection:"column", gap:8, minHeight:0}}>
             <div style={{fontFamily:"var(--f-mono)", fontSize:10, letterSpacing:"0.1em", textTransform:"uppercase", color:"var(--c-ink-4)"}}>Contrast review (sampled)</div>
