@@ -191,11 +191,11 @@
       urlLabel: null,
       caseUrl: "case-medbridge/index.html",
       shots: [
-        { src: "case-medbridge/img/08.png", cap: "Final UI, the unified patient dashboard across desktop, tablet and mobile" },
-        { src: "case-medbridge/img/06.png", cap: "Design system, color, type, spacing and components" },
-        { src: "case-medbridge/img/02.png", cap: "Journey map for the appointment flow" },
-        { src: "case-medbridge/img/01.png", cap: "User personas" },
-        { src: "case-medbridge/img/07.png", cap: "Accessibility audit, WCAG 2.1 AA" },
+        { src: "case-medbridge/img/ui-dashboard.png", cap: "Patient dashboard, appointments, prescriptions and health summary" },
+        { src: "case-medbridge/img/ui-doctors.png", cap: "Find a doctor, search and book providers" },
+        { src: "case-medbridge/img/ui-billing.png", cap: "Billing, invoices, balances and insurance" },
+        { src: "case-medbridge/img/ui-settings.png", cap: "Profile and account settings" },
+        { src: "case-medbridge/img/ui-signin.png", cap: "Secure sign-in to the patient portal" },
       ],
     },
     {
@@ -226,11 +226,11 @@
       urlLabel: null,
       caseUrl: "case-finflow/index.html",
       shots: [
-        { src: "case-finflow/img/08.png", cap: "Final UI, the role-based expense platform" },
-        { src: "case-finflow/img/06.png", cap: "Design system, color, type, spacing and components" },
-        { src: "case-finflow/img/02.png", cap: "Journey map, submission to approval" },
-        { src: "case-finflow/img/01.png", cap: "User personas, admin, manager and employee" },
-        { src: "case-finflow/img/07.png", cap: "Accessibility audit" },
+        { src: "case-finflow/img/ui-dashboard.png", cap: "Finance admin dashboard, spend, approvals and cash at a glance" },
+        { src: "case-finflow/img/ui-manager.png", cap: "Manager view, team spend and the approvals queue" },
+        { src: "case-finflow/img/ui-employee.png", cap: "Employee view, submit and track expenses" },
+        { src: "case-finflow/img/ui-payouts.png", cap: "Reimbursement payouts, scheduled and paid" },
+        { src: "case-finflow/img/ui-audit.png", cap: "Immutable audit log, every action and actor" },
       ],
     },
     {
