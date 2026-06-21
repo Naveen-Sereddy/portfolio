@@ -5,7 +5,7 @@
 /* ====================================================================== */
 /* Artifact 9 — Clickable Prototype (flow preview + launch)                */
 /* ====================================================================== */
-const PROTO_URL = "../ui_kits/portal/index.html";
+const PROTO_URL = "prototype.html";
 const b = (w, h, c, r = 3) => <div style={{ width: w, height: h, borderRadius: r, background: c, flex: "none" }} />;
 const PB = "var(--brand-600)", PT = "var(--teal-600)", PG = "var(--green-600)", PA = "var(--amber-700)";
 
@@ -224,16 +224,13 @@ function CaseStudyApp() {
   }, []);
 
   return (
-    <DesignCanvas>
-      <DCSection id="medbridge-casestudy" title="MedBridge — UX Case Study"
-        subtitle="Healthcare patient portal · 10 artifacts — research → competitive analysis → IA → wireframes → system → final UI → prototype">
-        {ARTIFACTS.map(([n, name, Comp]) => (
-          <DCArtboard key={n} id={n} label={`${n} · ${name}`} width={FRAME_W} height={FRAME_H}>
-            <Comp />
-          </DCArtboard>
-        ))}
-      </DCSection>
-    </DesignCanvas>
+    <main className="case-page">
+      {ARTIFACTS.map(([n, name, Comp]) => (
+        <section className="cs-band" key={n}>
+          <Comp />
+        </section>
+      ))}
+    </main>
   );
 }
 

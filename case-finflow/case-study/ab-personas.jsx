@@ -53,7 +53,7 @@ function ArtboardPersonas() {
       </div>
 
       <div className="ab-body">
-        <div style={{display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:20, height:"100%"}}>
+        <div style={{display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:20}}>
           {personas.map((p, i) => (
             <div key={i} style={{
               background:"var(--c-surface)", border:"1px solid var(--c-line)", borderRadius:14,

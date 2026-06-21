@@ -80,7 +80,7 @@ function ArtboardResearch() {
 
       {/* ── Body ── */}
       <div className="ab-body" style={{overflow:"hidden"}}>
-        <div style={{display:"grid", gridTemplateColumns:"1fr 1.15fr 0.9fr", gap:20, height:"100%"}}>
+        <div style={{display:"grid", gridTemplateColumns:"1fr 1.15fr 0.9fr", gap:20}}>
 
           {/* ── Column 1: Discovery ── */}
           <div style={{display:"flex", flexDirection:"column", gap:12, minHeight:0}}>
