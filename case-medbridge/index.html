@@ -4,12 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MedBridge · UX Case Study · Naveen Sereddy</title>
-  <meta name="description" content="MedBridge: an end-to-end patient-portal redesign unifying appointments, prescriptions, records, and billing into one calm, accessible experience. UX case study by Naveen Sereddy." />
+  <meta name="description" content="MedBridge: an end-to-end patient-portal redesign, from competitive research through a 30-screen clickable prototype. UX case study by Naveen Sereddy." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <script>try{if(localStorage.getItem("theme")!=="light")document.documentElement.classList.add("dark")}catch(e){}</script>
   <link rel="stylesheet" href="../case-studies.css?v=8" />
+  <link rel="stylesheet" href="colors_and_type.css" />
+  <link rel="stylesheet" href="components.css" />
+  <style>
+    html, body { margin: 0; }
+    .case-canvas { height: 100vh; overflow: hidden; background: #0D0D0D; }
+    .case-canvas #root { height: 100%; }
+    :root {
+      /* Case-study chrome tokens — matches naveen-sereddy.vercel.app
+         identity. Scoped to the artboard frame only; artifact content
+         keeps MedBridge's own real product tokens (colors_and_type.css). */
+      --cs-bg: #0D0D0D;
+      --cs-ink: #EDE7DD;
+      --cs-ink-3: #B7B0A6;
+      --cs-line: rgba(237, 231, 221, 0.12);
+      --cs-accent: #D4A85A;
+      --cs-f-serif: 'Fraunces', Georgia, serif;
+      --cs-f-sans: 'Inter', system-ui, sans-serif;
+    }
+  </style>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
   <header class="cs-head">
@@ -25,139 +49,9 @@
     </div>
   </header>
 
-  <main>
-    <!-- HERO -->
-    <div class="wrap hero">
-      <p class="eyebrow">UX Case Study · Healthcare</p>
-      <h1>MedBridge</h1>
-      <p class="sub">An end-to-end patient-portal redesign: appointments, prescriptions, records, and billing unified into one calm, secure experience.</p>
-      <dl class="meta">
-        <div><dt>My role</dt><dd>Research · IA · UI · Design System</dd></div>
-        <div><dt>Platform</dt><dd>Responsive web &amp; mobile</dd></div>
-        <div><dt>Timeline</dt><dd>Concept project · 2024</dd></div>
-        <div><dt>Outcome</dt><dd class="metric">5 core flows unified</dd></div>
-      </dl>
-    </div>
-
-    <!-- PROBLEM + GOALS -->
-    <section class="band">
-      <div class="wrap cols">
-        <div>
-          <p class="eyebrow">The problem</p>
-          <p class="lead">Healthcare portals are often hard to navigate, especially when patients manage appointments, prescriptions, medical records, and provider communication across multiple screens and workflows.</p>
-        </div>
-        <div>
-          <p class="eyebrow">Goals</p>
-          <p>Unify the core patient flows into one place. Improve navigation, discoverability, and accessibility. Reduce friction and raise task completion, while staying understandable for users with very different levels of technical literacy.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ARTIFACTS -->
-    <section>
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">01</span><p class="eyebrow" style="margin:0">Discovery · Research</p></div>
-        <h2>User personas</h2>
-        <p>Two archetypes anchor every design decision: a busy, mobile-first patient and an older caregiver. Each trade-off traces back to a real person and their goals.</p>
-        <figure class="fig"><a href="img/01.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/01.png?v=2" alt="MedBridge user personas: a mobile-first patient and an older caregiver, with goals, pain points, and behaviors" /></a></figure>
-      </div>
-    </section>
-
-    <section class="band">
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">02</span><p class="eyebrow" style="margin:0">Discovery · Research</p></div>
-        <h2>Journey map</h2>
-        <p>Mapping the appointment journey surfaced the exact moments patients hesitate or drop off, and the opportunities to remove that friction.</p>
-        <figure class="fig"><a href="img/02.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/02.png?v=2" alt="MedBridge user journey map for booking an appointment, with emotions, friction points and opportunities" /></a></figure>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">03</span><p class="eyebrow" style="margin:0">Discovery · Research</p></div>
-        <h2>Information architecture</h2>
-        <p>A flat, predictable structure so patients reach appointments, records, and billing without hunting through nested menus.</p>
-        <figure class="fig"><a href="img/03.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/03.png?v=2" alt="MedBridge information architecture sitemap" /></a></figure>
-      </div>
-    </section>
-
-    <section class="band">
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">04</span><p class="eyebrow" style="margin:0">Design · Wireframes</p></div>
-        <h2>Low-fidelity wireframes</h2>
-        <p>Grayscale wireframes settle layout and hierarchy before any visual design: fast to change, cheap to test.</p>
-        <figure class="fig"><a href="img/04.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/04.png?v=2" alt="MedBridge low-fidelity wireframes for key screens" /></a></figure>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">05</span><p class="eyebrow" style="margin:0">Design · Wireframes</p></div>
-        <h2>Mid-fidelity wireframes</h2>
-        <p>Real content and component structure validate the flows before committing to final UI.</p>
-        <figure class="fig"><a href="img/05.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/05.png?v=2" alt="MedBridge mid-fidelity wireframes" /></a></figure>
-      </div>
-    </section>
-
-    <section class="band">
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">06</span><p class="eyebrow" style="margin:0">Design · System</p></div>
-        <h2>Design system</h2>
-        <p>A healthcare-focused system keeps the product consistent and accessible: color roles, a type scale, a 4px spacing rhythm, and the core components every screen is assembled from.</p>
-        <figure class="fig"><a href="img/06.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/06.png?v=2" alt="MedBridge design system: color, type, spacing and components" /></a></figure>
-        <aside class="pullquote">
-          <p class="eyebrow">Key decision</p>
-          <blockquote>Balance clinical information density with simplicity. Patients need a lot of information, but the interface has to stay understandable across very different levels of technical literacy.</blockquote>
-        </aside>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">07</span><p class="eyebrow" style="margin:0">Design · Accessibility</p></div>
-        <h2>Accessibility audit</h2>
-        <p>Built to WCAG 2.1 AA: contrast-checked color, a logical keyboard path, descriptive screen-reader labels, and touch targets that clear the 44px minimum.</p>
-        <figure class="fig"><a href="img/07.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/07.png?v=2" alt="MedBridge accessibility audit: contrast checks, keyboard order, screen-reader labels" /></a></figure>
-      </div>
-    </section>
-
-    <section class="band">
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">08</span><p class="eyebrow" style="margin:0">Deliver · Final UI</p></div>
-        <h2>Final UI</h2>
-        <p>The unified portal, fully designed and responsive: one information architecture that adapts from a focused desktop workspace to a thumb-friendly mobile app.</p>
-        <figure class="fig"><a href="img/08.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/08.png?v=2" alt="MedBridge final UI across desktop, tablet and mobile" /></a></figure>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">09</span><p class="eyebrow" style="margin:0">Deliver · Prototype</p></div>
-        <h2>Clickable prototype</h2>
-        <p>The primary path, clickable end to end across 30 real screens: sign in &rarr; dashboard &rarr; book &rarr; pick date &amp; time &rarr; confirm &rarr; success. Real screen-to-screen navigation, not a slideshow.</p>
-        <figure class="fig"><a href="img/09.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/09.png?v=2" alt="MedBridge clickable prototype: the booking flow across six screens" /></a></figure>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="prototype.html" target="_blank" rel="noopener">Open the prototype &nearr;</a>
-        </div>
-        <p class="proto-note">Opens in a new tab · best experienced on desktop</p>
-      </div>
-    </section>
-
-    <!-- RESULTS -->
-    <section class="band">
-      <div class="wrap">
-        <p class="eyebrow">Outcome</p>
-        <h2>The result</h2>
-        <p>A unified patient portal that simplifies healthcare interactions while improving navigation, accessibility, and information discoverability, designed to hold up for the least technical patient in the room.</p>
-        <div class="results-grid">
-          <div class="res"><div class="v">5</div><div class="k">Core flows unified</div></div>
-          <div class="res"><div class="v">30</div><div class="k">Prototype screens</div></div>
-          <div class="res"><div class="v">AA</div><div class="k">WCAG 2.1 verified</div></div>
-          <div class="res"><div class="v">9</div><div class="k">Design artifacts</div></div>
-        </div>
-      </div>
-    </section>
-  </main>
+  <div class="case-canvas">
+    <div id="root"></div>
+  </div>
 
   <section class="next-case">
     <div class="wrap">
@@ -176,6 +70,18 @@
       </nav>
     </div>
   </footer>
+
+  <script type="text/babel" src="ui_kits/portal/lib.jsx"></script>
+  <script type="text/babel" src="ui_kits/portal/ui.jsx"></script>
+  <script type="text/babel" src="case-study/design-canvas.jsx"></script>
+  <script type="text/babel" src="case-study/cs-frame.jsx"></script>
+  <script type="text/babel" src="case-study/cs-art-personas-journey.jsx"></script>
+  <script type="text/babel" src="case-study/cs-art-ia.jsx"></script>
+  <script type="text/babel" src="case-study/cs-art-wireframes.jsx"></script>
+  <script type="text/babel" src="case-study/cs-art-designsystem.jsx"></script>
+  <script type="text/babel" src="case-study/cs-art-a11y.jsx"></script>
+  <script type="text/babel" src="case-study/cs-art-finalui.jsx"></script>
+  <script type="text/babel" src="case-study/cs-app.jsx"></script>
   <script src="../case-studies.js?v=1"></script>
 </body>
 </html>
