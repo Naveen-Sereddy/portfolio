@@ -5,11 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FinFlow · UX Case Study · Naveen Sereddy</title>
   <meta name="description" content="FinFlow: a role-based B2B expense-management platform designed from research through usability testing for admins, managers, and employees. UX case study by Naveen Sereddy." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <script>try{if(localStorage.getItem("theme")!=="light")document.documentElement.classList.add("dark")}catch(e){}</script>
   <link rel="stylesheet" href="../case-studies.css?v=8" />
+  <link rel="stylesheet" href="case-study/style.css">
+  <style>
+    html, body { margin: 0; }
+    .case-canvas { height: 100vh; overflow: hidden; background: #0D0D0D; }
+    .case-canvas #root { height: 100%; }
+  </style>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 </head>
 <body>
   <header class="cs-head">
@@ -25,140 +32,9 @@
     </div>
   </header>
 
-  <main>
-    <!-- HERO -->
-    <div class="wrap hero">
-      <p class="eyebrow">UX Case Study · B2B Fintech</p>
-      <h1>FinFlow</h1>
-      <p class="sub">A B2B expense-management platform designed from research through usability testing across three roles: admin, manager, and employee.</p>
-      <dl class="meta">
-        <div><dt>My role</dt><dd>Research · IA · Interaction · Design System</dd></div>
-        <div><dt>Platform</dt><dd>Responsive web (desktop-first)</dd></div>
-        <div><dt>Timeline</dt><dd>Concept project · 2025</dd></div>
-        <div><dt>Outcome</dt><dd class="metric">73% &rarr; 89%</dd></div>
-      </dl>
-    </div>
-
-    <!-- PROBLEM + GOALS -->
-    <section class="band">
-      <div class="wrap cols">
-        <div>
-          <p class="eyebrow">The problem</p>
-          <p class="lead">Finance teams manage expenses, approvals, reimbursements, reporting, and card programs across disconnected systems, creating inefficiency, poor visibility, and added administrative overhead.</p>
-        </div>
-        <div>
-          <p class="eyebrow">Goals</p>
-          <p>Unify submission, approval, and reporting into one role-based platform. Give each role (admin, manager, employee) a workflow built around its actual priorities, and raise task completion across the board.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ARTIFACTS -->
-    <section>
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">01</span><p class="eyebrow" style="margin:0">Discovery · Research</p></div>
-        <h2>User personas</h2>
-        <p>Three roles, three very different workdays. Anchoring on a primary finance user and the manager and employee who hand work to her kept every flow tied to a real priority.</p>
-        <figure class="fig"><a href="img/01.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/01.png?v=2" alt="FinFlow user personas for finance admin, manager, and employee" /></a></figure>
-      </div>
-    </section>
-
-    <section class="band">
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">02</span><p class="eyebrow" style="margin:0">Discovery · Research</p></div>
-        <h2>Journey map</h2>
-        <p>Following an expense from submission to approval exposed where time and visibility were lost between roles.</p>
-        <figure class="fig"><a href="img/02.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/02.png?v=2" alt="FinFlow journey map for submitting and approving an expense" /></a></figure>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">03</span><p class="eyebrow" style="margin:0">Discovery · Research</p></div>
-        <h2>Information architecture</h2>
-        <p>A role-aware structure so each user lands in the workspace built for their responsibilities, not a generic dashboard.</p>
-        <figure class="fig"><a href="img/03.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/03.png?v=2" alt="FinFlow information architecture sitemap" /></a></figure>
-        <aside class="pullquote">
-          <p class="eyebrow">Key decision</p>
-          <blockquote>Employees, managers, and admins have completely different priorities. Instead of one generic dashboard, each role got workflows built around its primary responsibilities.</blockquote>
-        </aside>
-      </div>
-    </section>
-
-    <section class="band">
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">04</span><p class="eyebrow" style="margin:0">Design · Wireframes</p></div>
-        <h2>Low-fidelity wireframes</h2>
-        <p>Grayscale wireframes lock in layout and hierarchy across the three role views before any visual design.</p>
-        <figure class="fig"><a href="img/04.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/04.png?v=2" alt="FinFlow low-fidelity wireframes" /></a></figure>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">05</span><p class="eyebrow" style="margin:0">Design · Wireframes</p></div>
-        <h2>Mid-fidelity wireframes</h2>
-        <p>Real labels and component structure validate the approval and expense flows before final UI.</p>
-        <figure class="fig"><a href="img/05.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/05.png?v=2" alt="FinFlow mid-fidelity wireframes" /></a></figure>
-      </div>
-    </section>
-
-    <section class="band">
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">06</span><p class="eyebrow" style="margin:0">Design · System</p></div>
-        <h2>Design system</h2>
-        <p>A small, disciplined system: color roles, a type scale, a four-step spacing rhythm, and the core components every FinFlow screen is built from.</p>
-        <figure class="fig"><a href="img/06.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/06.png?v=2" alt="FinFlow design system: color, type, spacing and components" /></a></figure>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">07</span><p class="eyebrow" style="margin:0">Design · Accessibility</p></div>
-        <h2>Accessibility audit</h2>
-        <p>Contrast-checked color pairs, a single visible focus token, and keyboard-first interaction across the dashboard.</p>
-        <figure class="fig"><a href="img/07.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/07.png?v=2" alt="FinFlow accessibility audit with contrast checks and focus states" /></a></figure>
-      </div>
-    </section>
-
-    <section class="band">
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">08</span><p class="eyebrow" style="margin:0">Deliver · Final UI</p></div>
-        <h2>Final UI</h2>
-        <p>The role-based platform, fully designed and responsive: admin, manager, and employee views built on one consistent system.</p>
-        <figure class="fig"><a href="img/08.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/08.png?v=2" alt="FinFlow final UI, responsive" /></a></figure>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <div class="art-head"><span class="art-num">09</span><p class="eyebrow" style="margin:0">Deliver · Prototype</p></div>
-        <h2>Clickable prototype</h2>
-        <p>A fully clickable prototype of the platform: sign-in and onboarding through all three role dashboards, expenses, approvals, corporate cards, reporting, settings, and the mobile views. Real screen-to-screen navigation across 30+ screens, with a search to jump anywhere.</p>
-        <figure class="fig"><a href="img/09.png?v=2" target="_blank" rel="noopener" aria-label="Open image at full size"><img loading="lazy" decoding="async" src="img/09.png?v=2" alt="FinFlow prototype flow: submit, approve, report across the three roles" /></a></figure>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="live-prototype/index.html" target="_blank" rel="noopener">Open the prototype &nearr;</a>
-        </div>
-        <p class="proto-note">Opens in a new tab · best experienced on desktop</p>
-      </div>
-    </section>
-
-    <!-- RESULTS -->
-    <section class="band">
-      <div class="wrap">
-        <p class="eyebrow">Outcome</p>
-        <h2>The result</h2>
-        <p>A role-based expense platform that streamlines submission, approvals, and reporting while giving finance teams the visibility they were missing across disconnected tools.</p>
-        <div class="results-grid">
-          <div class="res"><div class="v">73&rarr;89%</div><div class="k">Task completion in testing</div></div>
-          <div class="res"><div class="v">3</div><div class="k">Role-based workspaces</div></div>
-          <div class="res"><div class="v">AA</div><div class="k">WCAG 2.1 verified</div></div>
-          <div class="res"><div class="v">9</div><div class="k">Design artifacts</div></div>
-        </div>
-        <p style="margin-top:18px;font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.02em;">Concept project. Task-completion figures from prototype usability testing during the project.</p>
-      </div>
-    </section>
-  </main>
+  <div class="case-canvas">
+    <div id="root"></div>
+  </div>
 
   <section class="next-case">
     <div class="wrap">
@@ -177,6 +53,72 @@
       </nav>
     </div>
   </footer>
+
+  <script src="ui_kits/finflow/data.js"></script>
+  <script type="text/babel" src="design-canvas.jsx"></script>
+  <script type="text/babel" src="case-study/dashmock.jsx"></script>
+  <script type="text/babel" src="case-study/ab-personas.jsx"></script>
+  <script type="text/babel" src="case-study/ab-research.jsx"></script>
+  <script type="text/babel" src="case-study/ab-journey.jsx"></script>
+  <script type="text/babel" src="case-study/ab-sitemap.jsx"></script>
+  <script type="text/babel" src="case-study/ab-lofi.jsx"></script>
+  <script type="text/babel" src="case-study/ab-midfi.jsx"></script>
+  <script type="text/babel" src="case-study/ab-system.jsx"></script>
+  <script type="text/babel" src="case-study/ab-accessibility.jsx"></script>
+  <script type="text/babel" src="case-study/ab-final.jsx"></script>
+  <script type="text/babel" src="case-study/ab-proto.jsx"></script>
+
+  <script type="text/babel" data-presets="env,react">
+    const W = 1760;
+    const H = 1100;
+
+    function App() {
+      return (
+        <DesignCanvas>
+          <DCSection id="research" title="Discovery" subtitle="Personas · workflow · IA">
+            <DCArtboard id="01-personas" label="01 · Personas" width={W} height={H}>
+              <ArtboardPersonas />
+            </DCArtboard>
+            <DCArtboard id="01b-research" label="01b · Research" width={W} height={H}>
+              <ArtboardResearch />
+            </DCArtboard>
+            <DCArtboard id="02-journey" label="02 · Journey map" width={W} height={H}>
+              <ArtboardJourney />
+            </DCArtboard>
+            <DCArtboard id="03-sitemap" label="03 · Information architecture" width={W} height={H}>
+              <ArtboardSitemap />
+            </DCArtboard>
+          </DCSection>
+
+          <DCSection id="design" title="Design" subtitle="Wireframes · system · accessibility">
+            <DCArtboard id="04-lofi" label="04 · Low-fi wireframes" width={W} height={H}>
+              <ArtboardLoFi />
+            </DCArtboard>
+            <DCArtboard id="05-midfi" label="05 · Mid-fi wireframes" width={W} height={H}>
+              <ArtboardMidFi />
+            </DCArtboard>
+            <DCArtboard id="06-system" label="06 · Design system" width={W} height={H}>
+              <ArtboardDesignSystem />
+            </DCArtboard>
+            <DCArtboard id="07-a11y" label="07 · Accessibility audit" width={W} height={H}>
+              <ArtboardAccessibility />
+            </DCArtboard>
+          </DCSection>
+
+          <DCSection id="deliver" title="Deliver" subtitle="Hi-fi UI · clickable prototype">
+            <DCArtboard id="08-final" label="08 · Final UI · responsive" width={W} height={H}>
+              <ArtboardFinalUI />
+            </DCArtboard>
+            <DCArtboard id="09-proto" label="09 · Clickable prototype" width={W} height={H}>
+              <ArtboardPrototype />
+            </DCArtboard>
+          </DCSection>
+        </DesignCanvas>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
   <script src="../case-studies.js?v=1"></script>
 </body>
 </html>
