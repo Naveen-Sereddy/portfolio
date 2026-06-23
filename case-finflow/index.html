@@ -5,9 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FinFlow · UX Case Study · Naveen Sereddy</title>
   <meta name="description" content="FinFlow: a role-based B2B expense-management platform designed from research through usability testing for admins, managers, and employees. UX case study by Naveen Sereddy." />
+  <script>
+    /* Open every case study at the very top. The browser's default automatic
+       scroll restoration re-applies a stored scroll position AFTER this large,
+       async-rendered (React/Babel) page grows, briefly flashing the bottom
+       before settling. Disabling it keeps navigation pinned to 0,0. */
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.addEventListener("pageshow", function () { window.scrollTo(0, 0); });
+  </script>
   <script>try{if(localStorage.getItem("theme")!=="light")document.documentElement.classList.add("dark")}catch(e){}</script>
   <link rel="stylesheet" href="../case-studies.css?v=8" />
-  <link rel="stylesheet" href="case-study/style.css">
+  <link rel="stylesheet" href="case-study/style.css?v=2">
   <style>
     html, body { margin: 0; background: #0D0D0D; }
   </style>
@@ -29,6 +37,23 @@
       </div>
     </div>
   </header>
+
+  <!-- Project intro: title, summary, and the primary prototype CTA, above the fold. -->
+  <section class="wrap hero">
+    <p class="eyebrow">UX Case Study · B2B Fintech</p>
+    <h1>FinFlow</h1>
+    <p class="sub">A B2B expense-management platform designed from research through usability testing across three roles: admin, manager, and employee.</p>
+    <dl class="meta">
+      <div><dt>My role</dt><dd>Research · IA · Interaction · Design System</dd></div>
+      <div><dt>Platform</dt><dd>Responsive web (desktop-first)</dd></div>
+      <div><dt>Timeline</dt><dd>Concept project · 2025</dd></div>
+      <div><dt>Outcome</dt><dd class="metric">73% &rarr; 89%</dd></div>
+    </dl>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="ui_kits/finflow/index.html" target="_blank" rel="noopener">Open the live prototype &nearr;</a>
+    </div>
+    <p class="proto-note">Fully interactive · opens in a new tab · best on desktop</p>
+  </section>
 
   <div id="root"></div>
 
