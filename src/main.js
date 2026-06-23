@@ -283,11 +283,11 @@
         .map(
           (s, k) => p.caseUrl
             ? `
-          <a href="${p.caseUrl}" class="thumb aspect-[16/10] block" aria-label="${p.title} case study: ${s.cap.replace(/"/g, "")}">
+          <a href="${p.caseUrl}" class="thumb block h-16 sm:h-[72px]" aria-label="${p.title} case study: ${s.cap.replace(/"/g, "")}">
             <img src="${s.src}" alt="${s.cap.replace(/"/g, "")}" loading="lazy" decoding="async" width="1760" height="1100" class="h-full w-full object-cover object-top" />
           </a>`
             : `
-          <button class="thumb aspect-[16/10]" data-gallery="${p.id}" data-idx="${k + 1}" aria-label="View: ${s.cap.replace(/"/g, "")}">
+          <button class="thumb h-16 sm:h-[72px]" data-gallery="${p.id}" data-idx="${k + 1}" aria-label="View: ${s.cap.replace(/"/g, "")}">
             <img src="${s.src}" alt="${s.cap.replace(/"/g, "")}" loading="lazy" decoding="async" width="1760" height="1100" class="h-full w-full object-cover object-top" />
           </button>`
         )
@@ -407,7 +407,7 @@
               WCAG 2.1 AA
             </span>
           </div>` : ""}
-          <div class="mt-3 grid grid-cols-3 gap-2.5 sm:grid-cols-4 sm:gap-3">${thumbs}</div>
+          <div class="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-4 sm:gap-3.5">${thumbs}</div>
         </div>
         </div>
         ${study}

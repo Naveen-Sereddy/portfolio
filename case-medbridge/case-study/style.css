@@ -78,6 +78,41 @@
   border-radius: 4px;
 }
 
+/* ── Page-chrome buttons ──
+   MedBridge ships its product button styles in components.css (.btn /
+   .btn-primary = brand blue), which override the portfolio's shared button
+   on this page. The artifacts don't use .btn, so re-assert the portfolio
+   button — same geometry, radius, and gold accent used on every other page —
+   scoped to the page chrome (intro hero + footer). One button system sitewide. */
+.hero .btn,
+.cs-foot .btn,
+.next-case .btn {
+  height: auto;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: normal;
+  transition: transform .2s, background .2s;
+}
+.hero .btn-primary,
+.cs-foot .btn-primary {
+  background: var(--champ);
+  color: #fff;
+}
+.hero .btn-primary:hover,
+.cs-foot .btn-primary:hover {
+  background: var(--champ-deep);
+  transform: translateY(-1px);
+}
+/* components.css also recolours .eyebrow (slate); restore the portfolio gold
+   for the intro/next-case eyebrows. */
+.hero .eyebrow,
+.next-case .eyebrow {
+  color: var(--champ);
+}
+
 @media (max-width: 820px) {
   .cs-band { padding: 56px 18px; }
 }

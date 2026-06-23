@@ -28,7 +28,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="dist/styles.css?v=24" />
+  <link rel="stylesheet" href="dist/styles.css?v=26" />
+  <style>
+    /* Hero portrait focal point. Desktop keeps the body to the right of the
+       copy; on mobile/tablet the narrow crop is recentred on the face. */
+    #hero-portrait { object-position: 90% center; }
+    @media (max-width: 1023px) { #hero-portrait { object-position: 52% center; } }
+  </style>
   <noscript>
     <style>.reveal, .line-mask > span { opacity: 1 !important; transform: none !important; }</style>
   </noscript>
@@ -49,7 +55,7 @@
         </a>
 
         <!-- Center links (desktop) -->
-        <div class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-9 text-[0.82rem] font-medium text-bone-muted md:flex">
+        <div class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-9 text-[0.82rem] font-medium text-bone-muted lg:flex">
           <a href="#work" class="link-underline">Work</a>
           <a href="#about" class="link-underline">About</a>
           <a href="assets/resume/naveen-sereddy-resume.pdf" target="_blank" rel="noopener" class="link-underline">Résumé</a>
@@ -75,13 +81,13 @@
             <svg class="theme-sun hidden h-[1.2rem] w-[1.2rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.22 4.22l1.77 1.77M18.01 18.01l1.77 1.77M2 12h2.5M19.5 12H22M4.22 19.78l1.77-1.77M18.01 5.99l1.77-1.77"/></svg>
           </button>
 
-          <a href="#contact" class="ml-1 hidden md:inline-flex btn-primary !px-5 !py-2 !min-h-0 text-[0.8rem]">
+          <a href="#contact" class="ml-1 hidden lg:inline-flex btn-primary !px-5 !py-2 !min-h-0 text-[0.8rem]">
             Get in touch
           </a>
 
           <!-- Mobile menu toggle -->
           <button id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"
-                  class="ml-0.5 grid h-9 w-9 place-items-center rounded-full text-bone md:hidden cursor-pointer">
+                  class="ml-0.5 grid h-9 w-9 place-items-center rounded-full text-bone lg:hidden cursor-pointer">
             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16M4 16h16"/></svg>
           </button>
         </div>
@@ -114,9 +120,9 @@
     <!-- ===================================================== HERO -->
     <section class="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pt-20 pb-6 sm:pt-24">
       <!-- full-bleed background portrait: the image IS the hero background -->
-      <img src="assets/profile/hero-bg.jpg" alt="Portrait of Naveen Sereddy"
+      <img id="hero-portrait" src="assets/profile/hero-bg.jpg" alt="Portrait of Naveen Sereddy"
            width="2526" height="1555" fetchpriority="high" decoding="async"
-           class="absolute inset-0 z-0 h-full w-full object-cover" style="object-position: 90% center;" />
+           class="absolute inset-0 z-0 h-full w-full object-cover" />
       <!-- overlay: left ~80% dark for type, fades clean to the right so the portrait stays rich (no wash-out) -->
       <div class="pointer-events-none absolute inset-0 z-[1]"
            style="background:linear-gradient(90deg,rgba(13,13,13,.92) 0%,rgba(13,13,13,.80) 28%,rgba(13,13,13,.42) 55%,rgba(13,13,13,.10) 80%,rgba(13,13,13,0) 100%);"></div>
@@ -132,7 +138,7 @@
       <div class="wrap relative z-10 grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
         <!-- copy -->
         <div class="lg:col-span-7">
-          <div class="reveal mb-6 flex flex-col items-start gap-4">
+          <div class="reveal mb-7 mt-3 flex flex-col items-start gap-4 sm:mt-5">
             <span class="inline-flex items-center gap-2 rounded-full border border-line/12 bg-line/[0.03] px-3.5 py-1.5 text-[0.76rem] font-medium text-bone-muted">
               <span class="relative flex h-1.5 w-1.5">
                 <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold/70"></span>
@@ -143,13 +149,12 @@
             <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
               <span class="font-serif text-[1.7rem] font-normal leading-none text-bone sm:text-[2rem]">Naveen Sereddy</span>
               <span class="hidden h-4 w-px bg-line/25 sm:block"></span>
-              <span class="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-bone-dim">UI/UX Designer · Front-End Dev</span>
+              <span class="text-[0.7rem] font-medium uppercase tracking-[0.2em] text-bone-dim">UI/UX Designer · Front-End Dev</span>
             </div>
           </div>
 
-          <h1 class="mt-6 text-[clamp(2.8rem,6.6vw,6rem)] font-normal leading-[0.98]">
-            <span class="line-mask block"><span>Designing clarity</span></span>
-            <span class="line-mask block"><span>into <em class="gold-gradient not-italic font-normal">complex</em> products.</span></span>
+          <h1 class="mt-6 max-w-[15ch] text-[clamp(2.6rem,5.6vw,4.9rem)] font-normal leading-[1.02]">
+            <span class="line-mask block"><span>Designing clarity into <span class="whitespace-nowrap"><em class="gold-gradient not-italic font-normal">complex</em> products.</span></span></span>
           </h1>
 
           <p class="reveal reveal-delay-2 mt-7 max-w-xl text-lg leading-relaxed text-bone-muted sm:text-xl">
@@ -157,16 +162,18 @@
             <span class="text-bone">actually want to use</span>, across healthcare, fintech, and retail.
           </p>
 
-          <div class="reveal reveal-delay-3 mt-9 flex flex-wrap items-center gap-3">
-            <a href="#work" class="btn-primary">
-              View selected work
+          <div class="reveal reveal-delay-3 mt-9 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <a href="#contact" class="btn-primary">
+              Get in touch
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a href="assets/resume/naveen-sereddy-resume.pdf" download class="btn-ghost">
+            <a href="#work" class="btn-ghost">
+              View selected work
+            </a>
+            <a href="assets/resume/naveen-sereddy-resume.pdf" download class="btn-text">
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
               Download résumé
             </a>
-            <a href="#contact" class="btn-ghost">Get in touch</a>
           </div>
         </div>
 
@@ -206,12 +213,12 @@
     </section>
 
     <!-- ===================================================== WORK -->
-    <section id="work" class="relative py-28 sm:py-40">
+    <section id="work" class="relative py-24 sm:py-32">
       <div class="wrap relative">
         <div class="mb-20 flex flex-wrap items-end justify-between gap-6">
           <div>
             <p class="eyebrow eyebrow-accent reveal mb-4">Selected Work</p>
-            <h2 class="reveal reveal-delay-1 text-[clamp(2.4rem,5.4vw,4rem)] font-normal leading-[1.04]">
+            <h2 class="reveal reveal-delay-1 text-[clamp(2.4rem,5.4vw,4rem)] font-normal leading-[1.05]">
               Three problems,<br>solved end to end.
             </h2>
           </div>
@@ -225,13 +232,13 @@
     </section>
 
     <!-- ===================================================== ABOUT -->
-    <section id="about" class="relative band py-28 shadow-[inset_0_1px_0_rgb(0_0_0/0.18)] sm:py-40">
+    <section id="about" class="relative band py-20 shadow-[inset_0_1px_0_rgb(0_0_0/0.18)] sm:py-28">
       <div class="wrap relative">
         <p class="eyebrow eyebrow-accent reveal mb-4">About</p>
 
         <div class="grid gap-16 lg:grid-cols-12">
           <div class="lg:col-span-7">
-            <h2 class="reveal reveal-delay-1 max-w-2xl text-[clamp(1.9rem,4vw,3rem)] font-normal leading-[1.12]">
+            <h2 class="reveal reveal-delay-1 max-w-2xl text-[clamp(1.9rem,4vw,3rem)] font-normal leading-[1.05]">
               I treat <em class="gold-gradient">research</em> as the first draft of the interface.
             </h2>
             <div class="reveal reveal-delay-2 mt-8 max-w-xl space-y-5 text-[1.02rem] leading-relaxed text-bone-muted">
@@ -246,11 +253,11 @@
             <div class="reveal reveal-delay-3 mt-12">
               <p class="eyebrow mb-5">How I work</p>
               <ol class="grid grid-cols-2 gap-3 sm:grid-cols-5">
-                <li class="process-step">Research</li>
-                <li class="process-step">Wireframe</li>
-                <li class="process-step">Prototype</li>
-                <li class="process-step">Test</li>
-                <li class="process-step">Build</li>
+                <li class="process-step"><span class="proc-num">01</span>Research</li>
+                <li class="process-step"><span class="proc-num">02</span>Wireframe</li>
+                <li class="process-step"><span class="proc-num">03</span>Prototype</li>
+                <li class="process-step"><span class="proc-num">04</span>Test</li>
+                <li class="process-step"><span class="proc-num">05</span>Build</li>
               </ol>
             </div>
           </div>
@@ -261,19 +268,39 @@
               <p class="eyebrow mb-2">Capabilities</p>
               <div class="skill-line">
                 <span class="skill-cat">Design</span>
-                <span class="skill-items">UI/UX · Design systems · Information architecture · Wireframing · Prototyping · Responsive</span>
+                <div class="skill-chips">
+                  <span class="chip">UI/UX</span>
+                  <span class="chip">Design systems</span>
+                  <span class="chip">Information architecture</span>
+                  <span class="chip">Wireframing</span>
+                  <span class="chip">Prototyping</span>
+                  <span class="chip">Responsive</span>
+                </div>
               </div>
               <div class="skill-line">
                 <span class="skill-cat">Research</span>
-                <span class="skill-items">User research · Usability testing · Accessibility, WCAG 2.1</span>
+                <div class="skill-chips">
+                  <span class="chip">User research</span>
+                  <span class="chip">Usability testing</span>
+                  <span class="chip">Accessibility · WCAG 2.1</span>
+                </div>
               </div>
               <div class="skill-line">
                 <span class="skill-cat">Build</span>
-                <span class="skill-items">Front-end development · React · Tailwind CSS · HTML &amp; CSS</span>
+                <div class="skill-chips">
+                  <span class="chip">Front-end development</span>
+                  <span class="chip">React</span>
+                  <span class="chip">Tailwind CSS</span>
+                  <span class="chip">HTML &amp; CSS</span>
+                </div>
               </div>
               <div class="skill-line">
                 <span class="skill-cat">Tools</span>
-                <span class="skill-items">Figma · Git · Design tokens</span>
+                <div class="skill-chips">
+                  <span class="chip">Figma</span>
+                  <span class="chip">Git</span>
+                  <span class="chip">Design tokens</span>
+                </div>
               </div>
             </div>
           </div>
@@ -282,12 +309,12 @@
     </section>
 
     <!-- ===================================================== EXPERIENCE -->
-    <section id="experience" class="relative py-28 sm:py-40">
+    <section id="experience" class="relative py-20 sm:py-28">
       <div class="wrap relative">
         <div class="mb-16 flex flex-wrap items-end justify-between gap-6">
           <div>
             <p class="eyebrow eyebrow-accent reveal mb-4">Experience</p>
-            <h2 class="reveal reveal-delay-1 text-[clamp(2.2rem,5vw,3.4rem)] font-normal leading-[1.06]">
+            <h2 class="reveal reveal-delay-1 text-[clamp(2.2rem,5vw,3.4rem)] font-normal leading-[1.05]">
               Two years in fintech and finance,<br>design through front-end.
             </h2>
           </div>
@@ -302,8 +329,9 @@
           <div class="exp-row reveal">
             <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
               <div class="max-w-2xl">
+                <p class="mb-2.5 font-sans text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-bone-dim"><span class="text-bone-muted">40+</span> system components</p>
                 <div class="flex flex-wrap items-center gap-3">
-                  <h3 class="font-serif text-2xl font-normal leading-none">UI/UX Designer</h3>
+                  <h3 class="font-serif text-2xl font-normal leading-[1.05]">UI/UX Designer</h3>
                   <span class="rounded-full border border-gold/30 bg-gold/10 px-2.5 py-0.5 text-[0.66rem] font-semibold uppercase tracking-[0.1em] text-gold">Current</span>
                 </div>
                 <p class="mt-1.5 text-[0.92rem] font-medium text-bone-muted">Bill Holdings (BILL) · San Jose, CA · Remote</p>
@@ -312,9 +340,7 @@
                 </p>
               </div>
               <div class="shrink-0 text-left sm:text-right">
-                <p class="text-[0.8rem] font-medium uppercase tracking-[0.12em] text-bone-dim">2025 — Present</p>
-                <p class="mt-2 font-serif text-xl text-gold">40+</p>
-                <p class="text-[0.78rem] text-bone-muted">system components</p>
+                <p class="text-[0.82rem] font-semibold uppercase tracking-[0.12em] text-bone-muted">2025 — Present</p>
               </div>
             </div>
           </div>
@@ -323,8 +349,9 @@
           <div class="exp-row reveal reveal-delay-1">
             <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
               <div class="max-w-2xl">
+                <p class="mb-2.5 font-sans text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-bone-dim"><span class="text-bone-muted">3</span> client web apps</p>
                 <div class="flex flex-wrap items-center gap-3">
-                  <h3 class="font-serif text-2xl font-normal leading-none">Front-End Developer</h3>
+                  <h3 class="font-serif text-2xl font-normal leading-[1.05]">Front-End Developer</h3>
                   <span class="rounded-full border border-line/15 bg-line/[0.04] px-2.5 py-0.5 text-[0.66rem] font-semibold uppercase tracking-[0.1em] text-bone-muted">Prior</span>
                 </div>
                 <p class="mt-1.5 text-[0.92rem] font-medium text-bone-muted">Fidelity Investments · Westlake, TX · Remote</p>
@@ -333,9 +360,7 @@
                 </p>
               </div>
               <div class="shrink-0 text-left sm:text-right">
-                <p class="text-[0.8rem] font-medium uppercase tracking-[0.12em] text-bone-dim">2024 — 25</p>
-                <p class="mt-2 font-serif text-xl text-gold">3</p>
-                <p class="text-[0.78rem] text-bone-muted">client web apps</p>
+                <p class="text-[0.82rem] font-semibold uppercase tracking-[0.12em] text-bone-muted">2024 — 25</p>
               </div>
             </div>
           </div>
@@ -348,7 +373,7 @@
     </section>
 
     <!-- ===================================================== TESTIMONIAL -->
-    <section id="praise" class="relative band py-28 shadow-[inset_0_1px_0_rgb(0_0_0/0.18)] sm:py-40">
+    <section id="praise" class="relative band py-24 shadow-[inset_0_1px_0_rgb(0_0_0/0.18)] sm:py-32">
       <div class="wrap relative">
         <p class="eyebrow eyebrow-accent reveal mb-10">Kind words</p>
         <figure class="reveal mx-auto max-w-4xl text-center">
@@ -365,12 +390,12 @@
     </section>
 
     <!-- ===================================================== CONTACT -->
-    <section id="contact" class="relative overflow-hidden py-28 sm:py-40">
+    <section id="contact" class="relative overflow-hidden py-28 sm:py-44">
       <div class="pointer-events-none absolute left-1/2 top-1/3 h-[480px] w-[480px] -translate-x-1/2 rounded-full bg-gold/[0.05] blur-[150px]"></div>
       <div class="wrap relative">
         <div class="mx-auto max-w-2xl text-center">
           <p class="eyebrow eyebrow-accent reveal mb-6">Contact</p>
-          <h2 class="reveal reveal-delay-1 text-[clamp(2.4rem,6.4vw,4.4rem)] font-normal leading-[1.02]">
+          <h2 class="reveal reveal-delay-1 text-[clamp(2.4rem,6.4vw,4.4rem)] font-normal leading-[1.04]">
             Let's build something<br><em class="gold-gradient">people love</em> to use.
           </h2>
           <p class="reveal reveal-delay-2 mx-auto mt-7 max-w-md text-[1.02rem] leading-relaxed text-bone-muted">
@@ -457,10 +482,16 @@
     <div class="wrap relative">
       <div class="flex flex-col gap-10 border-b border-line/10 pb-10 md:flex-row md:items-end md:justify-between">
         <div>
-          <a href="#contact" class="group inline-flex flex-col items-start font-serif text-[clamp(2rem,5vw,3.4rem)] font-normal leading-none">
+          <a href="#contact" class="group inline-flex flex-col items-start font-serif text-[clamp(2rem,5vw,3.4rem)] font-medium leading-[1.02] tracking-tightest">
             <span>Let's work together</span>
             <span class="mt-3 h-[3px] w-10 rounded-full bg-gold transition-all duration-500 ease-out-expo group-hover:w-full"></span>
           </a>
+          <div class="mt-6">
+            <a href="#contact" class="btn-text">
+              Start a conversation
+              <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
           <p class="mt-4 text-[0.8rem] uppercase tracking-[0.14em] text-bone-dim">Currently at BILL · Open to new roles</p>
         </div>
         <nav class="flex flex-wrap gap-x-8 gap-y-3 text-[0.84rem] font-medium text-bone-muted">
@@ -509,6 +540,6 @@
 
   <!-- Lenis smooth scroll (vanilla) registers global `Lenis` -->
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
-  <script src="src/main.js?v=19" defer></script>
+  <script src="src/main.js?v=20" defer></script>
 </body>
 </html>

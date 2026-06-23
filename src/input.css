@@ -77,9 +77,10 @@
     @apply bg-gold/25 text-bone;
   }
 
-  /* Headlines */
+  /* Headlines — locked display line-height (1.00–1.05); inline leading-[] may
+     still override per-heading where a specific value is needed. */
   h1, h2, h3 {
-    @apply font-serif tracking-tightest;
+    @apply font-serif tracking-tightest leading-[1.04];
     font-optical-sizing: auto;
   }
 
@@ -245,9 +246,13 @@
   }
 
   .process-step {
-    @apply relative rounded-xl border border-line/[0.07] bg-line/[0.02] px-3 py-3
-           text-center font-sans text-[0.78rem] font-medium tracking-[0.02em] text-bone-muted
+    @apply relative rounded-xl border border-line/[0.07] bg-line/[0.02] px-3 py-3.5
+           text-center font-sans text-[0.82rem] font-medium tracking-[0.02em] text-bone-muted
            transition-colors duration-300 hover:border-gold/40 hover:text-bone;
+  }
+  /* accent step number, stacked above the label */
+  .proc-num {
+    @apply mb-1.5 block font-mono text-[0.64rem] font-semibold tracking-[0.12em] text-gold;
   }
 
   /* Experience timeline rows */
@@ -260,12 +265,19 @@
     box-shadow: 0 20px 46px -26px rgb(0 0 0 / 0.55);
   }
 
-  /* Skill category lines (no tag cloud) */
+  /* Skill category lines — small-caps muted label above wrapping chip tokens */
   .skill-line {
-    @apply flex flex-col gap-1.5 border-t border-line/[0.08] py-4 sm:flex-row sm:items-baseline sm:gap-6;
+    @apply flex flex-col gap-3 border-t border-line/[0.08] py-5;
   }
   .skill-cat {
-    @apply shrink-0 font-sans text-[0.74rem] font-semibold uppercase tracking-[0.18em] text-bone-dim sm:w-40;
+    @apply font-sans text-[0.74rem] font-semibold uppercase tracking-[0.18em] text-bone-dim;
+  }
+  .skill-chips {
+    @apply flex flex-wrap gap-2 gap-y-2.5;
+  }
+  /* capability tokens read a step larger than the dense project-role chips */
+  .skill-chips .chip {
+    @apply text-[0.84rem] py-2 text-bone;
   }
   .skill-items {
     @apply text-[0.98rem] leading-relaxed text-bone;

@@ -9,11 +9,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script>
+    /* Open every case study at the very top. The browser's default automatic
+       scroll restoration re-applies a stored scroll position AFTER this large,
+       async-rendered (React/Babel) page grows, briefly flashing the bottom
+       before settling. Disabling it keeps navigation pinned to 0,0. */
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.addEventListener("pageshow", function () { window.scrollTo(0, 0); });
+  </script>
   <script>try{if(localStorage.getItem("theme")!=="light")document.documentElement.classList.add("dark")}catch(e){}</script>
   <link rel="stylesheet" href="../case-studies.css?v=8" />
   <link rel="stylesheet" href="colors_and_type.css" />
   <link rel="stylesheet" href="components.css" />
-  <link rel="stylesheet" href="case-study/style.css" />
+  <link rel="stylesheet" href="case-study/style.css?v=2" />
   <style>
     html, body { margin: 0; background: #0D0D0D; }
     :root {
@@ -50,6 +58,23 @@
       </div>
     </div>
   </header>
+
+  <!-- Project intro: title, summary, and the primary prototype CTA, above the fold. -->
+  <section class="wrap hero">
+    <p class="eyebrow">UX Case Study · Healthcare</p>
+    <h1>MedBridge</h1>
+    <p class="sub">An end-to-end patient-portal redesign: appointments, prescriptions, records, and billing unified into one calm, secure, accessible experience.</p>
+    <dl class="meta">
+      <div><dt>My role</dt><dd>Research · IA · UI · Design System</dd></div>
+      <div><dt>Platform</dt><dd>Responsive web &amp; mobile</dd></div>
+      <div><dt>Timeline</dt><dd>Concept project · 2024</dd></div>
+      <div><dt>Outcome</dt><dd class="metric">30-screen prototype</dd></div>
+    </dl>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="prototype.html" target="_blank" rel="noopener">Open the prototype &nearr;</a>
+    </div>
+    <p class="proto-note">Fully clickable · opens in a new tab · best on desktop</p>
+  </section>
 
   <div id="root"></div>
 
