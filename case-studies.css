@@ -1,29 +1,9 @@
 /* Shared styling for the linear case-study pages (MedBridge, FinFlow).
-   Light Stone theme · Navy ink · Champagne accent, matches the portfolio's
-   light palette. Static, image-based, mobile-first. */
+   Dark Charcoal theme · off-white ink · Champagne accent, matches the
+   portfolio's palette. Static, image-based, mobile-first. */
 
 :root {
-  /* Light: warm off-white, charcoal ink, single warm accent */
-  --stone:      #F4F1EA;   /* page base */
-  --stone-2:    #ECE8DE;   /* alternating band */
-  --surface:    #FFFFFF;   /* cards / image frames */
-  --navy:       #1A1A1A;   /* primary ink */
-  --navy-deep:  #141414;   /* header / footer */
-  --muted:      #5B5853;   /* secondary text */
-  --dim:        #6C6861;   /* labels (AA on cream) */
-  --champ:      #9E7426;   /* accent, deepened for contrast on cream */
-  --champ-deep: #856319;   /* accent hover */
-  --line:       rgba(26, 26, 26, 0.12);
-  --line-soft:  rgba(26, 26, 26, 0.07);
-  --header-bg:  rgba(13, 13, 13, 0.86);
-  --shadow-col: rgba(0, 0, 0, 0.4);
-  --maxw: 1180px;
-  --serif: "Fraunces", Georgia, serif;
-  --sans: "Inter", system-ui, -apple-system, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, monospace;
-}
-.dark {
-  /* Dark: charcoal page, off-white text, single warm accent */
+  /* Charcoal page, off-white text, single warm accent */
   --stone:      #0D0D0D;
   --stone-2:    #121212;
   --surface:    #181818;
@@ -37,8 +17,11 @@
   --line-soft:  rgba(244, 241, 234, 0.07);
   --header-bg:  rgba(13, 13, 13, 0.9);
   --shadow-col: rgba(0, 0, 0, 0.5);
+  --maxw: 1180px;
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "Inter", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
 }
-html, body { transition: background-color .4s ease, color .4s ease; }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: var(--stone); }
@@ -76,13 +59,6 @@ a:focus-visible, button:focus-visible, .btn:focus-visible {
 }
 .cs-back:hover { opacity: 1; }
 .cs-head__right { display: flex; align-items: center; gap: 16px; }
-.cs-theme {
-  display: grid; place-items: center; height: 34px; width: 34px;
-  border-radius: 999px; border: 1px solid rgba(230,223,210,0.18);
-  background: transparent; color: #E6DFD2; cursor: pointer;
-  transition: border-color .2s ease, color .2s ease;
-}
-.cs-theme:hover { border-color: rgba(230,223,210,0.4); color: #fff; }
 .hidden { display: none !important; }
 
 /* ---- layout ------------------------------------------------------------ */
