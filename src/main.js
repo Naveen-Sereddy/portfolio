@@ -12,27 +12,6 @@
   const yearEl = $("#year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ------------------------------------------------------------ theme toggle */
-  const root = document.documentElement;
-  const themeBtn = $("#themeBtn");
-  const moonIcon = $(".theme-moon");
-  const sunIcon = $(".theme-sun");
-  const metaTheme = document.querySelector('meta[name="theme-color"]');
-  const syncTheme = () => {
-    const isDark = root.classList.contains("dark");
-    if (moonIcon) moonIcon.classList.toggle("hidden", isDark);
-    if (sunIcon) sunIcon.classList.toggle("hidden", !isDark);
-    if (metaTheme) metaTheme.setAttribute("content", isDark ? "#0D0D0D" : "#F4F1EA");
-    if (themeBtn) themeBtn.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
-  };
-  syncTheme();
-  if (themeBtn) {
-    themeBtn.addEventListener("click", () => {
-      const isDark = root.classList.toggle("dark");
-      try { localStorage.setItem("theme", isDark ? "dark" : "light"); } catch (e) {}
-      syncTheme();
-    });
-  }
 
   /* ------------------------------------------------------------ marquee */
   // Tools with a real brand logo roll as logos; methodology terms roll as text.
