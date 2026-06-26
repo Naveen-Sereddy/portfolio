@@ -64,7 +64,7 @@ function ArtboardFinalUI() {
             borderRadius: 10, background: "var(--c-accent)", color: "#1a1407",
             fontSize: 15, fontWeight: 600, textDecoration: "none",
           }}>
-            Open the live app ↗
+            Open the live prototype ↗
           </a>
           <span style={{ fontSize: 13, color: "var(--c-ink-4)" }}>Fully interactive · switch roles · ⌘K to jump anywhere</span>
         </div>

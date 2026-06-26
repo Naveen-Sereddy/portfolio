@@ -11,29 +11,8 @@
 
 /* ---------------------------------------------------------------- base */
 @layer base {
-  /* :root = light theme. .dark = the default charcoal theme (set pre-paint). */
+  /* Single theme: charcoal. Neutral, no brown. */
   :root {
-    --ink-950: 244 241 234;  /* #F4F1EA page background */
-    --ink-900: 236 232 223;  /* #ECE8DF nav / elevated */
-    --ink-800: 255 255 255;  /* #FFFFFF cards / frames */
-    --ink-700: 249 247 242;  /* #F9F7F2 inset / browser bar */
-    --ink-600: 230 226 216;  /* #E6E2D8 hover surface */
-    --bone: 26 26 26;        /* #1A1A1A primary text */
-    --bone-muted: 91 88 83;  /* #5B5853 secondary text */
-    --bone-dim: 108 104 97;  /* #6C6861 faint labels (AA on cream) */
-    --line: 26 26 26;        /* hairlines at low opacity */
-    --gold: 158 116 38;      /* #9E7426 accent, deepened so it reads on cream */
-    --btn-fg: 244 241 234;   /* off-white text on the deep-gold button */
-    --band: 236 232 222;     /* #ECE8DE alternating section band */
-    --grain-opacity: 0.014;
-
-    --sb-track: #E6E1D6;
-    --sb-thumb: #C9C2B2;
-    --sb-thumb-hover: #B4AC99;
-  }
-
-  /* Charcoal theme (default). Neutral, no brown. */
-  .dark {
     --ink-950: 13 13 13;     /* #0D0D0D page background */
     --ink-900: 20 20 20;     /* #141414 nav / elevated */
     --ink-800: 24 24 24;     /* #181818 cards / frames */
