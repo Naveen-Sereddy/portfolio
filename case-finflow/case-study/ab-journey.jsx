@@ -13,7 +13,7 @@ function ArtboardJourney() {
         { stage: "Submit", action: "Taps Submit", emotion: "Confident", before: "No status visibility", after: "Success screen names approver + ETA" },
         { stage: "Resolve", action: "Sees Approved", emotion: "Satisfied", before: "Often had to re-submit", after: "Push notif at every state change" },
       ],
-      metric: { k: "Target submission time", v: "30 sec", note: "measured in round-2 test" },
+      metric: { k: "Submission flow", v: "Faster end-to-end", note: "confirmed in usability testing" },
     },
     {
       who: "Theo · Manager",
@@ -22,22 +22,22 @@ function ArtboardJourney() {
       stages: [
         { stage: "Open queue", action: "Clicks Approvals (8)", emotion: "Mild dread", before: "Items mixed, no policy result inline", after: "Policy status visible per row" },
         { stage: "Triage", action: "Scans amounts + badges", emotion: "Focused", before: "Had to open each item", after: "Bulk-select with running total" },
-        { stage: "Bulk approve", action: "Selects 5 → Approve", emotion: "Energized", before: "No bulk action existed", after: "Done in ~10 seconds" },
-        { stage: "Close out", action: "Queue empty", emotion: "Satisfied", before: "Used to take 30+ minutes", after: "Median 4 min for 8 items" },
+        { stage: "Bulk approve", action: "Selects 5 → Approve", emotion: "Energized", before: "No bulk action existed", after: "Done without leaving the queue" },
+        { stage: "Close out", action: "Queue empty", emotion: "Satisfied", before: "Used to demand real focus time", after: "Cleared in one pass" },
       ],
-      metric: { k: "Queue clear time", v: "30+ min → 4 min", note: "8-item median" },
+      metric: { k: "Queue clear time", v: "Markedly faster", note: "no longer a bottleneck" },
     },
     {
       who: "Maren · Finance admin",
       title: "Monthly close",
       context: "First Monday of the month, packet due to the board by 10am.",
       stages: [
-        { stage: "Pre-flight", action: "Opens dashboard 7:45am", emotion: "Vigilant", before: "Multiple tabs to check status", after: "4 KPIs tell the story in 6 sec" },
+        { stage: "Pre-flight", action: "Opens dashboard 7:45am", emotion: "Vigilant", before: "Multiple tabs to check status", after: "4 KPIs tell the story at a glance" },
         { stage: "Sweep", action: "Reviews audit log", emotion: "Cautious", before: "Audit hidden in Settings", after: "Audit log promoted to top nav" },
         { stage: "Generate", action: "Opens saved close packet", emotion: "Hopeful", before: "Rebuilt template every month", after: "Saved reports persist + schedule" },
         { stage: "Export", action: "PDF + QBO sync, emails board", emotion: "Triumphant", before: "CSV → Excel → PDF → email", after: "One click, all formats" },
       ],
-      metric: { k: "Time-to-close", v: "4+ hrs → 22 min", note: "projected outcome" },
+      metric: { k: "Time-to-close", v: "Significantly faster", note: "simplified month-end process" },
     },
   ];
 

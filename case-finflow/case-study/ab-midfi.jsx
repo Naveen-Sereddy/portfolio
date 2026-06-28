@@ -8,14 +8,14 @@ function ArtboardMidFi() {
       problem: "Finance Admins have ≤ 6 seconds to know: spend, what needs a decision, what's at risk, cash on hand.",
       options: ["Card-grid of widgets (configurable)", "KPI strip + two-column hero", "Tabbed dashboard (Today/Pending/Reports)"],
       decision: "KPI strip + two-column hero — spend-over-time (2fr) and budget-vs-spent (1fr), then pending approvals and spend-by-category.",
-      impact: "Time-to-“what should I do today”: 22s → 6s (think-aloud, n=4).",
+      impact: "Faster orientation to “what should I do today.”",
     },
     {
       area: "Approvals",
       problem: "Most approvals are in-policy 2-click decisions; a few need real review — the UI must hide the trivial ones without hiding the important ones.",
       options: ["Kanban (Pending/Approved/Rejected)", "Dense list + persistent bulk-action bar", "Card grid"],
       decision: "Dense list with a bulk-action bar that appears on row-select, plus a header-level “Bulk approve all in-policy under $X” macro.",
-      impact: "Clicks per decision: 7 → 2. Median queue time: 30 min → 4 min for 8 items.",
+      impact: "Fewer clicks per decision and a much faster queue.",
     },
   ];
 

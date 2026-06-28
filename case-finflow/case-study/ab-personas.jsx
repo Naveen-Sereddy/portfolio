@@ -30,11 +30,11 @@ function ArtboardPersonas() {
       name: "Maren Okafor",
       role: "Director of Finance · 2-person team",
       age: "36 · San Francisco",
-      goal: "Close the month in 22 minutes instead of 4+ hours, and catch policy violations before close, not during audit.",
-      pain: "Old setup needed 4 tools + a spreadsheet to close; receipt chasing took 6+ hours a cycle; card issuance lived in a separate vendor portal.",
-      workflow: "7:45am scans 4 KPIs in 6 seconds → standup → approval queue & card issuance → 2pm reports & vendors. ⌘K everywhere, no mouse.",
-      tech: "Very high — power user, discovers shortcuts within 30 seconds.",
-      stat: { k: "Time-to-close target", v: "4hrs → 22 min" },
+      goal: "Close the month quickly and with confidence, and catch policy violations before close, not during audit.",
+      pain: "Old setup needed 4 tools + a spreadsheet to close; receipt chasing dragged on for days; card issuance lived in a separate vendor portal.",
+      workflow: "7:45am scans her KPIs at a glance → standup → approval queue & card issuance → 2pm reports & vendors. ⌘K everywhere, no mouse.",
+      tech: "Very high — power user, discovers shortcuts almost immediately.",
+      stat: { k: "Month-end close", v: "Simplified workflow" },
     },
   ];
 
