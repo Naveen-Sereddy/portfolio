@@ -15,7 +15,7 @@
   --champ-deep: #C2974A;
   --line:       rgba(244, 241, 234, 0.12);
   --line-soft:  rgba(244, 241, 234, 0.07);
-  --header-bg:  rgba(13, 13, 13, 0.9);
+  --header-bg:  rgba(20, 20, 20, 0.7);   /* matches homepage's bg-ink-900/70 */
   --shadow-col: rgba(0, 0, 0, 0.5);
   --maxw: 1180px;
   --serif: "Fraunces", Georgia, serif;
@@ -43,7 +43,7 @@ a:focus-visible, button:focus-visible, .btn:focus-visible {
 /* ---- header ------------------------------------------------------------ */
 .cs-head {
   position: sticky; top: 0; z-index: 40;
-  background: var(--header-bg); backdrop-filter: blur(12px);
+  background: var(--header-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
   border-bottom: 1px solid rgba(230, 223, 210, 0.12);
 }
 .cs-head__in {
