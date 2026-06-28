@@ -276,7 +276,7 @@ function ArtboardResearch() {
               ))}
 
               <div style={{marginTop:"auto", paddingTop:10, borderTop:"1px solid var(--c-line)", fontSize:12, color:"var(--c-ink-3)", lineHeight:1.5}}>
-                The IA rebuild reduced mean time-to-action for Maren's daily sweep from ~38 seconds to under 10 — measured via Maze click-path recordings, not self-report.
+                The IA rebuild noticeably shortened Maren's daily sweep — confirmed via Maze click-path recordings, not self-report.
               </div>
             </div>
 
