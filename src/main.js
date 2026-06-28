@@ -186,7 +186,7 @@
       desc:
         "A B2B expense-management platform designed from research through usability testing across three roles: admin, manager, and employee.",
       roles: ["User Research", "Usability Testing", "Data Visualization", "Design System"],
-      outcome: { value: "73% → 89%", label: "task completion in testing" },
+      outcome: { value: "73% → 89%", label: "task completion · Maze usability testing" },
       study: {
         problem: "Finance teams often manage expenses, approvals, reimbursements, reporting, and card programs across disconnected systems, creating inefficiency and added administrative overhead.",
         role: "Owned the product design process from research and workflow analysis through information architecture, interaction design, design systems, prototyping, accessibility review, and product strategy.",

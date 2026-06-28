@@ -35,7 +35,7 @@ function ArtboardSitemap() {
           <div className="ab-sub">Same brand, type system, and components serve all three roles — only the defaults change: which screen lands first, which density profile applies.</div>
         </div>
         <div className="ab-head__right">
-          <div className="ab-meta"><span className="ab-meta__k">Find-audit-log task</span><span className="ab-meta__v" style={{color:"var(--c-success)"}}>50% → 92%</span></div>
+          <div className="ab-meta"><span className="ab-meta__k">Audit log</span><span className="ab-meta__v" style={{color:"var(--c-success)"}}>Easier to find</span></div>
         </div>
       </div>
 
