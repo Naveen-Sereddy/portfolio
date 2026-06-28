@@ -21,6 +21,11 @@
   --serif: "Fraunces", Georgia, serif;
   --sans: "Inter", system-ui, -apple-system, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* same values as the homepage's scrollbar tokens (src/input.css .dark) */
+  --sb-track: #141414;
+  --sb-thumb: #2E2E2E;
+  --sb-thumb-hover: #3D3D3D;
 }
 
 * { box-sizing: border-box; }
@@ -32,6 +37,12 @@ body {
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
+
+/* Custom scrollbar — matches the homepage's, never the browser default. */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--sb-track); }
+::-webkit-scrollbar-thumb { background: var(--sb-thumb); border-radius: 99px; border: 2px solid var(--sb-track); }
+::-webkit-scrollbar-thumb:hover { background: var(--sb-thumb-hover); }
 
 /* Visible keyboard focus (was missing on case pages) */
 a:focus-visible, button:focus-visible, .btn:focus-visible {
