@@ -1,23 +1,20 @@
 /* MedBridge case-study — narrative scroll layout.
-   The artifacts (cs-art-*.jsx) are authored as fixed 1760px design frames.
-   Here each becomes a full-width <section> band: a crisp readable header
-   (Fraunces/Inter, portfolio identity) above the artifact's native visual
-   scaled to fit the column. No design canvas, pan/zoom, or frame chrome.
+   Warm dark palette, Cormorant Garamond + Inter + JetBrains Mono,
+   amber accent — consistent with the portfolio design system.
    Token vars (--cs-*) are declared in case-medbridge/index.html. */
 
 .case-page {
-  background: var(--cs-bg, #0D0D0D);
-  color: var(--cs-ink, #EDE7DD);
+  background: var(--cs-bg, #0d0404);
+  color: var(--cs-ink, #f0e4d3);
   font-family: var(--cs-f-sans, 'Inter', system-ui, sans-serif);
   -webkit-font-smoothing: antialiased;
 }
 
-/* Full-bleed section band; alternating tones for vertical rhythm. */
 .cs-band {
   padding: 84px 32px;
-  border-bottom: 1px solid var(--cs-line, rgba(237,231,221,0.12));
+  border-bottom: 1px solid var(--cs-line, rgba(255,255,255,0.06));
 }
-.cs-band:nth-child(even) { background: #121212; }
+.cs-band:nth-child(even) { background: #120806; }
 
 .csm-artifact {
   width: 100%;
@@ -35,26 +32,26 @@
   display: flex; align-items: center; gap: 10px;
   font-family: var(--cs-f-mono, 'JetBrains Mono', ui-monospace, monospace);
   font-size: 12px; font-weight: 500; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--cs-accent, #D4A85A);
+  text-transform: uppercase; color: var(--cs-accent, #d0923a);
   margin-bottom: 12px;
 }
 .csm-num {
   display: inline-flex; align-items: center; justify-content: center;
   min-width: 22px; height: 22px; padding: 0 4px; border-radius: 6px;
-  border: 1px solid var(--cs-line, rgba(237,231,221,0.12));
+  border: 1px solid var(--cs-line, rgba(255,255,255,0.06));
   font-family: var(--cs-f-mono, 'JetBrains Mono', ui-monospace, monospace);
-  font-size: 12px; font-weight: 600; color: var(--cs-accent-2, #E7C384);
+  font-size: 12px; font-weight: 600; color: var(--cs-accent-2, #e8a84e);
 }
 .csm-title {
   margin: 0;
-  font-family: var(--cs-f-serif, 'Fraunces', Georgia, serif);
+  font-family: var(--cs-f-serif, 'Cormorant Garamond', Georgia, serif);
   font-style: italic; font-weight: 500;
   font-size: clamp(30px, 4vw, 46px); line-height: 1.06; letter-spacing: -0.015em;
-  color: var(--cs-ink, #EDE7DD);
+  color: var(--cs-ink, #f0e4d3);
 }
 .csm-desc {
   margin: 14px 0 0; max-width: 70ch;
-  font-size: 16px; line-height: 1.6; color: var(--cs-ink-3, #B7B0A6);
+  font-size: 16px; line-height: 1.6; color: var(--cs-ink-3, #b8a58f);
 }
 
 /* ── Scaled artifact visual ── */
@@ -62,9 +59,9 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  border: 1px solid var(--cs-line, rgba(237,231,221,0.12));
+  border: 1px solid var(--cs-line, rgba(255,255,255,0.06));
   border-radius: 16px;
-  background: var(--cs-surface, #141414);
+  background: var(--cs-surface, #1a0f0a);
 }
 .csm-stage__inner {
   box-sizing: border-box;
@@ -73,7 +70,7 @@
 /* Focus ring — gold, matches portfolio. */
 .case-page a:focus-visible,
 .case-page button:focus-visible {
-  outline: 2px solid var(--cs-accent, #D4A85A);
+  outline: 2px solid var(--cs-accent, #d0923a);
   outline-offset: 3px;
   border-radius: 4px;
 }
