@@ -407,6 +407,7 @@ p { color: var(--text-2); max-width: 68ch; }
   object-position: 90% center;
 }
 @media (max-width: 1023px) { #hero-portrait { object-position: 80% center; } }
+@media (max-width: 639px)  { #hero-portrait { object-position: 55% 0%; } }
 
 .hero-overlay-lr {
   pointer-events: none;
