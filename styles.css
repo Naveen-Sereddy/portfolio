@@ -140,8 +140,8 @@ p { color: var(--text-2); max-width: 68ch; }
 @media (min-width: 1024px) { .wrap { padding: 0 2rem; } }
 
 .band { background: var(--bg-2); }
-.section { padding: 5rem 0; }
-.section-lg { padding: 6rem 0; }
+.section { padding: 7rem 0; }
+.section-lg { padding: 9rem 0; }
 
 .hairline {
   height: 1px;
@@ -654,8 +654,8 @@ p { color: var(--text-2); max-width: 68ch; }
 .marquee-fade-r { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
 
 /* ---------------------------------------------------------------- WORK */
-.section-work { padding: 6rem 0; }
-@media (min-width: 640px) { .section-work { padding: 8rem 0; } }
+.section-work { padding: 8rem 0; }
+@media (min-width: 640px) { .section-work { padding: 11rem 0; } }
 
 .work-header {
   display: flex;
@@ -943,8 +943,8 @@ p { color: var(--text-2); max-width: 68ch; }
 }
 
 /* ---------------------------------------------------------------- ABOUT */
-.section-about { padding: 5rem 0; }
-@media (min-width: 640px) { .section-about { padding: 7rem 0; } }
+.section-about { padding: 7rem 0; }
+@media (min-width: 640px) { .section-about { padding: 10rem 0; } }
 
 .about-grid {
   display: grid;
@@ -1030,8 +1030,8 @@ p { color: var(--text-2); max-width: 68ch; }
 .skill-chips { display: flex; flex-wrap: wrap; gap: 0.5rem 0.5rem; }
 
 /* ---------------------------------------------------------------- EXPERIENCE */
-.section-experience { padding: 5rem 0; }
-@media (min-width: 640px) { .section-experience { padding: 7rem 0; } }
+.section-experience { padding: 7rem 0; }
+@media (min-width: 640px) { .section-experience { padding: 10rem 0; } }
 
 .experience-header {
   display: flex;
@@ -1190,11 +1190,11 @@ p { color: var(--text-2); max-width: 68ch; }
 
 /* ---------------------------------------------------------------- CONTACT */
 .section-contact {
-  padding: 7rem 0;
+  padding: 9rem 0;
   position: relative;
   overflow: hidden;
 }
-@media (min-width: 640px) { .section-contact { padding: 11rem 0; } }
+@media (min-width: 640px) { .section-contact { padding: 14rem 0; } }
 
 .contact-glow {
   pointer-events: none;
