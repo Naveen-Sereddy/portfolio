@@ -140,7 +140,7 @@
       id: "navi",
       index: "01",
       title: "NAVI",
-      meta: "UX Case Study · AI Fintech · Enterprise B2B · 2025",
+      meta: "UX Case Study · AI Fintech · Enterprise B2B · 2026",
       kind: "Concept",
       desc: "AI financial wellness benefit embedded in Slack and HR tools — not a new app, but an agent that finds employees where their attention already lives.",
       roles: ["User Research", "AI Product Design", "Interaction Design", "Design System"],
