@@ -1,105 +1,439 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MedBridge · UX Case Study · Naveen Sereddy</title>
-  <meta name="description" content="MedBridge: an end-to-end patient-portal redesign, from competitive research through a 30-screen clickable prototype. UX case study by Naveen Sereddy." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <script>
-    /* Open every case study at the very top. The browser's default automatic
-       scroll restoration re-applies a stored scroll position AFTER this large,
-       async-rendered (React/Babel) page grows, briefly flashing the bottom
-       before settling. Disabling it keeps navigation pinned to 0,0. */
-    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-    window.addEventListener("pageshow", function () { window.scrollTo(0, 0); });
-  </script>
-  <link rel="stylesheet" href="../case-studies.css?v=12" />
-  <link rel="stylesheet" href="colors_and_type.css" />
-  <link rel="stylesheet" href="components.css" />
-  <link rel="stylesheet" href="case-study/style.css?v=2" />
-  <style>
-    html, body { margin: 0; background: #0D0D0D; }
-    :root {
-      /* Case-study narrative tokens — matches naveen-sereddy.vercel.app
-         identity. Used by the section header chrome; artifact content
-         keeps MedBridge's own real product tokens (colors_and_type.css). */
-      --cs-bg: #0D0D0D;
-      --cs-surface: #141414;
-      --cs-ink: #EDE7DD;
-      --cs-ink-3: #B7B0A6;
-      --cs-line: rgba(237, 231, 221, 0.12);
-      --cs-accent: #D4A85A;
-      --cs-accent-2: #E7C384;
-      --cs-f-serif: 'Fraunces', Georgia, serif;
-      --cs-f-sans: 'Inter', system-ui, sans-serif;
-      --cs-f-mono: 'JetBrains Mono', ui-monospace, monospace;
-    }
-  </style>
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MedBridge — UX Case Study · Naveen Sereddy</title>
+<meta name="description" content="MedBridge: an end-to-end patient-portal redesign, from competitive research through a 30-screen clickable prototype. UX case study by Naveen Sereddy." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script>
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  window.addEventListener("pageshow", function () { window.scrollTo(0, 0); });
+</script>
+<style>
+:root {
+  --bg:#0d0404; --bg-2:#120806; --bg-3:#1a0f0a; --bg-4:#24180d;
+  --text:#f0e4d3; --text-2:#b8a58f; --text-3:#7c6a5a; --text-4:#5a4d40;
+  --accent:#d0923a; --accent-soft:#b57d2b;
+  --accent-muted:rgba(208,146,58,0.09); --accent-mid:rgba(208,146,58,0.14);
+  --border:rgba(255,255,255,0.06); --border-strong:rgba(255,255,255,0.10);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+* { box-sizing:border-box; }
+html { font-size:16px; scroll-behavior:smooth; -webkit-font-smoothing:antialiased; background:var(--bg); color:var(--text); }
+body {
+  margin:0; font-family:'Inter',system-ui,sans-serif;
+  background:
+    radial-gradient(ellipse 75% 65% at 110% 10%,rgba(208,146,58,0.08),transparent 55%),
+    radial-gradient(ellipse 60% 50% at -10% 90%,rgba(208,146,58,0.06),transparent 55%),
+    var(--bg);
+  background-attachment:fixed; min-height:100vh; line-height:1.55;
+}
+h1,h2,h3,h4 { font-family:'Cormorant Garamond',Georgia,serif; line-height:1.15; margin:0 0 .5rem; color:var(--text); letter-spacing:-.01em; }
+h1 { font-size:clamp(2.4rem,5vw,3.6rem); font-weight:500; letter-spacing:-.02em; }
+h2 { font-size:clamp(1.9rem,4vw,2.75rem); letter-spacing:-.015em; }
+h4 { font-size:1.1rem; margin:0 0 .4rem; }
+p { margin:0 0 1rem; max-width:68ch; color:var(--text-2); }
+a { color:var(--text-2); text-decoration:none; transition:color 280ms var(--ease); }
+a:hover { color:var(--accent); }
+img { max-width:100%; display:block; }
+.wrap { max-width:1280px; margin:0 auto; padding:0 1.5rem; }
+.wrap-narrow { max-width:960px; margin:0 auto; padding:0 1.5rem; }
+@media (min-width:1024px) { .wrap, .wrap-narrow { padding:0 2rem; } }
+.section { padding:5rem 0; }
+.section-alt { padding:5rem 0; background:var(--bg-2); }
+.divider { height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08) 30%,rgba(208,146,58,0.22) 50%,rgba(255,255,255,0.08) 70%,transparent); }
+
+/* nav */
+.cs-nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:.9rem 0; background:rgba(13,4,4,0.72); backdrop-filter:blur(24px) saturate(180%); border-bottom:1px solid var(--border); }
+.cs-nav-inner { display:flex; align-items:center; justify-content:space-between; max-width:1200px; margin:0 auto; padding:0 1.5rem; }
+.cs-logo { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.35rem; font-weight:500; color:var(--text); }
+.cs-back { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--text-3); }
+.cs-back:hover { color:var(--accent); }
+
+/* tags + metrics */
+.tag { display:inline-flex; align-items:center; padding:.22rem .6rem; border-radius:999px; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; background:var(--accent-muted); color:var(--accent); border:1px solid rgba(208,146,58,0.15); }
+.tag-row { display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:1.1rem; }
+.metric { display:inline-flex; align-items:baseline; gap:.45rem; padding:.45rem .85rem; background:var(--accent-muted); border:1px solid rgba(208,146,58,0.18); border-radius:.65rem; }
+.metric-value { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.75rem; line-height:1; color:var(--accent); }
+.metric-label { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.68rem; color:var(--text-3); text-transform:uppercase; letter-spacing:.07em; }
+.metric-row { display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1.5rem; }
+.eyebrow { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; color:var(--accent); text-transform:uppercase; letter-spacing:.14em; margin-bottom:.9rem; }
+
+/* cards */
+.card { background:var(--bg-3); border:1px solid var(--border); border-radius:1rem; padding:1.25rem 1.4rem; }
+.card-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:.9rem; }
+@media (max-width:600px) { .card-grid { grid-template-columns:1fr; } }
+
+/* research insight cards */
+.insight-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:1.5rem; }
+@media (max-width:760px) { .insight-grid { grid-template-columns:1fr; } }
+.insight-card { background:var(--bg-3); border:1px solid var(--border); border-radius:1rem; padding:1.4rem 1.5rem; }
+.insight-num { font-family:'Cormorant Garamond',Georgia,serif; font-size:2.2rem; line-height:1; color:var(--accent); margin-bottom:.6rem; }
+.insight-card h4 { font-size:1rem; margin-bottom:.4rem; }
+.insight-card p { font-size:.9rem; margin:0; }
+
+/* sketch grid */
+.sketch-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; margin-top:1.5rem; align-items:start; }
+@media (max-width:640px) { .sketch-grid { grid-template-columns:1fr; } }
+.sketch-item { display:flex; flex-direction:column; gap:.75rem; }
+.sketch-item img { width:100%; height:auto; display:block; border-radius:.75rem; border:1px solid var(--border-strong); }
+.sketch-rationale { display:flex; gap:.65rem; align-items:flex-start; }
+.rationale-bar { width:3px; flex-shrink:0; background:var(--accent); border-radius:2px; margin-top:.2rem; }
+.rationale-text { font-size:.88rem; color:var(--text-2); line-height:1.5; }
+.rationale-text strong { color:var(--text); display:block; margin-bottom:.2rem; font-size:.8rem; font-family:'JetBrains Mono',ui-monospace,monospace; text-transform:uppercase; letter-spacing:.1em; color:var(--accent); }
+
+/* lofi grid — 3 columns */
+.lofi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; margin-top:1.5rem; align-items:start; }
+@media (max-width:760px) { .lofi-grid { grid-template-columns:1fr; } }
+@media (min-width:761px) and (max-width:1023px) { .lofi-grid { grid-template-columns:repeat(2,1fr); } }
+.lofi-item { display:flex; flex-direction:column; gap:.75rem; }
+.lofi-item img { width:100%; height:auto; display:block; border-radius:.75rem; border:1px solid var(--border-strong); }
+
+/* evolution comparison */
+.evolution-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; margin-top:1.5rem; align-items:start; }
+@media (max-width:760px) { .evolution-grid { grid-template-columns:1fr; } }
+.evolution-step { display:flex; flex-direction:column; gap:.65rem; }
+.evolution-label { display:inline-flex; align-items:center; gap:.5rem; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.12em; color:var(--text-3); }
+.evolution-label .dot { width:7px; height:7px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+.evolution-step img { width:100%; height:auto; display:block; border-radius:.65rem; border:1px solid var(--border-strong); }
+.evolution-step p { font-size:.85rem; color:var(--text-3); margin:0; line-height:1.45; }
+
+/* gallery */
+.gallery { display:grid; grid-template-columns:repeat(2,1fr); gap:.75rem; margin-top:.5rem; align-items:start; }
+@media (min-width:640px) { .gallery { grid-template-columns:repeat(3,1fr); } }
+.gallery img { width:100%; height:auto; display:block; border-radius:.65rem; border:1px solid var(--border); }
+
+/* quote */
+.quote-block { position:relative; padding:2.25rem 2.5rem 2rem; background:linear-gradient(180deg,rgba(208,146,58,0.10) 0%,transparent 100%),var(--bg-3); border:1px solid var(--border); border-radius:1rem; }
+.quote-block::before { content:'"'; position:absolute; left:.8rem; top:-.75rem; font-family:'Cormorant Garamond',Georgia,serif; font-size:6rem; color:rgba(208,146,58,0.20); line-height:1; }
+.quote-source { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-top:.9rem; margin-bottom:0; }
+
+/* buttons */
+.btn { display:inline-flex; align-items:center; gap:.5rem; padding:.65rem 1.1rem; border-radius:.55rem; font-family:'Inter',system-ui,sans-serif; font-size:.8rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; border:none; cursor:pointer; text-decoration:none; transition:all 280ms var(--ease); }
+.btn-primary { background:var(--accent); color:#110500; box-shadow:0 5px 18px rgba(208,146,58,0.25); }
+.btn-primary:hover { background:var(--accent-soft); transform:translateY(-2px); color:#110500; }
+.btn-ghost { background:transparent; color:var(--accent); border:1px solid rgba(208,146,58,0.35); }
+.btn-ghost:hover { background:var(--accent-muted); border-color:rgba(208,146,58,0.65); color:var(--accent); }
+.btn-row { display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1.5rem; }
+
+/* reflection */
+.reflection-list { display:grid; gap:.85rem; margin-top:1.25rem; }
+.reflection-item { display:flex; gap:1rem; align-items:flex-start; padding:1.1rem 1.3rem; background:var(--bg-3); border:1px solid var(--border); border-radius:.85rem; }
+.reflection-num { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.4rem; line-height:1; color:var(--accent); flex-shrink:0; margin-top:.1rem; }
+.reflection-item p { margin:0; font-size:.92rem; }
+
+/* next */
+.next-section { padding:4rem 0 5rem; }
+.next-label { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; color:var(--text-3); text-transform:uppercase; letter-spacing:.14em; margin-bottom:.75rem; }
+.next-link { font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(2rem,5vw,3.4rem); font-weight:500; color:var(--text); letter-spacing:-.015em; display:inline-flex; align-items:baseline; gap:.75rem; transition:color 280ms var(--ease); }
+.next-link:hover { color:var(--accent); }
+.next-link span { display:inline-block; transition:transform 300ms var(--ease); }
+.next-link:hover span { transform:translateX(8px); }
+.next-sub { margin-top:.6rem; color:var(--text-3); font-size:.9rem; }
+
+/* footer */
+.cs-footer { padding:2.5rem 0 3.5rem; border-top:1px solid var(--border); }
+.footer-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; color:var(--text-4); }
+.footer-links { display:flex; gap:1.25rem; }
+.footer-links a { color:var(--text-3); letter-spacing:.08em; text-transform:uppercase; }
+.footer-links a:hover { color:var(--accent); }
+
+:focus-visible { outline:2px solid rgba(208,146,58,0.55); outline-offset:3px; border-radius:.35rem; }
+@media (prefers-reduced-motion:reduce) { * { animation-duration:.01ms!important; transition-duration:.01ms!important; scroll-behavior:auto!important; } }
+::selection { background:rgba(208,146,58,0.25); color:var(--text); }
+::-webkit-scrollbar { width:10px; } ::-webkit-scrollbar-track { background:#141414; } ::-webkit-scrollbar-thumb { background:#2e2e2e; border-radius:99px; border:2px solid #141414; } ::-webkit-scrollbar-thumb:hover { background:#3d3d3d; }
+</style>
 </head>
 <body>
-  <header class="cs-head">
-    <div class="cs-head__in">
-      <a class="cs-logo" href="../index.html#work"><b>Naveen Sereddy</b></a>
-      <div class="cs-head__right">
-        <a class="cs-back" href="../index.html#work">&larr; All work</a>
+
+<nav class="cs-nav" aria-label="Site navigation">
+  <div class="cs-nav-inner">
+    <a class="cs-logo" href="../index.html">Naveen Sereddy</a>
+    <a class="cs-back" href="../index.html#work">← All work</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 1. HERO -->
+  <section class="section" style="padding-top:7.5rem">
+    <div class="wrap">
+      <div class="tag-row">
+        <span class="tag">Healthcare</span>
+        <span class="tag">2024</span>
+        <span class="tag">Concept</span>
+        <span class="tag">UX · UI · IA · Design System</span>
+      </div>
+      <h1 style="max-width:22ch">MedBridge — a patient portal that finally makes sense.</h1>
+      <p style="font-size:1.15rem;margin-top:.9rem;max-width:56ch">End-to-end redesign unifying appointments, prescriptions, records, and billing into one calm, secure, accessible experience.</p>
+      <div class="metric-row">
+        <div class="metric"><span class="metric-value">5</span><span class="metric-label">Core flows unified</span></div>
+        <div class="metric"><span class="metric-value">AA</span><span class="metric-label">WCAG 2.1</span></div>
+        <div class="metric"><span class="metric-value">30</span><span class="metric-label">Screen prototype</span></div>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="prototype.html" target="_blank" rel="noopener">Open prototype ↗</a>
+        <a class="btn btn-ghost" href="../index.html#work">← All work</a>
       </div>
     </div>
-  </header>
-
-  <!-- Project intro: title, summary, and the primary prototype CTA, above the fold. -->
-  <section class="wrap hero">
-    <p class="eyebrow">UX Case Study · Healthcare</p>
-    <h1>MedBridge</h1>
-    <p class="sub">An end-to-end patient-portal redesign: appointments, prescriptions, records, and billing unified into one calm, secure, accessible experience.</p>
-    <dl class="meta">
-      <div><dt>My role</dt><dd>Research · IA · UI · Design System</dd></div>
-      <div><dt>Platform</dt><dd>Responsive web &amp; mobile</dd></div>
-      <div><dt>Timeline</dt><dd>Concept project · 2024</dd></div>
-      <div><dt>Outcome</dt><dd class="metric">30-screen prototype</dd></div>
-    </dl>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="prototype.html" target="_blank" rel="noopener">Open the prototype &nearr;</a>
-    </div>
-    <p class="proto-note">Fully clickable · opens in a new tab · best on desktop</p>
   </section>
 
-  <div id="root"></div>
+  <div class="wrap"><div class="divider"></div></div>
 
-  <section class="next-case">
-    <div class="wrap">
-      <p class="eyebrow">Next case study</p>
-      <a class="next-link" href="../case-finflow/index.html">FinFlow <span aria-hidden="true">&rarr;</span></a>
-      <p class="next-sub">A role-based B2B expense platform, from research to a clickable prototype.</p>
+  <!-- 2. PROBLEM -->
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="eyebrow">The Problem</div>
+      <h2>Patients juggled four disconnected portals and still couldn't find basic information.</h2>
+      <p style="font-size:1.05rem;margin-top:.9rem">The existing patient portal scattered appointments, prescriptions, medical records, and billing across separate sections with no shared navigation. Patients called the support line for simple tasks. The mental model didn't match real-world healthcare needs.</p>
+      <p>This wasn't a visual problem. It was a structural one. The portal was built as four separate tools — and patients experienced it exactly that way.</p>
     </div>
   </section>
 
-  <footer class="cs-foot">
+  <!-- 3. RESEARCH INSIGHTS -->
+  <section class="section-alt">
+    <div class="wrap-narrow">
+      <div class="eyebrow">Research</div>
+      <h2>Three patterns that shaped every decision that followed.</h2>
+      <p style="margin-top:.9rem">User interviews, support-call analysis, and competitive review across five existing healthcare portals surfaced the same friction points across every participant.</p>
+      <div class="insight-grid">
+        <div class="insight-card">
+          <div class="insight-num">01</div>
+          <h4>Patients treat the portal as one product</h4>
+          <p>Every interview participant described "the portal" as a single thing — but experienced it as four disconnected tools. Navigation drop-off was highest when users tried to switch between service areas.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">02</div>
+          <h4>Appointments are the front door</h4>
+          <p>Scheduling and managing visits was the most frequent entry point. Yet the appointment flow required the most clicks and had the most dead-end navigation paths of any section in the portal.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">03</div>
+          <h4>Stress amplifies every usability flaw</h4>
+          <p>Patients access health portals during anxious moments — before a procedure, after a diagnosis, when a prescription runs out. Cognitive load was already high before any interaction began. Clarity wasn't a nice-to-have.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. EARLY SKETCHES -->
+  <section class="section">
     <div class="wrap">
-      <a class="btn btn-primary" href="../index.html#work">&larr; Back to all work</a>
-      <nav class="nav">
-        <a href="../index.html#contact">Contact</a>
+      <div class="eyebrow">Early Sketches</div>
+      <h2>Paper first. Before committing to anything.</h2>
+      <p style="margin-top:.9rem;max-width:62ch">Hand-drawn sketches let me stress-test layout decisions without getting attached to pixels. Each sketch answered one structural question before moving to digital.</p>
+      <div class="sketch-grid">
+
+        <div class="sketch-item">
+          <img src="img/sketch-sign-in.png" alt="Sign-in sketch with brand panel left and auth form right, trust signals at bottom" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Split-screen sign-in</strong>
+              Brand copy ("Your health, simplified.") and trust signals — HIPAA Compliant, 4.9 Rating, 200K+ Patients — on the left means new patients understand what they're signing into before entering credentials. For a health portal, trust has to arrive before the password field.
+            </div>
+          </div>
+        </div>
+
+        <div class="sketch-item">
+          <img src="img/sketch-dashboard.png" alt="Dashboard sketch with four KPI cards and two content areas: appointments and health summary" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Dashboard with KPI cards above the fold</strong>
+              Upcoming appointments, active prescriptions, pending balance, and unread messages surface as cards before any scroll — the four things patients check first. Patients under stress shouldn't need to hunt. The most critical information appears the moment the page loads.
+            </div>
+          </div>
+        </div>
+
+        <div class="sketch-item">
+          <img src="img/sketch-appointments-list.png" alt="Appointments list sketch with status tabs and inline action buttons per row" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Appointments list with inline actions</strong>
+              Status tabs (All / Upcoming / Past / Cancelled) at the top — not in a dropdown. Telehealth appointments show a "Join" button directly in the list row. Patients starting a virtual visit shouldn't need to open a detail screen just to click join.
+            </div>
+          </div>
+        </div>
+
+        <div class="sketch-item">
+          <img src="img/sketch-appointments-calendar.png" alt="Appointments calendar sketch with month grid and day-detail panel on the right" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Calendar with persistent day-detail panel</strong>
+              Selecting a date reveals the appointment card and a "Book This Day" button in a panel on the right — without navigating away from the calendar. A common task (checking and booking on the same day) stays in one context.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. LO-FI WIREFRAMES -->
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="eyebrow">Lo-Fi Wireframes</div>
+      <h2>Digital wireframes. Decisions locked in.</h2>
+      <p style="margin-top:.9rem;max-width:62ch">Moving to digital wireframes tested whether the sketch decisions actually held up at screen fidelity — before any visual design work began.</p>
+      <div class="lofi-grid">
+
+        <div class="lofi-item">
+          <img src="img/lofi-dashboard.png" alt="Lo-fi dashboard wireframe with KPI cards, appointments list, and health summary" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Two-column below the KPI cards</strong>
+              Upcoming Appointments on the left, Health Summary on the right — patients see both action items and health data without choosing one over the other. The digital wireframe confirmed the sketch's two-column structure was sound.
+            </div>
+          </div>
+        </div>
+
+        <div class="lofi-item">
+          <img src="img/lofi-appointments-list.png" alt="Lo-fi appointments list wireframe with tab filters and appointment cards with inline actions" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Status chips directly beside the doctor name</strong>
+              Confirmed/Pending/Pending appear as inline pill badges rather than in a separate column — because patients look at the doctor name first. Status beside the name means no eye travel across the row to understand the appointment state.
+            </div>
+          </div>
+        </div>
+
+        <div class="lofi-item">
+          <img src="img/lofi-appointments-calendar.png" alt="Lo-fi calendar wireframe with date dots for appointments and persistent day-detail sidebar" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Dot indicators on appointment dates</strong>
+              Active date gets a filled dark background; days with existing appointments get a small dot below the number. Patients can scan the full month and know which days are already occupied before selecting a new booking date.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. DESIGN EVOLUTION -->
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">Design Evolution</div>
+      <h2>From sketch to final — the dashboard flow.</h2>
+      <p style="margin-top:.9rem;max-width:62ch">The dashboard shows the clearest three-stage progression. The core layout decision — KPIs above the fold, two content blocks below — was made in the sketch and never changed.</p>
+      <div class="evolution-grid">
+        <div class="evolution-step sketch">
+          <div class="evolution-label"><span class="dot"></span>Sketch</div>
+          <img src="img/sketch-dashboard.png" alt="Hand-drawn dashboard sketch with KPI cards and two content areas" loading="lazy" />
+          <p>KPI card structure and two-column layout established. Structure was right from the first pass.</p>
+        </div>
+        <div class="evolution-step lofi">
+          <div class="evolution-label"><span class="dot"></span>Lo-Fi</div>
+          <img src="img/lofi-dashboard.png" alt="Digital lo-fi dashboard wireframe validating KPI layout and two-column structure" loading="lazy" />
+          <p>Digital wireframe validated the layout. Health Summary panel confirmed as the right complement to the appointments list.</p>
+        </div>
+        <div class="evolution-step final">
+          <div class="evolution-label"><span class="dot"></span>Final UI</div>
+          <img src="img/ui-dashboard.png" alt="Final high-fidelity patient dashboard screen" loading="lazy" />
+          <p>Visual system applied. The structure from the sketch is unchanged — the hierarchy was already solved.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. FINAL UI -->
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="eyebrow">Final UI</div>
+      <h2>One system. Five unified flows.</h2>
+      <p style="margin-top:.9rem;max-width:62ch">Appointments, records, prescriptions, billing, and profile all share one navigation model and one component language. Consistency reduces cognitive load when patients are already under stress.</p>
+      <div class="gallery" style="margin-top:1.5rem">
+        <img src="img/ui-dashboard.png" alt="Patient dashboard with upcoming appointments, prescriptions, and billing summary" loading="lazy" />
+        <img src="img/ui-doctors.png" alt="Find a doctor — search and book providers by specialty" loading="lazy" />
+        <img src="img/ui-billing.png" alt="Billing overview with invoices, insurance coverage, and payment history" loading="lazy" />
+        <img src="img/ui-signin.png" alt="Secure sign-in with accessible focus indicators and error states" loading="lazy" />
+        <img src="img/ui-settings.png" alt="Patient profile and notification preferences" loading="lazy" />
+        <img src="img/01.png" alt="User personas: mobile-first patient and older caregiver archetypes" loading="lazy" />
+        <img src="img/03.png" alt="Information architecture restructuring four portal sections into one task model" loading="lazy" />
+        <img src="img/05.png" alt="Mid-fidelity wireframes for appointment booking and prescription refill flows" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. QUOTE -->
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="quote-block">
+        <p style="font-size:1.05rem;max-width:74ch">"This wasn't a visual redesign. It was a clarity redesign. Every decision was tested against one question: would a patient under stress still understand what to do next?"</p>
+        <p class="quote-source">Design principle · MedBridge</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. OUTCOME -->
+  <section class="section-alt">
+    <div class="wrap-narrow">
+      <div class="eyebrow">Outcome</div>
+      <h2>One portal, five unified flows.</h2>
+      <p style="font-size:1.05rem;margin-top:.9rem">The final redesign collapsed four disconnected portal sections into one system with consistent navigation, predictable interactions, and full WCAG 2.1 AA compliance. Appointment booking, prescription refills, billing, medical records, and profile management share one mental model and one component language.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="prototype.html" target="_blank" rel="noopener">Open prototype ↗</a>
+        <a class="btn btn-ghost" href="../index.html#work">← All work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. REFLECTION -->
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="eyebrow">Reflection</div>
+      <h2>What I'd do differently.</h2>
+      <div class="reflection-list">
+        <div class="reflection-item">
+          <div class="reflection-num">1</div>
+          <p>I'd include caregiver flows from the start. Research mentioned older patients often had a family member navigating on their behalf — but I designed entirely for the patient as primary user. A caregiver access model would meaningfully change several IA decisions.</p>
+        </div>
+        <div class="reflection-item">
+          <div class="reflection-num">2</div>
+          <p>The mobile experience was designed after desktop. Given that appointment check-ins and prescription refills happen most often on phones, I'd reverse that order — mobile-first wireframing, then scale up to desktop.</p>
+        </div>
+        <div class="reflection-item">
+          <div class="reflection-num">3</div>
+          <p>Accessibility was built into components, but I didn't test with screen reader users during wireframing. I'd add at least one assistive-technology session early in the lo-fi stage, not only as a final audit before handoff.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="divider"></div></div>
+
+  <!-- 11. NEXT PROJECT -->
+  <section class="next-section">
+    <div class="wrap">
+      <p class="next-label">Next case study</p>
+      <a class="next-link" href="../case-navi/index.html">NAVI <span aria-hidden="true">→</span></a>
+      <p class="next-sub">AI financial wellness benefit embedded in Slack and HR tools — research-driven enterprise product design with measurable trust and adoption outcomes.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="cs-footer">
+  <div class="wrap">
+    <div class="footer-row">
+      <span>Naveen Sereddy · Product Design</span>
+      <div class="footer-links">
+        <a href="https://github.com/Naveen-Sereddy" target="_blank" rel="noopener">GitHub</a>
         <a href="https://linkedin.com/in/naveensereddy" target="_blank" rel="noopener">LinkedIn</a>
-      </nav>
+      </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script type="text/babel" src="ui_kits/portal/lib.jsx"></script>
-  <script type="text/babel" src="ui_kits/portal/ui.jsx"></script>
-  <script type="text/babel" src="case-study/cs-frame.jsx"></script>
-  <script type="text/babel" src="case-study/cs-art-personas-journey.jsx"></script>
-  <script type="text/babel" src="case-study/cs-art-ia.jsx"></script>
-  <script type="text/babel" src="case-study/cs-art-wireframes.jsx"></script>
-  <script type="text/babel" src="case-study/cs-art-designsystem.jsx"></script>
-  <script type="text/babel" src="case-study/cs-art-a11y.jsx"></script>
-  <script type="text/babel" src="case-study/cs-art-finalui.jsx"></script>
-  <script type="text/babel" src="case-study/cs-app.jsx"></script>
 </body>
 </html>

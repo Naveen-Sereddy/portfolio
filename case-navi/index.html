@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NAVI — UX Case Study · Naveen Sereddy</title>
+<meta name="description" content="NAVI: an AI financial wellness benefit embedded inside Slack and HR tools. Research-driven enterprise product design by Naveen Sereddy." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script>
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  window.addEventListener("pageshow", function () { window.scrollTo(0, 0); });
+</script>
+<style>
+:root {
+  --bg:#0d0404; --bg-2:#120806; --bg-3:#1a0f0a; --bg-4:#24180d;
+  --text:#f0e4d3; --text-2:#b8a58f; --text-3:#7c6a5a; --text-4:#5a4d40;
+  --accent:#d0923a; --accent-soft:#b57d2b;
+  --accent-muted:rgba(208,146,58,0.09); --accent-mid:rgba(208,146,58,0.14);
+  --border:rgba(255,255,255,0.06); --border-strong:rgba(255,255,255,0.10);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+* { box-sizing:border-box; }
+html { font-size:16px; scroll-behavior:smooth; -webkit-font-smoothing:antialiased; background:var(--bg); color:var(--text); }
+body {
+  margin:0; font-family:'Inter',system-ui,sans-serif;
+  background:
+    radial-gradient(ellipse 75% 65% at 110% 10%,rgba(208,146,58,0.08),transparent 55%),
+    radial-gradient(ellipse 60% 50% at -10% 90%,rgba(208,146,58,0.06),transparent 55%),
+    var(--bg);
+  background-attachment:fixed; min-height:100vh; line-height:1.55;
+}
+h1,h2,h3,h4 { font-family:'Cormorant Garamond',Georgia,serif; line-height:1.15; margin:0 0 .5rem; color:var(--text); letter-spacing:-.01em; }
+h1 { font-size:clamp(2.4rem,5vw,3.6rem); font-weight:500; letter-spacing:-.02em; }
+h2 { font-size:clamp(1.9rem,4vw,2.75rem); letter-spacing:-.015em; }
+h4 { font-size:1.1rem; margin:0 0 .4rem; }
+p { margin:0 0 1rem; max-width:68ch; color:var(--text-2); }
+a { color:var(--text-2); text-decoration:none; transition:color 280ms var(--ease); }
+a:hover { color:var(--accent); }
+img { max-width:100%; display:block; }
+.wrap { max-width:1280px; margin:0 auto; padding:0 1.5rem; }
+.wrap-narrow { max-width:960px; margin:0 auto; padding:0 1.5rem; }
+@media (min-width:1024px) { .wrap, .wrap-narrow { padding:0 2rem; } }
+.section { padding:5rem 0; }
+.section-alt { padding:5rem 0; background:var(--bg-2); }
+.divider { height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08) 30%,rgba(208,146,58,0.22) 50%,rgba(255,255,255,0.08) 70%,transparent); }
+
+/* nav */
+.cs-nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:.9rem 0; background:rgba(13,4,4,0.72); backdrop-filter:blur(24px) saturate(180%); border-bottom:1px solid var(--border); }
+.cs-nav-inner { display:flex; align-items:center; justify-content:space-between; max-width:1200px; margin:0 auto; padding:0 1.5rem; }
+.cs-logo { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.35rem; font-weight:500; color:var(--text); }
+.cs-back { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--text-3); }
+.cs-back:hover { color:var(--accent); }
+
+/* tags + metrics */
+.tag { display:inline-flex; align-items:center; padding:.22rem .6rem; border-radius:999px; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; background:var(--accent-muted); color:var(--accent); border:1px solid rgba(208,146,58,0.15); }
+.tag-row { display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:1.1rem; }
+.metric { display:inline-flex; align-items:baseline; gap:.45rem; padding:.45rem .85rem; background:var(--accent-muted); border:1px solid rgba(208,146,58,0.18); border-radius:.65rem; }
+.metric-value { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.75rem; line-height:1; color:var(--accent); }
+.metric-label { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.68rem; color:var(--text-3); text-transform:uppercase; letter-spacing:.07em; }
+.metric-row { display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1.5rem; }
+.eyebrow { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; color:var(--accent); text-transform:uppercase; letter-spacing:.14em; margin-bottom:.9rem; }
+
+/* cards */
+.card { background:var(--bg-3); border:1px solid var(--border); border-radius:1rem; padding:1.25rem 1.4rem; }
+.card-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:.9rem; }
+@media (max-width:600px) { .card-grid { grid-template-columns:1fr; } }
+
+/* research insight cards */
+.insight-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:1.5rem; }
+@media (max-width:760px) { .insight-grid { grid-template-columns:1fr; } }
+.insight-card { background:var(--bg-3); border:1px solid var(--border); border-radius:1rem; padding:1.4rem 1.5rem; }
+.insight-num { font-family:'Cormorant Garamond',Georgia,serif; font-size:2.2rem; line-height:1; color:var(--accent); margin-bottom:.6rem; }
+.insight-card h4 { font-size:1rem; margin-bottom:.4rem; }
+.insight-card p { font-size:.9rem; margin:0; }
+
+/* quote callout */
+.quote-inline { border-left:3px solid var(--accent); padding:.6rem 0 .6rem 1.2rem; margin:1.25rem 0; }
+.quote-inline p { font-size:.95rem; color:var(--text-2); margin:0; font-style:italic; }
+.quote-inline cite { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.68rem; color:var(--text-3); text-transform:uppercase; letter-spacing:.08em; margin-top:.45rem; display:block; font-style:normal; }
+
+/* pivot callout */
+.pivot-box { background:linear-gradient(135deg,rgba(208,146,58,0.08),rgba(208,146,58,0.04)); border:1px solid rgba(208,146,58,0.22); border-radius:1rem; padding:1.5rem 1.75rem; margin-top:1.5rem; }
+.pivot-box h4 { color:var(--accent); margin-bottom:.5rem; font-size:1rem; }
+.pivot-box p { margin:0; font-size:.95rem; }
+
+/* sketches grid */
+.sketch-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; margin-top:1.5rem; align-items:start; }
+@media (max-width:640px) { .sketch-grid { grid-template-columns:1fr; } }
+.sketch-item { display:flex; flex-direction:column; gap:.75rem; }
+.sketch-item img { width:100%; height:auto; display:block; border-radius:.75rem; border:1px solid var(--border-strong); }
+/* mobile sketches — portrait, 4-col */
+.sketch-grid-mobile { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-top:1.5rem; align-items:start; }
+@media (max-width:640px) { .sketch-grid-mobile { grid-template-columns:repeat(2,1fr); } }
+.sketch-rationale { display:flex; gap:.65rem; align-items:flex-start; }
+.rationale-bar { width:3px; flex-shrink:0; background:var(--accent); border-radius:2px; margin-top:.2rem; }
+.rationale-text { font-size:.88rem; color:var(--text-2); line-height:1.5; }
+.rationale-text strong { color:var(--text); display:block; margin-bottom:.2rem; font-size:.8rem; font-family:'JetBrains Mono',ui-monospace,monospace; text-transform:uppercase; letter-spacing:.1em; color:var(--accent); }
+
+/* design decisions */
+.decision-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-top:1.5rem; }
+@media (max-width:700px) { .decision-grid { grid-template-columns:1fr; } }
+.decision-card { background:var(--bg-3); border:1px solid var(--border); border-radius:1rem; padding:1.3rem 1.4rem; }
+.decision-num { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.6rem; line-height:1; color:var(--accent); margin-bottom:.5rem; }
+.decision-card h4 { font-size:.95rem; margin-bottom:.35rem; }
+.decision-card p { font-size:.88rem; margin:0; }
+
+/* evolution grid */
+.evolution-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; margin-top:1.5rem; align-items:start; }
+@media (max-width:640px) { .evolution-grid { grid-template-columns:1fr; } }
+.evolution-step { display:flex; flex-direction:column; gap:.65rem; }
+.evolution-label { display:inline-flex; align-items:center; gap:.5rem; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.12em; color:var(--text-3); }
+.evolution-label .dot { width:7px; height:7px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+.evolution-step img { width:100%; height:auto; display:block; border-radius:.65rem; border:1px solid var(--border-strong); }
+.evolution-step p { font-size:.85rem; color:var(--text-3); margin:0; line-height:1.45; }
+
+/* final UI gallery */
+.gallery { display:grid; grid-template-columns:repeat(2,1fr); gap:.75rem; margin-top:1.5rem; align-items:start; }
+@media (min-width:640px) { .gallery { grid-template-columns:repeat(2,1fr); } }
+.gallery img { width:100%; height:auto; display:block; border-radius:.65rem; border:1px solid var(--border); }
+
+/* mobile hi-fi grid — portrait, 4-col on desktop */
+.mobile-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-top:1.5rem; align-items:start; }
+@media (min-width:640px) { .mobile-grid { grid-template-columns:repeat(4,1fr); } }
+.mobile-grid img { width:100%; height:auto; display:block; border-radius:.75rem; border:1px solid var(--border-strong); }
+.mobile-item { display:flex; flex-direction:column; gap:.5rem; }
+.mobile-cap { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.65rem; color:var(--text-3); text-transform:uppercase; letter-spacing:.08em; }
+
+/* quote */
+.quote-block { position:relative; padding:2.25rem 2.5rem 2rem; background:linear-gradient(180deg,rgba(208,146,58,0.10) 0%,transparent 100%),var(--bg-3); border:1px solid var(--border); border-radius:1rem; }
+.quote-block::before { content:'"'; position:absolute; left:.8rem; top:-.75rem; font-family:'Cormorant Garamond',Georgia,serif; font-size:6rem; color:rgba(208,146,58,0.20); line-height:1; }
+.quote-source { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-top:.9rem; margin-bottom:0; }
+
+/* buttons */
+.btn { display:inline-flex; align-items:center; gap:.5rem; padding:.65rem 1.1rem; border-radius:.55rem; font-family:'Inter',system-ui,sans-serif; font-size:.8rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; border:none; cursor:pointer; text-decoration:none; transition:all 280ms var(--ease); }
+.btn-primary { background:var(--accent); color:#110500; box-shadow:0 5px 18px rgba(208,146,58,0.25); }
+.btn-primary:hover { background:var(--accent-soft); transform:translateY(-2px); color:#110500; }
+.btn-ghost { background:transparent; color:var(--accent); border:1px solid rgba(208,146,58,0.35); }
+.btn-ghost:hover { background:var(--accent-muted); border-color:rgba(208,146,58,0.65); color:var(--accent); }
+.btn-row { display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1.5rem; }
+
+/* reflection */
+.reflection-list { display:grid; gap:.85rem; margin-top:1.25rem; }
+.reflection-item { display:flex; gap:1rem; align-items:flex-start; padding:1.1rem 1.3rem; background:var(--bg-3); border:1px solid var(--border); border-radius:.85rem; }
+.reflection-num { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.4rem; line-height:1; color:var(--accent); flex-shrink:0; margin-top:.1rem; }
+.reflection-item p { margin:0; font-size:.92rem; }
+
+/* next */
+.next-section { padding:4rem 0 5rem; }
+.next-label { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; color:var(--text-3); text-transform:uppercase; letter-spacing:.14em; margin-bottom:.75rem; }
+.next-link { font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(2rem,5vw,3.4rem); font-weight:500; color:var(--text); letter-spacing:-.015em; display:inline-flex; align-items:baseline; gap:.75rem; transition:color 280ms var(--ease); }
+.next-link:hover { color:var(--accent); }
+.next-link span { display:inline-block; transition:transform 300ms var(--ease); }
+.next-link:hover span { transform:translateX(8px); }
+.next-sub { margin-top:.6rem; color:var(--text-3); font-size:.9rem; }
+
+/* footer */
+.cs-footer { padding:2.5rem 0 3.5rem; border-top:1px solid var(--border); }
+.footer-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; color:var(--text-4); }
+.footer-links { display:flex; gap:1.25rem; }
+.footer-links a { color:var(--text-3); letter-spacing:.08em; text-transform:uppercase; }
+.footer-links a:hover { color:var(--accent); }
+
+:focus-visible { outline:2px solid rgba(208,146,58,0.55); outline-offset:3px; border-radius:.35rem; }
+@media (prefers-reduced-motion:reduce) { * { animation-duration:.01ms!important; transition-duration:.01ms!important; scroll-behavior:auto!important; } }
+::selection { background:rgba(208,146,58,0.25); color:var(--text); }
+::-webkit-scrollbar { width:10px; } ::-webkit-scrollbar-track { background:#141414; } ::-webkit-scrollbar-thumb { background:#2e2e2e; border-radius:99px; border:2px solid #141414; } ::-webkit-scrollbar-thumb:hover { background:#3d3d3d; }
+</style>
+</head>
+<body>
+
+<nav class="cs-nav" aria-label="Site navigation">
+  <div class="cs-nav-inner">
+    <a class="cs-logo" href="../index.html">Naveen Sereddy</a>
+    <a class="cs-back" href="../index.html#work">← All work</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 1. HERO -->
+  <section class="section" style="padding-top:7.5rem">
+    <div class="wrap">
+      <div class="tag-row">
+        <span class="tag">Enterprise B2B</span>
+        <span class="tag">AI Product</span>
+        <span class="tag">2025</span>
+        <span class="tag">Concept</span>
+        <span class="tag">Research · UX · UI · Design System</span>
+      </div>
+      <h1 style="max-width:24ch">NAVI — the financial wellness benefit that finds you in Slack.</h1>
+      <p style="font-size:1.15rem;margin-top:.9rem;max-width:58ch">An embedded AI financial advisor designed for enterprise employees — not a separate app, but a benefit that surfaces inside the tools people already use every day.</p>
+      <div class="metric-row">
+        <div class="metric"><span class="metric-value">4.2 min → 38 sec</span><span class="metric-label">Time to act on recommendation</span></div>
+        <div class="metric"><span class="metric-value">4.4 / 5</span><span class="metric-label">Trust score</span></div>
+        <div class="metric"><span class="metric-value">7 of 8</span><span class="metric-label">Would adopt as workplace benefit</span></div>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="prototype-web.html" target="_blank" rel="noopener">Open web prototype ↗</a>
+        <a class="btn btn-primary" href="prototype-mobile.html" target="_blank" rel="noopener">Open mobile prototype ↗</a>
+        <a class="btn btn-ghost" href="../index.html#work" style="border-color:rgba(255,255,255,0.12);color:var(--text-3)">← All work</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="divider"></div></div>
+
+  <!-- 2. PROBLEM -->
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="eyebrow">The Problem</div>
+      <h2>87% of employees report financial stress. Adoption of the tools meant to help is under 5%.</h2>
+      <p style="font-size:1.05rem;margin-top:.9rem">Companies invest heavily in financial wellness benefits. The programs exist. The tools exist. But employees don't use them — because the tools are built wrong.</p>
+      <p>They're designed like banking apps: clinical interfaces, data-heavy dashboards, cold blues. They amplify the anxiety they're supposed to reduce. People enroll, open the app once, and never return. The problem isn't the benefit — it's the surface it lives on.</p>
+
+      <div class="quote-inline">
+        <p>"We offer a financial wellness program. Maybe 3% of employees actually use it."</p>
+        <cite>HR Manager · Mid-size tech company</cite>
+      </div>
+      <div class="quote-inline">
+        <p>"I know I should budget, but it feels like homework. If it just told me when something was wrong, I'd actually pay attention."</p>
+        <cite>Employee · User interview</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. RESEARCH + PIVOT -->
+  <section class="section-alt">
+    <div class="wrap-narrow">
+      <div class="eyebrow">Discovery</div>
+      <h2>19 interviews. One finding that changed the whole product.</h2>
+      <p style="margin-top:.9rem">I conducted 7 interviews with HR managers and 12 with individual employees across two mid-sized tech companies. The goal was to understand why adoption was so low — and whether the problem was the product or the surface it lived on.</p>
+
+      <div class="insight-grid">
+        <div class="insight-card">
+          <div class="insight-num">01</div>
+          <h4>People don't open finance apps</h4>
+          <p>Every employee interviewed already had a finance tool — Mint, their bank app, a budget spreadsheet. None opened them regularly. "I live in Slack" was said by 9 of 12.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">02</div>
+          <h4>Embarrassment blocks activation</h4>
+          <p>HR managers flagged that branding an app "financial wellness" triggers avoidance. Employees don't want colleagues knowing they signed up. Embedded tools remove that barrier — nothing to download, nothing visible.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">03</div>
+          <h4>Proactive beats reactive</h4>
+          <p>Users consistently described wanting to be told when something needed attention — not to go looking for it. "If it just pinged me when I was off track, I'd trust it more than any dashboard."</p>
+        </div>
+      </div>
+
+      <div class="pivot-box">
+        <h4>The Pivot</h4>
+        <p>The original concept was a standalone financial wellness app. After the interviews, the design problem became clear: people don't open finance apps — they open Slack, their payroll portal, and HR dashboards. NAVI became an embedded AI agent that surfaces where attention already lives. Not an app. A benefit that finds you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. WEB SKETCHES -->
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">Web Sketches</div>
+      <h2>Paper first. Four screens that defined the architecture.</h2>
+      <p style="margin-top:.9rem;max-width:62ch">Before any pixels, I sketched the four screens that carried the most structural risk: onboarding, the dashboard, the Slack embedded surface, and the alerts flow. Each sketch answered a specific layout question before committing to digital.</p>
+      <div class="sketch-grid">
+
+        <div class="sketch-item">
+          <img src="img/sketch-web-onboarding.png" alt="Split-screen onboarding sketch with brand panel left and payroll connect right" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Split-screen onboarding</strong>
+              Brand promise on the left ("Your money, finally making sense.") and activation steps on the right. The goal: employees see why NAVI exists before being asked to connect their payroll. Trust is established before data is requested.
+            </div>
+          </div>
+        </div>
+
+        <div class="sketch-item">
+          <img src="img/sketch-web-dashboard.png" alt="Dashboard sketch with paycheck summary, NAVI insights panel, and spending breakdown" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Paycheck-anchored dashboard</strong>
+              Paycheck data sits above everything — because the paycheck is NAVI's primary data source and the thing employees check first. Proactive AI insight card floats as a banner, never buried in a feed. The layout communicates: NAVI already knows what's happening.
+            </div>
+          </div>
+        </div>
+
+        <div class="sketch-item">
+          <img src="img/sketch-web-alerts.png" alt="Alerts sketch with anomaly detection card, goal impact section, and three resolution options" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Alert with goal impact</strong>
+              An anomaly isn't just flagged — it's connected to the user's goal. "Your dining spend is 50% above average. If unchanged, your emergency fund timeline shifts by one month." Three resolution paths replace a single dismiss button: the user stays in control of what happens next.
+            </div>
+          </div>
+        </div>
+
+        <div class="sketch-item">
+          <img src="img/sketch-web-slack.png" alt="Slack embedded view sketch with DM simulation and platform constraint annotations" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Slack Block Kit simulation</strong>
+              The embedded surface sketch was the most constrained: max 3 actions, no custom charts, text-first. Every feature that couldn't survive Block Kit was either cut or simplified. This sketch became the pressure valve for the entire web design — if it didn't work here, it didn't work anywhere.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. LO-FI (TEXT ONLY) -->
+  <section class="section-alt">
+    <div class="wrap-narrow">
+      <div class="eyebrow">Lo-Fi Wireframes</div>
+      <h2>Digital wireframes locked in structure. Constraints sharpened the design.</h2>
+      <p style="margin-top:.9rem">Moving from paper to digital wireframes, I pressure-tested the layout of every screen against the Slack Block Kit constraint — if a feature required a chart or more than three buttons in the embedded view, it got redesigned. This constraint eliminated several dashboard ideas that looked smart on paper but couldn't survive the simplest delivery surface.</p>
+      <p>The wireframe phase also surfaced the NAVI ANALYSIS card pattern: a structured response format with confidence percentage, data source citation, and a mandatory override button. This pattern emerged from a simple wireframe question — "how do we make AI output feel like a workplace tool and not a chatbot?" — and became one of the defining design decisions of the entire product.</p>
+      <p>The AI Analysis screen went through three lo-fi iterations before the layout stabilized. The final arrangement — proactive summary at top, user question in chat format, NAVI ANALYSIS card with confidence bar and explainability link — balanced information density against the anxiety that financial products tend to produce.</p>
+    </div>
+  </section>
+
+  <!-- 6. KEY DESIGN DECISIONS -->
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">Design Decisions</div>
+      <h2>Six decisions that define the product.</h2>
+      <p style="margin-top:.9rem;max-width:62ch">Every decision was either provable from the research or forced by the embedded constraint. Nothing decorative.</p>
+      <div class="decision-grid">
+
+        <div class="decision-card">
+          <div class="decision-num">01</div>
+          <h4>Claymorphism, not flat UI</h4>
+          <p>Most fintech tools default to dark, clinical interfaces. NAVI needed to communicate safety before the user read a single word. Soft 3D dome shadows, rounded clay surfaces, and sky-blue backgrounds create a tactile, approachable register — the "best friend who happens to know finance" aesthetic. This was the single biggest driver of trust scores in usability testing.</p>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-num">02</div>
+          <h4>"NAVI ANALYSIS," not "NAVI says"</h4>
+          <p>Consumer AI tools use chat bubbles. Enterprise benefits cannot — they feel like toys, not workplace systems. Every AI output is labeled "NAVI ANALYSIS" with a confidence percentage and a data source citation. The pattern communicates system credibility, not personality. Participants in testing described it as feeling "like a report from a trusted system."</p>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-num">03</div>
+          <h4>Human override on every card</h4>
+          <p>NAVI never acts. It proposes and waits. Every recommendation card has an Override button — a non-negotiable design rule. Financial anxiety peaks when people feel out of control. The override button is a design promise: the human is always in charge. Removing it in one test iteration caused a measurable drop in trust ratings.</p>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-num">04</div>
+          <h4>13-month plan, not 12</h4>
+          <p>When NAVI builds a savings plan, it recommends 13 months over the aspirational 12. Behavioral research shows calendar-year plans have higher dropout rates — they feel like New Year's resolutions. A 13-month timeline is counterintuitive enough to be memorable, and its odd framing signals that NAVI computed an actual timeline, not just rounded to a year.</p>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-num">05</div>
+          <h4>Confidence scores everywhere</h4>
+          <p>Every AI recommendation surfaces a confidence percentage and the data it was based on. Transparency reduces skepticism and keeps users engaged with the system's reasoning rather than dismissing it. Participants spent significantly more time on cards that showed confidence breakdowns — and rated them as more trustworthy even when confidence was only 74%.</p>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-num">06</div>
+          <h4>Privacy as a first-class surface</h4>
+          <p>The Privacy &amp; Data screen is reachable within two taps from anywhere. It shows exactly what NAVI accessed and — critically — what it did NOT access. Negative disclosure ("NAVI cannot see your performance reviews or health claims") was the most trusted copy in testing. Privacy isn't in Settings. It's on the nav.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. DESIGN EVOLUTION -->
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="eyebrow">Design Evolution</div>
+      <h2>From sketch to final — the dashboard.</h2>
+      <p style="margin-top:.9rem;max-width:62ch">The dashboard shows the clearest progression. The sketch established paycheck-first hierarchy and the proactive AI banner. The final UI applied the claymorphism system — soft card shadows, recessed stat tiles, warm sky-blue background — without changing a single structural decision made in the sketch.</p>
+      <div class="evolution-grid">
+        <div class="evolution-step">
+          <div class="evolution-label"><span class="dot"></span>Sketch</div>
+          <img src="img/sketch-web-dashboard.png" alt="Hand-drawn dashboard sketch with paycheck summary and NAVI insights" loading="lazy" />
+          <p>Paycheck card anchors the top. AI insight banner immediately below. Flexible spending breakdown right. Structure proven on paper before any pixels.</p>
+        </div>
+        <div class="evolution-step">
+          <div class="evolution-label"><span class="dot"></span>Final UI</div>
+          <img src="img/ui-web-dashboard.png" alt="Final dashboard with claymorphism treatment, sky-blue background, and AI analysis card" loading="lazy" />
+          <p>Claymorphism applied. Warm sky-blue background, soft clay card shadows, gold accent on the NAVI ANALYSIS badge. Layout identical to the sketch — because the structure was already right.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. WEB FINAL UI -->
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">Web Final UI</div>
+      <h2>Eight screens. One visual language.</h2>
+      <p style="margin-top:.9rem;max-width:62ch">The full-featured standalone portal — onboarding through privacy controls. The claymorphism system holds across every screen: same shadow formula, same card radius, same color palette. The design language communicates warmth and trust before the AI says a word.</p>
+      <div class="gallery">
+        <img src="img/ui-web-onboarding.png" alt="NAVI onboarding — split-screen with brand panel and payroll activation flow" loading="lazy" />
+        <img src="img/ui-web-dashboard.png" alt="NAVI dashboard — paycheck summary, AI insights banner, spending breakdown" loading="lazy" />
+        <img src="img/ui-web-alerts.png" alt="NAVI alerts — anomaly detection with goal impact and three resolution paths" loading="lazy" />
+        <img src="img/ui-web-slack.png" alt="NAVI embedded Slack view — Block Kit simulation with platform constraint annotations" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. MOBILE SKETCHES -->
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="eyebrow">Mobile Sketches</div>
+      <h2>Mobile constraints made the design sharper.</h2>
+      <p style="margin-top:.9rem;max-width:62ch">The mobile surface forced every screen to survive on a single viewport with no sidebar. Bottom navigation with five tabs. Each screen had one primary job. The sketches show how structure was worked out before any visual system was applied.</p>
+      <div class="sketch-grid-mobile">
+
+        <div class="sketch-item">
+          <img src="img/sketch-mobile-onboarding.png" alt="Mobile onboarding sketch with logo, headline, benefit list, and full-width CTA" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Single-screen onboarding</strong>
+              No split screen — the phone can't afford it. Logo, bold headline, three benefit bullets, usability stat, and one full-width CTA. Pagination dots below suggest there are more steps. The user sees confidence before they're asked to connect their paycheck.
+            </div>
+          </div>
+        </div>
+
+        <div class="sketch-item">
+          <img src="img/sketch-mobile-dashboard.png" alt="Mobile home screen sketch with paycheck card, NAVI Analysis badge, and bottom nav" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Paycheck-first home screen</strong>
+              One primary card: next paycheck, key financial stats, progress toward savings goal. The NAVI ANALYSIS card appears directly below — not in a feed, not buried, immediately actionable. Bottom nav labels confirm which tab is active; annotations explain every layout choice.
+            </div>
+          </div>
+        </div>
+
+        <div class="sketch-item">
+          <img src="img/sketch-mobile-goals.png" alt="Mobile goals sketch with progress ring, 13-month plan card, and next actions list" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Goals as a living plan</strong>
+              Progress ring at top — the emotional anchor. NAVI PLAN card below it showing the 13-month timeline with three key figures. Next Actions list surfaces pending, completed, and queued steps. The screen tells you where you are and exactly what to do next.
+            </div>
+          </div>
+        </div>
+
+        <div class="sketch-item">
+          <img src="img/sketch-mobile-coach.png" alt="Mobile coach sketch with AI chat interface, NAVI ANALYSIS card, and ask-anything input" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Coach as a structured conversation</strong>
+              Not a chatbot. A coach. The NAVI ANALYSIS card carries a confidence score and shows exactly what data it used. Quick suggestion prompts below the response reduce the blank-page anxiety of "what do I even ask?" Annotations on the sketch show every component's role.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. MOBILE FINAL UI -->
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">Mobile Final UI</div>
+      <h2>Four screens. Same claymorphism, pocket-sized.</h2>
+      <p style="margin-top:.9rem;max-width:62ch">The mobile prototype applies the same visual language — soft clay surfaces, sky-blue background, Nunito + DM Mono type system — to the constraints of a single-viewport phone screen. The bottom nav replaces the sidebar; cards stack instead of sit side by side.</p>
+      <div class="mobile-grid">
+        <div class="mobile-item">
+          <img src="img/hifi-mobile-onboarding.png" alt="Mobile onboarding — claymorphism, sky-blue background, benefit checklist card" loading="lazy" />
+          <span class="mobile-cap">Onboarding</span>
+        </div>
+        <div class="mobile-item">
+          <img src="img/hifi-mobile-dashboard.png" alt="Mobile dashboard — paycheck card, NAVI Analysis badge, accept/override actions" loading="lazy" />
+          <span class="mobile-cap">Dashboard</span>
+        </div>
+        <div class="mobile-item">
+          <img src="img/hifi-mobile-goals.png" alt="Mobile goals — progress ring, 13-month plan, next actions list" loading="lazy" />
+          <span class="mobile-cap">My Goals</span>
+        </div>
+        <div class="mobile-item">
+          <img src="img/hifi-mobile-coach.png" alt="Mobile coach — conversational AI with NAVI Analysis card and confidence score" loading="lazy" />
+          <span class="mobile-cap">Coach</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. QUOTE -->
+  <section class="section-alt">
+    <div class="wrap-narrow">
+      <div class="quote-block">
+        <p style="font-size:1.05rem;max-width:74ch">The hardest constraint was also the most clarifying one: designing for Slack's Block Kit format forced NAVI to say only what mattered. No charts, no dashboards — one sentence, one number, three buttons. Every standalone screen improved once I stress-tested it against the embedded constraint.</p>
+        <p class="quote-source">Design reflection · NAVI embedded-first approach</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. OUTCOME -->
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="eyebrow">Outcome</div>
+      <h2>Faster decisions, higher trust, real adoption intent.</h2>
+      <p style="font-size:1.05rem;margin-top:.9rem">Usability study with 8 participants simulating onboarding and two recommendation flows. The clearest result: time to act on a NAVI recommendation dropped from the 4.2-minute benchmark for comparable finance apps to 38 seconds. The design didn't just make the product look more trustworthy — it made acting on it feel effortless.</p>
+      <p>Trust score averaged 4.4 out of 5. Participants consistently cited the confidence percentages and data source citations as the reason they trusted the output. Seven of eight said they would use NAVI if their employer offered it as a benefit.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="prototype-web.html" target="_blank" rel="noopener">Open web prototype ↗</a>
+        <a class="btn btn-primary" href="prototype-mobile.html" target="_blank" rel="noopener">Open mobile prototype ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. REFLECTION -->
+  <section class="section-alt">
+    <div class="wrap-narrow">
+      <div class="eyebrow">Reflection</div>
+      <h2>What I'd do differently.</h2>
+      <div class="reflection-list">
+        <div class="reflection-item">
+          <div class="reflection-num">1</div>
+          <p>I'd run the Slack embedded surface through actual user testing earlier. I used it as a design pressure valve throughout the process, but testing it with real users — not just designers — would have surfaced edge cases in the Block Kit format I only caught late in the prototype phase.</p>
+        </div>
+        <div class="reflection-item">
+          <div class="reflection-num">2</div>
+          <p>The 13-month plan detail is a strong behavioral UX insight, but it's currently buried in the My Goals screen. It deserves a dedicated moment during onboarding — a short explanation of why the odd timeline is intentional. Users who understood it trusted NAVI more; users who didn't asked if it was a bug.</p>
+        </div>
+        <div class="reflection-item">
+          <div class="reflection-num">3</div>
+          <p>I'd add a second usability round focused specifically on the override flow. The first round showed people trusted NAVI enough to accept most recommendations — which is good. But I want to test the override path under realistic pressure: a recommendation that feels wrong, or one that contradicts a user's own instinct. That's where the design's trust architecture gets its hardest test.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="divider"></div></div>
+
+  <!-- 14. NEXT PROJECT -->
+  <section class="next-section">
+    <div class="wrap">
+      <p class="next-label">Next case study</p>
+      <a class="next-link" href="../case-finflow/index.html">FinFlow <span aria-hidden="true">→</span></a>
+      <p class="next-sub">Role-based B2B expense management — designed from research through usability testing for admin, manager, and employee with a measurable task completion lift.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="cs-footer">
+  <div class="wrap">
+    <div class="footer-row">
+      <span>Naveen Sereddy · Product Design</span>
+      <div class="footer-links">
+        <a href="https://github.com/Naveen-Sereddy" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/naveensereddy" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
