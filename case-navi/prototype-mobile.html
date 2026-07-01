@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-app>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: #0D0D0F; font-family: 'Nunito', sans-serif; }
+
+/* ── Studio background ── */
+.studio {
+  position: fixed; inset: 0; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 40%, rgba(61,150,240,0.06) 0%, transparent 65%), #0D0D0F;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ── iPhone 15 Pro frame ── */
+.iphone {
+  width: 393px; height: 852px;
+  background: linear-gradient(160deg, #2C2C2E 0%, #1C1C1E 40%, #111112 100%);
+  border-radius: 55px; position: relative; flex-shrink: 0;
+  box-shadow:
+    0 0 0 1.5px #3A3A3C,
+    0 0 0 5px #0D0D0F,
+    inset 0 0 0 1px rgba(255,255,255,0.07),
+    0 70px 140px rgba(0,0,0,0.85),
+    0 30px 60px rgba(0,0,0,0.5),
+    0 0 80px rgba(61,150,240,0.06);
+}
+/* Left side: silent switch + volume */
+.iphone::before {
+  content: '';
+  position: absolute; left: -4px; top: 108px;
+  width: 4px; height: 30px;
+  background: #2C2C2E; border-radius: 2px 0 0 2px;
+  box-shadow: 0 42px 0 #2C2C2E, 0 84px 0 #2C2C2E;
+}
+/* Right side: power button */
+.iphone::after {
+  content: '';
+  position: absolute; right: -4px; top: 178px;
+  width: 4px; height: 72px;
+  background: #2C2C2E; border-radius: 0 2px 2px 0;
+}
+.iphone-screen {
+  position: absolute; inset: 7px;
+  background: #DFF0FF; border-radius: 49px;
+  overflow: hidden; display: flex; flex-direction: column;
+}
+
+/* ── Dynamic Island ── */
+.di {
+  position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+  width: 126px; height: 37px; background: #000;
+  border-radius: 20px; z-index: 100; pointer-events: none;
+}
+
+/* ── Status bar ── */
+.sb {
+  flex-shrink: 0; height: 59px;
+  padding: 18px 28px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative; z-index: 5;
+}
+.sb-time { font-size: 15px; font-weight: 700; color: #0D2137; letter-spacing: -0.3px; }
+.sb-icons { display: flex; align-items: center; gap: 6px; }
+
+/* ── Screen area ── */
+.app { flex: 1; overflow: hidden; position: relative; }
+.screen { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; }
+.screen::-webkit-scrollbar { display: none; }
+
+/* ── Scrollable content padding ── */
+.scr-pad { padding: 0 20px 24px; }
+
+/* ── Bottom tab bar ── */
+.tab-bar {
+  flex-shrink: 0; height: 83px;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(189,216,245,0.6);
+  display: flex; align-items: flex-start; padding-top: 10px;
+}
+.tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 4px 2px; }
+.tab-icon { font-size: 22px; line-height: 1; }
+.tab-label { font-size: 10px; font-weight: 700; letter-spacing: 0.01em; }
+.tab-badge {
+  position: absolute; top: -4px; right: 8px;
+  width: 16px; height: 16px; background: #DC4545;
+  border-radius: 50%; font-size: 9px; font-weight: 800;
+  color: #fff; display: flex; align-items: center; justify-content: center;
+}
+.tab-icon-wrap { position: relative; }
+
+/* ── Clay card ── */
+.clay {
+  background: #FFFFFF; border-radius: 20px;
+  box-shadow: 8px 8px 20px rgba(0,0,0,0.12), -4px -4px 12px rgba(255,255,255,0.85),
+    inset -3px -3px 8px rgba(0,0,0,0.06), inset 3px 3px 8px rgba(255,255,255,0.65);
+}
+.clay-inner {
+  background: #E8F3FF; border-radius: 14px;
+  box-shadow: inset 3px 3px 7px rgba(0,0,0,0.1), inset -2px -2px 6px rgba(255,255,255,0.6);
+}
+.clay-blue {
+  background: rgba(61,150,240,0.07); border-radius: 14px;
+  border: 1px solid rgba(61,150,240,0.15);
+}
+
+/* ── Typography ── */
+.hero { font-size: 28px; font-weight: 900; color: #0D2137; line-height: 1.15; letter-spacing: -0.5px; }
+.title { font-size: 20px; font-weight: 800; color: #0D2137; letter-spacing: -0.3px; }
+.label { font-size: 10px; font-weight: 800; color: #7A9BB5; text-transform: uppercase; letter-spacing: 0.08em; }
+.t1 { color: #0D2137; } .t2 { color: #3D5E7A; } .t3 { color: #7A9BB5; }
+
+/* ── Buttons ── */
+.btn-primary {
+  width: 100%; padding: 16px; background: #3D96F0; color: #fff;
+  border: none; border-radius: 16px; font-size: 15px; font-weight: 800;
+  font-family: 'Nunito',sans-serif; cursor: pointer; letter-spacing: -0.1px;
+  box-shadow: 0 6px 18px rgba(61,150,240,0.35);
+}
+.btn-ghost {
+  padding: 11px 18px; background: #FFFFFF; color: #3D5E7A;
+  border: 1.5px solid #BDD8F5; border-radius: 12px;
+  font-size: 13px; font-weight: 700; font-family: 'Nunito',sans-serif; cursor: pointer;
+}
+.btn-sm-blue {
+  padding: 10px 16px; background: #3D96F0; color: #fff;
+  border: none; border-radius: 12px; font-size: 13px; font-weight: 700;
+  font-family: 'Nunito',sans-serif; cursor: pointer;
+}
+
+/* ── Section header ── */
+.sec-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+
+/* ── Progress ring (SVG) ── */
+.ring-track { fill: none; stroke: #E8F3FF; stroke-width: 10; }
+.ring-fill  { fill: none; stroke: #3D96F0; stroke-width: 10; stroke-linecap: round;
+  stroke-dasharray: 283; stroke-dashoffset: 212; /* ~25% */ transform-origin: center;
+  transform: rotate(-90deg); transition: stroke-dashoffset 1s ease; }
+
+/* ── Progress bar ── */
+.pbar-track { height: 8px; background: #E8F3FF; border-radius: 4px; overflow: hidden; }
+.pbar-fill  { height: 100%; background: linear-gradient(90deg,#3D96F0,#5BABFF); border-radius: 4px; transition: width 0.8s ease; }
+
+/* ── Typing dots ── */
+@keyframes dot { 0%,60%,100%{opacity:.2;transform:translateY(0)} 30%{opacity:1;transform:translateY(-3px)} }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: #7A9BB5; display: inline-block;
+  animation: dot 1.2s infinite; }
+.dot:nth-child(2){animation-delay:.2s} .dot:nth-child(3){animation-delay:.4s}
+
+/* ── Pulse ── */
+@keyframes bluePulse { 0%,100%{box-shadow:0 0 0 0 rgba(61,150,240,.4)} 50%{box-shadow:0 0 0 8px rgba(61,150,240,0)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+@keyframes spin { to{transform:rotate(360deg)} }
+@keyframes progressAnim { from{width:0} to{width:72%} }
+
+/* ── Analysis loading ── */
+.spinner { width: 40px; height: 40px; border: 3px solid #BDD8F5; border-top-color: #3D96F0;
+  border-radius: 50%; animation: spin 0.8s linear infinite; }
+
+/* ── Onboarding dots ── */
+.ob-dot { width: 7px; height: 7px; border-radius: 50%; background: #BDD8F5; transition: all 0.2s; }
+.ob-dot.active { width: 20px; background: #3D96F0; }
+
+/* ── Toast ── */
+.toast {
+  background: linear-gradient(135deg, #3D96F0, #5BABFF);
+  border-radius: 16px; padding: 14px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+  box-shadow: 0 6px 20px rgba(61,150,240,0.3);
+  animation: fadeUp 0.3s ease;
+}
+
+/* ── Transaction row ── */
+.tx-row { display: flex; align-items: center; gap: 12px; padding: 11px 0;
+  border-bottom: 1px solid #EBF4FF; }
+.tx-icon { width: 38px; height: 38px; border-radius: 12px; background: #E8F3FF;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 18px; }
+
+/* ── Onboarding goal card ── */
+.goal-card { border-radius: 16px; padding: 16px; cursor: pointer; transition: all 0.15s; margin-bottom: 10px; }
+
+/* ── NAVI analysis card ── */
+.navi-card { background: #FFFFFF; border-radius: 18px; overflow: hidden;
+  box-shadow: 6px 6px 16px rgba(0,0,0,0.1), -3px -3px 10px rgba(255,255,255,0.9); }
+.navi-card-hdr { background: linear-gradient(135deg,rgba(61,150,240,0.08),rgba(61,150,240,0.03));
+  padding: 14px 16px; border-bottom: 1px solid #EBF4FF; }
+.navi-badge { background: #3D96F0; color: #fff; border-radius: 6px; padding: 2px 8px;
+  font-size: 9px; font-weight: 800; letter-spacing: 0.06em; display: inline-block; }
+.conf-bar { height: 6px; border-radius: 3px; background: #E8F3FF; overflow: hidden; margin-top: 6px; }
+.conf-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg,#22A55A,#2DC76E); }
+
+/* ── Slack mobile ── */
+.slack-wrap { background: #FFFFFF; border-radius: 18px; overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.slack-hdr { background: #FFFFFF; padding: 12px 14px; border-bottom: 1px solid #E8E8E8;
+  display: flex; align-items: center; gap: 10px; }
+.slack-msg { padding: 12px 14px; display: flex; gap: 10px; }
+.slack-avatar { width: 34px; height: 34px; background: #3D96F0; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.slack-bk { background: #F8F8F8; border-left: 3px solid #3D96F0; border-radius: 4px; overflow: hidden; margin-top: 8px; }
+
+/* ── More menu list ── */
+.menu-item { display: flex; align-items: center; gap: 14px; padding: 15px 18px; background: #FFFFFF;
+  cursor: pointer; border-bottom: 1px solid #EBF4FF; }
+.menu-icon { width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+
+/* ── Back header ── */
+.back-hdr { display: flex; align-items: center; gap: 10px; padding: 14px 20px 8px; }
+.back-btn { width: 32px; height: 32px; border-radius: 50%; background: #FFFFFF;
+  border: 1.5px solid #BDD8F5; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 14px; flex-shrink: 0; }
+
+/* ── Toggle ── */
+.toggle-wrap { display: flex; align-items: center; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid #EBF4FF; }
+.toggle { width: 44px; height: 26px; border-radius: 13px; background: #3D96F0; position: relative; cursor: pointer; flex-shrink: 0; }
+.toggle::after { content:''; position:absolute; top:3px; right:3px; width:20px; height:20px;
+  background:#fff; border-radius:50%; box-shadow:0 1px 3px rgba(0,0,0,0.2); transition:transform 0.2s; }
+.toggle.off { background: #BDD8F5; }
+.toggle.off::after { transform: translateX(-18px); }
+
+/* ── Coach chat ── */
+.chat-bubble-navi { background: #FFFFFF; border-radius: 18px 18px 18px 4px; padding: 12px 14px;
+  box-shadow: 4px 4px 12px rgba(0,0,0,0.08); max-width: 90%; }
+.chat-bubble-user { background: #3D96F0; border-radius: 18px 18px 4px 18px; padding: 10px 14px;
+  color: #fff; font-size: 13px; align-self: flex-end; max-width: 80%; }
+.chat-input-bar { padding: 10px 16px 10px; display: flex; gap: 10px; align-items: center;
+  border-top: 1px solid #EBF4FF; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); }
+.chat-input { flex: 1; background: #E8F3FF; border: none; border-radius: 22px; padding: 10px 16px;
+  font-size: 13px; font-family: 'Nunito',sans-serif; color: #0D2137; outline: none; }
+</style>
+</helmet>
+
+<!-- ══════════════════════════════════ -->
+<!--        STUDIO + iPHONE FRAME       -->
+<!-- ══════════════════════════════════ -->
+<div class="studio">
+<div class="iphone">
+<div class="iphone-screen">
+
+  <!-- Dynamic Island -->
+  <div class="di"></div>
+
+  <!-- Status bar -->
+  <div class="sb">
+    <span class="sb-time">9:41</span>
+    <div class="sb-icons">
+      <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+        <rect x="0" y="4" width="3" height="8" rx="1" fill="#0D2137" opacity="0.35"/>
+        <rect x="4.5" y="2.5" width="3" height="9.5" rx="1" fill="#0D2137" opacity="0.55"/>
+        <rect x="9" y="0.5" width="3" height="11.5" rx="1" fill="#0D2137" opacity="0.75"/>
+        <rect x="13.5" y="0" width="3" height="12" rx="1" fill="#0D2137"/>
+      </svg>
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+        <path d="M8 2.5C10.5 2.5 12.7 3.5 14.3 5.2L15.5 3.8C13.5 1.7 10.9 0.5 8 0.5C5.1 0.5 2.5 1.7 0.5 3.8L1.7 5.2C3.3 3.5 5.5 2.5 8 2.5Z" fill="#0D2137" opacity="0.4"/>
+        <path d="M8 5.5C9.8 5.5 11.4 6.2 12.6 7.4L13.8 6C12.2 4.5 10.2 3.5 8 3.5C5.8 3.5 3.8 4.5 2.2 6L3.4 7.4C4.6 6.2 6.2 5.5 8 5.5Z" fill="#0D2137" opacity="0.7"/>
+        <path d="M8 8.5C9.1 8.5 10.1 8.9 10.9 9.6L8 12L5.1 9.6C5.9 8.9 6.9 8.5 8 8.5Z" fill="#0D2137"/>
+      </svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
+        <rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0D2137" stroke-opacity="0.35"/>
+        <rect x="22" y="3.5" width="2.5" height="5" rx="1.25" fill="#0D2137" opacity="0.4"/>
+        <rect x="2" y="2" width="16" height="8" rx="2" fill="#0D2137"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ═══ APP CONTENT ═══ -->
+  <div class="app">
+
+    <!-- ═══════════ ONBOARDING ═══════════ -->
+    <sc-if value="{{ isOnboarding }}">
+      <div class="screen" style="background:#DFF0FF;">
+
+        <!-- Step 0: Welcome -->
+        <sc-if value="{{ isStep0 }}">
+          <div style="display:flex;flex-direction:column;align-items:center;padding:24px 28px 32px;min-height:100%;">
+            <div style="margin-top:20px;margin-bottom:32px;">
+              <svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="26" cy="26" r="26" fill="#3D96F0" opacity="0.1"/>
+                <circle cx="26" cy="26" r="20" fill="#3D96F0" opacity="0.15"/>
+                <ellipse cx="26" cy="30" rx="9" ry="12" fill="#3D96F0"/>
+                <ellipse cx="26" cy="18" rx="5" ry="5" fill="#3D96F0"/>
+                <ellipse cx="26" cy="18" rx="3" ry="3" fill="#EEF7FF" opacity="0.7"/>
+                <rect x="22" y="38" width="8" height="4" rx="2" fill="#3D96F0"/>
+                <rect x="24" y="42" width="4" height="2" rx="1" fill="#3D96F0"/>
+              </svg>
+            </div>
+            <div style="text-align:center;margin-bottom:8px;">
+              <span style="font-size:11px;font-weight:800;color:#3D96F0;letter-spacing:0.1em;text-transform:uppercase;">FINANCIAL WELLNESS FOR WORK</span>
+            </div>
+            <h1 class="hero" style="text-align:center;margin-bottom:14px;font-size:30px;">Your finances,<br>finally clear.</h1>
+            <p style="font-size:14px;color:#3D5E7A;text-align:center;line-height:1.6;margin-bottom:28px;">NAVI watches your cash flow so you don't have to. No spreadsheets — just timely nudges when something needs attention.</p>
+
+            <div class="clay" style="width:100%;padding:18px;margin-bottom:28px;">
+              <p style="font-size:12px;font-weight:800;color:#7A9BB5;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:12px;">What NAVI does for you</p>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <div style="width:20px;height:20px;background:#3D96F0;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;"><span style="color:#fff;font-size:10px;font-weight:800;">✓</span></div>
+                  <p style="font-size:13px;color:#3D5E7A;line-height:1.45;">Reads your payroll deposits and spending patterns</p>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <div style="width:20px;height:20px;background:#3D96F0;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;"><span style="color:#fff;font-size:10px;font-weight:800;">✓</span></div>
+                  <p style="font-size:13px;color:#3D5E7A;line-height:1.45;">Surfaces proactive, actionable financial insights</p>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <div style="width:20px;height:20px;background:#3D96F0;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;"><span style="color:#fff;font-size:10px;font-weight:800;">✓</span></div>
+                  <p style="font-size:13px;color:#3D5E7A;line-height:1.45;">Never shares personal data with TechCorp HR</p>
+                </div>
+              </div>
+              <div style="margin-top:14px;padding-top:14px;border-top:1px solid #EBF4FF;display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                  <p style="font-size:9px;font-weight:800;color:#7A9BB5;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:2px;">Avg. time to act on a rec.</p>
+                  <p style="font-size:15px;font-family:'DM Mono',monospace;font-weight:600;color:#0D2137;"><span style="text-decoration:line-through;color:#7A9BB5;font-size:12px;">4.2 min</span> → <span style="color:#22A55A;">38 sec</span></p>
+                </div>
+                <div style="text-align:right;">
+                  <p style="font-size:9px;color:#7A9BB5;">Usability study</p>
+                  <p style="font-size:9px;color:#7A9BB5;">8 participants</p>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn-primary" onClick="{{ goStep1 }}" style="margin-bottom:20px;">Activate my benefit →</button>
+            <div style="display:flex;gap:7px;">
+              <div class="ob-dot active"></div>
+              <div class="ob-dot"></div>
+              <div class="ob-dot"></div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- Step 1: Connect Payroll -->
+        <sc-if value="{{ isStep1 }}">
+          <div style="padding:20px 24px;min-height:100%;display:flex;flex-direction:column;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:28px;">
+              <button class="back-btn" style="border:none;background:#E8F3FF;" onClick="{{ goStep0 }}">‹</button>
+              <span style="font-size:12px;font-weight:700;color:#7A9BB5;">Step 1 of 3</span>
+              <div style="flex:1;height:3px;background:#EBF4FF;border-radius:2px;overflow:hidden;">
+                <div style="width:33%;height:100%;background:#3D96F0;border-radius:2px;"></div>
+              </div>
+            </div>
+
+            <h2 class="title" style="margin-bottom:8px;">Connect your payroll</h2>
+            <p style="font-size:14px;color:#3D5E7A;line-height:1.6;margin-bottom:24px;">NAVI reads your paycheck deposits securely. No credentials shared with your employer.</p>
+
+            <div class="clay" style="padding:20px;margin-bottom:16px;">
+              <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+                <div style="width:48px;height:48px;background:#3D96F0;border-radius:14px;display:flex;align-items:center;justify-content:center;">
+                  <span style="color:#fff;font-size:20px;font-weight:900;">T</span>
+                </div>
+                <div>
+                  <p style="font-size:15px;font-weight:800;color:#0D2137;">TechCorp Payroll</p>
+                  <p style="font-size:12px;color:#7A9BB5;">via ADP · Bi-weekly deposit</p>
+                </div>
+                <div style="margin-left:auto;width:22px;height:22px;background:#22A55A;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+                  <span style="color:#fff;font-size:11px;font-weight:800;">✓</span>
+                </div>
+              </div>
+              <div class="clay-inner" style="padding:12px 14px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                  <span style="font-size:12px;color:#7A9BB5;">Last deposit</span>
+                  <span style="font-size:12px;font-weight:700;font-family:'DM Mono',monospace;color:#0D2137;">Jun 13 · $3,250</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <span style="font-size:12px;color:#7A9BB5;">Next deposit</span>
+                  <span style="font-size:12px;font-weight:700;font-family:'DM Mono',monospace;color:#3D96F0;">Jul 3 · $3,250</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:24px;padding:10px 14px;background:rgba(34,165,90,0.08);border-radius:12px;border:1px solid rgba(34,165,90,0.2);">
+              <span style="font-size:16px;">🔒</span>
+              <p style="font-size:12px;color:#22A55A;font-weight:700;">256-bit encryption · Read-only access · Never stored raw</p>
+            </div>
+
+            <div style="margin-top:auto;">
+              <button class="btn-primary" onClick="{{ goStep2 }}" style="margin-bottom:12px;">Connect TechCorp Payroll →</button>
+              <p style="font-size:11px;color:#7A9BB5;text-align:center;">You can disconnect at any time in Privacy &amp; Data</p>
+            </div>
+            <div style="display:flex;gap:7px;justify-content:center;margin-top:20px;">
+              <div class="ob-dot"></div><div class="ob-dot active"></div><div class="ob-dot"></div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- Step 2: Set Goal -->
+        <sc-if value="{{ isStep2 }}">
+          <div style="padding:20px 24px;min-height:100%;display:flex;flex-direction:column;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:28px;">
+              <button class="back-btn" style="border:none;background:#E8F3FF;" onClick="{{ goStep1 }}">‹</button>
+              <span style="font-size:12px;font-weight:700;color:#7A9BB5;">Step 2 of 3</span>
+              <div style="flex:1;height:3px;background:#EBF4FF;border-radius:2px;overflow:hidden;">
+                <div style="width:66%;height:100%;background:#3D96F0;border-radius:2px;"></div>
+              </div>
+            </div>
+
+            <h2 class="title" style="margin-bottom:6px;">What matters most?</h2>
+            <p style="font-size:14px;color:#3D5E7A;margin-bottom:24px;">NAVI builds a personalized 13-month plan around your top priority.</p>
+
+            <div class="goal-card" style="{{ goalEmergencyStyle }}" onClick="{{ selectEmergency }}">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="font-size:28px;">🛡️</div>
+                <div>
+                  <p style="font-size:15px;font-weight:800;color:#0D2137;">Build emergency fund</p>
+                  <p style="font-size:12px;color:#7A9BB5;">3–6 months of expenses saved</p>
+                </div>
+                <div style="margin-left:auto;width:22px;height:22px;border-radius:50%;border:2px solid #BDD8F5;background:{{ goalEmergencyCheck }};display:flex;align-items:center;justify-content:center;">
+                  <span style="color:#fff;font-size:11px;font-weight:800;">{{ goalEmergencyTick }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="goal-card" style="{{ goalDebtStyle }}" onClick="{{ selectDebt }}">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="font-size:28px;">💳</div>
+                <div>
+                  <p style="font-size:15px;font-weight:800;color:#0D2137;">Pay off credit card debt</p>
+                  <p style="font-size:12px;color:#7A9BB5;">Eliminate high-interest balances</p>
+                </div>
+                <div style="margin-left:auto;width:22px;height:22px;border-radius:50%;border:2px solid #BDD8F5;background:{{ goalDebtCheck }};display:flex;align-items:center;justify-content:center;">
+                  <span style="color:#fff;font-size:11px;font-weight:800;">{{ goalDebtTick }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="goal-card" style="{{ goalSavingsStyle }}" onClick="{{ selectSavings }}">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="font-size:28px;">📈</div>
+                <div>
+                  <p style="font-size:15px;font-weight:800;color:#0D2137;">Grow monthly savings</p>
+                  <p style="font-size:12px;color:#7A9BB5;">Increase savings rate by 10%</p>
+                </div>
+                <div style="margin-left:auto;width:22px;height:22px;border-radius:50%;border:2px solid #BDD8F5;background:{{ goalSavingsCheck }};display:flex;align-items:center;justify-content:center;">
+                  <span style="color:#fff;font-size:11px;font-weight:800;">{{ goalSavingsTick }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:auto;padding-top:16px;">
+              <button class="btn-primary" onClick="{{ startAnalysis }}" style="{{ continueStyle }}">Build my plan →</button>
+            </div>
+            <div style="display:flex;gap:7px;justify-content:center;margin-top:20px;">
+              <div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot active"></div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- Step 3: Analysis loading -->
+        <sc-if value="{{ isStep3 }}">
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:40px 28px;text-align:center;">
+            <div style="margin-bottom:28px;animation:bluePulse 2s ease infinite;border-radius:50%;">
+              <svg width="72" height="72" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="26" cy="26" r="26" fill="#3D96F0" opacity="0.12"/>
+                <ellipse cx="26" cy="30" rx="9" ry="12" fill="#3D96F0"/>
+                <ellipse cx="26" cy="18" rx="5" ry="5" fill="#3D96F0"/>
+                <ellipse cx="26" cy="18" rx="3" ry="3" fill="#EEF7FF" opacity="0.7"/>
+                <rect x="22" y="38" width="8" height="4" rx="2" fill="#3D96F0"/>
+              </svg>
+            </div>
+            <h2 class="title" style="margin-bottom:8px;">Building your plan...</h2>
+            <p style="font-size:14px;color:#7A9BB5;margin-bottom:28px;">Analyzing 6 months of payroll data and spending patterns</p>
+            <div style="width:100%;height:6px;background:#E8F3FF;border-radius:3px;overflow:hidden;margin-bottom:20px;">
+              <div style="height:100%;background:linear-gradient(90deg,#3D96F0,#5BABFF);border-radius:3px;animation:progressAnim 2.5s ease forwards;"></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;width:100%;">
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#FFFFFF;border-radius:12px;animation:fadeUp 0.3s ease both;">
+                <span style="font-size:14px;">💳</span>
+                <span style="font-size:12px;color:#3D5E7A;font-weight:600;">Payroll deposits · 6 months</span>
+                <span style="margin-left:auto;font-size:11px;color:#22A55A;font-weight:700;">✓ Done</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#FFFFFF;border-radius:12px;animation:fadeUp 0.3s ease 0.3s both;">
+                <span style="font-size:14px;">📊</span>
+                <span style="font-size:12px;color:#3D5E7A;font-weight:600;">Spending patterns</span>
+                <span style="margin-left:auto;font-size:11px;color:#22A55A;font-weight:700;">✓ Done</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#FFFFFF;border-radius:12px;animation:fadeUp 0.3s ease 0.6s both;">
+                <span style="font-size:14px;">🎯</span>
+                <span style="font-size:12px;color:#3D5E7A;font-weight:600;">13-month plan generation</span>
+                <div style="margin-left:auto;display:flex;gap:3px;"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+      </div>
+    </sc-if>
+
+    <!-- ═══════════ DASHBOARD ═══════════ -->
+    <sc-if value="{{ isDashboard }}">
+      <div class="screen">
+        <div class="scr-pad" style="padding-top:8px;">
+
+          <!-- Proactive toast -->
+          <sc-if value="{{ showToast }}">
+            <div class="toast">
+              <div style="width:36px;height:36px;background:rgba(255,255,255,0.25);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <span style="font-size:18px;">📋</span>
+              </div>
+              <div style="flex:1;">
+                <p style="font-size:12px;font-weight:800;color:#fff;margin-bottom:2px;">Weekly check-in ready</p>
+                <p style="font-size:11px;color:rgba(255,255,255,0.8);">June 27 · One item for your review</p>
+              </div>
+              <div style="display:flex;gap:8px;">
+                <button style="background:rgba(255,255,255,0.25);border:none;border-radius:8px;padding:6px 10px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;" onClick="{{ goCheckin }}">View</button>
+                <button style="background:none;border:none;padding:6px;color:rgba(255,255,255,0.7);cursor:pointer;font-size:16px;" onClick="{{ dismissToast }}">×</button>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- Header -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+            <div>
+              <p style="font-size:12px;font-weight:700;color:#7A9BB5;">June 27, 2026</p>
+              <h2 style="font-size:22px;font-weight:900;color:#0D2137;">Good morning, Allen</h2>
+            </div>
+            <div style="width:40px;height:40px;background:#FFFFFF;border-radius:12px;border:1.5px solid #BDD8F5;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;" onClick="{{ goAlerts }}">
+              <span style="font-size:20px;">🔔</span>
+              <div style="position:absolute;top:-4px;right:-4px;width:16px;height:16px;background:#DC4545;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+                <span style="font-size:9px;font-weight:800;color:#fff;">1</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main paycheck card -->
+          <div class="clay" style="padding:18px;margin-bottom:16px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+              <p class="label">Next Paycheck</p>
+              <span style="font-size:11px;font-weight:700;color:#3D96F0;background:rgba(61,150,240,0.1);border-radius:6px;padding:3px 8px;">Jul 3 · 6 days</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:14px;">
+              <span style="font-size:32px;font-weight:800;font-family:'DM Mono',monospace;color:#0D2137;">$3,250</span>
+              <span style="font-size:13px;color:#7A9BB5;">gross</span>
+            </div>
+            <div class="clay-inner" style="padding:12px 14px;margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span style="font-size:12px;color:#7A9BB5;">Checking balance</span>
+                <span style="font-size:12px;font-weight:700;font-family:'DM Mono',monospace;color:#22A55A;">$847 ✓</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span style="font-size:12px;color:#7A9BB5;">Bills before payday</span>
+                <span style="font-size:12px;font-weight:700;font-family:'DM Mono',monospace;color:#0D2137;">$100.49</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#7A9BB5;">Saved this month</span>
+                <span style="font-size:12px;font-weight:700;font-family:'DM Mono',monospace;color:#3D96F0;">$630 ↑</span>
+              </div>
+            </div>
+            <div style="height:6px;background:#E8F3FF;border-radius:3px;overflow:hidden;">
+              <div style="width:65%;height:100%;background:linear-gradient(90deg,#3D96F0,#5BABFF);border-radius:3px;"></div>
+            </div>
+            <p style="font-size:10px;color:#7A9BB5;margin-top:5px;">65% of savings goal · Jun 27</p>
+          </div>
+
+          <!-- NAVI insight card -->
+          <div class="navi-card" style="margin-bottom:16px;">
+            <div class="navi-card-hdr">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                <div style="width:28px;height:28px;background:#3D96F0;border-radius:8px;display:flex;align-items:center;justify-content:center;animation:bluePulse 3s ease infinite;"><span style="color:#fff;font-size:11px;font-weight:800;">N</span></div>
+                <span class="navi-badge">NAVI ANALYSIS</span>
+                <span style="font-size:10px;color:#7A9BB5;margin-left:auto;">89% confidence</span>
+              </div>
+              <div class="conf-bar"><div class="conf-fill" style="width:89%;"></div></div>
+            </div>
+            <div style="padding:14px 16px;">
+              <p style="font-size:13px;color:#0D2137;line-height:1.55;margin-bottom:10px;">Pay your Amex balance ($1,200) in full on July 3. Your paycheck covers it comfortably. Avoids ~<strong>$22 in interest</strong>.</p>
+              <p style="font-size:11px;color:#7A9BB5;">Source: TechCorp Payroll · Chase Checking</p>
+              <div style="display:flex;gap:8px;margin-top:12px;">
+                <button class="btn-sm-blue">✓ Accept</button>
+                <button class="btn-ghost" style="padding:10px 14px;font-size:12px;">⊘ Override</button>
+                <button class="btn-ghost" style="padding:10px 14px;font-size:12px;">? Why</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Spending breakdown -->
+          <div class="clay" style="padding:16px;margin-bottom:16px;">
+            <div class="sec-hdr">
+              <p class="label">June Spending</p>
+              <span style="font-size:11px;font-weight:700;color:#3D96F0;">$2,108 / $2,400</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                  <span style="font-size:12px;color:#3D5E7A;">🏠 Housing</span>
+                  <span style="font-size:12px;font-weight:600;font-family:'DM Mono',monospace;color:#0D2137;">$1,200</span>
+                </div>
+                <div class="pbar-track"><div class="pbar-fill" style="width:57%;background:#0D2137;opacity:0.7;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                  <span style="font-size:12px;color:#3D5E7A;">🍔 Food &amp; dining</span>
+                  <span style="font-size:12px;font-weight:600;font-family:'DM Mono',monospace;color:#0D2137;">$487</span>
+                </div>
+                <div class="pbar-track"><div class="pbar-fill" style="width:23%;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                  <span style="font-size:12px;color:#3D5E7A;">🚗 Transport</span>
+                  <span style="font-size:12px;font-weight:600;font-family:'DM Mono',monospace;color:#0D2137;">$241</span>
+                </div>
+                <div class="pbar-track"><div class="pbar-fill" style="width:11%;background:#D97706;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                  <span style="font-size:12px;color:#3D5E7A;">⚡ Utilities &amp; bills</span>
+                  <span style="font-size:12px;font-weight:600;font-family:'DM Mono',monospace;color:#0D2137;">$180</span>
+                </div>
+                <div class="pbar-track"><div class="pbar-fill" style="width:9%;background:#22A55A;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent transactions -->
+          <div style="margin-bottom:8px;">
+            <div class="sec-hdr"><p class="label">Recent</p><span style="font-size:11px;font-weight:700;color:#3D96F0;">View all</span></div>
+            <div class="clay" style="padding:4px 14px;">
+              <div class="tx-row">
+                <div class="tx-icon">🛒</div>
+                <div style="flex:1;"><p style="font-size:13px;font-weight:700;color:#0D2137;">Whole Foods</p><p style="font-size:11px;color:#7A9BB5;">Jun 26 · Groceries</p></div>
+                <span style="font-size:13px;font-weight:700;font-family:'DM Mono',monospace;color:#DC4545;">−$67.42</span>
+              </div>
+              <div class="tx-row">
+                <div class="tx-icon">⚡</div>
+                <div style="flex:1;"><p style="font-size:13px;font-weight:700;color:#0D2137;">PG&amp;E Electric</p><p style="font-size:11px;color:#7A9BB5;">Jun 25 · Utilities</p></div>
+                <span style="font-size:13px;font-weight:700;font-family:'DM Mono',monospace;color:#DC4545;">−$89.00</span>
+              </div>
+              <div class="tx-row" style="border-bottom:none;">
+                <div class="tx-icon">💰</div>
+                <div style="flex:1;"><p style="font-size:13px;font-weight:700;color:#0D2137;">TechCorp Payroll</p><p style="font-size:11px;color:#7A9BB5;">Jun 13 · Direct deposit</p></div>
+                <span style="font-size:13px;font-weight:700;font-family:'DM Mono',monospace;color:#22A55A;">+$3,250</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ═══════════ WEEKLY CHECK-IN ═══════════ -->
+    <sc-if value="{{ isCheckin }}">
+      <div class="screen">
+        <div class="scr-pad" style="padding-top:12px;">
+          <div style="margin-bottom:18px;">
+            <p class="label" style="margin-bottom:4px;">Weekly Check-In</p>
+            <h2 class="title">June 27, 2026</h2>
+          </div>
+
+          <div class="navi-card" style="margin-bottom:14px;">
+            <div class="navi-card-hdr">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                <div style="width:28px;height:28px;background:#3D96F0;border-radius:8px;display:flex;align-items:center;justify-content:center;animation:bluePulse 3s ease infinite;"><span style="color:#fff;font-size:11px;font-weight:800;">N</span></div>
+                <span class="navi-badge">NAVI ANALYSIS</span>
+                <span style="font-size:10px;color:#7A9BB5;margin-left:auto;">92%</span>
+              </div>
+              <div class="conf-bar"><div class="conf-fill" style="width:92%;"></div></div>
+              <p style="font-size:10px;color:#7A9BB5;margin-top:5px;">Source: TechCorp Payroll · Chase Checking · Amex</p>
+            </div>
+            <div style="padding:14px 16px;border-bottom:1px solid #EBF4FF;">
+              <p style="font-size:13px;color:#3D5E7A;line-height:1.6;">Hey Allen — your pay period looks clean. One item for your review before July 3.</p>
+            </div>
+            <div style="padding:12px 16px;border-bottom:1px solid #EBF4FF;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span style="font-size:12px;color:#7A9BB5;">Next paycheck</span>
+                <span style="font-size:12px;font-weight:700;font-family:'DM Mono',monospace;color:#3D96F0;">Jul 3 · $3,250</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span style="font-size:12px;color:#7A9BB5;">Bills before payday</span>
+                <span style="font-size:12px;font-weight:700;font-family:'DM Mono',monospace;color:#0D2137;">$100.49</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#7A9BB5;">Checking balance</span>
+                <span style="font-size:12px;font-weight:700;font-family:'DM Mono',monospace;color:#22A55A;">$847 ✓</span>
+              </div>
+            </div>
+            <div style="padding:12px 16px;border-bottom:1px solid #EBF4FF;background:rgba(61,150,240,0.03);">
+              <p style="font-size:10px;font-weight:800;color:#3D96F0;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;">Recommendation</p>
+              <p style="font-size:13px;color:#3D5E7A;line-height:1.55;">Pay your Amex balance ($1,200) in full on July 3. Avoids ~$22 in interest.</p>
+            </div>
+            <div style="padding:12px 16px;display:flex;gap:8px;">
+              <button class="btn-sm-blue" style="flex:1;padding:11px;">✓ Accept</button>
+              <button class="btn-ghost" style="flex:1;padding:11px;font-size:12px;">⊘ Override</button>
+              <button class="btn-ghost" style="padding:11px 12px;font-size:12px;">?</button>
+            </div>
+          </div>
+
+          <sc-if value="{{ checkinReviewed }}">
+            <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:rgba(34,165,90,0.08);border-radius:16px;border:1.5px solid rgba(34,165,90,0.25);">
+              <span style="font-size:20px;">✅</span>
+              <p style="font-size:13px;font-weight:700;color:#22A55A;">Reviewed · Jun 27, 9:00 AM</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{ checkinNotReviewed }}">
+            <button class="btn-ghost" style="width:100%;padding:14px;font-size:14px;" onClick="{{ markCheckinReviewed }}">Mark as reviewed</button>
+          </sc-if>
+
+          <!-- Explainability panel -->
+          <div class="clay" style="padding:16px;margin-top:14px;">
+            <p class="label" style="margin-bottom:12px;">How NAVI decided this</p>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;align-items:flex-start;gap:10px;">
+                <div style="width:6px;height:6px;border-radius:50%;background:#3D96F0;flex-shrink:0;margin-top:5px;"></div>
+                <p style="font-size:12px;color:#3D5E7A;line-height:1.5;">Amex balance is $1,200 · minimum payment $35 · interest rate 24.99% APR</p>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;">
+                <div style="width:6px;height:6px;border-radius:50%;background:#3D96F0;flex-shrink:0;margin-top:5px;"></div>
+                <p style="font-size:12px;color:#3D5E7A;line-height:1.5;">Checking will have $847 + $3,250 paycheck = $4,097 available on Jul 3</p>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;">
+                <div style="width:6px;height:6px;border-radius:50%;background:#22A55A;flex-shrink:0;margin-top:5px;"></div>
+                <p style="font-size:12px;color:#3D5E7A;line-height:1.5;">After full payment + bills: $2,796 remaining — above your $1,200 safety floor</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ═══════════ GOALS ═══════════ -->
+    <sc-if value="{{ isGoals }}">
+      <div class="screen">
+        <div class="scr-pad" style="padding-top:12px;">
+          <div style="margin-bottom:18px;"><h2 class="title">My Goals</h2></div>
+
+          <!-- Ring + primary goal -->
+          <div class="clay" style="padding:20px;margin-bottom:16px;">
+            <div style="display:flex;align-items:center;gap:18px;margin-bottom:16px;">
+              <div style="position:relative;flex-shrink:0;">
+                <svg width="88" height="88" viewBox="0 0 100 100">
+                  <circle class="ring-track" cx="50" cy="50" r="45"/>
+                  <circle class="ring-fill" cx="50" cy="50" r="45" style="stroke-dashoffset:240;"/>
+                </svg>
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                  <span style="font-size:18px;font-weight:900;font-family:'DM Mono',monospace;color:#3D96F0;">15%</span>
+                  <span style="font-size:9px;color:#7A9BB5;font-weight:700;">funded</span>
+                </div>
+              </div>
+              <div style="flex:1;">
+                <p class="label" style="margin-bottom:4px;">Emergency Fund</p>
+                <p style="font-size:16px;font-weight:800;color:#0D2137;margin-bottom:4px;">$3,090 saved</p>
+                <p style="font-size:12px;color:#7A9BB5;">of $20,000 goal</p>
+                <div style="margin-top:8px;display:inline-flex;align-items:center;gap:5px;background:rgba(34,165,90,0.08);border-radius:6px;padding:3px 8px;">
+                  <span style="font-size:11px;color:#22A55A;font-weight:700;">+$630 this month ↑</span>
+                </div>
+              </div>
+            </div>
+            <div class="pbar-track" style="margin-bottom:8px;">
+              <div class="pbar-fill" style="width:15%;"></div>
+            </div>
+            <p style="font-size:11px;color:#7A9BB5;text-align:right;">Month 3 of 13 · On track</p>
+          </div>
+
+          <!-- 13-month plan card -->
+          <div class="clay-blue" style="padding:16px;margin-bottom:16px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+              <span class="navi-badge">NAVI PLAN</span>
+              <span style="font-size:11px;color:#3D96F0;font-weight:700;">13-month timeline</span>
+            </div>
+            <p style="font-size:12px;color:#3D5E7A;line-height:1.6;margin-bottom:12px;">Save $1,470/month to reach your emergency fund goal by <strong style="color:#0D2137;">July 2027</strong>. NAVI adjusts this plan each paycheck.</p>
+            <div style="display:flex;gap:8px;">
+              <div style="flex:1;background:#FFFFFF;border-radius:10px;padding:10px 12px;text-align:center;">
+                <p style="font-size:16px;font-weight:800;font-family:'DM Mono',monospace;color:#3D96F0;">$1,470</p>
+                <p style="font-size:10px;color:#7A9BB5;">per month</p>
+              </div>
+              <div style="flex:1;background:#FFFFFF;border-radius:10px;padding:10px 12px;text-align:center;">
+                <p style="font-size:16px;font-weight:800;font-family:'DM Mono',monospace;color:#0D2137;">Jul '27</p>
+                <p style="font-size:10px;color:#7A9BB5;">target date</p>
+              </div>
+              <div style="flex:1;background:#FFFFFF;border-radius:10px;padding:10px 12px;text-align:center;">
+                <p style="font-size:16px;font-weight:800;font-family:'DM Mono',monospace;color:#22A55A;">10</p>
+                <p style="font-size:10px;color:#7A9BB5;">months left</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action steps -->
+          <div class="clay" style="padding:16px;margin-bottom:16px;">
+            <p class="label" style="margin-bottom:12px;">Next actions</p>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="width:28px;height:28px;background:#3D96F0;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:#fff;font-size:12px;font-weight:800;">1</span></div>
+                <div style="flex:1;">
+                  <p style="font-size:13px;font-weight:700;color:#0D2137;">Pay Amex in full · Jul 3</p>
+                  <p style="font-size:11px;color:#7A9BB5;">Saves ~$22 in interest this cycle</p>
+                </div>
+                <span style="font-size:11px;color:#3D96F0;font-weight:700;">Pending</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="width:28px;height:28px;background:#22A55A;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:#fff;font-size:12px;font-weight:800;">✓</span></div>
+                <div style="flex:1;">
+                  <p style="font-size:13px;font-weight:700;color:#0D2137;text-decoration:line-through;opacity:0.5;">Auto-save $630 · Jun 13</p>
+                  <p style="font-size:11px;color:#7A9BB5;">Completed</p>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="width:28px;height:28px;background:#E8F3FF;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-size:12px;font-weight:800;color:#7A9BB5;">2</span></div>
+                <div style="flex:1;">
+                  <p style="font-size:13px;font-weight:700;color:#0D2137;">Auto-save $1,470 · Jul 3</p>
+                  <p style="font-size:11px;color:#7A9BB5;">Scheduled after paycheck clears</p>
+                </div>
+                <span style="font-size:11px;color:#7A9BB5;font-weight:700;">Queued</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ═══════════ COACH (AI ANALYSIS) ═══════════ -->
+    <sc-if value="{{ isCoach }}">
+      <div class="screen" style="display:flex;flex-direction:column;">
+        <div style="flex:1;overflow-y:auto;padding:12px 20px 16px;">
+          <div style="margin-bottom:18px;"><h2 class="title">Coach</h2></div>
+
+          <!-- Previous query (dimmed) -->
+          <div style="opacity:0.45;margin-bottom:20px;">
+            <div style="display:flex;gap:10px;margin-bottom:8px;">
+              <div style="width:28px;height:28px;background:#3D96F0;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:#fff;font-size:11px;font-weight:800;">N</span></div>
+              <div class="chat-bubble-navi">
+                <p style="font-size:12px;color:#3D5E7A;line-height:1.5;">Your May savings rate was 19.4% — $230 above April. Keep it up and your emergency fund is 85% funded by Oct 2026.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Current query -->
+          <div style="display:flex;justify-content:flex-end;margin-bottom:12px;">
+            <div class="chat-bubble-user">Will I have enough before rent's due July 1?</div>
+          </div>
+
+          <!-- NAVI response -->
+          <div style="display:flex;gap:10px;margin-bottom:14px;">
+            <div style="width:28px;height:28px;background:#3D96F0;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:bluePulse 3s ease infinite;"><span style="color:#fff;font-size:11px;font-weight:800;">N</span></div>
+            <div style="flex:1;">
+              <div class="navi-card">
+                <div class="navi-card-hdr">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                    <span class="navi-badge">NAVI ANALYSIS</span>
+                    <span style="font-size:10px;color:#7A9BB5;margin-left:auto;">94% confident</span>
+                  </div>
+                  <div class="conf-bar"><div class="conf-fill" style="width:94%;"></div></div>
+                </div>
+                <div style="padding:12px 14px;">
+                  <p style="font-size:13px;color:#0D2137;line-height:1.55;margin-bottom:10px;">Yes — comfortably. Your rent ($1,800) is due July 1. You have $847 in checking now. That covers it with $47 to spare — no paycheck needed.</p>
+                  <div class="clay-inner" style="padding:10px 12px;margin-bottom:10px;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                      <span style="font-size:11px;color:#7A9BB5;">Checking now</span>
+                      <span style="font-size:11px;font-weight:700;font-family:'DM Mono',monospace;color:#22A55A;">$847</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                      <span style="font-size:11px;color:#7A9BB5;">Rent due Jul 1</span>
+                      <span style="font-size:11px;font-weight:700;font-family:'DM Mono',monospace;color:#DC4545;">−$1,800</span>
+                    </div>
+                    <div style="height:1px;background:#EBF4FF;margin:6px 0;"></div>
+                    <div style="display:flex;justify-content:space-between;">
+                      <span style="font-size:11px;color:#7A9BB5;">Balance Jul 1</span>
+                      <span style="font-size:11px;font-weight:800;font-family:'DM Mono',monospace;color:#0D2137;">−$953</span>
+                    </div>
+                    <p style="font-size:10px;color:#22A55A;margin-top:4px;font-weight:700;">✓ Paycheck ($3,250) arrives Jul 3 — you're covered</p>
+                  </div>
+                  <p style="font-size:10px;color:#7A9BB5;">Source: Chase Checking · TechCorp Payroll schedule</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick prompts -->
+          <div style="margin-bottom:8px;">
+            <p class="label" style="margin-bottom:10px;">Ask something else</p>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <button class="btn-ghost" style="text-align:left;padding:12px 14px;font-size:12px;border-radius:12px;">What's my biggest spending leak this month?</button>
+              <button class="btn-ghost" style="text-align:left;padding:12px 14px;font-size:12px;border-radius:12px;">How much can I afford to save in July?</button>
+              <button class="btn-ghost" style="text-align:left;padding:12px 14px;font-size:12px;border-radius:12px;">When will my emergency fund be fully funded?</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat input bar -->
+        <div class="chat-input-bar">
+          <input class="chat-input" placeholder="Ask NAVI anything..." value="{{ coachInput }}" onInput="{{ setCoachInput }}" />
+          <button class="btn-sm-blue" style="border-radius:12px;padding:10px 14px;flex-shrink:0;" onClick="{{ submitCoach }}">↑</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ═══════════ MORE ═══════════ -->
+    <sc-if value="{{ isMore }}">
+      <div class="screen">
+        <!-- User header -->
+        <div style="padding:16px 20px 0;">
+          <div style="display:flex;align-items:center;gap:14px;padding:18px;background:#FFFFFF;border-radius:20px;margin-bottom:20px;box-shadow:4px 4px 14px rgba(0,0,0,0.07),-2px -2px 8px rgba(255,255,255,0.9);">
+            <div style="width:52px;height:52px;background:linear-gradient(135deg,#3D96F0,#5BABFF);border-radius:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <span style="color:#fff;font-size:22px;font-weight:900;">A</span>
+            </div>
+            <div>
+              <p style="font-size:17px;font-weight:900;color:#0D2137;">Allen Smith</p>
+              <p style="font-size:12px;color:#7A9BB5;">Month 3 · Emergency Fund · TechCorp</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding:0 20px;">
+          <p class="label" style="margin-bottom:10px;padding-left:4px;">Features</p>
+          <div class="clay" style="padding:0;overflow:hidden;margin-bottom:18px;">
+            <div class="menu-item" onClick="{{ goSlack }}">
+              <div class="menu-icon" style="background:#E8EEF8;"><span>💬</span></div>
+              <div style="flex:1;"><p style="font-size:14px;font-weight:700;color:#0D2137;">Slack Embedded View</p><p style="font-size:11px;color:#7A9BB5;">How NAVI appears in Slack DM</p></div>
+              <span style="color:#BDD8F5;font-size:18px;">›</span>
+            </div>
+            <div class="menu-item" onClick="{{ goAlerts }}" style="position:relative;">
+              <div class="menu-icon" style="background:#FDEEED;"><span>🔔</span></div>
+              <div style="flex:1;"><p style="font-size:14px;font-weight:700;color:#0D2137;">Alerts</p><p style="font-size:11px;color:#7A9BB5;">Anomaly detection &amp; spending alerts</p></div>
+              <div style="background:#DC4545;color:#fff;border-radius:8px;padding:2px 8px;font-size:10px;font-weight:800;margin-right:8px;">1 new</div>
+              <span style="color:#BDD8F5;font-size:18px;">›</span>
+            </div>
+          </div>
+
+          <p class="label" style="margin-bottom:10px;padding-left:4px;">Account</p>
+          <div class="clay" style="padding:0;overflow:hidden;margin-bottom:18px;">
+            <div class="menu-item" onClick="{{ goPrivacy }}">
+              <div class="menu-icon" style="background:#EEF5EC;"><span>🔒</span></div>
+              <div style="flex:1;"><p style="font-size:14px;font-weight:700;color:#0D2137;">Privacy &amp; Data</p><p style="font-size:11px;color:#7A9BB5;">Control what NAVI can access</p></div>
+              <span style="color:#BDD8F5;font-size:18px;">›</span>
+            </div>
+            <div class="menu-item" style="border-bottom:none;">
+              <div class="menu-icon" style="background:#F0F0F5;"><span>⚙️</span></div>
+              <div style="flex:1;"><p style="font-size:14px;font-weight:700;color:#0D2137;">Settings</p><p style="font-size:11px;color:#7A9BB5;">Notifications, check-in frequency</p></div>
+              <span style="color:#BDD8F5;font-size:18px;">›</span>
+            </div>
+          </div>
+
+          <div style="padding:14px;background:rgba(61,150,240,0.06);border-radius:14px;border:1px solid rgba(61,150,240,0.15);margin-bottom:20px;">
+            <p style="font-size:11px;font-weight:700;color:#3D96F0;margin-bottom:3px;">NAVI never acts without your confirmation</p>
+            <p style="font-size:11px;color:#7A9BB5;line-height:1.5;">Every recommendation requires your explicit accept. You are always in control.</p>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ═══════════ SLACK EMBEDDED ═══════════ -->
+    <sc-if value="{{ isSlack }}">
+      <div class="screen">
+        <div class="back-hdr">
+          <button class="back-btn" onClick="{{ goMore }}">‹</button>
+          <p style="font-size:14px;font-weight:800;color:#0D2137;">Embedded View — Slack</p>
+        </div>
+
+        <!-- Context banner -->
+        <div style="margin:0 16px 14px;padding:10px 14px;background:#FFFFFF;border-radius:14px;border:1.5px solid #BDD8F5;display:flex;align-items:center;gap:10px;">
+          <div style="width:26px;height:26px;background:#3D96F0;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:#fff;font-size:10px;font-weight:800;">N</span></div>
+          <div style="flex:1;">
+            <p style="font-size:11px;font-weight:800;color:#0D2137;margin-bottom:1px;">Slack DM Preview</p>
+            <p style="font-size:10px;color:#7A9BB5;">No charts · Max 3 actions · Block Kit format</p>
+          </div>
+        </div>
+
+        <!-- Simulated Slack mobile -->
+        <div style="margin:0 16px;">
+          <!-- Slack DM header (purple brand) -->
+          <div style="background:#3F0E40;border-radius:14px 14px 0 0;padding:10px 14px;display:flex;align-items:center;gap:10px;">
+            <div class="slack-avatar"><span style="color:#fff;font-size:12px;font-weight:800;">N</span></div>
+            <div>
+              <p style="font-size:14px;font-weight:700;color:#FFFFFF;">NAVI</p>
+              <p style="font-size:11px;color:#CFC3CF;">App · TechCorp Financial Wellness</p>
+            </div>
+            <div style="margin-left:auto;display:flex;gap:14px;">
+              <span style="font-size:18px;color:#CFC3CF;">📞</span>
+              <span style="font-size:18px;color:#CFC3CF;">⋮</span>
+            </div>
+          </div>
+
+          <!-- Messages area -->
+          <div style="background:#FFFFFF;padding:14px;">
+
+            <!-- Earlier message (dimmed) -->
+            <div style="display:flex;gap:10px;margin-bottom:18px;opacity:0.45;">
+              <div class="slack-avatar" style="width:30px;height:30px;border-radius:7px;flex-shrink:0;"><span style="color:#fff;font-size:10px;font-weight:800;">N</span></div>
+              <div>
+                <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:4px;">
+                  <span style="font-size:13px;font-weight:700;color:#1D1C1D;">NAVI</span>
+                  <span style="font-size:10px;color:#616061;">Jun 13 · 9:00 AM</span>
+                </div>
+                <p style="font-size:13px;color:#1D1C1D;line-height:1.5;">May check-in complete. You saved $630 — $230 above April. Emergency fund is 10.3% funded.</p>
+              </div>
+            </div>
+
+            <!-- Current message -->
+            <div style="display:flex;gap:10px;">
+              <div class="slack-avatar" style="width:30px;height:30px;border-radius:7px;flex-shrink:0;animation:bluePulse 3s ease infinite;"><span style="color:#fff;font-size:10px;font-weight:800;">N</span></div>
+              <div style="flex:1;">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+                  <span style="font-size:13px;font-weight:700;color:#1D1C1D;">NAVI</span>
+                  <span style="font-size:10px;color:#616061;">Today · 9:00 AM</span>
+                  <span style="font-size:9px;font-weight:700;color:#3D96F0;background:rgba(61,150,240,0.1);border-radius:3px;padding:1px 5px;letter-spacing:0.04em;">PROACTIVE</span>
+                </div>
+
+                <!-- Block Kit card -->
+                <div class="slack-bk">
+                  <div style="padding:12px 14px;border-bottom:1px solid #E8E8E8;">
+                    <p style="font-size:13px;font-weight:700;color:#1D1C1D;margin-bottom:3px;">Weekly Check-In · June 27</p>
+                    <p style="font-size:12px;color:#616061;line-height:1.5;">Hey Allen — pay period looks clean. One item for review before July 3.</p>
+                  </div>
+                  <div style="padding:10px 14px;border-bottom:1px solid #E8E8E8;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+                      <span style="font-size:11px;color:#616061;">Next paycheck</span>
+                      <span style="font-size:11px;font-weight:600;font-family:'DM Mono',monospace;color:#3D96F0;">Jul 3 · $3,250</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+                      <span style="font-size:11px;color:#616061;">Bills before payday</span>
+                      <span style="font-size:11px;font-weight:600;font-family:'DM Mono',monospace;color:#1D1C1D;">$100.49</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;">
+                      <span style="font-size:11px;color:#616061;">Checking</span>
+                      <span style="font-size:11px;font-weight:600;font-family:'DM Mono',monospace;color:#007A5A;">$847 ✓</span>
+                    </div>
+                  </div>
+                  <div style="padding:10px 14px;border-bottom:1px solid #E8E8E8;background:rgba(29,28,29,0.02);">
+                    <p style="font-size:9px;font-weight:700;color:#3D96F0;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;">NAVI recommendation</p>
+                    <p style="font-size:11px;color:#616061;line-height:1.5;">Pay Amex ($1,200) in full on Jul 3. Avoids ~$22 interest.</p>
+                  </div>
+                  <div style="padding:8px 14px;display:flex;gap:6px;background:#FFFFFF;">
+                    <button style="background:#3D96F0;color:#fff;border:none;border-radius:4px;padding:6px 12px;font-size:11px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;">✓ Accept</button>
+                    <button style="background:#fff;border:1px solid rgba(29,28,29,0.24);color:#1D1C1D;border-radius:4px;padding:6px 10px;font-size:11px;font-family:'Nunito',sans-serif;cursor:pointer;">⊘ Override</button>
+                    <button style="background:#fff;border:1px solid rgba(29,28,29,0.24);color:#1D1C1D;border-radius:4px;padding:6px 10px;font-size:11px;font-family:'Nunito',sans-serif;cursor:pointer;">? Why</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slack input -->
+          <div style="background:#FFFFFF;border-top:1px solid #E8E8E8;border-radius:0 0 14px 14px;padding:8px 14px;">
+            <div style="background:#FFFFFF;border-radius:22px;border:1px solid rgba(29,28,29,0.28);padding:8px 12px;">
+              <span style="font-size:12px;color:#868686;">Message NAVI</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Platform constraints -->
+        <div style="margin:12px 16px 20px;padding:12px 14px;background:#E8F3FF;border-radius:12px;">
+          <p style="font-size:10px;font-weight:800;color:#7A9BB5;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;">Platform constraints</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <span style="font-size:10px;color:#3D5E7A;background:#FFFFFF;border-radius:6px;padding:3px 8px;">Max 3 actions</span>
+            <span style="font-size:10px;color:#3D5E7A;background:#FFFFFF;border-radius:6px;padding:3px 8px;">No data viz</span>
+            <span style="font-size:10px;color:#3D5E7A;background:#FFFFFF;border-radius:6px;padding:3px 8px;">Block Kit only</span>
+            <span style="font-size:10px;color:#3D5E7A;background:#FFFFFF;border-radius:6px;padding:3px 8px;">Text-first</span>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ═══════════ ALERTS ═══════════ -->
+    <sc-if value="{{ isAlerts }}">
+      <div class="screen">
+        <div class="back-hdr">
+          <button class="back-btn" onClick="{{ goMore }}">‹</button>
+          <p style="font-size:14px;font-weight:800;color:#0D2137;">Alerts</p>
+        </div>
+        <div class="scr-pad">
+
+          <!-- Active alert -->
+          <div style="background:#FFFFFF;border-radius:20px;border-left:4px solid #DC4545;overflow:hidden;margin-bottom:14px;box-shadow:6px 6px 16px rgba(0,0,0,0.09),-3px -3px 10px rgba(255,255,255,0.9);">
+            <div style="padding:14px 16px;border-bottom:1px solid #FEF0EF;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                <span style="font-size:18px;">⚠️</span>
+                <span style="font-size:10px;font-weight:800;color:#DC4545;text-transform:uppercase;letter-spacing:0.07em;">Spending anomaly</span>
+                <span style="font-size:10px;color:#7A9BB5;margin-left:auto;">Today · 2:14 PM</span>
+              </div>
+              <p style="font-size:14px;font-weight:800;color:#0D2137;margin-bottom:4px;">$78 at Steam · Unusual</p>
+              <p style="font-size:13px;color:#3D5E7A;line-height:1.5;">This is 4× your average gaming spend for June. Your June entertainment budget has $31 remaining.</p>
+            </div>
+            <div style="padding:12px 16px;border-bottom:1px solid #FEF0EF;background:rgba(220,69,69,0.03);">
+              <p style="font-size:11px;font-weight:700;color:#7A9BB5;margin-bottom:4px;">Goal impact</p>
+              <p style="font-size:12px;color:#3D5E7A;">Emergency fund plan delayed by <strong style="color:#DC4545;">~2 days</strong> if unaddressed</p>
+            </div>
+            <div style="padding:12px 16px;display:flex;gap:8px;">
+              <button class="btn-sm-blue" style="flex:1;padding:11px;font-size:12px;" onClick="{{ resolveAlert }}">This is fine</button>
+              <button class="btn-ghost" style="flex:1;padding:11px;font-size:12px;" onClick="{{ resolveAlert }}">Adjust budget</button>
+            </div>
+          </div>
+
+          <!-- Resolved alert -->
+          <div style="background:#FFFFFF;border-radius:20px;border-left:4px solid #22A55A;overflow:hidden;margin-bottom:14px;opacity:0.6;box-shadow:4px 4px 12px rgba(0,0,0,0.06);">
+            <div style="padding:14px 16px;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                <span style="font-size:14px;">✅</span>
+                <span style="font-size:10px;font-weight:800;color:#22A55A;text-transform:uppercase;letter-spacing:0.07em;">Resolved · Jun 20</span>
+              </div>
+              <p style="font-size:13px;font-weight:700;color:#0D2137;margin-bottom:3px;">Duplicate charge · Netflix</p>
+              <p style="font-size:12px;color:#7A9BB5;">$15.99 flagged and disputed successfully</p>
+            </div>
+          </div>
+
+          <div style="padding:14px;background:rgba(61,150,240,0.06);border-radius:14px;border:1px solid rgba(61,150,240,0.12);">
+            <p style="font-size:12px;color:#3D5E7A;line-height:1.6;text-align:center;">NAVI monitors every transaction for anomalies, duplicates, and goal drift — and only alerts when it matters.</p>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ═══════════ PRIVACY & DATA ═══════════ -->
+    <sc-if value="{{ isPrivacy }}">
+      <div class="screen">
+        <div class="back-hdr">
+          <button class="back-btn" onClick="{{ goMore }}">‹</button>
+          <p style="font-size:14px;font-weight:800;color:#0D2137;">Privacy &amp; Data</p>
+        </div>
+        <div class="scr-pad">
+
+          <div class="clay" style="padding:16px;margin-bottom:14px;">
+            <p class="label" style="margin-bottom:12px;">Data sources</p>
+            <div class="toggle-wrap">
+              <div>
+                <p style="font-size:14px;font-weight:700;color:#0D2137;">TechCorp Payroll</p>
+                <p style="font-size:11px;color:#7A9BB5;">Paycheck deposits · Read-only</p>
+              </div>
+              <div class="toggle"></div>
+            </div>
+            <div class="toggle-wrap">
+              <div>
+                <p style="font-size:14px;font-weight:700;color:#0D2137;">Chase Checking</p>
+                <p style="font-size:11px;color:#7A9BB5;">Spending patterns · Read-only</p>
+              </div>
+              <div class="toggle"></div>
+            </div>
+            <div class="toggle-wrap" style="border-bottom:none;">
+              <div>
+                <p style="font-size:14px;font-weight:700;color:#0D2137;">Amex Credit Card</p>
+                <p style="font-size:11px;color:#7A9BB5;">Balance &amp; due dates · Read-only</p>
+              </div>
+              <div class="toggle"></div>
+            </div>
+          </div>
+
+          <div class="clay" style="padding:16px;margin-bottom:14px;">
+            <p class="label" style="margin-bottom:12px;">AI behavior</p>
+            <div class="toggle-wrap">
+              <div>
+                <p style="font-size:14px;font-weight:700;color:#0D2137;">Proactive recommendations</p>
+                <p style="font-size:11px;color:#7A9BB5;">NAVI suggests without being asked</p>
+              </div>
+              <div class="toggle"></div>
+            </div>
+            <div class="toggle-wrap">
+              <div>
+                <p style="font-size:14px;font-weight:700;color:#0D2137;">Weekly check-in</p>
+                <p style="font-size:11px;color:#7A9BB5;">Friday briefing via Slack DM</p>
+              </div>
+              <div class="toggle"></div>
+            </div>
+            <div class="toggle-wrap" style="border-bottom:none;">
+              <div>
+                <p style="font-size:14px;font-weight:700;color:#0D2137;">HR aggregate sharing</p>
+                <p style="font-size:11px;color:#7A9BB5;">Anonymous wellness data to TechCorp HR</p>
+              </div>
+              <div class="toggle off"></div>
+            </div>
+          </div>
+
+          <div style="padding:14px 16px;background:rgba(34,165,90,0.07);border-radius:14px;border:1px solid rgba(34,165,90,0.2);margin-bottom:14px;">
+            <p style="font-size:12px;font-weight:700;color:#22A55A;margin-bottom:6px;">🔒 What NAVI cannot see</p>
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <p style="font-size:12px;color:#3D5E7A;">· Performance reviews or HR ratings</p>
+              <p style="font-size:12px;color:#3D5E7A;">· Health claims or insurance data</p>
+              <p style="font-size:12px;color:#3D5E7A;">· Manager conversations or Slack messages</p>
+              <p style="font-size:12px;color:#3D5E7A;">· Tax returns or investment accounts</p>
+            </div>
+          </div>
+
+          <button style="width:100%;padding:14px;background:#FEF0EF;border:1.5px solid rgba(220,69,69,0.3);border-radius:14px;font-size:14px;font-weight:700;color:#DC4545;font-family:'Nunito',sans-serif;cursor:pointer;">Request data deletion</button>
+        </div>
+      </div>
+    </sc-if>
+
+  </div><!-- end .app -->
+
+  <!-- ═══════════ BOTTOM TAB BAR ═══════════ -->
+  <sc-if value="{{ showTabBar }}">
+    <div class="tab-bar">
+      <div class="tab" onClick="{{ goHome }}" style="{{ tabHomeStyle }}">
+        <div class="tab-icon-wrap"><span class="tab-icon">🏠</span></div>
+        <span class="tab-label">Home</span>
+      </div>
+      <div class="tab" onClick="{{ goCheckin }}" style="{{ tabCheckinStyle }}">
+        <div class="tab-icon-wrap">
+          <span class="tab-icon">📋</span>
+          <sc-if value="{{ checkinNotReviewed }}">
+            <div class="tab-badge">1</div>
+          </sc-if>
+        </div>
+        <span class="tab-label">Check-in</span>
+      </div>
+      <div class="tab" onClick="{{ goGoals }}" style="{{ tabGoalsStyle }}">
+        <div class="tab-icon-wrap"><span class="tab-icon">🎯</span></div>
+        <span class="tab-label">Goals</span>
+      </div>
+      <div class="tab" onClick="{{ goCoach }}" style="{{ tabCoachStyle }}">
+        <div class="tab-icon-wrap"><span class="tab-icon">💬</span></div>
+        <span class="tab-label">Coach</span>
+      </div>
+      <div class="tab" onClick="{{ goMore }}" style="{{ tabMoreStyle }}">
+        <div class="tab-icon-wrap"><span class="tab-icon">⋯</span></div>
+        <span class="tab-label">More</span>
+      </div>
+    </div>
+  </sc-if>
+
+</div><!-- end .iphone-screen -->
+</div><!-- end .iphone -->
+</div><!-- end .studio -->
+
+</x-app>
+<script type="text/x-app" data-app-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900}}">
+class Component extends NaviBase {
+  state = {
+    screen: 'onboarding',
+    onboardingStep: 0,
+    selectedGoal: null,
+    analysisComplete: false,
+    toastDismissed: false,
+    checkinReviewed: false,
+    alertResolved: false,
+    coachInput: '',
+    tab: 'home',
+  };
+
+  navTo(s) { this.setState({ screen: s }); }
+  goTab(t, s) { this.setState({ tab: t, screen: s || t }); }
+
+  renderVals() {
+    const s = this.state;
+    const sc = s.screen;
+    const tab = s.tab;
+
+    const tabStyle = (t) => t === tab
+      ? 'color:#3D96F0;'
+      : 'color:#7A9BB5;';
+
+    const goalCheck = (g) => s.selectedGoal === g ? '#3D96F0' : 'transparent';
+    const goalTick  = (g) => s.selectedGoal === g ? '✓' : '';
+    const goalStyle = (g) => s.selectedGoal === g
+      ? 'background:#E8F3FF;border:2px solid #3D96F0;border-radius:16px;padding:14px;cursor:pointer;transition:all 0.15s;margin-bottom:10px;'
+      : 'background:#FFFFFF;border:2px solid #EBF4FF;border-radius:16px;padding:14px;cursor:pointer;transition:all 0.15s;margin-bottom:10px;';
+
+    return {
+      // Screen visibility
+      isOnboarding: sc === 'onboarding',
+      isDashboard:  sc === 'dashboard',
+      isCheckin:    sc === 'checkin',
+      isGoals:      sc === 'goals',
+      isCoach:      sc === 'coach',
+      isMore:       sc === 'more',
+      isSlack:      sc === 'slack',
+      isAlerts:     sc === 'alerts',
+      isPrivacy:    sc === 'privacy',
+
+      // Onboarding steps
+      isStep0: sc === 'onboarding' && s.onboardingStep === 0,
+      isStep1: sc === 'onboarding' && s.onboardingStep === 1,
+      isStep2: sc === 'onboarding' && s.onboardingStep === 2,
+      isStep3: sc === 'onboarding' && s.onboardingStep === 3,
+
+      // Tab bar
+      showTabBar: sc !== 'onboarding',
+      tabHomeStyle:    tabStyle('home'),
+      tabCheckinStyle: tabStyle('checkin'),
+      tabGoalsStyle:   tabStyle('goals'),
+      tabCoachStyle:   tabStyle('coach'),
+      tabMoreStyle:    tabStyle('more'),
+
+      // Navigation
+      goStep0: () => this.setState({ onboardingStep: 0 }),
+      goStep1: () => this.setState({ onboardingStep: 1 }),
+      goStep2: () => this.setState({ onboardingStep: 2 }),
+      goHome:    () => this.goTab('home', 'dashboard'),
+      goCheckin: () => this.goTab('checkin', 'checkin'),
+      goGoals:   () => this.goTab('goals', 'goals'),
+      goCoach:   () => this.goTab('coach', 'coach'),
+      goMore:    () => this.goTab('more', 'more'),
+      goSlack:   () => this.setState({ screen: 'slack' }),
+      goAlerts:  () => this.setState({ screen: 'alerts' }),
+      goPrivacy: () => this.setState({ screen: 'privacy' }),
+
+      // Onboarding goal selection
+      selectEmergency: () => this.setState({ selectedGoal: 'emergency' }),
+      selectDebt:      () => this.setState({ selectedGoal: 'debt' }),
+      selectSavings:   () => this.setState({ selectedGoal: 'savings' }),
+      goalEmergencyStyle: goalStyle('emergency'),
+      goalDebtStyle:      goalStyle('debt'),
+      goalSavingsStyle:   goalStyle('savings'),
+      goalEmergencyCheck: goalCheck('emergency'),
+      goalDebtCheck:      goalCheck('debt'),
+      goalSavingsCheck:   goalCheck('savings'),
+      goalEmergencyTick:  goalTick('emergency'),
+      goalDebtTick:       goalTick('debt'),
+      goalSavingsTick:    goalTick('savings'),
+      continueStyle: s.selectedGoal
+        ? 'width:100%;padding:16px;background:#3D96F0;color:#fff;border:none;border-radius:16px;font-size:15px;font-weight:800;font-family:Nunito,sans-serif;cursor:pointer;box-shadow:0 6px 18px rgba(61,150,240,0.35);'
+        : 'width:100%;padding:16px;background:#BDD8F5;color:#fff;border:none;border-radius:16px;font-size:15px;font-weight:800;font-family:Nunito,sans-serif;cursor:default;',
+
+      startAnalysis: () => {
+        if (!s.selectedGoal) return;
+        this.setState({ onboardingStep: 3 });
+        setTimeout(() => this.setState({ screen: 'dashboard', tab: 'home', analysisComplete: true }), 3000);
+      },
+
+      // Dashboard
+      showToast: !s.toastDismissed && sc === 'dashboard',
+      dismissToast: () => this.setState({ toastDismissed: true }),
+
+      // Check-in
+      checkinReviewed:    s.checkinReviewed,
+      checkinNotReviewed: !s.checkinReviewed,
+      markCheckinReviewed: () => this.setState({ checkinReviewed: true }),
+
+      // Alerts
+      resolveAlert: () => this.setState({ alertResolved: true }),
+
+      // Coach
+      coachInput: s.coachInput || '',
+      setCoachInput: (v) => this.setState({ coachInput: typeof v === 'string' ? v : (v && v.target ? v.target.value : '') }),
+      submitCoach: () => this.setState({ coachInput: '' }),
+    };
+  }
+}
+</script>
+<script>
+(function(){
+  function fit(){
+    var ph=document.querySelector('.iphone');
+    if(!ph){return setTimeout(fit,200);}
+    var s=Math.min((window.innerHeight*0.95)/852,(window.innerWidth*0.96)/393);
+    ph.style.zoom=s;
+  }
+  setTimeout(fit,300);
+  window.addEventListener('resize',fit);
+})();
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0D0D0D" />
+  <meta name="theme-color" content="#0d0404" />
   <title>Naveen Sereddy · UI/UX Designer</title>
   <meta name="description" content="Naveen Sereddy is a UI/UX designer and front-end developer who turns research and rough workflows into products people actually want to use. Case studies and live work across healthcare, fintech, and retail." />
   <link rel="canonical" href="https://naveen-sereddy.vercel.app/" />
@@ -19,39 +19,32 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://naveen-sereddy.vercel.app/assets/og/og-card.png" />
 
-  <!-- Fonts: two families only, Fraunces (display) + Inter (UI/body) -->
+  <!-- Fonts: Cormorant Garamond (display) · Inter (body) · JetBrains Mono (labels) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="dist/styles.css?v=27" />
-  <style>
-    /* Hero portrait focal point. Desktop keeps the body to the right of the
-       copy; on mobile/tablet the narrow crop is recentred on the face. */
-    #hero-portrait { object-position: 90% center; }
-    @media (max-width: 1023px) { #hero-portrait { object-position: 52% center; } }
-  </style>
+  <link rel="stylesheet" href="styles.css?v=2" />
+
   <noscript>
     <style>.reveal, .line-mask > span { opacity: 1 !important; transform: none !important; }</style>
   </noscript>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230D0D0D'/%3E%3Ctext x='16' y='21' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23D4A85A' text-anchor='middle'%3ENS%3C/text%3E%3C/svg%3E" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230d0404'/%3E%3Ctext x='16' y='21' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23d0923a' text-anchor='middle'%3ENS%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
   <a href="#top" class="skip-link">Skip to content</a>
-  <!-- Scroll progress -->
-  <div id="progress" class="fixed left-0 top-0 z-50 h-[2px] w-0 bg-gold/80"></div>
+  <div id="progress"></div>
 
   <!-- ===================================================== NAV -->
-  <header id="nav" class="fixed inset-x-0 top-0 z-40 transition-all duration-500 ease-out-expo">
-    <div class="wrap mt-3 sm:mt-4">
-      <nav class="flex items-center justify-between rounded-2xl border border-line/[0.07] bg-ink-900/70 px-3 py-2.5 backdrop-blur-xl sm:px-4">
+  <header id="nav">
+    <div class="wrap">
+      <nav class="nav-inner">
         <!-- Logo mark -->
-        <a href="#top" aria-label="Home · Naveen Sereddy" class="group flex items-center gap-2.5">
-          <span class="grid h-10 w-10 place-items-center rounded-xl border border-line/10 bg-line/[0.04] font-serif text-[1.05rem] font-medium text-bone transition-colors group-hover:border-gold/40">NS</span>
-        </a>
+        <a href="#top" class="nav-logo-mark" aria-label="Home · Naveen Sereddy">NS</a>
 
         <!-- Center links (desktop) -->
-        <div class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-9 text-[0.82rem] font-medium text-bone-muted lg:flex">
+        <div class="nav-center" role="navigation" aria-label="Primary">
           <a href="#work" class="link-underline">Work</a>
           <a href="#about" class="link-underline">About</a>
           <a href="assets/resume/naveen-sereddy-resume.pdf" target="_blank" rel="noopener" class="link-underline">Résumé</a>
@@ -59,26 +52,21 @@
         </div>
 
         <!-- Right cluster -->
-        <div class="flex items-center gap-1 sm:gap-1.5">
-          <a href="https://github.com/Naveen-Sereddy" target="_blank" rel="noopener" aria-label="GitHub profile"
-             class="grid h-9 w-9 place-items-center rounded-full text-bone-muted transition-colors hover:text-gold cursor-pointer">
-            <svg class="h-[1.15rem] w-[1.15rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        <div class="nav-right">
+          <a href="https://github.com/Naveen-Sereddy" target="_blank" rel="noopener" class="nav-icon-btn" aria-label="GitHub profile">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
           </a>
-          <a href="https://linkedin.com/in/naveensereddy" target="_blank" rel="noopener" aria-label="LinkedIn profile"
-             class="grid h-9 w-9 place-items-center rounded-full text-bone-muted transition-colors hover:text-gold cursor-pointer">
-            <svg class="h-[1.1rem] w-[1.1rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+          <a href="https://linkedin.com/in/naveensereddy" target="_blank" rel="noopener" class="nav-icon-btn" aria-label="LinkedIn profile">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
           </a>
 
-          <span class="mx-1 hidden h-5 w-px bg-line/15 sm:block"></span>
+          <div class="nav-divider" aria-hidden="true"></div>
 
-          <a href="#contact" class="ml-1 hidden lg:inline-flex btn-primary !px-5 !py-2 !min-h-0 text-[0.8rem]">
-            Get in touch
-          </a>
+          <a href="#contact" class="btn-primary nav-cta" style="font-size:0.8rem;padding:0.5rem 1.25rem;min-height:0;">Get in touch</a>
 
-          <!-- Mobile menu toggle -->
-          <button id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"
-                  class="ml-0.5 grid h-9 w-9 place-items-center rounded-full text-bone lg:hidden cursor-pointer">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16M4 16h16"/></svg>
+          <!-- Mobile hamburger -->
+          <button id="menuBtn" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
           </button>
         </div>
       </nav>
@@ -86,152 +74,139 @@
   </header>
 
   <!-- Mobile menu -->
-  <div id="mobileMenu" class="fixed inset-0 z-50 hidden flex-col bg-ink-950/97 backdrop-blur-xl">
-    <div class="wrap flex items-center justify-between pt-3 sm:pt-4">
-      <span class="font-serif text-lg">Menu</span>
-      <button id="menuClose" aria-label="Close menu" class="grid h-11 w-11 place-items-center rounded-full border border-line/10 cursor-pointer">
-        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  <div id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <div class="mobile-menu-top wrap">
+      <span style="font-family:var(--font-display);font-size:1.125rem;color:var(--text);">Menu</span>
+      <button id="menuClose" class="mobile-menu-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
     </div>
-    <nav class="flex flex-1 flex-col justify-center gap-2 px-8">
-      <a href="#work" class="mobile-link font-serif text-5xl tracking-tightest">Work</a>
-      <a href="#about" class="mobile-link font-serif text-5xl tracking-tightest">About</a>
-      <a href="assets/resume/naveen-sereddy-resume.pdf" target="_blank" rel="noopener" class="mobile-link font-serif text-5xl tracking-tightest">Résumé</a>
-      <a href="#contact" class="mobile-link font-serif text-5xl tracking-tightest">Contact</a>
-      <div class="mt-10 flex gap-5 text-sm font-medium text-bone-muted">
-        <a href="https://linkedin.com/in/naveensereddy" target="_blank" rel="noopener" class="link-underline">LinkedIn</a>
-        <a href="https://github.com/Naveen-Sereddy" target="_blank" rel="noopener" class="link-underline">GitHub</a>
-        <a href="mailto:naveen.workpath@gmail.com" class="link-underline">Email</a>
+    <nav class="mobile-menu-nav" aria-label="Mobile navigation">
+      <a href="#work"  class="mobile-link">Work</a>
+      <a href="#about" class="mobile-link">About</a>
+      <a href="assets/resume/naveen-sereddy-resume.pdf" target="_blank" rel="noopener" class="mobile-link">Résumé</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+      <div class="mobile-socials">
+        <a href="https://linkedin.com/in/naveensereddy" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/Naveen-Sereddy" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:naveen.workpath@gmail.com">Email</a>
       </div>
     </nav>
   </div>
 
   <main id="top">
-    <!-- ===================================================== HERO -->
-    <section class="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pt-20 pb-6 sm:pt-24">
-      <!-- full-bleed background portrait: the image IS the hero background -->
-      <img id="hero-portrait" src="assets/profile/hero-bg.jpg" alt="Portrait of Naveen Sereddy"
-           width="2526" height="1555" fetchpriority="high" decoding="async"
-           class="absolute inset-0 z-0 h-full w-full object-cover" />
-      <!-- overlay: left ~80% dark for type, fades clean to the right so the portrait stays rich (no wash-out) -->
-      <div class="pointer-events-none absolute inset-0 z-[1]"
-           style="background:linear-gradient(90deg,rgba(13,13,13,.92) 0%,rgba(13,13,13,.80) 28%,rgba(13,13,13,.42) 55%,rgba(13,13,13,.10) 80%,rgba(13,13,13,0) 100%);"></div>
-      <!-- soft top + bottom so the nav pill and CTAs read on any width -->
-      <div class="pointer-events-none absolute inset-x-0 top-0 z-[1] h-40 bg-gradient-to-b from-ink-950/60 to-transparent"></div>
-      <div class="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-28 bg-gradient-to-t from-ink-950/45 to-transparent"></div>
-      <!-- mobile only: vertical scrim so full-width type stays readable over the portrait -->
-      <div class="pointer-events-none absolute inset-0 z-[1] lg:hidden"
-           style="background:linear-gradient(180deg,rgba(13,13,13,.50) 0%,rgba(13,13,13,.40) 38%,rgba(13,13,13,.78) 100%);"></div>
-      <!-- one subtle radial glow, accent at low opacity -->
-      <div class="pointer-events-none absolute top-1/4 right-[-4%] z-[1] h-[460px] w-[460px] rounded-full bg-gold/[0.06] blur-[150px]"></div>
 
-      <div class="wrap relative z-10 grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
-        <!-- copy -->
-        <div class="lg:col-span-7">
-          <div class="reveal mb-7 mt-3 flex flex-col items-start gap-4 sm:mt-5">
-            <span class="inline-flex items-center gap-2 rounded-full border border-line/12 bg-line/[0.03] px-3.5 py-1.5 text-[0.76rem] font-medium text-bone-muted">
-              <span class="relative flex h-1.5 w-1.5">
-                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold/70"></span>
-                <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold"></span>
-              </span>
+    <!-- ===================================================== HERO -->
+    <section class="hero">
+      <img id="hero-portrait"
+           src="assets/profile/hero-bg.jpg"
+           alt="Portrait of Naveen Sereddy"
+           width="2526" height="1555"
+           fetchpriority="high" decoding="async" />
+
+      <!-- Overlays -->
+      <div class="hero-overlay-lr"  aria-hidden="true"></div>
+      <div class="hero-overlay-top" aria-hidden="true"></div>
+      <div class="hero-overlay-bottom" aria-hidden="true"></div>
+      <div class="hero-overlay-mobile" aria-hidden="true"></div>
+      <div class="hero-glow" aria-hidden="true"></div>
+
+      <!-- Copy -->
+      <div class="wrap hero-content">
+        <div class="hero-copy">
+          <div class="reveal" style="margin-bottom:1.75rem;margin-top:0.75rem;display:flex;flex-direction:column;align-items:flex-start;gap:1rem;">
+            <span class="status-badge">
+              <span class="status-dot" aria-hidden="true"></span>
               Available for work · Open to relocate
             </span>
-            <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-              <span class="font-serif text-[1.7rem] font-normal leading-none text-bone sm:text-[2rem]">Naveen Sereddy</span>
-              <span class="hidden h-4 w-px bg-line/25 sm:block"></span>
-              <span class="text-[0.7rem] font-medium uppercase tracking-[0.2em] text-bone-dim">UI/UX Designer · Front-End Dev</span>
+            <div class="identity-cluster">
+              <span class="identity-name">Naveen Sereddy</span>
+              <span class="identity-divider" aria-hidden="true"></span>
+              <span class="identity-title">UI/UX Designer · Front-End Dev</span>
             </div>
           </div>
 
-          <h1 class="mt-6 max-w-[15ch] text-[clamp(2.6rem,5.6vw,4.9rem)] font-normal leading-[1.02]">
-            <span class="line-mask block"><span>Designing clarity into <span class="whitespace-nowrap"><em class="gold-gradient not-italic font-normal">complex</em> products.</span></span></span>
+          <h1 class="hero-h1">
+            <span class="line-mask"><span>Designing clarity into <em class="gold-gradient" style="font-style:normal;white-space:nowrap;">complex</em> products.</span></span>
           </h1>
 
-          <p class="reveal reveal-delay-2 mt-7 max-w-xl text-lg leading-relaxed text-bone-muted sm:text-xl">
+          <p class="hero-sub reveal reveal-delay-2">
             I turn research and rough workflows into products people
-            <span class="text-bone">actually want to use</span>, across healthcare, fintech, and retail.
+            <strong>actually want to use</strong>, across healthcare, fintech, and retail.
           </p>
 
-          <div class="reveal reveal-delay-3 mt-9 flex flex-wrap items-center gap-x-5 gap-y-3">
+          <div class="hero-actions reveal reveal-delay-3">
             <a href="#contact" class="btn-primary">
               Get in touch
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a href="#work" class="btn-ghost">
-              View selected work
-            </a>
+            <a href="#work" class="btn-ghost">View selected work</a>
             <a href="assets/resume/naveen-sereddy-resume.pdf" download class="btn-text">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
               Download résumé
             </a>
           </div>
         </div>
-
-        <!-- portrait now lives in the hero background; right column intentionally empty -->
       </div>
     </section>
 
     <!-- ===================================================== STATS -->
-    <section aria-label="At a glance" class="relative pb-12 sm:pb-16">
+    <section class="section-stats" aria-label="At a glance">
       <div class="wrap">
-        <dl class="reveal grid max-w-2xl grid-cols-3 gap-8 border-t border-line/[0.08] pt-8">
+        <dl class="stats-grid reveal">
           <div>
-            <dt class="font-serif text-3xl text-bone" data-count="2" data-suffix="+">2+</dt>
-            <dd class="mt-1.5 text-[0.78rem] font-medium uppercase tracking-[0.12em] text-bone-muted">Years<br>experience</dd>
+            <dt class="stat-value" data-count="2" data-suffix="+">2+</dt>
+            <dd class="stat-label">Years<br>experience</dd>
           </div>
           <div>
-            <dt class="font-serif text-3xl text-bone" data-count="40" data-suffix="+">40+</dt>
-            <dd class="mt-1.5 text-[0.78rem] font-medium uppercase tracking-[0.12em] text-bone-muted">Design-system<br>components</dd>
+            <dt class="stat-value" data-count="40" data-suffix="+">40+</dt>
+            <dd class="stat-label">Design-system<br>components</dd>
           </div>
           <div>
-            <dt class="font-serif text-3xl text-bone">AA</dt>
-            <dd class="mt-1.5 text-[0.78rem] font-medium uppercase tracking-[0.12em] text-bone-muted">WCAG 2.1<br>accessible</dd>
+            <dt class="stat-value">AA</dt>
+            <dd class="stat-label">WCAG 2.1<br>accessible</dd>
           </div>
         </dl>
       </div>
     </section>
 
-    <!-- ===================================================== TOOLS STRIP -->
-    <section aria-hidden="true" class="relative border-y border-line/[0.06] py-5">
-      <div class="flex select-none overflow-hidden">
-        <div class="flex shrink-0 animate-marquee items-center gap-9 pr-9 text-[0.82rem] font-medium uppercase tracking-[0.14em] text-bone-dim" data-marquee>
-          <!-- filled by JS -->
-        </div>
+    <!-- ===================================================== MARQUEE -->
+    <section class="marquee-strip" aria-hidden="true">
+      <div style="display:flex;overflow:hidden;">
+        <div class="marquee-track" data-marquee></div>
       </div>
-      <div class="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-ink-950 to-transparent"></div>
-      <div class="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-ink-950 to-transparent"></div>
+      <div class="marquee-fade-l"></div>
+      <div class="marquee-fade-r"></div>
     </section>
 
     <!-- ===================================================== WORK -->
-    <section id="work" class="relative py-24 sm:py-32">
-      <div class="wrap relative">
-        <div class="mb-20 flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <p class="eyebrow eyebrow-accent reveal mb-4">Selected Work</p>
-            <h2 class="reveal reveal-delay-1 text-[clamp(2.4rem,5.4vw,4rem)] font-normal leading-[1.05]">
-              Three problems,<br>solved end to end.
-            </h2>
+    <section id="work" class="section-work">
+      <div class="wrap">
+        <div class="work-header">
+          <div class="work-header-left">
+            <p class="eyebrow eyebrow-accent reveal">Selected Work</p>
+            <h2 class="reveal reveal-delay-1">Four problems,<br>solved end to end.</h2>
           </div>
-          <p class="reveal reveal-delay-2 max-w-sm text-[0.98rem] leading-relaxed text-bone-muted">
-            From discovery research to a shipped interface. Case studies across healthcare, fintech, and retail, judged on user outcomes and business results.
+          <p class="work-header-desc reveal reveal-delay-2">
+            From discovery research to a shipped interface. Case studies across AI fintech, healthcare, and retail, judged on user outcomes and business results.
           </p>
         </div>
 
-        <div class="flex flex-col gap-36" id="projects"></div>
+        <div id="projects"></div>
       </div>
     </section>
 
     <!-- ===================================================== ABOUT -->
-    <section id="about" class="relative band py-20 shadow-[inset_0_1px_0_rgb(0_0_0/0.18)] sm:py-28">
-      <div class="wrap relative">
-        <p class="eyebrow eyebrow-accent reveal mb-4">About</p>
-
-        <div class="grid gap-16 lg:grid-cols-12">
-          <div class="lg:col-span-7">
-            <h2 class="reveal reveal-delay-1 max-w-2xl text-[clamp(1.9rem,4vw,3rem)] font-normal leading-[1.05]">
-              I treat <em class="gold-gradient">research</em> as the first draft of the interface.
+    <section id="about" class="section-about band">
+      <div class="wrap">
+        <div class="about-grid">
+          <!-- left: copy -->
+          <div class="about-copy">
+            <p class="eyebrow eyebrow-accent reveal">About</p>
+            <h2 class="reveal reveal-delay-1">
+              I treat <em class="gold-gradient" style="font-style:italic;">research</em> as the first draft of the interface.
             </h2>
-            <div class="reveal reveal-delay-2 mt-8 max-w-xl space-y-5 text-[1.02rem] leading-relaxed text-bone-muted">
+            <div class="about-body reveal reveal-delay-2">
               <p>
                 I started in front-end, which is where I learned that the cleanest code can still ship a confusing product. So I moved upstream: talking to users, mapping the information architecture, and pressure-testing flows before a line of UI is built.
               </p>
@@ -240,9 +215,9 @@
               </p>
             </div>
 
-            <div class="reveal reveal-delay-3 mt-12">
-              <p class="eyebrow mb-5">How I work</p>
-              <ol class="grid grid-cols-2 gap-3 sm:grid-cols-5">
+            <div class="how-i-work reveal reveal-delay-3">
+              <p class="eyebrow">How I work</p>
+              <ol class="process-steps" aria-label="My process">
                 <li class="process-step"><span class="proc-num">01</span>Research</li>
                 <li class="process-step"><span class="proc-num">02</span>Wireframe</li>
                 <li class="process-step"><span class="proc-num">03</span>Prototype</li>
@@ -252,10 +227,10 @@
             </div>
           </div>
 
-          <!-- skills, organized by category (no tag cloud) -->
-          <div class="reveal reveal-delay-2 lg:col-span-5">
-            <div class="card p-7 sm:p-9">
-              <p class="eyebrow mb-2">Capabilities</p>
+          <!-- right: capabilities card -->
+          <div class="reveal reveal-delay-2">
+            <div class="card capabilities-card">
+              <p class="eyebrow" style="margin-bottom:0.5rem;">Capabilities</p>
               <div class="skill-line">
                 <span class="skill-cat">Design</span>
                 <div class="skill-chips">
@@ -280,7 +255,6 @@
                 <div class="skill-chips">
                   <span class="chip">Front-end development</span>
                   <span class="chip">React</span>
-                  <span class="chip">Tailwind CSS</span>
                   <span class="chip">HTML &amp; CSS</span>
                 </div>
               </div>
@@ -299,136 +273,133 @@
     </section>
 
     <!-- ===================================================== EXPERIENCE -->
-    <section id="experience" class="relative py-20 sm:py-28">
-      <div class="wrap relative">
-        <div class="mb-16 flex flex-wrap items-end justify-between gap-6">
+    <section id="experience" class="section-experience">
+      <div class="wrap">
+        <div class="experience-header">
           <div>
-            <p class="eyebrow eyebrow-accent reveal mb-4">Experience</p>
-            <h2 class="reveal reveal-delay-1 text-[clamp(2.2rem,5vw,3.4rem)] font-normal leading-[1.05]">
+            <p class="eyebrow eyebrow-accent reveal">Experience</p>
+            <h2 class="reveal reveal-delay-1">
               Two years in fintech and finance,<br>design through front-end.
             </h2>
           </div>
           <a href="assets/resume/naveen-sereddy-resume.pdf" target="_blank" rel="noopener" class="btn-text reveal reveal-delay-2">
             Full résumé
-            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
           </a>
         </div>
 
-        <div class="grid gap-4">
-          <!-- Bill Holdings (BILL) -->
+        <div class="exp-rows">
+          <!-- Bill Holdings -->
           <div class="exp-row reveal">
-            <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-              <div class="max-w-2xl">
-                <p class="mb-2.5 font-sans text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-bone-dim"><span class="text-bone-muted">40+</span> system components</p>
-                <div class="flex flex-wrap items-center gap-3">
-                  <h3 class="font-serif text-2xl font-normal leading-[1.05]">UI/UX Designer</h3>
-                  <span class="rounded-full border border-gold/30 bg-gold/10 px-2.5 py-0.5 text-[0.66rem] font-semibold uppercase tracking-[0.1em] text-gold">Current</span>
+            <div class="exp-inner">
+              <div style="flex:1;min-width:0;">
+                <p class="exp-metric"><span>40+</span> system components</p>
+                <div class="exp-title-row">
+                  <span class="exp-title">UI/UX Designer</span>
+                  <span class="exp-badge current">Current</span>
                 </div>
-                <p class="mt-1.5 text-[0.92rem] font-medium text-bone-muted">Bill Holdings (BILL) · San Jose, CA · Remote</p>
-                <p class="mt-4 leading-relaxed text-bone-muted">
-                  Design a financial-services platform end to end, from wireframes to dev-ready Figma. Maintain a 40+ component design system, run usability tests with 8–10 users each sprint, and bake accessibility, contrast, focus, and labeling, into components before they reach dev.
+                <p class="exp-company">Bill Holdings (BILL) · San Jose, CA · Remote</p>
+                <p class="exp-desc">
+                  Design a financial-services platform end to end, from wireframes to dev-ready Figma. Maintain a 40+ component design system, run usability tests with 8–10 users each sprint, and bake accessibility, contrast, focus, and labeling into components before they reach dev.
                 </p>
               </div>
-              <div class="shrink-0 text-left sm:text-right">
-                <p class="text-[0.82rem] font-semibold uppercase tracking-[0.12em] text-bone-muted">2025 — Present</p>
-              </div>
+              <p class="exp-period">2025 — Present</p>
             </div>
           </div>
 
-          <!-- Fidelity Investments -->
+          <!-- Fidelity -->
           <div class="exp-row reveal reveal-delay-1">
-            <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-              <div class="max-w-2xl">
-                <p class="mb-2.5 font-sans text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-bone-dim"><span class="text-bone-muted">3</span> client web apps</p>
-                <div class="flex flex-wrap items-center gap-3">
-                  <h3 class="font-serif text-2xl font-normal leading-[1.05]">Front-End Developer</h3>
-                  <span class="rounded-full border border-line/15 bg-line/[0.04] px-2.5 py-0.5 text-[0.66rem] font-semibold uppercase tracking-[0.1em] text-bone-muted">Prior</span>
+            <div class="exp-inner">
+              <div style="flex:1;min-width:0;">
+                <p class="exp-metric"><span>3</span> client web apps</p>
+                <div class="exp-title-row">
+                  <span class="exp-title">Front-End Developer</span>
+                  <span class="exp-badge prior">Prior</span>
                 </div>
-                <p class="mt-1.5 text-[0.92rem] font-medium text-bone-muted">Fidelity Investments · Westlake, TX · Remote</p>
-                <p class="mt-4 leading-relaxed text-bone-muted">
+                <p class="exp-company">Fidelity Investments · Westlake, TX · Remote</p>
+                <p class="exp-desc">
                   Designed wireframes, flows, and high-fidelity mockups in Figma for 3 client web apps, built a shared component library, and wrote HTML/CSS and React for ~15 UI components, working directly with developers so designs shipped accurately.
                 </p>
               </div>
-              <div class="shrink-0 text-left sm:text-right">
-                <p class="text-[0.82rem] font-semibold uppercase tracking-[0.12em] text-bone-muted">2024 — 25</p>
-              </div>
+              <p class="exp-period">2024 — 25</p>
             </div>
           </div>
 
-          <p class="reveal reveal-delay-2 mt-3 text-[0.92rem] leading-relaxed text-bone-muted">
-            Plus self-directed product work and a live client build, in <a href="#work" class="link-underline text-bone">selected work</a> above.
+          <p class="exp-note reveal reveal-delay-2">
+            Plus self-directed product work and a live client build, in <a href="#work">selected work</a> above.
           </p>
         </div>
       </div>
     </section>
 
     <!-- ===================================================== TESTIMONIAL -->
-    <section id="praise" class="relative band py-24 shadow-[inset_0_1px_0_rgb(0_0_0/0.18)] sm:py-32">
-      <div class="wrap relative">
-        <p class="eyebrow eyebrow-accent reveal mb-10">Kind words</p>
-        <figure class="reveal mx-auto max-w-4xl text-center">
-          <blockquote class="font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] font-normal leading-[1.25] text-bone">
-            Naveen turned our confusing pricing into something customers actually get. Fewer <em class="gold-gradient">how does this work</em> questions, and more people walking in ready to shop.
+    <section id="praise" class="section-praise band">
+      <div class="wrap">
+        <p class="eyebrow eyebrow-accent reveal">Kind words</p>
+        <figure class="praise-quote reveal reveal-delay-1">
+          <blockquote>
+            Naveen turned our confusing pricing into something customers actually get. Fewer <em class="gold-gradient" style="font-style:italic;">how does this work</em> questions, and more people walking in ready to shop.
           </blockquote>
-          <figcaption class="mt-10 flex flex-col items-center gap-1">
-            <span class="font-medium text-bone">Jasper Xu</span>
-            <span class="text-[0.82rem] text-bone-muted">Owner, Bins &amp; Deals · Liberty, MO</span>
-            <a href="https://binsanddeals.com" target="_blank" rel="noopener" class="link-underline mt-2 text-[0.82rem] font-medium text-gold">binsanddeals.com</a>
+          <figcaption class="praise-attribution">
+            <span class="praise-name">Jasper Xu</span>
+            <span class="praise-role">Owner, Bins &amp; Deals · Liberty, MO</span>
+            <a href="https://binsanddeals.com" target="_blank" rel="noopener" class="praise-link">binsanddeals.com</a>
           </figcaption>
         </figure>
       </div>
     </section>
 
     <!-- ===================================================== CONTACT -->
-    <section id="contact" class="relative overflow-hidden py-28 sm:py-44">
-      <div class="pointer-events-none absolute left-1/2 top-1/3 h-[480px] w-[480px] -translate-x-1/2 rounded-full bg-gold/[0.05] blur-[150px]"></div>
-      <div class="wrap relative">
-        <div class="mx-auto max-w-2xl text-center">
-          <p class="eyebrow eyebrow-accent reveal mb-6">Contact</p>
-          <h2 class="reveal reveal-delay-1 text-[clamp(2.4rem,6.4vw,4.4rem)] font-normal leading-[1.04]">
-            Let's build something<br><em class="gold-gradient">people love</em> to use.
-          </h2>
-          <p class="reveal reveal-delay-2 mx-auto mt-7 max-w-md text-[1.02rem] leading-relaxed text-bone-muted">
-            Open to product design and front-end roles, freelance, and collaborations. Drop a note below.
-          </p>
+    <section id="contact" class="section-contact">
+      <div class="contact-glow" aria-hidden="true"></div>
+      <div class="wrap" style="position:relative;">
+        <div class="contact-header reveal">
+          <p class="eyebrow eyebrow-accent">Contact</p>
+          <h2>Let's build something<br><em class="gold-gradient" style="font-style:normal;">people love</em> to use.</h2>
+          <p>Open to product design and front-end roles, freelance, and collaborations. Drop a note below.</p>
         </div>
 
-        <div class="mx-auto mt-16 grid max-w-5xl gap-6 lg:grid-cols-5">
-          <!-- details card -->
-          <div class="reveal card flex flex-col gap-7 p-7 sm:p-9 lg:col-span-2">
+        <div class="contact-grid">
+          <!-- Details card -->
+          <div class="card contact-details reveal">
             <div>
-              <p class="field-label">Email</p>
-              <a id="contactEmail" href="mailto:naveen.workpath@gmail.com" data-email="naveen.workpath@gmail.com"
-                 class="email-link break-all font-serif text-lg text-bone transition-colors hover:text-gold">naveen.workpath@gmail.com</a>
-              <span id="emailCopied" class="ml-2 inline-block translate-y-0.5 text-[0.66rem] uppercase tracking-[0.12em] text-gold opacity-0 transition-opacity duration-300" aria-live="polite">Copied</span>
-            </div>
-            <div class="hairline"></div>
-            <div>
-              <p class="field-label">Availability</p>
-              <p class="flex items-center gap-2 text-bone">
-                <span class="relative flex h-2 w-2">
-                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold/70"></span>
-                  <span class="relative inline-flex h-2 w-2 rounded-full bg-gold"></span>
-                </span>
-                Available for work · Open to relocate
+              <p class="field-group-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 7l9 6 9-6M3 7v10a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V7M3 7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1"/></svg>
+                Email
               </p>
+              <a id="contactEmail" href="mailto:naveen.workpath@gmail.com" data-email="naveen.workpath@gmail.com" class="email-link">naveen.workpath@gmail.com</a>
+              <span id="emailCopied" aria-live="polite">Copied</span>
             </div>
             <div class="hairline"></div>
             <div>
-              <p class="field-label">Find me</p>
-              <div class="flex items-center gap-3">
-                <a href="https://github.com/Naveen-Sereddy" target="_blank" rel="noopener" aria-label="GitHub" class="grid h-10 w-10 place-items-center rounded-xl border border-line/15 bg-line/[0.03] text-bone-muted transition-colors hover:border-gold/50 hover:text-gold">
-                  <svg class="h-[1.15rem] w-[1.15rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              <p class="field-group-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                Availability
+              </p>
+              <div class="avail-row">
+                <span class="avail-dot" aria-hidden="true"></span>
+                Available for work · Open to relocate
+              </div>
+            </div>
+            <div class="hairline"></div>
+            <div>
+              <p class="field-group-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Find me
+              </p>
+              <div class="social-icons">
+                <a href="https://github.com/Naveen-Sereddy" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
                 </a>
-                <a href="https://linkedin.com/in/naveensereddy" target="_blank" rel="noopener" aria-label="LinkedIn" class="grid h-10 w-10 place-items-center rounded-xl border border-line/15 bg-line/[0.03] text-bone-muted transition-colors hover:border-gold/50 hover:text-gold">
-                  <svg class="h-[1.1rem] w-[1.1rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+                <a href="https://linkedin.com/in/naveensereddy" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
                 </a>
               </div>
             </div>
           </div>
 
-          <!-- form card -->
-          <form id="contactForm" novalidate class="reveal reveal-delay-1 card flex flex-col gap-5 p-7 sm:p-9 lg:col-span-3">
+          <!-- Form card -->
+          <form id="contactForm" novalidate class="card reveal reveal-delay-1" style="display:flex;flex-direction:column;gap:1.25rem;">
             <div>
               <label for="cName" class="field-label">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
@@ -450,58 +421,59 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 Message
               </label>
-              <textarea id="cMessage" name="message" rows="5" class="input resize-none" placeholder="Tell me about your project, role, or idea…" aria-required="true" aria-describedby="cMessage-err"></textarea>
+              <textarea id="cMessage" name="message" rows="5" class="input" placeholder="Tell me about your project, role, or idea…" aria-required="true" aria-describedby="cMessage-err"></textarea>
               <p id="cMessage-err" class="field-error hidden" role="alert">Please add a short message.</p>
             </div>
-            <button type="submit" class="btn-primary mt-1 w-full text-base">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            <button type="submit" class="btn-primary form-submit">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
               Send message
             </button>
-            <p id="formNote" class="hidden text-center text-sm text-bone-muted" role="status">
+            <p id="formNote" class="hidden" role="status">
               Opening your email app with your message ready to send. If nothing happens, email
-              <a href="mailto:naveen.workpath@gmail.com" class="text-gold hover:underline">naveen.workpath@gmail.com</a> directly.
+              <a href="mailto:naveen.workpath@gmail.com">naveen.workpath@gmail.com</a> directly.
             </p>
           </form>
         </div>
       </div>
     </section>
+
   </main>
 
   <!-- ===================================================== FOOTER -->
-  <footer class="relative overflow-hidden border-t border-line/[0.08] bg-ink-950 pb-10 pt-16 text-bone">
-    <div class="wrap relative">
-      <div class="flex flex-col gap-10 border-b border-line/10 pb-10 md:flex-row md:items-end md:justify-between">
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
         <div>
-          <a href="#contact" class="group inline-flex flex-col items-start font-serif text-[clamp(2rem,5vw,3.4rem)] font-medium leading-[1.02] tracking-tightest">
-            <span>Let's work together</span>
-            <span class="mt-3 h-[3px] w-10 rounded-full bg-gold transition-all duration-500 ease-out-expo group-hover:w-full"></span>
+          <a href="#contact" class="footer-cta-link">
+            Let's work together
+            <span class="footer-cta-bar" aria-hidden="true"></span>
           </a>
-          <div class="mt-6">
+          <div class="footer-cta-sub">
             <a href="#contact" class="btn-text">
               Start a conversation
-              <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
           </div>
-          <p class="mt-4 text-[0.8rem] uppercase tracking-[0.14em] text-bone-dim">Currently at BILL · Open to new roles</p>
+          <p class="footer-tagline">Currently at BILL · Open to new roles</p>
         </div>
-        <nav class="flex flex-wrap gap-x-8 gap-y-3 text-[0.84rem] font-medium text-bone-muted">
-          <a href="#work" class="link-underline">Work</a>
-          <a href="#about" class="link-underline">About</a>
-          <a href="assets/resume/naveen-sereddy-resume.pdf" target="_blank" rel="noopener" class="link-underline">Résumé</a>
-          <a href="#contact" class="link-underline">Contact</a>
-          <a href="https://github.com/Naveen-Sereddy" target="_blank" rel="noopener" class="link-underline">GitHub</a>
-          <a href="https://linkedin.com/in/naveensereddy" target="_blank" rel="noopener" class="link-underline">LinkedIn</a>
+
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="assets/resume/naveen-sereddy-resume.pdf" target="_blank" rel="noopener">Résumé</a>
+          <a href="#contact">Contact</a>
+          <a href="https://github.com/Naveen-Sereddy" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/naveensereddy" target="_blank" rel="noopener">LinkedIn</a>
         </nav>
       </div>
-      <div class="mt-8 flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
-        <p class="font-serif text-lg">Naveen Sereddy<span class="text-gold">.</span></p>
-        <p class="text-[0.8rem] font-medium uppercase tracking-[0.12em] text-bone-muted">
-          Designed &amp; built by Naveen · © <span id="year">2026</span>
-        </p>
-        <a href="#top" class="group flex items-center gap-2 text-[0.8rem] font-medium uppercase tracking-[0.12em] text-bone-muted">
+
+      <div class="footer-bottom">
+        <p class="footer-wordmark">Naveen Sereddy<span>.</span></p>
+        <p class="footer-copy">Designed &amp; built by Naveen · © <span id="year">2026</span></p>
+        <a href="#top" class="back-to-top">
           Back to top
-          <span class="grid h-8 w-8 place-items-center rounded-full border border-line/15 transition-colors group-hover:border-gold/60 group-hover:text-gold">
-            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+          <span class="back-to-top-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
           </span>
         </a>
       </div>
@@ -509,27 +481,26 @@
   </footer>
 
   <!-- ===================================================== LIGHTBOX -->
-  <div id="lightbox" class="fixed inset-0 z-[60] hidden items-center justify-center bg-[rgba(5,5,5,0.97)] backdrop-blur-lg">
-    <button id="lbClose" aria-label="Close" class="absolute right-4 top-4 grid h-12 w-12 place-items-center rounded-full border border-white/15 text-white hover:border-gold/60 hover:text-gold cursor-pointer">
-      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button id="lbClose" class="lb-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
-    <button id="lbPrev" aria-label="Previous" class="absolute left-3 sm:left-6 grid h-12 w-12 place-items-center rounded-full border border-white/15 text-white hover:border-gold/60 hover:text-gold cursor-pointer">
-      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 6l-6 6 6 6"/></svg>
+    <button id="lbPrev" class="lb-prev" aria-label="Previous image">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
     </button>
-    <button id="lbNext" aria-label="Next" class="absolute right-3 sm:right-6 grid h-12 w-12 place-items-center rounded-full border border-white/15 text-white hover:border-gold/60 hover:text-gold cursor-pointer">
-      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg>
+    <button id="lbNext" class="lb-next" aria-label="Next image">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
     </button>
-    <figure class="mx-auto flex max-h-[88vh] w-full max-w-5xl flex-col items-center px-4">
-      <img id="lbImg" src="" alt="" class="max-h-[78vh] w-auto rounded-xl object-contain ring-1 ring-white/15 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.85)]" />
-      <figcaption class="mt-4 flex items-center gap-3 text-center text-sm text-white/75">
-        <span id="lbCount" class="text-xs text-white/45"></span>
+    <figure class="lb-figure">
+      <img id="lbImg" src="" alt="" />
+      <figcaption class="lb-caption">
+        <span id="lbCount"></span>
         <span id="lbCaption"></span>
       </figcaption>
     </figure>
   </div>
 
-  <!-- Lenis smooth scroll (vanilla) registers global `Lenis` -->
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
-  <script src="src/main.js?v=22" defer></script>
+  <script src="src/main.js?v=25" defer></script>
 </body>
 </html>

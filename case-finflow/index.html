@@ -1,117 +1,459 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FinFlow · UX Case Study · Naveen Sereddy</title>
-  <meta name="description" content="FinFlow: a role-based B2B expense-management platform designed from research through usability testing for admins, managers, and employees. UX case study by Naveen Sereddy." />
-  <script>
-    /* Open every case study at the very top. The browser's default automatic
-       scroll restoration re-applies a stored scroll position AFTER this large,
-       async-rendered (React/Babel) page grows, briefly flashing the bottom
-       before settling. Disabling it keeps navigation pinned to 0,0. */
-    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-    window.addEventListener("pageshow", function () { window.scrollTo(0, 0); });
-  </script>
-  <link rel="stylesheet" href="../case-studies.css?v=12" />
-  <link rel="stylesheet" href="case-study/style.css?v=2">
-  <style>
-    html, body { margin: 0; background: #0D0D0D; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FinFlow — UX Case Study · Naveen Sereddy</title>
+<meta name="description" content="FinFlow: a role-based B2B expense-management platform designed from research through usability testing. 73%→89% task completion lift. UX case study by Naveen Sereddy." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script>
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  window.addEventListener("pageshow", function () { window.scrollTo(0, 0); });
+</script>
+<style>
+:root {
+  --bg:#0d0404; --bg-2:#120806; --bg-3:#1a0f0a; --bg-4:#24180d;
+  --text:#f0e4d3; --text-2:#b8a58f; --text-3:#7c6a5a; --text-4:#5a4d40;
+  --accent:#d0923a; --accent-soft:#b57d2b;
+  --accent-muted:rgba(208,146,58,0.09); --accent-mid:rgba(208,146,58,0.14);
+  --border:rgba(255,255,255,0.06); --border-strong:rgba(255,255,255,0.10);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+* { box-sizing:border-box; }
+html { font-size:16px; scroll-behavior:smooth; -webkit-font-smoothing:antialiased; background:var(--bg); color:var(--text); }
+body {
+  margin:0; font-family:'Inter',system-ui,sans-serif;
+  background:
+    radial-gradient(ellipse 75% 65% at 110% 10%,rgba(208,146,58,0.08),transparent 55%),
+    radial-gradient(ellipse 60% 50% at -10% 90%,rgba(208,146,58,0.06),transparent 55%),
+    var(--bg);
+  background-attachment:fixed; min-height:100vh; line-height:1.55;
+}
+h1,h2,h3,h4 { font-family:'Cormorant Garamond',Georgia,serif; line-height:1.15; margin:0 0 .5rem; color:var(--text); letter-spacing:-.01em; }
+h1 { font-size:clamp(2.4rem,5vw,3.6rem); font-weight:500; letter-spacing:-.02em; }
+h2 { font-size:clamp(1.9rem,4vw,2.75rem); letter-spacing:-.015em; }
+h4 { font-size:1.1rem; margin:0 0 .4rem; }
+p { margin:0 0 1rem; max-width:68ch; color:var(--text-2); }
+a { color:var(--text-2); text-decoration:none; transition:color 280ms var(--ease); }
+a:hover { color:var(--accent); }
+img { max-width:100%; display:block; }
+.wrap { max-width:1280px; margin:0 auto; padding:0 1.5rem; }
+.wrap-narrow { max-width:960px; margin:0 auto; padding:0 1.5rem; }
+@media (min-width:1024px) { .wrap, .wrap-narrow { padding:0 2rem; } }
+.section { padding:5rem 0; }
+.section-alt { padding:5rem 0; background:var(--bg-2); }
+.divider { height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08) 30%,rgba(208,146,58,0.22) 50%,rgba(255,255,255,0.08) 70%,transparent); }
 
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+/* nav */
+.cs-nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:.9rem 0; background:rgba(13,4,4,0.72); backdrop-filter:blur(24px) saturate(180%); border-bottom:1px solid var(--border); }
+.cs-nav-inner { display:flex; align-items:center; justify-content:space-between; max-width:1200px; margin:0 auto; padding:0 1.5rem; }
+.cs-logo { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.35rem; font-weight:500; color:var(--text); }
+.cs-back { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--text-3); }
+.cs-back:hover { color:var(--accent); }
+
+/* tags + metrics */
+.tag { display:inline-flex; align-items:center; padding:.22rem .6rem; border-radius:999px; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; background:var(--accent-muted); color:var(--accent); border:1px solid rgba(208,146,58,0.15); }
+.tag-row { display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:1.1rem; }
+.metric { display:inline-flex; align-items:baseline; gap:.45rem; padding:.45rem .85rem; background:var(--accent-muted); border:1px solid rgba(208,146,58,0.18); border-radius:.65rem; }
+.metric-value { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.75rem; line-height:1; color:var(--accent); }
+.metric-label { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.68rem; color:var(--text-3); text-transform:uppercase; letter-spacing:.07em; }
+.metric-row { display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1.5rem; }
+.eyebrow { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; color:var(--accent); text-transform:uppercase; letter-spacing:.14em; margin-bottom:.9rem; }
+
+/* cards */
+.card { background:var(--bg-3); border:1px solid var(--border); border-radius:1rem; padding:1.25rem 1.4rem; }
+.card-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:.9rem; }
+@media (max-width:600px) { .card-grid { grid-template-columns:1fr; } }
+
+/* research insight cards */
+.insight-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:1.5rem; }
+@media (max-width:760px) { .insight-grid { grid-template-columns:1fr; } }
+.insight-card { background:var(--bg-3); border:1px solid var(--border); border-radius:1rem; padding:1.4rem 1.5rem; }
+.insight-num { font-family:'Cormorant Garamond',Georgia,serif; font-size:2.2rem; line-height:1; color:var(--accent); margin-bottom:.6rem; }
+.insight-card h4 { font-size:1rem; margin-bottom:.4rem; }
+.insight-card p { font-size:.9rem; margin:0; }
+
+/* process */
+.process-list { margin-top:.5rem; }
+.process-row { display:grid; grid-template-columns:40px 1fr; gap:1rem; padding:1.1rem 0; border-top:1px solid var(--border); }
+.process-row:first-child { border-top:none; }
+.proc-num { width:36px; height:36px; border-radius:.55rem; display:grid; place-items:center; font-family:'Cormorant Garamond',Georgia,serif; font-size:1.1rem; color:#140900; background:var(--accent); flex-shrink:0; }
+
+/* sketches grid */
+.sketch-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; margin-top:1.5rem; align-items:start; }
+@media (max-width:640px) { .sketch-grid { grid-template-columns:1fr; } }
+.sketch-item { display:flex; flex-direction:column; gap:.75rem; }
+.sketch-item img { width:100%; height:auto; display:block; border-radius:.75rem; border:1px solid var(--border-strong); }
+.sketch-rationale { display:flex; gap:.65rem; align-items:flex-start; }
+.rationale-bar { width:3px; flex-shrink:0; background:var(--accent); border-radius:2px; margin-top:.2rem; }
+.rationale-text { font-size:.88rem; color:var(--text-2); line-height:1.5; }
+.rationale-text strong { color:var(--text); display:block; margin-bottom:.2rem; font-size:.8rem; font-family:'JetBrains Mono',ui-monospace,monospace; text-transform:uppercase; letter-spacing:.1em; color:var(--accent); }
+
+/* lofi grid — same as sketch grid */
+.lofi-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; margin-top:1.5rem; align-items:start; }
+@media (max-width:640px) { .lofi-grid { grid-template-columns:1fr; } }
+.lofi-item { display:flex; flex-direction:column; gap:.75rem; }
+.lofi-item img { width:100%; height:auto; display:block; border-radius:.75rem; border:1px solid var(--border-strong); }
+
+/* design evolution comparison */
+.evolution-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; margin-top:1.5rem; align-items:start; }
+@media (max-width:760px) { .evolution-grid { grid-template-columns:1fr; } }
+.evolution-step { display:flex; flex-direction:column; gap:.65rem; }
+.evolution-label { display:inline-flex; align-items:center; gap:.5rem; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.12em; color:var(--text-3); }
+.evolution-label .dot { width:7px; height:7px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+.evolution-step img { width:100%; height:auto; display:block; border-radius:.65rem; border:1px solid var(--border-strong); }
+.evolution-step p { font-size:.85rem; color:var(--text-3); margin:0; line-height:1.45; }
+.evolution-arrow { display:none; }
+@media (min-width:761px) {
+  .evolution-arrow { display:flex; align-items:center; justify-content:center; font-size:1.4rem; color:var(--accent); opacity:.5; align-self:center; }
+}
+
+/* final UI gallery */
+.gallery { display:grid; grid-template-columns:repeat(2,1fr); gap:.75rem; margin-top:.5rem; align-items:start; }
+@media (min-width:640px) { .gallery { grid-template-columns:repeat(3,1fr); } }
+.gallery img { width:100%; height:auto; display:block; border-radius:.65rem; border:1px solid var(--border); }
+
+/* quote */
+.quote-block { position:relative; padding:2.25rem 2.5rem 2rem; background:linear-gradient(180deg,rgba(208,146,58,0.10) 0%,transparent 100%),var(--bg-3); border:1px solid var(--border); border-radius:1rem; }
+.quote-block::before { content:'"'; position:absolute; left:.8rem; top:-.75rem; font-family:'Cormorant Garamond',Georgia,serif; font-size:6rem; color:rgba(208,146,58,0.20); line-height:1; }
+.quote-source { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-top:.9rem; margin-bottom:0; }
+
+/* buttons */
+.btn { display:inline-flex; align-items:center; gap:.5rem; padding:.65rem 1.1rem; border-radius:.55rem; font-family:'Inter',system-ui,sans-serif; font-size:.8rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; border:none; cursor:pointer; text-decoration:none; transition:all 280ms var(--ease); }
+.btn-primary { background:var(--accent); color:#110500; box-shadow:0 5px 18px rgba(208,146,58,0.25); }
+.btn-primary:hover { background:var(--accent-soft); transform:translateY(-2px); color:#110500; }
+.btn-ghost { background:transparent; color:var(--accent); border:1px solid rgba(208,146,58,0.35); }
+.btn-ghost:hover { background:var(--accent-muted); border-color:rgba(208,146,58,0.65); color:var(--accent); }
+.btn-row { display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1.5rem; }
+
+/* reflection */
+.reflection-list { display:grid; gap:.85rem; margin-top:1.25rem; }
+.reflection-item { display:flex; gap:1rem; align-items:flex-start; padding:1.1rem 1.3rem; background:var(--bg-3); border:1px solid var(--border); border-radius:.85rem; }
+.reflection-num { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.4rem; line-height:1; color:var(--accent); flex-shrink:0; margin-top:.1rem; }
+.reflection-item p { margin:0; font-size:.92rem; }
+
+/* next */
+.next-section { padding:4rem 0 5rem; }
+.next-label { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; color:var(--text-3); text-transform:uppercase; letter-spacing:.14em; margin-bottom:.75rem; }
+.next-link { font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(2rem,5vw,3.4rem); font-weight:500; color:var(--text); letter-spacing:-.015em; display:inline-flex; align-items:baseline; gap:.75rem; transition:color 280ms var(--ease); }
+.next-link:hover { color:var(--accent); }
+.next-link span { display:inline-block; transition:transform 300ms var(--ease); }
+.next-link:hover span { transform:translateX(8px); }
+.next-sub { margin-top:.6rem; color:var(--text-3); font-size:.9rem; }
+
+/* footer */
+.cs-footer { padding:2.5rem 0 3.5rem; border-top:1px solid var(--border); }
+.footer-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; color:var(--text-4); }
+.footer-links { display:flex; gap:1.25rem; }
+.footer-links a { color:var(--text-3); letter-spacing:.08em; text-transform:uppercase; }
+.footer-links a:hover { color:var(--accent); }
+
+:focus-visible { outline:2px solid rgba(208,146,58,0.55); outline-offset:3px; border-radius:.35rem; }
+@media (prefers-reduced-motion:reduce) { * { animation-duration:.01ms!important; transition-duration:.01ms!important; scroll-behavior:auto!important; } }
+::selection { background:rgba(208,146,58,0.25); color:var(--text); }
+::-webkit-scrollbar { width:10px; } ::-webkit-scrollbar-track { background:#141414; } ::-webkit-scrollbar-thumb { background:#2e2e2e; border-radius:99px; border:2px solid #141414; } ::-webkit-scrollbar-thumb:hover { background:#3d3d3d; }
+</style>
 </head>
 <body>
-  <header class="cs-head">
-    <div class="cs-head__in">
-      <a class="cs-logo" href="../index.html#work"><b>Naveen Sereddy</b></a>
-      <div class="cs-head__right">
-        <a class="cs-back" href="../index.html#work">&larr; All work</a>
+
+<nav class="cs-nav" aria-label="Site navigation">
+  <div class="cs-nav-inner">
+    <a class="cs-logo" href="../index.html">Naveen Sereddy</a>
+    <a class="cs-back" href="../index.html#work">← All work</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 1. HERO -->
+  <section class="section" style="padding-top:7.5rem">
+    <div class="wrap">
+      <div class="tag-row">
+        <span class="tag">B2B Fintech</span>
+        <span class="tag">2025</span>
+        <span class="tag">Concept</span>
+        <span class="tag">Research · IA · Interaction · Design System</span>
+      </div>
+      <h1 style="max-width:22ch">FinFlow — expense management that teams actually finish.</h1>
+      <p style="font-size:1.15rem;margin-top:.9rem;max-width:56ch">Designed from research through usability testing for admin, manager, and employee roles — with a measurable task completion lift.</p>
+      <div class="metric-row">
+        <div class="metric"><span class="metric-value">73% → 89%</span><span class="metric-label">Task completion</span></div>
+        <div class="metric"><span class="metric-value">3</span><span class="metric-label">Roles designed for</span></div>
+        <div class="metric"><span class="metric-value">AA</span><span class="metric-label">WCAG 2.1</span></div>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="ui_kits/finflow/index.html" target="_blank" rel="noopener">Open live prototype ↗</a>
+        <a class="btn btn-ghost" href="../index.html#work">← All work</a>
       </div>
     </div>
-  </header>
-
-  <!-- Project intro: title, summary, and the primary prototype CTA, above the fold. -->
-  <section class="wrap hero">
-    <p class="eyebrow">UX Case Study · B2B Fintech</p>
-    <h1>FinFlow</h1>
-    <p class="sub">A B2B expense-management platform designed from research through usability testing across three roles: admin, manager, and employee.</p>
-    <dl class="meta">
-      <div><dt>My role</dt><dd>Research · IA · Interaction · Design System</dd></div>
-      <div><dt>Platform</dt><dd>Responsive web (desktop-first)</dd></div>
-      <div><dt>Timeline</dt><dd>Concept project · 2025</dd></div>
-      <div><dt>Outcome</dt><dd class="metric">73% &rarr; 89% task completion &middot; Maze usability testing</dd></div>
-    </dl>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="ui_kits/finflow/index.html" target="_blank" rel="noopener">Open the live prototype &nearr;</a>
-    </div>
-    <p class="proto-note">Fully interactive · opens in a new tab · best on desktop</p>
   </section>
 
-  <div id="root"></div>
+  <div class="wrap"><div class="divider"></div></div>
 
-  <section class="next-case">
-    <div class="wrap">
-      <p class="eyebrow">Next case study</p>
-      <a class="next-link" href="../case-medbridge/index.html">MedBridge <span aria-hidden="true">&rarr;</span></a>
-      <p class="next-sub">A patient portal redesigned end to end, with a 30-screen clickable prototype.</p>
+  <!-- 2. PROBLEM -->
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="eyebrow">The Problem</div>
+      <h2>Three roles. One broken tool. Nobody could finish their task.</h2>
+      <p style="font-size:1.05rem;margin-top:.9rem">Employees got lost in category dropdowns and abandoned mid-submission. Managers couldn't see team context before approving — so approvals stalled. Admins had no consolidated view of spend or compliance status, making month-end reconciliation a manual scramble.</p>
+      <p>Usability testing confirmed what stakeholder interviews suggested: the tool was technically functional but practically unusable under real work conditions. The problem wasn't features — it was task structure.</p>
     </div>
   </section>
 
-  <footer class="cs-foot">
+  <!-- 3. RESEARCH INSIGHTS -->
+  <section class="section-alt">
+    <div class="wrap-narrow">
+      <div class="eyebrow">Research</div>
+      <h2>What users told us before a single screen was drawn.</h2>
+      <p style="margin-top:.9rem">Stakeholder interviews and user sessions across all three roles surfaced three patterns that shaped every design decision that followed.</p>
+      <div class="insight-grid">
+        <div class="insight-card">
+          <div class="insight-num">01</div>
+          <h4>Submission happens at the moment of purchase</h4>
+          <p>Employees tried to submit expenses immediately after spending — not days later at a desk. The tool wasn't built for mobile capture, so receipts went missing and submissions piled up.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">02</div>
+          <h4>Managers approve blindly</h4>
+          <p>Approvals arrived with no spend context — no team totals, no budget headroom, no policy flags. Managers either rubber-stamped everything or created bottlenecks requesting more information.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">03</div>
+          <h4>Admins do month-end manually</h4>
+          <p>Finance admins exported raw data to spreadsheets to understand total spend, policy exceptions, and reimbursement status. The tool had no reconciliation layer — just a transaction list.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. EARLY SKETCHES -->
+  <section class="section">
     <div class="wrap">
-      <a class="btn btn-primary" href="../index.html#work">&larr; Back to all work</a>
-      <nav class="nav">
-        <a href="../index.html#contact">Contact</a>
+      <div class="eyebrow">Early Sketches</div>
+      <h2>Paper first. Before committing to anything.</h2>
+      <p style="margin-top:.9rem;max-width:62ch">Rough sketches let me test structure without pixel polish getting in the way. Each one answered a specific question about task flow before moving to digital.</p>
+      <div class="sketch-grid">
+
+        <div class="sketch-item">
+          <img src="img/sketch-mobile-snap-receipt.png" alt="Mobile home screen sketch with snap receipt and new expense as primary actions" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Mobile-first home screen</strong>
+              Surfaced "Snap receipt" as the primary action — because research showed most employee submissions happen at the point of purchase, not at a desk. The home screen needed to serve that moment.
+            </div>
+          </div>
+        </div>
+
+        <div class="sketch-item">
+          <img src="img/sketch-sign-in.png" alt="Sign-in split-screen sketch with brand panel left and auth form right" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Split-screen sign-in</strong>
+              Brand messaging ("The whole company's spend, in flow.") on the left means SSO authentication doesn't feel cold or purely transactional. New users absorb the product value proposition before they even log in.
+            </div>
+          </div>
+        </div>
+
+        <div class="sketch-item">
+          <img src="img/sketch-new-expense.png" alt="New expense form sketch with two-column layout — form left, receipt upload right" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Two-column expense form</strong>
+              Form fields on the left, receipt drop zone on the right — so users can fill metadata and upload evidence in parallel. The old tool forced sequential steps, which caused drop-off halfway through.
+            </div>
+          </div>
+        </div>
+
+        <div class="sketch-item">
+          <img src="img/sketch-approvals-queue.png" alt="Approvals queue sketch with row-based list and inline approve/reject actions" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Inline approvals queue</strong>
+              Row-based list with Approve/Reject per row — managers can process a full queue without opening individual submissions. Designed for the manager's actual task: moving fast through a backlog, not reviewing one expense at a time.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. LO-FI WIREFRAMES -->
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="eyebrow">Lo-Fi Wireframes</div>
+      <h2>Digital wireframes. Decisions locked in.</h2>
+      <p style="margin-top:.9rem;max-width:62ch">Moving from sketch to lo-fi is where task structure gets tested. Each wireframe answered whether the layout actually let users complete their primary task without confusion.</p>
+      <div class="lofi-grid">
+
+        <div class="lofi-item">
+          <img src="img/lofi-new-expense.png" alt="Lo-fi wireframe: new expense form with sidebar nav and approval preview routing" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Approval preview before submitting</strong>
+              Added approval routing preview in the right panel — employees see exactly who will review the expense before hitting submit. Removes the anxiety of "where does this go?" that caused hesitation and abandoned forms.
+            </div>
+          </div>
+        </div>
+
+        <div class="lofi-item">
+          <img src="img/lofi-manager-dashboard.png" alt="Lo-fi wireframe: manager dashboard with KPI cards, team spend chart, and approvals queue" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>KPIs above the fold, queue one scroll away</strong>
+              Four KPI cards (team spend, pending approvals, budget status, flagged items) appear before any interaction. Managers see the number they need in under two seconds — then scroll to act on the queue below.
+            </div>
+          </div>
+        </div>
+
+        <div class="lofi-item">
+          <img src="img/lofi-all-expenses.png" alt="Lo-fi wireframe: all expenses list with tab filters and status badges" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Status as the primary sort dimension</strong>
+              Tabs (All / Pending / Approved / Flagged / Rejected) replace dropdown filtering — because status is the first thing every role filters by. Surface-level navigation beats a buried filter panel for the most common action.
+            </div>
+          </div>
+        </div>
+
+        <div class="lofi-item">
+          <img src="img/lofi-payouts.png" alt="Lo-fi wireframe: payouts page with KPI cards, batch table, and schedule slide-over" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>Batch payout dispatch in one action</strong>
+              Finance admins can select multiple reimbursements and schedule them in one slide-over panel — instead of approving one at a time. Designed for the admin's biggest pain: month-end takes hours, not minutes.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. DESIGN EVOLUTION COMPARISON -->
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">Design Evolution</div>
+      <h2>From sketch to final — one key flow.</h2>
+      <p style="margin-top:.9rem;max-width:62ch">The new expense submission flow shows the clearest progression. Each stage made the task structure more precise without changing the core intent established in the first sketch.</p>
+      <div class="evolution-grid">
+        <div class="evolution-step">
+          <div class="evolution-label"><span class="dot"></span>Sketch</div>
+          <img src="img/sketch-new-expense.png" alt="Hand-drawn sketch of new expense two-column form" loading="lazy" />
+          <p>Two-column layout, receipt zone right, no sequential steps. Rough but structurally sound.</p>
+        </div>
+        <div class="evolution-step">
+          <div class="evolution-label"><span class="dot"></span>Lo-Fi</div>
+          <img src="img/lofi-new-expense.png" alt="Digital lo-fi wireframe of new expense form with approval routing preview" loading="lazy" />
+          <p>Sidebar navigation added. Approval preview panel appears — the insight from user interviews that solved mid-form abandonment.</p>
+        </div>
+        <div class="evolution-step final">
+          <div class="evolution-label"><span class="dot"></span>Final UI</div>
+          <img src="img/ui-employee.png" alt="Final high-fidelity employee expense submission screen" loading="lazy" />
+          <p>Visual system applied. Structure unchanged from lo-fi — because the layout decision was already right.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. FINAL UI -->
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="eyebrow">Final UI</div>
+      <h2>One design system. Three role views.</h2>
+      <p style="margin-top:.9rem;max-width:62ch">Shared component primitives — tables, filters, status chips, approval actions — adapted to each role's primary task. Consistency across roles reduced the learning curve when users switched contexts.</p>
+      <div class="gallery" style="margin-top:1.5rem">
+        <img src="img/ui-dashboard.png" alt="Admin dashboard with spend overview, approvals queue, and policy compliance" loading="lazy" />
+        <img src="img/ui-manager.png" alt="Manager view with team spend by category and pending approval items" loading="lazy" />
+        <img src="img/ui-employee.png" alt="Employee expense submission flow with category picker and status tracking" loading="lazy" />
+        <img src="img/ui-audit.png" alt="Immutable audit log with action, actor, timestamp, and export control" loading="lazy" />
+        <img src="img/ui-payouts.png" alt="Reimbursement payouts — scheduled and paid" loading="lazy" />
+        <img src="img/01.png" alt="User research and persona documentation for three expense roles" loading="lazy" />
+        <img src="img/04.png" alt="Information architecture and sitemap across admin, manager, and employee flows" loading="lazy" />
+        <img src="img/06.png" alt="Mid-fidelity wireframes showing role-specific dashboard layouts" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. QUOTE -->
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="quote-block">
+        <p style="font-size:1.05rem;max-width:74ch">"We didn't just polish screens. We changed the task structure so users could finish faster, with fewer errors, and less cognitive fatigue — and measured it."</p>
+        <p class="quote-source">Design outcome · Maze usability testing</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. OUTCOME -->
+  <section class="section-alt">
+    <div class="wrap-narrow">
+      <div class="eyebrow">Outcome</div>
+      <h2>One system, three roles, measurable improvement.</h2>
+      <p style="font-size:1.05rem;margin-top:.9rem">The final design unified admin, manager, and employee into one consistent platform with role-specific dashboards and shared component primitives. Maze usability testing measured task completion lifting from 73% to 89% across the core expense workflows. Error rate and time-to-complete dropped in every tested flow.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="ui_kits/finflow/index.html" target="_blank" rel="noopener">Open live prototype ↗</a>
+        <a class="btn btn-ghost" href="../index.html#work">← All work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. REFLECTION -->
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="eyebrow">Reflection</div>
+      <h2>What I'd do differently.</h2>
+      <div class="reflection-list">
+        <div class="reflection-item">
+          <div class="reflection-num">1</div>
+          <p>I'd test the mobile snap-receipt flow earlier. It was sketched in the first round but deprioritized during wireframing — the most common real-world submission scenario got the least design attention.</p>
+        </div>
+        <div class="reflection-item">
+          <div class="reflection-num">2</div>
+          <p>The three role dashboards share components but were designed in sequence rather than in parallel. Designing them side-by-side from the start would have surfaced shared layout decisions earlier and reduced rework.</p>
+        </div>
+        <div class="reflection-item">
+          <div class="reflection-num">3</div>
+          <p>Task completion rate was the right metric — but I'd add time-on-task as a secondary measure from the first usability round, not just the final one. Speed matters as much as completion for a daily-use tool.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="divider"></div></div>
+
+  <!-- 11. NEXT PROJECT -->
+  <section class="next-section">
+    <div class="wrap">
+      <p class="next-label">Next case study</p>
+      <a class="next-link" href="../case-bins/index.html">Bins &amp; Deals <span aria-hidden="true">→</span></a>
+      <p class="next-sub">Brand, design, and front-end build for a live retail liquidation store — from blank canvas to a shipped marketing site.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="cs-footer">
+  <div class="wrap">
+    <div class="footer-row">
+      <span>Naveen Sereddy · Product Design</span>
+      <div class="footer-links">
+        <a href="https://github.com/Naveen-Sereddy" target="_blank" rel="noopener">GitHub</a>
         <a href="https://linkedin.com/in/naveensereddy" target="_blank" rel="noopener">LinkedIn</a>
-      </nav>
+      </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script src="ui_kits/finflow/data.js"></script>
-  <script type="text/babel" src="case-study/dashmock.jsx"></script>
-  <script type="text/babel" src="case-study/ab-personas.jsx"></script>
-  <script type="text/babel" src="case-study/ab-research.jsx"></script>
-  <script type="text/babel" src="case-study/ab-journey.jsx"></script>
-  <script type="text/babel" src="case-study/ab-sitemap.jsx"></script>
-  <script type="text/babel" src="case-study/ab-lofi.jsx"></script>
-  <script type="text/babel" src="case-study/ab-midfi.jsx"></script>
-  <script type="text/babel" src="case-study/ab-system.jsx"></script>
-  <script type="text/babel" src="case-study/ab-accessibility.jsx"></script>
-  <script type="text/babel" src="case-study/ab-final.jsx"></script>
-  <script type="text/babel" src="case-study/ab-proto.jsx"></script>
-
-  <script type="text/babel" data-presets="env,react">
-    // Single long-scrolling narrative: each artifact is a full-width
-    // section band, stacked top to bottom. No design canvas.
-    const SECTIONS = [
-      ArtboardPersonas,
-      ArtboardResearch,
-      ArtboardJourney,
-      ArtboardSitemap,
-      ArtboardLoFi,
-      ArtboardMidFi,
-      ArtboardDesignSystem,
-      ArtboardAccessibility,
-      ArtboardFinalUI,
-      ArtboardPrototype,
-    ];
-
-    function App() {
-      return (
-        <main className="case-page">
-          {SECTIONS.map((Section, i) => (
-            <section className="cs-band" key={i}>
-              <Section />
-            </section>
-          ))}
-        </main>
-      );
-    }
-
-    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-  </script>
 </body>
 </html>
