@@ -338,6 +338,7 @@ p { color: var(--text-2); max-width: 68ch; }
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1.5rem;
+  width: 100%; /* .wrap's auto margins otherwise shrink it to content width */
 }
 @media (min-width: 640px) { .mobile-menu-top { padding: 1rem 2rem; } }
 
