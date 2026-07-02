@@ -257,17 +257,17 @@
 
       /* action buttons */
       const primaryBtn = p.caseUrl
-        ? `<a href="${p.caseUrl}" class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1.25rem;min-height:0;">
+        ? `<a href="${p.caseUrl}" class="btn-primary btn-sm">
              View case study
              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
            </a>`
-        : `<button class="btn-ghost" data-gallery="${p.id}" data-idx="0" style="font-size:0.8rem;padding:0.5rem 1.25rem;min-height:0;">
+        : `<button class="btn-ghost btn-sm" data-gallery="${p.id}" data-idx="0">
              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 5h18v14H3zM3 9h18"/></svg>
              View gallery
            </button>`;
 
       const liveBtn = p.url
-        ? `<a href="${p.url}" target="_blank" rel="noopener" class="btn-ghost" style="font-size:0.8rem;padding:0.5rem 1.25rem;min-height:0;">
+        ? `<a href="${p.url}" target="_blank" rel="noopener" class="btn-ghost btn-sm">
              Visit live site
              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
            </a>`
@@ -410,10 +410,23 @@
   }, { passive: true });
   onScroll();
 
+  /* ------------------------------------------------------------ focus trap */
+  const FOCUSABLE = 'a[href], button:not([disabled]), input, textarea, select, [tabindex]:not([tabindex="-1"])';
+  const trapFocus = (container) => (e) => {
+    if (e.key !== "Tab") return;
+    const focusables = container.querySelectorAll(FOCUSABLE);
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last  = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first)      { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  };
+
   /* ------------------------------------------------------------ mobile menu */
   const menuBtn   = $("#menuBtn");
   const menu      = $("#mobileMenu");
   const menuClose = $("#menuClose");
+  let menuTrap = null;
 
   const openMenu = () => {
     if (!menu) return;
@@ -421,12 +434,16 @@
     document.body.classList.add("no-scroll");
     if (menuBtn) menuBtn.setAttribute("aria-expanded", "true");
     if (window.__lenis) window.__lenis.stop();
+    menuTrap = trapFocus(menu);
+    menu.addEventListener("keydown", menuTrap);
+    if (menuClose) menuClose.focus();
   };
   const closeMenu = () => {
     if (!menu) return;
     menu.classList.remove("open");
     document.body.classList.remove("no-scroll");
-    if (menuBtn) menuBtn.setAttribute("aria-expanded", "false");
+    if (menuTrap) { menu.removeEventListener("keydown", menuTrap); menuTrap = null; }
+    if (menuBtn) { menuBtn.setAttribute("aria-expanded", "false"); menuBtn.focus(); }
     if (window.__lenis) window.__lenis.start();
   };
 
@@ -450,21 +467,32 @@
     lbCap.textContent  = item.cap;
     lbCount.textContent = `${String(curIdx + 1).padStart(2, "0")} / ${String(curGallery.length).padStart(2, "0")}`;
   };
+  let lbReturnFocus = null;
+  let lbTrap = null;
+
   const openLb = (id, idx) => {
     curGallery = galleries[id] || [];
     curIdx     = idx || 0;
     renderLb();
     if (lb) {
+      lbReturnFocus = document.activeElement;
       lb.classList.add("open");
       document.body.classList.add("no-scroll");
       if (window.__lenis) window.__lenis.stop();
+      lbTrap = trapFocus(lb);
+      lb.addEventListener("keydown", lbTrap);
+      const closeBtn = $("#lbClose");
+      if (closeBtn) closeBtn.focus();
     }
   };
   const closeLb = () => {
     if (lb) {
       lb.classList.remove("open");
       document.body.classList.remove("no-scroll");
+      if (lbTrap) { lb.removeEventListener("keydown", lbTrap); lbTrap = null; }
       if (window.__lenis) window.__lenis.start();
+      if (lbReturnFocus && document.contains(lbReturnFocus)) lbReturnFocus.focus();
+      lbReturnFocus = null;
     }
   };
   const step = (d) => {
@@ -477,6 +505,7 @@
     if (trigger) { e.preventDefault(); openLb(trigger.dataset.gallery, parseInt(trigger.dataset.idx, 10) || 0); }
   });
   document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menu?.classList.contains("open")) { closeMenu(); return; }
     if ((e.key === "Enter" || e.key === " ") && document.activeElement?.dataset?.gallery && !lb?.classList.contains("open")) {
       e.preventDefault();
       const t = document.activeElement;
