@@ -20,9 +20,9 @@ const ExpenseList = () => {
         title="All expenses"
         sub={`${filtered.length} items · total ${new Intl.NumberFormat('en-US', { style:'currency', currency:'USD' }).format(total)}`}
         actions={<>
-          <button className="ff-btn"><Icon name="upload-simple" size={14}/> Import CSV</button>
+          <button className="ff-btn" onClick={()=>ffGo('import')}><Icon name="upload-simple" size={14}/> Import CSV</button>
           <button className="ff-btn"><Icon name="download-simple" size={14}/> Export</button>
-          <button className="ff-btn ff-btn--primary"><Icon name="plus" size={14}/> New expense</button>
+          <button className="ff-btn ff-btn--primary" onClick={()=>ffGo('new-expense')}><Icon name="plus" size={14}/> New expense</button>
         </>}
       />
 
@@ -68,8 +68,8 @@ const ExpenseList = () => {
             {filtered.map(e => {
               const cat = d.categories.find(c => c.id === e.cat);
               return (
-                <tr key={e.id}>
-                  <td><input type="checkbox"/></td>
+                <tr key={e.id} onClick={()=>ffGo('expense-detail')} style={{cursor:'pointer'}}>
+                  <td onClick={ev=>ev.stopPropagation()}><input type="checkbox"/></td>
                   <td><span className="ff-mono" style={{fontSize:12, color:'var(--ff-fg-muted)'}}>{e.id}</span></td>
                   <td className="ff-tnum" style={{color:'var(--ff-fg-muted)', fontSize:12}}>{e.date}</td>
                   <td>
@@ -107,7 +107,7 @@ const ExpenseDetail = () => {
         actions={<>
           <button className="ff-btn"><Icon name="chat-text" size={14}/> Comment</button>
           <button className="ff-btn"><Icon name="x" size={14}/> Reject</button>
-          <button className="ff-btn ff-btn--primary"><Icon name="check" size={14}/> Approve</button>
+          <button className="ff-btn ff-btn--primary" onClick={()=>ffGo('state-success')}><Icon name="check" size={14}/> Approve</button>
         </>}
       />
 
@@ -212,7 +212,7 @@ const NewExpense = () => {
         sub="Submit a business expense for approval"
         actions={<>
           <button className="ff-btn">Save draft</button>
-          <button className="ff-btn ff-btn--primary">Submit for approval</button>
+          <button className="ff-btn ff-btn--primary" onClick={()=>ffGo('expenses')}>Submit for approval</button>
         </>}
       />
 
@@ -252,7 +252,7 @@ const NewExpense = () => {
               <div className="ff-empty__icon"><Icon name="upload-simple" size={22}/></div>
               <div style={{fontSize:14, fontWeight:500}}>Drop a receipt</div>
               <div style={{fontSize:12, color:'var(--ff-fg-muted)'}}>PDF or image · OCR fills the form automatically</div>
-              <button className="ff-btn ff-btn--sm" style={{marginTop:6}}>Choose file</button>
+              <button className="ff-btn ff-btn--sm" style={{marginTop:6}} onClick={()=>ffGo('ocr')}>Choose file</button>
             </div>
           </Card>
           <Card title="Approval preview">
@@ -277,7 +277,7 @@ const OcrReview = () => {
         sub="We've parsed the receipt — confirm the fields below."
         actions={<>
           <button className="ff-btn">Re-scan</button>
-          <button className="ff-btn ff-btn--primary">Save expense</button>
+          <button className="ff-btn ff-btn--primary" onClick={()=>ffGo('expenses')}>Save expense</button>
         </>}
       />
       <div className="ff-grid" style={{gridTemplateColumns:'1fr 1fr', gap:24}}>
@@ -394,7 +394,7 @@ const BulkImport = () => (
           <div className="ff-empty__icon" style={{margin:'0 auto'}}><Icon name="file-csv" size={26}/></div>
           <div style={{fontSize:16, fontWeight:600, marginTop:12}}>Drop your CSV here</div>
           <div style={{fontSize:13, color:'var(--ff-fg-muted)', marginTop:4}}>Up to 5,000 rows · UTF-8 · max 10 MB</div>
-          <button className="ff-btn ff-btn--primary" style={{marginTop:18}}><Icon name="upload-simple" size={14}/> Choose file</button>
+          <button className="ff-btn ff-btn--primary" style={{marginTop:18}} onClick={()=>ffGo('expenses')}><Icon name="upload-simple" size={14}/> Choose file</button>
           <div style={{marginTop:12, fontSize:12}}><a href="#">Download CSV template</a></div>
         </div>
       </Card>

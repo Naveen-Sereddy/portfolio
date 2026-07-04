@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0d0404" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230d0404'/%3E%3Ctext x='16' y='21' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23d0923a' text-anchor='middle'%3ENS%3C/text%3E%3C/svg%3E" />
+<title>FinFlow — Full Screen Board · Naveen Sereddy</title>
+<meta name="description" content="Every real screen from the FinFlow prototype, laid out as one Figma-style board with grounded design notes." />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg:#0d0404; --bg-2:#120806; --bg-3:#1a0f0a;
+  --text:#f0e4d3; --text-2:#b8a58f; --text-3:#7c6a5a;
+  --accent:#d0923a; --accent-soft:#b57d2b;
+  --accent-muted:rgba(208,146,58,0.09);
+  --border:rgba(255,255,255,0.06); --border-strong:rgba(255,255,255,0.10);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --canvas-bg:#e9e4da; --canvas-grid:rgba(30,20,10,0.07);
+  --card-bg:#ffffff; --card-border:rgba(30,20,10,0.12);
+  --note-bg:#fbf8f2; --note-border:rgba(208,146,58,0.28);
+}
+* { box-sizing:border-box; }
+html,body { margin:0; padding:0; height:100%; overflow:hidden; background:var(--bg); }
+body { font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+h1,h2,h3 { font-family:'Cormorant Garamond',Georgia,serif; line-height:1.15; margin:0; letter-spacing:-.01em; }
+
+/* ---------- top toolbar ---------- */
+.toolbar {
+  position:fixed; top:0; left:0; right:0; z-index:50; height:56px;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  padding:0 1.25rem; background:rgba(13,4,4,0.92); backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid var(--border); color:var(--text);
+}
+.toolbar-left { display:flex; align-items:center; gap:.9rem; min-width:0; }
+.tb-back { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--text-3); text-decoration:none; white-space:nowrap; transition:color 200ms var(--ease); }
+.tb-back:hover { color:var(--accent); }
+.tb-title { font-size:1rem; font-weight:500; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tb-sub { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.68rem; color:var(--text-3); letter-spacing:.06em; white-space:nowrap; }
+.toolbar-right { display:flex; align-items:center; gap:.6rem; }
+.tb-btn {
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--accent); background:transparent; border:1px solid rgba(208,146,58,0.35); border-radius:.5rem;
+  padding:.4rem .75rem; cursor:pointer; transition:all 200ms var(--ease); white-space:nowrap;
+}
+.tb-btn:hover { background:var(--accent-muted); border-color:rgba(208,146,58,0.65); }
+.tb-hint { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.65rem; color:var(--text-3); display:none; }
+@media (min-width:860px) { .tb-hint { display:inline; } }
+
+/* ---------- pan/zoom viewport ---------- */
+.viewport {
+  position:fixed; inset:0; top:56px; overflow:hidden; background:var(--canvas-bg);
+  background-image:
+    radial-gradient(var(--canvas-grid) 1px, transparent 1px);
+  background-size:28px 28px;
+  cursor:grab;
+}
+.viewport.dragging { cursor:grabbing; }
+.canvas {
+  position:absolute; top:0; left:0; transform-origin:0 0; will-change:transform;
+  padding:120px;
+}
+
+/* ---------- cover frame ---------- */
+.cover-frame {
+  width:1040px; margin-bottom:100px; background:var(--card-bg); border:1px solid var(--card-border);
+  border-radius:1.25rem; padding:3.5rem 4rem; box-shadow:0 30px 70px rgba(20,10,0,0.18);
+}
+.cover-eyebrow { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; color:var(--accent-soft); text-transform:uppercase; letter-spacing:.14em; margin-bottom:.9rem; }
+.cover-frame h1 { font-size:2.6rem; color:#1b1310; max-width:20ch; margin-bottom:.6rem; }
+.cover-frame .cover-count { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.85rem; color:#7a6a58; margin-bottom:2rem; }
+.cover-frame p { color:#4a3d32; font-size:.98rem; line-height:1.6; max-width:70ch; margin:0 0 1.1rem; }
+.cover-goals { list-style:none; margin:1.6rem 0 0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:.6rem 2rem; }
+.cover-goals li { font-size:.85rem; color:#5a4c3e; padding-left:1.1rem; position:relative; }
+.cover-goals li::before { content:'—'; position:absolute; left:0; color:var(--accent-soft); }
+.cover-note { margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--card-border); font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; color:#8a7a68; letter-spacing:.02em; }
+
+/* ---------- role sections ---------- */
+.role-section { margin-bottom:110px; }
+.role-head { max-width:1040px; margin-bottom:2rem; }
+.role-eyebrow { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.7rem; color:var(--accent-soft); text-transform:uppercase; letter-spacing:.12em; margin-bottom:.4rem; }
+.role-head h2 { font-size:1.8rem; color:#1b1310; margin-bottom:.4rem; }
+.role-head p { font-size:.88rem; color:#5a4c3e; max-width:62ch; margin:0; }
+
+.card-grid { display:grid; grid-template-columns:repeat(4, 320px); gap:2rem; }
+
+.board-card { width:320px; }
+.card-frame {
+  background:var(--card-bg); border:1px solid var(--card-border); border-radius:.6rem;
+  overflow:hidden; box-shadow:0 14px 34px rgba(20,10,0,0.14);
+}
+.card-frame img { width:100%; height:auto; display:block; }
+.card-label {
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.08em;
+  color:var(--accent-soft); margin:.85rem 0 .3rem;
+}
+.card-note-box {
+  background:var(--note-bg); border:1px solid var(--note-border); border-radius:.5rem;
+  padding:.7rem .85rem; font-size:.8rem; line-height:1.5; color:#5a4c3e;
+  position:relative;
+}
+.card-note-box::before { content:''; position:absolute; top:-6px; left:14px; width:10px; height:10px; background:var(--note-bg); border-left:1px solid var(--note-border); border-top:1px solid var(--note-border); transform:rotate(45deg); }
+
+/* ---------- zoom controls hint ---------- */
+.zoom-pill {
+  position:fixed; bottom:1.25rem; right:1.25rem; z-index:40;
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; color:var(--text-2);
+  background:rgba(13,4,4,0.85); backdrop-filter:blur(14px); border:1px solid var(--border-strong);
+  border-radius:999px; padding:.5rem 1rem; pointer-events:none;
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-left">
+    <a class="tb-back" href="index.html">← Case study</a>
+    <span class="tb-title">FinFlow — Full Screen Board</span>
+    <span class="tb-sub" id="screenCount">48 screens</span>
+  </div>
+  <div class="toolbar-right">
+    <span class="tb-hint">drag to pan · scroll / pinch to zoom</span>
+    <button class="tb-btn" id="resetViewBtn">Reset view</button>
+  </div>
+</div>
+
+<div class="viewport" id="viewport">
+  <div class="canvas" id="canvas">
+
+    <div class="cover-frame">
+      <div class="cover-eyebrow">FinFlow · Design board</div>
+      <h1>The whole company's spend, in flow.</h1>
+      <div class="cover-count">48 screens · 3 roles · 1 shared workspace</div>
+      <p>FinFlow is an expense-management workspace for Series B SaaS companies (100–500 employees) that have outgrown receipt-by-Slack but aren't ready for an enterprise ERP. Companies in this band lose 6–10 finance-team hours a month to receipt chasing, plus another 4–6 hours per monthly close — and often don't catch policy violations until quarterly review.</p>
+      <p>Product vision: <em>"The whole company's spend, in flow."</em> One workspace where a Finance Admin can see, decide, and close the month without leaving for QuickBooks, Slack, or Excel. Employees submit in 30 seconds on mobile. Managers approve in 2 clicks. Auditors get an immutable trail.</p>
+      <ul class="cover-goals">
+        <li>30+ desktop screens across submission, approval, cards, reimbursements, reports, settings, and audit</li>
+        <li>A 6-screen mobile flow for the on-the-go employee</li>
+        <li>Light + dark themes defined as tokens from day one</li>
+        <li>WCAG 2.1 AA across every surface</li>
+      </ul>
+      <div class="cover-note">Drag to pan, scroll or pinch to zoom. Every screen below is a real state captured from the working prototype — grouped by the role that owns it, plus one shared section for auth, system states, and mobile.</div>
+    </div>
+
+    <div id="sections"></div>
+
+  </div>
+</div>
+
+<div class="zoom-pill" id="zoomPill">100%</div>
+
+<script>
+const SCREENS = [
+  // ---------------- Finance Admin (Maren Okafor, Director of Finance) ----------------
+  { id:'dashboard', label:'Finance Admin overview', section:'admin', note:"KPI strip + two-column hero (Option 2 of 3 considered). Maren has ~6 seconds each morning to read spend, approvals, risk, and cash — a configurable card-grid tested lower on that scan." },
+  { id:'expenses', label:'Expenses — list', section:'admin', note:"Chips + dense table beat Kanban in testing: bulk actions matter more than visual status columns on a 5K+ row workspace." },
+  { id:'expense-detail', label:'Expense detail', section:'admin', note:"The page every expense list links to — deep-links back to vendor, cardholder, and approval chain per the IA's cross-entity-link rule." },
+  { id:'flagged', label:'Policy flagged', section:'admin', note:"Inline policy result shown per row, not buried in audit — catching violations before close, not during quarterly review." },
+  { id:'import', label:'Bulk import CSV', section:'admin', note:"Power-user escape hatch for entering a batch of expenses at once, outside the one-at-a-time submission flow." },
+  { id:'reimburse', label:'Payouts list', section:'admin', note:"Replaces a manually-built ACH file uploaded to a bank portal — now a schedulable list inside the same workspace." },
+  { id:'schedule-payout', label:'Schedule payout', section:'admin', note:"3 clicks to schedule one ACH batch, with a 2-hour cancel window before it's final." },
+  { id:'reports', label:'Reports home', section:'admin', note:"Leads with KPI tiles + a saved-reports table (Option 2 of 3). Maren's monthly close packet is the same template every month — the builder stays out of that daily path." },
+  { id:'report-build', label:'Report builder', section:'admin', note:"A dedicated route reachable from the primary action, not the default landing — built for the 1-in-8 sessions that need a custom pull." },
+  { id:'saved-report', label:'Saved report', section:'admin', note:"The close-packet template itself — projected to cut Maren's close time from 4+ hours to 22 minutes." },
+  { id:'export-report', label:'Export', section:'admin', note:"PDF / CSV / QuickBooks export of a saved report — the last step in closing the month and emailing the board packet." },
+  { id:'cards', label:'Cards list', section:'admin', note:"Replaces the separate vendor portal Maren used to issue cards — balance vs. limit is now visible inline instead of in another tab." },
+  { id:'card-detail', label:'Card detail', section:'admin', note:"Per-card spend and limit history, linked from every expense that card touches." },
+  { id:'issue-card', label:'Issue new card', section:'admin', note:"Virtual card issuance in under 60 seconds, versus a 1–2 day turnaround through the old vendor portal." },
+  { id:'vendors', label:'Vendor directory', section:'admin', note:"Spend-by-vendor visibility that used to live in a filtered spreadsheet." },
+  { id:'vendor-detail', label:'Vendor detail', section:'admin', note:"Spend-over-time for a single vendor, linked from every expense and report that touches them." },
+  { id:'audit', label:'Audit log', section:'admin', note:"The single highest-impact IA decision in round-2 testing: promoting this out of Settings took “find the audit log” completion from 50% to 92%." },
+  { id:'settings-profile', label:'Settings · Profile', section:'admin', note:"First of 7 left-tab settings areas — the shell pattern (Stripe / GitHub / Linear-style) was chosen so Settings stops being “a graveyard.”" },
+  { id:'settings-security', label:'Settings · Security & 2FA', section:'admin', note:"SOC 2 is table-stakes for this segment — audit log, RBAC, and 2FA are expected from day one, not bolted on later." },
+  { id:'settings-team', label:'Settings · Team & roles', section:'admin', note:"Where Maren manages who has access to what, feeding the RBAC model referenced across audit log and approvals." },
+  { id:'settings-policies', label:'Settings · Policies', section:'admin', note:"The same policy engine configured during onboarding — edits here later show up as an “Edited Policy” row in the audit log." },
+  { id:'settings-integrations', label:'Settings · Integrations', section:'admin', note:"QuickBooks ships in v1 per the project's explicit scope; NetSuite was deliberately deferred to v1.1." },
+  { id:'settings-billing', label:'Settings · Billing', section:'admin', note:"FinFlow's own subscription/billing management, kept separate from the company's actual expense and card data." },
+  { id:'settings-notif', label:'Settings · Notification prefs', section:'admin', note:"Controls the push/email alerts both Iris and Theo rely on instead of checking email or Slack." },
+  { id:'onb-bank', label:'Onboarding · Connect bank / cards', section:'admin', note:"First-run setup step for the Finance Admin — wires FinFlow to the company's real card processor before any data flows." },
+  { id:'onb-team', label:'Onboarding · Invite team', section:'admin', note:"Second onboarding step — brings Managers and Employees into the workspace Maren just set up." },
+  { id:'onb-policy', label:'Onboarding · Set policy', section:'admin', note:"Third onboarding step — the spend rules configured here drive every inline policy flag seen later on Approvals and Expenses." },
+
+  // ---------------- Manager (Theo Vasquez, Head of Sales) ----------------
+  { id:'dashboard-mgr', label:'Manager dashboard', section:'manager', note:"Theo's role-aware landing — same KPI grammar as the Admin dashboard, re-scoped to his team's budget and queue so switching roles doesn't mean relearning the layout." },
+  { id:'approvals', label:'Approvals queue', section:'manager', note:"Dense list + persistent bulk-action bar (Option 2 of 3). Manager testing named bulk-approve the single most-loved feature — 3+ minutes saved per session." },
+  { id:'approval-detail', label:'Approval detail', section:'manager', note:"Where Theo reviews the ~20% of items that need a real look, with an override note as a first-class field, not a disappearing Slack comment." },
+  { id:'approval-bulk', label:'Bulk approve (queue)', section:'manager', note:"The one-click “approve all in-policy under $X” macro — took clicks-per-decision from 7 down to 2 average." },
+  { id:'approval-history', label:'Approval history', section:'manager', note:"Audit trail of past decisions, so “why was this approved” never requires asking Theo directly." },
+
+  // ---------------- Employee (Iris Chen, Senior PMM) ----------------
+  { id:'dashboard-emp', label:'Employee dashboard', section:'employee', note:"Iris's landing screen — stripped to spend-to-date and recent activity. She never sees approvals, cards, or reports here; those aren't her job." },
+  { id:'new-expense', label:'New expense (desktop)', section:'employee', note:"The rarely-used desktop counterpart — persona research found Iris “almost never uses the desktop product,” so this mainly covers edge cases mobile can't." },
+  { id:'ocr', label:'Receipt OCR review', section:'employee', note:"The step right after Iris snaps a photo — OCR fills the form but she can correct misreads, directly addressing a named pain point (“photo-only OCR often misread amounts”)." },
+  { id:'payout-detail', label:'Payout detail', section:'employee', note:"Answers the exact confidence anchor persona research called out: “when will I get paid” — without a Slack message to Finance." },
+  { id:'notif', label:'Notifications center', section:'employee', note:"The in-product home for the alerts Iris relies on: one push when approved, one when paid." },
+  { id:'help', label:'Help / Support', section:'employee', note:"Kept out of Iris's “My work” nav group so it doesn't compete with the two things she actually does daily." },
+  { id:'mobile-flow', label:'Employee mobile flow (6 screens)', section:'employee', note:"A deliberately separate, employee-only experience (Option 2 of 3): Sign in, Home, Snap receipt, New expense, Submit success, Status timeline. Mobile parity with desktop was rejected as “wasteful” — Iris never approves, manages cards, or builds reports." },
+
+  // ---------------- Shared / System ----------------
+  { id:'signin', label:'Sign in', section:'shared', note:"Shared auth surface for all three roles — Okta SSO listed above email/password for the keyboard-first power users." },
+  { id:'sso', label:'SSO / Workspace', section:'shared', note:"Auth is shared across all three roles — one login surface regardless of what a person does inside FinFlow." },
+  { id:'forgot', label:'Forgot password', section:'shared', note:"Standard recovery step in the shared auth shell." },
+  { id:'reset', label:'Reset password', section:'shared', note:"Completes the shared auth flow — same visual system as sign-in, no separate design language." },
+  { id:'state-loading', label:'Loading dashboard', section:'shared', note:"One of 5 explicit states scoped into v1 (loading / empty / error / success / confirmation) so no surface ships with an undefined in-between." },
+  { id:'state-empty', label:'Empty expenses', section:'shared', note:"The zero-state for a fresh workspace or a fully-cleared filter — same system as every other state, no special-cased design." },
+  { id:'state-error', label:'Error', section:'shared', note:"A recoverable failure with a status-page link and a support escape hatch, not a dead end." },
+  { id:'state-success', label:'Success — approval', section:'shared', note:"The confirmation moment after an approval decision — small, but part of never leaving a decision ambiguous." },
+  { id:'state-confirm', label:'Confirmation — payout scheduled', section:'shared', note:"Closes the loop on Schedule payout, pairing with the 2-hour cancel window before the batch is final." },
+];
+
+const SECTIONS = [
+  { key:'admin', eyebrow:'Role · Finance Admin', title:'Maren Okafor — Director of Finance', desc:'Owns close, audit, policy, cards, and reporting. Approvals also reach her queue, but Theo is the dedicated approver below.' },
+  { key:'manager', eyebrow:'Role · Manager', title:'Theo Vasquez — Head of Sales', desc:'Runs the approvals queue for his 12-person team. Also uses Reports and Settings, which share the same surfaces shown under Finance Admin.' },
+  { key:'employee', eyebrow:'Role · Employee', title:'Iris Chen — Senior PMM', desc:'Submits, tracks, and gets paid — almost entirely from her phone. Rarely touches the desktop product.' },
+  { key:'shared', eyebrow:'Cross-role', title:'Shared / System', desc:'Auth and system states that sit outside any single role — the same shell every persona above passes through.' },
+];
+
+const sectionsEl = document.getElementById('sections');
+document.getElementById('screenCount').textContent = SCREENS.length + ' screens';
+
+for (const sec of SECTIONS) {
+  const items = SCREENS.filter(s => s.section === sec.key);
+  const wrap = document.createElement('div');
+  wrap.className = 'role-section';
+  wrap.innerHTML = `
+    <div class="role-head">
+      <div class="role-eyebrow">${sec.eyebrow}</div>
+      <h2>${sec.title}</h2>
+      <p>${sec.desc} · ${items.length} screens</p>
+    </div>
+    <div class="card-grid">
+      ${items.map(s => `
+        <div class="board-card">
+          <div class="card-frame"><img src="img/board/${s.id}.png" alt="${s.label}" loading="lazy" /></div>
+          <div class="card-label">${s.label}</div>
+          <div class="card-note-box">${s.note}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  sectionsEl.appendChild(wrap);
+}
+
+// ---------------- pan / zoom canvas ----------------
+const viewport = document.getElementById('viewport');
+const canvas = document.getElementById('canvas');
+const zoomPill = document.getElementById('zoomPill');
+
+let scale = 1, tx = 0, ty = 0;
+const MIN_SCALE = 0.08, MAX_SCALE = 2.2;
+
+function applyTransform() {
+  canvas.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+  zoomPill.textContent = Math.round(scale * 100) + '%';
+}
+
+function fitToViewport() {
+  const contentW = canvas.scrollWidth;
+  const contentH = canvas.scrollHeight;
+  const vw = viewport.clientWidth;
+  const vh = viewport.clientHeight;
+  const fitScale = Math.min(vw / contentW, vh / contentH) * 0.94;
+  scale = Math.max(MIN_SCALE, Math.min(fitScale, 1));
+  tx = (vw - contentW * scale) / 2;
+  ty = 40;
+  applyTransform();
+}
+
+document.getElementById('resetViewBtn').addEventListener('click', fitToViewport);
+
+let dragging = false, lastX = 0, lastY = 0;
+viewport.addEventListener('mousedown', (e) => {
+  dragging = true; lastX = e.clientX; lastY = e.clientY;
+  viewport.classList.add('dragging');
+});
+window.addEventListener('mouseup', () => { dragging = false; viewport.classList.remove('dragging'); });
+window.addEventListener('mousemove', (e) => {
+  if (!dragging) return;
+  tx += e.clientX - lastX;
+  ty += e.clientY - lastY;
+  lastX = e.clientX; lastY = e.clientY;
+  applyTransform();
+});
+
+viewport.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const rect = viewport.getBoundingClientRect();
+  const cx = e.clientX - rect.left;
+  const cy = e.clientY - rect.top;
+
+  // scroll wheel / trackpad pinch always zooms around the cursor; drag handles panning.
+  const delta = -e.deltaY * 0.01;
+  const newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scale * (1 + delta)));
+  const worldX = (cx - tx) / scale;
+  const worldY = (cy - ty) / scale;
+  tx = cx - worldX * newScale;
+  ty = cy - worldY * newScale;
+  scale = newScale;
+  applyTransform();
+}, { passive:false });
+
+window.addEventListener('resize', fitToViewport);
+window.addEventListener('load', () => setTimeout(fitToViewport, 60));
+setTimeout(fitToViewport, 60);
+</script>
+
+</body>
+</html>

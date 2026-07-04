@@ -16,7 +16,8 @@ const ExpenseList = () => {
       currency: 'USD'
     }).format(total)}`,
     actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
-      className: "ff-btn"
+      className: "ff-btn",
+      onClick: () => ffGo('import')
     }, /*#__PURE__*/React.createElement(Icon, {
       name: "upload-simple",
       size: 14
@@ -26,7 +27,8 @@ const ExpenseList = () => {
       name: "download-simple",
       size: 14
     }), " Export"), /*#__PURE__*/React.createElement("button", {
-      className: "ff-btn ff-btn--primary"
+      className: "ff-btn ff-btn--primary",
+      onClick: () => ffGo('new-expense')
     }, /*#__PURE__*/React.createElement(Icon, {
       name: "plus",
       size: 14
@@ -83,7 +85,7 @@ const ExpenseList = () => {
     name: "magnifying-glass",
     size: 14
   }), /*#__PURE__*/React.createElement("input", {
-    placeholder: "Search expenses\u2026",
+    placeholder: "Search expenses…",
     value: q,
     onChange: e => setQ(e.target.value)
   })), /*#__PURE__*/React.createElement("select", {
@@ -123,8 +125,14 @@ const ExpenseList = () => {
   }))), /*#__PURE__*/React.createElement("tbody", null, filtered.map(e => {
     const cat = d.categories.find(c => c.id === e.cat);
     return /*#__PURE__*/React.createElement("tr", {
-      key: e.id
-    }, /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("input", {
+      key: e.id,
+      onClick: () => ffGo('expense-detail'),
+      style: {
+        cursor: 'pointer'
+      }
+    }, /*#__PURE__*/React.createElement("td", {
+      onClick: ev => ev.stopPropagation()
+    }, /*#__PURE__*/React.createElement("input", {
       type: "checkbox"
     })), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("span", {
       className: "ff-mono",
@@ -213,7 +221,8 @@ const ExpenseDetail = () => {
       name: "x",
       size: 14
     }), " Reject"), /*#__PURE__*/React.createElement("button", {
-      className: "ff-btn ff-btn--primary"
+      className: "ff-btn ff-btn--primary",
+      onClick: () => ffGo('state-success')
     }, /*#__PURE__*/React.createElement(Icon, {
       name: "check",
       size: 14
@@ -262,7 +271,7 @@ const ExpenseDetail = () => {
     label: "Payment"
   }, /*#__PURE__*/React.createElement("span", {
     className: "ff-mono"
-  }, "\u2022\u2022\u2022\u2022 ", e.cardLast4)), /*#__PURE__*/React.createElement(DetailRow, {
+  }, "•••• ", e.cardLast4)), /*#__PURE__*/React.createElement(DetailRow, {
     label: "Memo"
   }, e.memo))), /*#__PURE__*/React.createElement(Card, {
     title: "Receipt",
@@ -303,7 +312,7 @@ const ExpenseDetail = () => {
       fontSize: 10,
       color: 'var(--ff-fg-muted)'
     }
-  }, "UNITED \xB7 receipt.pdf"), /*#__PURE__*/React.createElement("div", {
+  }, "UNITED · receipt.pdf"), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       bottom: 14,
@@ -320,7 +329,7 @@ const ExpenseDetail = () => {
       fontSize: 11,
       color: 'var(--ff-fg-muted)'
     }
-  }, "1 of 1 \xB7 receipt_2026-05-22_united.pdf \xB7 248 KB"))), /*#__PURE__*/React.createElement(Card, {
+  }, "1 of 1 · receipt_2026-05-22_united.pdf · 248 KB"))), /*#__PURE__*/React.createElement(Card, {
     title: "Activity",
     padded: false
   }, /*#__PURE__*/React.createElement("div", {
@@ -363,7 +372,7 @@ const ExpenseDetail = () => {
     style: {
       fontSize: 13
     }
-  }, /*#__PURE__*/React.createElement("strong", null, a.who), " \xB7 ", a.act), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("strong", null, a.who), " · ", a.act), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       color: 'var(--ff-fg-muted)'
@@ -461,7 +470,8 @@ const NewExpense = () => {
     actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
       className: "ff-btn"
     }, "Save draft"), /*#__PURE__*/React.createElement("button", {
-      className: "ff-btn ff-btn--primary"
+      className: "ff-btn ff-btn--primary",
+      onClick: () => ffGo('expenses')
     }, "Submit for approval"))
   }), /*#__PURE__*/React.createElement("div", {
     className: "ff-grid",
@@ -516,7 +526,7 @@ const NewExpense = () => {
     className: "ff-label"
   }, "Memo"), /*#__PURE__*/React.createElement("textarea", {
     className: "ff-textarea",
-    defaultValue: "SF \u2192 Austin (sales kickoff)"
+    defaultValue: "SF → Austin (sales kickoff)"
   })), /*#__PURE__*/React.createElement("div", {
     className: "ff-grid ff-grid--2"
   }, /*#__PURE__*/React.createElement("div", {
@@ -525,13 +535,13 @@ const NewExpense = () => {
     className: "ff-label"
   }, "Project / cost center"), /*#__PURE__*/React.createElement("select", {
     className: "ff-select"
-  }, /*#__PURE__*/React.createElement("option", null, "Sales \u2014 FY26"), /*#__PURE__*/React.createElement("option", null, "Marketing"), /*#__PURE__*/React.createElement("option", null, "R&D"))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("option", null, "Sales — FY26"), /*#__PURE__*/React.createElement("option", null, "Marketing"), /*#__PURE__*/React.createElement("option", null, "R&D"))), /*#__PURE__*/React.createElement("div", {
     className: "ff-field"
   }, /*#__PURE__*/React.createElement("label", {
     className: "ff-label"
   }, "Payment"), /*#__PURE__*/React.createElement("select", {
     className: "ff-select"
-  }, /*#__PURE__*/React.createElement("option", null, "FinFlow Card \xB7 \u2022\u2022\u2022\u2022 4112"), /*#__PURE__*/React.createElement("option", null, "Personal \u2014 request reimbursement")))))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("option", null, "FinFlow Card · •••• 4112"), /*#__PURE__*/React.createElement("option", null, "Personal — request reimbursement")))))), /*#__PURE__*/React.createElement("div", {
     className: "ff-stack",
     style: {
       '--ff-stack-gap': '16px'
@@ -564,11 +574,12 @@ const NewExpense = () => {
       fontSize: 12,
       color: 'var(--ff-fg-muted)'
     }
-  }, "PDF or image \xB7 OCR fills the form automatically"), /*#__PURE__*/React.createElement("button", {
+  }, "PDF or image · OCR fills the form automatically"), /*#__PURE__*/React.createElement("button", {
     className: "ff-btn ff-btn--sm",
     style: {
       marginTop: 6
-    }
+    },
+    onClick: () => ffGo('ocr')
   }, "Choose file"))), /*#__PURE__*/React.createElement(Card, {
     title: "Approval preview"
   }, /*#__PURE__*/React.createElement("div", {
@@ -589,24 +600,25 @@ const NewExpense = () => {
     }
   }, /*#__PURE__*/React.createElement(Avatar, {
     initials: "TV"
-  }), /*#__PURE__*/React.createElement("span", null, "Theo Vasquez \xB7 Head of Sales")), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("span", null, "Theo Vasquez · Head of Sales")), /*#__PURE__*/React.createElement("div", {
     className: "ff-row",
     style: {
       gap: 8
     }
   }, /*#__PURE__*/React.createElement(Avatar, {
     initials: "MO"
-  }), /*#__PURE__*/React.createElement("span", null, "Maren Okafor \xB7 Finance")))))));
+  }), /*#__PURE__*/React.createElement("span", null, "Maren Okafor · Finance")))))));
 };
 const OcrReview = () => {
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
     eyebrow: "Receipt OCR",
     title: "Review extracted data",
-    sub: "We've parsed the receipt \u2014 confirm the fields below.",
+    sub: "We've parsed the receipt — confirm the fields below.",
     actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
       className: "ff-btn"
     }, "Re-scan"), /*#__PURE__*/React.createElement("button", {
-      className: "ff-btn ff-btn--primary"
+      className: "ff-btn ff-btn--primary",
+      onClick: () => ffGo('expenses')
     }, "Save expense"))
   }), /*#__PURE__*/React.createElement("div", {
     className: "ff-grid",
@@ -654,13 +666,13 @@ const OcrReview = () => {
       marginBottom: 18,
       color: '#666'
     }
-  }, "Austin, TX \xB7 Folio 4471"), /*#__PURE__*/React.createElement("div", {
+  }, "Austin, TX · Folio 4471"), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       justifyContent: 'space-between',
       marginBottom: 4
     }
-  }, /*#__PURE__*/React.createElement("span", null, "Room 412 \u2014 3 nights"), /*#__PURE__*/React.createElement("span", null, "$1,140.00")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", null, "Room 412 — 3 nights"), /*#__PURE__*/React.createElement("span", null, "$1,140.00")), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       justifyContent: 'space-between',
@@ -690,7 +702,7 @@ const OcrReview = () => {
       textAlign: 'center',
       color: '#888'
     }
-  }, "VISA \u2022\u2022\u2022\u2022 4112 \xB7 05/21/26 14:08"), /*#__PURE__*/React.createElement("div", {
+  }, "VISA •••• 4112 · 05/21/26 14:08"), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       top: 78,
@@ -730,7 +742,7 @@ const OcrReview = () => {
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "sparkle",
     size: 12
-  }), " OCR confidence \xB7 94%")))), /*#__PURE__*/React.createElement(Card, null, /*#__PURE__*/React.createElement("div", {
+  }), " OCR confidence · 94%")))), /*#__PURE__*/React.createElement(Card, null, /*#__PURE__*/React.createElement("div", {
     className: "ff-stack",
     style: {
       '--ff-stack-gap': '14px'
@@ -754,11 +766,11 @@ const OcrReview = () => {
     confidence: 88
   }), /*#__PURE__*/React.createElement(OcrField, {
     label: "Card",
-    value: "VISA \u2022\u2022\u2022\u2022 4112",
+    value: "VISA •••• 4112",
     confidence: 96
   }), /*#__PURE__*/React.createElement(OcrField, {
     label: "Category (predicted)",
-    value: "Travel \xB7 Lodging",
+    value: "Travel · Lodging",
     confidence: 91
   })), /*#__PURE__*/React.createElement("div", {
     className: "ff-alert ff-alert--warn",
@@ -803,9 +815,9 @@ const OcrField = ({
 }));
 const FlaggedExpense = () => {
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
-    eyebrow: "Expense \xB7 Policy violation",
-    title: "Marriott Austin \u2014 flagged",
-    sub: "EXP-2839 \xB7 Luna Park \xB7 May 21, 2026",
+    eyebrow: "Expense · Policy violation",
+    title: "Marriott Austin — flagged",
+    sub: "EXP-2839 · Luna Park · May 21, 2026",
     actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
       className: "ff-btn"
     }, /*#__PURE__*/React.createElement(Icon, {
@@ -835,7 +847,7 @@ const FlaggedExpense = () => {
     className: "ff-alert__body"
   }, /*#__PURE__*/React.createElement("div", {
     className: "ff-alert__title"
-  }, "3 policy violations detected"), /*#__PURE__*/React.createElement("div", null, "Hotel rate $413/night (cap $300) \xB7 Stay extended past sanctioned trip window \xB7 Missing project code"))), /*#__PURE__*/React.createElement("div", {
+  }, "3 policy violations detected"), /*#__PURE__*/React.createElement("div", null, "Hotel rate $413/night (cap $300) · Stay extended past sanctioned trip window · Missing project code"))), /*#__PURE__*/React.createElement("div", {
     className: "ff-grid",
     style: {
       gridTemplateColumns: '1.6fr 1fr',
@@ -879,7 +891,7 @@ const FlaggedExpense = () => {
     }
   }), /*#__PURE__*/React.createElement(DetailRow, {
     label: "Nights"
-  }, "3 \xD7 $413.33"), /*#__PURE__*/React.createElement("div", {
+  }, "3 × $413.33"), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 12
     }
@@ -900,7 +912,7 @@ const FlaggedExpense = () => {
     title: "Override note"
   }, /*#__PURE__*/React.createElement("textarea", {
     className: "ff-textarea",
-    defaultValue: "Customer offsite \u2014 only room block available. Approving as one-time exception."
+    defaultValue: "Customer offsite — only room block available. Approving as one-time exception."
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 12,
@@ -946,11 +958,12 @@ const BulkImport = () => /*#__PURE__*/React.createElement(React.Fragment, null, 
     color: 'var(--ff-fg-muted)',
     marginTop: 4
   }
-}, "Up to 5,000 rows \xB7 UTF-8 \xB7 max 10 MB"), /*#__PURE__*/React.createElement("button", {
+}, "Up to 5,000 rows · UTF-8 · max 10 MB"), /*#__PURE__*/React.createElement("button", {
   className: "ff-btn ff-btn--primary",
   style: {
     marginTop: 18
-  }
+  },
+  onClick: () => ffGo('expenses')
 }, /*#__PURE__*/React.createElement(Icon, {
   name: "upload-simple",
   size: 14
@@ -981,3 +994,4 @@ Object.assign(window, {
   FlaggedExpense,
   BulkImport
 });
+

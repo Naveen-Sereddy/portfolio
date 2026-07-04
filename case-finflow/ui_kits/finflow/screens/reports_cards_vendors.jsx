@@ -10,7 +10,7 @@ const ReportsHome = () => {
         sub="Saved reports and finance close packets"
         actions={<>
           <button className="ff-btn"><Icon name="folder-open" size={14}/> Saved</button>
-          <button className="ff-btn ff-btn--primary"><Icon name="plus" size={14}/> Build report</button>
+          <button className="ff-btn ff-btn--primary" onClick={()=>ffGo('report-build')}><Icon name="plus" size={14}/> Build report</button>
         </>}
       />
       <div className="ff-grid ff-grid--kpis">
@@ -49,7 +49,7 @@ const ReportsHome = () => {
               ["Software vendors over $1K", "Dev P.", "Quarterly",    "Apr 1, 6:00 AM"],
               ["Marketing spend by campaign", "Iris C.", "Manual",     "May 20, 2:14 PM"]
             ].map(([n,o,s,l], i) => (
-              <tr key={i}><td><strong>{n}</strong></td><td>{o}</td><td>{s}</td><td className="ff-tnum" style={{color:'var(--ff-fg-muted)'}}>{l}</td><td><button className="ff-btn ff-btn--sm ff-btn--ghost">Run</button></td></tr>
+              <tr key={i}><td><strong>{n}</strong></td><td>{o}</td><td>{s}</td><td className="ff-tnum" style={{color:'var(--ff-fg-muted)'}}>{l}</td><td><button className="ff-btn ff-btn--sm ff-btn--ghost" onClick={()=>ffGo('saved-report')}>Run</button></td></tr>
             ))}
           </tbody>
         </table>
@@ -61,7 +61,7 @@ const ReportsHome = () => {
 const ReportBuilder = () => (
   <>
     <PageHead eyebrow="Reports · Build" title="Untitled report" sub="Drag dimensions and measures, then save"
-      actions={<><button className="ff-btn">Discard</button><button className="ff-btn ff-btn--primary"><Icon name="floppy-disk" size={14}/> Save report</button></>}/>
+      actions={<><button className="ff-btn" onClick={()=>ffGo('reports')}>Discard</button><button className="ff-btn ff-btn--primary" onClick={()=>ffGo('saved-report')}><Icon name="floppy-disk" size={14}/> Save report</button></>}/>
     <div className="ff-grid" style={{gridTemplateColumns:'260px 1fr 280px', gap:16}}>
       <Card title="Fields">
         <div className="ff-eyebrow" style={{margin:'6px 0'}}>Dimensions</div>
@@ -95,7 +95,7 @@ const SavedReport = () => {
   return (
     <>
       <PageHead eyebrow="Report" title="Monthly close packet — April FY26" sub="Generated May 1 · Owned by Maren Okafor"
-        actions={<><button className="ff-btn"><Icon name="arrow-clockwise" size={14}/> Re-run</button><button className="ff-btn"><Icon name="share-network" size={14}/> Share</button><button className="ff-btn ff-btn--primary"><Icon name="download-simple" size={14}/> Export PDF</button></>}/>
+        actions={<><button className="ff-btn"><Icon name="arrow-clockwise" size={14}/> Re-run</button><button className="ff-btn"><Icon name="share-network" size={14}/> Share</button><button className="ff-btn ff-btn--primary" onClick={()=>ffGo('export-report')}><Icon name="download-simple" size={14}/> Export PDF</button></>}/>
       <div className="ff-grid ff-grid--kpis">
         <KpiTile label="Total spend" value="$348.0K" delta="+9% vs Mar" trend="up"/>
         <KpiTile label="Reimbursed" value="$42.1K" delta="142 payouts" trend="up"/>
@@ -159,7 +159,7 @@ const CardsList = () => {
   return (
     <>
       <PageHead eyebrow="Cards" title="Corporate cards" sub={`${d.cards.length} cards · ${d.cards.filter(c=>c.status==='active').length} active`}
-        actions={<><button className="ff-btn"><Icon name="download-simple" size={14}/> Statement</button><button className="ff-btn ff-btn--primary"><Icon name="plus" size={14}/> Issue card</button></>}/>
+        actions={<><button className="ff-btn"><Icon name="download-simple" size={14}/> Statement</button><button className="ff-btn ff-btn--primary" onClick={()=>ffGo('issue-card')}><Icon name="plus" size={14}/> Issue card</button></>}/>
       <div className="ff-grid" style={{gridTemplateColumns:'repeat(3, 1fr)', gap:16}}>
         {d.cards.map(c => (
           <div key={c.id} className="ff-card" style={{overflow:'hidden'}}>
@@ -186,7 +186,7 @@ const CardsList = () => {
             <div style={{padding:16}}>
               <BudgetBar label="Used this month" budget={c.limit/1000} spent={c.spent/1000}/>
               <div className="ff-row" style={{marginTop:14, gap:8}}>
-                <button className="ff-btn ff-btn--sm" style={{flex:1}}>View</button>
+                <button className="ff-btn ff-btn--sm" style={{flex:1}} onClick={()=>ffGo('card-detail')}>View</button>
                 <button className="ff-btn ff-btn--sm">{c.status === 'frozen' ? 'Unfreeze' : 'Freeze'}</button>
               </div>
             </div>
@@ -291,7 +291,7 @@ const IssueCard = () => (
             <div><div style={{fontSize:10, opacity:0.7, textTransform:'uppercase'}}>Limit</div><div className="ff-tnum" style={{fontSize:13}}>$5,000</div></div>
           </div>
         </div>
-        <button className="ff-btn ff-btn--primary ff-btn--lg" style={{width:'100%', marginTop:16}}>Issue card</button>
+        <button className="ff-btn ff-btn--primary ff-btn--lg" style={{width:'100%', marginTop:16}} onClick={()=>ffGo('cards')}>Issue card</button>
       </Card>
     </div>
   </>
@@ -330,7 +330,7 @@ const VendorsList = () => {
           <thead><tr><th>Vendor</th><th>Category</th><th className="ff-num">YTD spend</th><th className="ff-num">Δ vs Q1</th><th>Top owner</th><th>Status</th></tr></thead>
           <tbody>
             {d.vendors.map(v => (
-              <tr key={v.id}>
+              <tr key={v.id} onClick={()=>ffGo('vendor-detail')} style={{cursor:'pointer'}}>
                 <td><div style={{fontWeight:500}}>{v.name}</div><div style={{fontSize:11, color:'var(--ff-fg-muted)'}}>vendor-{v.id.slice(1).padStart(4, '0')}@arcadialabs.co</div></td>
                 <td><span className="ff-badge ff-badge--neutral ff-badge--no-dot">{d.categories.find(c=>c.id===v.cat).name}</span></td>
                 <td className="ff-num"><Money value={v.spend}/></td>

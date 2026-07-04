@@ -1,30 +1,30 @@
-function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 /* FinFlow Screens — Dashboards (Finance Admin, Manager, Employee) */
 
 const FinanceDashboard = () => {
   const d = FF_DATA;
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
-    eyebrow: "Workspace \xB7 Finance Admin",
+    eyebrow: "Workspace · Finance Admin",
     title: "Good morning, Maren.",
-    sub: "Spend across Arcadia Labs \xB7 Fiscal week 22, FY 2026",
+    sub: "Spend across Arcadia Labs · Fiscal week 22, FY 2026",
     actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
       className: "ff-btn"
     }, /*#__PURE__*/React.createElement(Icon, {
       name: "download-simple",
       size: 14
     }), " Export"), /*#__PURE__*/React.createElement("button", {
-      className: "ff-btn ff-btn--primary"
+      className: "ff-btn ff-btn--primary",
+      onClick: () => ffGo('report-build')
     }, /*#__PURE__*/React.createElement(Icon, {
       name: "plus",
       size: 14
     }), " New report"))
   }), /*#__PURE__*/React.createElement("div", {
     className: "ff-grid ff-grid--kpis"
-  }, d.kpis.finance.map((k, i) => /*#__PURE__*/React.createElement(KpiTile, _extends({
-    key: i
-  }, k, {
+  }, d.kpis.finance.map((k, i) => /*#__PURE__*/React.createElement(KpiTile, {
+    key: i,
+    ...k,
     spark: i < 2 ? d.spendOverTime : null
-  })))), /*#__PURE__*/React.createElement("div", {
+  }))), /*#__PURE__*/React.createElement("div", {
     className: "ff-grid",
     style: {
       gridTemplateColumns: '2fr 1fr',
@@ -60,24 +60,25 @@ const FinanceDashboard = () => {
     }
   }), "Spend (K)"), /*#__PURE__*/React.createElement("span", {
     className: "ff-tnum"
-  }, "Peak \xB7 $67.2K \xB7 W22"), /*#__PURE__*/React.createElement("span", {
+  }, "Peak · $67.2K · W22"), /*#__PURE__*/React.createElement("span", {
     className: "ff-tnum"
-  }, "Avg \xB7 $51.4K / wk"))), /*#__PURE__*/React.createElement(Card, {
+  }, "Avg · $51.4K / wk"))), /*#__PURE__*/React.createElement(Card, {
     title: "Budget vs. spent",
     action: /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 12,
         color: 'var(--ff-fg-muted)'
       }
-    }, "FY26 \xB7 42% elapsed")
+    }, "FY26 · 42% elapsed")
   }, /*#__PURE__*/React.createElement("div", {
     className: "ff-stack",
     style: {
       '--ff-stack-gap': '14px'
     }
-  }, d.budgets.map((b, i) => /*#__PURE__*/React.createElement(BudgetBar, _extends({
-    key: i
-  }, b)))))), /*#__PURE__*/React.createElement("div", {
+  }, d.budgets.map((b, i) => /*#__PURE__*/React.createElement(BudgetBar, {
+    key: i,
+    ...b
+  }))))), /*#__PURE__*/React.createElement("div", {
     className: "ff-grid",
     style: {
       gridTemplateColumns: '1.4fr 1fr',
@@ -185,7 +186,7 @@ const FinanceDashboard = () => {
       style: {
         color: 'var(--ff-fg-muted)'
       }
-    }, "$", c.value.toFixed(1), "K \xB7 ", (c.value / total * 100).toFixed(0), "%"));
+    }, "$", c.value.toFixed(1), "K · ", (c.value / total * 100).toFixed(0), "%"));
   }))))), /*#__PURE__*/React.createElement(Card, {
     title: "Recent activity",
     style: {
@@ -220,9 +221,9 @@ const ManagerDashboard = () => {
   const d = FF_DATA;
   const pendingMine = d.expenses.filter(e => e.status === "pending" || e.status === "flagged");
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
-    eyebrow: "Workspace \xB7 Manager",
+    eyebrow: "Workspace · Manager",
     title: `${d.me.manager.name.split(' ')[0]}'s team — Sales`,
-    sub: "8 direct reports \xB7 $48.2K spent this month \xB7 82% of monthly budget",
+    sub: "8 direct reports · $48.2K spent this month · 82% of monthly budget",
     actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
       className: "ff-btn"
     }, /*#__PURE__*/React.createElement(Icon, {
@@ -237,11 +238,11 @@ const ManagerDashboard = () => {
     }), " Review ", pendingMine.length, " approvals"))
   }), /*#__PURE__*/React.createElement("div", {
     className: "ff-grid ff-grid--kpis"
-  }, d.kpis.manager.map((k, i) => /*#__PURE__*/React.createElement(KpiTile, _extends({
-    key: i
-  }, k, {
+  }, d.kpis.manager.map((k, i) => /*#__PURE__*/React.createElement(KpiTile, {
+    key: i,
+    ...k,
     spark: i === 0 ? d.spendOverTime : null
-  })))), /*#__PURE__*/React.createElement("div", {
+  }))), /*#__PURE__*/React.createElement("div", {
     className: "ff-grid",
     style: {
       gridTemplateColumns: '2fr 1fr',
@@ -309,7 +310,7 @@ const ManagerDashboard = () => {
       fontSize: 11,
       color: 'var(--ff-fg-muted)'
     }
-  }, e.who, " \xB7 ", e.id)), /*#__PURE__*/React.createElement("div", {
+  }, e.who, " · ", e.id)), /*#__PURE__*/React.createElement("div", {
     style: {
       textAlign: 'right'
     }
@@ -351,7 +352,7 @@ const ManagerDashboard = () => {
     }, /*#__PURE__*/React.createElement("button", {
       className: "ff-btn ff-btn--primary ff-btn--sm",
       onClick: () => ffGo('approvals')
-    }, "Approve ", quick.length, " item", quick.length === 1 ? '' : 's', " \xB7 ", new Intl.NumberFormat('en-US', {
+    }, "Approve ", quick.length, " item", quick.length === 1 ? '' : 's', " · ", new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD'
     }).format(quickTotal)), /*#__PURE__*/React.createElement("button", {
@@ -361,7 +362,7 @@ const ManagerDashboard = () => {
   })()), /*#__PURE__*/React.createElement(Card, {
     title: "Budget snapshot"
   }, /*#__PURE__*/React.createElement(BudgetBar, {
-    label: "Team \u2014 May",
+    label: "Team — May",
     budget: 60,
     spent: 48.2
   }), /*#__PURE__*/React.createElement("div", {
@@ -369,7 +370,7 @@ const ManagerDashboard = () => {
       height: 12
     }
   }), /*#__PURE__*/React.createElement(BudgetBar, {
-    label: "Travel \u2014 May",
+    label: "Travel — May",
     budget: 28,
     spent: 26.4
   })), /*#__PURE__*/React.createElement(Card, {
@@ -382,7 +383,7 @@ const ManagerDashboard = () => {
       color: 'var(--ff-fg-muted)',
       lineHeight: 1.7
     }
-  }, /*#__PURE__*/React.createElement("li", null, "Hotel cap for domestic stays is ", /*#__PURE__*/React.createElement("strong", null, "$300/night")), /*#__PURE__*/React.createElement("li", null, "Per diem meals: ", /*#__PURE__*/React.createElement("strong", null, "$75/day")), /*#__PURE__*/React.createElement("li", null, "Anything over $500 in advertising \u2192 CMO sign-off")))));
+  }, /*#__PURE__*/React.createElement("li", null, "Hotel cap for domestic stays is ", /*#__PURE__*/React.createElement("strong", null, "$300/night")), /*#__PURE__*/React.createElement("li", null, "Per diem meals: ", /*#__PURE__*/React.createElement("strong", null, "$75/day")), /*#__PURE__*/React.createElement("li", null, "Anything over $500 in advertising → CMO sign-off")))));
 };
 const EmployeeDashboard = () => {
   const d = FF_DATA;
@@ -392,21 +393,24 @@ const EmployeeDashboard = () => {
     title: `Hi, ${d.me.employee.name.split(' ')[0]}.`,
     sub: "Your expenses and reimbursements this month",
     actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
-      className: "ff-btn"
+      className: "ff-btn",
+      onClick: () => ffGo('ocr')
     }, /*#__PURE__*/React.createElement(Icon, {
       name: "upload-simple",
       size: 14
     }), " Upload receipt"), /*#__PURE__*/React.createElement("button", {
-      className: "ff-btn ff-btn--primary"
+      className: "ff-btn ff-btn--primary",
+      onClick: () => ffGo('new-expense')
     }, /*#__PURE__*/React.createElement(Icon, {
       name: "plus",
       size: 14
     }), " New expense"))
   }), /*#__PURE__*/React.createElement("div", {
     className: "ff-grid ff-grid--kpis"
-  }, d.kpis.employee.map((k, i) => /*#__PURE__*/React.createElement(KpiTile, _extends({
-    key: i
-  }, k)))), /*#__PURE__*/React.createElement("div", {
+  }, d.kpis.employee.map((k, i) => /*#__PURE__*/React.createElement(KpiTile, {
+    key: i,
+    ...k
+  }))), /*#__PURE__*/React.createElement("div", {
     className: "ff-grid",
     style: {
       gridTemplateColumns: '1.5fr 1fr',
@@ -472,13 +476,13 @@ const EmployeeDashboard = () => {
       textTransform: 'uppercase',
       opacity: 0.75
     }
-  }, "FinFlow \xB7 Virtual"), /*#__PURE__*/React.createElement("div", {
+  }, "FinFlow · Virtual"), /*#__PURE__*/React.createElement("div", {
     className: "ff-mono",
     style: {
       fontSize: 18,
       letterSpacing: '0.12em'
     }
-  }, "\u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 9032"), /*#__PURE__*/React.createElement("div", {
+  }, "•••• •••• •••• 9032"), /*#__PURE__*/React.createElement("div", {
     className: "ff-row",
     style: {
       justifyContent: 'space-between'
@@ -542,10 +546,11 @@ const EmployeeDashboard = () => {
       fontSize: 13,
       marginTop: 6
     }
-  }, "RB-104 \xB7 Direct deposit \xB7 arrives May 30")))));
+  }, "RB-104 · Direct deposit · arrives May 30")))));
 };
 Object.assign(window, {
   FinanceDashboard,
   ManagerDashboard,
   EmployeeDashboard
 });
+
