@@ -666,7 +666,14 @@ const OcrReview = () => {
       marginBottom: 18,
       color: '#666'
     }
-  }, "Austin, TX · Folio 4471"), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      background: 'oklch(0.72 0.14 75 / 0.25)',
+      border: '1px solid oklch(0.72 0.14 75)',
+      borderRadius: 3,
+      padding: '2px 6px'
+    }
+  }, "Austin, TX · Folio 4471")), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       justifyContent: 'space-between',
@@ -696,35 +703,20 @@ const OcrReview = () => {
       justifyContent: 'space-between',
       fontWeight: 600
     }
-  }, /*#__PURE__*/React.createElement("span", null, "TOTAL"), /*#__PURE__*/React.createElement("span", null, "$1,240.00")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", null, "TOTAL"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      background: 'oklch(0.72 0.14 75 / 0.25)',
+      border: '1px solid oklch(0.72 0.14 75)',
+      borderRadius: 3,
+      padding: '1px 6px'
+    }
+  }, "$1,240.00")), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 18,
       textAlign: 'center',
       color: '#888'
     }
-  }, "VISA •••• 4112 · 05/21/26 14:08"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      top: 78,
-      left: 14,
-      right: 14,
-      height: 18,
-      background: 'oklch(0.72 0.14 75 / 0.25)',
-      border: '1px solid oklch(0.72 0.14 75)',
-      borderRadius: 3
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      top: 180,
-      left: 14,
-      right: 14,
-      height: 18,
-      background: 'oklch(0.72 0.14 75 / 0.25)',
-      border: '1px solid oklch(0.72 0.14 75)',
-      borderRadius: 3
-    }
-  })), /*#__PURE__*/React.createElement("div", {
+  }, "VISA •••• 4112 · 05/21/26 14:08")), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       top: 10,

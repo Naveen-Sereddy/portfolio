@@ -290,16 +290,18 @@ const OcrReview = () => {
               {/* faux receipt */}
               <div style={{position:'absolute', inset:24, background:'#fff', borderRadius:4, boxShadow:'var(--ff-shadow-md)', padding:'24px 20px', color:'#15131A', fontSize:11, fontFamily:'var(--ff-font-mono)'}}>
                 <div style={{textAlign:'center', fontFamily:'var(--ff-font-display)', fontSize:22, marginBottom:14}}>MARRIOTT</div>
-                <div style={{textAlign:'center', marginBottom:18, color:'#666'}}>Austin, TX · Folio 4471</div>
+                <div style={{textAlign:'center', marginBottom:18, color:'#666'}}>
+                  <span style={{background:'oklch(0.72 0.14 75 / 0.25)', border:'1px solid oklch(0.72 0.14 75)', borderRadius:3, padding:'2px 6px'}}>Austin, TX · Folio 4471</span>
+                </div>
                 <div style={{display:'flex', justifyContent:'space-between', marginBottom:4}}><span>Room 412 — 3 nights</span><span>$1,140.00</span></div>
                 <div style={{display:'flex', justifyContent:'space-between', marginBottom:4}}><span>Resort fee</span><span>$45.00</span></div>
                 <div style={{display:'flex', justifyContent:'space-between', marginBottom:4}}><span>Tax</span><span>$55.00</span></div>
                 <hr style={{margin:'10px 0', border:'0', borderTop:'1px dashed #ccc'}}/>
-                <div style={{display:'flex', justifyContent:'space-between', fontWeight:600}}><span>TOTAL</span><span>$1,240.00</span></div>
+                <div style={{display:'flex', justifyContent:'space-between', fontWeight:600}}>
+                  <span>TOTAL</span>
+                  <span style={{background:'oklch(0.72 0.14 75 / 0.25)', border:'1px solid oklch(0.72 0.14 75)', borderRadius:3, padding:'1px 6px'}}>$1,240.00</span>
+                </div>
                 <div style={{marginTop:18, textAlign:'center', color:'#888'}}>VISA •••• 4112 · 05/21/26 14:08</div>
-                {/* Highlights */}
-                <div style={{position:'absolute', top:78, left:14, right:14, height:18, background:'oklch(0.72 0.14 75 / 0.25)', border:'1px solid oklch(0.72 0.14 75)', borderRadius:3}}/>
-                <div style={{position:'absolute', top:180, left:14, right:14, height:18, background:'oklch(0.72 0.14 75 / 0.25)', border:'1px solid oklch(0.72 0.14 75)', borderRadius:3}}/>
               </div>
               <div style={{position:'absolute', top:10, right:10, background:'var(--ff-card)', border:'1px solid var(--ff-border)', borderRadius:6, padding:'4px 8px', fontSize:11, color:'var(--ff-fg-muted)', display:'flex', gap:8, alignItems:'center'}}>
                 <Icon name="sparkle" size={12}/> OCR confidence · 94%

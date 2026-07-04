@@ -294,7 +294,7 @@ const SavedReport = () => {
     title: "By category"
   }, /*#__PURE__*/React.createElement(BarChart, {
     data: d.categoryBreakdown.map(c => ({
-      cat: d.categories.find(x => x.id === c.cat).name.slice(0, 4),
+      cat: d.categories.find(x => x.id === c.cat).name,
       value: c.value
     })),
     height: 240,
@@ -1001,7 +1001,7 @@ const VendorDetail = () => {
     label: "YTD Spend",
     value: `$${(v.spend / 1000).toFixed(1)}K`,
     delta: `${v.change > 0 ? '+' : ''}${v.change}% vs Q1`,
-    trend: v.change > 0 ? "down" : "up"
+    trend: v.change > 0 ? "up" : v.change < 0 ? "down" : "neutral"
   }), /*#__PURE__*/React.createElement(KpiTile, {
     label: "Transactions",
     value: "38",

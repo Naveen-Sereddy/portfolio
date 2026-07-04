@@ -107,7 +107,7 @@ const SavedReport = () => {
           <LineChart data={d.spendOverTime} height={240} unit="$"/>
         </Card>
         <Card title="By category">
-          <BarChart data={d.categoryBreakdown.map(c => ({ cat: d.categories.find(x=>x.id===c.cat).name.slice(0,4), value: c.value }))} height={240} unit="$"/>
+          <BarChart data={d.categoryBreakdown.map(c => ({ cat: d.categories.find(x=>x.id===c.cat).name, value: c.value }))} height={240} unit="$"/>
         </Card>
       </div>
     </>
@@ -356,7 +356,7 @@ const VendorDetail = () => {
       <PageHead eyebrow="Vendor" title={v.name} sub="EIN 47-2210331 · Tax type C-Corp · Net-30"
         actions={<><button className="ff-btn"><Icon name="paperclip" size={14}/> Contracts</button><button className="ff-btn"><Icon name="envelope" size={14}/> Message</button><button className="ff-btn ff-btn--primary">Pay vendor</button></>}/>
       <div className="ff-grid ff-grid--kpis">
-        <KpiTile label="YTD Spend" value={`$${(v.spend/1000).toFixed(1)}K`} delta={`${v.change>0?'+':''}${v.change}% vs Q1`} trend={v.change > 0 ? "down" : "up"}/>
+        <KpiTile label="YTD Spend" value={`$${(v.spend/1000).toFixed(1)}K`} delta={`${v.change>0?'+':''}${v.change}% vs Q1`} trend={v.change > 0 ? "up" : v.change < 0 ? "down" : "neutral"}/>
         <KpiTile label="Transactions" value="38" delta="3 this week" trend="neutral"/>
         <KpiTile label="Avg invoice" value="$1,086" delta="−4% vs Q1" trend="up"/>
         <KpiTile label="Open invoices" value="2" delta="Both within 30d" trend="neutral"/>
