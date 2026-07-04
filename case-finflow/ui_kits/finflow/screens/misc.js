@@ -51,7 +51,7 @@ const AuthLayout = ({
     lineHeight: 1.6,
     maxWidth: 380
   }
-}, "Expense submission, approvals, cards, and close packets \u2014 one workspace, built for finance teams that move fast."), /*#__PURE__*/React.createElement("div", {
+}, "Expense submission, approvals, cards, and close packets — one workspace, built for finance teams that move fast."), /*#__PURE__*/React.createElement("div", {
   style: {
     marginTop: 32,
     fontSize: 11,
@@ -59,7 +59,7 @@ const AuthLayout = ({
     letterSpacing: '0.08em',
     textTransform: 'uppercase'
   }
-}, "SOC 2 Type II \xB7 PCI DSS \xB7 GDPR")), /*#__PURE__*/React.createElement("div", {
+}, "SOC 2 Type II · PCI DSS · GDPR")), /*#__PURE__*/React.createElement("div", {
   style: {
     position: 'absolute',
     right: -100,
@@ -96,7 +96,7 @@ const AuthLayout = ({
     fontSize: 12,
     opacity: 0.6
   }
-}, "\xA9 FinFlow \xB7 ", FF_DATA.company.fiscalYear)), /*#__PURE__*/React.createElement("main", {
+}, "© FinFlow · ", FF_DATA.company.fiscalYear)), /*#__PURE__*/React.createElement("main", {
   style: {
     display: 'flex',
     alignItems: 'center',
@@ -161,7 +161,8 @@ const SignIn = () => /*#__PURE__*/React.createElement(AuthLayout, {
   style: {
     width: '100%',
     justifyContent: 'center'
-  }
+  },
+  onClick: () => ffGo('sso')
 }, /*#__PURE__*/React.createElement(Icon, {
   name: "key",
   size: 16
@@ -200,7 +201,7 @@ const SignIn = () => /*#__PURE__*/React.createElement(AuthLayout, {
 }, "Password"), /*#__PURE__*/React.createElement("input", {
   className: "ff-input ff-input--lg",
   type: "password",
-  defaultValue: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
+  defaultValue: "••••••••••"
 })), /*#__PURE__*/React.createElement("div", {
   className: "ff-row",
   style: {
@@ -222,19 +223,28 @@ const SignIn = () => /*#__PURE__*/React.createElement(AuthLayout, {
   style: {
     fontSize: 13,
     whiteSpace: 'nowrap'
+  },
+  onClick: ev => {
+    ev.preventDefault();
+    ffGo('forgot');
   }
 }, "Forgot password?")), /*#__PURE__*/React.createElement("button", {
   className: "ff-btn ff-btn--primary ff-btn--lg",
   style: {
     width: '100%'
-  }
+  },
+  onClick: () => ffGo('dashboard')
 }, "Sign in")));
 const SSOWorkspace = () => /*#__PURE__*/React.createElement(AuthLayout, {
   title: "Find your workspace",
   sub: "Enter your work email or workspace URL.",
   foot: /*#__PURE__*/React.createElement("a", {
-    href: "#"
-  }, "\u2190 Back to sign in")
+    href: "#",
+    onClick: ev => {
+      ev.preventDefault();
+      ffGo('signin');
+    }
+  }, "← Back to sign in")
 }, /*#__PURE__*/React.createElement("div", {
   className: "ff-stack",
   style: {
@@ -271,7 +281,8 @@ const SSOWorkspace = () => /*#__PURE__*/React.createElement(AuthLayout, {
   className: "ff-btn ff-btn--primary ff-btn--lg",
   style: {
     width: '100%'
-  }
+  },
+  onClick: () => ffGo('dashboard')
 }, "Continue with SSO"), /*#__PURE__*/React.createElement("div", {
   className: "ff-alert ff-alert--info"
 }, /*#__PURE__*/React.createElement(Icon, {
@@ -287,8 +298,12 @@ const ForgotPassword = () => /*#__PURE__*/React.createElement(AuthLayout, {
   title: "Reset password",
   sub: "We'll email you a secure link.",
   foot: /*#__PURE__*/React.createElement("a", {
-    href: "#"
-  }, "\u2190 Back to sign in")
+    href: "#",
+    onClick: ev => {
+      ev.preventDefault();
+      ffGo('signin');
+    }
+  }, "← Back to sign in")
 }, /*#__PURE__*/React.createElement("div", {
   className: "ff-stack",
   style: {
@@ -305,7 +320,8 @@ const ForgotPassword = () => /*#__PURE__*/React.createElement(AuthLayout, {
   className: "ff-btn ff-btn--primary ff-btn--lg",
   style: {
     width: '100%'
-  }
+  },
+  onClick: () => ffGo('reset')
 }, "Send reset link")));
 const ResetPassword = () => /*#__PURE__*/React.createElement(AuthLayout, {
   title: "Set a new password",
@@ -323,7 +339,7 @@ const ResetPassword = () => /*#__PURE__*/React.createElement(AuthLayout, {
 }, "New password"), /*#__PURE__*/React.createElement("input", {
   className: "ff-input ff-input--lg",
   type: "password",
-  defaultValue: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
+  defaultValue: "••••••••••••••"
 })), /*#__PURE__*/React.createElement("div", {
   className: "ff-field"
 }, /*#__PURE__*/React.createElement("label", {
@@ -331,7 +347,7 @@ const ResetPassword = () => /*#__PURE__*/React.createElement(AuthLayout, {
 }, "Confirm password"), /*#__PURE__*/React.createElement("input", {
   className: "ff-input ff-input--lg",
   type: "password",
-  defaultValue: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
+  defaultValue: "••••••••••••••"
 })), /*#__PURE__*/React.createElement("div", {
   style: {
     fontSize: 12,
@@ -367,7 +383,8 @@ const ResetPassword = () => /*#__PURE__*/React.createElement(AuthLayout, {
   className: "ff-btn ff-btn--primary ff-btn--lg",
   style: {
     width: '100%'
-  }
+  },
+  onClick: () => ffGo('signin')
 }, "Update password")));
 
 /* ---------- Onboarding ---------- */
@@ -377,7 +394,8 @@ const OnboardingShell = ({
   children,
   title,
   sub,
-  next
+  next,
+  nextId
 }) => /*#__PURE__*/React.createElement("div", {
   style: {
     maxWidth: 840,
@@ -408,7 +426,7 @@ const OnboardingShell = ({
   className: "ff-step__line"
 }))))), /*#__PURE__*/React.createElement("div", {
   className: "ff-eyebrow"
-}, "Onboarding \xB7 ", step + 1, " of 3"), /*#__PURE__*/React.createElement("h1", {
+}, "Onboarding · ", step + 1, " of 3"), /*#__PURE__*/React.createElement("h1", {
   style: {
     fontFamily: 'var(--ff-font-sans)',
     fontWeight: 700,
@@ -436,13 +454,15 @@ const OnboardingShell = ({
 }, /*#__PURE__*/React.createElement("button", {
   className: "ff-btn ff-btn--ghost"
 }, "Skip for now"), /*#__PURE__*/React.createElement("button", {
-  className: "ff-btn ff-btn--primary ff-btn--lg"
+  className: "ff-btn ff-btn--primary ff-btn--lg",
+  onClick: () => ffGo(nextId)
 }, next)));
 const ConnectBank = () => /*#__PURE__*/React.createElement(OnboardingShell, {
   step: 0,
   title: "Connect a bank or card program",
   sub: "Pull statements automatically and start issuing FinFlow cards. We use read-only access by default.",
-  next: "Continue \u2192"
+  next: "Continue →",
+  nextId: "onb-team"
 }, /*#__PURE__*/React.createElement("div", {
   className: "ff-grid ff-grid--3"
 }, [{
@@ -509,7 +529,8 @@ const InviteTeam = () => /*#__PURE__*/React.createElement(OnboardingShell, {
   step: 1,
   title: "Invite your team",
   sub: "Send invites by email. Roles can be changed later.",
-  next: "Continue \u2192"
+  next: "Continue →",
+  nextId: "onb-policy"
 }, /*#__PURE__*/React.createElement(Card, null, /*#__PURE__*/React.createElement("div", {
   className: "ff-stack",
   style: {
@@ -575,8 +596,9 @@ const InviteTeam = () => /*#__PURE__*/React.createElement(OnboardingShell, {
 const SetPolicy = () => /*#__PURE__*/React.createElement(OnboardingShell, {
   step: 2,
   title: "Set your starter policy",
-  sub: "You can refine these later \u2014 these are sensible defaults for a Series B SaaS company.",
-  next: "Finish setup \u2192"
+  sub: "You can refine these later — these are sensible defaults for a Series B SaaS company.",
+  next: "Finish setup →",
+  nextId: "dashboard"
 }, /*#__PURE__*/React.createElement(Card, null, /*#__PURE__*/React.createElement("div", {
   className: "ff-stack",
   style: {
@@ -707,7 +729,7 @@ const AuditLog = () => {
     name: "magnifying-glass",
     size: 14
   }), /*#__PURE__*/React.createElement("input", {
-    placeholder: "Search by actor or target\u2026"
+    placeholder: "Search by actor or target…"
   }))), /*#__PURE__*/React.createElement(Card, {
     padded: false
   }, /*#__PURE__*/React.createElement("table", {
@@ -738,7 +760,7 @@ const AuditLog = () => {
       fontSize: 11,
       color: 'var(--ff-fg-muted)'
     }
-  }, "10.0.4.221 \xB7 Chrome 128")))))));
+  }, "10.0.4.221 · Chrome 128")))))));
 };
 
 /* ---------- Notif Center ---------- */
@@ -882,7 +904,7 @@ const Help = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__P
   name: "magnifying-glass",
   size: 18
 }), /*#__PURE__*/React.createElement("input", {
-  placeholder: "Search FinFlow help\u2026",
+  placeholder: "Search FinFlow help…",
   style: {
     fontSize: 15
   }
@@ -937,7 +959,7 @@ const Help = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__P
     fontSize: 13,
     marginTop: 4
   }
-}, "Average response \xB7 4 minutes during business hours")), /*#__PURE__*/React.createElement("div", {
+}, "Average response · 4 minutes during business hours")), /*#__PURE__*/React.createElement("div", {
   className: "ff-row"
 }, /*#__PURE__*/React.createElement("button", {
   className: "ff-btn"
@@ -953,8 +975,8 @@ const Help = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__P
 
 /* ---------- States: loading / empty / error / success / confirmation ---------- */
 const LoadingDashboard = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
-  eyebrow: "Workspace \xB7 Finance Admin",
-  title: "Loading workspace\u2026",
+  eyebrow: "Workspace · Finance Admin",
+  title: "Loading workspace…",
   sub: " "
 }), /*#__PURE__*/React.createElement("div", {
   className: "ff-grid ff-grid--kpis"
@@ -1052,12 +1074,14 @@ const EmptyExpenses = () => /*#__PURE__*/React.createElement(React.Fragment, nul
     gap: 8
   }
 }, /*#__PURE__*/React.createElement("button", {
-  className: "ff-btn"
+  className: "ff-btn",
+  onClick: () => ffGo('import')
 }, /*#__PURE__*/React.createElement(Icon, {
   name: "upload-simple",
   size: 14
 }), " Import CSV"), /*#__PURE__*/React.createElement("button", {
-  className: "ff-btn ff-btn--primary"
+  className: "ff-btn ff-btn--primary",
+  onClick: () => ffGo('new-expense')
 }, /*#__PURE__*/React.createElement(Icon, {
   name: "plus",
   size: 14
@@ -1091,19 +1115,21 @@ const ErrorState = () => /*#__PURE__*/React.createElement(React.Fragment, null, 
     color: 'var(--ff-fg-subtle)',
     marginTop: 6
   }
-}, "err_id: fff_4b22 \xB7 503"), /*#__PURE__*/React.createElement("div", {
+}, "err_id: fff_4b22 · 503"), /*#__PURE__*/React.createElement("div", {
   className: "ff-row",
   style: {
     marginTop: 12,
     gap: 8
   }
 }, /*#__PURE__*/React.createElement("button", {
-  className: "ff-btn"
+  className: "ff-btn",
+  onClick: () => ffGo('dashboard')
 }, /*#__PURE__*/React.createElement(Icon, {
   name: "arrow-clockwise",
   size: 14
 }), " Retry"), /*#__PURE__*/React.createElement("button", {
-  className: "ff-btn ff-btn--primary"
+  className: "ff-btn ff-btn--primary",
+  onClick: () => ffGo('help')
 }, "Contact support")))));
 const SuccessApproval = () => {
   // EXP-2841 was just approved, so it leaves the open queue.
@@ -1143,7 +1169,7 @@ const SuccessApproval = () => {
       color: 'var(--ff-fg-muted)',
       marginTop: 8
     }
-  }, "EXP-2841 \xB7 United Airlines \xB7 $842.50 approved and routed to Finance for payment."), /*#__PURE__*/React.createElement("div", {
+  }, "EXP-2841 · United Airlines · $842.50 approved and routed to Finance for payment."), /*#__PURE__*/React.createElement("div", {
     className: "ff-row",
     style: {
       justifyContent: 'center',
@@ -1151,10 +1177,12 @@ const SuccessApproval = () => {
       gap: 8
     }
   }, /*#__PURE__*/React.createElement("button", {
-    className: "ff-btn"
+    className: "ff-btn",
+    onClick: () => ffGo('expense-detail')
   }, "View expense"), /*#__PURE__*/React.createElement("button", {
-    className: "ff-btn ff-btn--primary"
-  }, "Next in queue (", remaining, ") \u2192")));
+    className: "ff-btn ff-btn--primary",
+    onClick: () => ffGo('approvals')
+  }, "Next in queue (", remaining, ") →")));
 };
 const ConfirmReimbursement = () => /*#__PURE__*/React.createElement("div", {
   style: {
@@ -1222,7 +1250,8 @@ const ConfirmReimbursement = () => /*#__PURE__*/React.createElement("div", {
 }, /*#__PURE__*/React.createElement("button", {
   className: "ff-btn"
 }, "Download ACH receipt"), /*#__PURE__*/React.createElement("button", {
-  className: "ff-btn ff-btn--primary"
+  className: "ff-btn ff-btn--primary",
+  onClick: () => ffGo('dashboard')
 }, "Back to dashboard")));
 Object.assign(window, {
   SignIn,
@@ -1241,3 +1270,4 @@ Object.assign(window, {
   SuccessApproval,
   ConfirmReimbursement
 });
+
