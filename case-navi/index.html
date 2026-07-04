@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0d0404" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230d0404'/%3E%3Ctext x='16' y='21' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23d0923a' text-anchor='middle'%3ENS%3C/text%3E%3C/svg%3E" />
 <title>NAVI — UX Case Study · Naveen Sereddy</title>
 <meta name="description" content="NAVI: an AI financial wellness benefit embedded inside Slack and HR tools. Research-driven enterprise product design by Naveen Sereddy." />
 <link rel="canonical" href="https://naveen-sereddy.vercel.app/case-navi/" />
@@ -15,7 +17,7 @@
 <meta name="twitter:image" content="https://naveen-sereddy.vercel.app/case-navi/img/ui-web-dashboard.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <script>
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
   window.addEventListener("pageshow", function () { window.scrollTo(0, 0); });
@@ -34,7 +36,7 @@
   --container-w:1180px;
 }
 * { box-sizing:border-box; }
-html { font-size:16px; scroll-behavior:smooth; -webkit-font-smoothing:antialiased; background:var(--bg); color:var(--text); }
+html { font-size:17px; scroll-behavior:smooth; -webkit-font-smoothing:antialiased; background:var(--bg); color:var(--text); }
 body {
   margin:0; font-family:'Inter',system-ui,sans-serif;
   background:
@@ -43,10 +45,10 @@ body {
     var(--bg);
   background-attachment:fixed; min-height:100vh; line-height:1.55;
 }
-h1,h2,h3,h4 { font-family:'Cormorant Garamond',Georgia,serif; line-height:1.15; margin:0; color:var(--text); letter-spacing:-.01em; }
+h1,h2,h3 { font-family:'Cormorant Garamond',Georgia,serif; line-height:1.15; margin:0; color:var(--text); letter-spacing:-.01em; }
 h1 { font-size:clamp(2.4rem,5vw,3.6rem); font-weight:500; letter-spacing:-.02em; max-width:22ch; }
 h2 { font-size:clamp(1.9rem,4vw,2.6rem); letter-spacing:-.015em; max-width:20ch; }
-h4 { font-size:1.05rem; margin:0 0 .4rem; }
+h3 { font-size:1.05rem; margin:0 0 .4rem; }
 p { margin:0; color:var(--text-2); }
 a { color:var(--text-2); text-decoration:none; transition:color 280ms var(--ease); }
 a:hover { color:var(--accent); }
@@ -108,12 +110,12 @@ img { max-width:100%; display:block; }
 @media (max-width:760px) { .insight-grid { grid-template-columns:1fr; } }
 .insight-card { background:var(--bg-3); border:1px solid var(--border); border-radius:1rem; padding:var(--sp-4) var(--sp-4); }
 .insight-num { font-family:'Cormorant Garamond',Georgia,serif; font-size:2.1rem; line-height:1; color:var(--accent); margin-bottom:var(--sp-2); }
-.insight-card h4 { font-size:1rem; }
+.insight-card h3 { font-size:1rem; }
 .insight-card p { font-size:.9rem; margin-top:.35rem; }
 
 /* pivot callout */
 .pivot-box { background:linear-gradient(135deg,rgba(208,146,58,0.08),rgba(208,146,58,0.04)); border:1px solid rgba(208,146,58,0.22); border-radius:1rem; padding:var(--sp-4) var(--sp-5); margin-top:var(--sp-4); }
-.pivot-box h4 { color:var(--accent); margin-bottom:.5rem; font-size:1rem; }
+.pivot-box h3 { color:var(--accent); margin-bottom:.5rem; font-size:1rem; }
 .pivot-box p { font-size:.95rem; }
 
 /* generic image+note grid — used for lo-fi wireframe archives */
@@ -125,13 +127,13 @@ img { max-width:100%; display:block; }
 .note-rationale { display:flex; gap:.65rem; align-items:flex-start; }
 .rationale-bar { width:3px; flex-shrink:0; background:var(--accent); border-radius:2px; margin-top:.2rem; align-self:stretch; }
 .rationale-text { font-size:.88rem; color:var(--text-2); line-height:1.5; }
-.rationale-text strong { color:var(--accent); display:block; margin-bottom:.25rem; font-size:.8rem; font-family:'JetBrains Mono',ui-monospace,monospace; text-transform:uppercase; letter-spacing:.1em; }
+.rationale-text strong { color:var(--accent); display:block; margin-bottom:.25rem; font-size:.8rem; font-weight:500; font-family:'JetBrains Mono',ui-monospace,monospace; text-transform:uppercase; letter-spacing:.1em; }
 
 /* text-only insight notes (replaces removed sketch images) */
 .note-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--sp-4); margin-top:var(--sp-5); }
 @media (max-width:700px) { .note-grid { grid-template-columns:1fr; } }
 .note-card { background:var(--bg-3); border:1px solid var(--border); border-radius:1rem; padding:var(--sp-4); }
-.note-card h4 { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; color:var(--accent); margin-bottom:.5rem; }
+.note-card h3 { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; color:var(--accent); margin-bottom:.5rem; }
 .note-card p { font-size:.9rem; }
 
 /* design decisions (3-up) */
@@ -140,7 +142,7 @@ img { max-width:100%; display:block; }
 @media (max-width:640px) { .decision-grid { grid-template-columns:1fr; } }
 .decision-card { background:var(--bg-3); border:1px solid var(--border); border-radius:1rem; padding:var(--sp-4); }
 .decision-num { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.5rem; line-height:1; color:var(--accent); margin-bottom:.5rem; }
-.decision-card h4 { font-size:.95rem; margin-bottom:.35rem; }
+.decision-card h3 { font-size:.95rem; margin-bottom:.35rem; }
 .decision-card p { font-size:.88rem; }
 
 /* ── comparison frame: forces identical width+height for paired/grid screenshots ── */
@@ -203,7 +205,7 @@ img { max-width:100%; display:block; }
 .killed-copy p { font-size:.95rem; }
 .killed-copy p + p { margin-top:var(--sp-3); }
 .killed-reason { border-left:3px solid var(--accent); padding:.1rem 0 .1rem 1.1rem; margin-top:var(--sp-4); }
-.killed-reason h4 { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:.3rem; }
+.killed-reason h3 { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:.3rem; }
 .killed-reason p { font-size:.92rem; }
 
 /* guided tour video */
@@ -235,6 +237,9 @@ img { max-width:100%; display:block; }
 .footer-links a { color:var(--text-3); letter-spacing:.08em; text-transform:uppercase; }
 .footer-links a:hover { color:var(--accent); }
 
+.skip-link { position:fixed; top:-40px; left:1rem; z-index:200; background:var(--accent); color:#110500; padding:.55rem 1rem; border-radius:.5rem; font-family:'Inter',system-ui,sans-serif; font-size:.85rem; font-weight:600; transition:top 200ms var(--ease); }
+.skip-link:focus { top:.75rem; }
+
 :focus-visible { outline:2px solid rgba(208,146,58,0.55); outline-offset:3px; border-radius:.35rem; }
 @media (prefers-reduced-motion:reduce) { * { animation-duration:.01ms!important; transition-duration:.01ms!important; scroll-behavior:auto!important; } }
 ::selection { background:rgba(208,146,58,0.25); color:var(--text); }
@@ -242,6 +247,7 @@ img { max-width:100%; display:block; }
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 
 <nav class="cs-nav" aria-label="Site navigation">
   <div class="cs-nav-inner">
@@ -250,7 +256,7 @@ img { max-width:100%; display:block; }
   </div>
 </nav>
 
-<main>
+<main id="main" tabindex="-1">
 
   <!-- 1. HERO -->
   <section class="section" style="padding-top:7.5rem">
@@ -320,24 +326,24 @@ img { max-width:100%; display:block; }
       <div class="insight-grid">
         <div class="insight-card">
           <div class="insight-num">01</div>
-          <h4>People don't open finance apps</h4>
+          <h3>People don't open finance apps</h3>
           <p>Every employee interviewed already had a finance tool — Mint, their bank app, a budget spreadsheet. None opened them regularly. "I live in Slack" was said by 9 of 12.</p>
         </div>
         <div class="insight-card">
           <div class="insight-num">02</div>
-          <h4>Embarrassment blocks activation</h4>
+          <h3>Embarrassment blocks activation</h3>
           <p>HR managers flagged that branding an app "financial wellness" triggers avoidance. Employees don't want colleagues knowing they signed up. Embedded tools remove that barrier — nothing to download, nothing visible.</p>
         </div>
         <div class="insight-card">
           <div class="insight-num">03</div>
-          <h4>Proactive beats reactive</h4>
+          <h3>Proactive beats reactive</h3>
           <p>Users consistently described wanting to be told when something needed attention — not to go looking for it. "If it just pinged me when I was off track, I'd trust it more than any dashboard."</p>
         </div>
       </div>
 
       <div class="prose" style="max-width:800px">
         <div class="pivot-box">
-          <h4>The Pivot</h4>
+          <h3>The Pivot</h3>
           <p>The original concept was a standalone financial wellness app. After the interviews, the design problem became clear: people don't open finance apps — they open Slack, their payroll portal, and HR dashboards. NAVI became an embedded AI agent that surfaces where attention already lives. Not an app. A benefit that finds you.</p>
         </div>
 
@@ -358,37 +364,37 @@ img { max-width:100%; display:block; }
 
         <div class="decision-card">
           <div class="decision-num">01</div>
-          <h4>Claymorphism, not flat UI</h4>
+          <h3>Claymorphism, not flat UI</h3>
           <p>My first visual pass was a dark, sharp fintech UI — it looked credible to me, and the first two test participants both called it "another bank app" unprompted. That reaction is exactly the avoidance the research warned about, so I threw the pass out. Soft 3D dome shadows, rounded clay surfaces, and sky-blue backgrounds create the "best friend who happens to know finance" register instead — and this became the single biggest driver of trust scores in testing.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">02</div>
-          <h4>"NAVI ANALYSIS," not "NAVI says"</h4>
+          <h3>"NAVI ANALYSIS," not "NAVI says"</h3>
           <p>Version one used chat bubbles with a friendly "NAVI says…" voice — in a workplace benefit it read as a toy, and one participant asked if it was "like a customer service bot." That comment killed the pattern. Every AI output became a labeled "NAVI ANALYSIS" block with a confidence percentage and a data source citation — system credibility, not personality. Testing participants described the rework as feeling "like a report from a trusted system."</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">03</div>
-          <h4>Human override on every card</h4>
+          <h3>Human override on every card</h3>
           <p>NAVI never acts. It proposes and waits. Every recommendation card has an Override button — a non-negotiable design rule. Financial anxiety peaks when people feel out of control. The override button is a design promise: the human is always in charge. Removing it in one test iteration caused a measurable drop in trust ratings.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">04</div>
-          <h4>13-month plan, not 12</h4>
+          <h3>13-month plan, not 12</h3>
           <p>When NAVI builds a savings plan, it recommends 13 months over the aspirational 12. Behavioral research shows calendar-year plans have higher dropout rates — they feel like New Year's resolutions. A 13-month timeline is counterintuitive enough to be memorable, and its odd framing signals that NAVI computed an actual timeline, not just rounded to a year.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">05</div>
-          <h4>Confidence scores everywhere</h4>
+          <h3>Confidence scores everywhere</h3>
           <p>Every AI recommendation surfaces a confidence percentage and the data it was based on. Transparency reduces skepticism and keeps users engaged with the system's reasoning rather than dismissing it. Participants spent significantly more time on cards that showed confidence breakdowns — and rated them as more trustworthy even when confidence was only 74%.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">06</div>
-          <h4>Privacy as a first-class surface</h4>
+          <h3>Privacy as a first-class surface</h3>
           <p>The Privacy &amp; Data screen is reachable within two taps from anywhere. It shows exactly what NAVI accessed and — critically — what it did NOT access. Negative disclosure ("NAVI cannot see your performance reviews or health claims") was the most trusted copy in testing. Privacy isn't in Settings. It's on the nav.</p>
         </div>
 
@@ -414,11 +420,11 @@ img { max-width:100%; display:block; }
         <div class="killed-copy">
           <p>Six KPI tiles. A 12-month trend line. A category donut. A merchant heatmap. A forecast band. It looked like a serious analytics product, and I was proud of it for about a week. Two things killed it:</p>
           <div class="killed-reason">
-            <h4>It couldn't survive Slack</h4>
+            <h3>It couldn't survive Slack</h3>
             <p>The Block Kit constraint allows no custom charts, max three actions, text-first. Every panel on this screen assumes a canvas that the primary delivery surface doesn't have. If the dashboard's core value was charts, the embedded version would always be a lesser product — backwards for an embedded-first strategy.</p>
           </div>
           <div class="killed-reason">
-            <h4>The research had already voted against it</h4>
+            <h3>The research had already voted against it</h3>
             <p>Insight 03 was "proactive beats reactive" — people wanted to be told when something needed attention, not to go exploring. This screen is a machine for exploring. It asks the user to do the analysis NAVI was supposed to do for them.</p>
           </div>
           <p style="margin-top:var(--sp-4)">What replaced it: one paycheck banner, one insight card with an action, one spending list. The final dashboard tells you what NAVI found — this one asked you to go find it yourself.</p>
@@ -648,19 +654,19 @@ img { max-width:100%; display:block; }
             </div>
             <div class="note-grid">
               <div class="note-card">
-                <h4>Split-screen onboarding</h4>
+                <h3>Split-screen onboarding</h3>
                 <p>Brand promise on the left ("Your money, finally making sense.") and activation steps on the right. The goal: employees see why NAVI exists before being asked to connect their payroll. Trust is established before data is requested.</p>
               </div>
               <div class="note-card">
-                <h4>Paycheck-anchored dashboard</h4>
+                <h3>Paycheck-anchored dashboard</h3>
                 <p>Paycheck data sits above everything — because the paycheck is NAVI's primary data source and the thing employees check first. Proactive AI insight card floats as a banner, never buried in a feed. The layout communicates: NAVI already knows what's happening.</p>
               </div>
               <div class="note-card">
-                <h4>Alert with goal impact</h4>
+                <h3>Alert with goal impact</h3>
                 <p>An anomaly isn't just flagged — it's connected to the user's goal. "Your dining spend is 50% above average. If unchanged, your emergency fund timeline shifts by one month." Three resolution paths replace a single dismiss button: the user stays in control of what happens next.</p>
               </div>
               <div class="note-card">
-                <h4>Slack Block Kit simulation</h4>
+                <h3>Slack Block Kit simulation</h3>
                 <p>The embedded surface sketch was the most constrained: max 3 actions, no custom charts, text-first. Every feature that couldn't survive Block Kit was either cut or simplified. This sketch became the pressure valve for the entire web design — if it didn't work here, it didn't work anywhere.</p>
               </div>
             </div>
@@ -712,19 +718,19 @@ img { max-width:100%; display:block; }
             </div>
             <div class="note-grid">
               <div class="note-card">
-                <h4>Single-screen onboarding</h4>
+                <h3>Single-screen onboarding</h3>
                 <p>No split screen — the phone can't afford it. Logo, bold headline, three benefit bullets, usability stat, and one full-width CTA. Pagination dots below suggest there are more steps. The user sees confidence before they're asked to connect their paycheck.</p>
               </div>
               <div class="note-card">
-                <h4>Paycheck-first home screen</h4>
+                <h3>Paycheck-first home screen</h3>
                 <p>One primary card: next paycheck, key financial stats, progress toward savings goal. The NAVI ANALYSIS card appears directly below — not in a feed, not buried, immediately actionable. Bottom nav labels confirm which tab is active; annotations explain every layout choice.</p>
               </div>
               <div class="note-card">
-                <h4>Goals as a living plan</h4>
+                <h3>Goals as a living plan</h3>
                 <p>Progress ring at top — the emotional anchor. NAVI PLAN card below it showing the 13-month timeline with three key figures. Next Actions list surfaces pending, completed, and queued steps. The screen tells you where you are and exactly what to do next.</p>
               </div>
               <div class="note-card">
-                <h4>Coach as a structured conversation</h4>
+                <h3>Coach as a structured conversation</h3>
                 <p>Not a chatbot. A coach. The NAVI ANALYSIS card carries a confidence score and shows exactly what data it used. Quick suggestion prompts below the response reduce the blank-page anxiety of "what do I even ask?" Annotations on the sketch show every component's role.</p>
               </div>
             </div>
@@ -784,7 +790,7 @@ img { max-width:100%; display:block; }
 
   <div id="board-lightbox" onclick="closeBoardLightbox()" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(6,2,1,0.92);cursor:zoom-out;overflow:auto;">
     <button onclick="closeBoardLightbox()" aria-label="Close" style="position:fixed;top:1.25rem;right:1.5rem;z-index:1000;background:var(--bg-3);border:1px solid var(--border-strong);color:var(--text);width:2.5rem;height:2.5rem;border-radius:50%;font-size:1.1rem;cursor:pointer;">✕</button>
-    <img id="board-lightbox-img" src="" alt="" style="display:block;width:max(180%,1400px);max-width:none;margin:2rem auto;" />
+    <img id="board-lightbox-img" alt="" style="display:block;width:max(180%,1400px);max-width:none;margin:2rem auto;" />
   </div>
   <script>
     function openBoardLightbox(src, alt) {
