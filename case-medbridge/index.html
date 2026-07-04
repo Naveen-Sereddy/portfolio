@@ -292,7 +292,18 @@ img { max-width:100%; display:block; }
       <div class="lofi-grid">
 
         <div class="lofi-item">
-          <img src="img/lofi-dashboard.jpg" alt="Lo-fi dashboard wireframe with KPI cards, appointments list, and health summary" loading="lazy" />
+          <img src="img/01-sign-in.png" alt="Lo-fi sign-in wireframe with email and password fields and Google SSO option" loading="lazy" />
+          <div class="sketch-rationale">
+            <div class="rationale-bar"></div>
+            <div class="rationale-text">
+              <strong>One clear path in, SSO as the escape hatch</strong>
+              The email/password form carries full visual weight; Google SSO sits below as a secondary option instead of competing for attention. Fewer decisions before a patient reaches their appointments.
+            </div>
+          </div>
+        </div>
+
+        <div class="lofi-item">
+          <img src="img/02-dashboard.png" alt="Lo-fi dashboard wireframe with KPI cards, appointments list, and health summary" loading="lazy" />
           <div class="sketch-rationale">
             <div class="rationale-bar"></div>
             <div class="rationale-text">
@@ -303,23 +314,23 @@ img { max-width:100%; display:block; }
         </div>
 
         <div class="lofi-item">
-          <img src="img/lofi-appointments-list.jpg" alt="Lo-fi appointments list wireframe with tab filters and appointment cards with inline actions" loading="lazy" />
+          <img src="img/03-appointments.png" alt="Lo-fi appointments wireframe with tab filters and a dense appointments table" loading="lazy" />
           <div class="sketch-rationale">
             <div class="rationale-bar"></div>
             <div class="rationale-text">
-              <strong>Status chips directly beside the doctor name</strong>
-              Confirmed/Pending/Pending appear as inline pill badges rather than in a separate column — because patients look at the doctor name first. Status beside the name means no eye travel across the row to understand the appointment state.
+              <strong>Tabbed status filtering over a dense table</strong>
+              Upcoming / Past / Cancelled tabs sit above a 14-row table instead of a status column patients have to scan — matching how people actually think about appointments: what's next, not what happened.
             </div>
           </div>
         </div>
 
         <div class="lofi-item">
-          <img src="img/lofi-appointments-calendar.jpg" alt="Lo-fi calendar wireframe with date dots for appointments and persistent day-detail sidebar" loading="lazy" />
+          <img src="img/04-book-appointment.png" alt="Lo-fi book appointment wireframe with provider, date, and time-slot steps and a persistent summary panel" loading="lazy" />
           <div class="sketch-rationale">
             <div class="rationale-bar"></div>
             <div class="rationale-text">
-              <strong>Dot indicators on appointment dates</strong>
-              Active date gets a filled dark background; days with existing appointments get a small dot below the number. Patients can scan the full month and know which days are already occupied before selecting a new booking date.
+              <strong>Three-step booking with a persistent summary</strong>
+              Provider → Date → Confirm keeps patients oriented across the flow, while the summary panel on the right locks in the selection so nothing gets lost switching between the date grid and time slots.
             </div>
           </div>
         </div>
@@ -342,7 +353,7 @@ img { max-width:100%; display:block; }
         </div>
         <div class="evolution-step lofi">
           <div class="evolution-label"><span class="dot"></span>Lo-Fi</div>
-          <img src="img/lofi-dashboard.jpg" alt="Digital lo-fi dashboard wireframe validating KPI layout and two-column structure" loading="lazy" />
+          <img src="img/02-dashboard.png" alt="Digital lo-fi dashboard wireframe validating KPI layout and two-column structure" loading="lazy" />
           <p>Digital wireframe validated the layout. Health Summary panel confirmed as the right complement to the appointments list.</p>
         </div>
         <div class="evolution-step final">
