@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<title>Page Transition System — Navigation Motion Study</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin:0; padding:0; height:100%; background:#0D0D0F; }
+    * { box-sizing:border-box; }
+    button { font-family:inherit; }
+  </style>
+</helmet>
+<div data-screen-label="Page Transition System" style="min-height:100vh;background:#0D0D0F;display:flex;flex-direction:column;position:relative;overflow-x:hidden;font-family:Inter,system-ui,sans-serif">
+
+  <div style="position:fixed;inset:0;background-image:radial-gradient(circle,#1b1b1f 1.2px, transparent 1.2px);background-size:24px 24px;opacity:0.55;pointer-events:none;z-index:0"></div>
+  <div style="position:fixed;inset:0;opacity:0.05;pointer-events:none;z-index:0;mix-blend-mode:overlay;background-image:url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'2\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E')"></div>
+
+  <div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:28px 40px 0">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="width:8px;height:8px;border-radius:2px;background:#0A84FF"></div>
+      <span style="color:#fff;font-weight:700;font-size:15px;letter-spacing:-0.01em">Transitions</span>
+      <span style="color:rgba(255,255,255,0.35);font-size:13px;font-weight:500">/ navigation demo</span>
+    </div>
+    <div style="color:rgba(255,255,255,0.4);font-size:13px;font-weight:600;letter-spacing:0.04em">{{currentLabel}} / 10</div>
+  </div>
+
+  <div style="position:relative;z-index:1;flex:1;display:flex;align-items:center;justify-content:center;padding:24px 20px">
+    <div ref="{{stageRef}}" style="position:relative;width:360px;height:680px;border-radius:44px;overflow:hidden;border:1px solid rgba(255,255,255,0.09);box-shadow:0 40px 100px rgba(0,0,0,0.55),inset 0 0 0 1px rgba(255,255,255,0.02);perspective:1400px;background:#0D0D0F">
+
+      <sc-for list="{{views}}" as="view" hint-placeholder-count="10">
+        <div ref="{{view.ref}}" style="{{view.style}}">
+
+          <sc-if value="{{view.showBack}}" hint-placeholder-val="{{false}}">
+            <button onClick="{{view.onBack}}" style="display:flex;align-items:center;gap:4px;background:none;border:none;color:rgba(255,255,255,0.5);font-size:15px;font-weight:500;padding:0;margin:0 0 28px;cursor:pointer">
+              <span style="font-size:20px;line-height:1">‹</span> Back
+            </button>
+          </sc-if>
+
+          <div style="font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;font-weight:800;font-size:{{view.titleSize}}px;color:#ffffff;letter-spacing:-0.03em;line-height:1.02">{{view.name}}</div>
+
+          <sc-if value="{{view.isHome}}" hint-placeholder-val="{{false}}">
+            <div style="display:flex;gap:9px;margin-top:26px">
+              <sc-for list="{{homeDots}}" as="d" hint-placeholder-count="9">
+                <div style="width:6px;height:6px;border-radius:50%;background:rgba(10,132,255,{{d.op}})"></div>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{view.showBack}}" hint-placeholder-val="{{false}}">
+            <div style="font-size:16px;color:rgba(255,255,255,0.42);margin-top:14px;max-width:250px;line-height:1.55;font-weight:400">{{view.desc}}</div>
+          </sc-if>
+
+        </div>
+      </sc-for>
+
+    </div>
+  </div>
+
+  <div style="position:relative;z-index:1;padding:20px 24px 40px;display:flex;flex-direction:column;align-items:center;gap:16px">
+    <div style="color:rgba(255,255,255,0.3);font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Tap a transition to navigate</div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:760px;width:100%">
+      <sc-for list="{{transitions}}" as="t" hint-placeholder-count="10">
+        <button onClick="{{t.onClick}}" disabled="{{busy}}" style="{{t.btnStyle}}" style-hover="{{t.btnHoverStyle}}">
+          <span style="font-size:11px;font-weight:700;color:#0A84FF;letter-spacing:0.05em">{{t.idLabel}}</span>
+          <span style="font-size:13px;font-weight:600;color:#fff">{{t.name}}</span>
+          <span style="font-size:11px;color:rgba(255,255,255,0.35);font-weight:500">{{t.durLabel}}</span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { current: 1, busy: false };
+  panelRefs = {};
+  stageRef = React.createRef();
+
+  views = [
+    { id: 1, name: 'Home', desc: '' },
+    { id: 2, name: 'Explore', desc: 'Discover new content curated for you' },
+    { id: 3, name: 'Library', desc: "Everything you've saved, in one place" },
+    { id: 4, name: 'Profile', desc: 'Manage your account and preferences' },
+    { id: 5, name: 'Messages', desc: 'Conversations with your team' },
+    { id: 6, name: 'Notifications', desc: 'Stay on top of what matters' },
+    { id: 7, name: 'Search', desc: 'Find anything, instantly' },
+    { id: 8, name: 'Favorites', desc: 'The things you come back to' },
+    { id: 9, name: 'Settings', desc: 'Fine-tune how the app behaves' },
+    { id: 10, name: 'Analytics', desc: 'Track performance over time' },
+  ];
+
+  transitions = [
+    { id: 1, name: 'Fade + Scale', dur: 500 },
+    { id: 2, name: 'Slide', dur: 400 },
+    { id: 3, name: 'Circle Reveal', dur: 600 },
+    { id: 4, name: '3D Flip', dur: 800 },
+    { id: 5, name: 'Staggered Grid', dur: 700 },
+    { id: 6, name: 'Blinds', dur: 600 },
+    { id: 7, name: 'Zoom Through', dur: 500 },
+    { id: 8, name: 'Morph Blob', dur: 700 },
+    { id: 9, name: 'Glitch', dur: 400 },
+    { id: 10, name: 'Stack', dur: 500 },
+  ];
+
+  setRef(id) {
+    return (el) => { if (el) this.panelRefs[id] = el; };
+  }
+
+  wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  twoPhase(el, fromStyle, toStyle, transitionCSS) {
+    el.style.transition = 'none';
+    Object.assign(el.style, fromStyle);
+    void el.offsetHeight;
+    el.style.transition = transitionCSS;
+    requestAnimationFrame(() => { Object.assign(el.style, toStyle); });
+  }
+
+  nextIdOf(c) { return c === 10 ? 1 : c + 1; }
+
+  async runTransition(typeId, e) {
+    if (this.state.busy) return;
+    const from = this.state.current;
+    const to = this.nextIdOf(from);
+    await this.animate(typeId, from, to, e);
+  }
+
+  async goBack() {
+    if (this.state.busy || this.state.current === 1) return;
+    await this.animate(1, this.state.current, 1, null);
+  }
+
+  async animate(typeId, from, to, e) {
+    this.setState({ busy: true });
+    const oldEl = this.panelRefs[from];
+    const newEl = this.panelRefs[to];
+    const stage = this.stageRef.current;
+    newEl.style.display = 'flex';
+    newEl.style.zIndex = '3';
+    oldEl.style.zIndex = '2';
+
+    switch (typeId) {
+      case 1: await this.tFadeScale(oldEl, newEl); break;
+      case 2: await this.tSlide(oldEl, newEl); break;
+      case 3: await this.tCircle(oldEl, newEl, e, stage); break;
+      case 4: await this.tFlip(oldEl, newEl); break;
+      case 5: await this.tGrid(oldEl, newEl, stage); break;
+      case 6: await this.tBlinds(oldEl, newEl, stage); break;
+      case 7: await this.tZoom(oldEl, newEl); break;
+      case 8: await this.tMorph(oldEl, newEl); break;
+      case 9: await this.tGlitch(oldEl, newEl, stage); break;
+      case 10: await this.tStack(oldEl, newEl); break;
+      default: break;
+    }
+
+    [oldEl, newEl].forEach(el => {
+      el.style.transition = '';
+      el.style.transform = '';
+      el.style.opacity = '';
+      el.style.filter = '';
+      el.style.clipPath = '';
+      el.style.borderRadius = '';
+      el.style.boxShadow = '';
+      el.style.zIndex = '';
+    });
+    oldEl.style.display = 'none';
+    this.setState({ current: to, busy: false });
+  }
+
+  tFadeScale(oldEl, newEl) {
+    const dur = 500, ease = 'cubic-bezier(.4,0,.2,1)';
+    this.twoPhase(oldEl, { opacity: '1', transform: 'scale(1)', filter: 'blur(0px)' }, { opacity: '0', transform: 'scale(0.85)', filter: 'blur(3px)' }, `opacity ${dur}ms ${ease}, transform ${dur}ms ${ease}, filter ${dur}ms ${ease}`);
+    this.twoPhase(newEl, { opacity: '0', transform: 'scale(1.08)' }, { opacity: '1', transform: 'scale(1)' }, `opacity ${dur}ms ${ease}, transform ${dur}ms ${ease}`);
+    return this.wait(dur);
+  }
+
+  tSlide(oldEl, newEl) {
+    const dur = 400, ease = 'cubic-bezier(.32,.72,0,1)';
+    this.twoPhase(oldEl, { transform: 'translateX(0)' }, { transform: 'translateX(-100%)' }, `transform ${dur}ms ${ease}`);
+    this.twoPhase(newEl, { transform: 'translateX(100%)', opacity: '1' }, { transform: 'translateX(0)' }, `transform ${dur}ms ${ease}`);
+    return this.wait(dur);
+  }
+
+  tCircle(oldEl, newEl, e, stage) {
+    const dur = 600, ease = 'cubic-bezier(.65,0,.35,1)';
+    const rect = stage.getBoundingClientRect();
+    let x = rect.width / 2, y = rect.height / 2;
+    if (e && typeof e.clientX === 'number' && e.clientX !== 0) { x = e.clientX - rect.left; y = e.clientY - rect.top; }
+    newEl.style.transition = 'none';
+    newEl.style.opacity = '1';
+    newEl.style.clipPath = `circle(0px at ${x}px ${y}px)`;
+    void newEl.offsetHeight;
+    newEl.style.transition = `clip-path ${dur}ms ${ease}`;
+    requestAnimationFrame(() => { newEl.style.clipPath = `circle(150% at ${x}px ${y}px)`; });
+    return this.wait(dur);
+  }
+
+  tFlip(oldEl, newEl) {
+    const dur = 800, ease = 'cubic-bezier(.4,0,.2,1)';
+    oldEl.style.backfaceVisibility = 'hidden';
+    newEl.style.backfaceVisibility = 'hidden';
+    newEl.style.opacity = '1';
+    this.twoPhase(oldEl, { transform: 'rotateY(0deg)' }, { transform: 'rotateY(-100deg)' }, `transform ${dur}ms ${ease}`);
+    this.twoPhase(newEl, { transform: 'rotateY(100deg)' }, { transform: 'rotateY(0deg)' }, `transform ${dur}ms ${ease}`);
+    return this.wait(dur);
+  }
+
+  tGrid(oldEl, newEl, stage) {
+    const dur = 700, cols = 4, rows = 4;
+    newEl.style.opacity = '1';
+    const rect = stage.getBoundingClientRect();
+    const cw = rect.width / cols, ch = rect.height / rows;
+    const tiles = [];
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const tile = document.createElement('div');
+        tile.style.position = 'absolute';
+        tile.style.left = (c * cw) + 'px';
+        tile.style.top = (r * ch) + 'px';
+        tile.style.width = cw + 'px';
+        tile.style.height = ch + 'px';
+        tile.style.background = '#141418';
+        tile.style.borderTop = '1px solid rgba(10,132,255,0.22)';
+        tile.style.borderLeft = '1px solid rgba(10,132,255,0.22)';
+        tile.style.zIndex = '4';
+        tile.style.opacity = '1';
+        tile.style.transform = 'scale(1)';
+        tile.style.transition = `opacity 300ms ease ${(r * cols + c) * 25}ms, transform 300ms ease ${(r * cols + c) * 25}ms`;
+        stage.appendChild(tile);
+        tiles.push(tile);
+      }
+    }
+    void stage.offsetHeight;
+    requestAnimationFrame(() => { tiles.forEach(t => { t.style.opacity = '0'; t.style.transform = 'scale(0.85)'; }); });
+    return this.wait(dur).then(() => tiles.forEach(t => t.remove()));
+  }
+
+  tBlinds(oldEl, newEl, stage) {
+    const dur = 600, strips = 8;
+    newEl.style.opacity = '1';
+    const rect = stage.getBoundingClientRect();
+    const sh = rect.height / strips;
+    const els = [];
+    for (let i = 0; i < strips; i++) {
+      const strip = document.createElement('div');
+      strip.style.position = 'absolute';
+      strip.style.left = '0';
+      strip.style.top = (i * sh) + 'px';
+      strip.style.width = '100%';
+      strip.style.height = sh + 'px';
+      strip.style.background = '#0D0D0F';
+      strip.style.borderBottom = '1px solid rgba(10,132,255,0.2)';
+      strip.style.zIndex = '4';
+      strip.style.transformOrigin = 'top';
+      strip.style.transform = 'scaleY(1)';
+      strip.style.transition = `transform 320ms cubic-bezier(.6,0,.4,1) ${i * 40}ms`;
+      stage.appendChild(strip);
+      els.push(strip);
+    }
+    void stage.offsetHeight;
+    requestAnimationFrame(() => { els.forEach(s => { s.style.transform = 'scaleY(0)'; }); });
+    return this.wait(dur).then(() => els.forEach(s => s.remove()));
+  }
+
+  tZoom(oldEl, newEl) {
+    const dur = 500, ease = 'ease-in-out';
+    this.twoPhase(oldEl, { transform: 'scale(1)', opacity: '1', filter: 'blur(0px)' }, { transform: 'scale(3)', opacity: '0', filter: 'blur(8px)' }, `transform ${dur}ms ${ease}, opacity ${dur}ms ${ease}, filter ${dur}ms ${ease}`);
+    this.twoPhase(newEl, { transform: 'scale(0.3)', opacity: '0' }, { transform: 'scale(1)', opacity: '1' }, `transform ${dur}ms ${ease}, opacity ${dur}ms ${ease}`);
+    return this.wait(dur);
+  }
+
+  tMorph(oldEl, newEl) {
+    const dur = 700, ease = 'cubic-bezier(.65,.05,.36,1)';
+    this.twoPhase(oldEl, { opacity: '1', transform: 'scale(1)' }, { opacity: '0', transform: 'scale(0.92)' }, `opacity ${dur}ms ease, transform ${dur}ms ease`);
+    this.twoPhase(newEl, { opacity: '0', transform: 'scale(0.3)', borderRadius: '62% 38% 55% 45% / 42% 60% 40% 58%' }, { opacity: '1', transform: 'scale(1)', borderRadius: '0px' }, `opacity ${dur}ms ${ease}, transform ${dur}ms ${ease}, border-radius ${dur}ms ${ease}`);
+    return this.wait(dur);
+  }
+
+  async tGlitch(oldEl, newEl, stage) {
+    const flash = document.createElement('div');
+    flash.style.position = 'absolute';
+    flash.style.inset = '0';
+    flash.style.zIndex = '5';
+    flash.style.pointerEvents = 'none';
+    flash.style.background = "repeating-linear-gradient(0deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px, transparent 1px, transparent 3px)";
+    flash.style.mixBlendMode = 'overlay';
+    flash.style.opacity = '0';
+    flash.style.transition = 'opacity 100ms linear';
+    stage.appendChild(flash);
+    requestAnimationFrame(() => { flash.style.opacity = '0.9'; });
+
+    this.twoPhase(oldEl, { transform: 'translate(0,0)', filter: 'hue-rotate(0deg) saturate(1)', opacity: '1' }, { transform: 'translate(-8px,0)', filter: 'hue-rotate(60deg) saturate(3) contrast(1.4)', opacity: '0' }, 'transform 180ms steps(3,end), filter 180ms linear, opacity 180ms linear');
+
+    await this.wait(150);
+    newEl.style.opacity = '1';
+    this.twoPhase(newEl, { transform: 'translate(8px,0)', filter: 'hue-rotate(-60deg) saturate(3)', opacity: '0' }, { transform: 'translate(0,0)', filter: 'hue-rotate(0deg) saturate(1)', opacity: '1' }, 'transform 220ms steps(3,end), filter 220ms linear, opacity 220ms linear');
+    flash.style.opacity = '0';
+    await this.wait(250);
+    flash.remove();
+  }
+
+  tStack(oldEl, newEl) {
+    const dur = 500, ease = 'cubic-bezier(.32,.72,0,1)';
+    this.twoPhase(oldEl, { transform: 'scale(1) translateY(0)', filter: 'brightness(1)' }, { transform: 'scale(0.92) translateY(-24px)', filter: 'brightness(0.7)' }, `transform ${dur}ms ${ease}, filter ${dur}ms ${ease}`);
+    this.twoPhase(newEl, { transform: 'translateY(100%)', boxShadow: '0 -20px 60px rgba(0,0,0,0.6)', opacity: '1' }, { transform: 'translateY(0)' }, `transform ${dur}ms ${ease}`);
+    return this.wait(dur);
+  }
+
+  renderVals() {
+    const current = this.state.current;
+    const busy = this.state.busy;
+
+    const views = this.views.map(v => ({
+      ...v,
+      showBack: v.id !== 1,
+      isHome: v.id === 1,
+      titleSize: v.id === 1 ? 72 : 44,
+      ref: this.setRef(v.id),
+      onBack: () => this.goBack(),
+      style: {
+        position: 'absolute', inset: '0', display: v.id === current ? 'flex' : 'none',
+        flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start',
+        padding: '0 34px', background: '#0D0D0F', zIndex: v.id === current ? 2 : 1,
+        backfaceVisibility: 'hidden',
+      },
+    }));
+
+    const homeDots = Array.from({ length: 9 }, (_, i) => ({ op: i === 0 ? 0.9 : 0.22 }));
+
+    const transitions = this.transitions.map(t => ({
+      ...t,
+      idLabel: String(t.id).padStart(2, '0'),
+      durLabel: `${t.dur}ms`,
+      onClick: (e) => this.runTransition(t.id, e),
+      btnStyle: {
+        display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '3px',
+        padding: '12px 14px', borderRadius: '12px', background: '#141418',
+        border: '1px solid rgba(255,255,255,0.08)', cursor: busy ? 'default' : 'pointer',
+        opacity: busy ? 0.45 : 1, transition: 'border-color 150ms ease, opacity 150ms ease',
+        textAlign: 'left',
+      },
+      btnHoverStyle: busy ? {} : { borderColor: 'rgba(10,132,255,0.55)' },
+    }));
+
+    return {
+      views, homeDots, transitions,
+      stageRef: this.stageRef,
+      currentLabel: String(current).padStart(2, '0'),
+      busy,
+    };
+  }
+}
+</script>
+</body>
+</html>

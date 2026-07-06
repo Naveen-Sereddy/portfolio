@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<title>Linear — Button & Interaction System</title>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0A0A0C; }
+    ::selection { background: var(--accent, #E281B1); color: #fff; }
+    input::placeholder { color: #55555C; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb, 226,129,177),0.45); }
+      50% { box-shadow: 0 0 0 8px rgba(var(--accent-rgb, 226,129,177),0); }
+    }
+    @keyframes drawCheck {
+      from { stroke-dashoffset: 24; }
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes successFlash {
+      0% { background-color: #16A34A; }
+      100% { background-color: #191A1F; }
+    }
+    @keyframes shakeX {
+      10%, 90% { transform: translateX(-1px); }
+      20%, 80% { transform: translateX(2px); }
+      30%, 50%, 70% { transform: translateX(-4px); }
+      40%, 60% { transform: translateX(4px); }
+    }
+    @keyframes heartPulse {
+      0% { transform: scale(1); }
+      35% { transform: scale(1.35); }
+      60% { transform: scale(0.92); }
+      100% { transform: scale(1); }
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(24px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes toastProgress {
+      from { width: 100%; }
+      to { width: 0%; }
+    }
+    @keyframes cardChildIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</helmet>
+
+<div style="background:#0A0A0C; min-height:100vh; font-family:'Inter',sans-serif; color:#F3F3F4; padding:64px 24px 120px; --accent:{{ accentColor }}; --accent-strong:{{ accentStrong }}; --accent-rgb:{{ accentRgb }}; --motion-bezier:{{ motionBezier }}; --motion-fast:{{ motionFast }}; --motion-slow:{{ motionSlow }}; --radius-btn-sm:{{ radiusBtnSm }}; --radius-btn-md:{{ radiusBtnMd }}; --radius-btn-lg:{{ radiusBtnLg }}; --radius-icon:{{ radiusIcon }}; --radius-card:{{ radiusCard }}; --radius-input:{{ radiusInput }}; --radius-box:{{ radiusBox }};">
+
+  <div style="max-width:920px; margin:0 auto 88px;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.08em; color:var(--accent, #E281B1); text-transform:uppercase; margin-bottom:14px;">Linear · Design System</div>
+    <h1 style="font-size:44px; font-weight:600; letter-spacing:-0.02em; margin:0 0 12px; color:#FFFFFF;">Button &amp; interaction system</h1>
+    <p style="font-size:16px; line-height:1.6; color:#8A8F98; max-width:560px; margin:0;">Every state below is live — hover, click, and focus each control to see the underlying motion. Purposeful transitions confirm actions, signal changes, and guide attention.</p>
+  </div>
+
+  <!-- SECTION 1: PRIMARY BUTTONS -->
+  <div style="max-width:920px; margin:0 auto 96px;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em; color:var(--accent, #E281B1); text-transform:uppercase; margin-bottom:8px;">01 / Primary Buttons</div>
+    <h2 style="font-size:22px; font-weight:600; margin:0 0 6px; color:#fff;">Hover, active, loading, success</h2>
+    <p style="font-size:14px; color:#8A8F98; margin:0 0 32px;">Click any button to run its loading → success cycle. Width is locked so nothing shifts.</p>
+
+    <div style="display:flex; align-items:center; gap:28px; flex-wrap:wrap; padding:40px; background:#111114; border:1px solid #1F1F23; border-radius:var(--radius-box, 16px);">
+
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <button onClick="{{ onSmClick }}" style="width:110px; height:32px; border-radius:var(--radius-btn-sm, 7px); border:none; background:{{ smBg }}; color:#fff; font-family:'Inter',sans-serif; font-weight:600; font-size:12px; display:flex; align-items:center; justify-content:center; gap:6px; cursor:{{ smCursor }}; transition:background 0.25s ease, transform var(--motion-fast, 0.18s) var(--motion-bezier, cubic-bezier(0.175,0.885,0.32,1.275)), box-shadow 0.18s ease; box-shadow:0 1px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.04) inset; animation:{{ smAnim }};" style-hover="{{ smHoverStyle }}" style-active="{{ smActiveStyle }}">
+          <sc-if value="{{ smIdle }}"><span>Deploy</span></sc-if>
+          <sc-if value="{{ smLoading }}"><div style="width:13px; height:13px; border-radius:50%; border:2px solid rgba(255,255,255,0.28); border-top-color:#fff; animation:spin 0.6s linear infinite;"></div></sc-if>
+          <sc-if value="{{ smSuccess }}">
+            <svg width="14" height="14" viewBox="0 0 24 24" key="{{ smKey }}"><path d="M5 13l4 4L19 7" style="fill:none; stroke:#fff; stroke-width:3.5; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:24; stroke-dashoffset:24; animation:drawCheck 0.35s cubic-bezier(0.65,0,0.35,1) forwards;"></path></svg>
+            <span>Done</span>
+          </sc-if>
+        </button>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#55555C;">small · 32px</span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <button onClick="{{ onMdClick }}" style="width:150px; height:42px; border-radius:var(--radius-btn-md, 8px); border:none; background:{{ mdBg }}; color:#fff; font-family:'Inter',sans-serif; font-weight:600; font-size:14px; display:flex; align-items:center; justify-content:center; gap:8px; cursor:{{ mdCursor }}; transition:background 0.25s ease, transform var(--motion-fast, 0.18s) var(--motion-bezier, cubic-bezier(0.175,0.885,0.32,1.275)), box-shadow 0.18s ease; box-shadow:0 2px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.04) inset; animation:{{ mdAnim }};" style-hover="{{ mdHoverStyle }}" style-active="{{ mdActiveStyle }}">
+          <sc-if value="{{ mdIdle }}"><span>Deploy</span></sc-if>
+          <sc-if value="{{ mdLoading }}"><div style="width:16px; height:16px; border-radius:50%; border:2px solid rgba(255,255,255,0.28); border-top-color:#fff; animation:spin 0.6s linear infinite;"></div></sc-if>
+          <sc-if value="{{ mdSuccess }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" key="{{ mdKey }}"><path d="M5 13l4 4L19 7" style="fill:none; stroke:#fff; stroke-width:3.5; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:24; stroke-dashoffset:24; animation:drawCheck 0.35s cubic-bezier(0.65,0,0.35,1) forwards;"></path></svg>
+            <span>Done</span>
+          </sc-if>
+        </button>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#55555C;">medium · 42px</span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <button onClick="{{ onLgClick }}" style="width:190px; height:52px; border-radius:var(--radius-btn-lg, 10px); border:none; background:{{ lgBg }}; color:#fff; font-family:'Inter',sans-serif; font-weight:600; font-size:15px; display:flex; align-items:center; justify-content:center; gap:9px; cursor:{{ lgCursor }}; transition:background 0.25s ease, transform var(--motion-fast, 0.18s) var(--motion-bezier, cubic-bezier(0.175,0.885,0.32,1.275)), box-shadow 0.18s ease; box-shadow:0 3px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.04) inset; animation:{{ lgAnim }};" style-hover="{{ lgHoverStyle }}" style-active="{{ lgActiveStyle }}">
+          <sc-if value="{{ lgIdle }}"><span>Deploy to production</span></sc-if>
+          <sc-if value="{{ lgLoading }}"><div style="width:18px; height:18px; border-radius:50%; border:2.5px solid rgba(255,255,255,0.28); border-top-color:#fff; animation:spin 0.6s linear infinite;"></div></sc-if>
+          <sc-if value="{{ lgSuccess }}">
+            <svg width="18" height="18" viewBox="0 0 24 24" key="{{ lgKey }}"><path d="M5 13l4 4L19 7" style="fill:none; stroke:#fff; stroke-width:3.5; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:24; stroke-dashoffset:24; animation:drawCheck 0.35s cubic-bezier(0.65,0,0.35,1) forwards;"></path></svg>
+            <span>Deployed</span>
+          </sc-if>
+        </button>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#55555C;">large · 52px</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 2: ICON BUTTONS -->
+  <div style="max-width:920px; margin:0 auto 96px;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em; color:var(--accent, #E281B1); text-transform:uppercase; margin-bottom:8px;">02 / Icon Buttons</div>
+    <h2 style="font-size:22px; font-weight:600; margin:0 0 6px; color:#fff;">Rotation, fill, bounce-back</h2>
+    <p style="font-size:14px; color:#8A8F98; margin:0 0 32px;">Small controls, big feedback. Scale bounces confirm the tap landed.</p>
+
+    <div style="display:flex; align-items:center; gap:20px; padding:40px; background:#111114; border:1px solid #1F1F23; border-radius:var(--radius-box, 16px);">
+
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <button style="width:44px; height:44px; border-radius:var(--radius-icon, 10px); border:1px solid #262629; background:#18181B; color:#C7C8CC; display:flex; align-items:center; justify-content:center; transition:background 0.2s ease, border-color 0.2s ease, transform var(--motion-fast, 0.15s) var(--motion-bezier, cubic-bezier(0.175,0.885,0.32,1.275));" style-hover="{ background:'#1F1F24', borderColor:'var(--accent, #E281B1)', color:'#fff' }" style-active="{ transform:'scale(0.8)' }">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" style="stroke:currentColor; stroke-width:2; stroke-linecap:round;"></path></svg>
+        </button>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#55555C;">plus</span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <button style="width:44px; height:44px; border-radius:var(--radius-icon, 10px); border:1px solid #262629; background:#18181B; color:#C7C8CC; display:flex; align-items:center; justify-content:center; transition:background 0.2s ease, border-color 0.2s ease, transform var(--motion-slow, 0.6s) var(--motion-bezier, cubic-bezier(0.175,0.885,0.32,1.275));" style-hover="{ background:'#1F1F24', borderColor:'var(--accent, #E281B1)', color:'#fff', transform:'rotate(180deg)' }" style-active="{ transform:'scale(0.8) rotate(180deg)' }">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" style="fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;"></path></svg>
+        </button>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#55555C;">arrow</span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <button onClick="{{ onToggleLike }}" style="width:44px; height:44px; border-radius:var(--radius-icon, 10px); border:1px solid #262629; background:#18181B; color:{{ heartColor }}; display:flex; align-items:center; justify-content:center; transition:background 0.2s ease, border-color 0.2s ease, transform var(--motion-fast, 0.15s) var(--motion-bezier, cubic-bezier(0.175,0.885,0.32,1.275)); animation:{{ heartAnim }};" style-hover="{ borderColor:'#EF4444' }" style-active="{ transform:'scale(0.8)' }">
+          <svg width="18" height="18" viewBox="0 0 24 24" key="{{ heartKey }}"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" style="fill:{{ heartFill }}; stroke:currentColor; stroke-width:1.4; stroke-linejoin:round; transition:fill 0.2s ease;"></path></svg>
+        </button>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#55555C;">heart</span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <button style="width:44px; height:44px; border-radius:var(--radius-icon, 10px); border:1px solid #262629; background:#18181B; color:#C7C8CC; display:flex; align-items:center; justify-content:center; transition:background 0.2s ease, border-color 0.2s ease, transform var(--motion-slow, 0.4s) var(--motion-bezier, cubic-bezier(0.175,0.885,0.32,1.275));" style-hover="{ background:'#1F1F24', borderColor:'var(--accent, #E281B1)', color:'#fff', transform:'rotate(75deg)' }" style-active="{ transform:'scale(0.8)' }">
+          <svg width="18" height="18" viewBox="0 0 24 24">
+            <path d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.646.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.76 6.76 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.93 6.93 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28z M15 12a3 3 0 11-6 0 3 3 0 016 0z" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round;"></path>
+          </svg>
+        </button>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#55555C;">settings</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 3: TOGGLES -->
+  <div style="max-width:920px; margin:0 auto 96px;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em; color:var(--accent, #E281B1); text-transform:uppercase; margin-bottom:8px;">03 / Toggle Switches</div>
+    <h2 style="font-size:22px; font-weight:600; margin:0 0 6px; color:#fff;">Elastic pill, morph, gradient</h2>
+    <p style="font-size:14px; color:#8A8F98; margin:0 0 32px;">Three takes on the same binary control.</p>
+
+    <div style="display:flex; gap:24px; flex-wrap:wrap;">
+
+      <div style="flex:1; min-width:220px; padding:28px; background:#111114; border:1px solid #1F1F23; border-radius:var(--radius-card, 14px); display:flex; flex-direction:column; align-items:flex-start; gap:18px;">
+        <span style="font-size:13px; color:#C7C8CC; font-weight:500;">Elastic pill</span>
+        <button onClick="{{ onToggle1 }}" style="width:52px; height:30px; border-radius:15px; border:none; background:{{ toggle1Bg }}; padding:3px; display:flex; justify-content:{{ toggle1Justify }}; cursor:pointer; transition:background 0.25s ease;">
+          <div style="width:24px; height:24px; border-radius:50%; background:#fff; transition:transform var(--motion-slow, 0.5s) var(--motion-bezier, cubic-bezier(0.175,0.885,0.32,1.275)); box-shadow:0 1px 3px rgba(0,0,0,0.3);"></div>
+        </button>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#55555C;">{{ toggle1Label }}</span>
+      </div>
+
+      <div style="flex:1; min-width:220px; padding:28px; background:#111114; border:1px solid #1F1F23; border-radius:var(--radius-card, 14px); display:flex; flex-direction:column; align-items:flex-start; gap:18px;">
+        <span style="font-size:13px; color:#C7C8CC; font-weight:500;">Circle → square morph</span>
+        <button onClick="{{ onToggle2 }}" style="width:52px; height:30px; border-radius:15px; border:none; background:{{ toggle2Bg }}; padding:3px; display:flex; justify-content:{{ toggle2Justify }}; cursor:pointer; transition:background 0.25s ease;">
+          <div style="width:24px; height:24px; border-radius:{{ toggle2Radius }}; background:#fff; transition:transform var(--motion-slow, 0.4s) var(--motion-bezier, cubic-bezier(0.175,0.885,0.32,1.275)), border-radius 0.3s ease; box-shadow:0 1px 3px rgba(0,0,0,0.3);"></div>
+        </button>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#55555C;">{{ toggle2Label }}</span>
+      </div>
+
+      <div style="flex:1; min-width:220px; padding:28px; background:#111114; border:1px solid #1F1F23; border-radius:var(--radius-card, 14px); display:flex; flex-direction:column; align-items:flex-start; gap:18px;">
+        <span style="font-size:13px; color:#C7C8CC; font-weight:500;">Gradient fill</span>
+        <button onClick="{{ onToggle3 }}" style="width:52px; height:30px; border-radius:15px; border:none; background-image:linear-gradient(90deg,#232326,#232326 50%,var(--accent, #E281B1) 50%,var(--accent, #E281B1)); background-size:200% 100%; background-position:{{ toggle3Pos }}; padding:3px; display:flex; justify-content:{{ toggle3Justify }}; cursor:pointer; transition:background-position var(--motion-slow, 0.5s) var(--motion-bezier, cubic-bezier(0.175,0.885,0.32,1.275));">
+          <div style="width:24px; height:24px; border-radius:50%; background:#fff; transition:transform var(--motion-slow, 0.5s) var(--motion-bezier, cubic-bezier(0.175,0.885,0.32,1.275)); box-shadow:0 1px 3px rgba(0,0,0,0.3);"></div>
+        </button>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#55555C;">{{ toggle3Label }}</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 4: INPUTS -->
+  <div style="max-width:920px; margin:0 auto 96px;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em; color:var(--accent, #E281B1); text-transform:uppercase; margin-bottom:8px;">04 / Input Fields</div>
+    <h2 style="font-size:22px; font-weight:600; margin:0 0 6px; color:#fff;">Focus, error, success, disabled</h2>
+    <p style="font-size:14px; color:#8A8F98; margin:0 0 32px;">Click into the first field. Use the replay buttons to re-trigger error and success states.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px;">
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <span style="font-size:12px; color:#8A8F98;">Focus</span>
+        <div style="position:relative;">
+          <input onFocus="{{ onFocusA }}" onBlur="{{ onBlurA }}" placeholder="Team name" style="width:100%; box-sizing:border-box; background:#111114; border:none; border-bottom:1px solid #262629; color:#fff; font-family:'Inter',sans-serif; font-size:14px; padding:10px 4px; outline:none;" />
+          <div style="position:absolute; left:50%; bottom:0; height:2px; width:{{ focusAWidth }}; transform:translateX(-50%); background:var(--accent, #E281B1); transition:width 0.3s ease-out;"></div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <span style="font-size:12px; color:#8A8F98;">Error</span>
+        <input key="{{ errorKey }}" defaultValue="workspace/prod" readonly="{{ true }}" style="width:100%; box-sizing:border-box; background:#111114; border:1px solid {{ errorBorder }}; color:#fff; font-family:'Inter',sans-serif; font-size:14px; border-radius:var(--radius-input, 7px); padding:10px 12px; outline:none; animation:{{ errorAnim }};" />
+        <button onClick="{{ onTriggerError }}" style="align-self:flex-start; background:none; border:none; color:#EF4444; font-size:12px; font-family:'JetBrains Mono',monospace; cursor:pointer; padding:0; transition:opacity 0.2s ease;" style-hover="{ opacity:0.7 }">↺ replay error</button>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <span style="font-size:12px; color:#8A8F98;">Success</span>
+        <div style="position:relative;">
+          <input defaultValue="handle-available" readonly="{{ true }}" style="width:100%; box-sizing:border-box; background:#111114; border:1px solid {{ successBorder }}; color:#fff; font-family:'Inter',sans-serif; font-size:14px; border-radius:var(--radius-input, 7px); padding:10px 34px 10px 12px; outline:none; transition:border-color 0.25s ease;" />
+          <sc-if value="{{ successActive }}">
+            <svg width="15" height="15" viewBox="0 0 24 24" key="{{ successKey }}" style="position:absolute; right:11px; top:50%; margin-top:-7px;"><path d="M5 13l4 4L19 7" style="fill:none; stroke:#22C55E; stroke-width:3.5; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:24; stroke-dashoffset:24; animation:drawCheck 0.35s cubic-bezier(0.65,0,0.35,1) forwards;"></path></svg>
+          </sc-if>
+        </div>
+        <button onClick="{{ onTriggerSuccess }}" style="align-self:flex-start; background:none; border:none; color:#22C55E; font-size:12px; font-family:'JetBrains Mono',monospace; cursor:pointer; padding:0; transition:opacity 0.2s ease;" style-hover="{ opacity:0.7 }">↺ replay success</button>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <span style="font-size:12px; color:#8A8F98;">Disabled</span>
+        <input defaultValue="locked/read-only" disabled="{{ true }}" style="width:100%; box-sizing:border-box; background:#111114; border:1px solid #1F1F23; color:#fff; font-family:'Inter',sans-serif; font-size:14px; border-radius:var(--radius-input, 7px); padding:10px 12px; outline:none; opacity:0.4; cursor:not-allowed;" />
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 5: CARDS -->
+  <div style="max-width:920px; margin:0 auto 96px;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em; color:var(--accent, #E281B1); text-transform:uppercase; margin-bottom:8px;">05 / Cards</div>
+    <h2 style="font-size:22px; font-weight:600; margin:0 0 6px; color:#fff;">Lift, deepen, stagger</h2>
+    <p style="font-size:14px; color:#8A8F98; margin:0 0 32px;">Hover a card — its contents reveal in sequence as the surface lifts.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px;">
+
+      <div onMouseEnter="{{ onCard0Enter }}" onMouseLeave="{{ onCard0Leave }}" style="padding:24px; background:#131316; border:1px solid #1F1F23; border-radius:var(--radius-card, 14px); transform:{{ card0Transform }}; box-shadow:{{ card0Shadow }}; transition:transform var(--motion-slow, 0.35s) var(--motion-bezier, cubic-bezier(0.175,0.885,0.32,1.275)), box-shadow 0.35s ease;">
+        <div style="width:32px; height:32px; border-radius:8px; background:var(--accent, #E281B1); margin-bottom:16px; opacity:{{ card0Op0 }}; transform:{{ card0T0 }}; transition:opacity 0.3s ease {{ card0Delay0 }}, transform 0.3s ease {{ card0Delay0 }};"></div>
+        <div style="font-size:15px; font-weight:600; color:#fff; margin-bottom:6px; opacity:{{ card0Op1 }}; transform:{{ card0T1 }}; transition:opacity 0.3s ease {{ card0Delay1 }}, transform 0.3s ease {{ card0Delay1 }};">Cycles</div>
+        <div style="font-size:13px; color:#8A8F98; line-height:1.5; opacity:{{ card0Op2 }}; transform:{{ card0T2 }}; transition:opacity 0.3s ease {{ card0Delay2 }}, transform 0.3s ease {{ card0Delay2 }};">Plan and track work in focused sprints.</div>
+      </div>
+
+      <div onMouseEnter="{{ onCard1Enter }}" onMouseLeave="{{ onCard1Leave }}" style="padding:24px; background:#131316; border:1px solid #1F1F23; border-radius:var(--radius-card, 14px); transform:{{ card1Transform }}; box-shadow:{{ card1Shadow }}; transition:transform var(--motion-slow, 0.35s) var(--motion-bezier, cubic-bezier(0.175,0.885,0.32,1.275)), box-shadow 0.35s ease;">
+        <div style="width:32px; height:32px; border-radius:8px; background:#22C55E; margin-bottom:16px; opacity:{{ card1Op0 }}; transform:{{ card1T0 }}; transition:opacity 0.3s ease {{ card1Delay0 }}, transform 0.3s ease {{ card1Delay0 }};"></div>
+        <div style="font-size:15px; font-weight:600; color:#fff; margin-bottom:6px; opacity:{{ card1Op1 }}; transform:{{ card1T1 }}; transition:opacity 0.3s ease {{ card1Delay1 }}, transform 0.3s ease {{ card1Delay1 }};">Triage</div>
+        <div style="font-size:13px; color:#8A8F98; line-height:1.5; opacity:{{ card1Op2 }}; transform:{{ card1T2 }}; transition:opacity 0.3s ease {{ card1Delay2 }}, transform 0.3s ease {{ card1Delay2 }};">Route new issues to the right owner.</div>
+      </div>
+
+      <div onMouseEnter="{{ onCard2Enter }}" onMouseLeave="{{ onCard2Leave }}" style="padding:24px; background:#131316; border:1px solid #1F1F23; border-radius:var(--radius-card, 14px); transform:{{ card2Transform }}; box-shadow:{{ card2Shadow }}; transition:transform var(--motion-slow, 0.35s) var(--motion-bezier, cubic-bezier(0.175,0.885,0.32,1.275)), box-shadow 0.35s ease;">
+        <div style="width:32px; height:32px; border-radius:8px; background:#EF4444; margin-bottom:16px; opacity:{{ card2Op0 }}; transform:{{ card2T0 }}; transition:opacity 0.3s ease {{ card2Delay0 }}, transform 0.3s ease {{ card2Delay0 }};"></div>
+        <div style="font-size:15px; font-weight:600; color:#fff; margin-bottom:6px; opacity:{{ card2Op1 }}; transform:{{ card2T1 }}; transition:opacity 0.3s ease {{ card2Delay1 }}, transform 0.3s ease {{ card2Delay1 }};">Insights</div>
+        <div style="font-size:13px; color:#8A8F98; line-height:1.5; opacity:{{ card2Op2 }}; transform:{{ card2T2 }}; transition:opacity 0.3s ease {{ card2Delay2 }}, transform 0.3s ease {{ card2Delay2 }};">Spot bottlenecks before they slip.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 6: TOASTS -->
+  <div style="max-width:920px; margin:0 auto;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em; color:var(--accent, #E281B1); text-transform:uppercase; margin-bottom:8px;">06 / Toast Notifications</div>
+    <h2 style="font-size:22px; font-weight:600; margin:0 0 6px; color:#fff;">Slide in, auto-dismiss, click to close</h2>
+    <p style="font-size:14px; color:#8A8F98; margin:0 0 32px;">Fires a toast with a live countdown. Click it to dismiss early.</p>
+
+    <button onClick="{{ onAddToast }}" style="height:40px; padding:0 20px; border-radius:var(--radius-btn-md, 8px); border:none; background:var(--accent, #E281B1); color:#fff; font-family:'Inter',sans-serif; font-weight:600; font-size:13px; cursor:pointer; transition:filter 0.2s ease, transform var(--motion-fast, 0.18s) var(--motion-bezier, cubic-bezier(0.175,0.885,0.32,1.275));" style-hover="{ filter:'brightness(1.1)', transform:'scale(1.02)' }" style-active="{ transform:'scale(0.95)' }">Show toast</button>
+  </div>
+
+  <div style="position:fixed; top:24px; right:24px; display:flex; flex-direction:column; gap:10px; z-index:1000;">
+    <sc-for list="{{ toasts }}" as="t" hint-placeholder-count="0">
+      <div onClick="{{ t.close }}" style="width:300px; background:#18181B; border:1px solid #262629; border-radius:var(--radius-card, 10px); padding:14px 16px; box-shadow:0 12px 32px rgba(0,0,0,0.5); cursor:pointer; animation:slideInRight var(--motion-slow, 0.4s) var(--motion-bezier, cubic-bezier(0.175,0.885,0.32,1.275)); overflow:hidden; position:relative;">
+        <div style="display:flex; gap:10px; align-items:flex-start;">
+          <div style="width:18px; height:18px; border-radius:50%; background:#22C55E; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
+            <svg width="10" height="10" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" style="fill:none; stroke:#0A0A0C; stroke-width:4; stroke-linecap:round; stroke-linejoin:round;"></path></svg>
+          </div>
+          <div>
+            <div style="font-size:13px; font-weight:600; color:#fff; margin-bottom:2px;">{{ t.title }}</div>
+            <div style="font-size:12px; color:#8A8F98; line-height:1.4;">{{ t.message }}</div>
+          </div>
+        </div>
+        <div style="position:absolute; left:0; bottom:0; height:2px; background:var(--accent, #E281B1); animation:toastProgress 5s linear forwards;"></div>
+      </div>
+    </sc-for>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  state = {
+    primary: { sm: 'idle', md: 'idle', lg: 'idle' },
+    primaryKey: { sm: 0, md: 0, lg: 0 },
+    liked: false,
+    heartKey: 0,
+    toggles: [false, false, false],
+    errorInput: { triggered: 0, active: false },
+    successInput: { triggered: 0, active: false },
+    focusA: false,
+    cardHover: [false, false, false],
+    toasts: [],
+    toastId: 1,
+  };
+
+  triggerPrimary(size) {
+    if (this.state.primary[size] !== 'idle') return;
+    this.setState(s => ({ primary: { ...s.primary, [size]: 'loading' } }));
+    setTimeout(() => {
+      this.setState(s => ({
+        primary: { ...s.primary, [size]: 'success' },
+        primaryKey: { ...s.primaryKey, [size]: s.primaryKey[size] + 1 },
+      }));
+    }, 1300);
+    setTimeout(() => {
+      this.setState(s => ({ primary: { ...s.primary, [size]: 'idle' } }));
+    }, 3000);
+  }
+
+  toggleLike() {
+    this.setState(s => ({ liked: !s.liked, heartKey: s.heartKey + 1 }));
+  }
+
+  toggleSwitch(i) {
+    this.setState(s => {
+      const t = [...s.toggles];
+      t[i] = !t[i];
+      return { toggles: t };
+    });
+  }
+
+  triggerErrorInput() {
+    this.setState(s => ({ errorInput: { triggered: s.errorInput.triggered + 1, active: true } }));
+  }
+
+  triggerSuccessInput() {
+    this.setState(s => ({ successInput: { triggered: s.successInput.triggered + 1, active: true } }));
+  }
+
+  setFocus(val) {
+    this.setState({ focusA: val });
+  }
+
+  setCardHover(i, val) {
+    this.setState(s => {
+      const c = [...s.cardHover];
+      c[i] = val;
+      return { cardHover: c };
+    });
+  }
+
+  addToast() {
+    const id = this.state.toastId;
+    this.setState(s => ({
+      toasts: [...s.toasts, { id, title: 'Deploy successful', message: 'linear-app was deployed to production.' }],
+      toastId: id + 1,
+    }));
+    setTimeout(() => this.removeToast(id), 5000);
+  }
+
+  removeToast(id) {
+    this.setState(s => ({ toasts: s.toasts.filter(t => t.id !== id) }));
+  }
+
+  cardChild(hover, delayMs) {
+    return {
+      op: hover ? 1 : 0,
+      t: hover ? 'translateY(0px)' : 'translateY(6px)',
+      delay: hover ? delayMs + 'ms' : '0ms',
+    };
+  }
+
+  renderVals() {
+    const s = this.state;
+
+    const sizeStyle = (status) => {
+      const idle = status === 'idle';
+      const loading = status === 'loading';
+      const success = status === 'success';
+      let bg = '#E281B1';
+      let anim = 'none';
+      if (loading) { bg = '#B8628E'; anim = 'pulseGlow 1.2s ease-in-out infinite'; }
+      if (success) { bg = '#22C55E'; anim = 'successFlash 1.6s ease forwards'; }
+      return {
+        idle, loading, success, bg,
+        cursor: idle ? 'pointer' : 'default',
+        anim,
+        hoverStyle: idle ? { filter: 'brightness(1.1)', transform: 'scale(1.02)' } : {},
+        activeStyle: idle ? { transform: 'scale(0.95)', boxShadow: '0 0px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.04) inset' } : {},
+      };
+    };
+
+    const sm = sizeStyle(s.primary.sm);
+    const md = sizeStyle(s.primary.md);
+    const lg = sizeStyle(s.primary.lg);
+
+    const heartFill = s.liked ? '#EF4444' : 'none';
+    const heartColor = s.liked ? '#EF4444' : '#C7C8CC';
+    const heartAnim = s.liked ? 'heartPulse 0.5s cubic-bezier(0.175,0.885,0.32,1.275)' : 'none';
+
+    const t1 = s.toggles[0], t2 = s.toggles[1], t3 = s.toggles[2];
+
+    const cardStyle = (hover) => ({
+      transform: hover ? 'translateY(-6px)' : 'translateY(0)',
+      shadow: hover ? '0 20px 40px rgba(0,0,0,0.45)' : '0 1px 2px rgba(0,0,0,0.2)',
+    });
+    const c0 = cardStyle(s.cardHover[0]);
+    const c1 = cardStyle(s.cardHover[1]);
+    const c2 = cardStyle(s.cardHover[2]);
+    const ch0 = [this.cardChild(s.cardHover[0], 0), this.cardChild(s.cardHover[0], 70), this.cardChild(s.cardHover[0], 140)];
+    const ch1 = [this.cardChild(s.cardHover[1], 0), this.cardChild(s.cardHover[1], 70), this.cardChild(s.cardHover[1], 140)];
+    const ch2 = [this.cardChild(s.cardHover[2], 0), this.cardChild(s.cardHover[2], 70), this.cardChild(s.cardHover[2], 140)];
+
+    return {
+      smBg: sm.bg, smCursor: sm.cursor, smAnim: sm.anim, smIdle: sm.idle, smLoading: sm.loading, smSuccess: sm.success,
+      smHoverStyle: sm.hoverStyle, smActiveStyle: sm.activeStyle, smKey: s.primaryKey.sm, onSmClick: () => this.triggerPrimary('sm'),
+
+      mdBg: md.bg, mdCursor: md.cursor, mdAnim: md.anim, mdIdle: md.idle, mdLoading: md.loading, mdSuccess: md.success,
+      mdHoverStyle: md.hoverStyle, mdActiveStyle: md.activeStyle, mdKey: s.primaryKey.md, onMdClick: () => this.triggerPrimary('md'),
+
+      lgBg: lg.bg, lgCursor: lg.cursor, lgAnim: lg.anim, lgIdle: lg.idle, lgLoading: lg.loading, lgSuccess: lg.success,
+      lgHoverStyle: lg.hoverStyle, lgActiveStyle: lg.activeStyle, lgKey: s.primaryKey.lg, onLgClick: () => this.triggerPrimary('lg'),
+
+      heartFill, heartColor, heartAnim, heartKey: s.heartKey, onToggleLike: () => this.toggleLike(),
+
+      toggle1Bg: t1 ? '#E281B1' : '#262629', toggle1Justify: t1 ? 'flex-end' : 'flex-start', toggle1Label: t1 ? 'on' : 'off', onToggle1: () => this.toggleSwitch(0),
+      toggle2Bg: t2 ? '#E281B1' : '#262629', toggle2Justify: t2 ? 'flex-end' : 'flex-start', toggle2Radius: t2 ? '6px' : '50%', toggle2Label: t2 ? 'on' : 'off', onToggle2: () => this.toggleSwitch(1),
+      toggle3Pos: t3 ? '100% 0' : '0 0', toggle3Justify: t3 ? 'flex-end' : 'flex-start', toggle3Label: t3 ? 'on' : 'off', onToggle3: () => this.toggleSwitch(2),
+
+      focusAWidth: s.focusA ? '100%' : '0%', onFocusA: () => this.setFocus(true), onBlurA: () => this.setFocus(false),
+
+      errorBorder: s.errorInput.active ? '#EF4444' : '#262629',
+      errorAnim: s.errorInput.triggered > 0 ? 'shakeX 0.4s cubic-bezier(0.175,0.885,0.32,1.275)' : 'none',
+      errorKey: s.errorInput.triggered, onTriggerError: () => this.triggerErrorInput(),
+
+      successBorder: s.successInput.active ? '#22C55E' : '#262629',
+      successActive: s.successInput.active, successKey: s.successInput.triggered, onTriggerSuccess: () => this.triggerSuccessInput(),
+
+      card0Transform: c0.transform, card0Shadow: c0.shadow,
+      card0Op0: ch0[0].op, card0T0: ch0[0].t, card0Delay0: ch0[0].delay,
+      card0Op1: ch0[1].op, card0T1: ch0[1].t, card0Delay1: ch0[1].delay,
+      card0Op2: ch0[2].op, card0T2: ch0[2].t, card0Delay2: ch0[2].delay,
+      onCard0Enter: () => this.setCardHover(0, true), onCard0Leave: () => this.setCardHover(0, false),
+
+      card1Transform: c1.transform, card1Shadow: c1.shadow,
+      card1Op0: ch1[0].op, card1T0: ch1[0].t, card1Delay0: ch1[0].delay,
+      card1Op1: ch1[1].op, card1T1: ch1[1].t, card1Delay1: ch1[1].delay,
+      card1Op2: ch1[2].op, card1T2: ch1[2].t, card1Delay2: ch1[2].delay,
+      onCard1Enter: () => this.setCardHover(1, true), onCard1Leave: () => this.setCardHover(1, false),
+
+      card2Transform: c2.transform, card2Shadow: c2.shadow,
+      card2Op0: ch2[0].op, card2T0: ch2[0].t, card2Delay0: ch2[0].delay,
+      card2Op1: ch2[1].op, card2T1: ch2[1].t, card2Delay1: ch2[1].delay,
+      card2Op2: ch2[2].op, card2T2: ch2[2].t, card2Delay2: ch2[2].delay,
+      onCard2Enter: () => this.setCardHover(2, true), onCard2Leave: () => this.setCardHover(2, false),
+
+      toasts: s.toasts.map(t => ({ ...t, close: () => this.removeToast(t.id) })),
+      onAddToast: () => this.addToast(),
+    };
+  }
+}
+
+</script>
+</body>
+</html>
