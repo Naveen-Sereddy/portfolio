@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<title>NYT Swiss Redesign — Editorial Typography Study</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  @font-face { font-family: 'Helvetica Neue'; src: local('Helvetica Neue'); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #FFFFFF; overflow-x: hidden; }
+  ::selection { background: #FF0000; color: #FFFFFF; }
+  input::placeholder { color: #000000; opacity: 0.4; }
+</style>
+</helmet>
+
+<div style="width:100%;max-width:1920px;margin:0 auto;min-height:1080px;background:#FFFFFF;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#000000;position:relative;">
+
+  <!-- ============ SCREEN 1: HOME ============ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="01 Homepage">
+      <div style="height:8px;background:#000000;width:100%;"></div>
+
+      <div style="padding:32px 64px 0 64px;">
+        <div style="display:flex;justify-content:flex-end;gap:32px;margin-bottom:24px;">
+          <span onClick="{{ openSections }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">SECTIONS</span>
+          <span onClick="{{ openNewsletter }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">NEWSLETTERS</span>
+          <span onClick="{{ openAccount }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">ACCOUNT</span>
+          <span onClick="{{ openSearch }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">SEARCH</span>
+        </div>
+
+        <div style="text-align:center;">
+          <div onClick="{{ goHome }}" style="font-size:80px;font-weight:900;letter-spacing:4px;line-height:1;cursor:pointer;">THE NEW YORK TIMES</div>
+          <div style="font-size:12px;font-weight:300;margin-top:16px;">Saturday, June 14, 2025 &mdash; Seventy-Fifth Year, Number 18,392</div>
+          <div style="font-size:12px;font-weight:300;margin-top:4px;">One Dollar &mdash; In the City, Two Dollars in the Suburbs</div>
+        </div>
+
+        <div style="display:flex;border-top:1px solid #000000;border-bottom:1px solid #000000;margin-top:24px;padding:16px 0;justify-content:center;gap:40px;">
+          <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="8">
+            <span onClick="{{ item.onClick }}" style="{{ item.style }}">{{ item.label }}</span>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(8,1fr);gap:24px;padding:48px 64px;">
+        <div style="grid-column:1/7;cursor:pointer;" onClick="{{ openClimate }}">
+          <div style="font-size:72px;font-weight:900;line-height:1.02;letter-spacing:-1px;">GLOBAL CLIMATE ACCORD REACHED AFTER 72-HOUR MARATHON NEGOTIATIONS</div>
+          <div style="font-size:24px;font-weight:300;margin-top:24px;max-width:100%;">Delegates from 194 nations agreed to binding emissions targets after an unprecedented round-the-clock session in Geneva.</div>
+          <div style="background:#000000;height:400px;margin-top:32px;"></div>
+          <div style="font-size:12px;font-weight:300;margin-top:8px;">Delegates convene in the final hours of negotiation in Geneva.</div>
+        </div>
+
+        <div style="grid-column:7/9;border-left:1px solid #000000;padding-left:24px;">
+          <sc-for list="{{ sideHeadlines }}" as="h" hint-placeholder-count="4">
+            <div onClick="{{ h.onClick }}" style="display:flex;gap:10px;margin-bottom:32px;cursor:pointer;">
+              <span style="color:#FF0000;font-size:16px;line-height:1.3;">&#9679;</span>
+              <span style="font-size:16px;font-weight:500;line-height:1.3;">{{ h.headline }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ SCREEN 2: ARTICLE ============ -->
+  <sc-if value="{{ isArticle }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="02 Article">
+      <div style="height:8px;background:#000000;width:100%;"></div>
+      <div style="padding:32px 64px 0 64px;display:flex;align-items:center;gap:16px;">
+        <span onClick="{{ goHome }}" style="color:#FF0000;font-size:24px;cursor:pointer;">&#8592;</span>
+        <span style="font-size:12px;font-weight:700;letter-spacing:1px;">{{ art.section }}</span>
+      </div>
+
+      <div style="padding:32px 64px 0 64px;">
+        <div style="font-size:56px;font-weight:900;line-height:1.0;max-width:1400px;">{{ art.headline }}</div>
+        <div style="display:flex;gap:24px;margin-top:24px;">
+          <span style="font-size:14px;font-weight:500;">By Jordan Ellis</span>
+          <span style="font-size:14px;font-weight:300;">{{ art.date }}</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(8,1fr);gap:24px;padding:48px 64px;">
+        <div style="grid-column:1/6;max-width:560px;">
+          <p style="font-size:16px;font-weight:400;line-height:1.4;">
+            <span style="float:left;font-size:72px;font-weight:900;color:#FF0000;line-height:0.8;padding-right:8px;">{{ art.dropCap }}</span>{{ art.firstRest }}
+          </p>
+          <sc-for list="{{ art.restParas }}" as="p" hint-placeholder-count="2">
+            <p style="font-size:16px;font-weight:400;line-height:1.4;margin-top:24px;max-width:560px;">{{ p }}</p>
+          </sc-for>
+        </div>
+
+        <div style="grid-column:6/9;">
+          <div style="border-left:4px solid #FF0000;padding-left:24px;margin-bottom:32px;">
+            <div style="font-size:32px;font-weight:300;line-height:1.25;">{{ art.pullquote }}</div>
+          </div>
+          <div style="background:#000000;height:280px;"></div>
+          <div style="font-size:12px;font-weight:300;margin-top:8px;text-align:right;">{{ art.caption }}</div>
+        </div>
+      </div>
+
+      <div style="padding:0 64px 64px 64px;">
+        <div style="font-size:14px;font-weight:700;letter-spacing:1px;margin-bottom:16px;">RELATED</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+          <sc-for list="{{ art.related }}" as="r" hint-placeholder-count="3">
+            <div onClick="{{ r.onClick }}" style="border:1px solid #000000;padding:24px;cursor:pointer;min-height:140px;">
+              <div style="font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:12px;">{{ r.section }}</div>
+              <div style="font-size:18px;font-weight:700;line-height:1.25;">{{ r.headline }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ SCREEN 3: SECTIONS INDEX ============ -->
+  <sc-if value="{{ isSections }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="03 Sections Index">
+      <div style="height:8px;background:#000000;width:100%;"></div>
+      <div style="padding:32px 64px;display:flex;justify-content:space-between;align-items:baseline;">
+        <span onClick="{{ goHome }}" style="font-size:24px;font-weight:900;letter-spacing:2px;cursor:pointer;">THE NEW YORK TIMES</span>
+        <div style="display:flex;gap:32px;">
+          <span onClick="{{ openNewsletter }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">NEWSLETTERS</span>
+          <span onClick="{{ openAccount }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">ACCOUNT</span>
+          <span onClick="{{ openSearch }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">SEARCH</span>
+        </div>
+      </div>
+      <div style="padding:0 64px;">
+        <div style="font-size:48px;font-weight:900;margin-bottom:48px;">ALL SECTIONS</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding-bottom:64px;">
+          <sc-for list="{{ sectionsList }}" as="s" hint-placeholder-count="8">
+            <div onClick="{{ s.onClick }}" style="{{ s.boxStyle }}" onMouseEnter="{{ s.onEnter }}" onMouseLeave="{{ s.onLeave }}">
+              <div style="{{ s.labelStyle }}">{{ s.label }}</div>
+              <div style="{{ s.countStyle }}">{{ s.count }} articles</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ SCREEN 4: SECTION PAGE ============ -->
+  <sc-if value="{{ isSection }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="04 Section Page">
+      <div style="height:8px;background:#000000;width:100%;"></div>
+      <div style="padding:32px 64px;display:flex;justify-content:space-between;align-items:baseline;">
+        <span onClick="{{ goHome }}" style="font-size:24px;font-weight:900;letter-spacing:2px;cursor:pointer;">THE NEW YORK TIMES</span>
+        <div style="display:flex;gap:32px;">
+          <span onClick="{{ openSections }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">SECTIONS</span>
+          <span onClick="{{ openSearch }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">SEARCH</span>
+        </div>
+      </div>
+      <div style="padding:0 64px;">
+        <div style="font-size:56px;font-weight:900;display:inline-block;border-bottom:4px solid #FF0000;padding-bottom:16px;margin-bottom:48px;">{{ sec.label }}</div>
+
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
+          <div onClick="{{ sec.lead.onClick }}" style="grid-column:1/4;border:1px solid transparent;padding:16px;cursor:pointer;" style-hover="border-color:#000000;">
+            <div style="font-size:24px;font-weight:700;line-height:1.2;">{{ sec.lead.headline }}</div>
+            <div style="background:#000000;height:220px;margin-top:24px;"></div>
+          </div>
+          <sc-for list="{{ sec.side }}" as="story" hint-placeholder-count="3">
+            <div onClick="{{ story.onClick }}" style="border:1px solid transparent;padding:16px;cursor:pointer;" style-hover="border-color:#000000;">
+              <div style="font-size:16px;font-weight:700;line-height:1.3;">{{ story.headline }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="margin-top:64px;padding-bottom:64px;">
+          <div style="font-size:24px;font-weight:700;margin-bottom:24px;">MOST READ</div>
+          <sc-for list="{{ mostRead }}" as="m" hint-placeholder-count="5">
+            <div onClick="{{ m.onClick }}" style="display:flex;gap:16px;padding:12px 0;border-top:1px solid #000000;cursor:pointer;">
+              <span style="color:#FF0000;font-size:16px;font-weight:700;width:24px;">{{ m.index }}.</span>
+              <span style="font-size:16px;font-weight:400;">{{ m.headline }}</span>
+            </div>
+          </sc-for>
+          <div style="border-top:1px solid #000000;"></div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ SCREEN 5: NEWSLETTERS ============ -->
+  <sc-if value="{{ isNewsletter }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="05 Newsletters">
+      <div style="height:8px;background:#000000;width:100%;"></div>
+      <div style="padding:32px 64px;display:flex;justify-content:space-between;align-items:baseline;">
+        <span onClick="{{ goHome }}" style="font-size:24px;font-weight:900;letter-spacing:2px;cursor:pointer;">THE NEW YORK TIMES</span>
+        <div style="display:flex;gap:32px;">
+          <span onClick="{{ openSections }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">SECTIONS</span>
+          <span onClick="{{ openAccount }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">ACCOUNT</span>
+          <span onClick="{{ openSearch }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">SEARCH</span>
+        </div>
+      </div>
+      <div style="padding:0 64px 64px 64px;">
+        <div style="font-size:40px;font-weight:900;margin-bottom:48px;">NEWSLETTERS</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px;">
+          <div style="border:1px solid #000000;border-left:4px solid #FF0000;padding:32px 32px 32px 29px;">
+            <div style="font-size:20px;font-weight:700;margin-bottom:12px;">Morning Briefing</div>
+            <div style="font-size:14px;font-weight:300;">What you need to know today</div>
+          </div>
+          <div style="border:1px solid #000000;padding:32px;">
+            <div style="font-size:20px;font-weight:700;margin-bottom:12px;">Tech Today</div>
+            <div style="font-size:14px;font-weight:300;">Digital trends and analysis</div>
+          </div>
+          <div style="border:1px solid #000000;padding:32px;">
+            <div style="font-size:20px;font-weight:700;margin-bottom:12px;">Opinion</div>
+            <div style="font-size:14px;font-weight:300;">Views that matter</div>
+          </div>
+        </div>
+        <div style="max-width:480px;">
+          <input value="{{ email }}" onChange="{{ onEmailChange }}" placeholder="Enter your email" style="width:100%;border:none;border-bottom:2px solid #000000;font-size:16px;font-weight:400;padding:12px 0;font-family:inherit;outline:none;"/>
+          <button onClick="{{ submitEmail }}" style="margin-top:24px;background:#000000;color:#FFFFFF;border:none;padding:16px 40px;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;font-family:inherit;">SUBSCRIBE</button>
+          <sc-if value="{{ subscribed }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#FF0000;color:#FFFFFF;padding:16px 24px;margin-top:32px;font-size:14px;font-weight:700;display:block;width:fit-content;">Thank you, Jordan</div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ SCREEN 6: ACCOUNT ============ -->
+  <sc-if value="{{ isAccount }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="06 Account">
+      <div style="height:8px;background:#000000;width:100%;"></div>
+      <div style="padding:32px 64px;display:flex;justify-content:space-between;align-items:baseline;">
+        <span onClick="{{ goHome }}" style="font-size:24px;font-weight:900;letter-spacing:2px;cursor:pointer;">THE NEW YORK TIMES</span>
+        <div style="display:flex;gap:32px;">
+          <span onClick="{{ openSections }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">SECTIONS</span>
+          <span onClick="{{ openNewsletter }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">NEWSLETTERS</span>
+          <span onClick="{{ openSearch }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">SEARCH</span>
+        </div>
+      </div>
+      <div style="padding:0 64px 64px 64px;display:grid;grid-template-columns:repeat(8,1fr);gap:24px;">
+        <div style="grid-column:1/9;font-size:36px;font-weight:900;margin-bottom:48px;">YOUR ACCOUNT</div>
+
+        <div style="grid-column:1/5;border:1px solid #000000;padding:32px;">
+          <div style="font-size:20px;font-weight:700;margin-bottom:8px;">Jordan Ellis</div>
+          <div style="font-size:14px;font-weight:300;margin-bottom:8px;">jordan.ellis@relay.dev</div>
+          <div style="font-size:14px;font-weight:300;margin-bottom:24px;">Subscriber since 2019</div>
+          <div style="font-size:16px;font-weight:700;color:#FF0000;">Digital + Print &mdash; $19.97/month</div>
+        </div>
+
+        <div style="grid-column:5/9;">
+          <div style="font-size:14px;font-weight:700;letter-spacing:1px;margin-bottom:16px;">BILLING HISTORY</div>
+          <sc-for list="{{ billing }}" as="b" hint-placeholder-count="3">
+            <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid #000000;font-size:14px;font-weight:400;">
+              <span>{{ b.date }}</span>
+              <span>{{ b.amount }}</span>
+            </div>
+          </sc-for>
+          <div style="border-top:1px solid #000000;"></div>
+        </div>
+
+        <div style="grid-column:1/9;margin-top:48px;">
+          <div style="font-size:14px;font-weight:700;letter-spacing:1px;margin-bottom:16px;">NEWSLETTER PREFERENCES</div>
+          <sc-for list="{{ prefs }}" as="p" hint-placeholder-count="5">
+            <div onClick="{{ p.onClick }}" style="display:flex;align-items:center;gap:12px;padding:8px 0;cursor:pointer;">
+              <div style="{{ p.boxStyle }}"></div>
+              <span style="font-size:14px;font-weight:400;">{{ p.label }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ SCREEN 7: SEARCH ============ -->
+  <sc-if value="{{ isSearch }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="07 Search">
+      <div style="height:8px;background:#000000;width:100%;"></div>
+      <div style="padding:32px 64px;display:flex;justify-content:space-between;align-items:baseline;">
+        <span onClick="{{ goHome }}" style="font-size:24px;font-weight:900;letter-spacing:2px;cursor:pointer;">THE NEW YORK TIMES</span>
+        <div style="display:flex;gap:32px;">
+          <span onClick="{{ openSections }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">SECTIONS</span>
+          <span onClick="{{ openNewsletter }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">NEWSLETTERS</span>
+          <span onClick="{{ openAccount }}" style="font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;">ACCOUNT</span>
+        </div>
+      </div>
+      <div style="padding:0 64px 64px 64px;max-width:1000px;">
+        <div style="font-size:48px;font-weight:900;margin-bottom:32px;">SEARCH</div>
+        <input value="{{ searchQuery }}" onChange="{{ onSearchChange }}" placeholder="Search articles..." style="width:100%;border:none;border-bottom:3px solid #000000;font-size:20px;font-weight:400;padding:16px 0;font-family:inherit;outline:none;margin-bottom:32px;"/>
+
+        <sc-if value="{{ showRecent }}" hint-placeholder-val="{{ true }}">
+          <div>
+            <div style="font-size:14px;font-weight:700;letter-spacing:1px;margin-bottom:16px;">RECENT SEARCHES</div>
+            <sc-for list="{{ recentSearches }}" as="r" hint-placeholder-count="3">
+              <div onClick="{{ r.onClick }}" style="display:flex;gap:10px;margin-bottom:12px;cursor:pointer;">
+                <span style="color:#FF0000;font-size:14px;">&#9679;</span>
+                <span style="font-size:14px;font-weight:400;">{{ r.term }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showResults }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div style="font-size:14px;font-weight:700;letter-spacing:1px;margin-bottom:16px;">{{ resultsLabel }}</div>
+            <sc-for list="{{ searchResults }}" as="res" hint-placeholder-count="3">
+              <div onClick="{{ res.onClick }}" style="border:1px solid #000000;padding:20px 24px;margin-bottom:16px;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;gap:32px;">
+
+                <div style="font-size:18px;font-weight:700;">
+                  <sc-for list="{{ res.segments }}" as="seg" hint-placeholder-count="1">
+                    <span style="{{ seg.style }}">{{ seg.text }}</span>
+                  </sc-for>
+                </div>
+                <div style="font-size:12px;font-weight:300;white-space:nowrap;">{{ res.date }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    screen: 'home',
+    currentArticleId: 'climate',
+    currentSectionKey: 'TECH',
+    email: '',
+    subscribed: false,
+    searchQuery: '',
+    hoverKey: null,
+    prefChecks: [true, true, false, false, true]
+  };
+
+  navLabels = ['WORLD', 'U.S.', 'POLITICS', 'BUSINESS', 'TECH', 'SCIENCE', 'HEALTH', 'ARTS'];
+
+  sectionCounts = {
+    WORLD: 124, 'U.S.': 89, POLITICS: 56, BUSINESS: 102,
+    TECH: 78, SCIENCE: 45, HEALTH: 67, ARTS: 93
+  };
+
+  articles = [
+    { id: 'climate', section: 'WORLD',
+      headline: 'GLOBAL CLIMATE ACCORD REACHED AFTER 72-HOUR MARATHON NEGOTIATIONS',
+      date: 'June 14, 2025',
+      caption: 'Delegates convene in the final hours of negotiation in Geneva.',
+      pullquote: '"This is the accord the planet could not afford to fail."',
+      body: [
+        'Global negotiators emerged from the Palace of Nations before dawn on Saturday with a binding accord that commits every signatory nation to a 50 percent reduction in emissions by 2035, ending a session that stretched more than 72 hours past its scheduled close.',
+        'The agreement, brokered after two prior rounds collapsed over financing disputes, establishes a $200 billion annual fund for developing nations to transition away from coal and oil. Negotiators from the United States, China and the European Union were the last to sign, arriving at a compromise on verification standards just after 4 a.m. local time.',
+        'Enforcement mechanisms remain untested, and several nations have signaled they will seek amendments before ratification votes begin this fall.'
+      ] },
+    { id: 'shutdown', section: 'U.S.', headline: 'FEDERAL SHUTDOWN ENTERS SECOND WEEK AS SENATE STALLS ON SPENDING BILL', date: 'June 13, 2025',
+      caption: 'The Capitol at dusk on the eighth day of the shutdown.', pullquote: '"Neither side has an incentive to blink first."',
+      body: ['Federal agencies furloughed roughly 400,000 workers for an eighth consecutive day Friday, as a spending bill remained stalled in the Senate over a dispute concerning border security riders.',
+        'Both party leaders described the talks as at an impasse, with a procedural vote scheduled for Monday unlikely to reach the sixty votes required for passage.',
+        'Economists warned that a shutdown extending past two weeks could shave a full percentage point off quarterly growth.'] },
+    { id: 'primary', section: 'POLITICS', headline: 'GOVERNOR ANNOUNCES PRIMARY CHALLENGE, SPLITTING PARTY LEADERSHIP', date: 'June 13, 2025',
+      caption: 'The governor filing papers at the state elections office.', pullquote: '"The party cannot keep running from this fight."',
+      body: ['The sitting governor filed papers Thursday to challenge the incumbent senator in next year\u2019s primary, an unusually public break within the party that officials had spent months trying to avert.',
+        'Party leadership had privately lobbied the governor to wait until the senator\u2019s term concluded, but allies say the decision was accelerated by internal polling showing a narrowing gap.',
+        'The senator\u2019s campaign dismissed the challenge as "a distraction from the work of governing."'] },
+    { id: 'earnings', section: 'BUSINESS', headline: 'RETAIL GIANTS POST WEAK EARNINGS AS CONSUMER SPENDING COOLS', date: 'June 12, 2025',
+      caption: 'A distribution center outside Columbus, Ohio.', pullquote: '"Shoppers are trading down, not trading up."',
+      body: ['Four of the five largest retail chains reported quarterly earnings below analyst expectations this week, citing a pullback in discretionary spending among middle-income households.',
+        'Executives pointed to elevated grocery and housing costs as the primary drag, with several chains announcing plans to expand discount store formats.',
+        'Shares of two major chains fell more than 8 percent following the announcements.'] },
+    { id: 'gpt5', section: 'TECH', headline: 'OPENAI ANNOUNCES GPT-5, CITING MAJOR GAINS IN REASONING', date: 'June 11, 2025',
+      caption: 'A researcher demonstrates the new model at a briefing in San Francisco.', pullquote: '"This is the first model that plans before it answers."',
+      body: ['OpenAI unveiled its next flagship model Wednesday, claiming substantial improvements in multi-step reasoning and a sharp reduction in factual errors compared with its predecessor.',
+        'The company said the model was trained using a new technique that allows it to revise its own draft answers before responding, a departure from prior architectures.',
+        'Rivals are expected to respond with competing releases within months, continuing an escalating cycle of model announcements.'] },
+    { id: 'chips', section: 'TECH', headline: 'CHIP MAKERS RACE TO BUILD DOMESTIC FABRICATION PLANTS', date: 'June 10, 2025',
+      caption: 'Construction continues on a new fabrication plant in Arizona.', pullquote: '"Every month of delay costs billions."',
+      body: ['Three of the world\u2019s largest chipmakers accelerated construction timelines on domestic fabrication plants this week, spurred by new federal incentives and mounting concern over supply chain exposure.',
+        'The plants, representing a combined $60 billion in investment, are expected to begin limited production within eighteen months.',
+        'Industry analysts caution that a shortage of skilled technicians could still delay full-scale output.'] },
+    { id: 'privacy', section: 'TECH', headline: 'STATES PASS COMPETING DATA PRIVACY LAWS, CONFUSING COMPLIANCE', date: 'June 9, 2025',
+      caption: 'A state legislature votes on a new privacy bill.', pullquote: '"Companies now face fifty different rulebooks."',
+      body: ['Eight states enacted new consumer data privacy laws this legislative session, each with differing definitions of personal data and enforcement mechanisms.',
+        'Compliance officers at major technology firms say the patchwork has become the single largest driver of legal costs this year.',
+        'Congress has introduced a federal standard bill for the sixth consecutive year, with no vote yet scheduled.'] },
+    { id: 'startup', section: 'TECH', headline: 'ROBOTICS STARTUP VALUED AT $4 BILLION AFTER FUNDING ROUND', date: 'June 8, 2025',
+      caption: 'A warehouse robot developed by the startup.', pullquote: '"We are three years from general-purpose hands."',
+      body: ['A warehouse robotics startup closed a $600 million funding round Tuesday at a $4 billion valuation, one of the largest private rounds in the sector this year.',
+        'The company\u2019s robots are already deployed in over 200 warehouses, performing picking and packing tasks previously done by hand.',
+        'Investors say the round will fund a push into general-purpose manipulation, a harder technical problem than warehouse automation.'] },
+    { id: 'fed', section: 'BUSINESS', headline: 'FEDERAL RESERVE HOLDS RATES STEADY, SIGNALS CAUTION ON INFLATION', date: 'June 7, 2025',
+      caption: 'The Federal Reserve building in Washington.', pullquote: '"We are in no hurry to declare victory."',
+      body: ['The Federal Reserve held its benchmark interest rate steady Wednesday, extending a pause that has now lasted four consecutive meetings.',
+        'The chair told reporters that while inflation has cooled from its peak, officials remain wary of cutting rates prematurely.',
+        'Markets had priced in roughly a 30 percent chance of a cut, and stocks slipped modestly following the announcement.'] }
+  ];
+
+  byId(id) { return this.articles.find(a => a.id === id); }
+
+  goHome = () => this.setState({ screen: 'home' });
+  openSections = () => this.setState({ screen: 'sections' });
+  openNewsletter = () => this.setState({ screen: 'newsletter' });
+  openAccount = () => this.setState({ screen: 'account' });
+  openSearch = () => this.setState({ screen: 'search' });
+  openClimate = () => this.setState({ screen: 'article', currentArticleId: 'climate' });
+  openArticle = (id) => this.setState({ screen: 'article', currentArticleId: id });
+  openSection = (key) => this.setState({ screen: 'section', currentSectionKey: key });
+
+  onEmailChange = (e) => this.setState({ email: e.target.value });
+  submitEmail = () => { if (this.state.email.trim()) this.setState({ subscribed: true }); };
+
+  onSearchChange = (e) => this.setState({ searchQuery: e.target.value });
+  setSearchTerm = (term) => this.setState({ searchQuery: term });
+
+  togglePref = (i) => {
+    const next = this.state.prefChecks.slice();
+    next[i] = !next[i];
+    this.setState({ prefChecks: next });
+  };
+
+  buildArt(article) {
+    const first = article.body[0];
+    return {
+      section: article.section,
+      headline: article.headline,
+      date: article.date,
+      dropCap: first.charAt(0).toUpperCase(),
+      firstRest: first.slice(1),
+      restParas: article.body.slice(1),
+      pullquote: article.pullquote,
+      caption: article.caption,
+      related: this.articles.filter(a => a.id !== article.id).slice(0, 3).map(a => ({
+        section: a.section, headline: a.headline, onClick: () => this.openArticle(a.id)
+      }))
+    };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const activeSection = s.screen === 'section' ? s.currentSectionKey
+      : (s.screen === 'article' ? this.byId(s.currentArticleId).section
+        : (s.screen === 'home' ? 'WORLD' : null));
+
+    const navItems = this.navLabels.map(label => ({
+      label,
+      onClick: () => this.openSection(label),
+      style: 'font-size:14px;font-weight:700;letter-spacing:0.5px;cursor:pointer;padding-bottom:8px;border-bottom:' +
+        (label === activeSection ? '2px solid #FF0000' : '2px solid transparent')
+    }));
+
+    const sideIds = ['shutdown', 'primary', 'earnings', 'gpt5'];
+    const sideHeadlines = sideIds.map(id => {
+      const a = this.byId(id);
+      return { headline: a.headline, onClick: () => this.openArticle(id) };
+    });
+
+    const sectionsList = this.navLabels.map(key => ({
+      label: key,
+      count: this.sectionCounts[key],
+      onClick: () => this.openSection(key),
+      boxStyle: 'border:1px solid #000000;padding:32px;cursor:pointer;transition:background 150ms,color 150ms;min-height:120px;' +
+        (s.hoverKey === key ? 'background:#FF0000;' : 'background:#FFFFFF;'),
+      labelStyle: 'font-size:24px;font-weight:700;margin-bottom:8px;' + (s.hoverKey === key ? 'color:#FFFFFF;' : 'color:#000000;'),
+      countStyle: 'font-size:14px;font-weight:300;' + (s.hoverKey === key ? 'color:#FFFFFF;' : 'color:#000000;'),
+      onEnter: () => this.setState({ hoverKey: key }),
+      onLeave: () => this.setState({ hoverKey: null })
+    }));
+
+    const sectionArticles = this.articles.filter(a => a.section === s.currentSectionKey);
+    const leadA = sectionArticles[0] || this.articles[0];
+    const sideAs = (sectionArticles.length > 1 ? sectionArticles.slice(1, 4) : this.articles.slice(1, 4));
+    const sec = {
+      label: s.currentSectionKey === 'U.S.' ? 'U.S.' : s.currentSectionKey,
+      lead: { headline: leadA.headline, onClick: () => this.openArticle(leadA.id) },
+      side: sideAs.map(a => ({ headline: a.headline, onClick: () => this.openArticle(a.id) }))
+    };
+
+    const mostReadIds = ['gpt5', 'fed', 'climate', 'chips', 'privacy'];
+    const mostRead = mostReadIds.map((id, i) => {
+      const a = this.byId(id);
+      return { index: i + 1, headline: a.headline, onClick: () => this.openArticle(id) };
+    });
+
+    const billing = [
+      { date: 'Jun 1, 2025', amount: '$19.97' },
+      { date: 'May 1, 2025', amount: '$19.97' },
+      { date: 'Apr 1, 2025', amount: '$19.97' }
+    ];
+
+    const prefLabels = ['Morning Briefing', 'Tech Today', 'Opinion', 'Breaking News', 'Weekend Reads'];
+    const prefs = prefLabels.map((label, i) => ({
+      label,
+      onClick: () => this.togglePref(i),
+      boxStyle: 'width:16px;height:16px;border:2px solid #FF0000;' + (s.prefChecks[i] ? 'background:#FF0000;' : 'background:#FFFFFF;')
+    }));
+
+    const recentTerms = ['climate accord', 'OpenAI', 'Fed rates'];
+    const recentSearches = recentTerms.map(term => ({ term, onClick: () => this.setSearchTerm(term) }));
+
+    const q = s.searchQuery.trim().toLowerCase();
+    const matches = q ? this.articles.filter(a => a.headline.toLowerCase().includes(q)) : [];
+    const searchResults = matches.map(a => {
+      const idx = a.headline.toLowerCase().indexOf(q);
+      const segments = idx === -1 ? [{ text: a.headline, style: 'font-weight:700;' }] : [
+        { text: a.headline.slice(0, idx), style: 'font-weight:700;' },
+        { text: a.headline.slice(idx, idx + q.length), style: 'font-weight:700;color:#FF0000;' },
+        { text: a.headline.slice(idx + q.length), style: 'font-weight:700;' }
+      ];
+      return { segments, date: a.date, onClick: () => this.openArticle(a.id) };
+    });
+
+    return {
+      isHome: s.screen === 'home',
+      isArticle: s.screen === 'article',
+      isSections: s.screen === 'sections',
+      isSection: s.screen === 'section',
+      isNewsletter: s.screen === 'newsletter',
+      isAccount: s.screen === 'account',
+      isSearch: s.screen === 'search',
+      goHome: this.goHome, openSections: this.openSections, openNewsletter: this.openNewsletter,
+      openAccount: this.openAccount, openSearch: this.openSearch, openClimate: this.openClimate,
+      navItems, sideHeadlines,
+      art: s.screen === 'article' ? this.buildArt(this.byId(s.currentArticleId)) : this.buildArt(this.articles[0]),
+      sectionsList,
+      sec, mostRead,
+      email: s.email, onEmailChange: this.onEmailChange, submitEmail: this.submitEmail, subscribed: s.subscribed,
+      billing, prefs,
+      searchQuery: s.searchQuery, onSearchChange: this.onSearchChange,
+      showRecent: q.length === 0, showResults: q.length > 0,
+      recentSearches, searchResults,
+      resultsLabel: searchResults.length + (searchResults.length === 1 ? ' RESULT' : ' RESULTS')
+    };
+  }
+}
+
+</script>
+</body>
+</html>

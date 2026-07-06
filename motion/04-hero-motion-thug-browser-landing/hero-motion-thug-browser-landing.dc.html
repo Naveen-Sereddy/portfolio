@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<title>Thug — Browser Landing Reveal</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; box-sizing: border-box; }
+    * { box-sizing: border-box; }
+    ::selection { background: #FF6B00; color: #fff; }
+    a { color: #FF6B00; text-decoration: none; }
+    a:hover { color: #E85D00; }
+    input::placeholder { color: #9A9A9E; }
+  </style>
+</helmet>
+
+<div style="font-family:'Inter',system-ui,-apple-system,sans-serif;background:#FFFFFF;color:#0A0A0C;overflow-x:clip;position:relative;">
+
+  <!-- top scroll progress bar -->
+  <div style="position:fixed;top:0;left:0;width:100%;height:3px;background:rgba(10,10,12,0.06);z-index:200;">
+    <div style="height:100%;background:#FF6B00;width:{{ scrollPct }}%;transition:width 60ms linear;"></div>
+  </div>
+
+  <!-- right progress dots -->
+  <div style="position:fixed;right:28px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:16px;z-index:200;">
+    <sc-for list="{{ dots }}" as="dot" hint-placeholder-count="6">
+      <div onClick="{{ dot.onClick }}" title="{{ dot.label }}" style="width:{{ dot.size }}px;height:{{ dot.size }}px;border-radius:50%;background:{{ dot.color }};cursor:pointer;transition:all 240ms ease;box-shadow:{{ dot.shadow }};"></div>
+    </sc-for>
+  </div>
+
+  <!-- ============ CHAPTER 1: HERO ============ -->
+  <section ref="{{ refs.heroRef }}" data-screen-label="Chapter 1 — Hero" style="position:relative;height:100vh;background:#0A0A0C;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;">
+    <div style="position:absolute;inset:0;opacity:{{ heroGridOpacity }};transition:opacity 1400ms ease;background-image:linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);background-size:64px 64px;"></div>
+    <div style="position:relative;display:flex;">
+      <sc-for list="{{ heroLetters }}" as="l" hint-placeholder-count="5">
+        <span style="display:inline-block;font-family:system-ui,-apple-system,sans-serif;font-weight:900;font-size:120px;color:#FFFFFF;letter-spacing:-4px;filter:{{ l.blur }};opacity:{{ l.opacity }};transform:{{ l.transform }};transition:filter 700ms ease {{ l.delay }}ms, opacity 700ms ease {{ l.delay }}ms, transform 700ms ease {{ l.delay }}ms;">{{ l.ch }}</span>
+      </sc-for>
+    </div>
+    <div style="position:relative;margin-top:8px;font-size:24px;color:#B8B8BC;opacity:{{ heroSubOpacity }};transform:{{ heroSubTransform }};transition:opacity 800ms ease 600ms, transform 800ms ease 600ms;">The browser that works for you</div>
+    <div style="position:absolute;bottom:40px;font-size:13px;color:#5C5C60;opacity:{{ heroSubOpacity }};transition:opacity 800ms ease 900ms;">Scroll to begin</div>
+  </section>
+
+  <!-- ============ CHAPTER 2: PROBLEM ============ -->
+  <section ref="{{ refs.problemRef }}" data-screen-label="Chapter 2 — Problem" style="position:relative;height:220vh;background:#FFFFFF;">
+    <div style="position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden;">
+      <div style="flex:0 0 50%;padding:0 80px;">
+        <div style="font-size:14px;font-weight:600;color:#FF6B00;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;opacity:{{ problemVisible.op }};transition:opacity 700ms ease;">The problem</div>
+        <div style="font-size:48px;font-weight:800;line-height:1.1;letter-spacing:-1px;opacity:{{ problemVisible.op }};transform:{{ problemVisible.tf }};transition:opacity 700ms ease, transform 700ms ease;">Tabs are a mess.</div>
+        <div style="font-size:20px;color:#5C5C60;margin-top:24px;line-height:1.5;max-width:420px;opacity:{{ problemVisible.op }};transform:{{ problemVisible.tf }};transition:opacity 700ms ease 150ms, transform 700ms ease 150ms;">You have 47 open. None belong to a project. None are grouped. Somewhere in there is the invoice you needed an hour ago.</div>
+      </div>
+      <div style="flex:0 0 50%;position:relative;height:100%;">
+        <sc-for list="{{ chaosTabs }}" as="tab" hint-placeholder-count="9">
+          <div style="position:absolute;top:{{ tab.top }}px;left:{{ tab.left }}px;width:150px;height:34px;background:{{ tab.bg }};border:1px solid #D8D8DC;border-radius:8px 8px 0 0;transform:{{ tab.transform }};transition:transform 60ms linear;display:flex;align-items:center;padding:0 10px;gap:6px;">
+            <div style="width:10px;height:10px;border-radius:2px;background:#C4C4C8;flex:none;"></div>
+            <div style="width:{{ tab.barWidth }}px;height:6px;border-radius:3px;background:#C4C4C8;"></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 3: SPACES ============ -->
+  <section ref="{{ refs.spacesRef }}" data-screen-label="Chapter 3 — Spaces" style="position:relative;height:400vh;background:#FFFFFF;">
+    <div style="position:sticky;top:0;height:100vh;display:flex;overflow:hidden;">
+      <div style="flex:0 0 42%;display:flex;flex-direction:column;justify-content:center;padding:0 80px;gap:14px;">
+        <div style="font-size:14px;font-weight:600;color:#FF6B00;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">The solution — spaces</div>
+        <div style="font-size:44px;font-weight:800;letter-spacing:-1px;margin-bottom:20px;">One browser,<br/>every context.</div>
+        <sc-for list="{{ spaces }}" as="sp" hint-placeholder-count="4">
+          <div style="display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:12px;background:{{ sp.active }};transition:background 400ms ease;">
+            <div style="width:10px;height:10px;border-radius:50%;background:{{ sp.dotColor }};transition:background 400ms ease;flex:none;"></div>
+            <div>
+              <div style="font-size:18px;font-weight:700;color:{{ sp.textColor }};transition:color 400ms ease;">{{ sp.name }}</div>
+              <div style="font-size:14px;color:{{ sp.subColor }};transition:color 400ms ease;">{{ sp.desc }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="flex:0 0 58%;position:relative;height:100%;">
+        <sc-for list="{{ spaces }}" as="sp" hint-placeholder-count="4">
+          <div style="position:absolute;inset:40px 60px;border-radius:20px;background:{{ sp.wash }};opacity:{{ sp.opacity }};transform:{{ sp.transform }};transition:opacity 500ms ease, transform 500ms ease;box-shadow:0 30px 60px -20px rgba(10,10,12,0.25);overflow:hidden;">
+            <div style="height:44px;display:flex;align-items:center;gap:8px;padding:0 16px;background:rgba(255,255,255,0.5);border-bottom:1px solid rgba(10,10,12,0.06);">
+              <div style="width:8px;height:8px;border-radius:50%;background:rgba(10,10,12,0.15);"></div>
+              <div style="width:8px;height:8px;border-radius:50%;background:rgba(10,10,12,0.15);"></div>
+              <div style="width:8px;height:8px;border-radius:50%;background:rgba(10,10,12,0.15);"></div>
+              <div style="margin-left:16px;font-size:13px;font-weight:600;color:#0A0A0C;">{{ sp.name }} space</div>
+            </div>
+            <div style="padding:28px;display:flex;flex-direction:column;gap:12px;">
+              <div style="width:60%;height:18px;border-radius:6px;background:rgba(10,10,12,0.12);"></div>
+              <div style="width:85%;height:12px;border-radius:5px;background:rgba(10,10,12,0.08);"></div>
+              <div style="width:70%;height:12px;border-radius:5px;background:rgba(10,10,12,0.08);"></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 4: TABS ============ -->
+  <section ref="{{ refs.tabsRef }}" data-screen-label="Chapter 4 — Tabs" style="position:relative;height:300vh;background:#FFFFFF;">
+    <div style="position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:0 60px;">
+      <div style="font-size:14px;font-weight:600;color:#FF6B00;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;">The solution — tabs</div>
+      <div style="font-size:40px;font-weight:800;letter-spacing:-1px;margin-bottom:44px;text-align:center;">From clutter to calm.</div>
+
+      <div style="position:relative;width:920px;height:340px;border-radius:16px;background:#F4F4F5;border:1px solid #E4E4E7;box-shadow:0 40px 80px -30px rgba(10,10,12,0.2);overflow:hidden;">
+        <!-- traditional cluttered horizontal tabs -->
+        <div style="position:absolute;inset:0;opacity:{{ tabsChromeOpacity }};transition:opacity 400ms ease;">
+          <div style="height:38px;display:flex;align-items:flex-end;gap:2px;padding:6px 8px 0;background:#E4E4E7;">
+            <sc-for list="{{ clutteredTabs }}" as="t" hint-placeholder-count="8">
+              <div style="width:82px;height:30px;background:#F4F4F5;border-radius:6px 6px 0 0;flex:none;"></div>
+            </sc-for>
+          </div>
+          <div style="padding:24px;display:flex;flex-direction:column;gap:10px;">
+            <div style="width:50%;height:14px;border-radius:5px;background:#D8D8DC;"></div>
+            <div style="width:70%;height:10px;border-radius:5px;background:#E4E4E7;"></div>
+          </div>
+        </div>
+        <!-- arc-style floating sidebar -->
+        <div style="position:absolute;inset:0;display:flex;opacity:{{ tabsSidebarOpacity }};transition:opacity 400ms ease;">
+          <div style="width:{{ tabsSidebarWidth }}px;overflow:hidden;flex:none;background:#0A0A0C;transition:width 400ms ease;display:flex;flex-direction:column;gap:8px;padding:16px 10px;">
+            <sc-for list="{{ sidebarTabs }}" as="t" hint-placeholder-count="6">
+              <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;background:{{ t.bg }};flex:none;">
+                <div style="width:8px;height:8px;border-radius:2px;background:#FF6B00;flex:none;"></div>
+                <div style="width:{{ t.w }}px;height:8px;border-radius:4px;background:rgba(255,255,255,0.5);"></div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="flex:1;padding:24px;display:flex;flex-direction:column;gap:10px;">
+            <div style="width:50%;height:14px;border-radius:5px;background:#D8D8DC;"></div>
+            <div style="width:70%;height:10px;border-radius:5px;background:#E4E4E7;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:48px;text-align:center;">
+        <div style="font-size:14px;font-weight:600;color:#5C5C60;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Favorites, pinned</div>
+        <div style="display:flex;gap:16px;justify-content:center;">
+          <sc-for list="{{ favorites }}" as="f" hint-placeholder-count="5">
+            <div style="width:52px;height:52px;border-radius:14px;background:#F4F4F5;border:1px solid #E4E4E7;display:flex;align-items:center;justify-content:center;transform:{{ f.transform }};transition:transform 500ms cubic-bezier(0.2,0.8,0.2,1) {{ f.delay }}ms;">
+              <div style="width:18px;height:18px;border-radius:5px;background:{{ f.color }};"></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 5: PERFORMANCE ============ -->
+  <section ref="{{ refs.perfRef }}" data-screen-label="Chapter 5 — Performance" style="position:relative;height:300vh;background:#0A0A0C;color:#FFFFFF;">
+    <div style="position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:0 60px;">
+      <div style="font-size:56px;font-weight:800;letter-spacing:-1px;margin-bottom:12px;">Fast. Really fast.</div>
+      <div style="display:flex;gap:64px;margin-bottom:56px;">
+        <div style="text-align:center;">
+          <div style="font-size:40px;font-weight:800;color:#FF6B00;">{{ perfStats.mem }}x</div>
+          <div style="font-size:14px;color:#8A8A8E;margin-top:6px;">less memory</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:40px;font-weight:800;color:#FF6B00;">{{ perfStats.cpu }}x</div>
+          <div style="font-size:14px;color:#8A8A8E;margin-top:6px;">less CPU</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:40px;font-weight:800;color:#FF6B00;">{{ perfStats.startup }}s</div>
+          <div style="font-size:14px;color:#8A8A8E;margin-top:6px;">cold startup</div>
+        </div>
+      </div>
+
+      <div style="width:760px;display:flex;flex-direction:column;gap:16px;">
+        <sc-for list="{{ raceBrowsers }}" as="b" hint-placeholder-count="6">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="width:76px;font-size:13px;color:#B8B8BC;flex:none;">{{ b.name }}</div>
+            <div style="flex:1;height:14px;border-radius:7px;background:rgba(255,255,255,0.08);overflow:hidden;">
+              <div style="height:100%;border-radius:7px;background:{{ b.color }};width:{{ b.width }}%;transition:background 400ms ease;"></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 6: CTA ============ -->
+  <section ref="{{ refs.ctaRef }}" data-screen-label="Chapter 6 — CTA" style="position:relative;height:100vh;background:#0A0A0C;color:#FFFFFF;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 40px;">
+    <div style="font-size:48px;font-weight:800;letter-spacing:-1px;margin-bottom:20px;opacity:{{ ctaVisible.op }};transform:{{ ctaVisible.tf }};transition:opacity 700ms ease,transform 700ms ease;">Ready to try {{ productName }}?</div>
+    <div style="font-size:18px;color:#8A8A8E;margin-bottom:36px;opacity:{{ ctaVisible.op }};transition:opacity 700ms ease 150ms;">Join the waitlist and bring order to your browser.</div>
+    <button style="background:#FF6B00;color:#0A0A0C;border:none;border-radius:999px;padding:16px 40px;font-size:16px;font-weight:700;cursor:pointer;transition:transform 260ms ease,background 260ms ease;margin-bottom:40px;" style-hover="transform:scale(1.05);background:#FF7E1F;">Download {{ productName }}</button>
+    <div style="display:flex;gap:10px;">
+      <input type="email" placeholder="you@email.com" style="width:280px;padding:14px 18px;border-radius:999px;border:1px solid #2A2A2E;background:#151517;color:#FFFFFF;font-size:14px;outline:none;"/>
+      <button style="background:transparent;color:#FFFFFF;border:1px solid #3A3A3E;border-radius:999px;padding:14px 24px;font-size:14px;font-weight:600;cursor:pointer;transition:border-color 220ms ease,background 220ms ease;" style-hover="border-color:#FF6B00;background:rgba(255,107,0,0.08);">Join waitlist</button>
+    </div>
+    <div style="position:absolute;bottom:24px;font-size:10px;color:#5C5C60;">Designed for portfolio</div>
+  </section>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 900}, &quot;productName&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Thug&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;accentColor&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#FF6B00&quot;, &quot;options&quot;: [&quot;#FF6B00&quot;, &quot;#FF8A3D&quot;, &quot;#E85D00&quot;], &quot;tsType&quot;: &quot;string&quot;}}">
+class Component extends DCLogic {
+  heroRef = React.createRef();
+  problemRef = React.createRef();
+  spacesRef = React.createRef();
+  tabsRef = React.createRef();
+  perfRef = React.createRef();
+  ctaRef = React.createRef();
+
+  state = {
+    scrollPct: 0,
+    activeChapter: 0,
+    heroVisible: false,
+    problemVisible: false,
+    spacesVisible: false,
+    tabsVisible: false,
+    perfVisible: false,
+    ctaVisible: false,
+    problemProgress: 0,
+    spacesProgress: 0,
+    tabsProgress: 0,
+    perfProgress: 0,
+    perfMem: 0,
+    perfCpu: 0,
+    perfStartup: 0
+  };
+
+  componentDidMount() {
+    this._ticking = false;
+    this._onScroll = () => {
+      if (this._ticking) return;
+      this._ticking = true;
+      requestAnimationFrame(() => {
+        this.handleScroll();
+        this._ticking = false;
+      });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    setTimeout(() => this.setState({ heroVisible: true }), 150);
+    this.handleScroll();
+
+    const opts = { threshold: 0.3 };
+    const mk = (key) => (entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          this.setState({ [key]: true });
+          if (key === 'perfVisible') this.animatePerfStats();
+          this._observers[key].disconnect();
+        }
+      });
+    };
+    this._observers = {
+      problemVisible: new IntersectionObserver(mk('problemVisible'), opts),
+      spacesVisible: new IntersectionObserver(mk('spacesVisible'), opts),
+      tabsVisible: new IntersectionObserver(mk('tabsVisible'), opts),
+      perfVisible: new IntersectionObserver(mk('perfVisible'), opts),
+      ctaVisible: new IntersectionObserver(mk('ctaVisible'), opts)
+    };
+    if (this.problemRef.current) this._observers.problemVisible.observe(this.problemRef.current);
+    if (this.spacesRef.current) this._observers.spacesVisible.observe(this.spacesRef.current);
+    if (this.tabsRef.current) this._observers.tabsVisible.observe(this.tabsRef.current);
+    if (this.perfRef.current) this._observers.perfVisible.observe(this.perfRef.current);
+    if (this.ctaRef.current) this._observers.ctaVisible.observe(this.ctaRef.current);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    Object.values(this._observers || {}).forEach(o => o.disconnect());
+    if (this._perfRaf) cancelAnimationFrame(this._perfRaf);
+  }
+
+  sectionProgress(ref) {
+    const el = ref.current;
+    if (!el) return 0;
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const total = rect.height - vh;
+    if (total <= 0) return 1;
+    const p = (-rect.top) / total;
+    return Math.max(0, Math.min(1, p));
+  }
+
+  handleScroll() {
+    const doc = document.documentElement;
+    const scrollTop = window.scrollY || doc.scrollTop;
+    const scrollHeight = doc.scrollHeight - window.innerHeight;
+    const pct = scrollHeight > 0 ? Math.max(0, Math.min(100, (scrollTop / scrollHeight) * 100)) : 0;
+
+    const centers = [this.heroRef, this.problemRef, this.spacesRef, this.tabsRef, this.perfRef, this.ctaRef]
+      .map(r => {
+        if (!r.current) return Infinity;
+        const rect = r.current.getBoundingClientRect();
+        return Math.abs(rect.top + rect.height / 2 - window.innerHeight / 2);
+      });
+    let active = 0, best = Infinity;
+    centers.forEach((d, i) => { if (d < best) { best = d; active = i; } });
+
+    this.setState({
+      scrollPct: pct,
+      activeChapter: active,
+      problemProgress: this.sectionProgress(this.problemRef),
+      spacesProgress: this.sectionProgress(this.spacesRef),
+      tabsProgress: this.sectionProgress(this.tabsRef),
+      perfProgress: this.sectionProgress(this.perfRef)
+    });
+  }
+
+  animatePerfStats() {
+    const start = performance.now();
+    const dur = 1400;
+    const targets = { mem: 2, cpu: 3, startup: 0.8 };
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / dur);
+      const ease = 1 - Math.pow(1 - t, 3);
+      this.setState({
+        perfMem: (targets.mem * ease).toFixed(1),
+        perfCpu: (targets.cpu * ease).toFixed(1),
+        perfStartup: (targets.startup * ease).toFixed(1)
+      });
+      if (t < 1) this._perfRaf = requestAnimationFrame(step);
+    };
+    this._perfRaf = requestAnimationFrame(step);
+  }
+
+  scrollToRef(ref) {
+    if (!ref.current) return;
+    const top = ref.current.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+
+  tabTransform(i, progress) {
+    // fixed pseudo-random base offsets per tab
+    const seeds = [
+      [40, -60, -18], [-80, 30, 22], [110, 70, -10], [-40, -90, 14],
+      [70, 110, -24], [-110, -20, 8], [20, 150, 18], [140, -30, -14], [-140, 60, -20]
+    ];
+    const s = seeds[i % seeds.length];
+    const stackX = (i % 4) * 4;
+    const stackY = Math.floor(i / 4) * 2;
+    const gridCols = 3;
+    const gridX = (i % gridCols) * 170 - 170;
+    const gridY = Math.floor(i / gridCols) * 46 + 10;
+
+    let x, y, rot;
+    if (progress <= 0.5) {
+      const p = progress / 0.5;
+      x = stackX + (s[0] - stackX) * p;
+      y = stackY + (s[1] - stackY) * p;
+      rot = s[2] * p;
+    } else {
+      const p = (progress - 0.5) / 0.5;
+      x = s[0] + (gridX - s[0]) * p;
+      y = s[1] + (gridY - s[1]) * p;
+      rot = s[2] * (1 - p);
+    }
+    return `translate(${x}px, ${y}px) rotate(${rot}deg)`;
+  }
+
+  renderVals() {
+    const s = this.state;
+    const accent = this.props.accentColor || '#FF6B00';
+    const productName = this.props.productName || 'Thug';
+
+    const chapters = [
+      { ref: this.heroRef, label: 'Hero' },
+      { ref: this.problemRef, label: 'Problem' },
+      { ref: this.spacesRef, label: 'Spaces' },
+      { ref: this.tabsRef, label: 'Tabs' },
+      { ref: this.perfRef, label: 'Performance' },
+      { ref: this.ctaRef, label: 'CTA' }
+    ];
+    const dots = chapters.map((c, i) => ({
+      label: c.label,
+      onClick: () => this.scrollToRef(c.ref),
+      size: i === s.activeChapter ? 12 : 8,
+      color: i === s.activeChapter ? accent : 'rgba(10,10,12,0.2)',
+      shadow: i === s.activeChapter ? `0 0 0 4px ${accent}22` : 'none'
+    }));
+
+    const title = productName;
+    const heroLetters = title.split('').map((ch, i) => ({
+      ch,
+      delay: i * 100,
+      blur: s.heroVisible ? 'blur(0px)' : 'blur(14px)',
+      opacity: s.heroVisible ? 1 : 0,
+      transform: s.heroVisible ? 'translateY(0px)' : 'translateY(18px)'
+    }));
+
+    const chaosTabs = new Array(9).fill(0).map((_, i) => ({
+      top: 60 + (i % 3) * 26,
+      left: 40 + Math.floor(i / 3) * 20,
+      bg: i % 2 === 0 ? '#F4F4F5' : '#EAEAEC',
+      barWidth: 60 + (i % 4) * 12,
+      transform: this.tabTransform(i, s.problemProgress)
+    }));
+
+    const spaceDefs = [
+      { name: 'Work', desc: 'Docs, meetings, deploys', wash: 'oklch(96% 0.015 55)', dot: accent },
+      { name: 'Personal', desc: 'Mail, banking, plans', wash: 'oklch(93% 0.02 40)', dot: accent },
+      { name: 'Research', desc: 'Papers, tabs to read later', wash: 'oklch(90% 0.015 70)', dot: accent },
+      { name: 'Design', desc: 'References, files, feedback', wash: 'oklch(20% 0.01 40)', dot: accent }
+    ];
+    const spacesActiveIdx = Math.min(3, Math.floor(s.spacesProgress * 4));
+    const spaces = spaceDefs.map((d, i) => {
+      const isActive = i === spacesActiveIdx;
+      return {
+        name: d.name,
+        desc: d.desc,
+        wash: d.wash,
+        dotColor: isActive ? accent : '#C4C4C8',
+        textColor: isActive ? '#0A0A0C' : '#B0B0B4',
+        subColor: isActive ? '#5C5C60' : '#C4C4C8',
+        active: isActive ? 'rgba(255,107,0,0.06)' : 'transparent',
+        opacity: isActive ? 1 : 0,
+        transform: isActive ? 'translateY(0px) scale(1)' : 'translateY(24px) scale(0.97)'
+      };
+    });
+
+    const clutteredTabs = new Array(8).fill(0);
+    const sidebarTabs = ['Inbox', 'Roadmap', 'Design QA', 'Deploy logs', 'Standup notes', 'Read later'].map((n, i) => ({
+      bg: i === 0 ? 'rgba(255,107,0,0.18)' : 'rgba(255,255,255,0.06)',
+      w: 40 + (i % 3) * 20
+    }));
+    const tabsChromeOpacity = Math.max(0, 1 - s.tabsProgress * 2.2);
+    const tabsSidebarOpacity = Math.min(1, Math.max(0, (s.tabsProgress - 0.35) * 2.2));
+    const tabsSidebarWidth = 60 + tabsSidebarOpacity * 140;
+    const favorites = [accent, '#0A0A0C', '#8A8A8E', accent, '#0A0A0C'].map((c, i) => ({
+      color: c,
+      delay: i * 90,
+      transform: s.tabsVisible ? 'scale(1)' : 'scale(0.4)'
+    }));
+
+    const raceDefs = [
+      { name: productName, target: 100, isProduct: true },
+      { name: 'Chrome', target: 78 },
+      { name: 'Safari', target: 70 },
+      { name: 'Edge', target: 65 },
+      { name: 'Firefox', target: 60 },
+      { name: 'Brave', target: 72 }
+    ];
+    const raceBrowsers = raceDefs.map(b => {
+      const width = b.target * s.perfProgress;
+      const finished = b.isProduct && width >= 99.5;
+      return {
+        name: b.name,
+        width: Math.min(b.target, width),
+        color: finished ? accent : (b.isProduct ? '#B8542E' : 'rgba(255,255,255,0.35)')
+      };
+    });
+
+    return {
+      accent,
+      productName,
+      scrollPct: s.scrollPct,
+      dots,
+      refs: { heroRef: this.heroRef, problemRef: this.problemRef, spacesRef: this.spacesRef, tabsRef: this.tabsRef, perfRef: this.perfRef, ctaRef: this.ctaRef },
+      heroLetters,
+      heroGridOpacity: s.heroVisible ? 1 : 0,
+      heroSubOpacity: s.heroVisible ? 1 : 0,
+      heroSubTransform: s.heroVisible ? 'translateY(0px)' : 'translateY(14px)',
+      problemVisible: {
+        op: s.problemVisible ? 1 : 0,
+        tf: s.problemVisible ? 'translateY(0px)' : 'translateY(20px)'
+      },
+      chaosTabs,
+      spaces,
+      tabsChromeOpacity,
+      tabsSidebarOpacity,
+      tabsSidebarWidth,
+      clutteredTabs,
+      sidebarTabs,
+      favorites,
+      perfStats: { mem: s.perfMem, cpu: s.perfCpu, startup: s.perfStartup },
+      raceBrowsers,
+      ctaVisible: {
+        op: s.ctaVisible ? 1 : 0,
+        tf: s.ctaVisible ? 'translateY(0px)' : 'translateY(20px)'
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

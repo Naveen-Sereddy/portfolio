@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<title>Retro Terminal — Cybersecurity Login Concept</title>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+    @keyframes flicker {
+      0% { opacity: 0.97; }
+      42% { opacity: 1; }
+      43% { opacity: 0.94; }
+      44% { opacity: 1; }
+      70% { opacity: 0.98; }
+      100% { opacity: 1; }
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #000; overflow: hidden; }
+  </style>
+</helmet>
+
+<div onClick="{{ focusInput }}" style="position:relative; width:100vw; height:100vh; background:#000; font-family:'JetBrains Mono','Courier New',monospace; font-size:14px; color:#00FF41; cursor:text; overflow:hidden;">
+
+  <input ref="{{ inputRef }}" value="{{ inputValue }}" onChange="{{ onChange }}" onKeyDown="{{ onKeyDown }}" autoFocus="{{ true }}" style="position:absolute; opacity:0; width:1px; height:1px; top:0; left:0; pointer-events:none;" />
+
+  <div style="position:relative; z-index:1; width:100%; height:100%; padding:32px 40px; animation:flicker 6s infinite; opacity:{{ opacity }}; transition:opacity 150ms linear; overflow-y:auto;">
+
+    <sc-if value="{{ isLogin }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:760px; margin:0 auto;">
+        <pre style="margin:0 0 24px 0; line-height:1.35; font-size:14px; font-family:'JetBrains Mono','Courier New',monospace; letter-spacing:0px; text-shadow:0 0 2px #00FF41; white-space:pre;">{{ banner }}</pre>
+        <sc-for list="{{ loginLog }}" as="line" hint-placeholder-count="2">
+          <div style="text-shadow:0 0 4px #00FF41; white-space:pre-wrap; margin-bottom:2px;">{{ line }}</div>
+        </sc-for>
+        <sc-if value="{{ loginActive }}" hint-placeholder-val="{{ true }}">
+          <div style="text-shadow:0 0 4px #00FF41; white-space:pre;">{{ loginPromptText }}<span>{{ loginDisplayValue }}</span><span style="animation:blink 1s step-end infinite;">█</span></div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isChallenges }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:900px; margin:0 auto;">
+        <div style="text-shadow:0 0 4px #00FF41; font-size:20px; font-weight:700; letter-spacing:2px;">CHALLENGES</div>
+        <div style="color:#00FF41; opacity:0.7; margin:4px 0 18px 0;">────────────────────────────────────────────────────────</div>
+        <sc-for list="{{ challengeRows }}" as="c" hint-placeholder-count="9">
+          <div onClick="{{ c.onClick }}" style="display:flex; gap:14px; padding:6px 8px; align-items:baseline; text-shadow:0 0 4px #00FF41;" style-hover="background:rgba(255,176,0,0.12); color:#FFB000; text-shadow:0 0 4px #FFB000;">
+            <span style="width:26px; opacity:0.8;">{{ c.numStr }}</span>
+            <span style="width:16px;">{{ c.icon }}</span>
+            <span style="flex:1;">{{ c.title }}</span>
+            <span style="width:70px; opacity:0.8;">{{ c.difficulty }}</span>
+            <span style="width:110px; text-align:right;">{{ c.pointsStr }}</span>
+            <span style="width:20px; text-align:center; color:#00FF41;">{{ c.checkMark }}</span>
+          </div>
+        </sc-for>
+        <div style="margin-top:24px; opacity:0.7;">commands: ls · cd &lt;##&gt; / open &lt;##&gt; · rank · chat · help</div>
+        <div style="margin-top:18px; white-space:pre; text-shadow:0 0 4px #00FF41;">jordan@htb:~$ {{ inputValue }}<span style="animation:blink 1s step-end infinite;">█</span></div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isChallenge }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:900px; margin:0 auto;">
+        <div style="text-shadow:0 0 4px #00FF41; font-size:18px; font-weight:700; letter-spacing:1px;">{{ challengeHeader }}</div>
+        <div style="color:#00FF41; opacity:0.7; margin:4px 0 18px 0;">────────────────────────────────────────────────────────</div>
+        <pre style="margin:0 0 20px 0; text-shadow:0 0 4px #00FF41; white-space:pre; line-height:1.4;">{{ challengeBox }}</pre>
+        <sc-for list="{{ challengeLog }}" as="line" hint-placeholder-count="1">
+          <div style="white-space:pre-wrap; margin-bottom:2px; text-shadow:0 0 4px currentColor; color:{{ line.color }};">{{ line.text }}</div>
+        </sc-for>
+        <div style="white-space:pre; text-shadow:0 0 4px #00FF41;">{{ challengePromptLabel }}{{ inputValue }}<span style="animation:blink 1s step-end infinite;">█</span></div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isSubmitFlag }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:760px; margin:0 auto;">
+        <div style="color:#FFB000; text-shadow:0 0 4px #FFB000; font-size:18px; font-weight:700; letter-spacing:2px;">SUBMIT FLAG</div>
+        <div style="color:#FFB000; opacity:0.7; margin:4px 0 24px 0;">────────────────────────────────────────────────────────</div>
+        <div style="white-space:pre; text-shadow:0 0 4px #00FF41;">Flag: {{ inputValue }}<span style="animation:blink 1s step-end infinite;">█</span></div>
+        <div style="margin-top:16px; opacity:0.7;">[enter] submit</div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isSuccess }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:760px; margin:0 auto;">
+        <pre style="margin:0 0 20px 0; text-shadow:0 0 6px #00FF41; white-space:pre; color:#00FF41;">{{ successBox }}</pre>
+        <div style="text-shadow:0 0 4px #00FF41;">[<span style="color:#FFB000;">C</span>]ontinue to scoreboard</div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isScoreboard }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:900px; margin:0 auto;">
+        <div style="text-shadow:0 0 4px #00FF41; font-size:20px; font-weight:700; letter-spacing:2px;">GLOBAL SCOREBOARD</div>
+        <div style="color:#00FF41; opacity:0.7; margin:4px 0 18px 0;">────────────────────────────────────────────────────────</div>
+        <sc-for list="{{ scoreboardRows }}" as="p" hint-placeholder-count="10">
+          <div style="display:flex; gap:14px; padding:4px 8px; align-items:baseline; color:{{ p.color }}; text-shadow:0 0 4px currentColor;">
+            <span style="width:24px; opacity:0.8;">{{ p.rank }}.</span>
+            <span style="width:180px;">{{ p.name }}<span style="animation:blink 1s step-end infinite;">{{ p.cursor }}</span></span>
+            <span style="width:100px;">{{ p.ptsStr }}</span>
+            <span style="font-size:12px; letter-spacing:-1px;">{{ p.bar }}</span>
+          </div>
+        </sc-for>
+        <div style="margin-top:22px; text-shadow:0 0 4px #00FF41; opacity:0.9;">{{ teamLine }}</div>
+        <div style="margin-top:24px; white-space:pre; text-shadow:0 0 4px #00FF41;">jordan@htb:~$ {{ inputValue }}<span style="animation:blink 1s step-end infinite;">█</span></div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isChat }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:820px; margin:0 auto; display:flex; flex-direction:column; height:100%;">
+        <div style="text-shadow:0 0 4px #00FF41; font-size:18px; font-weight:700; letter-spacing:1px;">TEAM CHAT — RedTeam</div>
+        <div style="color:#00FF41; opacity:0.7; margin:4px 0 16px 0;">────────────────────────────────────────────────────────</div>
+        <div style="flex:1; overflow-y:auto; margin-bottom:12px;">
+          <sc-for list="{{ chatMessages }}" as="m" hint-placeholder-count="4">
+            <div style="margin-bottom:8px; white-space:pre-wrap; color:{{ m.color }}; text-shadow:0 0 4px currentColor;">[{{ m.time }}] {{ m.user }}: {{ m.text }}</div>
+          </sc-for>
+        </div>
+        <div style="white-space:pre; text-shadow:0 0 4px #00FF41; margin-bottom:10px;">&gt; {{ inputValue }}<span style="animation:blink 1s step-end infinite;">█</span></div>
+        <div style="opacity:0.75; display:flex; gap:18px;">
+          <span onClick="{{ shortcutHelp }}" style="cursor:pointer;">/help</span>
+          <span onClick="{{ shortcutFlag }}" style="cursor:pointer;">/flag</span>
+          <span onClick="{{ shortcutChallenges }}" style="cursor:pointer;">/challenges</span>
+          <span onClick="{{ shortcutRank }}" style="cursor:pointer;">/rank</span>
+        </div>
+      </div>
+    </sc-if>
+
+  </div>
+
+  <div style="position:absolute; inset:0; z-index:2; pointer-events:none; background:repeating-linear-gradient(0deg, rgba(0,0,0,0.28) 0px, rgba(0,0,0,0.28) 1px, transparent 1px, transparent 2px);"></div>
+  <div style="position:absolute; inset:0; z-index:3; pointer-events:none; background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.75) 100%);"></div>
+  <div style="position:absolute; inset:0; z-index:4; pointer-events:none; box-shadow: inset 0 0 140px 40px rgba(0,0,0,0.6);"></div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  challenges = [
+    { id:1, title:"Phishing Email Analysis", difficulty:"Easy", icon:"◉", points:150,
+      desc:["An employee forwarded a suspicious email claiming","to be from IT support requesting a password reset.","Inspect the headers and identify the spoofed domain.","Attachment: phishing_sample.eml"],
+      hint:"spf", flag:"HTB{phishing_analysis_master}" },
+    { id:2, title:"SQL Injection Basics", difficulty:"Easy", icon:"◉", points:200,
+      desc:["A login form is vulnerable to SQL injection.","Bypass authentication without valid credentials.","Target: https://htb-project.thm/login"],
+      hint:"' or '1'='1", flag:"HTB{sql_injection_master}" },
+    { id:3, title:"XSS Payload Crafting", difficulty:"Medium", icon:"◈", points:300,
+      desc:["A web application reflects user input without","sanitization. Craft a payload that executes","JavaScript in the victim's browser.","Target: https://htb-project.thm/search?q="],
+      hint:("<scr"+"ipt>alert(1)</scr"+"ipt>"), flag:"HTB{xss_payload_master}" },
+    { id:4, title:"JWT Token Forgery", difficulty:"Medium", icon:"◈", points:350,
+      desc:["The API issues JWTs to authenticate users.","Forge a token that grants you admin privileges.","Target: https://htb-project.thm/api/profile"],
+      hint:"none", flag:"HTB{jwt_forgery_master}" },
+    { id:5, title:"SSRF to Metadata", difficulty:"Hard", icon:"◇", points:500,
+      desc:["The app fetches remote URLs on your behalf.","Abuse this to reach the cloud metadata service","and leak the instance's IAM credentials.","Target: https://htb-project.thm/fetch?url="],
+      hint:"169.254.169.254", flag:"HTB{ssrf_metadata_master}" },
+    { id:6, title:"Buffer Overflow 101", difficulty:"Hard", icon:"◇", points:600,
+      desc:["A legacy C binary parses user input with no","bounds checking. Overflow the buffer and hijack","the instruction pointer (EIP).","Binary: ./vuln_service"],
+      hint:"overflow", flag:"HTB{buffer_overflow_master}" },
+    { id:7, title:"Active Directory Exploitation", difficulty:"Insane", icon:"⬟", points:800,
+      desc:["You have a foothold in the CORP domain.","Escalate to Domain Admin using a known","Kerberos ticket-forging technique.","Domain: corp.htb-project.thm"],
+      hint:"golden ticket", flag:"HTB{ad_domain_master}" },
+    { id:8, title:"Container Escape", difficulty:"Insane", icon:"⬟", points:1000,
+      desc:["Your code executes inside a Docker container.","Find a misconfigured mount and escape to","the host filesystem.","Container: web-sandbox:latest"],
+      hint:"docker.sock", flag:"HTB{container_escape_master}" },
+    { id:9, title:"Custom Binary Exploitation", difficulty:"Insane", icon:"⬟", points:1200,
+      desc:["A custom binary has no stack protections.","Write shellcode and redirect execution to","achieve remote code execution.","Binary: ./custom_exploit"],
+      hint:"shellcode", flag:"HTB{binary_exploit_master}" }
+  ];
+
+  banner = "  ____  _____  ____  ____  ___________  ______\n / __ \\/ ___/ / __ \\/ __ \\/ ____/ ___/ / ____/\n/ / / /\\__ \\ / /_/ / / / /___ \\__ \\ /___ \\ \n/ /_/ /___/ // _, _/ /_/ /___/ /__/ /____/ /  \n\\____//____//_/ |_|\\____//____/____/ /_____/   ";
+
+  state = {
+    screen: 'login',
+    opacity: 1,
+    loginStage: 'username',
+    username: '',
+    password: '',
+    loginLog: [],
+    inputValue: '',
+    currentChallengeId: null,
+    challengeStage: 'input',
+    challengeLog: [],
+    score: 150,
+    solved: { 1: true },
+    lastScreen: 'challenges',
+    chatMessages: [
+      { time:'14:32', user:'sarah_codes', text:"Nice work on the XSS! Flag in 3 min.", color:'#00FF41' },
+      { time:'14:33', user:'Jordan_Ellis', text:"Thanks! That target was fun.", color:'#00FF41' },
+      { time:'14:35', user:'mike_sec', text:"I'm stuck on the buffer overflow, any hints?", color:'#00FF41' },
+      { time:'14:36', user:'system', text:"mike_sec solved 'Container Escape' — +1,000 pts", color:'#FFB000' }
+    ]
+  };
+
+  focusInput = () => { if (this._input) this._input.focus(); };
+  inputRef = (el) => { this._input = el; };
+
+  componentDidMount() {
+    setTimeout(() => { if (this._input) this._input.focus(); }, 50);
+  }
+
+  onChange = (e) => { this.setState({ inputValue: e.target.value }); };
+
+  transitionTo(screen, extra) {
+    this.setState(Object.assign({ opacity: 0 }, extra || {}));
+    setTimeout(() => {
+      this.setState(Object.assign({ screen, opacity: 0 }, extra || {}));
+      setTimeout(() => this.setState({ opacity: 1 }), 20);
+    }, 150);
+  }
+
+  goChallenges = () => { this.setState({ lastScreen: 'challenges' }); this.transitionTo('challenges'); this.setState({ inputValue: '' }); };
+  goScoreboard = () => { this.transitionTo('scoreboard'); this.setState({ inputValue: '' }); };
+  goChat = () => { this.transitionTo('chat'); this.setState({ inputValue: '' }); };
+
+  openChallenge(id) {
+    const c = this.challenges.find(x => x.id === id);
+    if (!c) return;
+    this.setState({ lastScreen: 'challenges' });
+    if (this.state.solved[id]) {
+      this.transitionTo('challenge', {
+        currentChallengeId: id, challengeStage: 'done',
+        challengeLog: [
+          { text: '[*] Challenge already solved.', color: '#FFB000' },
+          { text: '[+] Flag: ' + c.flag, color: '#00FF41' }
+        ]
+      });
+    } else {
+      this.transitionTo('challenge', { currentChallengeId: id, challengeStage: 'input', challengeLog: [] });
+    }
+    this.setState({ inputValue: '' });
+  }
+
+  handleGlobalCommand(lower) {
+    if (lower === 'back') { this.transitionTo(this.state.lastScreen || 'challenges'); this.setState({ inputValue: '' }); return true; }
+    if (lower === 'ls') { this.goChallenges(); return true; }
+    if (lower === 'rank') { this.goScoreboard(); return true; }
+    if (lower === 'chat') { this.goChat(); return true; }
+    const m = lower.match(/^(cd|open)\s+0*(\d+)/);
+    if (m) { this.openChallenge(parseInt(m[2], 10)); return true; }
+    return false;
+  }
+
+  submitLogin(value) {
+    const stage = this.state.loginStage;
+    if (stage === 'username') {
+      const log = this.state.loginLog.concat(['htb login: ' + value]);
+      this.setState({ username: value, loginStage: 'password', inputValue: '', loginLog: log });
+    } else if (stage === 'password') {
+      const log = this.state.loginLog.concat(['Password: ' + '*'.repeat(value.length)]);
+      this.setState({ password: value, loginStage: 'authenticating', inputValue: '', loginLog: log });
+      setTimeout(() => { this.setState({ loginLog: this.state.loginLog.concat(['Authenticating...']) }); }, 400);
+      setTimeout(() => { this.setState({ loginLog: this.state.loginLog.concat(['Access granted. Welcome, ' + this.state.username + '.']) }); }, 1100);
+      setTimeout(() => { this.setState({ lastScreen: 'challenges' }); this.transitionTo('challenges'); this.setState({ inputValue: '' }); }, 1900);
+    }
+  }
+
+  submitChallengeInput(value) {
+    const c = this.challenges.find(x => x.id === this.state.currentChallengeId);
+    const stage = this.state.challengeStage;
+    if (stage === 'awaitSubmit') {
+      const lower = value.trim().toLowerCase();
+      if (lower === 'y' || lower === 'yes') {
+        this.transitionTo('submitFlag', { inputValue: c.flag });
+      } else {
+        this.setState({ challengeLog: this.state.challengeLog.concat([{ text: 'Submit flag? (y/n): ' + value, color: '#00FF41' }]), inputValue: '', challengeStage: 'input' });
+      }
+      return;
+    }
+    const log = this.state.challengeLog.concat([{ text: 'jordan@htb:~$ ' + value, color: '#00FF41' }]);
+    const lower = value.toLowerCase();
+    if (c.hint && lower.indexOf(c.hint.toLowerCase()) !== -1) {
+      const newTotal = this.state.score + c.points;
+      const solved = Object.assign({}, this.state.solved); solved[c.id] = true;
+      log.push({ text: '[+] Exploit executed successfully!', color: '#00FF41' });
+      log.push({ text: '[+] Flag: ' + c.flag, color: '#00FF41' });
+      log.push({ text: '[+] Points: +' + c.points + ' \u2014 Total: ' + newTotal, color: '#00FF41' });
+      log.push({ text: 'Submit flag? (y/n): ', color: '#FFB000' });
+      this.setState({ challengeLog: log, inputValue: '', challengeStage: 'awaitSubmit', score: newTotal, solved: solved });
+    } else {
+      log.push({ text: '[-] Exploit failed. Try again.', color: '#FF0000' });
+      this.setState({ challengeLog: log, inputValue: '' });
+    }
+  }
+
+  submitFlagValue(value) {
+    const c = this.challenges.find(x => x.id === this.state.currentChallengeId);
+    if (value.trim() === c.flag) {
+      const box = "\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2551   CHALLENGE COMPLETED  +" + c.points + " PTS" + " ".repeat(Math.max(0, 8 - String(c.points).length)) + "\u2551\n\u2551   Rank: Pro \u2014 Top 2% globally             \u2551\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d";
+      this.transitionTo('success', { successBox: box });
+    } else {
+      this.setState({ inputValue: value + '' });
+    }
+  }
+
+  onKeyDown = (e) => {
+    if (e.key !== 'Enter') return;
+    const value = this.state.inputValue;
+    const lower = value.trim().toLowerCase();
+    const screen = this.state.screen;
+
+    if (screen === 'login') { this.submitLogin(value); return; }
+    if (screen === 'chat') {
+      if (lower === '/help') { this.appendChat('system', "commands: /help /flag /challenges /rank", '#FFB000'); this.setState({ inputValue: '' }); return; }
+      if (lower === '/flag') { const c = this.challenges.find(x => x.id === this.state.currentChallengeId); this.appendChat('system', c ? ('Current flag: ' + c.flag) : 'No active challenge.', '#FFB000'); this.setState({ inputValue: '' }); return; }
+      if (lower === '/challenges') { this.goChallenges(); return; }
+      if (lower === '/rank') { this.goScoreboard(); return; }
+      if (lower === 'back') { this.transitionTo(this.state.lastScreen || 'challenges'); this.setState({ inputValue: '' }); return; }
+      if (value.trim() !== '') { this.appendChat('Jordan_Ellis', value, '#00FF41'); this.setState({ inputValue: '' }); }
+      return;
+    }
+
+    if (this.handleGlobalCommand(lower)) return;
+
+    if (screen === 'challenges') {
+      this.setState({ inputValue: '' });
+      return;
+    }
+    if (screen === 'challenge') { this.submitChallengeInput(value); return; }
+    if (screen === 'submitFlag') { this.submitFlagValue(value); return; }
+    if (screen === 'success') {
+      if (lower === 'c' || lower === 'continue') this.goScoreboard();
+      return;
+    }
+    if (screen === 'scoreboard') { this.setState({ inputValue: '' }); return; }
+  };
+
+  appendChat(user, text, color) {
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2, '0');
+    const mm = String(now.getMinutes()).padStart(2, '0');
+    this.setState({ chatMessages: this.state.chatMessages.concat([{ time: hh + ':' + mm, user, text, color }]) });
+  }
+
+  buildBox(lines) {
+    const width = 56;
+    let out = '\u250c' + '\u2500'.repeat(width + 2) + '\u2510\n';
+    lines.forEach((l) => { out += '\u2502 ' + l.padEnd(width) + ' \u2502\n'; });
+    out += '\u2514' + '\u2500'.repeat(width + 2) + '\u2518';
+    return out;
+  }
+
+  buildBar(pts, max, width) {
+    const filled = Math.max(1, Math.round((pts / max) * width));
+    return '\u2588'.repeat(filled) + '\u2591'.repeat(Math.max(0, width - filled));
+  }
+
+  shortcutHelp = () => { this.setState({ inputValue: '/help' }); setTimeout(() => this.onKeyDown({ key: 'Enter' }), 0); };
+  shortcutFlag = () => { this.setState({ inputValue: '/flag' }); setTimeout(() => this.onKeyDown({ key: 'Enter' }), 0); };
+  shortcutChallenges = () => { this.goChallenges(); };
+  shortcutRank = () => { this.goScoreboard(); };
+
+  renderVals() {
+    const s = this.state;
+    const screen = s.screen;
+
+    let loginPromptText = 'htb login: ';
+    let loginDisplayValue = s.inputValue;
+    if (s.loginStage === 'password') { loginPromptText = 'Password: '; loginDisplayValue = '*'.repeat(s.inputValue.length); }
+    const loginActive = s.loginStage === 'username' || s.loginStage === 'password';
+
+    const challengeRows = this.challenges.map((c) => ({
+      numStr: String(c.id).padStart(2, '0') + '.',
+      icon: c.icon,
+      title: c.title,
+      difficulty: c.difficulty,
+      pointsStr: c.points.toLocaleString() + ' pts',
+      checkMark: s.solved[c.id] ? '\u2713' : '',
+      onClick: () => this.openChallenge(c.id)
+    }));
+
+    const currentChallenge = this.challenges.find(x => x.id === s.currentChallengeId);
+    const challengeHeader = currentChallenge ? ('CHALLENGE #' + String(currentChallenge.id).padStart(2, '0') + ' \u2014 ' + currentChallenge.title.toUpperCase()) : '';
+    const challengeBox = currentChallenge ? this.buildBox(currentChallenge.desc) : '';
+    const challengePromptLabel = s.challengeStage === 'awaitSubmit' ? '' : 'jordan@htb:~$ ';
+
+    const players = [
+      { name:'sarah_codes', pts:4250 },
+      { name:'mike_sec', pts:3890 },
+      { name:'Jordan_Ellis', pts:2847, me:true },
+      { name:'alex_htb', pts:2650 },
+      { name:'chris_r00t', pts:2400 },
+      { name:'devSecOps', pts:2100 },
+      { name:'whiteHat_99', pts:1850 },
+      { name:'ghostByte', pts:1600 },
+      { name:'cipherPunk', pts:1400 },
+      { name:'nullptr_x', pts:1200 }
+    ];
+    const maxPts = players[0].pts;
+    const scoreboardRows = players.map((p, i) => ({
+      rank: i + 1,
+      name: p.name,
+      ptsStr: p.pts.toLocaleString() + ' pts',
+      bar: this.buildBar(p.pts, maxPts, 20),
+      color: p.me ? '#FFB000' : '#00FF41',
+      cursor: p.me ? ' \u2588' : ''
+    }));
+    const teamLine = 'Team RedTeam \u2014 #3 globally \u2014 12,450 pts';
+
+    return {
+      opacity: s.opacity,
+      isLogin: screen === 'login',
+      isChallenges: screen === 'challenges',
+      isChallenge: screen === 'challenge',
+      isSubmitFlag: screen === 'submitFlag',
+      isSuccess: screen === 'success',
+      isScoreboard: screen === 'scoreboard',
+      isChat: screen === 'chat',
+      banner: this.banner,
+      loginLog: s.loginLog,
+      loginActive,
+      loginPromptText,
+      loginDisplayValue,
+      inputValue: s.inputValue,
+      onChange: this.onChange,
+      onKeyDown: this.onKeyDown,
+      inputRef: this.inputRef,
+      focusInput: this.focusInput,
+      challengeRows,
+      challengeHeader,
+      challengeBox,
+      challengeLog: s.challengeLog,
+      challengePromptLabel,
+      successBox: s.successBox,
+      scoreboardRows,
+      teamLine,
+      chatMessages: s.chatMessages,
+      shortcutHelp: this.shortcutHelp,
+      shortcutFlag: this.shortcutFlag,
+      shortcutChallenges: this.shortcutChallenges,
+      shortcutRank: this.shortcutRank
+    };
+  }
+}
+
+</script>
+</body>
+</html>

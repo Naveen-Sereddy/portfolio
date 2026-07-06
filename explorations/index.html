@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#0d0404" />
 <title>UI Style Explorations · Naveen Sereddy</title>
-<meta name="description" content="10 UI style explorations — neumorphism, claymorphism, glassmorphism, and more, by Naveen Sereddy." />
+<meta name="description" content="7 UI style explorations — neo-brutalism, claymorphism, glassmorphism, and more, by Naveen Sereddy." />
 <link rel="canonical" href="https://naveen-sereddy.vercel.app/explorations/" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230d0404'/%3E%3Ctext x='16' y='21' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23d0923a' text-anchor='middle'%3ENS%3C/text%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -49,12 +49,16 @@ a:hover { color:var(--accent); }
 
 .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.5rem; padding-bottom:6rem; }
 
-.placeholder {
-  border:1px dashed var(--border-strong); border-radius:1rem; padding:3.5rem 2rem; text-align:center;
-  margin-bottom:6rem;
+.card {
+  display:block; border-radius:1.25rem; border:1px solid var(--border); background:var(--bg-2);
+  overflow:hidden; transition:transform 280ms var(--ease), border-color 280ms var(--ease);
 }
-.placeholder .eyebrow { justify-content:center; }
-.placeholder p { max-width:40ch; margin:.75rem auto 0; font-size:.92rem; }
+.card:hover { transform:translateY(-4px); border-color:rgba(208,146,58,0.35); }
+.card-thumb { display:block; width:100%; aspect-ratio:16/10; object-fit:cover; background:var(--bg-3); }
+.card-body { padding:1.5rem 1.5rem 1.75rem; }
+.card-body h3 { margin-top:0; font-size:1.15rem; font-weight:500; color:var(--text); }
+.card-desc { margin-top:.5rem; font-size:.88rem; line-height:1.55; color:var(--text-2); }
+.card-cta { display:inline-block; margin-top:1.1rem; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); }
 </style>
 </head>
 <body>
@@ -67,15 +71,68 @@ a:hover { color:var(--accent); }
 <main>
   <div class="container hero">
     <div class="eyebrow">UI Style Explorations</div>
-    <h1>10 styles, one designer.</h1>
-    <p>Visual range outside the case-study work above — neumorphism, claymorphism, glassmorphism, and more. No decisions to walk through, just interfaces.</p>
+    <h1>7 styles, one designer.</h1>
+    <p>Visual range outside the case-study work above — neo-brutalism, claymorphism, glassmorphism, and more. No decisions to walk through, just interfaces.</p>
   </div>
   <div class="container">
-    <div class="placeholder">
-      <div class="eyebrow" style="display:flex;">Coming soon</div>
-      <p>The 10 style explorations are being finished and will land here shortly.</p>
+    <div class="grid" id="explorationsGrid">
+      <a class="card" href="01-fintech-brutal-trading-terminal/fintech-brutal-trading-terminal.dc.html" target="_blank" rel="noopener">
+        <img class="card-thumb" src="../assets/projects/explorations/01-fintech-brutal-trading-terminal.png" alt="Brutal — neo-brutalist trading terminal login screen" loading="lazy" />
+        <div class="card-body">
+          <h3>Brutal</h3>
+          <p class="card-desc">A neo-brutalist trading terminal — thick borders, hard shadows, mono type.</p>
+          <span class="card-cta">Open prototype →</span>
+        </div>
+      </a>
+      <a class="card" href="02-editorial-nyt-swiss-redesign/editorial-nyt-swiss-redesign.dc.html" target="_blank" rel="noopener">
+        <img class="card-thumb" src="../assets/projects/explorations/02-editorial-nyt-swiss-redesign.png?v=2" alt="NYT Swiss Redesign — editorial homepage typography study" loading="lazy" />
+        <div class="card-body">
+          <h3>NYT Swiss Redesign</h3>
+          <p class="card-desc">An editorial homepage rebuilt around Swiss typographic discipline.</p>
+          <span class="card-cta">Open prototype →</span>
+        </div>
+      </a>
+      <a class="card" href="03-travel-emirates-boarding-pass/travel-emirates-boarding-pass.dc.html" target="_blank" rel="noopener">
+        <img class="card-thumb" src="../assets/projects/explorations/03-travel-emirates-boarding-pass.png" alt="Emirates Vision Pro — glassmorphic boarding pass card" loading="lazy" />
+        <div class="card-body">
+          <h3>Emirates Vision Pro</h3>
+          <p class="card-desc">A glassmorphic boarding-pass card with a premium gold-on-gradient finish.</p>
+          <span class="card-cta">Open prototype →</span>
+        </div>
+      </a>
+      <a class="card" href="04-smart-home-claymorphic-nest/smart-home-claymorphic-nest.dc.html" target="_blank" rel="noopener">
+        <img class="card-thumb" src="../assets/projects/explorations/04-smart-home-claymorphic-nest.png" alt="Nest Clay — claymorphic smart home app on an iOS device frame" loading="lazy" />
+        <div class="card-body">
+          <h3>Nest Clay</h3>
+          <p class="card-desc">A claymorphic smart-home app — soft pastel controls in a real iOS frame.</p>
+          <span class="card-cta">Open prototype →</span>
+        </div>
+      </a>
+      <a class="card" href="05-productivity-campus-dashboard/productivity-campus-dashboard.dc.html" target="_blank" rel="noopener">
+        <img class="card-thumb" src="../assets/projects/explorations/05-productivity-campus-dashboard.png" alt="Campus — student productivity dashboard" loading="lazy" />
+        <div class="card-body">
+          <h3>Campus</h3>
+          <p class="card-desc">A dark student productivity dashboard — schedule, deep work, and GPA at a glance.</p>
+          <span class="card-cta">Open prototype →</span>
+        </div>
+      </a>
+      <a class="card" href="06-gaming-kitchen-quest/gaming-kitchen-quest.dc.html" target="_blank" rel="noopener">
+        <img class="card-thumb" src="../assets/projects/explorations/06-gaming-kitchen-quest.png" alt="Kitchen Quest — pixel-art cooking gamification screen" loading="lazy" />
+        <div class="card-body">
+          <h3>Kitchen Quest</h3>
+          <p class="card-desc">A pixel-art cooking game concept — chef select, recipes, and XP rewards.</p>
+          <span class="card-cta">Open prototype →</span>
+        </div>
+      </a>
+      <a class="card" href="07-security-retro-terminal-login/security-retro-terminal-login.dc.html" target="_blank" rel="noopener">
+        <img class="card-thumb" src="../assets/projects/explorations/07-security-retro-terminal-login.png" alt="Retro Terminal — CRT-style cybersecurity login concept" loading="lazy" />
+        <div class="card-body">
+          <h3>Retro Terminal</h3>
+          <p class="card-desc">A CRT-green terminal login concept for a cybersecurity platform.</p>
+          <span class="card-cta">Open prototype →</span>
+        </div>
+      </a>
     </div>
-    <div class="grid" id="explorationsGrid"></div>
   </div>
 </main>
 </body>

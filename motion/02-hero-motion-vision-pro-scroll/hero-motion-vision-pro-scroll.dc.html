@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<title>Vision Pro — Scroll Reveal Experience</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin:0; padding:0; background:#000; scroll-behavior:smooth; }
+    * { box-sizing:border-box; }
+    ::selection { background:#0A84FF; color:#fff; }
+    @keyframes shimmerSweep {
+      0% { transform: translateX(-120%) rotate(8deg); }
+      100% { transform: translateX(120%) rotate(8deg); }
+    }
+    @keyframes ctaPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(10,132,255,0.55); }
+      50% { box-shadow: 0 0 0 18px rgba(10,132,255,0); }
+    }
+    @keyframes dotBreathe {
+      0%, 100% { opacity:0.35; }
+      50% { opacity:0.9; }
+    }
+  </style>
+</helmet>
+
+<div style="background:#000;color:#fff;font-family:Inter,-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;width:100%;overflow-x:hidden;position:relative;">
+
+  <div style="position:fixed;top:0;left:0;height:2px;background:#0A84FF;z-index:60;width:{{ pagePct }}%;transition:width 0.05s linear;"></div>
+
+  <div style="position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;justify-content:center;z-index:50;pointer-events:none;">
+    <div style="font-size:15px;font-weight:600;letter-spacing:0.02em;color:{{ navTextColor }};transition:color 0.3s ease;">Vision Pro</div>
+  </div>
+
+  <div style="position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:14px;">
+    <sc-for list="{{ dots }}" as="dot" hint-placeholder-count="6">
+      <div style="width:{{ dot.size }}px;height:{{ dot.size }}px;border-radius:50%;background:{{ dot.color }};transition:all 0.3s ease;"></div>
+    </sc-for>
+  </div>
+
+  <!-- CHAPTER 1: HERO -->
+  <div ref="{{ refs.heroWrap }}" data-screen-label="01 Hero" style="height:220vh;position:relative;">
+    <div style="position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(ellipse at 50% 40%, #141414 0%, #000 70%);">
+      <div style="text-align:center;opacity:{{ heroOpacity }};transform:translate3d(0,{{ heroTranslate }}px,0) scale({{ heroScale }});will-change:transform,opacity;">
+        <div style="font-size:15px;letter-spacing:0.3em;text-transform:uppercase;color:#8e8e93;margin-bottom:22px;">Introducing</div>
+        <div style="font-size:clamp(56px,10vw,140px);font-weight:700;letter-spacing:-0.03em;line-height:1;background:linear-gradient(180deg,#fff 0%,#c7c7cc 55%,#8e8e93 100%);-webkit-background-clip:text;background-clip:text;color:transparent;">Vision Pro</div>
+        <div style="font-size:20px;color:#8e8e93;margin-top:26px;font-weight:400;">An infinite canvas for apps. All within arm's reach.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPTER 2: DESIGN -->
+  <div ref="{{ refs.designWrap }}" data-screen-label="02 Design" style="height:260vh;position:relative;">
+    <div style="position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#050505;perspective:1200px;">
+      <div style="position:absolute;top:64px;left:0;right:0;text-align:center;">
+        <div style="font-size:13px;letter-spacing:0.25em;text-transform:uppercase;color:#0A84FF;margin-bottom:10px;">Design</div>
+        <div style="font-size:clamp(28px,4vw,46px);font-weight:600;letter-spacing:-0.01em;">Precision glass. Aerospace-grade alloy.</div>
+      </div>
+      <div style="width:min(46vw,380px);height:min(30vw,240px);border-radius:28px;position:relative;transform-style:preserve-3d;transform:translate3d(0,0,0) rotateY({{ designRotation }}deg);will-change:transform;background:linear-gradient(135deg,#3a3a3c 0%,#8e8e93 35%,#e5e5ea 50%,#8e8e93 65%,#232325 100%);box-shadow:0 40px 90px rgba(0,0,0,0.65),inset 0 0 40px rgba(255,255,255,0.08);overflow:hidden;">
+        <div style="position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,0.35) 50%,transparent 60%);animation:shimmerSweep 3.2s ease-in-out infinite;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPTER 3: DISPLAY -->
+  <div ref="{{ refs.displaySec }}" data-screen-label="03 Display" style="min-height:110vh;display:flex;align-items:center;justify-content:center;background:#000;padding:80px 24px;">
+    <div style="max-width:1000px;width:100%;display:flex;gap:60px;flex-wrap:wrap;align-items:center;justify-content:space-between;">
+      <div style="flex:1 1 360px;opacity:{{ displayOpacity }};transform:translate3d({{ displayTranslate }}px,0,0);will-change:transform,opacity;">
+        <div style="font-size:13px;letter-spacing:0.25em;text-transform:uppercase;color:#0A84FF;margin-bottom:14px;">Display</div>
+        <div style="font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.01em;line-height:1.1;">Micro-OLED displays sharper than 4K per eye.</div>
+        <div style="font-size:17px;color:#8e8e93;margin-top:18px;line-height:1.6;">Two displays pack more pixels than a 4K TV into a space the size of a postage stamp.</div>
+      </div>
+      <div style="flex:1 1 300px;display:flex;flex-direction:column;gap:28px;opacity:{{ displayOpacity }};transform:translate3d(0,{{ statsTranslate }}px,0);will-change:transform,opacity;">
+        <sc-for list="{{ stats }}" as="stat" hint-placeholder-count="3">
+          <div>
+            <div style="font-size:clamp(38px,5vw,56px);font-weight:700;letter-spacing:-0.02em;color:#fff;">{{ stat.value }}<span style="font-size:0.5em;color:#8e8e93;margin-left:4px;">{{ stat.unit }}</span></div>
+            <div style="font-size:14px;color:#8e8e93;margin-top:4px;">{{ stat.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPTER 4: SPATIAL AUDIO -->
+  <div ref="{{ refs.audioWrap }}" data-screen-label="04 Spatial Audio" style="height:220vh;position:relative;">
+    <div style="position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#0a0a0c 0%,#000 75%);">
+      <div style="position:absolute;top:64px;left:0;right:0;text-align:center;z-index:2;">
+        <div style="font-size:13px;letter-spacing:0.25em;text-transform:uppercase;color:#0A84FF;margin-bottom:10px;">Spatial Audio</div>
+        <div style="font-size:clamp(28px,4vw,46px);font-weight:600;letter-spacing:-0.01em;">Sound that feels like it's really there.</div>
+      </div>
+      <div style="position:relative;width:12px;height:12px;border-radius:50%;background:#0A84FF;box-shadow:0 0 24px 4px rgba(10,132,255,0.7);z-index:2;"></div>
+      <sc-for list="{{ rings }}" as="ring" hint-placeholder-count="4">
+        <div style="position:absolute;width:120px;height:120px;border-radius:50%;border:1.5px solid rgba(10,132,255,{{ ring.opacity }});transform:scale({{ ring.scale }});will-change:transform,opacity;"></div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- CHAPTER 5: ECOSYSTEM -->
+  <div ref="{{ refs.ecoSec }}" data-screen-label="05 Ecosystem" style="min-height:110vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;padding:80px 24px;gap:56px;">
+    <div style="text-align:center;">
+      <div style="font-size:13px;letter-spacing:0.25em;text-transform:uppercase;color:#0A84FF;margin-bottom:10px;">Ecosystem</div>
+      <div style="font-size:clamp(28px,4vw,46px);font-weight:600;letter-spacing:-0.01em;">Every app you love, all around you.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(100px,140px));gap:22px;max-width:700px;">
+      <sc-for list="{{ icons }}" as="icon" hint-placeholder-count="8">
+        <div style="aspect-ratio:1;border-radius:26px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;background:{{ icon.bg }};opacity:{{ icon.opacity }};transform:translate3d(0,{{ icon.translate }}px,0) scale({{ icon.scale }});will-change:transform,opacity;box-shadow:0 12px 30px rgba(0,0,0,0.5);">
+          <span style="font-size:13px;font-weight:600;color:#fff;">{{ icon.label }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- CHAPTER 6: CTA -->
+  <div ref="{{ refs.ctaSec }}" data-screen-label="06 CTA" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#000 0%,#050507 100%);padding:100px 24px;gap:36px;">
+    <div style="text-align:center;opacity:{{ ctaOpacity }};">
+      <div style="font-size:13px;letter-spacing:0.25em;text-transform:uppercase;color:#0A84FF;margin-bottom:14px;">Experience it yourself</div>
+      <div style="font-size:clamp(32px,5vw,54px);font-weight:700;letter-spacing:-0.02em;">See what a new era of computing looks like.</div>
+    </div>
+    <button style="padding:18px 44px;border-radius:999px;border:none;background:#0A84FF;color:#fff;font-size:18px;font-weight:600;cursor:pointer;font-family:inherit;animation:ctaPulse 2.4s ease-out infinite;opacity:{{ ctaOpacity }};">Book a Demo</button>
+    <div style="width:min(92vw,420px);opacity:{{ ctaOpacity }};transform:translate3d(0,{{ ctaFormTranslate }}px,0);will-change:transform,opacity;background:#0d0d0f;border:1px solid #1c1c1e;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px;margin-top:10px;">
+      <div style="font-size:15px;font-weight:600;color:#fff;">Reserve your session</div>
+      <input type="text" placeholder="Full name" style="background:#1c1c1e;border:1px solid #2c2c2e;border-radius:10px;padding:12px 14px;color:#fff;font-size:15px;font-family:inherit;outline:none;"/>
+      <input type="email" placeholder="Email address" style="background:#1c1c1e;border:1px solid #2c2c2e;border-radius:10px;padding:12px 14px;color:#fff;font-size:15px;font-family:inherit;outline:none;"/>
+      <button style="margin-top:4px;padding:13px;border-radius:10px;border:none;background:#fff;color:#000;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;">Confirm Reservation</button>
+    </div>
+  </div>
+
+  <div style="height:12vh;background:#000;"></div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    pHero: 1, pDesign: 0, pDisplay: 0, pAudio: 0, pEco: 0, pCta: 0, pagePct: 0
+  };
+
+  constructor(props) {
+    super(props);
+    this.el = {};
+    this.refs = {
+      heroWrap: (n) => { this.el.heroWrap = n; },
+      designWrap: (n) => { this.el.designWrap = n; },
+      displaySec: (n) => { this.el.displaySec = n; },
+      audioWrap: (n) => { this.el.audioWrap = n; },
+      ecoSec: (n) => { this.el.ecoSec = n; },
+      ctaSec: (n) => { this.el.ctaSec = n; },
+    };
+    this.ticking = false;
+    this.onScroll = this.onScroll.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.compute();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+  }
+
+  onScroll() {
+    if (this.ticking) return;
+    this.ticking = true;
+    requestAnimationFrame(() => {
+      this.compute();
+      this.ticking = false;
+    });
+  }
+
+  compute() {
+    const vh = window.innerHeight;
+    const clamp01 = (v) => Math.max(0, Math.min(1, v));
+
+    const pinned = (key) => {
+      const node = this.el[key];
+      if (!node) return 0;
+      const r = node.getBoundingClientRect();
+      const scrollable = r.height - vh;
+      if (scrollable <= 0) return 1;
+      return clamp01(-r.top / scrollable);
+    };
+    const enter = (key) => {
+      const node = this.el[key];
+      if (!node) return 0;
+      const r = node.getBoundingClientRect();
+      return clamp01((vh * 0.9 - r.top) / (vh * 0.6));
+    };
+
+    const doc = document.documentElement;
+    const pagePct = clamp01(window.scrollY / Math.max(1, doc.scrollHeight - vh)) * 100;
+
+    this.setState({
+      pHero: pinned('heroWrap'),
+      pDesign: pinned('designWrap'),
+      pDisplay: enter('displaySec'),
+      pAudio: pinned('audioWrap'),
+      pEco: enter('ecoSec'),
+      pCta: enter('ctaSec'),
+      pagePct,
+    });
+  }
+
+  renderVals() {
+    const { pHero, pDesign, pDisplay, pAudio, pEco, pCta, pagePct } = this.state;
+
+    // Hero is visible immediately on load (pHero=0 at top of page); it only
+    // fades/zooms out later as the user scrolls past it into chapter 2.
+    let heroOpacity, heroScale, heroTranslate;
+    if (pHero < 0.6) {
+      heroOpacity = 1;
+      heroScale = 1;
+      heroTranslate = 0;
+    } else {
+      const t = (pHero - 0.6) / 0.4;
+      heroOpacity = 1 - t;
+      heroScale = 1 + 0.06 * t;
+      heroTranslate = -40 * t;
+    }
+
+    const designRotation = pDesign * 360;
+
+    const displayOpacity = pDisplay;
+    const displayTranslate = (1 - pDisplay) * -80;
+    const statsTranslate = (1 - pDisplay) * 30;
+    const statDefs = [
+      { target: 23, unit: 'M', label: 'pixels combined' },
+      { target: 3391, unit: 'ppi', label: 'pixel density' },
+      { target: 90, unit: 'Hz', label: 'refresh rate' },
+    ];
+    const stats = statDefs.map((s) => ({
+      value: Math.round(s.target * displayOpacity).toLocaleString(),
+      unit: s.unit,
+      label: s.label,
+    }));
+
+    const rings = [0, 1, 2, 3].map((i) => {
+      const phase = (pAudio * 1.15 + i * 0.25) % 1;
+      return {
+        scale: 0.3 + phase * 7,
+        opacity: (1 - phase) * 0.7,
+      };
+    });
+
+    const iconNames = ['Photos', 'Safari', 'Mail', 'Music', 'Maps', 'Notes', 'Fitness', 'Calendar'];
+    const hues = [210, 195, 340, 280, 25, 50, 140, 10];
+    const icons = iconNames.map((label, i) => {
+      const p = clampLocal((pEco - i * 0.09) * 1.6);
+      return {
+        label,
+        opacity: p,
+        translate: (1 - p) * 36,
+        scale: 0.85 + 0.15 * p,
+        bg: `linear-gradient(135deg, hsl(${hues[i]},70%,45%) 0%, hsl(${hues[i]},60%,25%) 100%)`,
+      };
+    });
+
+    const ctaOpacity = pCta;
+    const ctaFormTranslate = (1 - pCta) * 60;
+
+    let activeIdx = 0;
+    if (pCta > 0.05) activeIdx = 5;
+    else if (pEco > 0.05) activeIdx = 4;
+    else if (pAudio > 0.05) activeIdx = 3;
+    else if (pDisplay > 0.05) activeIdx = 2;
+    else if (pDesign > 0.05) activeIdx = 1;
+    const dots = [0, 1, 2, 3, 4, 5].map((i) => ({
+      size: i === activeIdx ? 9 : 6,
+      color: i === activeIdx ? '#0A84FF' : 'rgba(255,255,255,0.3)',
+    }));
+
+    const navTextColor = pHero > 0.15 && pHero < 0.95 ? 'rgba(255,255,255,0)' : '#fff';
+
+    return {
+      refs: this.refs,
+      pagePct,
+      navTextColor,
+      heroOpacity, heroScale, heroTranslate,
+      designRotation,
+      displayOpacity, displayTranslate, statsTranslate, stats,
+      rings,
+      icons,
+      ctaOpacity, ctaFormTranslate,
+      dots,
+    };
+
+    function clampLocal(v) { return Math.max(0, Math.min(1, v)); }
+  }
+}
+
+</script>
+</body>
+</html>

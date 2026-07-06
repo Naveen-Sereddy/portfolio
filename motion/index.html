@@ -49,12 +49,16 @@ a:hover { color:var(--accent); }
 
 .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.5rem; padding-bottom:6rem; }
 
-.placeholder {
-  border:1px dashed var(--border-strong); border-radius:1rem; padding:3.5rem 2rem; text-align:center;
-  margin-bottom:6rem;
+.card {
+  display:block; border-radius:1.25rem; border:1px solid var(--border); background:var(--bg-2);
+  overflow:hidden; transition:transform 280ms var(--ease), border-color 280ms var(--ease);
 }
-.placeholder .eyebrow { justify-content:center; }
-.placeholder p { max-width:40ch; margin:.75rem auto 0; font-size:.92rem; }
+.card:hover { transform:translateY(-4px); border-color:rgba(208,146,58,0.35); }
+.card-thumb { display:block; width:100%; aspect-ratio:16/10; object-fit:cover; background:var(--bg-3); }
+.card-body { padding:1.5rem 1.5rem 1.75rem; }
+.card-body h3 { margin-top:0; font-size:1.15rem; font-weight:500; color:var(--text); }
+.card-desc { margin-top:.5rem; font-size:.88rem; line-height:1.55; color:var(--text-2); }
+.card-cta { display:inline-block; margin-top:1.1rem; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); }
 </style>
 </head>
 <body>
@@ -71,11 +75,48 @@ a:hover { color:var(--accent); }
     <p>Scroll stories, micro-interactions, and page transitions — motion and interaction range outside the case-study work above.</p>
   </div>
   <div class="container">
-    <div class="placeholder">
-      <div class="eyebrow" style="display:flex;">Coming soon</div>
-      <p>The 5 motion studies are being finished and will land here shortly.</p>
+    <div class="grid" id="motionGrid">
+      <a class="card" href="01-design-system-linear-button-showcase/design-system-linear-button-showcase.dc.html" target="_blank" rel="noopener">
+        <img class="card-thumb" src="../assets/projects/motion/01-design-system-linear-button-showcase.png" alt="Linear — button and interaction state system" loading="lazy" />
+        <div class="card-body">
+          <h3>Linear</h3>
+          <p class="card-desc">A live button & interaction system — hover, loading, and success states you can click through.</p>
+          <span class="card-cta">Open prototype →</span>
+        </div>
+      </a>
+      <a class="card" href="02-hero-motion-vision-pro-scroll/hero-motion-vision-pro-scroll.dc.html" target="_blank" rel="noopener">
+        <img class="card-thumb" src="../assets/projects/motion/02-hero-motion-vision-pro-scroll.png" alt="Vision Pro — scroll reveal hero experience" loading="lazy" />
+        <div class="card-body">
+          <h3>Vision Pro</h3>
+          <p class="card-desc">An Apple-style scroll-reveal hero, from intro headline to a reservation CTA.</p>
+          <span class="card-cta">Open prototype →</span>
+        </div>
+      </a>
+      <a class="card" href="03-character-animation-pip-mascot/character-animation-pip-mascot.dc.html" target="_blank" rel="noopener">
+        <img class="card-thumb" src="../assets/projects/motion/03-character-animation-pip-mascot.png" alt="Pip — character mascot animation states" loading="lazy" />
+        <div class="card-body">
+          <h3>Pip</h3>
+          <p class="card-desc">A mascot character with tappable states — idle, happy, dance, and level-up.</p>
+          <span class="card-cta">Open prototype →</span>
+        </div>
+      </a>
+      <a class="card" href="04-hero-motion-thug-browser-landing/hero-motion-thug-browser-landing.dc.html" target="_blank" rel="noopener">
+        <img class="card-thumb" src="../assets/projects/motion/04-hero-motion-thug-browser-landing.png" alt="Thug — browser landing page scroll reveal" loading="lazy" />
+        <div class="card-body">
+          <h3>Thug</h3>
+          <p class="card-desc">A dark, bold browser-landing reveal — problem, solution, and tabs-to-calm story.</p>
+          <span class="card-cta">Open prototype →</span>
+        </div>
+      </a>
+      <a class="card" href="05-navigation-page-transition-system/navigation-page-transition-system.dc.html" target="_blank" rel="noopener">
+        <img class="card-thumb" src="../assets/projects/motion/05-navigation-page-transition-system.png" alt="Page Transition System — ten navigation transition demos on a phone frame" loading="lazy" />
+        <div class="card-body">
+          <h3>Page Transition System</h3>
+          <p class="card-desc">Ten tap-to-navigate transitions — fade, slide, 3D flip, glitch, and more.</p>
+          <span class="card-cta">Open prototype →</span>
+        </div>
+      </a>
     </div>
-    <div class="grid" id="motionGrid"></div>
   </div>
 </main>
 </body>

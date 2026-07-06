@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<title>Nest Clay — Claymorphic Smart Home App</title>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    @keyframes camNoise {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 100% 100%; }
+    }
+    @keyframes motionPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+    @keyframes scenePulseAnim {
+      0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.9), 8px 8px 16px rgba(0,0,0,0.22), -8px -8px 16px rgba(255,255,255,0.6); }
+      50% { box-shadow: 0 0 0 14px rgba(255,255,255,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,255,255,0), 8px 8px 16px rgba(0,0,0,0.22), -8px -8px 16px rgba(255,255,255,0.6); }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+
+<div style="{{ pageWrapStyle }}">
+ <div style="width:342px;height:743px;">
+  <div style="transform:scale(0.85);transform-origin:top left;width:402px;height:874px;">
+  <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402,874" hide-home-indicator="{{ true }}">
+    <div style="{{ deviceContentStyle }}">
+
+      <!-- ============ SCREEN 1 — HOME ============ -->
+      <sc-if value="{{ onScreen1 }}" hint-placeholder-val="{{ true }}">
+        <div data-screen-label="01 Home" style="{{ screenPadStyle }}">
+          <div style="{{ helloStyle }}">Hello, Jordan</div>
+
+          <div style="{{ homeCardStyle }}" onClick="{{ goToScreen2 }}">
+            <div style="{{ homeCardLabelStyle }}">Living Room</div>
+            <div style="{{ homeCardTempStyle }}">{{ tempDisplay }}</div>
+            <div style="{{ homeCardModeStyle }}">{{ modeDisplay }}</div>
+          </div>
+
+          <div style="{{ pillRowStyle }}">
+            <div style="{{ pillDoorStyle }}" onClick="{{ goToScreen7 }}">
+              <div style="{{ pillIconWrapStyle }}" dangerouslySetInnerHTML="{{ iconLock }}"></div>
+              <div style="{{ pillLabelStyle }}">Front Door</div>
+              <div style="{{ pillStatusStyle }}">{{ doorStatusText }}</div>
+            </div>
+            <div style="{{ pillLightStyle }}" onClick="{{ toggleLight }}">
+              <div style="{{ pillIconWrapStyle }}" dangerouslySetInnerHTML="{{ iconBulb }}"></div>
+              <div style="{{ pillLabelStyle }}">Living Room Light</div>
+              <div style="{{ pillStatusStyle }}">{{ lightStatusText }}</div>
+            </div>
+            <div style="{{ pillCamStyle }}" onClick="{{ goToScreen3 }}">
+              <div style="{{ pillIconWrapStyle }}" dangerouslySetInnerHTML="{{ iconCamera }}"></div>
+              <div style="{{ pillLabelStyle }}">Backyard Cam</div>
+              <div style="{{ pillStatusStyle }}">{{ camStatusText }}</div>
+            </div>
+            <div style="{{ pillSpeakerStyle }}" onClick="{{ toggleSpeaker }}">
+              <div style="{{ pillIconWrapStyle }}" dangerouslySetInnerHTML="{{ iconMusic }}"></div>
+              <div style="{{ pillLabelStyle }}">Bedroom Speaker</div>
+              <div style="{{ pillStatusStyle }}">{{ speakerStatusText }}</div>
+            </div>
+          </div>
+
+          <div style="{{ tileRowStyle }}">
+            <div style="{{ tileScenesStyle }}" onClick="{{ goToScreen5 }}">
+              <div style="{{ tileIconWrapStyle }}" dangerouslySetInnerHTML="{{ iconSun }}"></div>
+              <div style="{{ tileLabelStyle }}">Scenes</div>
+            </div>
+            <div style="{{ tileEnergyStyle }}" onClick="{{ goToScreen6 }}">
+              <div style="{{ tileIconWrapStyle }}" dangerouslySetInnerHTML="{{ iconBolt }}"></div>
+              <div style="{{ tileLabelStyle }}">Energy</div>
+            </div>
+            <div style="{{ tileSettingsStyle }}" onClick="{{ goToScreen8 }}">
+              <div style="{{ tileIconWrapStyle }}" dangerouslySetInnerHTML="{{ iconGear }}"></div>
+              <div style="{{ tileLabelStyle }}">Settings</div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ============ SCREEN 2 — THERMOSTAT ============ -->
+      <sc-if value="{{ onScreen2 }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="02 Thermostat" style="{{ screenPadStyle }}">
+          <div style="{{ headerRowStyle }}">
+            <div style="{{ backBtnStyle }}" onClick="{{ goBack }}" dangerouslySetInnerHTML="{{ iconBack }}"></div>
+            <div style="{{ headerTitleStyle }}">Thermostat</div>
+            <div style="{{ headerSpacerStyle }}"></div>
+          </div>
+
+          <div style="{{ dialOuterStyle }}" onMouseDown="{{ dialStart }}" onTouchStart="{{ dialStart }}" ref="{{ dialRef }}">
+            <svg width="260" height="260" viewBox="0 0 260 260" style="{{ dialSvgStyle }}">
+              <circle cx="130" cy="130" r="108" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="14" stroke-linecap="round" stroke-dasharray="{{ trackDashArray }}" transform="rotate(135 130 130)"></circle>
+              <circle cx="130" cy="130" r="108" fill="none" stroke="{{ dialProgressColor }}" stroke-width="14" stroke-linecap="round" stroke-dasharray="{{ progressDashArray }}" transform="rotate(135 130 130)"></circle>
+              <circle cx="{{ thumbX }}" cy="{{ thumbY }}" r="16" fill="{{ dialThumbColor }}" stroke="#fff" stroke-width="3"></circle>
+            </svg>
+            <div style="{{ dialCenterStyle }}">
+              <div style="{{ dialTempStyle }}">{{ tempDisplay }}</div>
+              <div style="{{ dialModeStyle }}">{{ modeDisplay }}</div>
+            </div>
+          </div>
+
+          <div style="{{ arrowRowStyle }}">
+            <div style="{{ arrowDownStyle }}" onClick="{{ tempDown }}" dangerouslySetInnerHTML="{{ iconDown }}"></div>
+            <div style="{{ arrowUpStyle }}" onClick="{{ tempUp }}" dangerouslySetInnerHTML="{{ iconUp }}"></div>
+          </div>
+
+          <div style="{{ presetRowStyle }}">
+            <div style="{{ presetEcoStyle }}" onClick="{{ setPresetEco }}">Eco 68°</div>
+            <div style="{{ presetComfortStyle }}" onClick="{{ setPresetComfort }}">Comfort 72°</div>
+            <div style="{{ presetAwayStyle }}" onClick="{{ setPresetAway }}">Away 60°</div>
+          </div>
+
+          <div style="{{ scheduleBtnStyle }}" onClick="{{ toggleSchedule }}">Schedule</div>
+
+          <sc-if value="{{ scheduleOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ scheduleCardStyle }}">
+              <sc-for list="{{ scheduleRows }}" as="row" hint-placeholder-count="4">
+                <div style="{{ row.rowStyle }}">
+                  <div style="{{ row.timeStyle }}">{{ row.time }}</div>
+                  <div style="{{ row.barTrackStyle }}">
+                    <div style="{{ row.barFillStyle }}"></div>
+                  </div>
+                  <div style="{{ row.tempStyle }}">{{ row.temp }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <!-- ============ SCREEN 3 — CAMERA ============ -->
+      <sc-if value="{{ onScreen3 }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="03 Camera" style="{{ screenPadStyle }}">
+          <div style="{{ headerRowStyle }}">
+            <div style="{{ backBtnStyle }}" onClick="{{ goBack }}" dangerouslySetInnerHTML="{{ iconBack }}"></div>
+            <div style="{{ headerTitleStyle }}">Backyard Camera</div>
+            <div style="{{ headerSpacerStyle }}"></div>
+          </div>
+
+          <div style="{{ viewfinderStyle }}">
+            <div style="{{ noiseLayerStyle }}"></div>
+            <div style="{{ motionPillStyle }}">Motion detected — 2 min ago</div>
+            <div style="{{ camControlsRowStyle }}">
+              <div style="{{ camTalkStyle }}" dangerouslySetInnerHTML="{{ iconMic }}"></div>
+              <div style="{{ camRecordStyle }}" onClick="{{ toggleRecording }}" dangerouslySetInnerHTML="{{ iconRecord }}"></div>
+              <div style="{{ camSnapStyle }}" dangerouslySetInnerHTML="{{ iconCamera }}"></div>
+            </div>
+          </div>
+
+          <div style="{{ sectionLabelStyle }}">Recent Clips</div>
+          <div style="{{ clipGridStyle }}">
+            <sc-for list="{{ clipThumbs }}" as="clip" hint-placeholder-count="4">
+              <div style="{{ clip.style }}" onClick="{{ clip.onClick }}">
+                <div style="{{ clip.playWrapStyle }}" dangerouslySetInnerHTML="{{ iconPlay }}"></div>
+                <div style="{{ clip.labelStyle }}">{{ clip.time }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ============ SCREEN 4 — CLIP REVIEW ============ -->
+      <sc-if value="{{ onScreen4 }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="04 Clip Review" style="{{ screenPadStyle }}">
+          <div style="{{ headerRowStyle }}">
+            <div style="{{ backBtnStyle }}" onClick="{{ goBack }}" dangerouslySetInnerHTML="{{ iconBack }}"></div>
+            <div style="{{ headerTitleStyle }}">Recent Activity</div>
+            <div style="{{ headerSpacerStyle }}"></div>
+          </div>
+
+          <div style="{{ clipViewerStyle }}">
+            <div style="{{ noiseLayerStyle }}"></div>
+            <div style="{{ clipViewerLabelStyle }}">Clip — {{ selectedClipTime }}</div>
+          </div>
+
+          <div style="{{ timelineTrackStyle }}">
+            <sc-for list="{{ timelineMarkers }}" as="mk" hint-placeholder-count="8">
+              <div style="{{ mk.style }}" onClick="{{ mk.onClick }}">{{ mk.time }}</div>
+            </sc-for>
+          </div>
+
+          <div style="{{ tagRowStyle }}">
+            <sc-for list="{{ eventTags }}" as="tag" hint-placeholder-count="3">
+              <div style="{{ tag.style }}">{{ tag.label }}</div>
+            </sc-for>
+          </div>
+
+          <div style="{{ shareBtnStyle }}" onClick="{{ openShare }}">Share Clip</div>
+
+          <sc-if value="{{ shareOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ shareOverlayStyle }}" onClick="{{ closeShare }}">
+              <div style="{{ shareSheetStyle }}" onClick="{{ stopProp }}">
+                <div style="{{ shareTitleStyle }}">Share Clip</div>
+                <div style="{{ shareLinkRowStyle }}">
+                  <div style="{{ shareLinkTextStyle }}">nest.link/clip/8842x</div>
+                  <div style="{{ copyBtnStyle }}" onClick="{{ copyLink }}">Copy</div>
+                </div>
+                <sc-if value="{{ toastVisible }}" hint-placeholder-val="{{ false }}">
+                  <div style="{{ toastStyle }}">{{ toastText }}</div>
+                </sc-if>
+                <div style="{{ shareCloseStyle }}" onClick="{{ closeShare }}">Done</div>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <!-- ============ SCREEN 5 — SCENES ============ -->
+      <sc-if value="{{ onScreen5 }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="05 Scenes" style="{{ screenPadStyle }}">
+          <div style="{{ sceneHeaderStyle }}">Scenes</div>
+          <div style="{{ sceneListStyle }}">
+            <sc-for list="{{ scenesData }}" as="scene" hint-placeholder-count="5">
+              <div style="{{ scene.cardStyle }}" onClick="{{ scene.onClick }}">
+                <div style="{{ scene.iconWrapStyle }}" dangerouslySetInnerHTML="{{ scene.icon }}"></div>
+                <div style="{{ scene.textWrapStyle }}">
+                  <div style="{{ scene.nameStyle }}">{{ scene.name }}</div>
+                  <div style="{{ scene.descStyle }}">{{ scene.desc }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="{{ createSceneBtnStyle }}">+ Create Scene</div>
+        </div>
+      </sc-if>
+
+      <!-- ============ SCREEN 6 — ENERGY ============ -->
+      <sc-if value="{{ onScreen6 }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="06 Energy" style="{{ screenPadStyle }}">
+          <div style="{{ sceneHeaderStyle }}">Energy Usage</div>
+
+          <div style="{{ donutCardStyle }}">
+            <svg width="180" height="180" viewBox="0 0 180 180">
+              <circle cx="90" cy="90" r="70" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="20"></circle>
+              <circle cx="90" cy="90" r="70" fill="none" stroke="{{ C.coral }}" stroke-width="20" stroke-dasharray="{{ hvacDash }}" transform="rotate(-90 90 90)" stroke-linecap="round"></circle>
+              <circle cx="90" cy="90" r="70" fill="none" stroke="{{ C.sky }}" stroke-width="20" stroke-dasharray="{{ lightDash }}" transform="rotate({{ lightRotate }} 90 90)" stroke-linecap="round"></circle>
+              <circle cx="90" cy="90" r="70" fill="none" stroke="{{ C.mint }}" stroke-width="20" stroke-dasharray="{{ otherDash }}" transform="rotate({{ otherRotate }} 90 90)" stroke-linecap="round"></circle>
+            </svg>
+            <div style="{{ donutCenterStyle }}">
+              <div style="{{ donutKwhStyle }}">142 kWh</div>
+              <div style="{{ donutSubStyle }}">this month</div>
+            </div>
+          </div>
+
+          <div style="{{ breakdownListStyle }}">
+            <div style="{{ hvacRowStyle }}">
+              <div style="{{ dotCoralStyle }}"></div>
+              <div style="{{ breakdownLabelStyle }}">HVAC</div>
+              <div style="{{ breakdownPctStyle }}">54%</div>
+            </div>
+            <div style="{{ lightRowStyle }}">
+              <div style="{{ dotSkyStyle }}"></div>
+              <div style="{{ breakdownLabelStyle }}">Lighting</div>
+              <div style="{{ breakdownPctStyle }}">28%</div>
+            </div>
+            <div style="{{ otherRowStyle }}">
+              <div style="{{ dotMintStyle }}"></div>
+              <div style="{{ breakdownLabelStyle }}">Other</div>
+              <div style="{{ breakdownPctStyle }}">18%</div>
+            </div>
+          </div>
+
+          <div style="{{ comparisonTextStyle }}">Last month: 168 kWh — down 15.4%</div>
+
+          <div style="{{ tipCardStyle }}">Tip: Lower thermostat 2° to save $8/month</div>
+        </div>
+      </sc-if>
+
+      <!-- ============ SCREEN 7 — LOCK ============ -->
+      <sc-if value="{{ onScreen7 }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="07 Lock" style="{{ screenPadStyle }}">
+          <div style="{{ headerRowStyle }}">
+            <div style="{{ backBtnStyle }}" onClick="{{ goBack }}" dangerouslySetInnerHTML="{{ iconBack }}"></div>
+            <div style="{{ headerTitleStyle }}">Smart Lock</div>
+            <div style="{{ headerSpacerStyle }}"></div>
+          </div>
+
+          <div style="{{ lockCircleStyle }}" onClick="{{ toggleLockState }}">
+            <div style="{{ lockIconWrapStyle }}" dangerouslySetInnerHTML="{{ iconLockBig }}"></div>
+          </div>
+          <div style="{{ lockStatusStyle }}">Front Door — {{ lockStatusText }}</div>
+
+          <div style="{{ pinRowStyle }}">
+            <sc-for list="{{ pinDots }}" as="dot" hint-placeholder-count="4">
+              <div style="{{ dot.style }}"></div>
+            </sc-for>
+          </div>
+
+          <div style="{{ keypadGridStyle }}">
+            <sc-for list="{{ keypadKeys }}" as="key" hint-placeholder-count="10">
+              <div style="{{ key.style }}" onClick="{{ key.onClick }}">{{ key.label }}</div>
+            </sc-for>
+          </div>
+
+          <div style="{{ tempCodeBtnStyle }}" onClick="{{ generateTempCode }}">Generate 4-hour code</div>
+          <sc-if value="{{ hasTempCode }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ tempCodeDisplayStyle }}">Code {{ tempCodeText }} · expires in 4h</div>
+          </sc-if>
+
+          <div style="{{ activityLogStyle }}">
+            <div style="{{ activityRowStyle }}">Jordan unlocked at 6:42 PM</div>
+            <div style="{{ activityRowStyle }}">Auto-locked at 11:00 PM</div>
+            <div style="{{ activityRowStyle }}">Jordan locked at 6:45 PM</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ============ SCREEN 8 — SETTINGS ============ -->
+      <sc-if value="{{ onScreen8 }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="08 Settings" style="{{ settingsPadStyle }}">
+          <div style="{{ headerTitleLeftStyle }}">Settings</div>
+
+          <div style="{{ userCardStyle }}">
+            <div style="{{ userAvatarStyle }}">JE</div>
+            <div>
+              <div style="{{ userNameStyle }}">Jordan Ellis</div>
+              <div style="{{ userEmailStyle }}">jordan.ellis@relay.dev</div>
+            </div>
+          </div>
+
+          <div style="{{ addressRowStyle }}">
+            <div style="{{ addressLabelStyle }}">Home Address</div>
+            <div style="{{ addressValueStyle }}">1420 Birch Street, Denver</div>
+          </div>
+
+          <div style="{{ sectionLabelStyle }}">Family</div>
+          <div style="{{ familyRowStyle }}">
+            <sc-for list="{{ familyMembers }}" as="member" hint-placeholder-count="3">
+              <div style="{{ member.style }}">{{ member.initials }}</div>
+            </sc-for>
+          </div>
+
+          <div style="{{ sectionLabelStyle }}">Notifications</div>
+          <div style="{{ notifListStyle }}">
+            <sc-for list="{{ notifications }}" as="notif" hint-placeholder-count="5">
+              <div style="{{ notif.rowStyle }}">
+                <div style="{{ notif.labelStyle }}">{{ notif.label }}</div>
+                <div style="{{ notif.trackStyle }}" onClick="{{ notif.onClick }}">
+                  <div style="{{ notif.knobStyle }}"></div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="{{ footerCreditStyle }}">Designed by Naveen Sereddy — Claymorphism Exploration</div>
+        </div>
+      </sc-if>
+
+      <!-- ============ BOTTOM TAB BAR (persistent) ============ -->
+      <div style="{{ tabBarStyle }}">
+        <div style="{{ navHomeStyle }}" onClick="{{ goToScreen1 }}">
+          <div style="{{ navIconWrapStyle }}" dangerouslySetInnerHTML="{{ iconHouse }}"></div>
+          <div style="{{ navLabelStyle }}">Home</div>
+        </div>
+        <div style="{{ navDevicesStyle }}" onClick="{{ goToScreen2 }}">
+          <div style="{{ navIconWrapStyle }}" dangerouslySetInnerHTML="{{ iconGrid }}"></div>
+          <div style="{{ navLabelStyle }}">Devices</div>
+        </div>
+        <div style="{{ navScenesStyle }}" onClick="{{ goToScreen5 }}">
+          <div style="{{ navIconWrapStyle }}" dangerouslySetInnerHTML="{{ iconSun }}"></div>
+          <div style="{{ navLabelStyle }}">Scenes</div>
+        </div>
+        <div style="{{ navEnergyStyle }}" onClick="{{ goToScreen6 }}">
+          <div style="{{ navIconWrapStyle }}" dangerouslySetInnerHTML="{{ iconBolt }}"></div>
+          <div style="{{ navLabelStyle }}">Energy</div>
+        </div>
+        <div style="{{ navSettingsStyle }}" onClick="{{ goToScreen8 }}">
+          <div style="{{ navIconWrapStyle }}" dangerouslySetInnerHTML="{{ iconGear }}"></div>
+          <div style="{{ navLabelStyle }}">Settings</div>
+        </div>
+      </div>
+
+    </div>
+  </x-import>
+  </div>
+ </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  state = {
+    screen: 1,
+    history: [],
+    thermo: { temp: 72, mode: 'Heating', preset: 'comfort', scheduleOpen: false },
+    lock: { locked: true, pin: [], tempCode: null },
+    devices: { doorLocked: true, lightOn: true, lightBrightness: 80, camRecording: true, speakerPlaying: true },
+    scenePulse: null,
+    activeScene: null,
+    selectedClip: 0,
+    notifOn: [true, true, false, true, true],
+    shareOpen: false,
+    toast: null,
+  };
+
+  shade(hex, percent) {
+    const num = parseInt(hex.slice(1), 16);
+    let r = (num >> 16) + percent;
+    let g = ((num >> 8) & 0x00ff) + percent;
+    let b = (num & 0x0000ff) + percent;
+    r = Math.min(255, Math.max(0, r));
+    g = Math.min(255, Math.max(0, g));
+    b = Math.min(255, Math.max(0, b));
+    return '#' + (0x1000000 + r * 0x10000 + g * 0x100 + b).toString(16).slice(1);
+  }
+
+  clay(hex, opts = {}) {
+    const { pressed = false, radius = 28, flat = false } = opts;
+    const light = this.shade(hex, 40);
+    const dark = this.shade(hex, -40);
+    return {
+      background: flat ? hex : `linear-gradient(145deg, ${light}, ${dark})`,
+      borderRadius: radius + 'px',
+      boxShadow: pressed
+        ? 'inset 7px 7px 14px rgba(0,0,0,0.28), inset -7px -7px 14px rgba(255,255,255,0.45)'
+        : '8px 8px 16px rgba(0,0,0,0.20), -8px -8px 16px rgba(255,255,255,0.65)',
+      transform: pressed ? 'scale(0.96)' : 'scale(1)',
+      transition: 'all 380ms cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+      border: 'none',
+      cursor: 'pointer',
+    };
+  }
+
+  goTo = (screen) => {
+    this.setState((s) => ({ screen, history: [...s.history, s.screen] }));
+  };
+  goBack = () => {
+    this.setState((s) => {
+      const h = [...s.history];
+      const prev = h.pop();
+      return { screen: prev !== undefined ? prev : 1, history: h };
+    });
+  };
+
+  toggleLight = () => this.setState((s) => ({ devices: { ...s.devices, lightOn: !s.devices.lightOn } }));
+  toggleSpeaker = () => this.setState((s) => ({ devices: { ...s.devices, speakerPlaying: !s.devices.speakerPlaying } }));
+  toggleRecording = () => this.setState((s) => ({ devices: { ...s.devices, camRecording: !s.devices.camRecording } }));
+
+  tempUp = () => this.setState((s) => ({ thermo: { ...s.thermo, temp: Math.min(90, s.thermo.temp + 1), preset: null } }));
+  tempDown = () => this.setState((s) => ({ thermo: { ...s.thermo, temp: Math.max(50, s.thermo.temp - 1), preset: null } }));
+
+  setPresetEco = () => this.setState((s) => ({ thermo: { ...s.thermo, temp: 68, preset: 'eco' } }));
+  setPresetComfort = () => this.setState((s) => ({ thermo: { ...s.thermo, temp: 72, preset: 'comfort' } }));
+  setPresetAway = () => this.setState((s) => ({ thermo: { ...s.thermo, temp: 60, preset: 'away' } }));
+
+  toggleSchedule = () => this.setState((s) => ({ thermo: { ...s.thermo, scheduleOpen: !s.thermo.scheduleOpen } }));
+
+  dialStart = (e) => {
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+    this._dragStartY = y;
+    this._dragStartTemp = this.state.thermo.temp;
+    this._dragging = true;
+    window.addEventListener('mousemove', this.dialMove);
+    window.addEventListener('mouseup', this.dialEnd);
+    window.addEventListener('touchmove', this.dialMove, { passive: false });
+    window.addEventListener('touchend', this.dialEnd);
+  };
+  dialMove = (e) => {
+    if (!this._dragging) return;
+    if (e.cancelable) e.preventDefault();
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+    const delta = this._dragStartY - y;
+    const newTemp = Math.max(50, Math.min(90, Math.round(this._dragStartTemp + delta / 6)));
+    if (newTemp !== this.state.thermo.temp) {
+      this.setState((s) => ({ thermo: { ...s.thermo, temp: newTemp, preset: null } }));
+    }
+  };
+  dialEnd = () => {
+    this._dragging = false;
+    window.removeEventListener('mousemove', this.dialMove);
+    window.removeEventListener('mouseup', this.dialEnd);
+    window.removeEventListener('touchmove', this.dialMove);
+    window.removeEventListener('touchend', this.dialEnd);
+  };
+  componentWillUnmount() {
+    this.dialEnd();
+  }
+
+  toggleLockState = () => this.setState((s) => ({ lock: { ...s.lock, locked: !s.lock.locked, pin: [] } }));
+
+  pressKeypad = (d) => {
+    if (d === 'C') {
+      this.setState((s) => ({ lock: { ...s.lock, pin: [] } }));
+      return;
+    }
+    this.setState((s) => {
+      const pin = [...s.lock.pin, d].slice(0, 4);
+      return { lock: { ...s.lock, pin } };
+    });
+    setTimeout(() => {
+      this.setState((s) => {
+        if (s.lock.pin.length >= 4) {
+          return { lock: { ...s.lock, locked: !s.lock.locked, pin: [] } };
+        }
+        return null;
+      });
+    }, 350);
+  };
+
+  generateTempCode = () => {
+    const code = String(Math.floor(1000 + Math.random() * 9000));
+    this.setState((s) => ({ lock: { ...s.lock, tempCode: code } }));
+  };
+
+  triggerScene = (id) => {
+    const presets = {
+      morning: { light: true, brightness: 30, temp: 70, locked: false },
+      movie: { light: false, brightness: 0, temp: 72, locked: undefined },
+      goodnight: { light: false, brightness: 0, temp: 62, locked: true },
+      away: { light: false, brightness: 0, temp: 60, locked: true },
+      party: { light: true, brightness: 100, temp: 70, locked: undefined },
+    };
+    const p = presets[id];
+    this.setState((s) => ({
+      activeScene: id,
+      scenePulse: id,
+      devices: {
+        ...s.devices,
+        lightOn: p.light,
+        lightBrightness: p.brightness,
+        doorLocked: p.locked !== undefined ? p.locked : s.devices.doorLocked,
+      },
+      thermo: { ...s.thermo, temp: p.temp },
+      lock: { ...s.lock, locked: p.locked !== undefined ? p.locked : s.lock.locked },
+    }));
+    setTimeout(() => this.setState({ scenePulse: null }), 900);
+  };
+
+  toggleNotif = (i) => {
+    this.setState((s) => {
+      const n = [...s.notifOn];
+      n[i] = !n[i];
+      return { notifOn: n };
+    });
+  };
+
+  selectClip = (i) => this.setState({ selectedClip: i, screen: 4 });
+  selectTimelineClip = (i) => this.setState({ selectedClip: i });
+
+  openShare = () => this.setState({ shareOpen: true, toast: null });
+  closeShare = () => this.setState({ shareOpen: false, toast: null });
+  copyLink = () => this.setState({ toast: 'Link copied!' });
+  stopProp = (e) => e.stopPropagation();
+
+  renderVals() {
+    const s = this.state;
+    const clay = (hex, opts) => this.clay(hex, opts);
+    const C = { sky: '#7EC8E3', mint: '#88D8B0', coral: '#FFAA5C', grape: '#C490D1', lemon: '#F6E986', gray: '#E6E1D8' };
+    const ink = '#4A4238';
+    const inkSoft = 'rgba(74,66,56,0.62)';
+    const nunito = "'Nunito', sans-serif";
+    const fredoka = "'Fredoka One', cursive";
+    const mono = "'JetBrains Mono', monospace";
+
+    const screen = s.screen;
+    const activeTab = screen === 1 ? 'home' : [2, 3, 4, 7].includes(screen) ? 'devices' : screen === 5 ? 'scenes' : screen === 6 ? 'energy' : 'settings';
+
+    // ---------- icons ----------
+    const icon = (svg) => ({ __html: svg });
+    const iconLock = icon('<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="3" fill="currentColor"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>');
+    const iconBulb = icon('<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="10" r="6.5" fill="currentColor"/><rect x="9" y="17" width="6" height="3" rx="1.2" fill="currentColor"/><rect x="10" y="20.5" width="4" height="1.8" rx="0.9" fill="currentColor"/></svg>');
+    const iconCamera = icon('<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="8" width="18" height="12" rx="3.5" fill="currentColor"/><rect x="8.5" y="4.5" width="7" height="4" rx="1.5" fill="currentColor"/><circle cx="12" cy="14" r="3.6" fill="#ffffff" opacity="0.55"/></svg>');
+    const iconMusic = icon('<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="7" cy="18" r="3" fill="currentColor"/><circle cx="18" cy="16" r="3" fill="currentColor"/><line x1="10" y1="18" x2="10" y2="5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><line x1="21" y1="16" x2="21" y2="3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><line x1="10" y1="5" x2="21" y2="3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>');
+    const iconSun = icon('<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" fill="currentColor"/><g stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.2" y1="4.2" x2="6.3" y2="6.3"/><line x1="17.7" y1="17.7" x2="19.8" y2="19.8"/><line x1="4.2" y1="19.8" x2="6.3" y2="17.7"/><line x1="17.7" y1="6.3" x2="19.8" y2="4.2"/></g></svg>');
+    const iconFilm = icon('<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="currentColor"/><rect x="6" y="7.5" width="2" height="2" rx="0.5" fill="#fff" opacity="0.6"/><rect x="6" y="14.5" width="2" height="2" rx="0.5" fill="#fff" opacity="0.6"/><rect x="16" y="7.5" width="2" height="2" rx="0.5" fill="#fff" opacity="0.6"/><rect x="16" y="14.5" width="2" height="2" rx="0.5" fill="#fff" opacity="0.6"/></svg>');
+    const iconMoon = icon('<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="currentColor"/></svg>');
+    const iconHouse = icon('<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 11.5L12 4l8 7.5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="6.5" y="11" width="11" height="9" rx="1.5" fill="currentColor"/></svg>');
+    const iconMic = icon('<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="9" y="2" width="6" height="12" rx="3" fill="currentColor"/><path d="M6 11a6 6 0 0 0 12 0" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/><line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>');
+    const iconRecord = icon('<svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="currentColor"/></svg>');
+    const iconBack = icon('<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    const iconUp = icon('<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 15l6-6 6 6" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    const iconDown = icon('<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    const iconBolt = icon('<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="currentColor"/></svg>');
+    const iconGear = icon('<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2.5" stroke-dasharray="3 3" fill="none"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>');
+    const iconGrid = icon('<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" fill="currentColor"/><rect x="13" y="3" width="8" height="8" rx="2" fill="currentColor"/><rect x="3" y="13" width="8" height="8" rx="2" fill="currentColor"/><rect x="13" y="13" width="8" height="8" rx="2" fill="currentColor"/></svg>');
+    const iconPlay = icon('<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M8 5l12 7-12 7z" fill="currentColor"/></svg>');
+    const iconShare = icon('<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="6" cy="12" r="2.5" fill="currentColor"/><circle cx="18" cy="6" r="2.5" fill="currentColor"/><circle cx="18" cy="18" r="2.5" fill="currentColor"/><line x1="8.2" y1="10.8" x2="15.8" y2="7.2" stroke="currentColor" stroke-width="2"/><line x1="8.2" y1="13.2" x2="15.8" y2="16.8" stroke="currentColor" stroke-width="2"/></svg>');
+    const iconLockBig = icon('<svg width="64" height="64" viewBox="0 0 24 24" fill="none" color="#fff"><rect x="5" y="11" width="14" height="10" rx="3" fill="currentColor"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>');
+
+    // ---------- layout base ----------
+    const pageWrapStyle = { height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(160deg,#EDEAE1,#DAD5C9)', padding: 20, boxSizing: 'border-box', fontFamily: nunito };
+    const deviceContentStyle = { height: '100%', display: 'flex', flexDirection: 'column', background: 'linear-gradient(165deg,#F3F0E7,#E6E1D8)', paddingTop: 54 };
+    const screenPadStyle = { flex: 1, padding: '18px 22px 20px', display: 'flex', flexDirection: 'column', gap: 18, color: ink };
+    const settingsPadStyle = { ...screenPadStyle };
+
+    // ---------- Screen 1 ----------
+    const helloStyle = { fontFamily: fredoka, fontSize: 28, color: ink, marginTop: 4 };
+    const tempDisplay = s.thermo.temp + '°F';
+    const modeDisplay = s.thermo.mode;
+
+    const homeCardStyle = { ...clay(C.sky, { radius: 32 }), padding: '22px 24px', display: 'flex', flexDirection: 'column', gap: 4 };
+    const homeCardLabelStyle = { fontFamily: nunito, fontWeight: 700, fontSize: 15, color: '#2E5266', opacity: 0.85 };
+    const homeCardTempStyle = { fontFamily: mono, fontWeight: 700, fontSize: 36, color: '#20414F' };
+    const homeCardModeStyle = { fontFamily: nunito, fontSize: 13, color: '#2E5266', opacity: 0.75 };
+
+    const pillRowStyle = { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 };
+    const pillBase = (hex) => ({ ...clay(hex, { radius: 26 }), padding: '16px 14px', display: 'flex', flexDirection: 'column', gap: 6, minHeight: 108 });
+    const pillDoorStyle = pillBase(C.gray);
+    const pillLightStyle = pillBase(s.devices.lightOn ? C.lemon : C.gray);
+    const pillCamStyle = pillBase(C.coral);
+    const pillSpeakerStyle = pillBase(s.devices.speakerPlaying ? C.grape : C.gray);
+    const pillIconWrapStyle = { color: ink, opacity: 0.8 };
+    const pillLabelStyle = { fontFamily: nunito, fontWeight: 700, fontSize: 13.5, marginTop: 2 };
+    const pillStatusStyle = { fontFamily: nunito, fontSize: 12, color: inkSoft };
+
+    const doorStatusText = s.devices.doorLocked ? 'Locked' : 'Unlocked';
+    const lightStatusText = s.devices.lightOn ? `On ${s.devices.lightBrightness}%` : 'Off';
+    const camStatusText = s.devices.camRecording ? 'Recording' : 'Idle';
+    const speakerStatusText = s.devices.speakerPlaying ? 'Playing Lo-fi' : 'Paused';
+
+    const tileRowStyle = { display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12, marginTop: 4 };
+    const tileBase = (hex) => ({ ...clay(hex, { radius: 24 }), padding: '16px 8px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 });
+    const tileScenesStyle = tileBase(C.grape);
+    const tileEnergyStyle = tileBase(C.coral);
+    const tileSettingsStyle = tileBase(C.gray);
+    const tileIconWrapStyle = { color: ink };
+    const tileLabelStyle = { fontFamily: nunito, fontWeight: 700, fontSize: 13 };
+
+    // ---------- shared header ----------
+    const headerRowStyle = { display: 'flex', alignItems: 'center', gap: 10, marginTop: 4 };
+    const backBtnStyle = { ...clay(C.gray, { radius: 18 }), width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', color: ink };
+    const headerTitleStyle = { fontFamily: fredoka, fontSize: 20, color: ink, flex: 1, textAlign: 'center', marginRight: 40 };
+    const headerTitleLeftStyle = { fontFamily: fredoka, fontSize: 20, color: ink, marginTop: 4 };
+    const headerSpacerStyle = { width: 40 };
+    const sectionLabelStyle = { fontFamily: nunito, fontWeight: 800, fontSize: 13, color: inkSoft, textTransform: 'uppercase', letterSpacing: 0.5, marginTop: 6 };
+    const sceneHeaderStyle = { fontFamily: fredoka, fontSize: 24, color: ink, marginTop: 4 };
+
+    // ---------- Screen 2 thermostat ----------
+    const temp = s.thermo.temp;
+    const pct = (temp - 50) / (90 - 50);
+    const angleDeg = -135 + pct * 270;
+    const rad = (angleDeg * Math.PI) / 180;
+    const r = 108, cx = 130, cy = 130;
+    const thumbX = cx + r * Math.sin(rad);
+    const thumbY = cy - r * Math.cos(rad);
+    const circumference = 2 * Math.PI * r;
+    const arcLen = circumference * 0.75;
+    const trackDashArray = `${arcLen} ${circumference}`;
+    const progressDashArray = `${arcLen * pct} ${circumference}`;
+    const dialProgressColor = C.coral;
+    const dialThumbColor = this.shade(C.coral, -20);
+
+    const dialOuterStyle = { ...clay(C.sky, { radius: 999, pressed: true }), width: 260, height: 260, alignSelf: 'center', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', touchAction: 'none', marginTop: 6 };
+    const dialSvgStyle = { position: 'absolute', top: 0, left: 0, transform: 'rotate(0deg)' };
+    const dialCenterStyle = { position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 };
+    const dialTempStyle = { fontFamily: mono, fontWeight: 700, fontSize: 48, color: '#20414F' };
+    const dialModeStyle = { fontFamily: nunito, fontSize: 14, color: '#4E7C6B', fontWeight: 700 };
+
+    const arrowRowStyle = { display: 'flex', gap: 14, justifyContent: 'center' };
+    const arrowBase = { ...clay(C.gray, { radius: 20 }), width: 56, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', color: ink };
+    const arrowDownStyle = arrowBase;
+    const arrowUpStyle = arrowBase;
+
+    const presetRowStyle = { display: 'flex', gap: 10, justifyContent: 'space-between' };
+    const presetPill = (active) => ({ ...clay(C.mint, { radius: 20, pressed: active }), flex: 1, padding: '10px 6px', textAlign: 'center', fontFamily: nunito, fontWeight: 700, fontSize: 12.5, color: '#25543F' });
+    const presetEcoStyle = presetPill(s.thermo.preset === 'eco');
+    const presetComfortStyle = presetPill(s.thermo.preset === 'comfort');
+    const presetAwayStyle = presetPill(s.thermo.preset === 'away');
+
+    const scheduleBtnStyle = { ...clay(C.coral, { radius: 22 }), padding: '13px', textAlign: 'center', fontFamily: nunito, fontWeight: 800, fontSize: 14.5, color: '#5C2E0E' };
+    const scheduleOpen = s.thermo.scheduleOpen;
+    const scheduleData = [
+      { time: '6:00a', temp: '68°', pct: 0.45 },
+      { time: '9:00a', temp: '72°', pct: 0.75 },
+      { time: '5:00p', temp: '70°', pct: 0.65 },
+      { time: '10:00p', temp: '62°', pct: 0.3 },
+    ];
+    const scheduleRows = scheduleData.map((row) => ({
+      time: row.time,
+      temp: row.temp,
+      rowStyle: { display: 'flex', alignItems: 'center', gap: 10 },
+      timeStyle: { fontFamily: mono, fontSize: 12, width: 46, color: inkSoft },
+      barTrackStyle: { ...clay(C.gray, { radius: 12, pressed: true }), flex: 1, height: 16, position: 'relative', overflow: 'hidden', padding: 0 },
+      barFillStyle: { width: (row.pct * 100) + '%', height: '100%', borderRadius: 12, background: `linear-gradient(90deg, ${this.shade(C.coral, 20)}, ${C.coral})` },
+      tempStyle: { fontFamily: mono, fontSize: 12, width: 36, textAlign: 'right', color: ink, fontWeight: 700 },
+    }));
+    const scheduleCardStyle = { ...clay(C.gray, { radius: 22 }), padding: '16px', display: 'flex', flexDirection: 'column', gap: 12 };
+
+    // ---------- Screen 3 camera ----------
+    const viewfinderStyle = { ...clay(this.shade('#3A3A3A', -10), { radius: 30 }), height: 260, position: 'relative', overflow: 'hidden', padding: 0 };
+    const noiseLayerStyle = {
+      position: 'absolute', inset: 0,
+      background: 'repeating-linear-gradient(115deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.09) 2px, rgba(0,0,0,0.12) 4px, rgba(255,255,255,0.04) 7px)',
+      backgroundSize: '300% 300%',
+      animation: 'camNoise 6s linear infinite alternate',
+    };
+    const motionPillStyle = { ...clay(C.coral, { radius: 20 }), position: 'absolute', top: 14, left: 14, padding: '8px 14px', fontFamily: nunito, fontWeight: 700, fontSize: 11.5, color: '#5C2E0E', animation: 'motionPulse 1.6s ease-in-out infinite' };
+    const camControlsRowStyle = { position: 'absolute', bottom: 16, left: 0, right: 0, display: 'flex', justifyContent: 'center', gap: 14 };
+    const camBtnBase = { width: 52, height: 52, borderRadius: 18, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' };
+    const camTalkStyle = { ...clay(C.sky, { radius: 18 }), ...camBtnBase };
+    const camRecordStyle = { ...clay(s.devices.camRecording ? C.coral : C.gray, { radius: 18, pressed: s.devices.camRecording }), ...camBtnBase, color: s.devices.camRecording ? '#fff' : ink };
+    const camSnapStyle = { ...clay(C.mint, { radius: 18 }), ...camBtnBase };
+
+    const clipTimes = ['7:02 AM', '8:45 AM', '11:20 AM', '1:15 PM', '3:40 PM', '5:55 PM', '7:30 PM', '9:10 PM'];
+    const clipGridStyle = { display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 10 };
+    const clipThumbs = clipTimes.slice(0, 4).map((time, i) => ({
+      time,
+      style: { ...clay(C.gray, { radius: 18 }), aspectRatio: '1', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4, padding: 6 },
+      playWrapStyle: { color: ink, opacity: 0.7 },
+      labelStyle: { fontFamily: mono, fontSize: 9.5, color: inkSoft },
+      onClick: () => this.selectClip(i),
+    }));
+
+    // ---------- Screen 4 clip review ----------
+    const selectedClipTime = clipTimes[s.selectedClip] || clipTimes[0];
+    const clipViewerStyle = { ...clay('#3A3A3A', { radius: 26 }), height: 220, position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'flex-end', padding: 0 };
+    const clipViewerLabelStyle = { position: 'relative', margin: 14, fontFamily: mono, fontSize: 13, color: '#fff', background: 'rgba(0,0,0,0.35)', padding: '6px 12px', borderRadius: 14 };
+
+    const timelineTrackStyle = { ...clay(C.gray, { radius: 22, pressed: true }), display: 'flex', gap: 8, padding: '10px', overflowX: 'auto' };
+    const timelineMarkers = clipTimes.map((time, i) => ({
+      time,
+      style: { ...clay(i === s.selectedClip ? C.sky : this.shade(C.gray, 10), { radius: 14, pressed: i === s.selectedClip }), padding: '8px 10px', fontFamily: mono, fontSize: 10.5, whiteSpace: 'nowrap', color: ink, flexShrink: 0 },
+      onClick: () => this.selectTimelineClip(i),
+    }));
+
+    const tagLabels = ['Person', 'Package', 'Animal'];
+    const tagRowStyle = { display: 'flex', gap: 10 };
+    const activeTagIdx = s.selectedClip % 3;
+    const eventTags = tagLabels.map((label, i) => ({
+      label,
+      style: { ...clay(i === activeTagIdx ? C.mint : C.gray, { radius: 18, pressed: i === activeTagIdx }), padding: '9px 16px', fontFamily: nunito, fontWeight: 700, fontSize: 12.5, color: ink },
+    }));
+
+    const shareBtnStyle = { ...clay(C.grape, { radius: 22 }), padding: '13px', textAlign: 'center', fontFamily: nunito, fontWeight: 800, fontSize: 14.5, color: '#3F2249' };
+    const shareOverlayStyle = { position: 'absolute', inset: 0, background: 'rgba(40,32,26,0.45)', display: 'flex', alignItems: 'flex-end', zIndex: 40 };
+    const shareSheetStyle = { ...clay(C.gray, { radius: 30 }), width: '100%', padding: 22, display: 'flex', flexDirection: 'column', gap: 14 };
+    const shareTitleStyle = { fontFamily: fredoka, fontSize: 18, color: ink };
+    const shareLinkRowStyle = { display: 'flex', gap: 10, alignItems: 'center' };
+    const shareLinkTextStyle = { ...clay(this.shade(C.gray, -4), { radius: 16, pressed: true }), flex: 1, padding: '12px 14px', fontFamily: mono, fontSize: 12.5, color: inkSoft };
+    const copyBtnStyle = { ...clay(C.sky, { radius: 16 }), padding: '12px 18px', fontFamily: nunito, fontWeight: 800, fontSize: 13, color: '#20414F' };
+    const toastVisible = !!s.toast;
+    const toastText = s.toast || '';
+    const toastStyle = { fontFamily: nunito, fontSize: 12.5, color: '#25543F', fontWeight: 700 };
+    const shareCloseStyle = { ...clay(C.gray, { radius: 18 }), padding: '12px', textAlign: 'center', fontFamily: nunito, fontWeight: 700, fontSize: 13.5, color: ink };
+
+    // ---------- Screen 5 scenes ----------
+    const sceneDefs = [
+      { id: 'morning', name: 'Good Morning', color: C.lemon, desc: 'Lights on 30%, Thermostat 70°, Blinds open', icon: iconSun },
+      { id: 'movie', name: 'Movie Night', color: C.grape, desc: 'Lights off, Blinds closed, Speaker on', icon: iconFilm },
+      { id: 'goodnight', name: 'Goodnight', color: C.sky, desc: 'All locks, Thermostat 62°, Lights off', icon: iconMoon },
+      { id: 'away', name: 'Away', color: C.coral, desc: 'All lights off, Cameras on, Thermostat 60°', icon: iconHouse },
+      { id: 'party', name: 'Party', color: C.mint, desc: 'Lights colorful, Speaker 80%, Thermostat 70°', icon: iconMusic },
+    ];
+    const sceneListStyle = { display: 'flex', flexDirection: 'column', gap: 12 };
+    const scenesData = sceneDefs.map((def) => {
+      const pulsing = s.scenePulse === def.id;
+      return {
+        name: def.name,
+        desc: def.desc,
+        icon: def.icon,
+        cardStyle: { ...clay(def.color, { radius: 26 }), padding: '16px 18px', display: 'flex', alignItems: 'center', gap: 14, animation: pulsing ? 'scenePulseAnim 0.9s ease-out' : 'none' },
+        iconWrapStyle: { color: ink, flexShrink: 0 },
+        textWrapStyle: { display: 'flex', flexDirection: 'column', gap: 3 },
+        nameStyle: { fontFamily: nunito, fontWeight: 800, fontSize: 15.5, color: ink },
+        descStyle: { fontFamily: nunito, fontSize: 12, color: inkSoft },
+        onClick: () => this.triggerScene(def.id),
+      };
+    });
+    const createSceneBtnStyle = { ...clay(C.lemon, { radius: 22 }), alignSelf: 'flex-end', padding: '13px 20px', fontFamily: nunito, fontWeight: 800, fontSize: 13.5, color: '#6B5A0E' };
+
+    // ---------- Screen 6 energy ----------
+    const donutR = 70, donutCirc = 2 * Math.PI * donutR;
+    const hvacDash = `${donutCirc * 0.54} ${donutCirc}`;
+    const lightDash = `${donutCirc * 0.28} ${donutCirc}`;
+    const otherDash = `${donutCirc * 0.18} ${donutCirc}`;
+    const lightRotate = -90 + 360 * 0.54;
+    const otherRotate = -90 + 360 * 0.54 + 360 * 0.28;
+
+    const donutCardStyle = { ...clay(C.gray, { radius: 30 }), alignSelf: 'center', width: 220, height: 220, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' };
+    const donutCenterStyle = { position: 'absolute', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 };
+    const donutKwhStyle = { fontFamily: mono, fontWeight: 700, fontSize: 22, color: ink };
+    const donutSubStyle = { fontFamily: nunito, fontSize: 11.5, color: inkSoft };
+
+    const breakdownListStyle = { display: 'flex', flexDirection: 'column', gap: 10 };
+    const breakdownRowBase = { ...clay(C.gray, { radius: 18 }), display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px' };
+    const hvacRowStyle = breakdownRowBase, lightRowStyle = breakdownRowBase, otherRowStyle = breakdownRowBase;
+    const dotBase = (hex) => ({ width: 14, height: 14, borderRadius: 999, background: hex, flexShrink: 0 });
+    const dotCoralStyle = dotBase(C.coral), dotSkyStyle = dotBase(C.sky), dotMintStyle = dotBase(C.mint);
+    const breakdownLabelStyle = { fontFamily: nunito, fontWeight: 700, fontSize: 14, color: ink, flex: 1 };
+    const breakdownPctStyle = { fontFamily: mono, fontSize: 14, fontWeight: 700, color: ink };
+
+    const comparisonTextStyle = { fontFamily: nunito, fontWeight: 700, fontSize: 13.5, color: '#25543F' };
+    const tipCardStyle = { ...clay(C.lemon, { radius: 22 }), padding: '16px 18px', fontFamily: nunito, fontSize: 13.5, color: '#6B5A0E', fontWeight: 700 };
+
+    // ---------- Screen 7 lock ----------
+    const locked = s.lock.locked;
+    const lockCircleStyle = { ...clay(locked ? C.coral : C.mint, { radius: 999, pressed: locked }), width: 200, height: 200, alignSelf: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 10 };
+    const lockIconWrapStyle = { color: '#fff' };
+    const lockStatusStyle = { fontFamily: mono, fontWeight: 700, fontSize: 22, textAlign: 'center', color: ink };
+    const lockStatusText = locked ? 'Locked' : 'Unlocked';
+
+    const pinRowStyle = { display: 'flex', gap: 14, justifyContent: 'center' };
+    const pinDots = [0, 1, 2, 3].map((i) => ({
+      style: { ...clay(C.coral, { radius: 999, pressed: s.lock.pin.length > i }), width: 26, height: 26 },
+    }));
+
+    const keypadGridStyle = { display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, maxWidth: 260, alignSelf: 'center', width: '100%' };
+    const keypadLabels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'C', '0', ''];
+    const keypadKeys = keypadLabels
+      .filter((l) => l !== '')
+      .map((label) => ({
+        label,
+        style: { ...clay(C.gray, { radius: 18 }), aspectRatio: '1', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: mono, fontWeight: 700, fontSize: 17, color: ink },
+        onClick: () => this.pressKeypad(label),
+      }));
+
+    const tempCodeBtnStyle = { ...clay(C.coral, { radius: 22 }), padding: '13px', textAlign: 'center', fontFamily: nunito, fontWeight: 800, fontSize: 14, color: '#5C2E0E' };
+    const hasTempCode = !!s.lock.tempCode;
+    const tempCodeText = s.lock.tempCode || '';
+    const tempCodeDisplayStyle = { ...clay(C.gray, { radius: 16, pressed: true }), padding: '10px 14px', fontFamily: mono, fontSize: 13, textAlign: 'center', color: ink };
+
+    const activityLogStyle = { display: 'flex', flexDirection: 'column', gap: 8, marginTop: 4 };
+    const activityRowStyle = { ...clay(C.gray, { radius: 16 }), padding: '10px 14px', fontFamily: nunito, fontSize: 12, color: inkSoft };
+
+    // ---------- Screen 8 settings ----------
+    const userCardStyle = { ...clay(C.sky, { radius: 26 }), padding: '16px 18px', display: 'flex', alignItems: 'center', gap: 14 };
+    const userAvatarStyle = { ...clay(C.grape, { radius: 999 }), width: 52, height: 52, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: fredoka, fontSize: 16, color: '#fff', flexShrink: 0 };
+    const userNameStyle = { fontFamily: nunito, fontWeight: 800, fontSize: 15.5, color: '#20414F' };
+    const userEmailStyle = { fontFamily: nunito, fontSize: 12, color: '#2E5266', opacity: 0.8 };
+
+    const addressRowStyle = { ...clay(C.gray, { radius: 20 }), padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 4 };
+    const addressLabelStyle = { fontFamily: nunito, fontWeight: 700, fontSize: 12, color: inkSoft };
+    const addressValueStyle = { fontFamily: nunito, fontWeight: 700, fontSize: 14, color: ink };
+
+    const familyDefs = [{ i: 'JE', c: C.grape }, { i: 'LG', c: C.mint }, { i: 'AK', c: C.coral }];
+    const familyRowStyle = { display: 'flex', gap: 12 };
+    const familyMembers = familyDefs.map((m) => ({
+      initials: m.i,
+      style: { ...clay(m.c, { radius: 999 }), width: 52, height: 52, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: fredoka, fontSize: 14, color: '#fff' },
+    }));
+
+    const notifLabels = ['Motion Alerts', 'Sound Alerts', 'Energy Reports', 'Scene Reminders', 'Software Updates'];
+    const notifListStyle = { display: 'flex', flexDirection: 'column', gap: 8 };
+    const notifications = notifLabels.map((label, i) => {
+      const on = s.notifOn[i];
+      return {
+        label,
+        rowStyle: { ...clay(C.gray, { radius: 18 }), padding: '10px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
+        labelStyle: { fontFamily: nunito, fontWeight: 700, fontSize: 13, color: ink },
+        trackStyle: { ...clay(on ? C.mint : this.shade(C.gray, -8), { radius: 999, pressed: true }), width: 46, height: 26, display: 'flex', alignItems: 'center', padding: '0 3px', justifyContent: on ? 'flex-end' : 'flex-start' },
+        knobStyle: { ...clay('#ffffff', { radius: 999 }), width: 20, height: 20 },
+        onClick: () => this.toggleNotif(i),
+      };
+    });
+    const footerCreditStyle = { fontFamily: nunito, fontSize: 10, color: inkSoft, textAlign: 'center', marginTop: 'auto', paddingTop: 10, paddingBottom: 4 };
+
+    // ---------- tab bar ----------
+    const tabPill = (name, hex) => ({ ...clay(hex, { radius: 20, pressed: activeTab === name }), flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, padding: '9px 4px' });
+    const tabBarStyle = { display: 'flex', gap: 8, padding: '10px 14px 26px', background: 'transparent' };
+    const navHomeStyle = tabPill('home', C.sky);
+    const navDevicesStyle = tabPill('devices', C.mint);
+    const navScenesStyle = tabPill('scenes', C.grape);
+    const navEnergyStyle = tabPill('energy', C.coral);
+    const navSettingsStyle = tabPill('settings', C.gray);
+    const navIconWrapStyle = { color: ink };
+    const navLabelStyle = { fontFamily: nunito, fontWeight: 700, fontSize: 9.5, color: ink };
+
+    return {
+      C, ink,
+      onScreen1: screen === 1, onScreen2: screen === 2, onScreen3: screen === 3, onScreen4: screen === 4,
+      onScreen5: screen === 5, onScreen6: screen === 6, onScreen7: screen === 7, onScreen8: screen === 8,
+
+      goToScreen1: () => this.goTo(1), goToScreen2: () => this.goTo(2), goToScreen3: () => this.goTo(3),
+      goToScreen4: () => this.goTo(4), goToScreen5: () => this.goTo(5), goToScreen6: () => this.goTo(6),
+      goToScreen7: () => this.goTo(7), goToScreen8: () => this.goTo(8), goBack: this.goBack,
+
+      toggleLight: this.toggleLight, toggleSpeaker: this.toggleSpeaker, toggleRecording: this.toggleRecording,
+      tempUp: this.tempUp, tempDown: this.tempDown,
+      setPresetEco: this.setPresetEco, setPresetComfort: this.setPresetComfort, setPresetAway: this.setPresetAway,
+      toggleSchedule: this.toggleSchedule, dialStart: this.dialStart, dialRef: (el) => { this.dialEl = el; },
+      toggleLockState: this.toggleLockState, generateTempCode: this.generateTempCode,
+      openShare: this.openShare, closeShare: this.closeShare, copyLink: this.copyLink, stopProp: this.stopProp,
+
+      pageWrapStyle, deviceContentStyle, screenPadStyle, settingsPadStyle,
+      helloStyle, tempDisplay, modeDisplay,
+      homeCardStyle, homeCardLabelStyle, homeCardTempStyle, homeCardModeStyle,
+      pillRowStyle, pillDoorStyle, pillLightStyle, pillCamStyle, pillSpeakerStyle, pillIconWrapStyle, pillLabelStyle, pillStatusStyle,
+      doorStatusText, lightStatusText, camStatusText, speakerStatusText,
+      tileRowStyle, tileScenesStyle, tileEnergyStyle, tileSettingsStyle, tileIconWrapStyle, tileLabelStyle,
+
+      headerRowStyle, backBtnStyle, headerTitleStyle, headerTitleLeftStyle, headerSpacerStyle, sectionLabelStyle, sceneHeaderStyle,
+
+      dialOuterStyle, dialSvgStyle, dialCenterStyle, dialTempStyle, dialModeStyle,
+      trackDashArray, progressDashArray, dialProgressColor, dialThumbColor, thumbX, thumbY,
+      arrowRowStyle, arrowDownStyle, arrowUpStyle,
+      presetRowStyle, presetEcoStyle, presetComfortStyle, presetAwayStyle,
+      scheduleBtnStyle, scheduleOpen, scheduleRows, scheduleCardStyle,
+
+      viewfinderStyle, noiseLayerStyle, motionPillStyle, camControlsRowStyle, camTalkStyle, camRecordStyle, camSnapStyle,
+      clipGridStyle, clipThumbs,
+
+      selectedClipTime, clipViewerStyle, clipViewerLabelStyle, timelineTrackStyle, timelineMarkers,
+      tagRowStyle, eventTags, shareBtnStyle, shareOpen: s.shareOpen, shareOverlayStyle, shareSheetStyle, shareTitleStyle,
+      shareLinkRowStyle, shareLinkTextStyle, copyBtnStyle, toastVisible, toastText, toastStyle, shareCloseStyle,
+
+      sceneListStyle, scenesData, createSceneBtnStyle,
+
+      donutCardStyle, hvacDash, lightDash, otherDash, lightRotate, otherRotate, donutCenterStyle, donutKwhStyle, donutSubStyle,
+      breakdownListStyle, hvacRowStyle, lightRowStyle, otherRowStyle, dotCoralStyle, dotSkyStyle, dotMintStyle, breakdownLabelStyle, breakdownPctStyle,
+      comparisonTextStyle, tipCardStyle,
+
+      lockCircleStyle, lockIconWrapStyle, lockStatusStyle, lockStatusText, pinRowStyle, pinDots, keypadGridStyle, keypadKeys,
+      tempCodeBtnStyle, hasTempCode, tempCodeText, tempCodeDisplayStyle, activityLogStyle, activityRowStyle,
+
+      userCardStyle, userAvatarStyle, userNameStyle, userEmailStyle, addressRowStyle, addressLabelStyle, addressValueStyle,
+      familyRowStyle, familyMembers, notifListStyle, notifications, footerCreditStyle,
+
+      tabBarStyle, navHomeStyle, navDevicesStyle, navScenesStyle, navEnergyStyle, navSettingsStyle, navIconWrapStyle, navLabelStyle,
+
+      iconLock, iconBulb, iconCamera, iconMusic, iconSun, iconFilm, iconMoon, iconHouse, iconMic, iconRecord, iconBack,
+      iconUp, iconDown, iconBolt, iconGear, iconGrid, iconPlay, iconShare, iconLockBig,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

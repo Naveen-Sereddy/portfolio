@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<title>Kitchen Quest — Cooking Gamification Prototype</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; image-rendering: pixelated; -webkit-font-smoothing: none; }
+  html, body { margin: 0; padding: 0; background: #000; }
+  button { font-family: inherit; }
+  ::selection { background: #FBC02D; color: #000; }
+</style>
+</helmet>
+<div style="width: 100%; height: 100vh; min-height: 640px; background: #000; display: flex; align-items: center; justify-content: center; font-family: 'VT323', monospace;">
+  <div style="position: relative; width: 960px; height: 640px; background: #000; box-shadow: 0 0 0 4px #444, 0 0 0 8px #000, 0 0 40px 8px rgba(0,0,0,0.6);">
+    <div style="position: absolute; top: -12px; left: -12px; width: 8px; height: 8px; background: #9E9E9E; border: 2px solid #000;"></div>
+    <div style="position: absolute; top: -12px; right: -12px; width: 8px; height: 8px; background: #9E9E9E; border: 2px solid #000;"></div>
+    <div style="position: absolute; bottom: -12px; left: -12px; width: 8px; height: 8px; background: #9E9E9E; border: 2px solid #000;"></div>
+    <div style="position: absolute; bottom: -12px; right: -12px; width: 8px; height: 8px; background: #9E9E9E; border: 2px solid #000;"></div>
+
+    <div style="position: relative; width: 960px; height: 640px; overflow: hidden;">
+
+      <!-- SCREEN 1: TITLE / CHARACTER SELECT -->
+      <sc-if value="{{ isScreen1 }}" hint-placeholder-val="{{ true }}">
+        <div style="position: absolute; inset: 0; background-image: conic-gradient(#795548 90deg, #FFB300 90deg 180deg, #795548 180deg 270deg, #FFB300 270deg); background-size: 40px 40px; display: flex; flex-direction: column; align-items: center; padding: 32px 20px;">
+          <div style="font-family: 'Press Start 2P'; font-size: 28px; color: #FBC02D; text-shadow: 3px 0 0 #000, -3px 0 0 #000, 0 3px 0 #000, 0 -3px 0 #000, 4px 4px 0 #000; margin-top: 12px; letter-spacing: 2px;">KITCHEN QUEST</div>
+          <div style="font-family: 'VT323'; font-size: 22px; color: #fff; margin-top: 18px; text-shadow: 2px 2px 0 #000;">Choose Your Chef</div>
+          <div style="display: flex; gap: 32px; margin-top: 46px;">
+            <sc-for list="{{ chefsView }}" as="chef" hint-placeholder-count="3">
+              <div onClick="{{ chef.select }}" style="cursor: pointer; display: flex; flex-direction: column; align-items: center; background: #fff; border: 4px solid #000; padding: 14px; width: 168px;">
+                <div style="width: 128px; height: 128px; display: grid; grid-template-columns: repeat(16, 8px); grid-template-rows: repeat(16, 8px);">
+                  <sc-for list="{{ chef.pixels }}" as="c" hint-placeholder-count="256">
+                    <div style="width: 8px; height: 8px; background: {{ c }};"></div>
+                  </sc-for>
+                </div>
+                <div style="font-family: 'Press Start 2P'; font-size: 11px; color: #000; margin-top: 12px; text-align: center;">{{ chef.name }}</div>
+                <div style="font-family: 'VT323'; font-size: 15px; color: #795548; margin-top: 4px;">{{ chef.role }}</div>
+                <div style="font-family: 'VT323'; font-size: 15px; color: #388E3C; margin-top: 2px;">{{ chef.bonus }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- SCREEN 2: KITCHEN / RECIPE SELECT -->
+      <sc-if value="{{ isScreen2 }}" hint-placeholder-val="{{ false }}">
+        <div style="position: absolute; inset: 0; background: #03A9F4; display: flex; flex-direction: column;">
+          <div style="height: 44px; background: #000; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 4px solid #FBC02D; flex-shrink: 0;">
+            <div style="font-family: 'JetBrains Mono'; font-weight: 700; font-size: 14px; color: #FFB300;">GOLD: {{ gold }}</div>
+            <div style="font-family: 'Press Start 2P'; font-size: 10px; color: #fff;">CHEF: {{ chefShort }}</div>
+          </div>
+          <div style="padding: 14px 24px 6px;">
+            <div style="font-family: 'Press Start 2P'; font-size: 16px; color: #fff; text-shadow: 2px 2px 0 #000;">CHAPTER 1: BREAKFAST</div>
+          </div>
+          <div style="flex: 1; display: flex; gap: 20px; padding: 10px 24px 20px; min-height: 0;">
+            <div style="display: flex; flex-direction: column; align-items: center; width: 190px; flex-shrink: 0;">
+              <div style="width: 112px; height: 112px; display: grid; grid-template-columns: repeat(16, 7px); grid-template-rows: repeat(16, 7px);">
+                <sc-for list="{{ professorPixels }}" as="c" hint-placeholder-count="256">
+                  <div style="width: 7px; height: 7px; background: {{ c }};"></div>
+                </sc-for>
+              </div>
+              <div style="background: #fff; border: 3px solid #000; padding: 10px; margin-top: 10px; font-family: 'VT323'; font-size: 16px; color: #000; line-height: 1.25;">
+                "Welcome, Jordan! Today we learn the art of scrambled eggs."
+              </div>
+            </div>
+            <div style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 14px; min-height: 0;">
+              <sc-for list="{{ recipesView }}" as="recipe" hint-placeholder-count="4">
+                <div onClick="{{ recipe.select }}" style="cursor: pointer; background: #fff; border: 3px solid #000; padding: 14px 16px; display: flex; flex-direction: column; justify-content: center; gap: 8px;">
+                  <div style="font-family: 'Press Start 2P'; font-size: 12px; color: #000;">{{ recipe.name }}</div>
+                  <div style="font-family: 'VT323'; font-size: 18px; color: #FF9800;">{{ recipe.stars }}</div>
+                  <div style="font-family: 'VT323'; font-size: 15px; color: #000;">TIME: {{ recipe.time }}</div>
+                  <div style="font-family: 'VT323'; font-size: 15px; color: #388E3C;">REWARD: +{{ recipe.xp }} XP</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="height: 52px; background: #000; display: flex; border-top: 4px solid #fff; flex-shrink: 0;">
+            <div onClick="{{ navKitchen }}" style="flex: 1; display: flex; align-items: center; justify-content: center; border-right: 2px solid #fff; background: {{ navBg2 }}; color: #fff; font-family: 'Press Start 2P'; font-size: 9px; cursor: pointer;">KITCHEN</div>
+            <div onClick="{{ navCook }}" style="flex: 1; display: flex; align-items: center; justify-content: center; border-right: 2px solid #fff; background: {{ navBg3 }}; color: #fff; opacity: {{ cookNavOpacity }}; font-family: 'Press Start 2P'; font-size: 9px; cursor: pointer;">COOK</div>
+            <div onClick="{{ navInv }}" style="flex: 1; display: flex; align-items: center; justify-content: center; border-right: 2px solid #fff; background: {{ navBg5 }}; color: #fff; font-family: 'Press Start 2P'; font-size: 9px; cursor: pointer;">INVENTORY</div>
+            <div onClick="{{ navQuest }}" style="flex: 1; display: flex; align-items: center; justify-content: center; background: {{ navBg6 }}; color: #fff; font-family: 'Press Start 2P'; font-size: 9px; cursor: pointer;">QUESTS</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- SCREEN 3: COOKING MINIGAME -->
+      <sc-if value="{{ isScreen3 }}" hint-placeholder-val="{{ false }}">
+        <div style="position: absolute; inset: 0; background: #FF9800; display: flex; flex-direction: column;">
+          <div style="height: 44px; background: #000; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 4px solid #FBC02D; flex-shrink: 0;">
+            <div style="font-family: 'JetBrains Mono'; font-weight: 700; font-size: 14px; color: #FFB300;">GOLD: {{ gold }}</div>
+            <div style="font-family: 'Press Start 2P'; font-size: 10px; color: #fff;">CHEF: {{ chefShort }}</div>
+          </div>
+          <div style="padding: 14px 24px 4px;">
+            <div style="font-family: 'Press Start 2P'; font-size: 18px; color: #000; text-shadow: 2px 2px 0 #fff;">{{ recipeNameUpper }}</div>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 10px 24px;">
+
+            <sc-if value="{{ isPhaseIngredients }}" hint-placeholder-val="{{ true }}">
+              <div style="font-family: 'VT323'; font-size: 18px; color: #000; background: #fff; border: 2px solid #000; padding: 8px 16px;">"Gather your ingredients first!"</div>
+              <div style="display: flex; flex-direction: column; gap: 12px; width: 380px;">
+                <div onClick="{{ toggleEggs }}" style="cursor: pointer; display: flex; align-items: center; gap: 12px; background: #fff; border: 3px solid #000; padding: 10px 14px;">
+                  <div style="width: 24px; height: 24px; border: 3px solid #000; background: {{ eggsCheckColor }};"></div>
+                  <div style="width: 32px; height: 32px; display: grid; grid-template-columns: repeat(8, 4px); grid-template-rows: repeat(8, 4px);">
+                    <sc-for list="{{ eggPixels }}" as="c" hint-placeholder-count="64"><div style="width: 4px; height: 4px; background: {{ c }};"></div></sc-for>
+                  </div>
+                  <div style="font-family: 'VT323'; font-size: 18px; color: #000;">Eggs — 2 large</div>
+                </div>
+                <div onClick="{{ toggleButter }}" style="cursor: pointer; display: flex; align-items: center; gap: 12px; background: #fff; border: 3px solid #000; padding: 10px 14px;">
+                  <div style="width: 24px; height: 24px; border: 3px solid #000; background: {{ butterCheckColor }};"></div>
+                  <div style="width: 32px; height: 32px; display: grid; grid-template-columns: repeat(8, 4px); grid-template-rows: repeat(8, 4px);">
+                    <sc-for list="{{ butterPixels }}" as="c" hint-placeholder-count="64"><div style="width: 4px; height: 4px; background: {{ c }};"></div></sc-for>
+                  </div>
+                  <div style="font-family: 'VT323'; font-size: 18px; color: #000;">Butter — 1 tbsp</div>
+                </div>
+                <div onClick="{{ toggleSalt }}" style="cursor: pointer; display: flex; align-items: center; gap: 12px; background: #fff; border: 3px solid #000; padding: 10px 14px;">
+                  <div style="width: 24px; height: 24px; border: 3px solid #000; background: {{ saltCheckColor }};"></div>
+                  <div style="width: 32px; height: 32px; display: grid; grid-template-columns: repeat(8, 4px); grid-template-rows: repeat(8, 4px);">
+                    <sc-for list="{{ saltPixels }}" as="c" hint-placeholder-count="64"><div style="width: 4px; height: 4px; background: {{ c }};"></div></sc-for>
+                  </div>
+                  <div style="font-family: 'VT323'; font-size: 18px; color: #000;">Salt — pinch</div>
+                </div>
+              </div>
+              <button onClick="{{ startCooking }}" disabled="{{ !ingredientsAllChecked }}" style="font-family: 'Press Start 2P'; font-size: 13px; background: {{ startBtnColor }}; color: #000; border: 4px solid #000; padding: 14px 24px; cursor: pointer;">START COOKING</button>
+            </sc-if>
+
+            <sc-if value="{{ isPhaseTiming }}" hint-placeholder-val="{{ false }}">
+              <div style="font-family: 'VT323'; font-size: 18px; color: #000; background: #fff; border: 2px solid #000; padding: 8px 16px;">Click TOSS when the arrow hits the center!</div>
+              <div style="position: relative; width: 420px; height: 48px; background: #388E3C; border: 4px solid #000;">
+                <div style="position: absolute; left: 44%; width: 12%; height: 100%; background: #689F38; border-left: 2px solid #000; border-right: 2px solid #000;"></div>
+                <div style="position: absolute; top: -6px; bottom: -6px; width: 6px; background: #D32F2F; border: 2px solid #000; left: {{ arrowPos }}%;"></div>
+              </div>
+              <button onClick="{{ toss }}" style="font-family: 'Press Start 2P'; font-size: 16px; background: #FBC02D; color: #000; border: 4px solid #000; padding: 16px 40px; cursor: pointer;">TOSS</button>
+            </sc-if>
+
+            <sc-if value="{{ isPhasePlating }}" hint-placeholder-val="{{ false }}">
+              <div style="font-family: 'VT323'; font-size: 18px; color: #000; background: #fff; border: 2px solid #000; padding: 6px 14px; white-space: nowrap;">TIMING: {{ timingRankText }} · +{{ timingXpText }} XP</div>
+              <div style="display: flex; gap: 36px; align-items: center;">
+                <div style="position: relative; width: 200px; height: 200px; background: #fff; border: 4px solid #000; clip-path: polygon(20% 0, 80% 0, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0 80%, 0 20%);">
+                  <sc-if value="{{ plated.eggs }}" hint-placeholder-val="{{ false }}">
+                    <div style="position: absolute; top: 28px; left: 24px; width: 40px; height: 40px; display: grid; grid-template-columns: repeat(8, 5px); grid-template-rows: repeat(8, 5px);">
+                      <sc-for list="{{ eggPixels }}" as="c" hint-placeholder-count="64"><div style="width: 5px; height: 5px; background: {{ c }};"></div></sc-for>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ plated.butter }}" hint-placeholder-val="{{ false }}">
+                    <div style="position: absolute; top: 80px; left: 80px; width: 40px; height: 40px; display: grid; grid-template-columns: repeat(8, 5px); grid-template-rows: repeat(8, 5px);">
+                      <sc-for list="{{ butterPixels }}" as="c" hint-placeholder-count="64"><div style="width: 5px; height: 5px; background: {{ c }};"></div></sc-for>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ plated.salt }}" hint-placeholder-val="{{ false }}">
+                    <div style="position: absolute; top: 28px; left: 132px; width: 40px; height: 40px; display: grid; grid-template-columns: repeat(8, 5px); grid-template-rows: repeat(8, 5px);">
+                      <sc-for list="{{ saltPixels }}" as="c" hint-placeholder-count="64"><div style="width: 5px; height: 5px; background: {{ c }};"></div></sc-for>
+                    </div>
+                  </sc-if>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                  <div onClick="{{ togglePlateEggs }}" style="cursor: pointer; opacity: {{ eggsTrayOpacity }}; display: flex; align-items: center; gap: 10px; background: #fff; border: 3px solid #000; padding: 8px 12px;">
+                    <div style="width: 32px; height: 32px; display: grid; grid-template-columns: repeat(8, 4px); grid-template-rows: repeat(8, 4px);"><sc-for list="{{ eggPixels }}" as="c" hint-placeholder-count="64"><div style="width: 3.5px; height: 3.5px; background: {{ c }};"></div></sc-for></div>
+                    <div style="font-family: 'VT323'; font-size: 16px;">EGGS</div>
+                  </div>
+                  <div onClick="{{ togglePlateButter }}" style="cursor: pointer; opacity: {{ butterTrayOpacity }}; display: flex; align-items: center; gap: 10px; background: #fff; border: 3px solid #000; padding: 8px 12px;">
+                    <div style="width: 32px; height: 32px; display: grid; grid-template-columns: repeat(8, 4px); grid-template-rows: repeat(8, 4px);"><sc-for list="{{ butterPixels }}" as="c" hint-placeholder-count="64"><div style="width: 3.5px; height: 3.5px; background: {{ c }};"></div></sc-for></div>
+                    <div style="font-family: 'VT323'; font-size: 16px;">BUTTER</div>
+                  </div>
+                  <div onClick="{{ togglePlateSalt }}" style="cursor: pointer; opacity: {{ saltTrayOpacity }}; display: flex; align-items: center; gap: 10px; background: #fff; border: 3px solid #000; padding: 8px 12px;">
+                    <div style="width: 32px; height: 32px; display: grid; grid-template-columns: repeat(8, 4px); grid-template-rows: repeat(8, 4px);"><sc-for list="{{ saltPixels }}" as="c" hint-placeholder-count="64"><div style="width: 3.5px; height: 3.5px; background: {{ c }};"></div></sc-for></div>
+                    <div style="font-family: 'VT323'; font-size: 16px;">SALT</div>
+                  </div>
+                </div>
+              </div>
+              <button onClick="{{ serve }}" disabled="{{ !platedAllPlaced }}" style="font-family: 'Press Start 2P'; font-size: 14px; background: {{ serveBtnColor }}; color: #000; border: 4px solid #000; padding: 14px 28px; cursor: pointer;">SERVE</button>
+            </sc-if>
+
+          </div>
+          <div style="height: 52px; background: #000; display: flex; border-top: 4px solid #fff; flex-shrink: 0;">
+            <div onClick="{{ navKitchen }}" style="flex: 1; display: flex; align-items: center; justify-content: center; border-right: 2px solid #fff; background: {{ navBg2 }}; color: #fff; font-family: 'Press Start 2P'; font-size: 9px; cursor: pointer;">KITCHEN</div>
+            <div onClick="{{ navCook }}" style="flex: 1; display: flex; align-items: center; justify-content: center; border-right: 2px solid #fff; background: {{ navBg3 }}; color: #fff; font-family: 'Press Start 2P'; font-size: 9px; cursor: pointer;">COOK</div>
+            <div onClick="{{ navInv }}" style="flex: 1; display: flex; align-items: center; justify-content: center; border-right: 2px solid #fff; background: {{ navBg5 }}; color: #fff; font-family: 'Press Start 2P'; font-size: 9px; cursor: pointer;">INVENTORY</div>
+            <div onClick="{{ navQuest }}" style="flex: 1; display: flex; align-items: center; justify-content: center; background: {{ navBg6 }}; color: #fff; font-family: 'Press Start 2P'; font-size: 9px; cursor: pointer;">QUESTS</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- SCREEN 4: RESULT / RATING -->
+      <sc-if value="{{ isScreen4 }}" hint-placeholder-val="{{ false }}">
+        <div style="position: absolute; inset: 0; background: #388E3C; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;">
+          <div style="font-family: 'Press Start 2P'; font-size: 20px; color: #FBC02D; text-shadow: 3px 3px 0 #000;">DISH SERVED!</div>
+          <div style="display: flex; gap: 8px;">
+            <sc-for list="{{ starRow }}" as="st" hint-placeholder-count="5">
+              <div style="width: 40px; height: 40px; display: grid; grid-template-columns: repeat(8, 5px); grid-template-rows: repeat(8, 5px);">
+                <sc-for list="{{ st.pixels }}" as="c" hint-placeholder-count="64"><div style="width: 5px; height: 5px; background: {{ c }};"></div></sc-for>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display: flex; gap: 24px; font-family: 'JetBrains Mono'; font-weight: 700; font-size: 16px; color: #fff; background: #000; border: 3px solid #FBC02D; padding: 10px 20px;">
+            <div>XP +{{ resultXp }}</div>
+            <div>COMBO {{ resultCombo }}</div>
+            <div>TIME {{ resultTime }}</div>
+          </div>
+          <div style="font-family: 'VT323'; font-size: 18px; background: #fff; color: #000; border: 3px solid #000; padding: 12px 20px; max-width: 480px; text-align: center;">{{ resultFeedback }}</div>
+          <button onClick="{{ continueToInventory }}" style="font-family: 'Press Start 2P'; font-size: 14px; background: #388E3C; color: #fff; border: 4px solid #000; box-shadow: 0 0 0 3px #fff; padding: 14px 30px; cursor: pointer;">CONTINUE</button>
+        </div>
+      </sc-if>
+
+      <!-- SCREEN 5: INVENTORY -->
+      <sc-if value="{{ isScreen5 }}" hint-placeholder-val="{{ false }}">
+        <div style="position: absolute; inset: 0; background: #7B1FA2; display: flex; flex-direction: column;">
+          <div style="height: 44px; background: #000; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 4px solid #FBC02D; flex-shrink: 0;">
+            <div style="font-family: 'Press Start 2P'; font-size: 18px; color: #fff;">INVENTORY</div>
+            <div style="font-family: 'JetBrains Mono'; font-weight: 700; font-size: 14px; color: #FFB300;">GOLD: {{ gold }}</div>
+          </div>
+          <div style="flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); gap: 16px; padding: 20px 24px; min-height: 0;">
+            <sc-for list="{{ inventoryView }}" as="item" hint-placeholder-count="6">
+              <div style="background: #fff; border: 4px solid {{ item.color }}; padding: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; opacity: {{ item.opacity }}; filter: {{ item.filter }};">
+                <div style="width: 56px; height: 56px; display: grid; grid-template-columns: repeat(8, 7px); grid-template-rows: repeat(8, 7px);">
+                  <sc-for list="{{ item.pixels }}" as="c" hint-placeholder-count="64"><div style="width: 7px; height: 7px; background: {{ c }};"></div></sc-for>
+                </div>
+                <div style="font-family: 'Press Start 2P'; font-size: 10px; color: #000; text-align: center;">{{ item.name }}</div>
+                <div style="font-family: 'VT323'; font-size: 15px; color: {{ item.color }};">{{ item.rarity }}</div>
+                <sc-if value="{{ item.locked }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-family: 'VT323'; font-size: 12px; color: #795548; text-align: center;">Win 3 speed runs to unlock</div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+          <div style="height: 52px; background: #000; display: flex; border-top: 4px solid #fff; flex-shrink: 0;">
+            <div onClick="{{ navKitchen }}" style="flex: 1; display: flex; align-items: center; justify-content: center; border-right: 2px solid #fff; background: {{ navBg2 }}; color: #fff; font-family: 'Press Start 2P'; font-size: 9px; cursor: pointer;">KITCHEN</div>
+            <div onClick="{{ navCook }}" style="flex: 1; display: flex; align-items: center; justify-content: center; border-right: 2px solid #fff; background: {{ navBg3 }}; color: #fff; opacity: {{ cookNavOpacity }}; font-family: 'Press Start 2P'; font-size: 9px; cursor: pointer;">COOK</div>
+            <div onClick="{{ navInv }}" style="flex: 1; display: flex; align-items: center; justify-content: center; border-right: 2px solid #fff; background: {{ navBg5 }}; color: #fff; font-family: 'Press Start 2P'; font-size: 9px; cursor: pointer;">INVENTORY</div>
+            <div onClick="{{ navQuest }}" style="flex: 1; display: flex; align-items: center; justify-content: center; background: {{ navBg6 }}; color: #fff; font-family: 'Press Start 2P'; font-size: 9px; cursor: pointer;">QUESTS</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- SCREEN 6: QUEST LOG / PROFILE -->
+      <sc-if value="{{ isScreen6 }}" hint-placeholder-val="{{ false }}">
+        <div style="position: absolute; inset: 0; background: #009688; display: flex; flex-direction: column;">
+          <div style="height: 44px; background: #000; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 4px solid #FBC02D; flex-shrink: 0;">
+            <div style="font-family: 'Press Start 2P'; font-size: 18px; color: #fff;">QUEST LOG</div>
+            <div onClick="{{ toggleSettings }}" style="cursor: pointer; width: 34px; height: 34px; background: #9E9E9E; border: 3px solid #fff; display: flex; align-items: center; justify-content: center;">
+              <div style="width: 24px; height: 24px; display: grid; grid-template-columns: repeat(8, 3px); grid-template-rows: repeat(8, 3px);">
+                <sc-for list="{{ gearPixels }}" as="c" hint-placeholder-count="64"><div style="width: 3px; height: 3px; background: {{ c }};"></div></sc-for>
+              </div>
+            </div>
+          </div>
+
+          <div style="flex: 1; display: flex; gap: 20px; padding: 18px 24px; min-height: 0;">
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 14px;">
+              <div style="background: #fff; border: 4px solid #000; padding: 14px;">
+                <div style="font-family: 'Press Start 2P'; font-size: 13px; color: #000;">Jordan Ellis</div>
+                <div style="font-family: 'VT323'; font-size: 16px; color: #388E3C; margin-top: 2px;">Level 7 Chef</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 13px; color: #000; margin-top: 10px;">XP: 2,150 / 3,000</div>
+                <div style="width: 100%; height: 16px; background: #9E9E9E; border: 2px solid #000; margin-top: 4px;">
+                  <div style="width: {{ xpBarPercent }}%; height: 100%; background: #FBC02D;"></div>
+                </div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 13px; color: #000; margin-top: 10px;">Recipes mastered: 12/40</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 13px; color: #000; margin-top: 4px;">Perfect dishes: 8</div>
+              </div>
+
+              <sc-if value="{{ settingsOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="background: #fff; border: 4px solid #000; padding: 14px; display: flex; flex-direction: column; gap: 10px;">
+                  <div style="font-family: 'Press Start 2P'; font-size: 11px; color: #000;">SETTINGS</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="font-family: 'VT323'; font-size: 16px;">Sound</div>
+                    <div onClick="{{ toggleSound }}" style="cursor: pointer; width: 44px; height: 22px; background: {{ soundTrackColor }}; border: 2px solid #000; position: relative;">
+                      <div style="position: absolute; top: 1px; width: 18px; height: 16px; background: #fff; border: 2px solid #000; left: {{ soundKnobPos }}px;"></div>
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="font-family: 'VT323'; font-size: 16px;">Music</div>
+                    <div onClick="{{ toggleMusic }}" style="cursor: pointer; width: 44px; height: 22px; background: {{ musicTrackColor }}; border: 2px solid #000; position: relative;">
+                      <div style="position: absolute; top: 1px; width: 18px; height: 16px; background: #fff; border: 2px solid #000; left: {{ musicKnobPos }}px;"></div>
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="font-family: 'VT323'; font-size: 16px;">Vibration</div>
+                    <div onClick="{{ toggleVibration }}" style="cursor: pointer; width: 44px; height: 22px; background: {{ vibrationTrackColor }}; border: 2px solid #000; position: relative;">
+                      <div style="position: absolute; top: 1px; width: 18px; height: 16px; background: #fff; border: 2px solid #000; left: {{ vibrationKnobPos }}px;"></div>
+                    </div>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
+              <div style="font-family: 'Press Start 2P'; font-size: 12px; color: #fff; text-shadow: 2px 2px 0 #000;">DAILY QUESTS</div>
+              <sc-for list="{{ questsView }}" as="q" hint-placeholder-count="3">
+                <div onClick="{{ q.toggle }}" style="cursor: pointer; display: flex; align-items: center; gap: 12px; background: #fff; border: 3px solid #000; padding: 10px 14px;">
+                  <div style="width: 22px; height: 22px; border: 3px solid #000; background: {{ q.checkColor }}; flex-shrink: 0;"></div>
+                  <div style="font-family: 'VT323'; font-size: 17px; color: #000; flex: 1;">{{ q.label }}</div>
+                  <div style="font-family: 'JetBrains Mono'; font-size: 13px; color: #388E3C;">+{{ q.xp }} XP</div>
+                </div>
+              </sc-for>
+              <div style="flex: 1;"></div>
+              <div style="font-family: 'VT323'; font-size: 11px; color: #FFFFFF; text-align: right;">Designed by Naveen Sereddy — Pixel Art Exploration</div>
+            </div>
+          </div>
+
+          <div style="height: 52px; background: #000; display: flex; border-top: 4px solid #fff; flex-shrink: 0;">
+            <div onClick="{{ navKitchen }}" style="flex: 1; display: flex; align-items: center; justify-content: center; border-right: 2px solid #fff; background: {{ navBg2 }}; color: #fff; font-family: 'Press Start 2P'; font-size: 9px; cursor: pointer;">KITCHEN</div>
+            <div onClick="{{ navCook }}" style="flex: 1; display: flex; align-items: center; justify-content: center; border-right: 2px solid #fff; background: {{ navBg3 }}; color: #fff; opacity: {{ cookNavOpacity }}; font-family: 'Press Start 2P'; font-size: 9px; cursor: pointer;">COOK</div>
+            <div onClick="{{ navInv }}" style="flex: 1; display: flex; align-items: center; justify-content: center; border-right: 2px solid #fff; background: {{ navBg5 }}; color: #fff; font-family: 'Press Start 2P'; font-size: 9px; cursor: pointer;">INVENTORY</div>
+            <div onClick="{{ navQuest }}" style="flex: 1; display: flex; align-items: center; justify-content: center; background: {{ navBg6 }}; color: #fff; font-family: 'Press Start 2P'; font-size: 9px; cursor: pointer;">QUESTS</div>
+          </div>
+        </div>
+      </sc-if>
+
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    screen: 1,
+    chefId: null,
+    recipe: null,
+    cookPhase: 'ingredients',
+    ingredients: { eggs: true, butter: true, salt: true },
+    arrowPos: 0,
+    arrowDir: 1,
+    timingResult: null,
+    plated: { eggs: false, butter: false, salt: false },
+    cookStartTime: null,
+    elapsedTime: null,
+    quests: [true, false, false],
+    settingsOpen: false,
+    sound: true,
+    music: true,
+    vibration: false,
+    gold: 850
+  };
+
+  CHAR_MAP = { K: '#000000', W: '#FFFFFF', A: '#FFB300', Y: '#FBC02D', X: '#9E9E9E', D: '#795548', B: '#1976D2', R: '#D32F2F', G: '#388E3C', U: '#7B1FA2' };
+
+  CHEFS = [
+    { id: 'red', name: 'CHEF RED', role: 'Sous Chef', bonus: '+15% Speed', hue: '#D32F2F' },
+    { id: 'blue', name: 'CHEF BLUE', role: 'Pastry Chef', bonus: '+10% Precision', hue: '#1976D2' },
+    { id: 'green', name: 'CHEF GREEN', role: 'Line Cook', bonus: '+20% Combo', hue: '#388E3C' }
+  ];
+
+  RECIPES = [
+    { id: 'scramble', name: 'Classic Scramble', diff: 2, time: '5 min', xp: 50 },
+    { id: 'omelette', name: 'French Omelette', diff: 3, time: '10 min', xp: 120 },
+    { id: 'shakshuka', name: 'Shakshuka', diff: 4, time: '20 min', xp: 200 },
+    { id: 'benedict', name: 'Eggs Benedict', diff: 5, time: '25 min', xp: 350 }
+  ];
+
+  INVENTORY_DEF = [
+    { name: "Chef's Knife", rarity: 'Common', icon: 'knife', color: '#9E9E9E', locked: false },
+    { name: 'Cast Iron Skillet', rarity: 'Uncommon', icon: 'skillet', color: '#388E3C', locked: false },
+    { name: 'Copper Pan', rarity: 'Rare', icon: 'pan', color: '#1976D2', locked: false },
+    { name: 'Spice Rack', rarity: 'Epic', icon: 'spice', color: '#7B1FA2', locked: false },
+    { name: 'Blue Apron', rarity: 'Legendary', icon: 'apron', color: '#FFB300', locked: false },
+    { name: 'Golden Whisk', rarity: 'Locked', icon: 'whisk', color: '#9E9E9E', locked: true }
+  ];
+
+  QUEST_DEF = [
+    { label: 'Cook 1 breakfast recipe', xp: 50 },
+    { label: 'Earn 3 perfect ratings', xp: 150 },
+    { label: 'Unlock 1 new recipe', xp: 100 }
+  ];
+
+  ICONS = {
+    egg: ['..KKKK..', '.KWWWWK.', 'KWWWWWWK', 'KWWAAWWK', 'KWWAAWWK', 'KWWWWWWK', '.KWWWWK.', '..KKKK..'],
+    butter: ['KKKKKKKK', 'KYYYYYYK', 'KYYYYYYK', 'KYYYYYYK', 'KYYYYYYK', 'KYYYYYYK', 'KYYYYYYK', 'KKKKKKKK'],
+    salt: ['..KKKK..', '.KWWWWK.', '..KXXK..', '..KXXK..', '..KXXK..', '..KXXK..', '..KXXK..', '..KKKK..'],
+    knife: ['.....XXK', '....XXK.', '...XXK..', '..XXK...', '.XXK....', 'KDDK....', 'KDDK....', '.KKK....'],
+    skillet: ['.....XX.', '....X...', 'KKKKKKK.', 'KXXXXXK.', 'KXXXXXK.', 'KKKKKKK.', '........', '........'],
+    pan: ['.....XX.', '....X...', 'KKKKKKK.', 'KAAAAAK.', 'KAAAAAK.', 'KKKKKKK.', '........', '........'],
+    spice: ['........', '.R.G.U..', '.R.G.U..', 'KKKKKKKK', 'DDDDDDDD', '........', '........', '........'],
+    apron: ['..KKKK..', '.KBBBBK.', 'KBBBBBBK', 'KBBBBBBK', 'KKBBBBKK', '..KBBK..', '..KBBK..', '..KKKK..'],
+    whisk: ['...KK...', '..K..K..', '.K.YY.K.', 'K.YYYY.K', 'K.YYYY.K', '.K.YY.K.', '..K..K..', '...KK...'],
+    starFull: ['...KK...', '..KAAK..', '.KAAAAK.', 'KAAAAAAK', 'KAAAAAAK', '.KAAAAK.', '..KAAK..', '...KK...'],
+    starEmpty: ['...KK...', '..K..K..', '.K....K.', 'K......K', 'K......K', '.K....K.', '..K..K..', '...KK...'],
+    gear: ['..K..K..', '.KXXXXK.', 'KXXXXXXK', 'KXXKKXXK', 'KXXKKXXK', 'KXXXXXXK', '.KXXXXK.', '..K..K..']
+  };
+
+  expandRows(rows, hue) {
+    const map = Object.assign({}, this.CHAR_MAP);
+    if (hue) map['H'] = hue;
+    const flat = [];
+    rows.forEach(r => {
+      for (const ch of r) flat.push(ch === '.' ? 'transparent' : (map[ch] || 'transparent'));
+    });
+    return flat;
+  }
+
+  chefRows() {
+    return [
+      '......KKKK......',
+      '....KKWWWWKK....',
+      '...KWWWWWWWWK...',
+      '...KWWWWWWWWK...',
+      '..KWWWWWWWWWWK..',
+      '..KWWWWWWWWWWK..',
+      '.KWWWWWWWWWWWWK.',
+      '.KKKKKKKKKKKKKK.',
+      '.KAAAAAAAAAAAAK.',
+      '.KAAAKAAAAKAAAK.',
+      '.KAAAAAAAAAAAAK.',
+      '.KAAAAKKKKAAAAK.',
+      '..KHHHHHHHHHHK..',
+      '.KHHHHWWWWHHHHK.',
+      '.KHHHHWWWWHHHHK.',
+      '.KKKKKKKKKKKKKK.'
+    ];
+  }
+
+  makeChefSprite(hue) { return this.expandRows(this.chefRows(), hue); }
+  iconPixels(name) { return this.expandRows(this.ICONS[name]); }
+
+  goToScreen(n) {
+    if (n === 3 && !this.state.recipe) return;
+    this.setState({ screen: n });
+  }
+  selectChef(chefId) { this.setState({ chefId, screen: 2 }); }
+  selectRecipe(recipe) {
+    this.setState({
+      recipe, screen: 3, cookPhase: 'ingredients',
+      ingredients: { eggs: true, butter: true, salt: true },
+      plated: { eggs: false, butter: false, salt: false },
+      timingResult: null, elapsedTime: null
+    });
+  }
+  toggleIngredient(key) { this.setState(s => ({ ingredients: { ...s.ingredients, [key]: !s.ingredients[key] } })); }
+
+  clearArrowLoop() { if (this._arrowInterval) { clearInterval(this._arrowInterval); this._arrowInterval = null; } }
+  startArrowLoop() {
+    this.clearArrowLoop();
+    this._arrowInterval = setInterval(() => {
+      this.setState(s => {
+        let pos = s.arrowPos + s.arrowDir * 3.2;
+        let dir = s.arrowDir;
+        if (pos >= 100) { pos = 100; dir = -1; }
+        if (pos <= 0) { pos = 0; dir = 1; }
+        return { arrowPos: pos, arrowDir: dir };
+      });
+    }, 25);
+  }
+  startCooking() {
+    this.setState({ cookPhase: 'timing', cookStartTime: Date.now(), arrowPos: 0, arrowDir: 1 });
+    this.startArrowLoop();
+  }
+  toss() {
+    this.clearArrowLoop();
+    const dist = Math.abs(this.state.arrowPos - 50);
+    let rank, xp;
+    if (dist <= 5) { rank = 'PERFECT'; xp = 100; }
+    else if (dist <= 15) { rank = 'GREAT'; xp = 75; }
+    else if (dist <= 30) { rank = 'GOOD'; xp = 50; }
+    else { rank = 'MISS'; xp = 25; }
+    this.setState({ timingResult: { rank, xp }, cookPhase: 'plating' });
+  }
+  togglePlate(key) { this.setState(s => ({ plated: { ...s.plated, [key]: !s.plated[key] } })); }
+  serve() {
+    const elapsed = Date.now() - (this.state.cookStartTime || Date.now());
+    this.setState({ elapsedTime: elapsed, screen: 4 });
+  }
+  continueToInventory() { this.setState({ screen: 5 }); }
+  toggleQuest(i) { this.setState(s => { const q = [...s.quests]; q[i] = !q[i]; return { quests: q }; }); }
+  toggleSettings() { this.setState(s => ({ settingsOpen: !s.settingsOpen })); }
+  toggleSetting(key) { this.setState(s => ({ [key]: !s[key] })); }
+
+  componentWillUnmount() { this.clearArrowLoop(); }
+
+  renderVals() {
+    const s = this.state;
+    const chef = this.CHEFS.find(c => c.id === s.chefId) || this.CHEFS[0];
+    const recipe = s.recipe || this.RECIPES[0];
+
+    const eggPixels = this.iconPixels('egg');
+    const butterPixels = this.iconPixels('butter');
+    const saltPixels = this.iconPixels('salt');
+    const gearPixels = this.iconPixels('gear');
+    const starFullPixels = this.iconPixels('starFull');
+    const starEmptyPixels = this.iconPixels('starEmpty');
+
+    const ingredientsAllChecked = s.ingredients.eggs && s.ingredients.butter && s.ingredients.salt;
+    const platedAllPlaced = s.plated.eggs && s.plated.butter && s.plated.salt;
+
+    const rankStars = { PERFECT: 5, GREAT: 4, GOOD: 3, MISS: 2 };
+    const filled = s.timingResult ? (rankStars[s.timingResult.rank] || 3) : 3;
+    const starRow = [0, 1, 2, 3, 4].map(i => ({ pixels: i < filled ? starFullPixels : starEmptyPixels }));
+
+    const feedbackMap = {
+      PERFECT: 'Flawless technique, Jordan! Restaurant quality.',
+      GREAT: 'Great timing! A tasty, fluffy scramble.',
+      GOOD: 'A decent scramble, Jordan. Try lower heat for fluffier texture.',
+      MISS: 'A bit overcooked — watch the timing bar closer next time.'
+    };
+    const comboMap = { PERFECT: 'x3', GREAT: 'x2', GOOD: 'x1', MISS: 'x1' };
+    const elapsed = s.elapsedTime || 0;
+    const totalSec = Math.max(1, Math.round(elapsed / 1000));
+    const mm = Math.floor(totalSec / 60);
+    const ss = totalSec % 60;
+    const resultTime = mm + ':' + String(ss).padStart(2, '0');
+
+    const inventoryView = this.INVENTORY_DEF.map(it => ({
+      ...it,
+      pixels: this.iconPixels(it.icon),
+      opacity: it.locked ? 0.55 : 1,
+      filter: it.locked ? 'grayscale(1)' : 'none'
+    }));
+
+    const questsView = this.QUEST_DEF.map((q, i) => ({
+      ...q,
+      checkColor: s.quests[i] ? '#388E3C' : '#fff',
+      toggle: () => this.toggleQuest(i)
+    }));
+
+    return {
+      isScreen1: s.screen === 1,
+      isScreen2: s.screen === 2,
+      isScreen3: s.screen === 3,
+      isScreen4: s.screen === 4,
+      isScreen5: s.screen === 5,
+      isScreen6: s.screen === 6,
+
+      chefsView: this.CHEFS.map(c => ({ ...c, pixels: this.makeChefSprite(c.hue), select: () => this.selectChef(c.id) })),
+      chefName: chef.name,
+      chefShort: chef.name.replace('CHEF ', ''),
+      professorPixels: this.makeChefSprite('#795548'),
+
+      gold: s.gold,
+
+      recipesView: this.RECIPES.map(r => ({
+        ...r,
+        stars: '★'.repeat(r.diff) + '☆'.repeat(5 - r.diff),
+        select: () => this.selectRecipe(r)
+      })),
+
+      recipeNameUpper: recipe.name.toUpperCase(),
+
+      isPhaseIngredients: s.cookPhase === 'ingredients',
+      isPhaseTiming: s.cookPhase === 'timing',
+      isPhasePlating: s.cookPhase === 'plating',
+
+      eggPixels, butterPixels, saltPixels, gearPixels,
+
+      toggleEggs: () => this.toggleIngredient('eggs'),
+      toggleButter: () => this.toggleIngredient('butter'),
+      toggleSalt: () => this.toggleIngredient('salt'),
+      eggsCheckColor: s.ingredients.eggs ? '#388E3C' : '#fff',
+      butterCheckColor: s.ingredients.butter ? '#388E3C' : '#fff',
+      saltCheckColor: s.ingredients.salt ? '#388E3C' : '#fff',
+      ingredientsAllChecked,
+      startBtnColor: ingredientsAllChecked ? '#FBC02D' : '#9E9E9E',
+      startCooking: () => this.startCooking(),
+
+      arrowPos: s.arrowPos,
+      toss: () => this.toss(),
+      timingRankText: s.timingResult ? s.timingResult.rank : '',
+      timingXpText: s.timingResult ? s.timingResult.xp : 0,
+
+      plated: s.plated,
+      togglePlateEggs: () => this.togglePlate('eggs'),
+      togglePlateButter: () => this.togglePlate('butter'),
+      togglePlateSalt: () => this.togglePlate('salt'),
+      eggsTrayOpacity: s.plated.eggs ? 0.3 : 1,
+      butterTrayOpacity: s.plated.butter ? 0.3 : 1,
+      saltTrayOpacity: s.plated.salt ? 0.3 : 1,
+      platedAllPlaced,
+      serveBtnColor: platedAllPlaced ? '#FBC02D' : '#9E9E9E',
+      serve: () => this.serve(),
+
+      starRow,
+      resultXp: (s.timingResult ? s.timingResult.xp : 0) + 50,
+      resultCombo: s.timingResult ? comboMap[s.timingResult.rank] : 'x1',
+      resultTime,
+      resultFeedback: s.timingResult ? feedbackMap[s.timingResult.rank] : feedbackMap.GOOD,
+      continueToInventory: () => this.continueToInventory(),
+
+      inventoryView,
+
+      xpBarPercent: (2150 / 3000) * 100,
+      questsView,
+      settingsOpen: s.settingsOpen,
+      toggleSettings: () => this.toggleSettings(),
+      soundTrackColor: s.sound ? '#388E3C' : '#9E9E9E',
+      musicTrackColor: s.music ? '#388E3C' : '#9E9E9E',
+      vibrationTrackColor: s.vibration ? '#388E3C' : '#9E9E9E',
+      soundKnobPos: s.sound ? 22 : 2,
+      musicKnobPos: s.music ? 22 : 2,
+      vibrationKnobPos: s.vibration ? 22 : 2,
+      toggleSound: () => this.toggleSetting('sound'),
+      toggleMusic: () => this.toggleSetting('music'),
+      toggleVibration: () => this.toggleSetting('vibration'),
+
+      navKitchen: () => this.goToScreen(2),
+      navCook: () => this.goToScreen(3),
+      navInv: () => this.goToScreen(5),
+      navQuest: () => this.goToScreen(6),
+      navBg2: s.screen === 2 ? '#388E3C' : '#000000',
+      navBg3: s.screen === 3 ? '#388E3C' : '#000000',
+      navBg5: s.screen === 5 ? '#388E3C' : '#000000',
+      navBg6: s.screen === 6 ? '#388E3C' : '#000000',
+      cookNavOpacity: s.recipe ? 1 : 0.4
+    };
+  }
+}
+</script>
+</body>
+</html>
