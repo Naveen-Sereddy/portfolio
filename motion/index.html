@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0d0404" />
+<title>Motion Studies · Naveen Sereddy</title>
+<meta name="description" content="5 motion studies — scroll stories, micro-interactions, and page transitions, by Naveen Sereddy." />
+<link rel="canonical" href="https://naveen-sereddy.vercel.app/motion/" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230d0404'/%3E%3Ctext x='16' y='21' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23d0923a' text-anchor='middle'%3ENS%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg:#0d0404; --bg-2:#120806; --bg-3:#1a0f0a;
+  --text:#f0e4d3; --text-2:#b8a58f; --text-3:#7c6a5a;
+  --accent:#d0923a; --accent-soft:#b57d2b;
+  --border:rgba(255,255,255,0.06); --border-strong:rgba(255,255,255,0.10);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --container-w:1180px;
+}
+* { box-sizing:border-box; }
+html { font-size:17px; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; }
+body {
+  margin:0; font-family:'Inter',system-ui,sans-serif; line-height:1.55;
+  background: radial-gradient(ellipse 75% 65% at 110% 10%,rgba(208,146,58,0.08),transparent 55%), var(--bg);
+  background-attachment:fixed; min-height:100vh;
+}
+h1,h2 { font-family:'Cormorant Garamond',Georgia,serif; line-height:1.15; margin:0; letter-spacing:-.01em; }
+p { margin:0; color:var(--text-2); }
+a { color:var(--text-2); text-decoration:none; transition:color 280ms var(--ease); }
+a:hover { color:var(--accent); }
+
+.container { max-width:var(--container-w); margin:0 auto; padding:0 1.5rem; }
+@media (min-width:1024px) { .container { padding:0 2.5rem; } }
+
+.cs-nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:.9rem 0; background:rgba(13,4,4,0.72); backdrop-filter:blur(24px) saturate(180%); border-bottom:1px solid var(--border); }
+.cs-nav-inner { display:flex; align-items:center; justify-content:space-between; max-width:var(--container-w); margin:0 auto; padding:0 1.5rem; }
+@media (min-width:1024px) { .cs-nav-inner { padding:0 2.5rem; } }
+.cs-logo { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.35rem; font-weight:500; color:var(--text); }
+.cs-back { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--text-3); }
+.cs-back:hover { color:var(--accent); }
+
+.hero { padding:9rem 0 4rem; }
+.eyebrow { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; color:var(--accent); text-transform:uppercase; letter-spacing:.14em; margin-bottom:.75rem; }
+.hero h1 { font-size:clamp(2.2rem,5vw,3.2rem); font-weight:500; letter-spacing:-.02em; max-width:20ch; }
+.hero p { margin-top:1rem; font-size:1.02rem; max-width:56ch; }
+
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.5rem; padding-bottom:6rem; }
+
+.placeholder {
+  border:1px dashed var(--border-strong); border-radius:1rem; padding:3.5rem 2rem; text-align:center;
+  margin-bottom:6rem;
+}
+.placeholder .eyebrow { justify-content:center; }
+.placeholder p { max-width:40ch; margin:.75rem auto 0; font-size:.92rem; }
+</style>
+</head>
+<body>
+<header class="cs-nav">
+  <div class="cs-nav-inner">
+    <a href="../index.html" class="cs-logo">Naveen Sereddy</a>
+    <a href="../index.html#work" class="cs-back">← All work</a>
+  </div>
+</header>
+<main>
+  <div class="container hero">
+    <div class="eyebrow">Motion Studies</div>
+    <h1>5 animations, in motion.</h1>
+    <p>Scroll stories, micro-interactions, and page transitions — motion and interaction range outside the case-study work above.</p>
+  </div>
+  <div class="container">
+    <div class="placeholder">
+      <div class="eyebrow" style="display:flex;">Coming soon</div>
+      <p>The 5 motion studies are being finished and will land here shortly.</p>
+    </div>
+    <div class="grid" id="motionGrid"></div>
+  </div>
+</main>
+</body>
+</html>
