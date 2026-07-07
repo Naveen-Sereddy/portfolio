@@ -31,4 +31,4 @@ The hero sparkle field loads tsParticles from a CDN and is non-blocking — if t
 unreachable the portrait simply keeps its static glow. To make the site 100% offline/self-contained,
 download `tsparticles.slim.bundle.min.js` into `assets/` and point the script tag in `index.html` at it.
 
-Built with Tailwind. Designed & built by Naveen Madhav.
+Built with Tailwind. Designed & built by Naveen Sereddy.
