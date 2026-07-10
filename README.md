@@ -1,5 +1,7 @@
 # Naveen Sereddy — Portfolio
 
+**Live site:** [naveensereddy.com](https://naveensereddy.com)
+
 Dark, elegant, motion-driven personal portfolio. Static **HTML + Tailwind CSS** (compiled, no runtime framework) so it loads fast on any device.
 
 ## Stack

@@ -37,7 +37,7 @@ const SettingsShell = ({
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
     eyebrow: "Settings",
     title: "Workspace settings",
-    sub: "Manage your Arcadia Labs workspace"
+    sub: "Manage your Reyonal workspace"
   }), /*#__PURE__*/React.createElement("div", {
     className: "ff-grid",
     style: {
@@ -73,14 +73,14 @@ const SettingsProfile = () => /*#__PURE__*/React.createElement(Card, {
     marginBottom: 20
   }
 }, /*#__PURE__*/React.createElement(Avatar, {
-  initials: "MO",
+  initials: "MS",
   size: "xl"
 }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
   style: {
     fontSize: 18,
     fontWeight: 600
   }
-}, "Maren Okafor"), /*#__PURE__*/React.createElement("div", {
+}, "Marcus Stoinis"), /*#__PURE__*/React.createElement("div", {
   style: {
     fontSize: 13,
     color: 'var(--ff-fg-muted)'
@@ -106,14 +106,14 @@ const SettingsProfile = () => /*#__PURE__*/React.createElement(Card, {
   className: "ff-label"
 }, "Full name"), /*#__PURE__*/React.createElement("input", {
   className: "ff-input",
-  defaultValue: "Maren Okafor"
+  defaultValue: "Marcus Stoinis"
 })), /*#__PURE__*/React.createElement("div", {
   className: "ff-field"
 }, /*#__PURE__*/React.createElement("label", {
   className: "ff-label"
 }, "Preferred name"), /*#__PURE__*/React.createElement("input", {
   className: "ff-input",
-  defaultValue: "Maren"
+  defaultValue: "Marcus"
 })), /*#__PURE__*/React.createElement("div", {
   className: "ff-field"
 }, /*#__PURE__*/React.createElement("label", {
@@ -134,7 +134,7 @@ const SettingsProfile = () => /*#__PURE__*/React.createElement(Card, {
   className: "ff-label"
 }, "Work email"), /*#__PURE__*/React.createElement("input", {
   className: "ff-input",
-  defaultValue: "maren@arcadialabs.co"
+  defaultValue: "marcus.stoinis@reyonal.com"
 })), /*#__PURE__*/React.createElement("div", {
   className: "ff-field"
 }, /*#__PURE__*/React.createElement("label", {
@@ -255,7 +255,7 @@ const SettingsTeam = () => /*#__PURE__*/React.createElement(Card, {
   }), " Invite")
 }, /*#__PURE__*/React.createElement("table", {
   className: "ff-table"
-}, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Name"), /*#__PURE__*/React.createElement("th", null, "Email"), /*#__PURE__*/React.createElement("th", null, "Role"), /*#__PURE__*/React.createElement("th", null, "Last active"), /*#__PURE__*/React.createElement("th", null))), /*#__PURE__*/React.createElement("tbody", null, [["Maren Okafor", "Finance Admin", "maren@arcadialabs.co", "Now"], ["Theo Vasquez", "Manager", "theo@arcadialabs.co", "12m"], ["Iris Chen", "Employee", "iris@arcadialabs.co", "2h"], ["Luna Park", "Employee", "luna@arcadialabs.co", "4h"], ["Dev Patel", "Employee", "dev@arcadialabs.co", "Yesterday"], ["Mira Solberg", "Employee", "mira@arcadialabs.co", "2d"], ["Asa Brown", "Auditor", "asa@arcadialabs.co", "1w"]].map(([n, role, em, la], i) => /*#__PURE__*/React.createElement("tr", {
+}, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Name"), /*#__PURE__*/React.createElement("th", null, "Email"), /*#__PURE__*/React.createElement("th", null, "Role"), /*#__PURE__*/React.createElement("th", null, "Last active"), /*#__PURE__*/React.createElement("th", null))), /*#__PURE__*/React.createElement("tbody", null, [["Marcus Stoinis", "Finance Admin", "marcus.stoinis@reyonal.com", "Now"], ["Xavier Bartlett", "Manager", "xavier.bartlett@reyonal.com", "12m"], ["Corey Anderson", "Employee", "corey.anderson@reyonal.com", "2h"], ["Jordan Lee", "Employee", "jordan.lee@reyonal.com", "4h"], ["Sam Richardson", "Employee", "sam.richardson@reyonal.com", "Yesterday"], ["James Taylor", "Employee", "james.taylor@reyonal.com", "2d"], ["Jamie Smith", "Auditor", "jamie.smith@reyonal.com", "1w"]].map(([n, role, em, la], i) => /*#__PURE__*/React.createElement("tr", {
   key: i
 }, /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("span", {
   className: "ff-row",
@@ -269,7 +269,7 @@ const SettingsTeam = () => /*#__PURE__*/React.createElement(Card, {
     color: 'var(--ff-fg-muted)'
   }
 }, em), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("span", {
-  className: "ff-badge ff-badge--plum ff-badge--no-dot"
+  className: "ff-badge ff-badge--primary ff-badge--no-dot"
 }, role)), /*#__PURE__*/React.createElement("td", {
   className: "ff-tnum",
   style: {
@@ -433,7 +433,7 @@ const SettingsBilling = () => /*#__PURE__*/React.createElement("div", {
     width: 40,
     height: 28,
     borderRadius: 4,
-    background: 'var(--ff-plum-700)'
+    background: 'var(--ff-teal-700)'
   }
 }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
   style: {

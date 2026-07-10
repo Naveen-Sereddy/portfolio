@@ -30,9 +30,9 @@
     }
     .ff-launch:hover { background: var(--ff-hover); }
 
-    /* Mobile section */
+    /* Mobile section — frames pre-scaled via MobileThumb so all 6 fit one viewport without horizontal scroll */
     .ff-mobile-shelf {
-      display: flex; gap: 28px; padding: 48px 32px;
+      display: flex; gap: 20px; padding: 32px;
       background: var(--ff-card-2); border-top: 1px solid var(--ff-border);
       overflow-x: auto;
     }
@@ -43,15 +43,13 @@
 
   <template id="__bundler_thumbnail">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
-      <rect width="400" height="300" fill="#3B1A33"/>
+      <rect width="400" height="300" fill="#15181c"/>
       <g transform="translate(140,80)">
-        <rect width="120" height="120" rx="26" fill="#FBF5E8"/>
-        <rect x="30" y="26" width="14" height="68" fill="#3B1A33"/>
-        <rect x="30" y="26" width="56" height="14" fill="#3B1A33"/>
-        <rect x="30" y="50" width="38" height="14" fill="#3B1A33"/>
-        <circle cx="82" cy="86" r="8" fill="#D9BE57"/>
+        <polygon points="60,0 112,28 60,56 8,28" fill="#fff" stroke="#15181c" stroke-width="4"/>
+        <polygon points="8,28 60,56 60,112 8,84" fill="#15181c"/>
+        <polygon points="112,28 112,84 60,112 60,56" fill="#3d9b8f"/>
       </g>
-      <text x="200" y="246" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="26" fill="#FBF5E8">FinFlow</text>
+      <text x="200" y="246" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="26" fill="#fff">FinFlow</text>
     </svg>
   </template>
 

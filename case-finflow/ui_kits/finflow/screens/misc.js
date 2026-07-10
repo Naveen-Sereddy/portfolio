@@ -17,8 +17,8 @@ const AuthLayout = ({
 }, /*#__PURE__*/React.createElement("aside", {
   style: {
     padding: '56px 56px',
-    background: 'var(--ff-plum-900)',
-    color: '#FBF5E8',
+    background: 'var(--ff-teal-900)',
+    color: '#fff',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -41,7 +41,7 @@ const AuthLayout = ({
     fontSize: 56,
     lineHeight: 1.05,
     letterSpacing: '-0.04em',
-    color: '#FBF5E8'
+    color: '#fff'
   }
 }, "The whole company's", /*#__PURE__*/React.createElement("br", null), "spend, in flow."), /*#__PURE__*/React.createElement("p", {
   style: {
@@ -51,7 +51,7 @@ const AuthLayout = ({
     lineHeight: 1.6,
     maxWidth: 380
   }
-}, "Expense submission, approvals, cards, and close packets — one workspace, built for finance teams that move fast."), /*#__PURE__*/React.createElement("div", {
+}, "Expense submission, approvals, cards, and close packets \u2014 one workspace, built for finance teams that move fast."), /*#__PURE__*/React.createElement("div", {
   style: {
     marginTop: 32,
     fontSize: 11,
@@ -59,7 +59,7 @@ const AuthLayout = ({
     letterSpacing: '0.08em',
     textTransform: 'uppercase'
   }
-}, "SOC 2 Type II · PCI DSS · GDPR")), /*#__PURE__*/React.createElement("div", {
+}, "SOC 2 Type II \xB7 PCI DSS \xB7 GDPR")), /*#__PURE__*/React.createElement("div", {
   style: {
     position: 'absolute',
     right: -100,
@@ -70,7 +70,7 @@ const AuthLayout = ({
   style: {
     width: 280,
     height: 32,
-    background: 'var(--ff-citron-500)',
+    background: 'var(--ff-teal-500)',
     borderRadius: 8,
     marginBottom: 14
   }
@@ -78,7 +78,7 @@ const AuthLayout = ({
   style: {
     width: 240,
     height: 32,
-    background: 'var(--ff-plum-300)',
+    background: 'var(--ff-teal-300)',
     borderRadius: 8,
     marginBottom: 14,
     marginLeft: 40
@@ -87,7 +87,7 @@ const AuthLayout = ({
   style: {
     width: 200,
     height: 32,
-    background: 'var(--ff-plum-500)',
+    background: 'var(--ff-teal-500)',
     borderRadius: 8,
     marginLeft: 80
   }
@@ -96,7 +96,7 @@ const AuthLayout = ({
     fontSize: 12,
     opacity: 0.6
   }
-}, "© FinFlow · ", FF_DATA.company.fiscalYear)), /*#__PURE__*/React.createElement("main", {
+}, "\xA9 FinFlow \xB7 ", FF_DATA.company.fiscalYear)), /*#__PURE__*/React.createElement("main", {
   style: {
     display: 'flex',
     alignItems: 'center',
@@ -193,7 +193,7 @@ const SignIn = () => /*#__PURE__*/React.createElement(AuthLayout, {
   className: "ff-label"
 }, "Work email"), /*#__PURE__*/React.createElement("input", {
   className: "ff-input ff-input--lg",
-  defaultValue: "maren@arcadialabs.co"
+  defaultValue: "marcus.stoinis@reyonal.com"
 })), /*#__PURE__*/React.createElement("div", {
   className: "ff-field"
 }, /*#__PURE__*/React.createElement("label", {
@@ -201,7 +201,7 @@ const SignIn = () => /*#__PURE__*/React.createElement(AuthLayout, {
 }, "Password"), /*#__PURE__*/React.createElement("input", {
   className: "ff-input ff-input--lg",
   type: "password",
-  defaultValue: "••••••••••"
+  defaultValue: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
 })), /*#__PURE__*/React.createElement("div", {
   className: "ff-row",
   style: {
@@ -244,7 +244,7 @@ const SSOWorkspace = () => /*#__PURE__*/React.createElement(AuthLayout, {
       ev.preventDefault();
       ffGo('signin');
     }
-  }, "← Back to sign in")
+  }, "\u2190 Back to sign in")
 }, /*#__PURE__*/React.createElement("div", {
   className: "ff-stack",
   style: {
@@ -260,7 +260,7 @@ const SSOWorkspace = () => /*#__PURE__*/React.createElement(AuthLayout, {
   }
 }, /*#__PURE__*/React.createElement("input", {
   className: "ff-input ff-input--lg",
-  defaultValue: "arcadialabs",
+  defaultValue: "reyonal",
   style: {
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0
@@ -293,7 +293,7 @@ const SSOWorkspace = () => /*#__PURE__*/React.createElement(AuthLayout, {
   className: "ff-alert__body"
 }, /*#__PURE__*/React.createElement("div", {
   className: "ff-alert__title"
-}, "Arcadia Labs uses Okta"), /*#__PURE__*/React.createElement("div", null, "You'll be redirected to your identity provider.")))));
+}, "Reyonal uses Okta"), /*#__PURE__*/React.createElement("div", null, "You'll be redirected to your identity provider.")))));
 const ForgotPassword = () => /*#__PURE__*/React.createElement(AuthLayout, {
   title: "Reset password",
   sub: "We'll email you a secure link.",
@@ -303,7 +303,7 @@ const ForgotPassword = () => /*#__PURE__*/React.createElement(AuthLayout, {
       ev.preventDefault();
       ffGo('signin');
     }
-  }, "← Back to sign in")
+  }, "\u2190 Back to sign in")
 }, /*#__PURE__*/React.createElement("div", {
   className: "ff-stack",
   style: {
@@ -315,7 +315,7 @@ const ForgotPassword = () => /*#__PURE__*/React.createElement(AuthLayout, {
   className: "ff-label"
 }, "Work email"), /*#__PURE__*/React.createElement("input", {
   className: "ff-input ff-input--lg",
-  defaultValue: "maren@arcadialabs.co"
+  defaultValue: "marcus.stoinis@reyonal.com"
 })), /*#__PURE__*/React.createElement("button", {
   className: "ff-btn ff-btn--primary ff-btn--lg",
   style: {
@@ -339,7 +339,7 @@ const ResetPassword = () => /*#__PURE__*/React.createElement(AuthLayout, {
 }, "New password"), /*#__PURE__*/React.createElement("input", {
   className: "ff-input ff-input--lg",
   type: "password",
-  defaultValue: "••••••••••••••"
+  defaultValue: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
 })), /*#__PURE__*/React.createElement("div", {
   className: "ff-field"
 }, /*#__PURE__*/React.createElement("label", {
@@ -347,7 +347,7 @@ const ResetPassword = () => /*#__PURE__*/React.createElement(AuthLayout, {
 }, "Confirm password"), /*#__PURE__*/React.createElement("input", {
   className: "ff-input ff-input--lg",
   type: "password",
-  defaultValue: "••••••••••••••"
+  defaultValue: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
 })), /*#__PURE__*/React.createElement("div", {
   style: {
     fontSize: 12,
@@ -426,7 +426,7 @@ const OnboardingShell = ({
   className: "ff-step__line"
 }))))), /*#__PURE__*/React.createElement("div", {
   className: "ff-eyebrow"
-}, "Onboarding · ", step + 1, " of 3"), /*#__PURE__*/React.createElement("h1", {
+}, "Onboarding \xB7 ", step + 1, " of 3"), /*#__PURE__*/React.createElement("h1", {
   style: {
     fontFamily: 'var(--ff-font-sans)',
     fontWeight: 700,
@@ -461,7 +461,7 @@ const ConnectBank = () => /*#__PURE__*/React.createElement(OnboardingShell, {
   step: 0,
   title: "Connect a bank or card program",
   sub: "Pull statements automatically and start issuing FinFlow cards. We use read-only access by default.",
-  next: "Continue →",
+  next: "Continue \u2192",
   nextId: "onb-team"
 }, /*#__PURE__*/React.createElement("div", {
   className: "ff-grid ff-grid--3"
@@ -529,7 +529,7 @@ const InviteTeam = () => /*#__PURE__*/React.createElement(OnboardingShell, {
   step: 1,
   title: "Invite your team",
   sub: "Send invites by email. Roles can be changed later.",
-  next: "Continue →",
+  next: "Continue \u2192",
   nextId: "onb-policy"
 }, /*#__PURE__*/React.createElement(Card, null, /*#__PURE__*/React.createElement("div", {
   className: "ff-stack",
@@ -537,13 +537,13 @@ const InviteTeam = () => /*#__PURE__*/React.createElement(OnboardingShell, {
     '--ff-stack-gap': '10px'
   }
 }, [{
-  e: "theo@arcadialabs.co",
+  e: "xavier.bartlett@reyonal.com",
   r: "Manager"
 }, {
-  e: "iris@arcadialabs.co",
+  e: "corey.anderson@reyonal.com",
   r: "Employee"
 }, {
-  e: "dev@arcadialabs.co",
+  e: "sam.richardson@reyonal.com",
   r: "Employee"
 }, {
   e: "",
@@ -596,8 +596,8 @@ const InviteTeam = () => /*#__PURE__*/React.createElement(OnboardingShell, {
 const SetPolicy = () => /*#__PURE__*/React.createElement(OnboardingShell, {
   step: 2,
   title: "Set your starter policy",
-  sub: "You can refine these later — these are sensible defaults for a Series B SaaS company.",
-  next: "Finish setup →",
+  sub: "You can refine these later \u2014 these are sensible defaults for a growing SaaS company.",
+  next: "Finish setup \u2192",
   nextId: "dashboard"
 }, /*#__PURE__*/React.createElement(Card, null, /*#__PURE__*/React.createElement("div", {
   className: "ff-stack",
@@ -729,7 +729,7 @@ const AuditLog = () => {
     name: "magnifying-glass",
     size: 14
   }), /*#__PURE__*/React.createElement("input", {
-    placeholder: "Search by actor or target…"
+    placeholder: "Search by actor or target\u2026"
   }))), /*#__PURE__*/React.createElement(Card, {
     padded: false
   }, /*#__PURE__*/React.createElement("table", {
@@ -753,14 +753,14 @@ const AuditLog = () => {
   }, a.actor !== "System" && a.actor !== "Okta SSO" && /*#__PURE__*/React.createElement(Avatar, {
     initials: a.actor.split(' ').map(x => x[0]).join('').slice(0, 2)
   }), a.actor)), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("span", {
-    className: "ff-badge ff-badge--plum ff-badge--no-dot"
+    className: "ff-badge ff-badge--primary ff-badge--no-dot"
   }, a.action)), /*#__PURE__*/React.createElement("td", null, a.target), /*#__PURE__*/React.createElement("td", {
     className: "ff-mono",
     style: {
       fontSize: 11,
       color: 'var(--ff-fg-muted)'
     }
-  }, "10.0.4.221 · Chrome 128")))))));
+  }, "10.0.4.221 \xB7 Chrome 128")))))));
 };
 
 /* ---------- Notif Center ---------- */
@@ -904,7 +904,7 @@ const Help = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__P
   name: "magnifying-glass",
   size: 18
 }), /*#__PURE__*/React.createElement("input", {
-  placeholder: "Search FinFlow help…",
+  placeholder: "Search FinFlow help\u2026",
   style: {
     fontSize: 15
   }
@@ -919,8 +919,8 @@ const Help = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__P
     width: 36,
     height: 36,
     borderRadius: 8,
-    background: 'var(--ff-plum-100)',
-    color: 'var(--ff-plum-700)',
+    background: 'var(--ff-teal-100)',
+    color: 'var(--ff-teal-700)',
     display: 'grid',
     placeItems: 'center',
     marginBottom: 12
@@ -959,7 +959,7 @@ const Help = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__P
     fontSize: 13,
     marginTop: 4
   }
-}, "Average response · 4 minutes during business hours")), /*#__PURE__*/React.createElement("div", {
+}, "Average response \xB7 4 minutes during business hours")), /*#__PURE__*/React.createElement("div", {
   className: "ff-row"
 }, /*#__PURE__*/React.createElement("button", {
   className: "ff-btn"
@@ -975,8 +975,8 @@ const Help = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__P
 
 /* ---------- States: loading / empty / error / success / confirmation ---------- */
 const LoadingDashboard = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
-  eyebrow: "Workspace · Finance Admin",
-  title: "Loading workspace…",
+  eyebrow: "Workspace \xB7 Finance Admin",
+  title: "Loading workspace\u2026",
   sub: " "
 }), /*#__PURE__*/React.createElement("div", {
   className: "ff-grid ff-grid--kpis"
@@ -1056,7 +1056,19 @@ const EmptyExpenses = () => /*#__PURE__*/React.createElement(React.Fragment, nul
   eyebrow: "Expenses",
   title: "All expenses",
   sub: "0 items"
-}), /*#__PURE__*/React.createElement(Card, null, /*#__PURE__*/React.createElement("div", {
+}), /*#__PURE__*/React.createElement("div", {
+  style: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '55vh'
+  }
+}, /*#__PURE__*/React.createElement(Card, {
+  style: {
+    width: '100%',
+    maxWidth: 520
+  }
+}, /*#__PURE__*/React.createElement("div", {
   className: "ff-empty"
 }, /*#__PURE__*/React.createElement("div", {
   className: "ff-empty__icon"
@@ -1085,12 +1097,24 @@ const EmptyExpenses = () => /*#__PURE__*/React.createElement(React.Fragment, nul
 }, /*#__PURE__*/React.createElement(Icon, {
   name: "plus",
   size: 14
-}), " New expense")))));
+}), " New expense"))))));
 const ErrorState = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
   eyebrow: "Workspace",
   title: "Something went wrong",
   sub: "We couldn't load your dashboard"
-}), /*#__PURE__*/React.createElement(Card, null, /*#__PURE__*/React.createElement("div", {
+}), /*#__PURE__*/React.createElement("div", {
+  style: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '55vh'
+  }
+}, /*#__PURE__*/React.createElement(Card, {
+  style: {
+    width: '100%',
+    maxWidth: 520
+  }
+}, /*#__PURE__*/React.createElement("div", {
   className: "ff-empty"
 }, /*#__PURE__*/React.createElement("div", {
   className: "ff-empty__icon",
@@ -1115,7 +1139,7 @@ const ErrorState = () => /*#__PURE__*/React.createElement(React.Fragment, null, 
     color: 'var(--ff-fg-subtle)',
     marginTop: 6
   }
-}, "err_id: fff_4b22 · 503"), /*#__PURE__*/React.createElement("div", {
+}, "err_id: fff_4b22 \xB7 503"), /*#__PURE__*/React.createElement("div", {
   className: "ff-row",
   style: {
     marginTop: 12,
@@ -1130,7 +1154,7 @@ const ErrorState = () => /*#__PURE__*/React.createElement(React.Fragment, null, 
 }), " Retry"), /*#__PURE__*/React.createElement("button", {
   className: "ff-btn ff-btn--primary",
   onClick: () => ffGo('help')
-}, "Contact support")))));
+}, "Contact support"))))));
 const SuccessApproval = () => {
   // EXP-2841 was just approved, so it leaves the open queue.
   const remaining = Math.max(0, FF_DATA.expenses.filter(e => e.status === "pending" || e.status === "flagged").length - 1);
@@ -1169,7 +1193,7 @@ const SuccessApproval = () => {
       color: 'var(--ff-fg-muted)',
       marginTop: 8
     }
-  }, "EXP-2841 · United Airlines · $842.50 approved and routed to Finance for payment."), /*#__PURE__*/React.createElement("div", {
+  }, "EXP-2841 \xB7 United Airlines \xB7 $842.50 approved and routed to Finance for payment."), /*#__PURE__*/React.createElement("div", {
     className: "ff-row",
     style: {
       justifyContent: 'center',
@@ -1182,7 +1206,7 @@ const SuccessApproval = () => {
   }, "View expense"), /*#__PURE__*/React.createElement("button", {
     className: "ff-btn ff-btn--primary",
     onClick: () => ffGo('approvals')
-  }, "Next in queue (", remaining, ") →")));
+  }, "Next in queue (", remaining, ") \u2192")));
 };
 const ConfirmReimbursement = () => /*#__PURE__*/React.createElement("div", {
   style: {
@@ -1228,15 +1252,15 @@ const ConfirmReimbursement = () => /*#__PURE__*/React.createElement("div", {
   }
 }, /*#__PURE__*/React.createElement("table", {
   className: "ff-table ff-table--compact"
-}, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "Iris Chen"), /*#__PURE__*/React.createElement("td", {
+}, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "Corey Anderson"), /*#__PURE__*/React.createElement("td", {
   className: "ff-num"
 }, /*#__PURE__*/React.createElement(Money, {
   value: 320.40
-}))), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "Luna Park"), /*#__PURE__*/React.createElement("td", {
+}))), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "Jordan Lee"), /*#__PURE__*/React.createElement("td", {
   className: "ff-num"
 }, /*#__PURE__*/React.createElement(Money, {
   value: 82.00
-}))), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "Dev Patel"), /*#__PURE__*/React.createElement("td", {
+}))), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "Sam Richardson"), /*#__PURE__*/React.createElement("td", {
   className: "ff-num"
 }, /*#__PURE__*/React.createElement(Money, {
   value: 218.50
@@ -1270,4 +1294,3 @@ Object.assign(window, {
   SuccessApproval,
   ConfirmReimbursement
 });
-

@@ -7,14 +7,14 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230d0404'/%3E%3Ctext x='16' y='21' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23d0923a' text-anchor='middle'%3ENS%3C/text%3E%3C/svg%3E" />
 <title>FinFlow — UX Case Study · Naveen Sereddy</title>
 <meta name="description" content="FinFlow: a role-based B2B expense-management platform designed from research through usability testing. 73%→89% task completion lift. UX case study by Naveen Sereddy." />
-<link rel="canonical" href="https://naveen-sereddy.vercel.app/case-finflow/" />
+<link rel="canonical" href="https://naveensereddy.com/case-finflow/" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="FinFlow — UX Case Study · Naveen Sereddy" />
 <meta property="og:description" content="FinFlow: a role-based B2B expense-management platform designed from research through usability testing. 73%→89% task completion lift. UX case study by Naveen Sereddy." />
-<meta property="og:image" content="https://naveen-sereddy.vercel.app/case-finflow/img/ui-dashboard.png" />
-<meta property="og:url" content="https://naveen-sereddy.vercel.app/case-finflow/" />
+<meta property="og:image" content="https://naveensereddy.com/case-finflow/img/ui-dashboard.png" />
+<meta property="og:url" content="https://naveensereddy.com/case-finflow/" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://naveen-sereddy.vercel.app/case-finflow/img/ui-dashboard.png" />
+<meta name="twitter:image" content="https://naveensereddy.com/case-finflow/img/ui-dashboard.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -233,11 +233,12 @@ img { max-width:100%; display:block; }
       <div class="tag-row">
         <span class="tag">B2B Fintech</span>
         <span class="tag">2025</span>
-        <span class="tag">Concept</span>
+        <span class="tag">Production</span>
         <span class="tag">Research · IA · Interaction · Design System</span>
       </div>
       <h1>FinFlow — expense management that teams actually finish.</h1>
       <p class="lede" style="font-size:1.15rem;max-width:56ch">Designed from research through usability testing for admin, manager, and employee roles — with a measurable task completion lift.</p>
+      <p class="lede">Role-aware expense workspace for Reyonal — 48 screens, 3 roles, WCAG 2.1 AA, built on the Arctic Graphite design system.</p>
       <div class="metric-row">
         <div class="metric"><span class="metric-value">73% → 89%</span><span class="metric-label">Task completion</span></div>
         <div class="metric"><span class="metric-value">3</span><span class="metric-label">Roles designed for</span></div>
@@ -276,23 +277,23 @@ img { max-width:100%; display:block; }
       <div class="section-head prose">
         <div class="eyebrow">Research</div>
         <h2>What users told us before a single screen was drawn.</h2>
-        <p class="lede">12 interviews across 4 weeks, anchored on three personas — Iris (employee), Theo (manager), and Maren (Finance Director, primary). Three patterns shaped every decision that followed.</p>
+        <p class="lede">12 interviews across 4 weeks, anchored on three personas — Corey (employee), Xavier (manager), and Marcus (Head of Finance, primary). Three patterns shaped every decision that followed.</p>
       </div>
       <div class="insight-grid">
         <div class="insight-card">
           <div class="insight-num">01</div>
           <h3>Submission happens at the moment of purchase</h3>
-          <p>Iris tried to submit expenses immediately after spending — not days later at a desk. The old tool wasn't built for mobile capture, so receipts went missing and submissions piled up.</p>
+          <p>Corey tried to submit expenses immediately after spending — not days later at a desk. The old tool wasn't built for mobile capture, so receipts went missing and submissions piled up.</p>
         </div>
         <div class="insight-card">
           <div class="insight-num">02</div>
           <h3>Managers approve blindly</h3>
-          <p>Theo's approvals arrived with no spend context — no team totals, no budget headroom, no policy flags. He either rubber-stamped everything or created bottlenecks requesting more information.</p>
+          <p>Xavier's approvals arrived with no spend context — no team totals, no budget headroom, no policy flags. He either rubber-stamped everything or created bottlenecks requesting more information.</p>
         </div>
         <div class="insight-card">
           <div class="insight-num">03</div>
           <h3>Admins do month-end manually</h3>
-          <p>Maren's previous setup was four tools plus a spreadsheet to close the month. Receipt chasing alone took 6+ hours per cycle — there was no reconciliation layer, just a transaction list.</p>
+          <p>Marcus's previous setup was four tools plus a spreadsheet to close the month. Receipt chasing alone took 6+ hours per cycle — there was no reconciliation layer, just a transaction list.</p>
         </div>
       </div>
     </div>
@@ -311,19 +312,19 @@ img { max-width:100%; display:block; }
         <div class="decision-card">
           <div class="decision-num">01</div>
           <h3>A confidence chip, not blind OCR</h3>
-          <p>The old tool auto-filled receipt data with no way to tell if it was right — Iris's exact words: "will the OCR get the amount right? Last tool got it wrong." FinFlow shows a confidence percentage inline and makes correction a single tap, not a form reset.</p>
+          <p>The old tool auto-filled receipt data with no way to tell if it was right — Corey's exact words: "will the OCR get the amount right? Last tool got it wrong." FinFlow shows a confidence percentage inline and makes correction a single tap, not a form reset.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">02</div>
           <h3>Smart categories, not memorized codes</h3>
-          <p>The old tool forced Iris to remember a project code from memory at the point of purchase. FinFlow suggests category and project from her recent activity — recognition over recall, right when her hands are full.</p>
+          <p>The old tool forced Corey to remember a project code from memory at the point of purchase. FinFlow suggests category and project from their recent activity — recognition over recall, right when their hands are full.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">03</div>
-          <h3>Policy flags do the triage for Theo</h3>
-          <p>Theo's real complaint: he couldn't tell which items in his queue were obviously fine. An inline policy chip on every row lets him bulk-approve the in-policy items confidently and spend his attention only on the flagged one.</p>
+          <h3>Policy flags do the triage for Xavier</h3>
+          <p>Xavier's real complaint: he couldn't tell which items in his queue were obviously fine. An inline policy chip on every row lets him bulk-approve the in-policy items confidently and spend his attention only on the flagged one.</p>
         </div>
 
         <div class="decision-card">
@@ -335,13 +336,13 @@ img { max-width:100%; display:block; }
         <div class="decision-card">
           <div class="decision-num">05</div>
           <h3>Card issuance lives inside FinFlow</h3>
-          <p>Maren's old workflow issued virtual cards through a separate vendor portal — one more login, one more system to reconcile. FinFlow treats the card as a first-class object: issue it, set its limit, and watch its balance without leaving the platform.</p>
+          <p>Marcus's old workflow issued virtual cards through a separate vendor portal — one more login, one more system to reconcile. FinFlow treats the card as a first-class object: issue it, set its limit, and watch its balance without leaving the platform.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">06</div>
           <h3>One accent color, spent deliberately</h3>
-          <p>Plum is reserved for primary actions and policy flags only — nothing else on the screen fights for that attention. Hierarchy comes from contrast and density choices, not from decorating every surface with brand color.</p>
+          <p>Teal is reserved for primary actions and policy flags only — nothing else on the screen fights for that attention. Hierarchy comes from contrast and density choices, not from decorating every surface with brand color.</p>
         </div>
 
       </div>
@@ -366,7 +367,7 @@ img { max-width:100%; display:block; }
           <p>Nine top-level surfaces, three sidebars — one for each role. But the first version buried Audit log, Approvals, and the role-aware Dashboard landing inside a generic Settings menu, because that's where "configuration-feeling" screens conventionally go.</p>
           <div class="killed-reason">
             <h3>Convention beat the actual task</h3>
-            <p>Finance admins open the audit log constantly — during monthly close, during a flagged-transaction dispute, during a SOC 2 review. It behaves like a primary workspace, not a setting. Filing it under Settings optimized for information-architecture tidiness, not for how often Maren actually needed it.</p>
+            <p>Finance admins open the audit log constantly — during monthly close, during a flagged-transaction dispute, during a SOC 2 review. It behaves like a primary workspace, not a setting. Filing it under Settings optimized for information-architecture tidiness, not for how often Marcus actually needed it.</p>
           </div>
           <p style="margin-top:var(--sp-4)">Round-2 testing measured it directly: task completion on "find the audit log" was 50%. Promoting it to a top-level, role-visible sidebar item — no nesting, no extra click — took that to 92%. The whole IA got flatter after that finding, not just the one item.</p>
         </div>
@@ -391,7 +392,7 @@ img { max-width:100%; display:block; }
         <div class="evolution-step">
           <div class="evolution-label"><span class="dot"></span>Final UI</div>
           <div class="frame"><img src="img/ui-employee.png" alt="Final high-fidelity employee expense submission screen" loading="lazy" /></div>
-          <p>Visual system applied — clean plum-and-paper palette, virtual card as a real object. Structure unchanged from the wireframe, because the layout decision was already right.</p>
+          <p>Visual system applied — cold-neutral base with a teal accent, virtual card as a real object. Structure unchanged from the wireframe, because the layout decision was already right.</p>
         </div>
       </div>
     </div>
@@ -414,9 +415,9 @@ img { max-width:100%; display:block; }
           <span class="anno-dot" style="left:45%; top:68%">3</span>
         </div>
         <div class="anno-legend two-col">
-          <div class="anno-legend-item"><span class="anno-legend-num">1</span><p><strong>"Awaiting you" replaces a generic inbox count.</strong> Insight 02 — managers approve blindly without context. Naming the number as a personal queue, not a company statistic, makes it feel like Theo's actual to-do, not a report.</p></div>
-          <div class="anno-legend-item"><span class="anno-legend-num">2</span><p><strong>Flagged sits in the row, not a separate report.</strong> Decision 03 — policy flags do the triage. Theo sees the Marriott charge is over the lodging cap without opening it or cross-referencing a policy doc.</p></div>
-          <div class="anno-legend-item"><span class="anno-legend-num">3</span><p><strong>Spend by member, not just spend by team.</strong> A team total alone hides who's driving it. Per-member bars let Theo spot the one outlier report without exporting anything.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">1</span><p><strong>"Awaiting you" replaces a generic inbox count.</strong> Insight 02 — managers approve blindly without context. Naming the number as a personal queue, not a company statistic, makes it feel like Xavier's actual to-do, not a report.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">2</span><p><strong>Flagged sits in the row, not a separate report.</strong> Decision 03 — policy flags do the triage. Xavier sees the Marriott charge is over the lodging cap without opening it or cross-referencing a policy doc.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">3</span><p><strong>Spend by member, not just spend by team.</strong> A team total alone hides who's driving it. Per-member bars let Xavier spot the one outlier report without exporting anything.</p></div>
         </div>
       </div>
 
@@ -428,9 +429,9 @@ img { max-width:100%; display:block; }
           <span class="anno-dot" style="left:59%; top:57%">6</span>
         </div>
         <div class="anno-legend two-col" style="margin-top:0">
-          <div class="anno-legend-item"><span class="anno-legend-num">4</span><p><strong>Upload receipt sits beside New expense, not inside it.</strong> Insight 01 — submission happens at the point of purchase. Iris can capture evidence the moment she has it, before she's even decided how to categorize the spend.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">4</span><p><strong>Upload receipt sits beside New expense, not inside it.</strong> Insight 01 — submission happens at the point of purchase. Corey can capture evidence the moment they have it, before they've even decided how to categorize the spend.</p></div>
           <div class="anno-legend-item"><span class="anno-legend-num">5</span><p><strong>The virtual card is a real object, not a settings row.</strong> Decision 05 — card issuance used to live in a separate vendor portal. Seeing the masked number and live balance here makes the spend limit tangible, not abstract.</p></div>
-          <div class="anno-legend-item"><span class="anno-legend-num">6</span><p><strong>Status is visible without opening the row.</strong> Approved, Rejected, and why (CMO sign-off needed) are readable at a glance — Iris never has to click into an expense just to check where it stands.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">6</span><p><strong>Status is visible without opening the row.</strong> Approved, Rejected, and why (CMO sign-off needed) are readable at a glance — Corey never has to click into an expense just to check where it stands.</p></div>
         </div>
       </div>
     </div>
@@ -540,10 +541,10 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Personas</div>
               <h2>Three roles, three workdays.</h2>
-              <p class="lede">12 interviews, 4 weeks, anchored on one primary persona (Maren, Finance) supported by two secondaries who hand work off to her.</p>
+              <p class="lede">12 interviews, 4 weeks, anchored on one primary persona (Marcus, Finance) supported by two secondaries who hand work off to him.</p>
             </div>
             <div class="frame" style="--ar:1760/1100;max-width:1000px;margin-inline:auto">
-              <img src="img/01.png" alt="Three FinFlow personas — Iris Chen (employee), Theo Vasquez (manager), and Maren Okafor (finance admin) with goals, pain points, and behaviors" loading="lazy" />
+              <img src="img/01.png" alt="Three FinFlow personas — Corey Anderson (employee), Xavier Bartlett (manager), and Marcus Stoinis (finance admin) with goals, pain points, and behaviors" loading="lazy" />
             </div>
           </div>
 
@@ -637,7 +638,7 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Design System</div>
               <h2>A small system, fully spent.</h2>
-              <p class="lede">Six colors, three type faces, one four-step spacing scale. Every screen in FinFlow is built from this sheet — no one-off styles past round 2.</p>
+              <p class="lede">A teal accent over a cold-neutral graphite scale, two type faces, one four-step spacing scale. Every screen in FinFlow is built from this sheet — no one-off styles past round 2.</p>
             </div>
             <div class="frame" style="--ar:1760/1100;max-width:1000px;margin-inline:auto">
               <img src="img/06.png" alt="FinFlow design system foundations — color tokens, spacing scale, typography, and component variants" loading="lazy" />
@@ -651,7 +652,7 @@ img { max-width:100%; display:block; }
               <p class="lede">A working flow across three personas and three viewports — submit, approve, and see it land live in the audit log.</p>
             </div>
             <div class="frame" style="--ar:1760/1100;max-width:1000px;margin-inline:auto">
-              <img src="img/09.png" alt="FinFlow interactive prototype walkthrough — Iris submits a receipt on iOS, Theo reviews it, Maren sees it land in reporting" loading="lazy" />
+              <img src="img/09.png" alt="FinFlow interactive prototype walkthrough — Corey submits a receipt on iOS, Xavier reviews it, Marcus sees it land in reporting" loading="lazy" />
             </div>
           </div>
 
