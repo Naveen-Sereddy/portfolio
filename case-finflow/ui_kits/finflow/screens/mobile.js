@@ -12,7 +12,7 @@ const MobileStatusBar = ({
     padding: '0 22px',
     fontSize: 14,
     fontWeight: 600,
-    color: theme === "dark" ? '#FBF5E8' : '#15131A'
+    color: theme === "dark" ? '#fff' : '#15181c'
   }
 }, /*#__PURE__*/React.createElement("span", {
   className: "ff-tnum"
@@ -48,7 +48,7 @@ const MobileFrame = ({
     height: 760,
     borderRadius: 42,
     padding: 8,
-    background: theme === 'dark' ? '#000' : '#15131A',
+    background: theme === 'dark' ? '#000' : '#15181c',
     boxShadow: '0 24px 60px -20px rgba(0,0,0,0.35)',
     flexShrink: 0
   }
@@ -81,14 +81,17 @@ const MobileSignIn = () => /*#__PURE__*/React.createElement(MobileFrame, {
     display: 'flex',
     flexDirection: 'column',
     padding: '48px 24px 32px',
-    background: 'var(--ff-plum-900)',
-    color: '#FBF5E8',
+    background: 'var(--ff-teal-900)',
+    color: '#fff',
     height: '100%'
   }
 }, /*#__PURE__*/React.createElement(BrandMark, {
   variant: "horizontal",
   theme: "dark",
-  size: 28
+  size: 28,
+  style: {
+    alignSelf: 'center'
+  }
 }), /*#__PURE__*/React.createElement("div", {
   style: {
     flex: 1
@@ -101,7 +104,7 @@ const MobileSignIn = () => /*#__PURE__*/React.createElement(MobileFrame, {
     lineHeight: 1.1,
     letterSpacing: '-0.03em'
   }
-}, "Welcome", /*#__PURE__*/React.createElement("br", null), "back, Iris."), /*#__PURE__*/React.createElement("p", {
+}, "Welcome", /*#__PURE__*/React.createElement("br", null), "back, Corey."), /*#__PURE__*/React.createElement("p", {
   style: {
     opacity: 0.7,
     fontSize: 13,
@@ -116,11 +119,11 @@ const MobileSignIn = () => /*#__PURE__*/React.createElement(MobileFrame, {
 }, /*#__PURE__*/React.createElement("input", {
   className: "ff-input ff-input--lg",
   placeholder: "Work email",
-  defaultValue: "iris@arcadialabs.co",
+  defaultValue: "corey.anderson@reyonal.com",
   style: {
     background: 'rgba(255,255,255,0.08)',
     border: '1px solid rgba(255,255,255,0.18)',
-    color: '#FBF5E8'
+    color: '#fff'
   }
 }), /*#__PURE__*/React.createElement("input", {
   className: "ff-input ff-input--lg",
@@ -130,7 +133,7 @@ const MobileSignIn = () => /*#__PURE__*/React.createElement(MobileFrame, {
   style: {
     background: 'rgba(255,255,255,0.08)',
     border: '1px solid rgba(255,255,255,0.18)',
-    color: '#FBF5E8'
+    color: '#fff'
   }
 }), /*#__PURE__*/React.createElement("button", {
   className: "ff-btn ff-btn--accent ff-btn--lg",
@@ -141,7 +144,7 @@ const MobileSignIn = () => /*#__PURE__*/React.createElement(MobileFrame, {
 }, "Sign in"), /*#__PURE__*/React.createElement("button", {
   className: "ff-btn ff-btn--ghost",
   style: {
-    color: '#FBF5E8',
+    color: '#fff',
     width: '100%'
   }
 }, /*#__PURE__*/React.createElement(Icon, {
@@ -154,7 +157,7 @@ const MobileSignIn = () => /*#__PURE__*/React.createElement(MobileFrame, {
     opacity: 0.6,
     marginTop: 24
   }
-}, "Arcadia Labs \xB7 SSO available")));
+}, "Reyonal \xB7 SSO available")));
 const MobileHome = () => {
   const d = FF_DATA;
   return /*#__PURE__*/React.createElement(MobileFrame, null, /*#__PURE__*/React.createElement("div", {
@@ -182,16 +185,16 @@ const MobileHome = () => {
       marginTop: 2,
       whiteSpace: 'nowrap'
     }
-  }, "Hi, Iris.")), /*#__PURE__*/React.createElement(Avatar, {
-    initials: "IC",
+  }, "Hi, Corey.")), /*#__PURE__*/React.createElement(Avatar, {
+    initials: "CA",
     size: "lg"
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 20,
       padding: 18,
       borderRadius: 14,
-      background: 'linear-gradient(135deg, var(--ff-plum-700), var(--ff-plum-900))',
-      color: '#FBF5E8',
+      background: 'linear-gradient(135deg, var(--ff-teal-700), var(--ff-teal-900))',
+      color: '#fff',
       position: 'relative'
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -285,7 +288,7 @@ const MobileHome = () => {
     style: {
       '--ff-stack-gap': '8px'
     }
-  }, d.expenses.filter(e => e.who === "Iris Chen").map(e => /*#__PURE__*/React.createElement("div", {
+  }, d.expenses.filter(e => e.who === "Corey Anderson").map(e => /*#__PURE__*/React.createElement("div", {
     key: e.id,
     style: {
       padding: '12px 14px',
@@ -417,27 +420,69 @@ const MobileSnapReceipt = () => /*#__PURE__*/React.createElement(MobileFrame, {
   scrollable: false
 }, /*#__PURE__*/React.createElement("div", {
   style: {
-    flex: 1,
-    background: '#0a0808',
+    height: '100%',
+    background: '#0c0e10',
     position: 'relative',
     overflow: 'hidden',
-    color: '#FBF5E8'
+    color: '#fff'
   }
 }, /*#__PURE__*/React.createElement("div", {
   style: {
     position: 'absolute',
     inset: 0,
-    background: 'radial-gradient(circle at 50% 60%, oklch(0.30 0.02 30), #0a0808 70%)'
+    background: 'radial-gradient(circle at 50% 60%, oklch(0.30 0.02 30), #0c0e10 70%)'
   }
 }), /*#__PURE__*/React.createElement("div", {
+  style: {
+    position: 'absolute',
+    inset: 0,
+    opacity: 0.12
+  }
+}, /*#__PURE__*/React.createElement("div", {
+  style: {
+    position: 'absolute',
+    left: '33.3%',
+    top: 0,
+    bottom: 0,
+    width: 1,
+    background: '#fff'
+  }
+}), /*#__PURE__*/React.createElement("div", {
+  style: {
+    position: 'absolute',
+    left: '66.6%',
+    top: 0,
+    bottom: 0,
+    width: 1,
+    background: '#fff'
+  }
+}), /*#__PURE__*/React.createElement("div", {
+  style: {
+    position: 'absolute',
+    top: '33.3%',
+    left: 0,
+    right: 0,
+    height: 1,
+    background: '#fff'
+  }
+}), /*#__PURE__*/React.createElement("div", {
+  style: {
+    position: 'absolute',
+    top: '66.6%',
+    left: 0,
+    right: 0,
+    height: 1,
+    background: '#fff'
+  }
+})), /*#__PURE__*/React.createElement("div", {
   style: {
     position: 'absolute',
     top: '18%',
     left: '14%',
     right: '14%',
     bottom: '22%',
-    background: '#FBF5E8',
-    color: '#15131A',
+    background: '#fff',
+    color: '#15181c',
     borderRadius: 8,
     padding: 24,
     fontFamily: 'var(--ff-font-mono)',
@@ -497,6 +542,41 @@ const MobileSnapReceipt = () => /*#__PURE__*/React.createElement(MobileFrame, {
 }, "Hold steady \u2014 align receipt in frame"), /*#__PURE__*/React.createElement("div", {
   style: {
     position: 'absolute',
+    top: 46,
+    left: 0,
+    right: 0,
+    display: 'flex',
+    justifyContent: 'center'
+  }
+}, /*#__PURE__*/React.createElement("span", {
+  style: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 6,
+    background: 'rgba(61,155,143,0.22)',
+    border: '1px solid rgba(61,155,143,0.5)',
+    color: 'var(--ff-teal-300)',
+    borderRadius: 999,
+    padding: '4px 10px',
+    fontSize: 11,
+    fontWeight: 500
+  }
+}, /*#__PURE__*/React.createElement(Icon, {
+  name: "check-circle",
+  size: 12,
+  weight: "fill"
+}), " Document detected")), /*#__PURE__*/React.createElement("div", {
+  style: {
+    position: 'absolute',
+    bottom: 88,
+    right: 32,
+    fontSize: 10,
+    opacity: 0.6,
+    textAlign: 'center'
+  }
+}, "Auto"), /*#__PURE__*/React.createElement("div", {
+  style: {
+    position: 'absolute',
     bottom: 30,
     left: 0,
     right: 0,
@@ -508,7 +588,7 @@ const MobileSnapReceipt = () => /*#__PURE__*/React.createElement(MobileFrame, {
 }, /*#__PURE__*/React.createElement("button", {
   style: {
     background: 'rgba(255,255,255,0.1)',
-    color: '#FBF5E8',
+    color: '#fff',
     width: 48,
     height: 48,
     borderRadius: 999,
@@ -519,7 +599,7 @@ const MobileSnapReceipt = () => /*#__PURE__*/React.createElement(MobileFrame, {
   size: 20
 })), /*#__PURE__*/React.createElement("button", {
   style: {
-    background: '#FBF5E8',
+    background: '#fff',
     width: 72,
     height: 72,
     borderRadius: 999,
@@ -528,7 +608,7 @@ const MobileSnapReceipt = () => /*#__PURE__*/React.createElement(MobileFrame, {
 }), /*#__PURE__*/React.createElement("button", {
   style: {
     background: 'rgba(255,255,255,0.1)',
-    color: '#FBF5E8',
+    color: '#fff',
     width: 48,
     height: 48,
     borderRadius: 999,
@@ -546,7 +626,7 @@ const MobileSnapReceipt = () => /*#__PURE__*/React.createElement(MobileFrame, {
 }, /*#__PURE__*/React.createElement("button", {
   style: {
     background: 'rgba(255,255,255,0.1)',
-    color: '#FBF5E8',
+    color: '#fff',
     width: 36,
     height: 36,
     borderRadius: 999,
@@ -561,7 +641,7 @@ const CaptureCorners = () => {
     position: 'absolute',
     width: 32,
     height: 32,
-    borderColor: '#D9BE57',
+    borderColor: 'var(--ff-teal-500)',
     borderStyle: 'solid',
     borderWidth: 0
   };
@@ -730,7 +810,7 @@ const MobileNewExpense = () => /*#__PURE__*/React.createElement(MobileFrame, nul
     width: 34,
     height: 22,
     borderRadius: 3,
-    background: 'var(--ff-plum-700)'
+    background: 'var(--ff-teal-700)'
   }
 }), /*#__PURE__*/React.createElement("div", {
   style: {
@@ -812,7 +892,7 @@ const MobileSubmitSuccess = () => /*#__PURE__*/React.createElement(MobileFrame, 
   }
 }, "EXP-2842 \xB7 Blue Bottle Coffee \xB7 ", /*#__PURE__*/React.createElement("strong", {
   className: "ff-tnum"
-}, "$42.80"), " \xB7 Sent to Theo for approval."), /*#__PURE__*/React.createElement("div", {
+}, "$42.80"), " \xB7 Sent to Xavier for approval."), /*#__PURE__*/React.createElement("div", {
   style: {
     padding: '14px 16px',
     background: 'var(--ff-card-2)',
@@ -835,7 +915,7 @@ const MobileSubmitSuccess = () => /*#__PURE__*/React.createElement(MobileFrame, 
     color: 'var(--ff-fg-muted)',
     lineHeight: 1.7
   }
-}, /*#__PURE__*/React.createElement("li", null, "Theo Vasquez (Manager) reviews"), /*#__PURE__*/React.createElement("li", null, "You'll be notified within ~6h"), /*#__PURE__*/React.createElement("li", null, "Charge already on your card"))), /*#__PURE__*/React.createElement("div", {
+}, /*#__PURE__*/React.createElement("li", null, "Xavier Bartlett (Manager) reviews"), /*#__PURE__*/React.createElement("li", null, "You'll be notified within ~6h"), /*#__PURE__*/React.createElement("li", null, "Charge already on your card"))), /*#__PURE__*/React.createElement("div", {
   style: {
     flex: 1
   }
@@ -953,34 +1033,35 @@ const MobileStatusTimeline = () => /*#__PURE__*/React.createElement(MobileFrame,
   done: true
 }, {
   icon: "user",
-  title: "Awaiting Theo Vasquez",
+  title: "Awaiting Xavier Bartlett",
   who: "Manager",
   ts: "Now",
   active: true
 }, {
   icon: "user",
   title: "Finance review",
-  who: "Maren Okafor",
+  who: "Marcus Stoinis",
   ts: "Next",
   done: false
 }, {
   icon: "check",
   title: "Approved & posted",
-  who: "—",
-  ts: "—",
+  who: "",
+  ts: "Pending finance review",
   done: false
 }].map((s, i) => /*#__PURE__*/React.createElement("div", {
   key: i,
   style: {
+    position: 'relative',
     display: 'flex',
-    gap: 12,
     marginBottom: 18,
     opacity: s.done || s.active ? 1 : 0.5
   }
 }, /*#__PURE__*/React.createElement("div", {
   style: {
     position: 'absolute',
-    left: 0,
+    left: -30,
+    top: 0,
     width: 30,
     height: 30,
     borderRadius: 999,
@@ -1007,7 +1088,7 @@ const MobileStatusTimeline = () => /*#__PURE__*/React.createElement(MobileFrame,
     fontSize: 11,
     color: 'var(--ff-fg-muted)'
   }
-}, s.who, " \xB7 ", s.ts)))))));
+}, s.who ? `${s.who} · ${s.ts}` : s.ts)))))));
 Object.assign(window, {
   MobileSignIn,
   MobileHome,

@@ -1,13 +1,21 @@
 /* FinFlow Screens — Expenses (list, detail, new, OCR review, flagged, import) */
 
+const EXPENSE_COLUMNS = ["ID", "Date", "Merchant / memo", "Owner", "Category", "Amount", "Status"];
 const ExpenseList = () => {
   const d = FF_DATA;
   const [status, setStatus] = React.useState("all");
   const [cat, setCat] = React.useState("all");
   const [q, setQ] = React.useState("");
+  const [compact, setCompact] = React.useState(false);
+  const [selected, setSelected] = React.useState([]);
+  const [columnsOpen, setColumnsOpen] = React.useState(false);
   const query = q.trim().toLowerCase();
   const filtered = d.expenses.filter(e => (status === "all" || e.status === status) && (cat === "all" || e.cat === cat) && (query === "" || [e.merchant, e.memo, e.who, e.id].some(f => f.toLowerCase().includes(query))));
   const total = filtered.reduce((s, e) => s + e.amount, 0);
+  const selectedTotal = filtered.filter(e => selected.includes(e.id)).reduce((s, e) => s + e.amount, 0);
+  const allSelected = filtered.length > 0 && filtered.every(e => selected.includes(e.id));
+  const toggleRow = id => setSelected(sel => sel.includes(id) ? sel.filter(x => x !== id) : [...sel, id]);
+  const toggleAll = () => setSelected(allSelected ? [] : filtered.map(e => e.id));
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
     eyebrow: "Expenses",
     title: "All expenses",
@@ -15,7 +23,10 @@ const ExpenseList = () => {
       style: 'currency',
       currency: 'USD'
     }).format(total)}`,
-    actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+    actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(DensityToggle, {
+      compact: compact,
+      onToggle: () => setCompact(c => !c)
+    }), /*#__PURE__*/React.createElement(RefreshButton, null), /*#__PURE__*/React.createElement("button", {
       className: "ff-btn",
       onClick: () => ffGo('import')
     }, /*#__PURE__*/React.createElement(Icon, {
@@ -85,7 +96,7 @@ const ExpenseList = () => {
     name: "magnifying-glass",
     size: 14
   }), /*#__PURE__*/React.createElement("input", {
-    placeholder: "Search expenses…",
+    placeholder: "Search expenses\u2026",
     value: q,
     onChange: e => setQ(e.target.value)
   })), /*#__PURE__*/React.createElement("select", {
@@ -105,17 +116,100 @@ const ExpenseList = () => {
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "calendar-blank",
     size: 14
-  }), " May 2026"))), /*#__PURE__*/React.createElement(Card, {
+  }), " May 2026 ", /*#__PURE__*/React.createElement(Icon, {
+    name: "caret-down",
+    size: 12
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative'
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "ff-btn",
+    onClick: () => setColumnsOpen(o => !o)
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "columns",
+    size: 14
+  }), " Columns"), columnsOpen && /*#__PURE__*/React.createElement("div", {
+    className: "ff-card",
+    style: {
+      position: 'absolute',
+      top: 'calc(100% + 6px)',
+      right: 0,
+      zIndex: 10,
+      padding: 10,
+      width: 180,
+      boxShadow: 'var(--ff-shadow-lg)'
+    }
+  }, EXPENSE_COLUMNS.map(col => /*#__PURE__*/React.createElement("label", {
+    key: col,
+    className: "ff-row",
+    style: {
+      gap: 8,
+      padding: '5px 4px',
+      fontSize: 13
+    }
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    defaultChecked: true
+  }), " ", col)))))), selected.length > 0 && /*#__PURE__*/React.createElement("div", {
+    className: "ff-row",
+    style: {
+      justifyContent: 'space-between',
+      padding: '10px 16px',
+      marginBottom: 10,
+      background: 'var(--ff-card-2)',
+      border: '1px solid var(--ff-border)',
+      borderRadius: 'var(--ff-radius-md)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "ff-row",
+    style: {
+      gap: 10,
+      fontSize: 13
+    }
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    checked: true,
+    readOnly: true
+  }), /*#__PURE__*/React.createElement("span", null, selected.length, " selected \xB7 total ", new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  }).format(selectedTotal))), /*#__PURE__*/React.createElement("div", {
+    className: "ff-row",
+    style: {
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "ff-btn ff-btn--primary ff-btn--sm",
+    onClick: () => {
+      alert('Selected approved');
+      setSelected([]);
+    }
+  }, "Approve selected"), /*#__PURE__*/React.createElement("button", {
+    className: "ff-btn ff-btn--ghost ff-btn--sm",
+    onClick: () => alert('Flagged')
+  }, "Flag"), /*#__PURE__*/React.createElement("button", {
+    className: "ff-btn ff-btn--ghost ff-btn--sm",
+    onClick: () => alert('Exported')
+  }, "Export"), /*#__PURE__*/React.createElement("button", {
+    className: "ff-btn ff-btn--ghost ff-btn--sm",
+    onClick: () => {
+      alert('Deleted');
+      setSelected([]);
+    }
+  }, "Delete"))), /*#__PURE__*/React.createElement(Card, {
     padded: false
   }, /*#__PURE__*/React.createElement("table", {
-    className: "ff-table"
+    className: `ff-table ${compact ? 'ff-table--compact' : ''}`
   }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", {
     style: {
       width: 32
     }
   }, /*#__PURE__*/React.createElement("input", {
     type: "checkbox",
-    "aria-label": "Select all"
+    "aria-label": "Select all",
+    checked: allSelected,
+    onChange: toggleAll
   })), /*#__PURE__*/React.createElement("th", null, "ID"), /*#__PURE__*/React.createElement("th", null, "Date"), /*#__PURE__*/React.createElement("th", null, "Merchant / memo"), /*#__PURE__*/React.createElement("th", null, "Owner"), /*#__PURE__*/React.createElement("th", null, "Category"), /*#__PURE__*/React.createElement("th", {
     className: "ff-num"
   }, "Amount"), /*#__PURE__*/React.createElement("th", null, "Status"), /*#__PURE__*/React.createElement("th", {
@@ -133,7 +227,9 @@ const ExpenseList = () => {
     }, /*#__PURE__*/React.createElement("td", {
       onClick: ev => ev.stopPropagation()
     }, /*#__PURE__*/React.createElement("input", {
-      type: "checkbox"
+      type: "checkbox",
+      checked: selected.includes(e.id),
+      onChange: () => toggleRow(e.id)
     })), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("span", {
       className: "ff-mono",
       style: {
@@ -146,7 +242,7 @@ const ExpenseList = () => {
         color: 'var(--ff-fg-muted)',
         fontSize: 12
       }
-    }, e.date), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", {
+    }, fmtDate(e.date)), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", {
       style: {
         fontWeight: 500
       }
@@ -209,7 +305,7 @@ const ExpenseDetail = () => {
     className: "ff-mono"
   }, e.id)), /*#__PURE__*/React.createElement(PageHead, {
     title: e.merchant,
-    sub: `${e.id} · Submitted by ${e.who} on ${e.date}`,
+    sub: `${e.id} · Submitted by ${e.who} on ${fmtDate(e.date)}`,
     actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
       className: "ff-btn"
     }, /*#__PURE__*/React.createElement(Icon, {
@@ -267,11 +363,11 @@ const ExpenseDetail = () => {
     label: "Date"
   }, /*#__PURE__*/React.createElement("span", {
     className: "ff-tnum"
-  }, e.date)), /*#__PURE__*/React.createElement(DetailRow, {
+  }, fmtDate(e.date))), /*#__PURE__*/React.createElement(DetailRow, {
     label: "Payment"
   }, /*#__PURE__*/React.createElement("span", {
     className: "ff-mono"
-  }, "•••• ", e.cardLast4)), /*#__PURE__*/React.createElement(DetailRow, {
+  }, "\u2022\u2022\u2022\u2022 ", e.cardLast4)), /*#__PURE__*/React.createElement(DetailRow, {
     label: "Memo"
   }, e.memo))), /*#__PURE__*/React.createElement(Card, {
     title: "Receipt",
@@ -312,7 +408,7 @@ const ExpenseDetail = () => {
       fontSize: 10,
       color: 'var(--ff-fg-muted)'
     }
-  }, "UNITED · receipt.pdf"), /*#__PURE__*/React.createElement("div", {
+  }, "UNITED \xB7 receipt.pdf"), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       bottom: 14,
@@ -329,7 +425,7 @@ const ExpenseDetail = () => {
       fontSize: 11,
       color: 'var(--ff-fg-muted)'
     }
-  }, "1 of 1 · receipt_2026-05-22_united.pdf · 248 KB"))), /*#__PURE__*/React.createElement(Card, {
+  }, "1 of 1 \xB7 receipt_2026-05-22_united.pdf \xB7 248 KB"))), /*#__PURE__*/React.createElement(Card, {
     title: "Activity",
     padded: false
   }, /*#__PURE__*/React.createElement("div", {
@@ -338,7 +434,7 @@ const ExpenseDetail = () => {
       '--ff-stack-gap': '0'
     }
   }, [{
-    who: "Luna Park",
+    who: "Jordan Lee",
     act: "Submitted expense",
     ts: "May 22, 9:12 AM"
   }, {
@@ -346,11 +442,11 @@ const ExpenseDetail = () => {
     act: "Policy check passed",
     ts: "May 22, 9:12 AM"
   }, {
-    who: "Theo Vasquez",
+    who: "Xavier Bartlett",
     act: "Routed for approval",
     ts: "May 22, 9:15 AM"
   }, {
-    who: "Maren Okafor",
+    who: "Marcus Stoinis",
     act: "Viewing now",
     ts: "Just now"
   }].map((a, i, arr) => /*#__PURE__*/React.createElement("div", {
@@ -372,7 +468,7 @@ const ExpenseDetail = () => {
     style: {
       fontSize: 13
     }
-  }, /*#__PURE__*/React.createElement("strong", null, a.who), " · ", a.act), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("strong", null, a.who), " \xB7 ", a.act), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       color: 'var(--ff-fg-muted)'
@@ -391,11 +487,11 @@ const ExpenseDetail = () => {
       '--ff-stack-gap': '12px'
     }
   }, [{
-    name: "Theo Vasquez",
+    name: "Xavier Bartlett",
     title: "Head of Sales",
     status: "approved"
   }, {
-    name: "Maren Okafor",
+    name: "Marcus Stoinis",
     title: "Finance",
     status: "pending"
   }].map((s, i) => /*#__PURE__*/React.createElement("div", {
@@ -526,7 +622,7 @@ const NewExpense = () => {
     className: "ff-label"
   }, "Memo"), /*#__PURE__*/React.createElement("textarea", {
     className: "ff-textarea",
-    defaultValue: "SF → Austin (sales kickoff)"
+    defaultValue: "SF \u2192 Austin (sales kickoff)"
   })), /*#__PURE__*/React.createElement("div", {
     className: "ff-grid ff-grid--2"
   }, /*#__PURE__*/React.createElement("div", {
@@ -535,13 +631,13 @@ const NewExpense = () => {
     className: "ff-label"
   }, "Project / cost center"), /*#__PURE__*/React.createElement("select", {
     className: "ff-select"
-  }, /*#__PURE__*/React.createElement("option", null, "Sales — FY26"), /*#__PURE__*/React.createElement("option", null, "Marketing"), /*#__PURE__*/React.createElement("option", null, "R&D"))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("option", null, "Sales \u2014 FY26"), /*#__PURE__*/React.createElement("option", null, "Marketing"), /*#__PURE__*/React.createElement("option", null, "R&D"))), /*#__PURE__*/React.createElement("div", {
     className: "ff-field"
   }, /*#__PURE__*/React.createElement("label", {
     className: "ff-label"
   }, "Payment"), /*#__PURE__*/React.createElement("select", {
     className: "ff-select"
-  }, /*#__PURE__*/React.createElement("option", null, "FinFlow Card · •••• 4112"), /*#__PURE__*/React.createElement("option", null, "Personal — request reimbursement")))))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("option", null, "FinFlow Card \xB7 \u2022\u2022\u2022\u2022 4112"), /*#__PURE__*/React.createElement("option", null, "Personal \u2014 request reimbursement")))))), /*#__PURE__*/React.createElement("div", {
     className: "ff-stack",
     style: {
       '--ff-stack-gap': '16px'
@@ -574,7 +670,7 @@ const NewExpense = () => {
       fontSize: 12,
       color: 'var(--ff-fg-muted)'
     }
-  }, "PDF or image · OCR fills the form automatically"), /*#__PURE__*/React.createElement("button", {
+  }, "PDF or image \xB7 OCR fills the form automatically"), /*#__PURE__*/React.createElement("button", {
     className: "ff-btn ff-btn--sm",
     style: {
       marginTop: 6
@@ -599,21 +695,21 @@ const NewExpense = () => {
       gap: 8
     }
   }, /*#__PURE__*/React.createElement(Avatar, {
-    initials: "TV"
-  }), /*#__PURE__*/React.createElement("span", null, "Theo Vasquez · Head of Sales")), /*#__PURE__*/React.createElement("div", {
+    initials: "XB"
+  }), /*#__PURE__*/React.createElement("span", null, "Xavier Bartlett \xB7 Head of Sales")), /*#__PURE__*/React.createElement("div", {
     className: "ff-row",
     style: {
       gap: 8
     }
   }, /*#__PURE__*/React.createElement(Avatar, {
-    initials: "MO"
-  }), /*#__PURE__*/React.createElement("span", null, "Maren Okafor · Finance")))))));
+    initials: "MS"
+  }), /*#__PURE__*/React.createElement("span", null, "Marcus Stoinis \xB7 Finance")))))));
 };
 const OcrReview = () => {
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
     eyebrow: "Receipt OCR",
     title: "Review extracted data",
-    sub: "We've parsed the receipt — confirm the fields below.",
+    sub: "We've parsed the receipt \u2014 confirm the fields below.",
     actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
       className: "ff-btn"
     }, "Re-scan"), /*#__PURE__*/React.createElement("button", {
@@ -649,7 +745,7 @@ const OcrReview = () => {
       borderRadius: 4,
       boxShadow: 'var(--ff-shadow-md)',
       padding: '24px 20px',
-      color: '#15131A',
+      color: '#15181c',
       fontSize: 11,
       fontFamily: 'var(--ff-font-mono)'
     }
@@ -673,13 +769,13 @@ const OcrReview = () => {
       borderRadius: 3,
       padding: '2px 6px'
     }
-  }, "Austin, TX · Folio 4471")), /*#__PURE__*/React.createElement("div", {
+  }, "Austin, TX \xB7 Folio 4471")), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       justifyContent: 'space-between',
       marginBottom: 4
     }
-  }, /*#__PURE__*/React.createElement("span", null, "Room 412 — 3 nights"), /*#__PURE__*/React.createElement("span", null, "$1,140.00")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", null, "Room 412 \u2014 3 nights"), /*#__PURE__*/React.createElement("span", null, "$1,140.00")), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       justifyContent: 'space-between',
@@ -716,7 +812,7 @@ const OcrReview = () => {
       textAlign: 'center',
       color: '#888'
     }
-  }, "VISA •••• 4112 · 05/21/26 14:08")), /*#__PURE__*/React.createElement("div", {
+  }, "VISA \u2022\u2022\u2022\u2022 4112 \xB7 05/21/26 14:08")), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       top: 10,
@@ -734,7 +830,7 @@ const OcrReview = () => {
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "sparkle",
     size: 12
-  }), " OCR confidence · 94%")))), /*#__PURE__*/React.createElement(Card, null, /*#__PURE__*/React.createElement("div", {
+  }), " OCR confidence \xB7 94%")))), /*#__PURE__*/React.createElement(Card, null, /*#__PURE__*/React.createElement("div", {
     className: "ff-stack",
     style: {
       '--ff-stack-gap': '14px'
@@ -758,11 +854,11 @@ const OcrReview = () => {
     confidence: 88
   }), /*#__PURE__*/React.createElement(OcrField, {
     label: "Card",
-    value: "VISA •••• 4112",
+    value: "VISA \u2022\u2022\u2022\u2022 4112",
     confidence: 96
   }), /*#__PURE__*/React.createElement(OcrField, {
     label: "Category (predicted)",
-    value: "Travel · Lodging",
+    value: "Travel \xB7 Lodging",
     confidence: 91
   })), /*#__PURE__*/React.createElement("div", {
     className: "ff-alert ff-alert--warn",
@@ -807,9 +903,9 @@ const OcrField = ({
 }));
 const FlaggedExpense = () => {
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
-    eyebrow: "Expense · Policy violation",
-    title: "Marriott Austin — flagged",
-    sub: "EXP-2839 · Luna Park · May 21, 2026",
+    eyebrow: "Expense \xB7 Policy violation",
+    title: "Marriott Austin \u2014 flagged",
+    sub: "EXP-2839 \xB7 Jordan Lee \xB7 May 21, 2026",
     actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
       className: "ff-btn"
     }, /*#__PURE__*/React.createElement(Icon, {
@@ -839,7 +935,7 @@ const FlaggedExpense = () => {
     className: "ff-alert__body"
   }, /*#__PURE__*/React.createElement("div", {
     className: "ff-alert__title"
-  }, "3 policy violations detected"), /*#__PURE__*/React.createElement("div", null, "Hotel rate $413/night (cap $300) · Stay extended past sanctioned trip window · Missing project code"))), /*#__PURE__*/React.createElement("div", {
+  }, "3 policy violations detected"), /*#__PURE__*/React.createElement("div", null, "Hotel rate $413/night (cap $300) \xB7 Stay extended past sanctioned trip window \xB7 Missing project code"))), /*#__PURE__*/React.createElement("div", {
     className: "ff-grid",
     style: {
       gridTemplateColumns: '1.6fr 1fr',
@@ -883,7 +979,7 @@ const FlaggedExpense = () => {
     }
   }), /*#__PURE__*/React.createElement(DetailRow, {
     label: "Nights"
-  }, "3 × $413.33"), /*#__PURE__*/React.createElement("div", {
+  }, "3 \xD7 $413.33"), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 12
     }
@@ -904,14 +1000,14 @@ const FlaggedExpense = () => {
     title: "Override note"
   }, /*#__PURE__*/React.createElement("textarea", {
     className: "ff-textarea",
-    defaultValue: "Customer offsite — only room block available. Approving as one-time exception."
+    defaultValue: "Customer offsite \u2014 only room block available. Approving as one-time exception."
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 12,
       color: 'var(--ff-fg-muted)',
       marginTop: 10
     }
-  }, "Override will be recorded in audit log under Maren Okafor (Finance Admin)."))));
+  }, "Override will be recorded in audit log under Marcus Stoinis (Finance Admin)."))));
 };
 const BulkImport = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
   eyebrow: "Expenses",
@@ -950,7 +1046,7 @@ const BulkImport = () => /*#__PURE__*/React.createElement(React.Fragment, null, 
     color: 'var(--ff-fg-muted)',
     marginTop: 4
   }
-}, "Up to 5,000 rows · UTF-8 · max 10 MB"), /*#__PURE__*/React.createElement("button", {
+}, "Up to 5,000 rows \xB7 UTF-8 \xB7 max 10 MB"), /*#__PURE__*/React.createElement("button", {
   className: "ff-btn ff-btn--primary",
   style: {
     marginTop: 18
@@ -986,4 +1082,3 @@ Object.assign(window, {
   FlaggedExpense,
   BulkImport
 });
-

@@ -25,19 +25,41 @@ const BrandMark = ({
     return () => obs.disconnect();
   }, [themeOverride]);
   const dark = theme === "dark";
-  const plum = "#3B1A33";
-  const cream = "#FBF5E8";
-  const citron = "#D9BE57";
-  const fg = dark ? cream : "#15131A";
+  const ink = "#15181c"; // graphite-950-ish, cube face on light theme
+  const paper = "#f4f6f8"; // graphite-50-ish, cube face on dark theme
+  const teal = "#3d9b8f"; // brand accent — right face
+  const faceMain = dark ? paper : ink;
+  const fg = dark ? paper : ink;
 
   // Wordmark text style — driven by CSS vars (overridable by Tweaks)
   const wordStyle = {
-    fontFamily: 'var(--ff-brand-font, "Instrument Serif", Georgia, serif)',
-    fontStyle: 'var(--ff-brand-style, italic)',
-    fontWeight: 'var(--ff-brand-weight, 400)',
-    letterSpacing: 'var(--ff-brand-letter-spacing, -0.01em)',
+    fontFamily: 'var(--ff-brand-font, "Inter", ui-sans-serif, system-ui, sans-serif)',
+    fontStyle: 'var(--ff-brand-style, normal)',
+    fontWeight: 'var(--ff-brand-weight, 700)',
+    letterSpacing: 'var(--ff-brand-letter-spacing, -0.02em)',
     fill: fg
   };
+
+  // Isometric cube glyph — top face outlined, left face solid, right face teal accent
+  const CubeGlyph = ({
+    x = 0,
+    y = 0,
+    s = 1
+  }) => /*#__PURE__*/React.createElement("g", {
+    transform: `translate(${x} ${y}) scale(${s})`
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M32 6 L56 20 L32 32 L8 20 Z",
+    fill: dark ? "#0c0e10" : "#fff",
+    stroke: faceMain,
+    strokeWidth: "3",
+    strokeLinejoin: "round"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M8 20 L32 32 L32 58 L8 44 Z",
+    fill: faceMain
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M56 20 L56 44 L32 58 L32 32 Z",
+    fill: teal
+  }));
   if (variant === "mark") {
     const s = size || 40;
     return /*#__PURE__*/React.createElement("svg", {
@@ -48,35 +70,7 @@ const BrandMark = ({
       style: style,
       role: "img",
       "aria-label": "FinFlow"
-    }, /*#__PURE__*/React.createElement("rect", {
-      width: "64",
-      height: "64",
-      rx: "14",
-      fill: dark ? cream : plum
-    }), /*#__PURE__*/React.createElement("rect", {
-      x: "16",
-      y: "14",
-      width: "7",
-      height: "36",
-      fill: dark ? plum : cream
-    }), /*#__PURE__*/React.createElement("rect", {
-      x: "16",
-      y: "14",
-      width: "30",
-      height: "7",
-      fill: dark ? plum : cream
-    }), /*#__PURE__*/React.createElement("rect", {
-      x: "16",
-      y: "27",
-      width: "20",
-      height: "7",
-      fill: dark ? plum : cream
-    }), /*#__PURE__*/React.createElement("circle", {
-      cx: "44",
-      cy: "46",
-      r: "4",
-      fill: citron
-    }));
+    }, /*#__PURE__*/React.createElement(CubeGlyph, null));
   }
   if (variant === "wordmark") {
     const h = size || 28;
@@ -105,36 +99,9 @@ const BrandMark = ({
       style: style,
       role: "img",
       "aria-label": "FinFlow"
-    }, /*#__PURE__*/React.createElement("rect", {
-      x: "68",
-      y: "0",
-      width: "64",
-      height: "64",
-      rx: "14",
-      fill: dark ? cream : plum
-    }), /*#__PURE__*/React.createElement("rect", {
-      x: "84",
-      y: "14",
-      width: "7",
-      height: "36",
-      fill: dark ? plum : cream
-    }), /*#__PURE__*/React.createElement("rect", {
-      x: "84",
-      y: "14",
-      width: "30",
-      height: "7",
-      fill: dark ? plum : cream
-    }), /*#__PURE__*/React.createElement("rect", {
-      x: "84",
-      y: "27",
-      width: "20",
-      height: "7",
-      fill: dark ? plum : cream
-    }), /*#__PURE__*/React.createElement("circle", {
-      cx: "112",
-      cy: "46",
-      r: "4",
-      fill: citron
+    }, /*#__PURE__*/React.createElement(CubeGlyph, {
+      x: 68,
+      y: 0
     }), /*#__PURE__*/React.createElement("text", {
       x: "100",
       y: "106",
@@ -150,41 +117,15 @@ const BrandMark = ({
   const h = size || 32;
   return /*#__PURE__*/React.createElement("svg", {
     height: h,
-    viewBox: "0 0 280 56",
+    viewBox: "0 0 166 56",
     className: className,
     style: style,
     role: "img",
     "aria-label": "FinFlow"
-  }, /*#__PURE__*/React.createElement("rect", {
-    x: "0",
-    y: "6",
-    width: "44",
-    height: "44",
-    rx: "10",
-    fill: dark ? cream : plum
-  }), /*#__PURE__*/React.createElement("rect", {
-    x: "11",
-    y: "16",
-    width: "5",
-    height: "25",
-    fill: dark ? plum : cream
-  }), /*#__PURE__*/React.createElement("rect", {
-    x: "11",
-    y: "16",
-    width: "21",
-    height: "5",
-    fill: dark ? plum : cream
-  }), /*#__PURE__*/React.createElement("rect", {
-    x: "11",
-    y: "25",
-    width: "14",
-    height: "5",
-    fill: dark ? plum : cream
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "31",
-    cy: "38",
-    r: "3",
-    fill: citron
+  }, /*#__PURE__*/React.createElement(CubeGlyph, {
+    x: 0,
+    y: 4,
+    s: 0.75
   }), /*#__PURE__*/React.createElement("text", {
     x: "60",
     y: "38",

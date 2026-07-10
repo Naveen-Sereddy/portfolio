@@ -37,6 +37,13 @@ const Money = ({
     className: `ff-tnum ${className}`
   }, sign, fmt.format(value));
 };
+
+/* One date format everywhere: ISO in, "May 22, 2026" out. */
+const fmtDate = iso => new Date(iso + "T00:00:00").toLocaleDateString("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric"
+});
 const StatusBadge = ({
   status
 }) => {
@@ -74,7 +81,7 @@ const StatusBadge = ({
   };
   const cls = m.cls || status;
   return /*#__PURE__*/React.createElement("span", {
-    className: `ff-badge ff-badge--${cls} ff-badge--no-dot`
+    className: `ff-badge ff-badge--${cls} ff-badge--no-dot ff-badge--status`
   }, /*#__PURE__*/React.createElement(Icon, {
     name: m.icon,
     size: 12
@@ -155,6 +162,10 @@ const Sidebar = ({
         id: "settings",
         icon: "gear-six",
         label: "Settings"
+      }, {
+        id: "help",
+        icon: "lifebuoy",
+        label: "Help"
       }]
     }],
     manager: [{
@@ -194,6 +205,10 @@ const Sidebar = ({
         id: "settings",
         icon: "gear-six",
         label: "Settings"
+      }, {
+        id: "help",
+        icon: "lifebuoy",
+        label: "Help"
       }]
     }],
     employee: [{
@@ -396,6 +411,43 @@ const TopBar = ({
   })));
 };
 
+/* Refresh button — shared across dashboards/expenses/approvals. Tracks "last synced" locally. */
+const RefreshButton = () => {
+  const [spinning, setSpinning] = React.useState(false);
+  const [synced, setSynced] = React.useState("2m ago");
+  const onClick = () => {
+    setSpinning(true);
+    setTimeout(() => {
+      setSpinning(false);
+      setSynced("just now");
+    }, 500);
+  };
+  return /*#__PURE__*/React.createElement("button", {
+    className: "ff-btn ff-btn--ghost",
+    onClick: onClick
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "arrows-clockwise",
+    size: 14,
+    style: {
+      transform: spinning ? 'rotate(360deg)' : 'rotate(0deg)',
+      transition: 'transform 0.5s var(--ff-ease)'
+    }
+  }), "Last synced ", synced);
+};
+
+/* Density toggle — shared. Parent owns the boolean, this is just the button. */
+const DensityToggle = ({
+  compact,
+  onToggle
+}) => /*#__PURE__*/React.createElement("button", {
+  className: "ff-btn ff-btn--ghost",
+  onClick: onToggle,
+  "aria-pressed": compact
+}, /*#__PURE__*/React.createElement(Icon, {
+  name: compact ? "rows" : "list",
+  size: 14
+}), " ", compact ? "Compact" : "Comfortable");
+
 /* PageHead — title + actions */
 const PageHead = ({
   eyebrow,
@@ -494,6 +546,7 @@ const ChipBar = ({
 Object.assign(window, {
   Icon,
   Money,
+  fmtDate,
   StatusBadge,
   Avatar,
   Sidebar,
@@ -502,6 +555,8 @@ Object.assign(window, {
   KpiTile,
   Card,
   ChipBar,
+  RefreshButton,
+  DensityToggle,
   ffGo,
   FF_PENDING
 });

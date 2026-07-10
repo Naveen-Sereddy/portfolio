@@ -3,17 +3,24 @@
 const ApprovalsQueue = () => {
   const d = FF_DATA;
   const items = d.expenses.filter(e => e.status === "pending" || e.status === "flagged");
-  const selCount = Math.min(3, items.length);
-  const selTotal = items.slice(0, selCount).reduce((s, e) => s + e.amount, 0);
+  const [selected, setSelected] = React.useState(items.slice(0, 3).map(e => e.id));
+  const [compact, setCompact] = React.useState(false);
+  const selTotal = items.filter(e => selected.includes(e.id)).reduce((s, e) => s + e.amount, 0);
   const fmtUSD = n => new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD"
   }).format(n);
+  const allSelected = items.length > 0 && items.every(e => selected.includes(e.id));
+  const toggleRow = id => setSelected(sel => sel.includes(id) ? sel.filter(x => x !== id) : [...sel, id]);
+  const toggleAll = () => setSelected(allSelected ? [] : items.map(e => e.id));
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
     eyebrow: "Approvals",
     title: "Approvals queue",
     sub: `${items.length} items awaiting your review`,
-    actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+    actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(DensityToggle, {
+      compact: compact,
+      onToggle: () => setCompact(c => !c)
+    }), /*#__PURE__*/React.createElement(RefreshButton, null), /*#__PURE__*/React.createElement("button", {
       className: "ff-btn"
     }, /*#__PURE__*/React.createElement(Icon, {
       name: "funnel",
@@ -36,26 +43,35 @@ const ApprovalsQueue = () => {
       background: 'var(--ff-card-2)'
     }
   }, /*#__PURE__*/React.createElement("input", {
-    type: "checkbox"
+    type: "checkbox",
+    checked: allSelected,
+    onChange: toggleAll
   }), " ", /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 12,
       color: 'var(--ff-fg-muted)'
     }
-  }, selCount, " selected · total ", fmtUSD(selTotal)), /*#__PURE__*/React.createElement("div", {
+  }, selected.length, " selected \xB7 total ", fmtUSD(selTotal)), /*#__PURE__*/React.createElement("div", {
     style: {
       flex: 1
     }
   }), /*#__PURE__*/React.createElement("button", {
-    className: "ff-btn ff-btn--sm"
+    className: "ff-btn ff-btn--sm",
+    onClick: () => {
+      alert(`Rejected ${selected.length} items`);
+      setSelected([]);
+    }
   }, "Reject"), /*#__PURE__*/React.createElement("button", {
     className: "ff-btn ff-btn--sm ff-btn--primary",
-    onClick: () => ffGo('state-success')
+    onClick: () => {
+      alert(`Approved ${selected.length} items`);
+      ffGo('state-success');
+    }
   }, "Approve")), items.map((e, i) => /*#__PURE__*/React.createElement("div", {
     key: e.id,
     onClick: () => ffGo('approval-detail'),
     style: {
-      padding: '16px 20px',
+      padding: compact ? '10px 20px' : '16px 20px',
       borderBottom: i < items.length - 1 ? '1px solid var(--ff-border)' : '0',
       display: 'grid',
       gridTemplateColumns: 'auto 60px 1fr auto auto',
@@ -65,7 +81,8 @@ const ApprovalsQueue = () => {
     }
   }, /*#__PURE__*/React.createElement("input", {
     type: "checkbox",
-    defaultChecked: i < 3,
+    checked: selected.includes(e.id),
+    onChange: () => toggleRow(e.id),
     onClick: ev => ev.stopPropagation()
   }), /*#__PURE__*/React.createElement("div", {
     className: "ff-receipt"
@@ -93,7 +110,7 @@ const ApprovalsQueue = () => {
       color: 'var(--ff-fg-muted)',
       marginTop: 2
     }
-  }, e.memo, " · ", e.who, " · ", e.date)), /*#__PURE__*/React.createElement("div", {
+  }, e.memo, " \xB7 ", e.who, " \xB7 ", fmtDate(e.date))), /*#__PURE__*/React.createElement("div", {
     style: {
       textAlign: 'right'
     }
@@ -128,48 +145,48 @@ const ApprovalHistory = () => {
   const items = [{
     id: "EXP-2840",
     merchant: "Figma",
-    who: "Mira Solberg",
+    who: "James Taylor",
     amount: 180.00,
     status: "approved",
     decided: "May 22 14:22",
-    by: "Maren Okafor"
+    by: "Marcus Stoinis"
   }, {
     id: "EXP-2837",
     merchant: "AWS",
-    who: "Dev Patel",
+    who: "Sam Richardson",
     amount: 3204.18,
     status: "approved",
     decided: "May 20 11:08",
-    by: "Maren Okafor"
+    by: "Marcus Stoinis"
   }, {
     id: "EXP-2834",
     merchant: "Reforge",
-    who: "Iris Chen",
+    who: "Corey Anderson",
     amount: 995.00,
     status: "approved",
     decided: "May 19 16:42",
-    by: "Maren Okafor"
+    by: "Marcus Stoinis"
   }, {
     id: "EXP-2832",
     merchant: "Eventbrite",
-    who: "Iris Chen",
+    who: "Corey Anderson",
     amount: 640.00,
     status: "rejected",
     decided: "May 18 17:30",
-    by: "Maren Okafor"
+    by: "Marcus Stoinis"
   }, {
     id: "EXP-2828",
     merchant: "Slack",
-    who: "Dev Patel",
+    who: "Sam Richardson",
     amount: 149.00,
     status: "approved",
     decided: "May 16 09:14",
-    by: "Maren Okafor"
+    by: "Marcus Stoinis"
   }];
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
     eyebrow: "Approvals",
     title: "Approval history",
-    sub: "Decisions you've made — past 30 days"
+    sub: "Decisions you've made \u2014 past 30 days"
   }), /*#__PURE__*/React.createElement(Card, {
     padded: false
   }, /*#__PURE__*/React.createElement("table", {
@@ -268,7 +285,7 @@ const ReimbursementsList = () => {
     style: {
       color: 'var(--ff-fg-muted)'
     }
-  }, r.date), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("span", {
+  }, fmtDate(r.date)), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("span", {
     className: "ff-badge ff-badge--neutral ff-badge--no-dot"
   }, "ACH")), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("button", {
     className: "ff-btn ff-btn--ghost ff-btn--sm",
@@ -278,8 +295,8 @@ const ReimbursementsList = () => {
 const PayoutDetail = () => {
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
     eyebrow: "Reimbursement",
-    title: "RB-104 — Iris Chen",
-    sub: "Scheduled · arrives May 30, 2026",
+    title: "RB-104 \u2014 Corey Anderson",
+    sub: "Scheduled \xB7 arrives May 30, 2026",
     actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
       className: "ff-btn ff-btn--danger",
       onClick: () => ffGo('reimburse')
@@ -299,7 +316,7 @@ const PayoutDetail = () => {
     className: "ff-table"
   }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Expense"), /*#__PURE__*/React.createElement("th", null, "Date"), /*#__PURE__*/React.createElement("th", {
     className: "ff-num"
-  }, "Amount"))), /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "Office supplies — Staples", /*#__PURE__*/React.createElement("div", {
+  }, "Amount"))), /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "Office supplies \u2014 Staples", /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       color: 'var(--ff-fg-muted)'
@@ -321,7 +338,7 @@ const PayoutDetail = () => {
     className: "ff-num"
   }, /*#__PURE__*/React.createElement(Money, {
     value: 56.28
-  }))), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "Client coffee — Sightglass", /*#__PURE__*/React.createElement("div", {
+  }))), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "Client coffee \u2014 Sightglass", /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       color: 'var(--ff-fg-muted)'
@@ -353,19 +370,19 @@ const PayoutDetail = () => {
     title: "Payout method"
   }, /*#__PURE__*/React.createElement(DetailRow, {
     label: "Account"
-  }, "Bank of Marin · •••• 8841"), /*#__PURE__*/React.createElement("div", {
+  }, "Bank of Marin \xB7 \u2022\u2022\u2022\u2022 8841"), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 12
     }
   }), /*#__PURE__*/React.createElement(DetailRow, {
     label: "Method"
-  }, "ACH — same day"), /*#__PURE__*/React.createElement("div", {
+  }, "ACH \u2014 same day"), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 12
     }
   }), /*#__PURE__*/React.createElement(DetailRow, {
     label: "Memo"
-  }, "FinFlow · RB-104"), /*#__PURE__*/React.createElement("div", {
+  }, "FinFlow \xB7 RB-104"), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 18
     }
@@ -404,27 +421,27 @@ const SchedulePayout = () => /*#__PURE__*/React.createElement(React.Fragment, nu
 }, "Owed"), /*#__PURE__*/React.createElement("th", null, "Items"))), /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("input", {
   type: "checkbox",
   defaultChecked: true
-})), /*#__PURE__*/React.createElement("td", null, "Iris Chen"), /*#__PURE__*/React.createElement("td", {
+})), /*#__PURE__*/React.createElement("td", null, "Corey Anderson"), /*#__PURE__*/React.createElement("td", {
   className: "ff-num"
 }, /*#__PURE__*/React.createElement(Money, {
   value: 320.40
 })), /*#__PURE__*/React.createElement("td", null, "3")), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("input", {
   type: "checkbox",
   defaultChecked: true
-})), /*#__PURE__*/React.createElement("td", null, "Luna Park"), /*#__PURE__*/React.createElement("td", {
+})), /*#__PURE__*/React.createElement("td", null, "Jordan Lee"), /*#__PURE__*/React.createElement("td", {
   className: "ff-num"
 }, /*#__PURE__*/React.createElement(Money, {
   value: 82.00
 })), /*#__PURE__*/React.createElement("td", null, "1")), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("input", {
   type: "checkbox",
   defaultChecked: true
-})), /*#__PURE__*/React.createElement("td", null, "Dev Patel"), /*#__PURE__*/React.createElement("td", {
+})), /*#__PURE__*/React.createElement("td", null, "Sam Richardson"), /*#__PURE__*/React.createElement("td", {
   className: "ff-num"
 }, /*#__PURE__*/React.createElement(Money, {
   value: 218.50
 })), /*#__PURE__*/React.createElement("td", null, "2")), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("input", {
   type: "checkbox"
-})), /*#__PURE__*/React.createElement("td", null, "Asa Brown"), /*#__PURE__*/React.createElement("td", {
+})), /*#__PURE__*/React.createElement("td", null, "Jamie Smith"), /*#__PURE__*/React.createElement("td", {
   className: "ff-num"
 }, /*#__PURE__*/React.createElement(Money, {
   value: 64.20
@@ -448,13 +465,13 @@ const SchedulePayout = () => /*#__PURE__*/React.createElement(React.Fragment, nu
   className: "ff-label"
 }, "Funding source"), /*#__PURE__*/React.createElement("select", {
   className: "ff-select"
-}, /*#__PURE__*/React.createElement("option", null, "Mercury · Operating ·  •••• 5512"))), /*#__PURE__*/React.createElement("div", {
+}, /*#__PURE__*/React.createElement("option", null, "Mercury \xB7 Operating \xB7  \u2022\u2022\u2022\u2022 5512"))), /*#__PURE__*/React.createElement("div", {
   className: "ff-field"
 }, /*#__PURE__*/React.createElement("label", {
   className: "ff-label"
 }, "Memo"), /*#__PURE__*/React.createElement("input", {
   className: "ff-input",
-  defaultValue: "FinFlow · May 2026"
+  defaultValue: "FinFlow \xB7 May 2026"
 })), /*#__PURE__*/React.createElement("div", {
   className: "ff-card ff-card--flat",
   style: {
@@ -507,4 +524,3 @@ Object.assign(window, {
   PayoutDetail,
   SchedulePayout
 });
-

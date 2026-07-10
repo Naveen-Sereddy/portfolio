@@ -5,8 +5,8 @@ const ReportsHome = () => {
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
     eyebrow: "Reports",
     title: "Reports",
-    sub: "Saved reports and finance close packets",
-    actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+    sub: "Saved reports and finance close packets \xB7 Updated 12m ago",
+    actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(RefreshButton, null), /*#__PURE__*/React.createElement("button", {
       className: "ff-btn"
     }, /*#__PURE__*/React.createElement(Icon, {
       name: "folder-open",
@@ -34,7 +34,7 @@ const ReportsHome = () => {
   }), /*#__PURE__*/React.createElement(KpiTile, {
     label: "Top Vendor",
     value: "AWS",
-    delta: "$41.3K · 7.5% of YTD",
+    delta: "$41.3K \xB7 7.5% of YTD",
     trend: "neutral"
   }), /*#__PURE__*/React.createElement(KpiTile, {
     label: "Open Reports",
@@ -48,7 +48,7 @@ const ReportsHome = () => {
       marginTop: 16
     }
   }, /*#__PURE__*/React.createElement(Card, {
-    title: "Cumulative spend — FY26",
+    title: "Cumulative spend \u2014 FY26",
     action: /*#__PURE__*/React.createElement("span", {
       className: "ff-row",
       style: {
@@ -63,28 +63,22 @@ const ReportsHome = () => {
         background: 'var(--ff-chart-1)',
         borderRadius: 2
       }
-    }), "Plan · ", /*#__PURE__*/React.createElement("span", {
-      style: {
-        width: 8,
-        height: 8,
-        background: 'var(--ff-chart-2)',
-        borderRadius: 2
-      }
-    }), "Actual")
+    }), "Actual spend")
   }, /*#__PURE__*/React.createElement(AreaChart, {
     data: d.cumulative,
     height: 220,
     unit: "$"
   })), /*#__PURE__*/React.createElement(Card, {
-    title: "Top vendors — YTD",
+    title: "Top vendors \u2014 YTD",
     padded: false
   }, /*#__PURE__*/React.createElement("table", {
     className: "ff-table"
   }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Vendor"), /*#__PURE__*/React.createElement("th", null, "Category"), /*#__PURE__*/React.createElement("th", {
     className: "ff-num"
   }, "Spend"), /*#__PURE__*/React.createElement("th", {
-    className: "ff-num"
-  }, "Δ"))), /*#__PURE__*/React.createElement("tbody", null, d.vendors.slice(0, 6).map(v => /*#__PURE__*/React.createElement("tr", {
+    className: "ff-num",
+    title: "vs. prior month \xB7 red = spend increased"
+  }, "\u0394 spend"))), /*#__PURE__*/React.createElement("tbody", null, d.vendors.slice(0, 6).map(v => /*#__PURE__*/React.createElement("tr", {
     key: v.id
   }, /*#__PURE__*/React.createElement("td", null, v.name), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("span", {
     className: "ff-badge ff-badge--neutral ff-badge--no-dot"
@@ -105,7 +99,7 @@ const ReportsHome = () => {
     padded: false
   }, /*#__PURE__*/React.createElement("table", {
     className: "ff-table"
-  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Name"), /*#__PURE__*/React.createElement("th", null, "Owner"), /*#__PURE__*/React.createElement("th", null, "Schedule"), /*#__PURE__*/React.createElement("th", null, "Last run"), /*#__PURE__*/React.createElement("th", null))), /*#__PURE__*/React.createElement("tbody", null, [["Monthly close packet", "Maren O.", "Monthly · 1st", "May 1, 6:00 AM"], ["Travel by team", "Maren O.", "Weekly · Mon", "May 19, 8:00 AM"], ["Software vendors over $1K", "Dev P.", "Quarterly", "Apr 1, 6:00 AM"], ["Marketing spend by campaign", "Iris C.", "Manual", "May 20, 2:14 PM"]].map(([n, o, s, l], i) => /*#__PURE__*/React.createElement("tr", {
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Name"), /*#__PURE__*/React.createElement("th", null, "Owner"), /*#__PURE__*/React.createElement("th", null, "Schedule"), /*#__PURE__*/React.createElement("th", null, "Last run"), /*#__PURE__*/React.createElement("th", null))), /*#__PURE__*/React.createElement("tbody", null, [["Monthly close packet", "Marcus S.", "Monthly · 1st", "May 1, 6:00 AM"], ["Travel by team", "Marcus S.", "Weekly · Mon", "May 19, 8:00 AM"], ["Software vendors over $1K", "Sam R.", "Quarterly", "Apr 1, 6:00 AM"], ["Marketing spend by campaign", "Corey A.", "Manual", "May 20, 2:14 PM"]].map(([n, o, s, l], i) => /*#__PURE__*/React.createElement("tr", {
     key: i
   }, /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("strong", null, n)), /*#__PURE__*/React.createElement("td", null, o), /*#__PURE__*/React.createElement("td", null, s), /*#__PURE__*/React.createElement("td", {
     className: "ff-tnum",
@@ -118,7 +112,7 @@ const ReportsHome = () => {
   }, "Run"))))))));
 };
 const ReportBuilder = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
-  eyebrow: "Reports · Build",
+  eyebrow: "Reports \xB7 Build",
   title: "Untitled report",
   sub: "Drag dimensions and measures, then save",
   actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
@@ -214,7 +208,7 @@ const ReportBuilder = () => /*#__PURE__*/React.createElement(React.Fragment, nul
   className: "ff-label"
 }, "Schedule"), /*#__PURE__*/React.createElement("select", {
   className: "ff-select"
-}, /*#__PURE__*/React.createElement("option", null, "Weekly · Monday 8am"), /*#__PURE__*/React.createElement("option", null, "Monthly"), /*#__PURE__*/React.createElement("option", null, "Manual"))), /*#__PURE__*/React.createElement("div", {
+}, /*#__PURE__*/React.createElement("option", null, "Weekly \xB7 Monday 8am"), /*#__PURE__*/React.createElement("option", null, "Monthly"), /*#__PURE__*/React.createElement("option", null, "Manual"))), /*#__PURE__*/React.createElement("div", {
   className: "ff-row",
   style: {
     justifyContent: 'space-between'
@@ -237,8 +231,8 @@ const SavedReport = () => {
   const d = FF_DATA;
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
     eyebrow: "Report",
-    title: "Monthly close packet — April FY26",
-    sub: "Generated May 1 · Owned by Maren Okafor",
+    title: "Monthly close packet \u2014 April FY26",
+    sub: "Generated May 1 \xB7 Owned by Marcus Stoinis",
     actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
       className: "ff-btn"
     }, /*#__PURE__*/React.createElement(Icon, {
@@ -270,13 +264,13 @@ const SavedReport = () => {
     trend: "up"
   }), /*#__PURE__*/React.createElement(KpiTile, {
     label: "Variance vs plan",
-    value: "−2.4%",
+    value: "\u22122.4%",
     delta: "Under by $8.6K",
     trend: "up"
   }), /*#__PURE__*/React.createElement(KpiTile, {
     label: "Top category",
     value: "Software",
-    delta: "$184.2K · 33%",
+    delta: "$184.2K \xB7 33%",
     trend: "neutral"
   })), /*#__PURE__*/React.createElement("div", {
     className: "ff-grid",
@@ -333,7 +327,7 @@ const ExportReport = () => /*#__PURE__*/React.createElement(React.Fragment, null
   className: "ff-label"
 }, "Date range"), /*#__PURE__*/React.createElement("input", {
   className: "ff-input ff-tnum",
-  defaultValue: "2026-04-01 → 2026-04-30"
+  defaultValue: "2026-04-01 \u2192 2026-04-30"
 })), /*#__PURE__*/React.createElement("div", {
   className: "ff-field"
 }, /*#__PURE__*/React.createElement("label", {
@@ -375,7 +369,7 @@ const ExportReport = () => /*#__PURE__*/React.createElement(React.Fragment, null
   className: "ff-label"
 }, "Email to"), /*#__PURE__*/React.createElement("input", {
   className: "ff-input",
-  defaultValue: "maren@arcadialabs.co, board@arcadialabs.co"
+  defaultValue: "marcus.stoinis@reyonal.com, board@reyonal.com"
 })))), /*#__PURE__*/React.createElement(Card, {
   title: "Preview"
 }, /*#__PURE__*/React.createElement("div", {
@@ -386,7 +380,7 @@ const ExportReport = () => /*#__PURE__*/React.createElement(React.Fragment, null
     borderRadius: 6,
     boxShadow: 'var(--ff-shadow-md)',
     padding: '20px 18px',
-    color: '#15131A',
+    color: '#15181c',
     display: 'flex',
     flexDirection: 'column',
     gap: 8,
@@ -399,11 +393,11 @@ const ExportReport = () => /*#__PURE__*/React.createElement(React.Fragment, null
     fontSize: 18,
     letterSpacing: '-0.02em'
   }
-}, "FinFlow · Monthly Close — April FY26"), /*#__PURE__*/React.createElement("div", {
+}, "FinFlow \xB7 Monthly Close \u2014 April FY26"), /*#__PURE__*/React.createElement("div", {
   style: {
     color: '#888'
   }
-}, "Arcadia Labs · Generated May 1, 2026"), /*#__PURE__*/React.createElement("div", {
+}, "Reyonal \xB7 Generated May 1, 2026"), /*#__PURE__*/React.createElement("div", {
   style: {
     height: 60,
     background: 'var(--ff-chart-1)',
@@ -421,7 +415,7 @@ const ExportReport = () => /*#__PURE__*/React.createElement(React.Fragment, null
   key: i,
   style: {
     padding: '6px 8px',
-    background: '#F7F4EE',
+    background: '#F0F2F4',
     borderRadius: 3
   }
 }, x))), /*#__PURE__*/React.createElement("div", {
@@ -439,8 +433,8 @@ const CardsList = () => {
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
     eyebrow: "Cards",
     title: "Corporate cards",
-    sub: `${d.cards.length} cards · ${d.cards.filter(c => c.status === 'active').length} active`,
-    actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+    sub: `${d.cards.length} cards · ${d.cards.filter(c => c.status === 'active').length} active · Updated 12m ago`,
+    actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(RefreshButton, null), /*#__PURE__*/React.createElement("button", {
       className: "ff-btn"
     }, /*#__PURE__*/React.createElement(Icon, {
       name: "download-simple",
@@ -467,8 +461,8 @@ const CardsList = () => {
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       padding: '20px',
-      color: '#FBF5E8',
-      background: c.status === 'frozen' ? 'linear-gradient(135deg, oklch(0.40 0.02 340), oklch(0.30 0.02 340))' : 'linear-gradient(135deg, var(--ff-plum-700), var(--ff-plum-900))',
+      color: '#fff',
+      background: c.status === 'frozen' ? 'linear-gradient(135deg, oklch(0.40 0.008 240), oklch(0.28 0.008 240))' : 'linear-gradient(135deg, var(--ff-teal-700), var(--ff-teal-900))',
       display: 'flex',
       flexDirection: 'column',
       gap: 12,
@@ -496,7 +490,7 @@ const CardsList = () => {
       fontSize: 15,
       letterSpacing: '0.1em'
     }
-  }, "•••• •••• •••• ", c.last4), /*#__PURE__*/React.createElement("div", {
+  }, "\u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 ", c.last4), /*#__PURE__*/React.createElement("div", {
     className: "ff-row",
     style: {
       justifyContent: 'space-between',
@@ -516,7 +510,7 @@ const CardsList = () => {
     className: "ff-badge ff-badge--no-dot",
     style: {
       background: 'rgba(255,255,255,0.15)',
-      color: '#FBF5E8'
+      color: '#fff'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "snowflake",
@@ -547,7 +541,7 @@ const CardsList = () => {
 };
 const CardDetail = () => {
   const d = FF_DATA;
-  const c = d.cards[2]; // Luna Park's card
+  const c = d.cards[2]; // Jordan Lee's card
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
     eyebrow: `Card · ${c.type}`,
     title: `•••• ${c.last4}`,
@@ -580,8 +574,8 @@ const CardDetail = () => {
     style: {
       padding: '24px',
       borderRadius: 12,
-      background: 'linear-gradient(135deg, var(--ff-plum-700), var(--ff-plum-900))',
-      color: '#FBF5E8'
+      background: 'linear-gradient(135deg, var(--ff-teal-700), var(--ff-teal-900))',
+      color: '#fff'
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "ff-row",
@@ -606,7 +600,7 @@ const CardDetail = () => {
       letterSpacing: '0.12em',
       margin: '16px 0'
     }
-  }, "•••• •••• •••• ", c.last4), /*#__PURE__*/React.createElement("div", {
+  }, "\u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 ", c.last4), /*#__PURE__*/React.createElement("div", {
     className: "ff-row",
     style: {
       justifyContent: 'space-between'
@@ -633,7 +627,7 @@ const CardDetail = () => {
     }
   }, "CVV"), /*#__PURE__*/React.createElement("div", {
     className: "ff-mono"
-  }, "•••")))), /*#__PURE__*/React.createElement("div", {
+  }, "\u2022\u2022\u2022")))), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 18
     }
@@ -683,7 +677,7 @@ const CardDetail = () => {
     style: {
       color: 'var(--ff-fg-muted)'
     }
-  }, e.date), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("strong", null, e.merchant)), /*#__PURE__*/React.createElement("td", {
+  }, fmtDate(e.date)), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("strong", null, e.merchant)), /*#__PURE__*/React.createElement("td", {
     style: {
       color: 'var(--ff-fg-muted)'
     }
@@ -718,7 +712,7 @@ const SettingRow = ({
 const IssueCard = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
   eyebrow: "Cards",
   title: "Issue a new card",
-  sub: "Virtual cards are ready instantly. Physical cards arrive in 5–7 days."
+  sub: "Virtual cards are ready instantly. Physical cards arrive in 5\u20137 days."
 }), /*#__PURE__*/React.createElement("div", {
   className: "ff-grid",
   style: {
@@ -744,7 +738,7 @@ const IssueCard = () => /*#__PURE__*/React.createElement(React.Fragment, null, /
   className: "ff-label"
 }, "Cardholder"), /*#__PURE__*/React.createElement("select", {
   className: "ff-select"
-}, /*#__PURE__*/React.createElement("option", null, "Iris Chen — Marketing"), /*#__PURE__*/React.createElement("option", null, "Dev Patel — Eng"), /*#__PURE__*/React.createElement("option", null, "Vendor card (no holder)"))), /*#__PURE__*/React.createElement("div", {
+}, /*#__PURE__*/React.createElement("option", null, "Corey Anderson \u2014 Marketing"), /*#__PURE__*/React.createElement("option", null, "Sam Richardson \u2014 Eng"), /*#__PURE__*/React.createElement("option", null, "Vendor card (no holder)"))), /*#__PURE__*/React.createElement("div", {
   className: "ff-grid ff-grid--2"
 }, /*#__PURE__*/React.createElement("div", {
   className: "ff-field"
@@ -798,8 +792,8 @@ const IssueCard = () => /*#__PURE__*/React.createElement(React.Fragment, null, /
   style: {
     padding: '24px',
     borderRadius: 12,
-    background: 'linear-gradient(135deg, var(--ff-plum-700), var(--ff-plum-900))',
-    color: '#FBF5E8'
+    background: 'linear-gradient(135deg, var(--ff-teal-700), var(--ff-teal-900))',
+    color: '#fff'
   }
 }, /*#__PURE__*/React.createElement("div", {
   className: "ff-row",
@@ -813,7 +807,7 @@ const IssueCard = () => /*#__PURE__*/React.createElement(React.Fragment, null, /
     textTransform: 'uppercase',
     opacity: 0.7
   }
-}, "Virtual · New"), /*#__PURE__*/React.createElement(BrandMark, {
+}, "Virtual \xB7 New"), /*#__PURE__*/React.createElement(BrandMark, {
   variant: "mark",
   size: 26,
   theme: "dark"
@@ -824,7 +818,7 @@ const IssueCard = () => /*#__PURE__*/React.createElement(React.Fragment, null, /
     letterSpacing: '0.12em',
     margin: '18px 0'
   }
-}, "•••• •••• •••• ••••"), /*#__PURE__*/React.createElement("div", {
+}, "\u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022"), /*#__PURE__*/React.createElement("div", {
   className: "ff-row",
   style: {
     justifyContent: 'space-between'
@@ -839,7 +833,7 @@ const IssueCard = () => /*#__PURE__*/React.createElement(React.Fragment, null, /
   style: {
     fontSize: 13
   }
-}, "Iris Chen")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+}, "Corey Anderson")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
   style: {
     fontSize: 10,
     opacity: 0.7,
@@ -870,9 +864,9 @@ const FreezeCardModal = ({
   className: "ff-modal__head"
 }, /*#__PURE__*/React.createElement("div", {
   className: "ff-modal__title"
-}, "Freeze card · •••• 4112"), /*#__PURE__*/React.createElement("div", {
+}, "Freeze card \xB7 \u2022\u2022\u2022\u2022 4112"), /*#__PURE__*/React.createElement("div", {
   className: "ff-modal__sub"
-}, "Luna Park will not be able to charge this card until unfrozen.")), /*#__PURE__*/React.createElement("div", {
+}, "Jordan Lee will not be able to charge this card until unfrozen.")), /*#__PURE__*/React.createElement("div", {
   className: "ff-modal__body"
 }, /*#__PURE__*/React.createElement("div", {
   className: "ff-field"
@@ -880,7 +874,7 @@ const FreezeCardModal = ({
   className: "ff-label"
 }, "Reason (optional)"), /*#__PURE__*/React.createElement("textarea", {
   className: "ff-textarea",
-  placeholder: "e.g. Suspicious activity, off-policy charge…"
+  placeholder: "e.g. Suspicious activity, off-policy charge\u2026"
 })), /*#__PURE__*/React.createElement("div", {
   className: "ff-row",
   style: {
@@ -917,8 +911,8 @@ const VendorsList = () => {
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
     eyebrow: "Vendors",
     title: "Vendor directory",
-    sub: `${d.vendors.length} vendors active YTD`,
-    actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+    sub: `${d.vendors.length} vendors active YTD · Updated 12m ago`,
+    actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(RefreshButton, null), /*#__PURE__*/React.createElement("button", {
       className: "ff-btn"
     }, /*#__PURE__*/React.createElement(Icon, {
       name: "upload-simple",
@@ -936,8 +930,9 @@ const VendorsList = () => {
   }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Vendor"), /*#__PURE__*/React.createElement("th", null, "Category"), /*#__PURE__*/React.createElement("th", {
     className: "ff-num"
   }, "YTD spend"), /*#__PURE__*/React.createElement("th", {
-    className: "ff-num"
-  }, "Δ vs Q1"), /*#__PURE__*/React.createElement("th", null, "Top owner"), /*#__PURE__*/React.createElement("th", null, "Status"))), /*#__PURE__*/React.createElement("tbody", null, d.vendors.map(v => /*#__PURE__*/React.createElement("tr", {
+    className: "ff-num",
+    title: "red = spend increased"
+  }, "\u0394 vs Q1"), /*#__PURE__*/React.createElement("th", null, "Top owner"), /*#__PURE__*/React.createElement("th", null, "Status"))), /*#__PURE__*/React.createElement("tbody", null, d.vendors.map(v => /*#__PURE__*/React.createElement("tr", {
     key: v.id,
     onClick: () => ffGo('vendor-detail'),
     style: {
@@ -952,7 +947,7 @@ const VendorsList = () => {
       fontSize: 11,
       color: 'var(--ff-fg-muted)'
     }
-  }, "vendor-", v.id.slice(1).padStart(4, '0'), "@arcadialabs.co")), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("span", {
+  }, "vendor-", v.id.slice(1).padStart(4, '0'), "@reyonal.com")), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("span", {
     className: "ff-badge ff-badge--neutral ff-badge--no-dot"
   }, d.categories.find(c => c.id === v.cat).name)), /*#__PURE__*/React.createElement("td", {
     className: "ff-num"
@@ -963,7 +958,7 @@ const VendorsList = () => {
     style: {
       color: v.change > 0 ? 'var(--ff-rejected)' : v.change < 0 ? 'var(--ff-approved)' : 'var(--ff-fg-muted)'
     }
-  }, v.change > 0 ? '+' : '', v.change.toFixed(1), "%"), /*#__PURE__*/React.createElement("td", null, "Maren O."), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("span", {
+  }, v.change > 0 ? '+' : '', v.change.toFixed(1), "%"), /*#__PURE__*/React.createElement("td", null, "Marcus S."), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("span", {
     className: "ff-badge ff-badge--approved ff-badge--no-dot"
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "check",
@@ -981,7 +976,7 @@ const VendorDetail = () => {
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
     eyebrow: "Vendor",
     title: v.name,
-    sub: "EIN 47-2210331 · Tax type C-Corp · Net-30",
+    sub: "EIN 47-2210331 \xB7 Tax type C-Corp \xB7 Net-30",
     actions: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
       className: "ff-btn"
     }, /*#__PURE__*/React.createElement(Icon, {
@@ -1010,7 +1005,7 @@ const VendorDetail = () => {
   }), /*#__PURE__*/React.createElement(KpiTile, {
     label: "Avg invoice",
     value: "$1,086",
-    delta: "−4% vs Q1",
+    delta: "\u22124% vs Q1",
     trend: "up"
   }), /*#__PURE__*/React.createElement(KpiTile, {
     label: "Open invoices",
@@ -1036,7 +1031,7 @@ const VendorDetail = () => {
     className: "ff-table"
   }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Date"), /*#__PURE__*/React.createElement("th", null, "Memo"), /*#__PURE__*/React.createElement("th", null, "Owner"), /*#__PURE__*/React.createElement("th", {
     className: "ff-num"
-  }, "Amount"), /*#__PURE__*/React.createElement("th", null, "Status"))), /*#__PURE__*/React.createElement("tbody", null, [["2026-05-20", "Monthly infra", "Dev Patel", 3204.18, "approved"], ["2026-04-22", "Monthly infra", "Dev Patel", 3018.40, "approved"], ["2026-03-21", "Monthly infra", "Dev Patel", 2964.22, "approved"]].map(([dt, m, w, a, s], i) => /*#__PURE__*/React.createElement("tr", {
+  }, "Amount"), /*#__PURE__*/React.createElement("th", null, "Status"))), /*#__PURE__*/React.createElement("tbody", null, [["2026-05-20", "Monthly infra", "Sam Richardson", 3204.18, "approved"], ["2026-04-22", "Monthly infra", "Sam Richardson", 3018.40, "approved"], ["2026-03-21", "Monthly infra", "Sam Richardson", 2964.22, "approved"]].map(([dt, m, w, a, s], i) => /*#__PURE__*/React.createElement("tr", {
     key: i
   }, /*#__PURE__*/React.createElement("td", {
     className: "ff-tnum",
@@ -1063,4 +1058,3 @@ Object.assign(window, {
   VendorsList,
   VendorDetail
 });
-

@@ -15,7 +15,7 @@ const WORDMARK_PRESETS = {
     "--ff-brand-size-scale": "1.05"
   },
   "Modern grotesk": {
-    "--ff-brand-font": '"Geist", system-ui, sans-serif',
+    "--ff-brand-font": '"Inter", system-ui, sans-serif',
     "--ff-brand-style": "normal",
     "--ff-brand-weight": "700",
     "--ff-brand-letter-spacing": "-0.035em",
@@ -356,17 +356,143 @@ const SettingsWrapper = ({
     setActive: setActive
   }, map[active]);
 };
-const MobileShelf = () => /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
-  eyebrow: "Mobile \xB7 Employee POV",
-  title: "iOS \u2014 expense submission flow",
-  sub: "Iris submits a $42.80 coffee expense in 6 taps."
-}), /*#__PURE__*/React.createElement("div", {
-  className: "ff-mobile-shelf ff-scroll",
+
+/* Wraps a fixed 360x760 MobileFrame in a scaled-down box. transform (not zoom) so
+   percentage-based absolute-positioned children inside the frame still resolve
+   against the real 360x760 box before the visual scale is applied. */
+const MobileThumb = ({
+  children,
+  scale
+}) => /*#__PURE__*/React.createElement("div", {
   style: {
-    borderRadius: 'var(--ff-radius-lg)',
-    border: '1px solid var(--ff-border)'
+    width: 360 * scale,
+    height: 760 * scale,
+    overflow: 'hidden',
+    flexShrink: 0
   }
-}, /*#__PURE__*/React.createElement(MobileSignIn, null), /*#__PURE__*/React.createElement(MobileHome, null), /*#__PURE__*/React.createElement(MobileSnapReceipt, null), /*#__PURE__*/React.createElement(MobileNewExpense, null), /*#__PURE__*/React.createElement(MobileSubmitSuccess, null), /*#__PURE__*/React.createElement(MobileStatusTimeline, null)));
+}, /*#__PURE__*/React.createElement("div", {
+  style: {
+    width: 360,
+    height: 760,
+    transform: `scale(${scale})`,
+    transformOrigin: 'top left'
+  }
+}, children));
+const MOBILE_SCREENS = [{
+  label: "Sign in",
+  Comp: () => /*#__PURE__*/React.createElement(MobileSignIn, null)
+}, {
+  label: "Home",
+  Comp: () => /*#__PURE__*/React.createElement(MobileHome, null)
+}, {
+  label: "Snap receipt",
+  Comp: () => /*#__PURE__*/React.createElement(MobileSnapReceipt, null)
+}, {
+  label: "New expense",
+  Comp: () => /*#__PURE__*/React.createElement(MobileNewExpense, null)
+}, {
+  label: "Submitted",
+  Comp: () => /*#__PURE__*/React.createElement(MobileSubmitSuccess, null)
+}, {
+  label: "Status",
+  Comp: () => /*#__PURE__*/React.createElement(MobileStatusTimeline, null)
+}];
+const MOBILE_PAGES = [[0, 1, 2], [3, 4, 5]];
+const MobileShelf = () => {
+  const [page, setPage] = React.useState(0);
+  const scale = 0.72;
+  const indices = MOBILE_PAGES[page];
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
+    eyebrow: "Mobile \xB7 Employee POV",
+    title: "iOS \u2014 expense submission flow",
+    sub: "Corey submits a $42.80 coffee expense in 6 taps."
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "ff-row",
+    style: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 20,
+      marginTop: 8
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "ff-btn ff-btn--ghost ff-btn--icon",
+    "aria-label": "Previous screens",
+    disabled: page === 0,
+    onClick: () => setPage(p => Math.max(0, p - 1)),
+    style: {
+      width: 44,
+      height: 44,
+      borderRadius: 999,
+      border: '1px solid var(--ff-border-strong)',
+      flexShrink: 0
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "caret-left",
+    size: 18
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "ff-mobile-shelf",
+    style: {
+      borderRadius: 'var(--ff-radius-lg)',
+      border: '1px solid var(--ff-border)',
+      justifyContent: 'center',
+      overflow: 'visible'
+    }
+  }, indices.map(i => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement(MobileThumb, {
+    scale: scale
+  }, MOBILE_SCREENS[i].Comp()), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--ff-fg-muted)',
+      fontWeight: 500
+    }
+  }, i + 1, ". ", MOBILE_SCREENS[i].label)))), /*#__PURE__*/React.createElement("button", {
+    className: "ff-btn ff-btn--ghost ff-btn--icon",
+    "aria-label": "Next screens",
+    disabled: page === MOBILE_PAGES.length - 1,
+    onClick: () => setPage(p => Math.min(MOBILE_PAGES.length - 1, p + 1)),
+    style: {
+      width: 44,
+      height: 44,
+      borderRadius: 999,
+      border: '1px solid var(--ff-border-strong)',
+      flexShrink: 0
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "caret-right",
+    size: 18
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "ff-row",
+    style: {
+      justifyContent: 'center',
+      gap: 8,
+      marginTop: 16
+    }
+  }, MOBILE_PAGES.map((_, i) => /*#__PURE__*/React.createElement("button", {
+    key: i,
+    "aria-label": `Go to screens ${i * 3 + 1}–${i * 3 + 3}`,
+    onClick: () => setPage(i),
+    style: {
+      width: 20,
+      height: 8,
+      borderRadius: 999,
+      border: 0,
+      padding: 0,
+      cursor: 'pointer',
+      transform: i === page ? 'scaleX(1)' : 'scaleX(0.4)',
+      transformOrigin: 'center',
+      background: i === page ? 'var(--ff-primary)' : 'var(--ff-border-strong)',
+      transition: 'transform 200ms var(--ff-ease)'
+    }
+  }))));
+};
 const DEFAULT_BY_ROLE = {
   finance: "dashboard",
   manager: "dashboard-mgr",
@@ -520,8 +646,8 @@ const App = () => {
     // navigation (e.g. an Employee left looking at Vendors/Audit). Redirect to
     // that role's home if the current screen isn't in its reachable set.
     const REACHABLE = {
-      finance: ["dashboard", "expenses", "approvals", "reimburse", "reports", "cards", "vendors", "audit", "settings-policies", "settings-team", "settings-integrations", "settings-profile"],
-      manager: ["dashboard-mgr", "approvals", "expenses", "reports", "saved-report", "notif", "settings-profile"],
+      finance: ["dashboard", "expenses", "approvals", "reimburse", "reports", "cards", "vendors", "audit", "settings-policies", "settings-team", "settings-integrations", "settings-profile", "help"],
+      manager: ["dashboard-mgr", "approvals", "expenses", "reports", "saved-report", "notif", "settings-profile", "help"],
       employee: ["dashboard-emp", "new-expense", "expenses", "reimburse", "cards", "notif", "help"]
     };
     if (!(REACHABLE[r] || []).includes(screen)) setScreen(DEFAULT_BY_ROLE[r]);
