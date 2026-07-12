@@ -407,7 +407,7 @@ p { color: var(--text-2); max-width: 68ch; }
   object-position: 90% center;
 }
 @media (max-width: 1023px) { #hero-portrait { object-position: 80% center; } }
-@media (max-width: 639px)  { #hero-portrait { object-position: 55% 0%; } }
+@media (max-width: 639px)  { #hero-portrait { object-position: 76% center; transform: scale(1.12) translateY(-5%); transform-origin: center; } }
 
 .hero-overlay-lr {
   pointer-events: none;
@@ -444,7 +444,7 @@ p { color: var(--text-2); max-width: 68ch; }
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, rgba(13,4,4,0.50) 0%, rgba(13,4,4,0.40) 38%, rgba(13,4,4,0.78) 100%);
+  background: linear-gradient(180deg, rgba(13,4,4,0.55) 0%, rgba(13,4,4,0.68) 38%, rgba(13,4,4,0.78) 100%);
 }
 @media (min-width: 1024px) { .hero-overlay-mobile { display: none; } }
 

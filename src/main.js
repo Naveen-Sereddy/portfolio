@@ -137,8 +137,26 @@
   /* ------------------------------------------------------------ project data */
   const projects = [
     {
-      id: "navi",
+      id: "finflow",
       index: "01",
+      title: "FinFlow",
+      meta: "UX Case Study · B2B Fintech · 2025",
+      kind: "Client · NDA",
+      desc: "A B2B expense-management platform designed from research through usability testing across three roles: admin, manager, and employee.",
+      roles: ["User Research", "Usability Testing", "Data Visualization", "Design System"],
+      outcome: { value: "73% → 89%", label: "task completion · real internal result" },
+      caseUrl: "case-finflow/index.html",
+      shots: [
+        { src: "case-finflow/img/ui-dashboard.png", cap: "Finance admin dashboard, spend, approvals and cash at a glance" },
+        { src: "case-finflow/img/ui-manager.png",   cap: "Manager view, team spend and the approvals queue" },
+        { src: "case-finflow/img/ui-employee.png",  cap: "Employee view, submit and track expenses" },
+        { src: "case-finflow/img/ui-payouts.png",   cap: "Reimbursement payouts, scheduled and paid" },
+        { src: "case-finflow/img/ui-audit.png",     cap: "Immutable audit log, every action and actor" },
+      ],
+    },
+    {
+      id: "navi",
+      index: "02",
       title: "NAVI",
       meta: "UX Case Study · AI Fintech · Enterprise B2B · 2026",
       kind: "Concept",
@@ -152,24 +170,6 @@
         { src: "case-navi/img/ui-web-alerts.png",        cap: "Alerts — anomaly detection with goal impact and three resolution paths" },
         { src: "case-navi/img/ui-web-slack.png",         cap: "Slack embedded view — Block Kit simulation under platform constraints" },
         { src: "case-navi/img/ui-web-ai-analysis.png",   cap: "NAVI AI Analysis card — confidence score, data source, and override action" },
-      ],
-    },
-    {
-      id: "finflow",
-      index: "02",
-      title: "FinFlow",
-      meta: "UX Case Study · B2B Fintech · 2025",
-      kind: "Concept",
-      desc: "A B2B expense-management platform designed from research through usability testing across three roles: admin, manager, and employee.",
-      roles: ["User Research", "Usability Testing", "Data Visualization", "Design System"],
-      outcome: { value: "73% → 89%", label: "task completion · Maze usability testing" },
-      caseUrl: "case-finflow/index.html",
-      shots: [
-        { src: "case-finflow/img/ui-dashboard.png", cap: "Finance admin dashboard, spend, approvals and cash at a glance" },
-        { src: "case-finflow/img/ui-manager.png",   cap: "Manager view, team spend and the approvals queue" },
-        { src: "case-finflow/img/ui-employee.png",  cap: "Employee view, submit and track expenses" },
-        { src: "case-finflow/img/ui-payouts.png",   cap: "Reimbursement payouts, scheduled and paid" },
-        { src: "case-finflow/img/ui-audit.png",     cap: "Immutable audit log, every action and actor" },
       ],
     },
     {
