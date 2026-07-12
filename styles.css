@@ -690,9 +690,9 @@ p { color: var(--text-2); max-width: 68ch; }
 #projects {
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 6rem;
 }
-@media (min-width: 640px) { #projects { gap: 6rem; } }
+@media (min-width: 640px) { #projects { gap: 8rem; } }
 
 /* ── project card ──────────────────────────────────── */
 .project { display: flex; flex-direction: column; gap: 1.5rem; }
