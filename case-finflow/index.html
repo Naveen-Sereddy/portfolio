@@ -237,8 +237,8 @@ img { max-width:100%; display:block; }
         <span class="tag">Research · IA · Interaction · Design System</span>
       </div>
       <h1>FinFlow — expense management that teams actually finish.</h1>
-      <p class="lede" style="font-size:1.15rem;max-width:56ch">Designed from research through usability testing for admin, manager, and employee roles — with a measurable task completion lift.</p>
-      <p class="lede">Role-aware expense workspace for Reyonal — 48 screens, 3 roles, WCAG 2.1 AA, built on the Arctic Graphite design system.</p>
+      <p class="lede" style="font-size:1.15rem;max-width:56ch">I designed this from research all the way through usability testing, for the admin, manager, and employee roles, and the task completion numbers moved because of it.</p>
+      <p class="lede">It's a role-aware expense workspace built for Reyonal: 48 screens across 3 roles, WCAG 2.1 AA accessible, built on the Arctic Graphite design system.</p>
       <div class="metric-row">
         <div class="metric"><span class="metric-value">73% → 89%</span><span class="metric-label">Task completion</span></div>
         <div class="metric"><span class="metric-value">3</span><span class="metric-label">Roles designed for</span></div>
@@ -266,9 +266,9 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">The Problem</div>
         <h2>Three roles. One broken tool. Nobody could finish their task.</h2>
-        <p class="lede" style="font-size:1.05rem">Employees got lost in category dropdowns and abandoned mid-submission. Managers couldn't see team context before approving — so approvals stalled. Admins had no consolidated view of spend or compliance status, making month-end reconciliation a manual scramble.</p>
+        <p class="lede" style="font-size:1.05rem">Employees got stuck in category dropdowns and gave up halfway through submitting. Managers had no team context when approving, so approvals just sat there. Admins couldn't see spend or compliance in one place, which turned month-end into a manual scramble every single time.</p>
       </div>
-      <p>Usability testing confirmed what stakeholder interviews suggested: the tool was technically functional but practically unusable under real work conditions. The problem wasn't features — it was task structure.</p>
+      <p>The usability tests backed up what people told us in interviews: the tool worked fine on paper, but nobody could actually use it day to day. It wasn't missing features. The way the tasks were structured was the real problem.</p>
     </div>
   </section>
 
@@ -278,23 +278,23 @@ img { max-width:100%; display:block; }
       <div class="section-head prose">
         <div class="eyebrow">Research</div>
         <h2>What users told us before a single screen was drawn.</h2>
-        <p class="lede">12 interviews across 4 weeks, anchored on three personas — Corey (employee), Xavier (manager), and Marcus (Head of Finance, primary). Three patterns shaped every decision that followed.</p>
+        <p class="lede">I ran 12 interviews over 4 weeks, built around three personas: Corey (employee), Xavier (manager), and Marcus (Head of Finance, the primary one). Three patterns kept showing up, and they shaped basically every decision after that.</p>
       </div>
       <div class="insight-grid">
         <div class="insight-card">
           <div class="insight-num">01</div>
           <h3>Submission happens at the moment of purchase</h3>
-          <p>Corey tried to submit expenses immediately after spending — not days later at a desk. The old tool wasn't built for mobile capture, so receipts went missing and submissions piled up.</p>
+          <p>Corey wanted to submit an expense right after buying something, not days later back at his desk. The old tool had no real mobile capture, so receipts got lost and submissions kept piling up.</p>
         </div>
         <div class="insight-card">
           <div class="insight-num">02</div>
           <h3>Managers approve blindly</h3>
-          <p>Xavier's approvals arrived with no spend context — no team totals, no budget headroom, no policy flags. He either rubber-stamped everything or created bottlenecks requesting more information.</p>
+          <p>Xavier's approval queue gave him nothing to go on: no team totals, no budget headroom, no policy flags. So he'd either approve everything without really checking, or hold things up asking for more info.</p>
         </div>
         <div class="insight-card">
           <div class="insight-num">03</div>
           <h3>Admins do month-end manually</h3>
-          <p>Marcus's previous setup was four tools plus a spreadsheet to close the month. Receipt chasing alone took 6+ hours per cycle — there was no reconciliation layer, just a transaction list.</p>
+          <p>Marcus was closing the month with four different tools plus a spreadsheet. Just chasing down receipts ate up 6+ hours every cycle, because there was no real reconciliation, just a raw transaction list.</p>
         </div>
       </div>
     </div>
@@ -306,44 +306,44 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Design Decisions</div>
         <h2>Six decisions the journey map forced.</h2>
-        <p class="lede">Mapping one $42.80 expense across all three personas surfaced three specific friction points. Every decision below traces back to a moment where the old tool actively made someone's day worse.</p>
+        <p class="lede">I mapped a single $42.80 expense across all three personas and found three specific points where things broke down. Every decision below comes straight from one of those moments, a place where the old tool made someone's day harder.</p>
       </div>
       <div class="decision-grid">
 
         <div class="decision-card">
           <div class="decision-num">01</div>
           <h3>A confidence chip, not blind OCR</h3>
-          <p>The old tool auto-filled receipt data with no way to tell if it was right — Corey's exact words: "will the OCR get the amount right? Last tool got it wrong." FinFlow shows a confidence percentage inline and makes correction a single tap, not a form reset.</p>
+          <p>The old tool auto-filled receipt data and gave you no way to know if it was even right. Corey put it best: "will the OCR get the amount right? Last tool got it wrong." FinFlow shows a confidence score right on the field, and fixing it is one tap, not starting the whole form over.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">02</div>
           <h3>Smart categories, not memorized codes</h3>
-          <p>The old tool forced Corey to remember a project code from memory at the point of purchase. FinFlow suggests category and project from their recent activity — recognition over recall, right when their hands are full.</p>
+          <p>The old tool expected Corey to remember a project code off the top of his head, standing at a register. FinFlow suggests the category and project based on recent activity instead, recognizing over recalling, right when his hands are full.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">03</div>
           <h3>Policy flags do the triage for Xavier</h3>
-          <p>Xavier's real complaint: he couldn't tell which items in his queue were obviously fine. An inline policy chip on every row lets him bulk-approve the in-policy items confidently and spend his attention only on the flagged one.</p>
+          <p>Xavier's real complaint was simple: he couldn't tell which items in his queue were fine and which weren't. A policy chip on every row fixes that. He can bulk-approve everything in-policy without a second thought, and put his attention on the one flagged item.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">04</div>
           <h3>Audit log promoted to top-level nav</h3>
-          <p>It started nested three levels inside Settings. Round-2 testing showed nobody could find it — a 50% task completion rate for "find the audit log." Promoting it to a top-level sidebar item took that to 92%.</p>
+          <p>This one started buried three levels deep inside Settings. Round-2 testing showed nobody could find it: only 50% of people managed to complete "find the audit log." Moving it to a top-level sidebar item brought that up to 92%.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">05</div>
           <h3>Card issuance lives inside FinFlow</h3>
-          <p>Marcus's old workflow issued virtual cards through a separate vendor portal — one more login, one more system to reconcile. FinFlow treats the card as a first-class object: issue it, set its limit, and watch its balance without leaving the platform.</p>
+          <p>Marcus used to issue virtual cards through a separate vendor portal, another login, another system to reconcile at month-end. In FinFlow, the card is just part of the platform. You issue it, set a limit, and watch the balance without ever leaving the app.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">06</div>
           <h3>One accent color, spent deliberately</h3>
-          <p>Teal is reserved for primary actions and policy flags only — nothing else on the screen fights for that attention. Hierarchy comes from contrast and density choices, not from decorating every surface with brand color.</p>
+          <p>Teal only shows up for primary actions and policy flags. Nothing else on the screen competes for that attention. The hierarchy comes from contrast and spacing, not from painting brand color on every surface.</p>
         </div>
 
       </div>
@@ -356,7 +356,7 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Restructured in Review</div>
         <h2>The audit log used to be buried three levels deep.</h2>
-        <p class="lede">This is the real information architecture from round 2 — not a mockup. The highlighted surfaces were originally nested inside Settings, where finance admins never found them.</p>
+        <p class="lede">This is the actual information architecture from round 2, not a cleaned-up mockup. The highlighted screens were originally tucked inside Settings, right where finance admins never went looking for them.</p>
       </div>
       <div class="killed-grid">
         <div>
@@ -365,12 +365,12 @@ img { max-width:100%; display:block; }
           </div>
         </div>
         <div class="killed-copy">
-          <p>Nine top-level surfaces, three sidebars — one for each role. But the first version buried Audit log, Approvals, and the role-aware Dashboard landing inside a generic Settings menu, because that's where "configuration-feeling" screens conventionally go.</p>
+          <p>Nine top-level surfaces, three sidebars, one per role. But the first version buried Audit log, Approvals, and the role-aware Dashboard landing inside a generic Settings menu, because that's usually where anything that "feels like configuration" ends up.</p>
           <div class="killed-reason">
             <h3>Convention beat the actual task</h3>
-            <p>Finance admins open the audit log constantly — during monthly close, during a flagged-transaction dispute, during a SOC 2 review. It behaves like a primary workspace, not a setting. Filing it under Settings optimized for information-architecture tidiness, not for how often Marcus actually needed it.</p>
+            <p>Finance admins are in the audit log all the time: closing the month, disputing a flagged transaction, prepping for a SOC 2 review. It's a primary workspace, not a setting. Filing it under Settings looked tidy on a sitemap, but it had nothing to do with how often Marcus actually used it.</p>
           </div>
-          <p style="margin-top:var(--sp-4)">Round-2 testing measured it directly: task completion on "find the audit log" was 50%. Promoting it to a top-level, role-visible sidebar item — no nesting, no extra click — took that to 92%. The whole IA got flatter after that finding, not just the one item.</p>
+          <p style="margin-top:var(--sp-4)">Round-2 testing put a number on it: only 50% of people could complete "find the audit log." Once it became a top-level, role-visible sidebar item, no nesting, no extra click, that jumped to 92%. That one finding flattened the whole IA, not just this one item.</p>
         </div>
       </div>
     </div>
@@ -382,18 +382,18 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Design Evolution</div>
         <h2>From lo-fi to final — the new expense flow.</h2>
-        <p class="lede">The new expense submission flow shows the clearest progression. The two-column layout — form left, receipt right — was locked in at wireframe stage and never changed.</p>
+        <p class="lede">The new expense flow is the clearest example of how this evolved. The two-column layout, form on the left and receipt on the right, was decided at wireframe stage and stayed exactly that way through to final.</p>
       </div>
       <div class="evolution-grid">
         <div class="evolution-step">
           <div class="evolution-label"><span class="dot"></span>Lo-Fi</div>
           <div class="frame"><img src="img/02-new-expense.svg" alt="Lo-fi wireframe of new expense form with sidebar nav and approval preview routing" loading="lazy" /></div>
-          <p>Sidebar navigation, two-column form, approval-routing preview in the right panel — so submitters see exactly who reviews this before they hit submit.</p>
+          <p>Sidebar nav, a two-column form, and an approval-routing preview in the right panel, so whoever's submitting can see exactly who's going to review it before they hit submit.</p>
         </div>
         <div class="evolution-step">
           <div class="evolution-label"><span class="dot"></span>Final UI</div>
           <div class="frame"><img src="img/ui-new-expense.svg" alt="Final high-fidelity new expense form with sidebar nav, receipt dropzone, and approval preview" loading="lazy" /></div>
-          <p>Visual system applied — cold-neutral base with a teal accent, virtual card as a real object. Structure unchanged from the wireframe, because the layout decision was already right.</p>
+          <p>Same structure, now with the visual system applied: cold neutral base, teal accent, the virtual card rendered as a real object on screen. Nothing about the layout changed, because the wireframe already got it right.</p>
         </div>
       </div>
     </div>
@@ -405,7 +405,7 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Research, On the Screens</div>
         <h2>Every numbered dot traces back to a friction point.</h2>
-        <p class="lede">The manager and employee views carry the most research weight. Annotated below with the specific finding behind each element.</p>
+        <p class="lede">The manager and employee views carry the most research behind them. Below, each annotation points to the specific finding that shaped it.</p>
       </div>
 
       <div class="anno-block">
@@ -416,9 +416,9 @@ img { max-width:100%; display:block; }
           <span class="anno-dot" style="left:45%; top:68%">3</span>
         </div>
         <div class="anno-legend two-col">
-          <div class="anno-legend-item"><span class="anno-legend-num">1</span><p><strong>"Awaiting you" replaces a generic inbox count.</strong> Insight 02 — managers approve blindly without context. Naming the number as a personal queue, not a company statistic, makes it feel like Xavier's actual to-do, not a report.</p></div>
-          <div class="anno-legend-item"><span class="anno-legend-num">2</span><p><strong>Flagged sits in the row, not a separate report.</strong> Decision 03 — policy flags do the triage. Xavier sees the Marriott charge is over the lodging cap without opening it or cross-referencing a policy doc.</p></div>
-          <div class="anno-legend-item"><span class="anno-legend-num">3</span><p><strong>Spend by member, not just spend by team.</strong> A team total alone hides who's driving it. Per-member bars let Xavier spot the one outlier report without exporting anything.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">1</span><p><strong>"Awaiting you" replaces a generic inbox count.</strong> This ties back to insight 02, managers approving without context. Calling it a personal queue instead of a company stat makes it feel like Xavier's actual to-do list, not just another report.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">2</span><p><strong>Flagged sits in the row, not a separate report.</strong> This is decision 03, policy flags doing the triage work. Xavier can see the Marriott charge is over the lodging cap without opening it or checking a policy doc.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">3</span><p><strong>Spend by member, not just spend by team.</strong> A team total on its own hides who's actually driving the spend. Breaking it out by member lets Xavier spot the one outlier without exporting anything.</p></div>
         </div>
       </div>
 
@@ -430,9 +430,9 @@ img { max-width:100%; display:block; }
           <span class="anno-dot" style="left:59%; top:57%">6</span>
         </div>
         <div class="anno-legend two-col" style="margin-top:0">
-          <div class="anno-legend-item"><span class="anno-legend-num">4</span><p><strong>Upload receipt sits beside New expense, not inside it.</strong> Insight 01 — submission happens at the point of purchase. Corey can capture evidence the moment they have it, before they've even decided how to categorize the spend.</p></div>
-          <div class="anno-legend-item"><span class="anno-legend-num">5</span><p><strong>The virtual card is a real object, not a settings row.</strong> Decision 05 — card issuance used to live in a separate vendor portal. Seeing the masked number and live balance here makes the spend limit tangible, not abstract.</p></div>
-          <div class="anno-legend-item"><span class="anno-legend-num">6</span><p><strong>Status is visible without opening the row.</strong> Approved, Rejected, and why (CMO sign-off needed) are readable at a glance — Corey never has to click into an expense just to check where it stands.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">4</span><p><strong>Upload receipt sits beside New expense, not inside it.</strong> This is insight 01, submission happening right at the point of purchase. Corey can grab the receipt the second he has it, before he's even figured out how to categorize the spend.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">5</span><p><strong>The virtual card is a real object, not a settings row.</strong> Decision 05 again, card issuance used to sit in a separate vendor portal. Seeing the masked number and live balance right here makes the spend limit feel real instead of abstract.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">6</span><p><strong>Status is visible without opening the row.</strong> Approved, rejected, and the reason why (like needing CMO sign-off) are all readable at a glance. Corey doesn't have to open an expense just to check its status.</p></div>
         </div>
       </div>
     </div>
@@ -444,7 +444,7 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Final UI</div>
         <h2>One design system. Five screens.</h2>
-        <p class="lede">Shared component primitives — tables, filters, status chips, approval actions — adapted to each role's primary task. Consistency across roles reduced the learning curve when users switched contexts.</p>
+        <p class="lede">The same component primitives, tables, filters, status chips, approval actions, get adapted to whatever each role actually needs to do. Keeping it consistent across roles meant people didn't have to relearn the product every time they switched context.</p>
       </div>
       <div class="shot-grid">
         <div class="shot-item"><div class="frame"><img src="img/ui-dashboard.png" alt="Admin dashboard with spend overview, approvals queue, and policy compliance" loading="lazy" /></div><span class="shot-cap">Admin Dashboard</span></div>
@@ -462,7 +462,7 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Accessibility</div>
         <h2>Audited, not assumed.</h2>
-        <p class="lede">The "AA WCAG 2.1" tag in the hero isn't a claim — it's a measured result. Every foreground/background pair was sampled against AA and AAA thresholds, focus order was verified against the visual reading order, and keyboard-only navigation was tested end to end.</p>
+        <p class="lede">That "AA WCAG 2.1" tag up in the hero isn't just a claim, it's something I actually checked. I sampled every foreground and background pair against AA and AAA thresholds, checked focus order against the visual reading order, and tested keyboard-only navigation end to end.</p>
       </div>
       <div class="access-grid">
         <div class="frame" style="--ar:1760/1100">
@@ -482,7 +482,7 @@ img { max-width:100%; display:block; }
   <section class="section">
     <div class="container">
       <div class="quote-block">
-        <p>"We didn't just polish screens. We changed the task structure so users could finish faster, with fewer errors, and less cognitive fatigue — and measured it."</p>
+        <p>"We didn't just polish the screens. We changed how the tasks were structured, so people could finish faster, make fewer mistakes, and feel less drained doing it. Then we actually measured that."</p>
         <p class="quote-source">Design outcome · real internal result</p>
       </div>
     </div>
@@ -494,7 +494,7 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Outcome</div>
         <h2>One system, three roles, measurable improvement.</h2>
-        <p class="lede" style="font-size:1.05rem">The final design unified admin, manager, and employee into one consistent platform with role-specific dashboards and shared component primitives. Task completion on the core expense workflows lifted from 73% to 89%, a real internal result measured after launch, not a self-run test. Error rate and time-to-complete dropped in every tested flow.</p>
+        <p class="lede" style="font-size:1.05rem">The final design brought admin, manager, and employee together into one consistent platform, with dashboards built for each role but sharing the same component primitives underneath. Task completion on the core expense workflows went from 73% to 89%, a real internal number measured after launch, not something I ran myself. Error rate and time-to-complete both dropped across every flow we tested.</p>
       </div>
       <div class="btn-row">
         <a class="btn btn-primary" href="ui_kits/finflow/index.html" target="_blank" rel="noopener">Open live prototype ↗</a>
@@ -514,15 +514,15 @@ img { max-width:100%; display:block; }
       <div class="reflection-list">
         <div class="reflection-item">
           <div class="reflection-num">1</div>
-          <p>I'd test the mobile snap-receipt flow earlier. It was sketched in the first round but deprioritized during wireframing — the most common real-world submission scenario got the least design attention.</p>
+          <p>I'd test the mobile snap-receipt flow a lot earlier. It got sketched in round one, then got pushed down the list during wireframing, which is backwards, since it's the most common way people actually submit an expense.</p>
         </div>
         <div class="reflection-item">
           <div class="reflection-num">2</div>
-          <p>The three role dashboards share components but were designed in sequence rather than in parallel. Designing them side-by-side from the start would have surfaced shared layout decisions earlier and reduced rework.</p>
+          <p>The three dashboards share components, but I designed them one after another instead of side by side. Doing them in parallel from the start would've surfaced the shared layout decisions sooner and saved some rework.</p>
         </div>
         <div class="reflection-item">
           <div class="reflection-num">3</div>
-          <p>Task completion rate was the right metric — but I'd add time-on-task as a secondary measure from the first usability round, not just the final one. Speed matters as much as completion for a daily-use tool.</p>
+          <p>Task completion rate was the right thing to measure, but I'd add time-on-task from the very first usability round, not just the last one. For a tool people use every day, speed matters just as much as whether they finish.</p>
         </div>
       </div>
     </div>
@@ -542,7 +542,7 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Personas</div>
               <h2>Three roles, three workdays.</h2>
-              <p class="lede">12 interviews, 4 weeks, anchored on one primary persona (Marcus, Finance) supported by two secondaries who hand work off to him.</p>
+              <p class="lede">12 interviews over 4 weeks, built around one primary persona, Marcus in Finance, supported by two secondary personas who hand work off to him.</p>
             </div>
             <div class="frame" style="--ar:1760/1100;max-width:1000px;margin-inline:auto">
               <img src="img/01.png" alt="Three FinFlow personas — Corey Anderson (employee), Xavier Bartlett (manager), and Marcus Stoinis (finance admin) with goals, pain points, and behaviors" loading="lazy" />
@@ -553,7 +553,7 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Journey Map</div>
               <h2>Submit, approve, settle.</h2>
-              <p class="lede">A single $42.80 team-coffee expense walked across three personas and six stages. Three friction points, highlighted below, drove the highest-leverage design decisions.</p>
+              <p class="lede">I walked a single $42.80 team-coffee expense across all three personas and six stages. Three friction points came out of that, highlighted below, and they drove the decisions with the biggest payoff.</p>
             </div>
             <div class="frame" style="--ar:1760/1100;max-width:1000px;margin-inline:auto">
               <img src="img/02.png" alt="FinFlow journey map tracing a single expense across trigger, capture, review, submit, approve, and resolve stages with three highlighted friction points" loading="lazy" />
@@ -564,24 +564,24 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Early Sketch Notes</div>
               <h2>Paper first. Before committing to anything.</h2>
-              <p class="lede">Rough sketches let me test structure without pixel polish getting in the way. Each one answered a specific question about task flow before moving to digital.</p>
+              <p class="lede">Sketching on paper let me test structure before pixel polish got in the way. Each one answered a specific question about the task flow before I moved anything to digital.</p>
             </div>
             <div class="note-grid">
               <div class="note-card">
                 <h3>Mobile-first home screen</h3>
-                <p>Surfaced "Snap receipt" as the primary action — because research showed most employee submissions happen at the point of purchase, not at a desk. The home screen needed to serve that moment.</p>
+                <p>Made "Snap receipt" the primary action, because the research was clear: most submissions happen right at the point of purchase, not later at a desk. The home screen had to work for that moment specifically.</p>
               </div>
               <div class="note-card">
                 <h3>Split-screen sign-in</h3>
-                <p>Brand messaging ("The whole company's spend, in flow.") on the left means SSO authentication doesn't feel cold or purely transactional. New users absorb the product value proposition before they even log in.</p>
+                <p>Brand messaging on the left ("The whole company's spend, in flow.") keeps SSO sign-in from feeling cold and purely transactional. New users get a sense of the product before they've even logged in.</p>
               </div>
               <div class="note-card">
                 <h3>Two-column expense form</h3>
-                <p>Form fields on the left, receipt drop zone on the right — so users can fill metadata and upload evidence in parallel. The old tool forced sequential steps, which caused drop-off halfway through.</p>
+                <p>Form fields on the left, receipt drop zone on the right, so people can fill in the details and upload the receipt at the same time. The old tool made you do it step by step, and that's exactly where people dropped off.</p>
               </div>
               <div class="note-card">
                 <h3>Inline approvals queue</h3>
-                <p>Row-based list with Approve/Reject per row — managers can process a full queue without opening individual submissions. Designed for the manager's actual task: moving fast through a backlog, not reviewing one expense at a time.</p>
+                <p>A row-based list with Approve/Reject right on each row, so managers can clear a whole queue without opening a single submission. This matches what managers actually do: move fast through a backlog, not review one expense at a time.</p>
               </div>
             </div>
           </div>
@@ -590,35 +590,35 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Lo-Fi Wireframes</div>
               <h2>Digital wireframes. Decisions locked in.</h2>
-              <p class="lede">Moving from sketch to lo-fi is where task structure gets tested. Each wireframe answered whether the layout actually let users complete their primary task without confusion.</p>
+              <p class="lede">Going from sketch to lo-fi is where the task structure actually gets tested. Each wireframe had to answer one question: does this layout let people finish their main task without getting confused?</p>
             </div>
             <div class="note-media-grid">
               <div class="note-media-item">
                 <div class="frame"><img src="img/02-new-expense.svg" alt="Lo-fi wireframe: new expense form with sidebar nav and approval preview routing" loading="lazy" /></div>
                 <div class="note-rationale">
                   <div class="rationale-bar"></div>
-                  <div class="rationale-text"><strong>Approval preview before submitting</strong>Added approval routing preview in the right panel — employees see exactly who will review the expense before hitting submit. Removes the anxiety of "where does this go?" that caused hesitation and abandoned forms.</div>
+                  <div class="rationale-text"><strong>Approval preview before submitting</strong>Added an approval routing preview in the right panel, so employees can see exactly who's going to review the expense before they hit submit. That gets rid of the "wait, where does this even go?" feeling that made people hesitate and sometimes abandon the form.</div>
                 </div>
               </div>
               <div class="note-media-item">
                 <div class="frame"><img src="img/03-manager-dashboard.svg" alt="Lo-fi wireframe: manager dashboard with KPI cards, team spend chart, and approvals queue" loading="lazy" /></div>
                 <div class="note-rationale">
                   <div class="rationale-bar"></div>
-                  <div class="rationale-text"><strong>KPIs above the fold, queue one scroll away</strong>Four KPI cards (team spend, pending approvals, budget status, flagged items) appear before any interaction. Managers see the number they need in under two seconds — then scroll to act on the queue below.</div>
+                  <div class="rationale-text"><strong>KPIs above the fold, queue one scroll away</strong>Four KPI cards, team spend, pending approvals, budget status, flagged items, show up before you do anything at all. A manager gets the number they need in under two seconds, then scrolls down to actually work the queue.</div>
                 </div>
               </div>
               <div class="note-media-item">
                 <div class="frame"><img src="img/01-all-expenses.svg" alt="Lo-fi wireframe: all expenses list with tab filters and status badges" loading="lazy" /></div>
                 <div class="note-rationale">
                   <div class="rationale-bar"></div>
-                  <div class="rationale-text"><strong>Status as the primary sort dimension</strong>Tabs (All / Pending / Approved / Flagged / Rejected) replace dropdown filtering — because status is the first thing every role filters by. Surface-level navigation beats a buried filter panel for the most common action.</div>
+                  <div class="rationale-text"><strong>Status as the primary sort dimension</strong>Tabs (All, Pending, Approved, Flagged, Rejected) replace a dropdown filter, because status is the first thing everyone filters by no matter their role. For the most common action, putting it right on the surface beats hiding it in a filter panel.</div>
                 </div>
               </div>
               <div class="note-media-item">
                 <div class="frame"><img src="img/04-payouts.svg" alt="Lo-fi wireframe: payouts page with KPI cards, batch table, and schedule slide-over" loading="lazy" /></div>
                 <div class="note-rationale">
                   <div class="rationale-bar"></div>
-                  <div class="rationale-text"><strong>Batch payout dispatch in one action</strong>Finance admins can select multiple reimbursements and schedule them in one slide-over panel — instead of approving one at a time. Designed for the admin's biggest pain: month-end takes hours, not minutes.</div>
+                  <div class="rationale-text"><strong>Batch payout dispatch in one action</strong>Finance admins can select several reimbursements and schedule all of them from one slide-over panel, instead of approving them one by one. This was built directly for the admin's biggest pain point: month-end taking hours instead of minutes.</div>
                 </div>
               </div>
             </div>
@@ -628,7 +628,7 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Mid-Fidelity Wireframes</div>
               <h2>Real labels, real density.</h2>
-              <p class="lede">Same three screens. Real component shells, real copy, real numbers. One accent color, reserved for primary actions and policy flags — so hierarchy emerges from contrast, not chrome.</p>
+              <p class="lede">Same three screens, but now with real component shells, real copy, and real numbers. One accent color, used only for primary actions and policy flags, so the hierarchy comes from contrast instead of decoration.</p>
             </div>
             <div class="frame" style="--ar:1760/1100;max-width:1000px;margin-inline:auto">
               <img src="img/05.png" alt="Mid-fidelity wireframes for admin dashboard, expenses ledger, and manager approvals with real copy and component density" loading="lazy" />
@@ -639,7 +639,7 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Design System</div>
               <h2>A small system, fully spent.</h2>
-              <p class="lede">A teal accent over a cold-neutral graphite scale, two type faces, one four-step spacing scale. Every screen in FinFlow is built from this sheet — no one-off styles past round 2.</p>
+              <p class="lede">A teal accent on top of a cold neutral graphite scale, two typefaces, and a four-step spacing scale. Every screen in FinFlow comes from this one sheet, no one-off styles past round 2.</p>
             </div>
             <div class="frame" style="--ar:1760/1100;max-width:1000px;margin-inline:auto">
               <img src="img/06.png" alt="FinFlow design system foundations — color tokens, spacing scale, typography, and component variants" loading="lazy" />
@@ -650,7 +650,7 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Interactive Prototype</div>
               <h2>From receipt to reporting, in three clicks.</h2>
-              <p class="lede">A working flow across three personas and three viewports — submit, approve, and see it land live in the audit log.</p>
+              <p class="lede">A working flow across all three personas and three viewports: submit it, approve it, watch it land in the audit log in real time.</p>
             </div>
             <div class="frame" style="--ar:1760/1100;max-width:1000px;margin-inline:auto">
               <img src="img/09.png" alt="FinFlow interactive prototype walkthrough — Corey submits a receipt on iOS, Xavier reviews it, Marcus sees it land in reporting" loading="lazy" />
