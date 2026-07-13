@@ -231,7 +231,7 @@ img { max-width:100%; display:block; }
         <span class="tag">UX · UI · IA · Design System</span>
       </div>
       <h1>MedBridge — a patient portal that finally makes sense.</h1>
-      <p class="lede" style="font-size:1.15rem;max-width:56ch">End-to-end redesign unifying appointments, prescriptions, records, and billing into one calm, secure, accessible experience.</p>
+      <p class="lede" style="font-size:1.15rem;max-width:56ch">A full redesign that pulls appointments, prescriptions, records, and billing into one calm, secure, accessible place.</p>
       <div class="metric-row">
         <div class="metric"><span class="metric-value">5</span><span class="metric-label">Core flows unified</span></div>
         <div class="metric"><span class="metric-value">AA</span><span class="metric-label">WCAG 2.1</span></div>
@@ -257,9 +257,9 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">The Problem</div>
         <h2>Patients juggled four disconnected portals and still couldn't find basic information.</h2>
-        <p class="lede" style="font-size:1.05rem">The existing patient portal scattered appointments, prescriptions, medical records, and billing across separate sections with no shared navigation. Patients called the support line for simple tasks. The mental model didn't match real-world healthcare needs.</p>
+        <p class="lede" style="font-size:1.05rem">The old patient portal scattered appointments, prescriptions, medical records, and billing across separate sections, each with its own navigation. People called support for things that should've taken thirty seconds to do themselves. The portal just didn't match how patients actually think about their own care.</p>
       </div>
-      <p>This wasn't a visual problem. It was a structural one. The portal was built as four separate tools — and patients experienced it exactly that way.</p>
+      <p>It wasn't a visual problem, it was a structural one. The portal had been built as four separate tools, and that's exactly how it felt to use.</p>
     </div>
   </section>
 
@@ -269,23 +269,23 @@ img { max-width:100%; display:block; }
       <div class="section-head prose">
         <div class="eyebrow">Research</div>
         <h2>Three patterns that shaped every decision that followed.</h2>
-        <p class="lede">User interviews, support-call analysis, and competitive review across five existing healthcare portals — anchored on two archetypes at opposite ends of tech literacy: Sarah, a mobile-first patient, and Robert, an older caregiver.</p>
+        <p class="lede">I ran user interviews, dug through support-call logs, and reviewed five competing healthcare portals. Two personas anchored the whole thing: Sarah, a mobile-first patient, and Robert, an older caregiver who's far less comfortable with tech.</p>
       </div>
       <div class="insight-grid">
         <div class="insight-card">
           <div class="insight-num">01</div>
           <h3>Patients treat the portal as one product</h3>
-          <p>Every interview participant described "the portal" as a single thing — but experienced it as four disconnected tools. Navigation drop-off was highest when users tried to switch between service areas.</p>
+          <p>Every person I interviewed called it "the portal," like it was one thing. In practice they were living with four disconnected tools. Drop-off spiked whenever someone tried to move between service areas.</p>
         </div>
         <div class="insight-card">
           <div class="insight-num">02</div>
           <h3>Appointments are the front door</h3>
-          <p>Scheduling and managing visits was the most frequent entry point. Yet the appointment flow required the most clicks and had the most dead-end navigation paths of any section in the portal.</p>
+          <p>Scheduling and managing visits was how most people entered the portal in the first place. And yet that flow needed the most clicks of any section, with more dead ends than anywhere else.</p>
         </div>
         <div class="insight-card">
           <div class="insight-num">03</div>
-          <h3>Stress amplifies every usability flaw</h3>
-          <p>Patients access health portals during anxious moments — before a procedure, after a diagnosis, when a prescription runs out. Cognitive load was already high before any interaction began. Clarity wasn't a nice-to-have.</p>
+          <h3>Stress makes every flaw worse</h3>
+          <p>People open health portals at anxious moments: right before a procedure, right after a diagnosis, when a prescription's about to run out. Their mental bandwidth is already spent before they even open the app. So clarity here isn't a nice extra, it's the whole job.</p>
         </div>
       </div>
     </div>
@@ -297,44 +297,44 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Design Decisions</div>
         <h2>Six decisions the journey map forced.</h2>
-        <p class="lede">Mapping Sarah's path from "I should see my cardiologist" to a confirmed visit surfaced two specific friction points. Every decision below traces back to a moment where the old portal made an anxious task harder than it needed to be.</p>
+        <p class="lede">Mapping Sarah's path from "I should see my cardiologist" to an actual confirmed visit turned up two clear friction points. Every decision below traces back to a moment where the old portal made an already-anxious task harder than it needed to be.</p>
       </div>
       <div class="decision-grid">
 
         <div class="decision-card">
           <div class="decision-num">01</div>
           <h3>In-network by default, sorted by fit</h3>
-          <p>Sarah's real friction: too many results, in-network status unclear, choice paralysis. The redesign defaults every search to in-network and sorts by soonest availability plus best match — not an alphabetical wall of providers.</p>
+          <p>Sarah's real problem was too many results, unclear in-network status, and choice paralysis. So the redesign defaults every search to in-network providers and sorts by soonest availability and best match, instead of just dumping an alphabetical list on her.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">02</div>
           <h3>Real availability, not a guessing game</h3>
-          <p>Her second friction: few slots fit a 9-to-5 schedule, and availability was hard to parse. Evening and telehealth slots are highlighted up front, with real open times shown before she commits to a provider.</p>
+          <p>Her second problem: barely any slots fit a 9-to-5 schedule, and figuring out what was actually open took too much digging. Now evening and telehealth slots get highlighted up front, and real open times show before she even commits to a provider.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">03</div>
           <h3>Plain language, not clinical jargon</h3>
-          <p>"Understand lab results in plain language, not codes" was Sarah's stated goal. Test results carry a plain-language "Reviewed" status instead of raw lab codes — the same information, without requiring a medical degree to parse it.</p>
+          <p>Sarah put it plainly: she wanted to understand lab results without needing a translator. So test results now carry a "Reviewed" status in plain English instead of raw lab codes. Same information, no medical degree required to read it.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">04</div>
           <h3>One accent color, spent only on action</h3>
-          <p>Blue appears exactly where a decision is live — a primary button, an active nav item, a selected date. Everything else stays neutral, so the one thing that needs attention doesn't have to compete with brand color for it.</p>
+          <p>Blue shows up only where a decision is actually live: a primary button, an active nav item, a selected date. Everything else stays neutral. That way the one thing that needs attention isn't competing with a bunch of brand color for it.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">05</div>
           <h3>44px targets, built for shaky hands</h3>
-          <p>Robert's pain point: afraid of clicking the wrong button and breaking something. Every interactive control spans a minimum 44×44px hit area with 8px of clear space around it — comfortable for older caregivers and anyone with reduced motor precision.</p>
+          <p>Robert told us he was afraid of clicking the wrong button and breaking something. Every interactive control now spans at least a 44×44px hit area with 8px of clear space around it. That's comfortable for older caregivers, and honestly for anyone whose motor precision isn't perfect.</p>
         </div>
 
         <div class="decision-card">
           <div class="decision-num">06</div>
           <h3>A keyboard path, not a visual afterthought</h3>
-          <p>Tab order follows the visual reading order exactly, a skip-link sits first in the DOM, and every icon-only control carries a descriptive aria-label. Verified with an actual Tab-and-VoiceOver pass, not just a color-contrast checker.</p>
+          <p>Tab order matches the visual reading order exactly, a skip-link sits first in the DOM, and every icon-only control has a descriptive aria-label. I checked all of this with an actual Tab-and-VoiceOver pass, not just a contrast checker.</p>
         </div>
 
       </div>
@@ -347,13 +347,13 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Scoped Out, On Purpose</div>
         <h2>Robert needed two accounts. He got one.</h2>
-        <p class="lede">Not everything in the research made it into this version — and that's a decision worth being honest about.</p>
+        <p class="lede">Not everything from the research made it into this version, and that's worth being upfront about.</p>
       </div>
       <div class="scoped-box">
         <h3>The caregiver dual-account gap</h3>
-        <p>Robert's persona goal was explicit: "keep his and Elena's appointments in one organized place." His real pain point was just as direct — switching between his own account and hers was confusing, on top of an interface he already found dense and hard to read.</p>
-        <p>Designing real caregiver access — a second identity with permissioned visibility into a spouse's records, not just a shared login — would have changed several information-architecture decisions documented here: how the dashboard greets the user, how appointments get attributed, how billing splits across two people. That's a redesign of the account model, not a feature added on top of one.</p>
-        <p>I scoped this version around a single-patient account and documented the gap rather than bolt on a shortcut that would have undermined the "one calm, organized place" goal for every other patient. It's the first thing in the reflection below, and it's the most consequential thing I'd build next.</p>
+        <p>Robert's goal was explicit: keep his and Elena's appointments in one organized place. His actual pain point was just as direct: switching between his own account and hers was confusing, on top of an interface he already found dense and hard to read.</p>
+        <p>Real caregiver access means a second identity with permissioned visibility into a spouse's records, not just a shared login. Building that would have changed several information-architecture decisions in this project: how the dashboard greets the user, how appointments get attributed, how billing splits across two people. That's a redesign of the account model, not a feature bolted onto one.</p>
+        <p>So I scoped this version around a single-patient account and wrote the gap down instead of forcing in a shortcut that would've undermined the "one calm, organized place" goal for everyone else. It's the first thing I mention in the reflection below, and it's the most consequential thing I'd build next.</p>
       </div>
     </div>
   </section>
@@ -364,18 +364,18 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Design Evolution</div>
         <h2>From lo-fi to final — the dashboard.</h2>
-        <p class="lede">The dashboard shows the clearest progression. KPI cards above the fold, two content blocks below — the layout decision was made at wireframe stage and never changed.</p>
+        <p class="lede">The dashboard shows the clearest before-and-after. KPI cards above the fold, two content blocks below: that layout got locked in at the wireframe stage and never changed after that.</p>
       </div>
       <div class="evolution-grid">
         <div class="evolution-step">
           <div class="evolution-label"><span class="dot"></span>Lo-Fi</div>
           <div class="frame"><img src="img/02-dashboard.png" alt="Lo-fi dashboard wireframe with KPI cards, appointments list, and health summary" loading="lazy" /></div>
-          <p>Two-column structure below the KPI row — Upcoming Appointments left, Health Summary right. Confirmed at wireframe stage that patients needed both without choosing one over the other.</p>
+          <p>Two-column layout below the KPI row: Upcoming Appointments on the left, Health Summary on the right. At wireframe stage it was already clear patients needed both, not one or the other.</p>
         </div>
         <div class="evolution-step">
           <div class="evolution-label"><span class="dot"></span>Final UI</div>
           <div class="frame"><img src="img/ui-dashboard.png" alt="Final high-fidelity patient dashboard screen" loading="lazy" /></div>
-          <p>Visual system applied — stat cards, accent-led appointment rows, a vitals grid. The structure from the wireframe is unchanged, because the hierarchy was already solved.</p>
+          <p>The visual system went on top: stat cards, accent-led appointment rows, a vitals grid. The wireframe's structure stayed put, because the hierarchy was already right.</p>
         </div>
       </div>
     </div>
@@ -387,7 +387,7 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Research, On the Screens</div>
         <h2>Every numbered dot traces back to a friction point.</h2>
-        <p class="lede">The dashboard and provider search carry the most research weight. Annotated below with the specific finding behind each element.</p>
+        <p class="lede">The dashboard and provider search carry the most research weight of any screens in the flow. Below, each element is annotated with the specific finding it came from.</p>
       </div>
 
       <div class="anno-block">
@@ -398,9 +398,9 @@ img { max-width:100%; display:block; }
           <span class="anno-dot" style="left:83%; top:45%">3</span>
         </div>
         <div class="anno-legend two-col">
-          <div class="anno-legend-item"><span class="anno-legend-num">1</span><p><strong>Pending balance sits beside unread messages, not buried in Billing.</strong> Insight 02 — appointments and money are both front-door tasks. Sarah shouldn't need to leave the dashboard to know she owes $248.</p></div>
-          <div class="anno-legend-item"><span class="anno-legend-num">2</span><p><strong>Confirmed, Telehealth, and Pending are visible without opening a row.</strong> Insight 03 — stress amplifies friction. A patient scanning for "what do I need to do next" gets the answer in the list, not behind a click.</p></div>
-          <div class="anno-legend-item"><span class="anno-legend-num">3</span><p><strong>Vitals carry a "Confirmed" status, the same pattern as appointments.</strong> One visual language for "this is settled" reduces the number of things a stressed patient has to learn to read this screen.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">1</span><p><strong>Pending balance sits beside unread messages, not buried in Billing.</strong> This is Insight 02: appointments and money are both front-door tasks. Sarah shouldn't have to leave the dashboard just to find out she owes $248.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">2</span><p><strong>Confirmed, Telehealth, and Pending are visible without opening a row.</strong> This ties to Insight 03: stress makes friction worse. Someone scanning for "what do I need to do next" gets the answer right in the list, no click required.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">3</span><p><strong>Vitals carry a "Confirmed" status, the same pattern as appointments.</strong> One visual language for "this is settled" means a stressed patient has fewer things to learn just to read the screen.</p></div>
         </div>
       </div>
 
@@ -412,9 +412,9 @@ img { max-width:100%; display:block; }
           <span class="anno-dot" style="left:42%; top:40%">6</span>
         </div>
         <div class="anno-legend two-col" style="margin-top:0">
-          <div class="anno-legend-item"><span class="anno-legend-num">4</span><p><strong>Insurance filter defaults to a live decision, not a dead-end dropdown.</strong> Decision 01 — the journey map's biggest friction was in-network status being unclear. Filtering by insurance is a first-class control, not buried in Advanced Search.</p></div>
-          <div class="anno-legend-item"><span class="anno-legend-num">5</span><p><strong>Rating and years of experience sit directly under the name.</strong> Choice paralysis came from too many undifferentiated results — a trust signal at a glance narrows the decision without opening every profile.</p></div>
-          <div class="anno-legend-item"><span class="anno-legend-num">6</span><p><strong>Book is one tap from the search results, not three screens deep.</strong> Decision 02 — real availability shown up front means Sarah commits to a slot without a separate "check availability" round trip.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">4</span><p><strong>Insurance filter defaults to a live decision, not a dead-end dropdown.</strong> This is Decision 01. The journey map's biggest friction was unclear in-network status, so filtering by insurance is now a first-class control instead of something buried in Advanced Search.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">5</span><p><strong>Rating and years of experience sit directly under the name.</strong> Choice paralysis came from too many undifferentiated results. A trust signal at a glance narrows the decision without making someone open every profile.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">6</span><p><strong>Book is one tap from the search results, not three screens deep.</strong> This is Decision 02. Showing real availability up front means Sarah commits to a slot without a separate "check availability" round trip.</p></div>
         </div>
       </div>
     </div>
@@ -426,7 +426,7 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Final UI</div>
         <h2>One system. Five unified flows.</h2>
-        <p class="lede">Appointments, records, prescriptions, billing, and profile all share one navigation model and one component language. Consistency reduces cognitive load when patients are already under stress.</p>
+        <p class="lede">Appointments, records, prescriptions, billing, and profile all share one navigation model and one set of components. When people are already stressed, not having to relearn the interface every time they switch sections matters.</p>
       </div>
       <div class="shot-grid">
         <div class="shot-item"><div class="frame"><img src="img/ui-dashboard.png" alt="Patient dashboard with upcoming appointments, prescriptions, and billing summary" loading="lazy" /></div><span class="shot-cap">Dashboard</span></div>
@@ -444,7 +444,7 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Accessibility</div>
         <h2>Audited, not assumed.</h2>
-        <p class="lede">The "AA WCAG 2.1" tag in the hero is a measured result, not a checkbox. The dashboard was evaluated specifically for the widest-literacy user in the research — Robert, 68, low-to-moderate tech comfort — not just for AA compliance in the abstract.</p>
+        <p class="lede">The "AA WCAG 2.1" tag in the hero is a measured result, not a checkbox I ticked. I evaluated the dashboard specifically against Robert: 68 years old, low-to-moderate tech comfort, the least confident user in the research, not just against AA compliance as an abstract standard.</p>
       </div>
       <div class="access-grid">
         <div class="frame" style="--ar:1760/1100">
@@ -464,7 +464,7 @@ img { max-width:100%; display:block; }
   <section class="section">
     <div class="container">
       <div class="quote-block">
-        <p>"This wasn't a visual redesign. It was a clarity redesign. Every decision was tested against one question: would a patient under stress still understand what to do next?"</p>
+        <p>"This wasn't really a visual redesign. It was a clarity redesign. I tested every decision against one question: would a patient under stress still know what to do next?"</p>
         <p class="quote-source">Design principle · MedBridge</p>
       </div>
     </div>
@@ -476,7 +476,7 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Outcome</div>
         <h2>One portal, five unified flows.</h2>
-        <p class="lede" style="font-size:1.05rem">The final redesign collapsed four disconnected portal sections into one system with consistent navigation, predictable interactions, and full WCAG 2.1 AA compliance. Appointment booking, prescription refills, billing, medical records, and profile management share one mental model and one component language.</p>
+        <p class="lede" style="font-size:1.05rem">The final redesign folds four disconnected portal sections into one system, with consistent navigation, predictable interactions, and full WCAG 2.1 AA compliance. Appointment booking, prescription refills, billing, medical records, and profile management now share one mental model and one set of components.</p>
       </div>
       <div class="btn-row">
         <a class="btn btn-primary" href="ui_kits/portal/index.html" target="_blank" rel="noopener">Open prototype ↗</a>
@@ -495,11 +495,11 @@ img { max-width:100%; display:block; }
       <div class="reflection-list">
         <div class="reflection-item">
           <div class="reflection-num">1</div>
-          <p>The mobile experience was designed after desktop. Given that appointment check-ins and prescription refills happen most often on phones, I'd reverse that order — mobile-first wireframing, then scale up to desktop.</p>
+          <p>I designed the mobile experience after desktop. Appointment check-ins and prescription refills mostly happen on phones, so next time I'd flip that order: mobile-first wireframing, then scale up.</p>
         </div>
         <div class="reflection-item">
           <div class="reflection-num">2</div>
-          <p>Accessibility was built into components, but I didn't test with screen reader users during wireframing. I'd add at least one assistive-technology session early in the lo-fi stage, not only as a final audit before handoff.</p>
+          <p>I built accessibility into the components, but I didn't test with screen reader users during wireframing. Next time I'd run at least one assistive-technology session early, in the lo-fi stage, instead of saving it for a final audit before handoff.</p>
         </div>
       </div>
     </div>
@@ -519,7 +519,7 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Personas</div>
               <h2>Two archetypes, opposite ends of tech literacy.</h2>
-              <p class="lede">Sarah (36, mobile-first, high tech literacy) and Robert (68, caregiver, low-to-moderate tech literacy) anchor every design decision — spanning the widest gap in comfort with technology MedBridge has to serve.</p>
+              <p class="lede">Sarah (36, mobile-first, high tech literacy) and Robert (68, caregiver, low-to-moderate tech literacy) anchor every design decision here. Together they span the widest gap in tech comfort MedBridge needs to serve.</p>
             </div>
             <div class="frame" style="--ar:1760/1100;max-width:1000px;margin-inline:auto">
               <img src="img/01.png" alt="Two MedBridge personas — Sarah Johnson, a mobile-first patient, and Robert Alvarez, an older caregiver — with goals, pain points, and behaviors" loading="lazy" />
@@ -530,7 +530,7 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Journey Map</div>
               <h2>Realize, find, choose, confirm, done.</h2>
-              <p class="lede">Sarah's path from realizing she needs care to a confirmed visit. Two friction points — finding an in-network doctor and finding a slot that fits — drove the redesign priorities.</p>
+              <p class="lede">Sarah's path from realizing she needs care to an actual confirmed visit. Two friction points drove the redesign priorities: finding an in-network doctor, and finding a slot that fits her schedule.</p>
             </div>
             <div class="frame" style="--ar:1760/1100;max-width:1000px;margin-inline:auto">
               <img src="img/02.png" alt="MedBridge user journey map for booking an appointment, from realize and decide through post-booking, with emotion curve and two highlighted friction points" loading="lazy" />
@@ -541,7 +541,7 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Information Architecture</div>
               <h2>One home, seven sections, three levels deep.</h2>
-              <p class="lede">A flat IA with nine top-level surfaces, built shallow on purpose — every screen reachable in two taps from the dashboard.</p>
+              <p class="lede">A flat IA with nine top-level surfaces, built shallow on purpose. Every screen is reachable in two taps from the dashboard.</p>
             </div>
             <div class="frame" style="--ar:1760/1100;max-width:1000px;margin-inline:auto">
               <img src="img/03.png" alt="MedBridge information architecture — one authenticated home branching into seven primary sections, three levels deep, 26 pages" loading="lazy" />
@@ -552,24 +552,24 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Early Sketch Notes</div>
               <h2>Paper first. Before committing to anything.</h2>
-              <p class="lede">Hand-drawn sketches let me stress-test layout decisions without getting attached to pixels. Each sketch answered one structural question before moving to digital.</p>
+              <p class="lede">Hand-drawn sketches let me pressure-test layout ideas without getting attached to pixels too early. Each one answered a single structural question before I moved to digital.</p>
             </div>
             <div class="note-grid">
               <div class="note-card">
                 <h3>Split-screen sign-in</h3>
-                <p>Brand copy ("Your health, simplified.") and trust signals — HIPAA Compliant, 4.9 Rating, 200K+ Patients — on the left means new patients understand what they're signing into before entering credentials. For a health portal, trust has to arrive before the password field.</p>
+                <p>Brand copy ("Your health, simplified.") and trust signals like HIPAA Compliant, 4.9 Rating, and 200K+ Patients sit on the left, so new patients know what they're signing into before they even enter credentials. For a health portal, trust needs to show up before the password field does.</p>
               </div>
               <div class="note-card">
                 <h3>Dashboard with KPI cards above the fold</h3>
-                <p>Upcoming appointments, active prescriptions, pending balance, and unread messages surface as cards before any scroll — the four things patients check first. Patients under stress shouldn't need to hunt.</p>
+                <p>Upcoming appointments, active prescriptions, pending balance, and unread messages all show up as cards before any scrolling: the four things patients check first. Nobody stressed should have to go hunting for that.</p>
               </div>
               <div class="note-card">
                 <h3>Appointments list with inline actions</h3>
-                <p>Status tabs (All / Upcoming / Past / Cancelled) at the top — not in a dropdown. Telehealth appointments show a "Join" button directly in the list row, so starting a virtual visit never requires a detail screen first.</p>
+                <p>Status tabs (All / Upcoming / Past / Cancelled) sit at the top instead of hiding in a dropdown. Telehealth appointments get a "Join" button right in the list row, so starting a virtual visit never means opening a detail screen first.</p>
               </div>
               <div class="note-card">
                 <h3>Calendar with persistent day-detail panel</h3>
-                <p>Selecting a date reveals the appointment card and a "Book This Day" button in a panel on the right — without navigating away from the calendar. Checking and booking on the same day stays in one context.</p>
+                <p>Selecting a date reveals the appointment card and a "Book This Day" button in a panel on the right, without leaving the calendar. Checking and booking on the same day stays in one place.</p>
               </div>
             </div>
           </div>
@@ -578,35 +578,35 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Lo-Fi Wireframes</div>
               <h2>Digital wireframes. Decisions locked in.</h2>
-              <p class="lede">Moving to digital wireframes tested whether the sketch decisions actually held up at screen fidelity — before any visual design work began.</p>
+              <p class="lede">Moving to digital wireframes was the real test of whether the sketch decisions held up at screen fidelity, before any visual design work started.</p>
             </div>
             <div class="note-media-grid">
               <div class="note-media-item">
                 <div class="frame" style="--ar:1560/1162"><img src="img/01-sign-in.png" alt="Lo-fi sign-in wireframe with email and password fields and Google SSO option" loading="lazy" /></div>
                 <div class="note-rationale">
                   <div class="rationale-bar"></div>
-                  <div class="rationale-text"><strong>One clear path in, SSO as the escape hatch</strong>The email/password form carries full visual weight; Google SSO sits below as a secondary option instead of competing for attention. Fewer decisions before a patient reaches their appointments.</div>
+                  <div class="rationale-text"><strong>One clear path in, SSO as the escape hatch</strong>The email/password form carries full visual weight. Google SSO sits below as a secondary option instead of competing for attention, which means fewer decisions before a patient reaches their appointments.</div>
                 </div>
               </div>
               <div class="note-media-item">
                 <div class="frame" style="--ar:1560/1162"><img src="img/02-dashboard.png" alt="Lo-fi dashboard wireframe with KPI cards, appointments list, and health summary" loading="lazy" /></div>
                 <div class="note-rationale">
                   <div class="rationale-bar"></div>
-                  <div class="rationale-text"><strong>Two-column below the KPI cards</strong>Upcoming Appointments on the left, Health Summary on the right — patients see both action items and health data without choosing one over the other.</div>
+                  <div class="rationale-text"><strong>Two-column below the KPI cards</strong>Upcoming Appointments on the left, Health Summary on the right. Patients see both action items and health data without having to pick one.</div>
                 </div>
               </div>
               <div class="note-media-item">
                 <div class="frame" style="--ar:1560/1162"><img src="img/03-appointments.png" alt="Lo-fi appointments wireframe with tab filters and a dense appointments table" loading="lazy" /></div>
                 <div class="note-rationale">
                   <div class="rationale-bar"></div>
-                  <div class="rationale-text"><strong>Tabbed status filtering over a dense table</strong>Upcoming / Past / Cancelled tabs sit above a 14-row table instead of a status column patients have to scan — matching how people actually think about appointments: what's next, not what happened.</div>
+                  <div class="rationale-text"><strong>Tabbed status filtering over a dense table</strong>Upcoming / Past / Cancelled tabs sit above a 14-row table instead of a status column patients have to scan. It matches how people actually think about appointments: what's next, not what already happened.</div>
                 </div>
               </div>
               <div class="note-media-item">
                 <div class="frame" style="--ar:1560/1162"><img src="img/04-book-appointment.png" alt="Lo-fi book appointment wireframe with provider, date, and time-slot steps and a persistent summary panel" loading="lazy" /></div>
                 <div class="note-rationale">
                   <div class="rationale-bar"></div>
-                  <div class="rationale-text"><strong>Three-step booking with a persistent summary</strong>Provider → Date → Confirm keeps patients oriented across the flow, while the summary panel on the right locks in the selection so nothing gets lost switching between the date grid and time slots.</div>
+                  <div class="rationale-text"><strong>Three-step booking with a persistent summary</strong>Provider → Date → Confirm keeps patients oriented through the flow. The summary panel on the right locks in the selection so nothing gets lost while switching between the date grid and time slots.</div>
                 </div>
               </div>
             </div>
@@ -616,7 +616,7 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Mid-Fidelity Wireframes</div>
               <h2>Real labels, real hierarchy.</h2>
-              <p class="lede">Same three screens with defined components, real copy, and basic hierarchy. One accent — blue — introduced strictly for primary actions and active states.</p>
+              <p class="lede">Same three screens, now with defined components, real copy, and basic hierarchy. One accent color, blue, introduced strictly for primary actions and active states.</p>
             </div>
             <div class="frame" style="--ar:1760/1100;max-width:1000px;margin-inline:auto">
               <img src="img/05.png" alt="MedBridge mid-fidelity wireframes for patient dashboard, find a doctor and booking, and medical records" loading="lazy" />
@@ -627,7 +627,7 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Design System</div>
               <h2>A single source of truth.</h2>
-              <p class="lede">WCAG-checked color roles, a 1.20 type scale, a 4px spacing rhythm, and the core components every MedBridge screen is assembled from.</p>
+              <p class="lede">WCAG-checked color roles, a 1.20 type scale, a 4px spacing rhythm, and the core components every MedBridge screen gets built from.</p>
             </div>
             <div class="frame" style="--ar:1760/1100;max-width:1000px;margin-inline:auto">
               <img src="img/06.png" alt="MedBridge design system foundations — color palette, typography, spacing scale, and core components" loading="lazy" />
@@ -638,7 +638,7 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Interactive Prototype</div>
               <h2>The primary path, fully clickable.</h2>
-              <p class="lede">30 real screens: sign in → dashboard → book → pick date & time → confirm → success. Real screen-to-screen navigation, not a slideshow.</p>
+              <p class="lede">30 real screens: sign in → dashboard → book → pick date & time → confirm → success. It's real screen-to-screen navigation, not a slideshow pretending to be a product.</p>
             </div>
             <div class="frame" style="--ar:1760/1100;max-width:1000px;margin-inline:auto">
               <img src="img/09.png" alt="MedBridge interactive prototype walkthrough of the appointment booking flow across sign in, dashboard, doctor selection, date and time, confirm, and success screens" loading="lazy" />
@@ -657,7 +657,7 @@ img { max-width:100%; display:block; }
     <div class="container">
       <p class="next-label">Next case study</p>
       <a class="next-link" href="../case-finflow/index.html">FinFlow <span aria-hidden="true">→</span></a>
-      <p class="next-sub">Role-based B2B expense management — designed from research through usability testing for admin, manager, and employee with a measurable task completion lift.</p>
+      <p class="next-sub">Role-based B2B expense management, designed from research through usability testing for admin, manager, and employee, with a measurable task completion lift.</p>
     </div>
   </section>
 

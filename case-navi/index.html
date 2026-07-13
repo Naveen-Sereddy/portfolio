@@ -269,7 +269,7 @@ img { max-width:100%; display:block; }
         <span class="tag">Research · UX · UI · Design System</span>
       </div>
       <h1>NAVI — the financial wellness benefit that finds you in Slack.</h1>
-      <p class="lede" style="font-size:1.15rem;max-width:58ch">An embedded AI financial advisor designed for enterprise employees — not a separate app, but a benefit that surfaces inside the tools people already use every day.</p>
+      <p class="lede" style="font-size:1.15rem;max-width:58ch">An AI financial advisor built for enterprise employees. Not a separate app — a benefit that shows up inside the tools people already use every day.</p>
       <div class="metric-row">
         <div class="metric"><span class="metric-value">4.2 min → 38 sec</span><span class="metric-label">Time to act on recommendation</span></div>
         <div class="metric"><span class="metric-value">4.4 / 5</span><span class="metric-label">Trust score</span></div>
@@ -297,9 +297,9 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">The Problem</div>
         <h2>87% of employees report financial stress. Adoption of the tools meant to help is under 5%.</h2>
-        <p class="lede" style="font-size:1.05rem">Companies invest heavily in financial wellness benefits. The programs exist. The tools exist. But employees don't use them — because the tools are built wrong.</p>
+        <p class="lede" style="font-size:1.05rem">Companies pour money into financial wellness benefits. The programs exist. The tools exist. But employees don't use them, because the tools are built wrong.</p>
       </div>
-      <p>They're designed like banking apps: clinical interfaces, data-heavy dashboards, cold blues. They amplify the anxiety they're supposed to reduce. People enroll, open the app once, and never return. The problem isn't the benefit — it's the surface it lives on.</p>
+      <p>They're designed like banking apps: clinical interfaces, data-heavy dashboards, cold blues. They make the anxiety worse instead of easing it. People enroll, open the app once, and never come back. The benefit itself isn't the problem. Where it lives is.</p>
 
       <div style="margin-top:var(--sp-4)">
         <div class="quote-inline">
@@ -320,31 +320,31 @@ img { max-width:100%; display:block; }
       <div class="section-head prose">
         <div class="eyebrow">Discovery</div>
         <h2>19 interviews. One finding that changed the whole product.</h2>
-        <p class="lede">I conducted 7 interviews with HR managers and 12 with individual employees across two mid-sized tech companies. The goal was to understand why adoption was so low — and whether the problem was the product or the surface it lived on.</p>
+        <p class="lede">I talked to 7 HR managers and 12 individual employees across two mid-sized tech companies. I wanted to know why adoption was so low, and whether the problem was the product itself or the surface it lived on.</p>
       </div>
 
       <div class="insight-grid">
         <div class="insight-card">
           <div class="insight-num">01</div>
           <h3>People don't open finance apps</h3>
-          <p>Every employee interviewed already had a finance tool — Mint, their bank app, a budget spreadsheet. None opened them regularly. "I live in Slack" was said by 9 of 12.</p>
+          <p>Every employee I talked to already had a finance tool: Mint, their bank app, a budget spreadsheet. None of them opened it regularly. Nine of twelve said some version of "I live in Slack."</p>
         </div>
         <div class="insight-card">
           <div class="insight-num">02</div>
           <h3>Embarrassment blocks activation</h3>
-          <p>HR managers flagged that branding an app "financial wellness" triggers avoidance. Employees don't want colleagues knowing they signed up. Embedded tools remove that barrier — nothing to download, nothing visible.</p>
+          <p>HR managers told me that branding something "financial wellness" makes people avoid it. Nobody wants coworkers knowing they signed up. An embedded tool sidesteps that: nothing to download, nothing visible.</p>
         </div>
         <div class="insight-card">
           <div class="insight-num">03</div>
           <h3>Proactive beats reactive</h3>
-          <p>Users consistently described wanting to be told when something needed attention — not to go looking for it. "If it just pinged me when I was off track, I'd trust it more than any dashboard."</p>
+          <p>Over and over, people said they wanted to be told when something needed attention, not to go looking for it themselves. "If it just pinged me when I was off track, I'd trust it more than any dashboard."</p>
         </div>
       </div>
 
       <div class="prose" style="max-width:800px">
         <div class="pivot-box">
           <h3>The Pivot</h3>
-          <p>The original concept was a standalone financial wellness app. After the interviews, the design problem became clear: people don't open finance apps — they open Slack, their payroll portal, and HR dashboards. NAVI became an embedded AI agent that surfaces where attention already lives. Not an app. A benefit that finds you.</p>
+          <p>I started out designing a standalone financial wellness app. After the interviews, it was obvious that was wrong: people don't open finance apps, they open Slack, their payroll portal, HR dashboards. So NAVI became an embedded AI agent that shows up where attention already lives. Not an app. A benefit that finds you.</p>
         </div>
 
         <p style="margin-top:var(--sp-4);font-size:.95rem">Honestly — the pivot wasn't a clean whiteboard moment. I had three weeks of standalone-app work already done: a full IA map, a navigation model, early screens I liked. Interview nine is where it stopped being deniable — an employee said "I live in Slack" almost word-for-word like the three before her, and I remember thinking my information architecture was an answer to a question nobody had asked. I kept the research, kept two screens, and threw away the rest. It stung for about a day. Then the design got dramatically easier, because "what can survive inside Slack?" is a much sharper question than "what should a finance app have?"</p>
@@ -389,7 +389,7 @@ img { max-width:100%; display:block; }
         <div class="decision-card">
           <div class="decision-num">05</div>
           <h3>Confidence scores everywhere</h3>
-          <p>Every AI recommendation surfaces a confidence percentage and the data it was based on. Transparency reduces skepticism and keeps users engaged with the system's reasoning rather than dismissing it. Participants spent significantly more time on cards that showed confidence breakdowns — and rated them as more trustworthy even when confidence was only 74%.</p>
+          <p>Every AI recommendation shows a confidence percentage and the data behind it. Being upfront about the reasoning cuts down skepticism, people actually engage with it instead of dismissing it outright. Participants spent noticeably more time on cards with a confidence breakdown, and rated them as more trustworthy even when the score was only 74%.</p>
         </div>
 
         <div class="decision-card">
@@ -421,7 +421,7 @@ img { max-width:100%; display:block; }
           <p>Six KPI tiles. A 12-month trend line. A category donut. A merchant heatmap. A forecast band. It looked like a serious analytics product, and I was proud of it for about a week. Two things killed it:</p>
           <div class="killed-reason">
             <h3>It couldn't survive Slack</h3>
-            <p>The Block Kit constraint allows no custom charts, max three actions, text-first. Every panel on this screen assumes a canvas that the primary delivery surface doesn't have. If the dashboard's core value was charts, the embedded version would always be a lesser product — backwards for an embedded-first strategy.</p>
+            <p>Block Kit doesn't allow custom charts, caps you at three actions, and it's text-first. Every panel on this screen assumed a canvas the primary surface just doesn't have. If the dashboard's whole value was in its charts, the embedded version would always be the weaker sibling, which is backwards when embedded is supposed to be the point.</p>
           </div>
           <div class="killed-reason">
             <h3>The research had already voted against it</h3>
@@ -439,7 +439,7 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Design Evolution</div>
         <h2>From lo-fi to final — web and mobile.</h2>
-        <p class="lede">The dashboard shows the clearest progression on both surfaces. Paycheck-first hierarchy and the proactive AI banner were established in the wireframe and never changed — only the visual system was layered on top.</p>
+        <p class="lede">The dashboard shows the clearest progression on both surfaces. Paycheck-first layout and the proactive AI banner were locked in at the wireframe stage and never changed. Only the visual system got layered on top later.</p>
       </div>
 
       <div class="pair-block">
@@ -480,7 +480,7 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Research, On the Screens</div>
         <h2>Every numbered dot is an interview finding.</h2>
-        <p class="lede">Research doesn't live in a separate section of this product — it's load-bearing. These are the two screens where the interviews shaped the most pixels, annotated with the specific finding behind each element.</p>
+        <p class="lede">Research isn't a separate section tacked onto this product, it's load-bearing. These are the two screens where the interviews shaped the most pixels, each one annotated with the specific finding behind it.</p>
       </div>
 
       <div class="anno-block">
@@ -521,7 +521,7 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Web Final UI</div>
         <h2>Eight screens. One visual language.</h2>
-        <p class="lede">The full-featured standalone portal — onboarding through privacy controls. The claymorphism system holds across every screen: same shadow formula, same card radius, same color palette. The design language communicates warmth and trust before the AI says a word.</p>
+        <p class="lede">The full standalone portal, onboarding through privacy controls. The claymorphism system holds across every screen: same shadow formula, same card radius, same palette. It reads as warm and trustworthy before NAVI says a single word.</p>
       </div>
 
       <div class="pair-block">
@@ -558,7 +558,7 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Mobile Final UI</div>
         <h2>Four screens. Same claymorphism, pocket-sized.</h2>
-        <p class="lede">The mobile prototype applies the same visual language — soft clay surfaces, sky-blue background, Nunito + DM Mono type system — to the constraints of a single-viewport phone screen. The bottom nav replaces the sidebar; cards stack instead of sit side by side.</p>
+        <p class="lede">The mobile version uses the same visual language (soft clay surfaces, sky-blue background, Nunito + DM Mono type) squeezed into a single-viewport phone screen. Bottom nav replaces the sidebar, and cards stack instead of sitting side by side.</p>
       </div>
 
       <div class="shot-grid four-col">
@@ -676,7 +676,7 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Web Lo-Fi Wireframes</div>
               <h2>Digital wireframes locked in structure. Constraints sharpened the design.</h2>
-              <p class="lede">Moving from paper to digital wireframes, I pressure-tested the layout of every screen against the Slack Block Kit constraint — if a feature required a chart or more than three buttons in the embedded view, it got redesigned. This constraint eliminated several dashboard ideas that looked smart on paper but couldn't survive the simplest delivery surface. The wireframe phase also surfaced the NAVI ANALYSIS card pattern: a structured response format with confidence percentage, data source citation, and a mandatory override button — one of the defining design decisions of the entire product.</p>
+              <p class="lede">Moving from paper to digital, I tested every screen's layout against the Slack Block Kit constraint. If a feature needed a chart or more than three buttons in the embedded view, it got redesigned. That killed off a few dashboard ideas that looked smart on paper but couldn't survive the simplest version of the surface. This is also where the NAVI ANALYSIS card pattern showed up: confidence percentage, data source citation, mandatory override button. One of the decisions the whole product hangs on.</p>
             </div>
             <div class="note-media-grid">
               <div class="note-media-item">
