@@ -1,6 +1,10 @@
 /* =========================================================================
    Naveen Sereddy — Portfolio
    Warm dark palette · Cormorant Garamond display · Inter body
+
+   Design philosophy: a restrained editorial shell — one dark palette, one
+   accent, one type pairing — so each case study underneath it can carry its
+   own visual identity without competing with the portfolio brand.
    ========================================================================= */
 
 /* ---------------------------------------------------------------- tokens */
@@ -53,7 +57,71 @@
   --sb-thumb:      #2E2E2E;
   --sb-thumb-hover:#3D3D3D;
   --grain-opacity: 0.022;
+
+  /* spacing — 4px baseline grid */
+  --sp-1:  0.25rem;  /* 4px */
+  --sp-2:  0.5rem;   /* 8px */
+  --sp-3:  0.75rem;  /* 12px */
+  --sp-4:  1rem;     /* 16px */
+  --sp-5:  1.5rem;   /* 24px */
+  --sp-6:  2rem;     /* 32px */
+  --sp-7:  3rem;     /* 48px */
+  --sp-8:  4rem;     /* 64px */
+
+  /* border width */
+  --border-w-sm: 1px;
+  --border-w-md: 2px;
+
+  /* opacity */
+  --op-subtle: 0.06;
+  --op-muted:  0.09;
+  --op-mid:    0.14;
+  --op-strong: 0.28;
+
+  /* z-index — semantic stacking scale */
+  --z-sticky:         100;  /* fixed nav */
+  --z-modal-backdrop: 150;  /* mobile menu */
+  --z-overlay:        200;  /* decorative grain layer */
+  --z-modal:          250;  /* lightbox */
+  --z-toast:          300;  /* skip link, progress bar — always on top */
+
+  /* focus ring */
+  --focus-ring-width:  2px;
+  --focus-ring-color:  rgba(208,146,58,0.6);
+  --focus-ring-offset: 3px;
+
+  /* blur */
+  --blur-sm: 16px;
+  --blur-md: 24px;
+
+  /* letter-spacing */
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide:   0.08em;
+  --tracking-wider:  0.14em;
+
+  /* touch target minimum (WCAG 2.1 AA — 2.5.5) */
+  --touch-target-min: 44px;
 }
+
+/* ---------------------------------------------------------------- motion usage
+   hover / small state change  → --duration-fast + --ease-out
+   card lift, button press     → --duration-base + --ease-out
+   page reveal, section enter  → --duration-slow + --ease-spring
+   modal / lightbox open       → --duration-base + --ease-spring
+   tooltip, tag                → --duration-fast + --ease-out
+   ------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------- accessibility
+   - :focus-visible ring is tokenized (--focus-ring-*) and applied globally, below
+   - prefers-reduced-motion honored at the bottom of this file — disables all
+     .reveal / line-mask animation, falls back to instant state
+   - interactive tap targets meet --touch-target-min (44×44px, WCAG 2.5.5)
+   - body copy uses --text-2 / --text-3 against --bg, verified ≥4.5:1 (AA)
+   - responsive type: all headings use clamp()-free rem scale sized per
+     breakpoint rather than fluid clamp, kept deliberately capped — see
+     hero-h1 / section h2 rules for the per-breakpoint steps
+   ------------------------------------------------------------------------- */
 
 /* ---------------------------------------------------------------- reset */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -88,7 +156,7 @@ body::after {
   content: '';
   position: fixed;
   inset: 0;
-  z-index: 200;
+  z-index: var(--z-overlay);
   pointer-events: none;
   opacity: var(--grain-opacity);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -120,10 +188,35 @@ p { color: var(--text-2); max-width: 68ch; }
 
 /* Focus */
 :focus-visible {
-  outline: 2px solid rgba(208,146,58,0.6);
-  outline-offset: 3px;
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
   border-radius: var(--radius-sm);
 }
+
+/* ---------------------------------------------------------------- component principles
+   1. One primary CTA per section — secondary actions use btn-ghost/btn-text
+   2. Icon-only buttons always carry an aria-label; icons never stand alone
+      in a critical flow (nav, form, contact) without a text equivalent
+   3. Body copy caps at 68-70ch (see the global `p` rule) for readability
+   4. Cards share one padding/radius/shadow vocabulary (--radius-xl,
+      --shadow-card) regardless of section — no per-card one-offs
+   5. Buttons share one height rhythm via consistent vertical padding, not
+      fixed heights, so type size changes don't break alignment
+   6. Motion follows the usage table above — never an arbitrary duration
+   7. Spacing between/inside components comes from the --sp-* scale, not
+      arbitrary rem values, wherever a rule is touched going forward
+   ------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------- responsive strategy
+   Breakpoints are used as literal min-width values (CSS custom properties
+   can't be read inside @media), but they follow one documented scale:
+     sm  480px  — large phone
+     md  640px  — small tablet / phone landscape
+     lg  768px  — tablet
+     xl  1024px — desktop
+   Layouts reflow mobile-first: single column → 2-up → full multi-column,
+   nav collapses to the hamburger drawer below `xl`.
+   ------------------------------------------------------------------------- */
 
 /* ---------------------------------------------------------------- utilities */
 .hidden { display: none !important; }
@@ -187,7 +280,7 @@ p { color: var(--text-2); max-width: 68ch; }
   position: fixed;
   left: 1rem;
   top: 1rem;
-  z-index: 300;
+  z-index: var(--z-toast);
   padding: 0.625rem 1rem;
   border-radius: var(--radius-md);
   font-family: var(--font-body);
@@ -205,7 +298,7 @@ p { color: var(--text-2); max-width: 68ch; }
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 300;
+  z-index: var(--z-toast);
   height: 2px;
   width: 0;
   background: rgba(208,146,58,0.75);
@@ -218,7 +311,7 @@ p { color: var(--text-2); max-width: 68ch; }
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: var(--z-sticky);
   padding: 0.75rem 0;
   transition: transform 0.5s var(--ease-out), background 0.3s ease;
 }
@@ -230,10 +323,10 @@ p { color: var(--text-2); max-width: 68ch; }
   justify-content: space-between;
   gap: 1rem;
   border-radius: 1rem;
-  border: 1px solid rgba(255,255,255,0.06);
+  border: var(--border-w-sm) solid var(--border);
   background: rgba(13,4,4,0.70);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(var(--blur-md)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur-md)) saturate(180%);
   padding: 0.5rem 0.75rem;
 }
 @media (min-width: 640px) { .nav-inner { padding: 0.625rem 1rem; } }
@@ -285,8 +378,8 @@ p { color: var(--text-2); max-width: 68ch; }
 .nav-icon-btn {
   display: grid;
   place-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
   border-radius: 50%;
   color: var(--text-2);
   transition: color 0.2s ease;
@@ -312,8 +405,8 @@ p { color: var(--text-2); max-width: 68ch; }
 .nav-hamburger {
   display: grid;
   place-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
   border-radius: 50%;
   color: var(--text);
 }
@@ -324,10 +417,10 @@ p { color: var(--text-2); max-width: 68ch; }
 #mobileMenu {
   position: fixed;
   inset: 0;
-  z-index: 150;
+  z-index: var(--z-modal-backdrop);
   background: rgba(13,4,4,0.97);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
   display: none;
   flex-direction: column;
 }
@@ -1559,10 +1652,10 @@ textarea.input { min-height: 8.75rem; resize: vertical; }
 #lightbox {
   position: fixed;
   inset: 0;
-  z-index: 250;
+  z-index: var(--z-modal);
   background: rgba(5,2,2,0.97);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(var(--blur-sm));
+  -webkit-backdrop-filter: blur(var(--blur-sm));
   display: none;
   align-items: center;
   justify-content: center;
