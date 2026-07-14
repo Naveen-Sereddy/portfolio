@@ -15,7 +15,7 @@
   --bg-4:          #24180d;
   --text:          #f0e4d3;
   --text-2:        #b8a58f;
-  --text-3:        #7c6a5a;
+  --text-3:        #96826d;
   --accent:        #d0923a;
   --accent-soft:   #b57d2b;
   --accent-muted:  rgba(208,146,58,0.09);
@@ -117,7 +117,9 @@
    - prefers-reduced-motion honored at the bottom of this file — disables all
      .reveal / line-mask animation, falls back to instant state
    - interactive tap targets meet --touch-target-min (44×44px, WCAG 2.5.5)
-   - body copy uses --text-2 / --text-3 against --bg, verified ≥4.5:1 (AA)
+   - body copy uses --text-2 / --text-3 against --bg and --bg-3, verified
+     ≥5.1:1 (AA) in both cases — text-3 was raised from #7c6a5a (3.6-3.9:1,
+     failing) to #96826d in 2026-07 to actually meet the standard
    - responsive type: all headings use clamp()-free rem scale sized per
      breakpoint rather than fluid clamp, kept deliberately capped — see
      hero-h1 / section h2 rules for the per-breakpoint steps
@@ -181,6 +183,7 @@ p { color: var(--text-2); max-width: 68ch; }
 ::selection { background: rgba(208,146,58,0.28); color: var(--text); }
 
 /* Scrollbar */
+html { scrollbar-color: var(--sb-thumb) var(--sb-track); }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--sb-track); }
 ::-webkit-scrollbar-thumb { background: var(--sb-thumb); border-radius: 99px; border: 2px solid var(--sb-track); }
@@ -300,9 +303,11 @@ p { color: var(--text-2); max-width: 68ch; }
   top: 0;
   z-index: var(--z-toast);
   height: 2px;
-  width: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
   background: rgba(208,146,58,0.75);
-  transition: width 0.1s linear;
+  transition: transform 0.1s linear;
 }
 
 /* ---------------------------------------------------------------- NAV */
@@ -1451,8 +1456,8 @@ p { color: var(--text-2); max-width: 68ch; }
 .social-icon {
   display: grid;
   place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
   border-radius: var(--radius-xl);
   border: 1px solid rgba(255,255,255,0.12);
   background: rgba(255,255,255,0.03);
@@ -1781,7 +1786,7 @@ textarea.input { min-height: 8.75rem; resize: vertical; }
 .btn-sm {
   font-size: 0.8rem;
   padding: 0.5rem 1.25rem;
-  min-height: 0;
+  min-height: var(--touch-target-min);
 }
 
 .btn-text {
@@ -1797,6 +1802,7 @@ textarea.input { min-height: 8.75rem; resize: vertical; }
   background: none;
   border: none;
   padding: 0;
+  min-height: var(--touch-target-min);
   position: relative;
   transition: color 0.2s ease;
 }
