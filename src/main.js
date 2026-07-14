@@ -364,6 +364,14 @@
   } else {
     revealEls.forEach((el) => el.classList.add("is-in"));
   }
+  // will-change stays on .reveal until its own transition finishes, then
+  // drops so dozens of revealed nodes don't sit promoted to their own
+  // compositor layer for the rest of the page's life.
+  document.addEventListener("transitionend", (e) => {
+    if (e.target.classList && e.target.classList.contains("is-in")) {
+      e.target.style.willChange = "auto";
+    }
+  });
 
   /* ------------------------------------------------------------ count-up */
   const counters = $$("[data-count]");
@@ -401,7 +409,7 @@
     const h   = document.documentElement;
     const max = h.scrollHeight - h.clientHeight;
     const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
-    if (progress) progress.style.width = pct + "%";
+    if (progress) progress.style.transform = `scaleX(${pct / 100})`;
     if (nav) nav.classList.toggle("scrolled", h.scrollTop > 20);
     ticking = false;
   };
@@ -573,29 +581,22 @@
   if (!reduceMotion && finePointer) {
     $$(".btn-primary, .btn-ghost").forEach((btn) => {
       const strength = 0.22;
+      // Inline transform always beats the CSS :hover/:active rules, so the
+      // lift (-2px) and press (scale .98) states are composed here instead
+      // of left to the stylesheet, or the magnet effect silently cancels them.
+      let mx = 0, my = 0, pressed = false;
+      const apply = () => {
+        btn.style.transform = `translate(${mx}px, ${my}px) translateY(-2px)${pressed ? " scale(0.98)" : ""}`;
+      };
       btn.addEventListener("pointermove", (e) => {
         const r = btn.getBoundingClientRect();
-        const x = e.clientX - (r.left + r.width / 2);
-        const y = e.clientY - (r.top  + r.height / 2);
-        btn.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
+        mx = (e.clientX - (r.left + r.width / 2)) * strength;
+        my = (e.clientY - (r.top  + r.height / 2)) * strength;
+        apply();
       });
-      btn.addEventListener("pointerleave", () => { btn.style.transform = ""; });
+      btn.addEventListener("pointerdown", () => { pressed = true; apply(); });
+      btn.addEventListener("pointerup", () => { pressed = false; apply(); });
+      btn.addEventListener("pointerleave", () => { btn.style.transform = ""; pressed = false; });
     });
-  }
-
-  /* ------------------------------------------------------------ parallax (hero portrait) */
-  if (!reduceMotion) {
-    const px = $$("[data-parallax]");
-    if (px.length) {
-      window.addEventListener("scroll", () => {
-        requestAnimationFrame(() => {
-          const y = window.scrollY;
-          px.forEach((el) => {
-            const amt = parseFloat(el.dataset.parallax) || 0.05;
-            el.style.transform = `translate3d(0, ${y * amt * -1}px, 0)`;
-          });
-        });
-      }, { passive: true });
-    }
   }
 })();
