@@ -138,7 +138,7 @@ h1,h2,h3 { font-family:'Cormorant Garamond',Georgia,serif; line-height:1.15; mar
       <p>Product vision: <em>"The whole company's spend, in flow."</em> One workspace where a Finance Admin can see, decide, and close the month without leaving for QuickBooks, Slack, or Excel. Employees submit in 30 seconds on mobile. Managers approve in 2 clicks. Auditors get an immutable trail.</p>
       <ul class="cover-goals">
         <li>30+ desktop screens across submission, approval, cards, reimbursements, reports, settings, and audit</li>
-        <li>A 6-screen mobile flow for the on-the-go employee</li>
+        <li>An 8-screen mobile flow for the on-the-go employee</li>
         <li>Light + dark themes defined as tokens from day one</li>
         <li>WCAG 2.1 AA across every surface</li>
       </ul>
@@ -197,7 +197,7 @@ const SCREENS = [
   { id:'payout-detail', label:'Payout detail', section:'employee', note:"Answers the exact confidence anchor persona research called out: “when will I get paid” — without a Slack message to Finance." },
   { id:'notif', label:'Notifications center', section:'employee', note:"The in-product home for the alerts Corey relies on: one push when approved, one when paid." },
   { id:'help', label:'Help / Support', section:'employee', note:"Kept out of Corey's “My work” nav group so it doesn't compete with the two things they actually do daily." },
-  { id:'mobile-flow', label:'Employee mobile flow (6 screens)', section:'employee', note:"A deliberately separate, employee-only experience (Option 2 of 3): Sign in, Home, Snap receipt, New expense, Submit success, Status timeline. Mobile parity with desktop was rejected as “wasteful” — Corey never approves, manages cards, or builds reports." },
+  { id:'mobile-flow', label:'Employee mobile flow (8 screens)', section:'employee', note:"A deliberately separate, employee-only experience (Option 2 of 3): Sign in, Home, Snap receipt, New expense, Submit success, Status timeline, My expenses, My card. Full desktop parity was rejected as wasteful; the mobile build only covers what actually happens on a phone. Corey never approves, builds reports, or sees other people's spend here — checking their own expense history and managing their own card made the cut, batch approvals and audit logs didn't." },
 
   // ---------------- Shared / System ----------------
   { id:'signin', label:'Sign in', section:'shared', note:"Shared auth surface for all three roles — Okta SSO listed above email/password for the keyboard-first power users." },
