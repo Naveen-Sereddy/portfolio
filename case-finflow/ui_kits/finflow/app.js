@@ -334,7 +334,7 @@ const SCREEN_REGISTRY = [
 {
   id: "mobile-flow",
   group: "Mobile",
-  label: "Employee mobile flow (6 screens)",
+  label: "Employee mobile flow (8 screens)",
   chrome: "mobile",
   Comp: () => /*#__PURE__*/React.createElement(MobileShelf, null)
 }];
@@ -396,8 +396,14 @@ const MOBILE_SCREENS = [{
 }, {
   label: "Status",
   Comp: () => /*#__PURE__*/React.createElement(MobileStatusTimeline, null)
+}, {
+  label: "My expenses",
+  Comp: () => /*#__PURE__*/React.createElement(MobileExpenses, null)
+}, {
+  label: "My card",
+  Comp: () => /*#__PURE__*/React.createElement(MobileCards, null)
 }];
-const MOBILE_PAGES = [[0, 1, 2], [3, 4, 5]];
+const MOBILE_PAGES = [[0, 1, 2], [3, 4, 5], [6, 7]];
 const MobileShelf = () => {
   const [page, setPage] = React.useState(0);
   const scale = 0.72;
@@ -405,7 +411,7 @@ const MobileShelf = () => {
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PageHead, {
     eyebrow: "Mobile \xB7 Employee POV",
     title: "iOS \u2014 expense submission flow",
-    sub: "Corey submits a $42.80 coffee expense in 6 taps."
+    sub: "Corey submits a $42.80 coffee expense in 6 taps, then checks past expenses and manages their card."
   }), /*#__PURE__*/React.createElement("div", {
     className: "ff-row",
     style: {

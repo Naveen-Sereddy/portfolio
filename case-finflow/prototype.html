@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0d0404" />
+<meta name="robots" content="noindex" />
+<title>FinFlow — Opening prototype…</title>
+<style>
+  html, body { height: 100%; margin: 0; background: #0d0404; }
+  body { display: flex; align-items: center; justify-content: center; font-family: system-ui, sans-serif; color: #b8a58f; font-size: 14px; }
+</style>
+</head>
+<body>
+  <p>Opening the FinFlow prototype…</p>
+  <noscript>
+    <p><a href="ui_kits/finflow/index.html" style="color:#d0923a;">Continue to the prototype</a></p>
+  </noscript>
+  <script>
+    // Same 600px breakpoint the case study's other responsive prototype uses.
+    // Desktop gets the full 48-screen admin/manager/finance/employee app —
+    // admin and finance tooling is desktop-only by design (see the case study).
+    // A real phone gets the dedicated employee mobile flow, full-bleed.
+    var target = window.innerWidth <= 600 ? "ui_kits/finflow/mobile-app.html" : "ui_kits/finflow/index.html";
+    window.location.replace(target);
+  </script>
+</body>
+</html>
