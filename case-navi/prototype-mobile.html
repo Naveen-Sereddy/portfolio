@@ -237,6 +237,23 @@ html, body { height: 100%; overflow: hidden; background: #0D0D0F; font-family: '
   border-top: 1px solid #EBF4FF; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); }
 .chat-input { flex: 1; background: #E8F3FF; border: none; border-radius: 22px; padding: 10px 16px;
   font-size: 13px; font-family: 'Nunito',sans-serif; color: #0D2137; outline: none; }
+
+/* ── Real mobile viewport: drop the decorative device frame and render
+   the app edge-to-edge instead of a phone-mockup-inside-a-phone.
+   Placed last so it wins the cascade against the base rules above. ── */
+@media (max-width: 600px) {
+  .studio { position: static; display: block; background: #DFF0FF; }
+  .iphone {
+    width: 100vw; height: 100dvh;
+    border-radius: 0; box-shadow: none; background: none;
+  }
+  .iphone::before, .iphone::after { display: none; }
+  .iphone-screen { inset: 0; border-radius: 0; }
+  .di { display: none; }
+  .sb { display: none; }
+  .app { padding-top: env(safe-area-inset-top); }
+  .tab-bar { padding-bottom: calc(10px + env(safe-area-inset-bottom)); height: auto; min-height: 83px; }
+}
 </style>
 </helmet>
 
@@ -1335,6 +1352,9 @@ class Component extends NaviBase {
   function fit(){
     var ph=document.querySelector('.iphone');
     if(!ph){return setTimeout(fit,200);}
+    // Below 600px the CSS drops the decorative device frame and renders
+    // full-bleed, so the desktop zoom-to-fit math doesn't apply here.
+    if(window.innerWidth<=600){ ph.style.zoom=''; return; }
     var s=Math.min((window.innerHeight*0.95)/852,(window.innerWidth*0.96)/393);
     ph.style.zoom=s;
   }
