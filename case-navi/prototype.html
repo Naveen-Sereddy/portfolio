@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0D0D0F" />
+<meta name="robots" content="noindex" />
+<title>NAVI — Opening prototype…</title>
+<style>
+  html, body { height: 100%; margin: 0; background: #0D0D0F; }
+  body { display: flex; align-items: center; justify-content: center; font-family: system-ui, sans-serif; color: #7A9BB5; font-size: 14px; }
+</style>
+</head>
+<body>
+  <p>Opening the NAVI prototype…</p>
+  <noscript>
+    <p><a href="prototype-web.html" style="color:#3D96F0;">Continue to the web prototype</a></p>
+  </noscript>
+  <script>
+    // Same 600px breakpoint the mobile prototype itself uses to decide
+    // whether it's on a real phone. Route once, on load, no flicker.
+    var target = window.innerWidth <= 600 ? "prototype-mobile.html" : "prototype-web.html";
+    window.location.replace(target);
+  </script>
+</body>
+</html>
