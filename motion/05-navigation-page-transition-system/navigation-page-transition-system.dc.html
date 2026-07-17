@@ -15,6 +15,11 @@
     html, body { margin:0; padding:0; height:100%; background:#0D0D0F; }
     * { box-sizing:border-box; }
     button { font-family:inherit; }
+    @media (max-width: 480px) {
+      .nt-stage { width: min(360px, calc(100vw - 40px)) !important; height: min(680px, 78vh) !important; }
+      .nt-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      .nt-header { padding: 20px 20px 0 !important; }
+    }
   </style>
 </helmet>
 <div data-screen-label="Page Transition System" style="min-height:100vh;background:#0D0D0F;display:flex;flex-direction:column;position:relative;overflow-x:hidden;font-family:Inter,system-ui,sans-serif">
@@ -22,7 +27,7 @@
   <div style="position:fixed;inset:0;background-image:radial-gradient(circle,#1b1b1f 1.2px, transparent 1.2px);background-size:24px 24px;opacity:0.55;pointer-events:none;z-index:0"></div>
   <div style="position:fixed;inset:0;opacity:0.05;pointer-events:none;z-index:0;mix-blend-mode:overlay;background-image:url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'2\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E')"></div>
 
-  <div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:28px 40px 0">
+  <div class="nt-header" style="position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:28px 40px 0">
     <div style="display:flex;align-items:center;gap:10px">
       <div style="width:8px;height:8px;border-radius:2px;background:#0A84FF"></div>
       <span style="color:#fff;font-weight:700;font-size:15px;letter-spacing:-0.01em">Transitions</span>
@@ -32,7 +37,7 @@
   </div>
 
   <div style="position:relative;z-index:1;flex:1;display:flex;align-items:center;justify-content:center;padding:24px 20px">
-    <div ref="{{stageRef}}" style="position:relative;width:360px;height:680px;border-radius:44px;overflow:hidden;border:1px solid rgba(255,255,255,0.09);box-shadow:0 40px 100px rgba(0,0,0,0.55),inset 0 0 0 1px rgba(255,255,255,0.02);perspective:1400px;background:#0D0D0F">
+    <div ref="{{stageRef}}" class="nt-stage" style="position:relative;width:360px;height:680px;border-radius:44px;overflow:hidden;border:1px solid rgba(255,255,255,0.09);box-shadow:0 40px 100px rgba(0,0,0,0.55),inset 0 0 0 1px rgba(255,255,255,0.02);perspective:1400px;background:#0D0D0F">
 
       <sc-for list="{{views}}" as="view" hint-placeholder-count="10">
         <div ref="{{view.ref}}" style="{{view.style}}">
@@ -65,7 +70,7 @@
 
   <div style="position:relative;z-index:1;padding:20px 24px 40px;display:flex;flex-direction:column;align-items:center;gap:16px">
     <div style="color:rgba(255,255,255,0.3);font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Tap a transition to navigate</div>
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:760px;width:100%">
+    <div class="nt-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:760px;width:100%">
       <sc-for list="{{transitions}}" as="t" hint-placeholder-count="10">
         <button onClick="{{t.onClick}}" disabled="{{busy}}" style="{{t.btnStyle}}" style-hover="{{t.btnHoverStyle}}">
           <span style="font-size:11px;font-weight:700;color:#0A84FF;letter-spacing:0.05em">{{t.idLabel}}</span>

@@ -19,6 +19,8 @@
 </style>
 </helmet>
 <div style="width: 100%; height: 100vh; min-height: 640px; background: #000; display: flex; align-items: center; justify-content: center; font-family: 'VT323', monospace;">
+ <div style="{{ consoleOuterBoxStyle }}">
+  <div style="{{ consoleScaleStyle }}">
   <div style="position: relative; width: 960px; height: 640px; background: #000; box-shadow: 0 0 0 4px #444, 0 0 0 8px #000, 0 0 40px 8px rgba(0,0,0,0.6);">
     <div style="position: absolute; top: -12px; left: -12px; width: 8px; height: 8px; background: #9E9E9E; border: 2px solid #000;"></div>
     <div style="position: absolute; top: -12px; right: -12px; width: 8px; height: 8px; background: #9E9E9E; border: 2px solid #000;"></div>
@@ -313,6 +315,8 @@
 
     </div>
   </div>
+  </div>
+ </div>
 </div>
 
 </x-dc>
@@ -335,8 +339,20 @@ class Component extends DCLogic {
     sound: true,
     music: true,
     vibration: false,
-    gold: 850
+    gold: 850,
+    scale: 1,
   };
+
+  computeScale = () => {
+    const s = Math.min((window.innerWidth * 0.96) / 960, (window.innerHeight * 0.96) / 640, 1);
+    this.setState({ scale: s });
+  };
+
+  componentDidMount() {
+    this.computeScale();
+    this._onResize = () => this.computeScale();
+    window.addEventListener('resize', this._onResize);
+  }
 
   CHAR_MAP = { K: '#000000', W: '#FFFFFF', A: '#FFB300', Y: '#FBC02D', X: '#9E9E9E', D: '#795548', B: '#1976D2', R: '#D32F2F', G: '#388E3C', U: '#7B1FA2' };
 
@@ -469,7 +485,7 @@ class Component extends DCLogic {
   toggleSettings() { this.setState(s => ({ settingsOpen: !s.settingsOpen })); }
   toggleSetting(key) { this.setState(s => ({ [key]: !s[key] })); }
 
-  componentWillUnmount() { this.clearArrowLoop(); }
+  componentWillUnmount() { this.clearArrowLoop(); window.removeEventListener('resize', this._onResize); }
 
   renderVals() {
     const s = this.state;
@@ -516,7 +532,11 @@ class Component extends DCLogic {
       toggle: () => this.toggleQuest(i)
     }));
 
+    const consoleOuterBoxStyle = { width: 960 * s.scale, height: 640 * s.scale };
+    const consoleScaleStyle = { transform: `scale(${s.scale})`, transformOrigin: 'top left', width: 960, height: 640 };
+
     return {
+      consoleOuterBoxStyle, consoleScaleStyle,
       isScreen1: s.screen === 1,
       isScreen2: s.screen === 2,
       isScreen3: s.screen === 3,

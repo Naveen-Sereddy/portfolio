@@ -16,13 +16,23 @@
     @keyframes campus-fadein { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
     * { box-sizing: border-box; }
     body { margin: 0; }
+    @media (max-width: 760px) {
+      .cd-sidebar { width: 60px !important; padding: 16px 0 !important; gap: 8px !important; }
+      .cd-main { padding: 20px 16px !important; }
+      .cd-grid4, .cd-grid3, .cd-grid2, .cd-msg-grid { grid-template-columns: 1fr !important; grid-template-rows: none !important; height: auto !important; }
+      .cd-tile { grid-column: 1 / -1 !important; grid-row: auto !important; }
+      .cd-note-card { grid-column: 1 / -1 !important; grid-row: auto !important; }
+      .cd-focus-week { grid-template-columns: repeat(4, 1fr) !important; }
+      .cd-header-row { flex-wrap: wrap !important; row-gap: 10px !important; }
+      .cd-header-title { font-size: 18px !important; }
+    }
   </style>
 </helmet>
 
 <div style="display:flex; height:100vh; width:100%; background-color:#0D0D0F; background-image: radial-gradient(#2C2C2E 1px, transparent 1px); background-size: 22px 22px; color:#F5F5F7; font-family: 'Inter', system-ui, sans-serif; overflow:hidden;">
 
   <!-- SIDEBAR -->
-  <div style="width:92px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:14px; padding:28px 0; border-right:1px solid #2C2C2E;">
+  <div class="cd-sidebar" style="width:92px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:14px; padding:28px 0; border-right:1px solid #2C2C2E;">
     <div style="width:40px; height:40px; border-radius:11px; background:#0A84FF; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:16px; color:#0D0D0F; margin-bottom:10px;">C</div>
 
     <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
@@ -74,7 +84,7 @@
   </div>
 
   <!-- MAIN -->
-  <div style="{{ mainWrapStyle }}">
+  <div class="cd-main" style="{{ mainWrapStyle }}">
 
     <!-- DASHBOARD -->
     <sc-if value="{{ isDashboard }}">
@@ -87,10 +97,10 @@
           <div style="font-family:'JetBrains Mono',monospace; font-size:20px; color:#F5F5F7; background:#1C1C1E; border:1px solid #2C2C2E; padding:8px 16px; border-radius:12px;">{{ clockLabel }}</div>
         </div>
 
-        <div style="display:grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, minmax(80px,1fr)); gap:16px; height:calc(100% - 88px);">
+        <div class="cd-grid4" style="display:grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, minmax(80px,1fr)); gap:16px; height:calc(100% - 88px);">
 
           <!-- Tile A: schedule 2x2 -->
-          <div onClick="{{ goSchedule }}" style="grid-column:1/3; grid-row:1/3; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:20px; padding:22px; cursor:pointer; display:flex; flex-direction:column; transition:border-color 150ms;">
+          <div class="cd-tile" onClick="{{ goSchedule }}" style="grid-column:1/3; grid-row:1/3; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:20px; padding:22px; cursor:pointer; display:flex; flex-direction:column; transition:border-color 150ms;">
             <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
               <div style="font-size:15px; font-weight:600; color:#9CA3AF; letter-spacing:0.3px;">TODAY'S SCHEDULE</div>
               <div style="color:#0A84FF; font-size:18px;">&#8594;</div>
@@ -110,7 +120,7 @@
           </div>
 
           <!-- Tile B: weather 1x1 -->
-          <div style="grid-column:3/4; grid-row:1/2; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:20px; padding:18px; display:flex; flex-direction:column; justify-content:space-between;">
+          <div class="cd-tile" style="grid-column:3/4; grid-row:1/2; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:20px; padding:18px; display:flex; flex-direction:column; justify-content:space-between;">
             <div style="font-size:13px; font-weight:600; color:#9CA3AF;">WEATHER</div>
             <div style="display:flex; align-items:center; gap:10px;">
               <div style="position:relative; width:34px; height:34px;">
@@ -125,7 +135,7 @@
           </div>
 
           <!-- Tile C: countdown 1x1 -->
-          <div style="grid-column:4/5; grid-row:1/2; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:20px; padding:18px; display:flex; flex-direction:column; justify-content:space-between;">
+          <div class="cd-tile" style="grid-column:4/5; grid-row:1/2; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:20px; padding:18px; display:flex; flex-direction:column; justify-content:space-between;">
             <div style="font-size:13px; font-weight:600; color:#9CA3AF;">NEXT CLASS</div>
             <div>
               <div style="font-family:'JetBrains Mono',monospace; font-size:24px; font-weight:600; color:#0A84FF;">32 min</div>
@@ -134,7 +144,7 @@
           </div>
 
           <!-- Tile E: messages 1x1 -->
-          <div onClick="{{ goMessages }}" style="grid-column:3/4; grid-row:2/3; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:20px; padding:18px; display:flex; flex-direction:column; justify-content:space-between; cursor:pointer;">
+          <div class="cd-tile" onClick="{{ goMessages }}" style="grid-column:3/4; grid-row:2/3; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:20px; padding:18px; display:flex; flex-direction:column; justify-content:space-between; cursor:pointer;">
             <div style="display:flex; align-items:center; justify-content:space-between;">
               <div style="font-size:13px; font-weight:600; color:#9CA3AF;">MESSAGES</div>
               <div style="color:#0A84FF; font-size:16px;">&#8594;</div>
@@ -149,7 +159,7 @@
           </div>
 
           <!-- Tile F: GPA 1x1 -->
-          <div onClick="{{ goGrades }}" style="grid-column:4/5; grid-row:2/3; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:20px; padding:18px; display:flex; flex-direction:column; justify-content:space-between; cursor:pointer;">
+          <div class="cd-tile" onClick="{{ goGrades }}" style="grid-column:4/5; grid-row:2/3; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:20px; padding:18px; display:flex; flex-direction:column; justify-content:space-between; cursor:pointer;">
             <div style="display:flex; align-items:center; justify-content:space-between;">
               <div style="font-size:13px; font-weight:600; color:#9CA3AF;">GPA</div>
               <div style="color:#0A84FF; font-size:16px;">&#8594;</div>
@@ -164,7 +174,7 @@
           </div>
 
           <!-- Tile D: focus timer 2x1 bottom -->
-          <div onClick="{{ goFocus }}" style="grid-column:1/4; grid-row:3/5; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:20px; padding:20px 22px; cursor:pointer; display:flex; flex-direction:column;">
+          <div class="cd-tile" onClick="{{ goFocus }}" style="grid-column:1/4; grid-row:3/5; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:20px; padding:20px 22px; cursor:pointer; display:flex; flex-direction:column;">
             <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
               <div>
                 <div style="font-size:13px; font-weight:600; color:#9CA3AF;">DEEP WORK TODAY</div>
@@ -183,7 +193,7 @@
           </div>
 
           <!-- filler 1x1 to balance grid -->
-          <div style="grid-column:4/5; grid-row:3/5; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:20px; padding:18px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:6px; color:#5C5C60;">
+          <div class="cd-tile" style="grid-column:4/5; grid-row:3/5; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:20px; padding:18px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:6px; color:#5C5C60;">
             <div style="width:34px; height:34px; border:2px dashed #3A3A3C; border-radius:10px;"></div>
             <div style="font-size:11.5px; text-align:center;">No campus events<br/>right now</div>
           </div>
@@ -232,10 +242,10 @@
     <!-- FOCUS ANALYTICS -->
     <sc-if value="{{ isFocus }}">
       <div>
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;">
+        <div class="cd-header-row" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;">
           <div style="display:flex; align-items:center; gap:16px;">
             <div onClick="{{ goDashboard }}" style="width:36px; height:36px; border-radius:10px; background:#1C1C1E; border:1px solid #2C2C2E; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;">&#8592;</div>
-            <div style="font-size:22px; font-weight:700; letter-spacing:0.4px;">FOCUS TIME</div>
+            <div class="cd-header-title" style="font-size:22px; font-weight:700; letter-spacing:0.4px;">FOCUS TIME</div>
           </div>
           <div style="display:flex; gap:8px;">
             <sc-for list="{{ weekPills }}" as="w" hint-placeholder-count="2">
@@ -252,7 +262,7 @@
           </svg>
         </div>
 
-        <div style="display:grid; grid-template-columns: repeat(7, 1fr); gap:14px; margin-bottom:20px;">
+        <div class="cd-focus-week" style="display:grid; grid-template-columns: repeat(7, 1fr); gap:14px; margin-bottom:20px;">
           <sc-for list="{{ focusWeek }}" as="d" hint-placeholder-count="7">
             <div style="background:#1C1C1E; border:1px solid #2C2C2E; border-radius:16px; padding:16px 10px; display:flex; flex-direction:column; align-items:center; gap:8px;">
               <div style="font-size:12px; color:#9CA3AF;">{{ d.label }}</div>
@@ -271,19 +281,19 @@
     <!-- ASSIGNMENTS -->
     <sc-if value="{{ isAssignments }}">
       <div>
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;">
+        <div class="cd-header-row" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;">
           <div style="display:flex; align-items:center; gap:16px;">
             <div onClick="{{ goDashboard }}" style="width:36px; height:36px; border-radius:10px; background:#1C1C1E; border:1px solid #2C2C2E; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;">&#8592;</div>
-            <div style="font-size:22px; font-weight:700; letter-spacing:0.4px;">ASSIGNMENTS</div>
+            <div class="cd-header-title" style="font-size:22px; font-weight:700; letter-spacing:0.4px;">ASSIGNMENTS</div>
           </div>
-          <div style="display:flex; gap:8px;">
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
             <sc-for list="{{ filterPills }}" as="f" hint-placeholder-count="4">
               <div onClick="{{ f.select }}" style="{{ f.style }}">{{ f.label }}</div>
             </sc-for>
           </div>
         </div>
 
-        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:16px; max-width:920px;">
+        <div class="cd-grid2" style="display:grid; grid-template-columns: repeat(2, 1fr); gap:16px; max-width:920px;">
           <sc-for list="{{ filteredAssignments }}" as="a" hint-placeholder-count="5">
             <div onClick="{{ a.toggle }}" style="background:#1C1C1E; border:1px solid #2C2C2E; border-left:4px solid {{ a.color }}; border-radius:18px; padding:20px; cursor:pointer; animation: {{ a.pulseAnim }};">
               <div style="display:flex; justify-content:space-between; align-items:flex-start;">
@@ -311,10 +321,10 @@
     <!-- NOTES -->
     <sc-if value="{{ isNotes }}">
       <div>
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;">
+        <div class="cd-header-row" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;">
           <div style="display:flex; align-items:center; gap:16px;">
             <div onClick="{{ goDashboard }}" style="width:36px; height:36px; border-radius:10px; background:#1C1C1E; border:1px solid #2C2C2E; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;">&#8592;</div>
-            <div style="font-size:22px; font-weight:700; letter-spacing:0.4px;">NOTES</div>
+            <div class="cd-header-title" style="font-size:22px; font-weight:700; letter-spacing:0.4px;">NOTES</div>
           </div>
           <div style="display:flex; gap:8px;">
             <sc-for list="{{ sortPills }}" as="s" hint-placeholder-count="2">
@@ -323,9 +333,9 @@
           </div>
         </div>
 
-        <div style="display:grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows:minmax(110px, auto); gap:16px;">
+        <div class="cd-grid3" style="display:grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows:minmax(110px, auto); gap:16px;">
           <sc-for list="{{ notes }}" as="n" hint-placeholder-count="4">
-            <div onClick="{{ n.open }}" style="grid-column:span {{ n.colSpan }}; grid-row:span {{ n.rowSpan }}; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:18px; padding:20px; cursor:pointer; display:flex; flex-direction:column; overflow:hidden;">
+            <div class="cd-note-card" onClick="{{ n.open }}" style="grid-column:span {{ n.colSpan }}; grid-row:span {{ n.rowSpan }}; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:18px; padding:20px; cursor:pointer; display:flex; flex-direction:column; overflow:hidden;">
               <sc-if value="{{ n.editing }}" hint-placeholder-val="{{ false }}">
                 <div style="display:flex; flex-direction:column; height:100%;">
                   <div style="background:#0A84FF; margin:-20px -20px 12px -20px; padding:10px 16px; border-radius:18px 18px 0 0; font-size:13px; font-weight:600;">{{ n.title }}</div>
@@ -339,7 +349,7 @@
             </div>
           </sc-for>
 
-          <div onClick="{{ createNote }}" style="grid-column:span 1; grid-row:span 1; background:#0A84FF; border-radius:18px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:28px; font-weight:300; color:#fff;">+</div>
+          <div class="cd-note-card" onClick="{{ createNote }}" style="grid-column:span 1; grid-row:span 1; background:#0A84FF; border-radius:18px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:28px; font-weight:300; color:#fff; min-height:70px;">+</div>
         </div>
       </div>
     </sc-if>
@@ -349,10 +359,10 @@
       <div>
         <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
           <div onClick="{{ goDashboard }}" style="width:36px; height:36px; border-radius:10px; background:#1C1C1E; border:1px solid #2C2C2E; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;">&#8592;</div>
-          <div style="font-size:22px; font-weight:700; letter-spacing:0.4px;">GRADES &mdash; SPRING 2025</div>
+          <div class="cd-header-title" style="font-size:22px; font-weight:700; letter-spacing:0.4px;">GRADES &mdash; SPRING 2025</div>
         </div>
 
-        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:16px; max-width:900px; margin-bottom:16px;">
+        <div class="cd-grid2" style="display:grid; grid-template-columns: repeat(2, 1fr); gap:16px; max-width:900px; margin-bottom:16px;">
           <sc-for list="{{ courses }}" as="c" hint-placeholder-count="4">
             <div style="background:#1C1C1E; border:1px solid #2C2C2E; border-radius:18px; padding:20px;">
               <div style="font-size:16px; font-weight:600; margin-bottom:12px;">{{ c.name }}</div>
@@ -385,12 +395,12 @@
       <div>
         <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
           <div onClick="{{ goDashboard }}" style="width:36px; height:36px; border-radius:10px; background:#1C1C1E; border:1px solid #2C2C2E; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;">&#8592;</div>
-          <div style="font-size:22px; font-weight:700; letter-spacing:0.4px;">MESSAGES &mdash; 2 unread</div>
+          <div class="cd-header-title" style="font-size:22px; font-weight:700; letter-spacing:0.4px;">MESSAGES &mdash; 2 unread</div>
         </div>
 
-        <div style="display:grid; grid-template-columns: 2fr 1fr; grid-template-rows: auto auto; gap:16px; max-width:920px;">
+        <div class="cd-msg-grid" style="display:grid; grid-template-columns: 2fr 1fr; grid-template-rows: auto auto; gap:16px; max-width:920px;">
           <sc-for list="{{ messages }}" as="m" hint-placeholder-count="3">
-            <div onClick="{{ m.open }}" style="grid-column:{{ m.colSpan }}; grid-row:{{ m.rowSpan }}; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:18px; padding:20px; cursor:pointer; display:flex; flex-direction:column; gap:10px;">
+            <div class="cd-tile" onClick="{{ m.open }}" style="grid-column:{{ m.colSpan }}; grid-row:{{ m.rowSpan }}; background:#1C1C1E; border:1px solid #2C2C2E; border-radius:18px; padding:20px; cursor:pointer; display:flex; flex-direction:column; gap:10px;">
               <div style="display:flex; align-items:center; gap:10px;">
                 <div style="width:32px; height:32px; border-radius:50%; background:{{ m.avatarColor }}; flex-shrink:0;"></div>
                 <div style="font-size:14.5px; font-weight:600;">{{ m.sender }}</div>
@@ -423,10 +433,10 @@
       <div>
         <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
           <div onClick="{{ goDashboard }}" style="width:36px; height:36px; border-radius:10px; background:#1C1C1E; border:1px solid #2C2C2E; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;">&#8592;</div>
-          <div style="font-size:22px; font-weight:700; letter-spacing:0.4px;">SETTINGS</div>
+          <div class="cd-header-title" style="font-size:22px; font-weight:700; letter-spacing:0.4px;">SETTINGS</div>
         </div>
 
-        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:16px; max-width:920px;">
+        <div class="cd-grid2" style="display:grid; grid-template-columns: repeat(2, 1fr); gap:16px; max-width:920px;">
 
           <div style="background:#1C1C1E; border:1px solid #2C2C2E; border-radius:18px; padding:20px;">
             <div style="font-size:14px; font-weight:600; color:#9CA3AF; margin-bottom:14px;">APPEARANCE</div>

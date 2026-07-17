@@ -79,6 +79,45 @@ img { max-width:100%; display:block; }
 .metric-label { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.68rem; color:var(--text-3); text-transform:uppercase; letter-spacing:.07em; }
 .metric-row { display:flex; gap:.75rem; flex-wrap:wrap; margin-top:var(--sp-6); }
 
+.meta-strip { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:var(--sp-6); padding-top:var(--sp-5); border-top:1px solid var(--border); }
+.meta-item { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; letter-spacing:.05em; color:var(--text-3); padding:.4rem .8rem; background:var(--bg-3); border:1px solid var(--border); border-radius:.5rem; }
+.meta-item strong { color:var(--text-2); font-weight:600; text-transform:none; letter-spacing:0; font-family:'Inter',system-ui,sans-serif; }
+
+.insight-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-6); margin-top:var(--sp-6); }
+@media (max-width:760px) { .insight-grid { grid-template-columns:1fr; } }
+.insight-grid.cols-2 { grid-template-columns:repeat(2,1fr); }
+@media (max-width:640px) { .insight-grid.cols-2 { grid-template-columns:1fr; } }
+.insight-card { background:var(--bg-3); border:1px solid var(--border); border-radius:1rem; padding:var(--sp-5); }
+.insight-num { font-family:'Cormorant Garamond',Georgia,serif; font-size:2.1rem; line-height:1; color:var(--accent); margin-bottom:var(--sp-3); }
+.insight-card h3 { font-size:1rem; }
+.insight-card p { font-size:.9rem; margin-top:.35rem; }
+
+.decision-num { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.5rem; line-height:1; color:var(--accent); margin-bottom:.5rem; }
+
+.evolution-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--sp-6); align-items:start; max-width:900px; margin-inline:auto; }
+@media (max-width:640px) { .evolution-grid { grid-template-columns:1fr; } }
+.evolution-step { display:flex; flex-direction:column; gap:var(--sp-3); }
+.evolution-label { display:inline-flex; align-items:center; gap:.5rem; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.12em; color:var(--text-3); }
+.evolution-label .dot { width:7px; height:7px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+.evolution-step p { font-size:.85rem; color:var(--text-3); line-height:1.45; }
+
+.reflection-list { display:grid; gap:1.25rem; margin-top:var(--sp-5); max-width:800px; margin-inline:auto; }
+.reflection-item { display:flex; gap:1rem; align-items:flex-start; padding:var(--sp-4) var(--sp-5); background:var(--bg-3); border:1px solid var(--border); border-radius:.85rem; }
+.reflection-num { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.4rem; line-height:1; color:var(--accent); flex-shrink:0; margin-top:.1rem; }
+.reflection-item p { font-size:.92rem; }
+
+.anno-block { max-width:920px; margin-inline:auto; }
+.anno-wrap { position:relative; margin-top:var(--sp-5); }
+.anno-wrap img { width:100%; height:auto; display:block; border-radius:.75rem; border:1px solid var(--border-strong); }
+.anno-dot { position:absolute; transform:translate(-50%,-50%); width:28px; height:28px; border-radius:50%; background:var(--accent); color:#110500; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.8rem; font-weight:700; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 4px rgba(208,146,58,0.28), 0 2px 10px rgba(0,0,0,0.45); z-index:3; }
+.anno-legend { display:grid; gap:.75rem; margin-top:var(--sp-5); }
+.anno-legend.two-col { grid-template-columns:repeat(2,1fr); gap:.9rem 1.75rem; }
+@media (max-width:700px) { .anno-legend.two-col { grid-template-columns:1fr; } }
+.anno-legend-item { display:flex; gap:.85rem; align-items:flex-start; }
+.anno-legend-num { flex-shrink:0; width:24px; height:24px; border-radius:50%; background:var(--accent-muted); border:1px solid rgba(208,146,58,0.35); color:var(--accent); font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; font-weight:700; display:flex; align-items:center; justify-content:center; margin-top:.1rem; }
+.anno-legend-item p { font-size:.9rem; }
+.anno-legend-item p strong { color:var(--text); }
+
 .card { background:var(--bg-3); border:1px solid var(--border); border-radius:1rem; padding:var(--sp-5); }
 .card p { font-size:.92rem; }
 .card-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--sp-6); margin-top:var(--sp-6); }
@@ -171,6 +210,12 @@ img { max-width:100%; display:block; }
       <div class="btn-row">
         <a class="btn btn-primary" href="https://binsanddeals.com" target="_blank" rel="noopener">Visit live site ↗</a>
       </div>
+      <div class="meta-strip">
+        <span class="meta-item">Role: <strong>Solo Designer &amp; Developer</strong></span>
+        <span class="meta-item">Duration: <strong>Built in an initial sprint, refined post-launch</strong></span>
+        <span class="meta-item">Scope: <strong>Research → build → deployment</strong></span>
+        <span class="meta-item">Client: <strong>Independently owned, single location</strong></span>
+      </div>
     </div>
   </section>
 
@@ -184,11 +229,57 @@ img { max-width:100%; display:block; }
         <h2>The store relied on word-of-mouth, but first-timers bounced before they understood what they were walking into.</h2>
         <p class="lede" style="font-size:1.05rem">Customers didn't get the liquidation pricing model, didn't know what categories the store carried, and had no real sense of how the place ran day to day. There was no centralized digital presence, just scattered social posts and a physical address. So most design decisions came down to one question: what does someone need to know before they drive over?</p>
       </div>
+      <p>The same handful of questions kept coming up, at the register, in Facebook comments, over the phone: why are the prices so low, are these products used, how does the pricing actually work, what do you even sell, is it worth the drive. None of that lived anywhere online. Every answer happened one conversation at a time, which meant the staff had basically become the website. Every new customer needed the same explanation the last one got, and there was no way to make that scale.</p>
       <p>The confusion wasn't really about the store. It was about explaining liquidation pricing, a business model most first-timers had never run into before.</p>
     </div>
   </section>
 
-  <!-- 3. ROLE + SCOPE -->
+  <!-- 3. RESEARCH -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-head prose">
+        <div class="eyebrow">Research</div>
+        <h2>What customers told us before a single section got designed.</h2>
+        <p class="lede">I sat down with the owner first: business goals, customer behavior, which Facebook posts actually got engagement, what changes week to week versus what never does. Then I talked to customers at the counter over a few visits. I wasn't collecting feature requests. I was watching for whatever question kept coming up right before someone decided to actually shop.</p>
+      </div>
+      <div class="insight-grid cols-2">
+        <div class="insight-card">
+          <div class="insight-num">01</div>
+          <h3>People needed education, not another discount</h3>
+          <p>Nobody was asking for a better deal. They were asking how the store worked. Understanding beat promotion as the thing that actually got people through the door.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">02</div>
+          <h3>Facebook created awareness, not understanding</h3>
+          <p>A product photo in a Facebook post gets a like and a comment. It doesn't explain pricing, or that inventory turns over weekly, or what a "treasure hunt" store even means. The site had to fill in what a single post never could.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">03</div>
+          <h3>Mobile wasn't an edge case, it was almost everyone</h3>
+          <p>Nearly every visitor arrived through a phone, clicking in from a Facebook post or a Marketplace listing. Designing desktop-first would've meant solving the wrong problem first.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">04</div>
+          <h3>Fewer sections worked better than more</h3>
+          <p>Every extra section on the homepage competed with the one thing people actually needed to know next. It got clearer once each section answered exactly one question before moving to the next.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3b. THE IDEA I DIDN'T BUILD -->
+  <section class="section">
+    <div class="container prose">
+      <div class="section-head">
+        <div class="eyebrow">Considered, Then Cut</div>
+        <h2>The product catalog I didn't build.</h2>
+      </div>
+      <p>The obvious move for a retail site is a product catalog, something visitors can browse before they show up. I started sketching one and stopped partway through. Bins &amp; Deals restocks every week, sometimes within days. A catalog would promise something the store couldn't back up: an item featured Monday morning might be gone by Monday afternoon.</p>
+      <p>So instead of showcasing inventory, the site needed to explain how the inventory works. Once customers understood the color-tag pricing and the fact that stock turns over constantly, the unpredictability stopped being a liability and started being the reason to come back.</p>
+    </div>
+  </section>
+
+  <!-- 4. ROLE + SCOPE -->
   <section class="section-alt">
     <div class="container">
       <div class="section-head prose" style="max-width:700px">
@@ -198,15 +289,70 @@ img { max-width:100%; display:block; }
       <div class="card-grid">
         <div class="card"><h3>Stakeholder</h3><p>Sat down with the owner to pull out the operational rules, the questions customers kept asking, and what the business actually needed.</p></div>
         <div class="card"><h3>UX + Content</h3><p>Looked at what customers kept asking, then built the content structure and hierarchy around first-time visitors.</p></div>
-        <div class="card"><h3>UI + Build</h3><p>Responsive design, the React and Tailwind build, SEO metadata, and the Vercel deployment.</p></div>
+        <div class="card"><h3>UI + Build</h3><p>React and Tailwind CSS over a CMS platform, since the owner needed direct control over promotional content and SEO without a subscription or platform lock-in, plus the Vercel deployment.</p></div>
         <div class="card"><h3>Acquisition Funnels</h3><p>Facebook and Marketplace integration, since that's where most new visitors were actually coming from.</p></div>
       </div>
       <p class="constraint-note"><strong>Constraints:</strong> This was a live client with real operational requirements, not a hypothetical. Pricing tiers, hours, categories: all of it had to match what was actually happening in the store. SEO needed to catch local search intent for a physical location.</p>
     </div>
   </section>
 
-  <!-- 4. PROCESS -->
+  <!-- 5. INFORMATION ARCHITECTURE -->
   <section class="section">
+    <div class="container">
+      <div class="section-head prose">
+        <div class="eyebrow">Information Architecture</div>
+        <h2>Navigation built from actual questions, not a sitemap.</h2>
+        <p class="lede">Before wireframing anything, I wrote out every question that kept coming up, from the owner, from customers at the counter, from Facebook comments, and matched each one to a section of the homepage. This is what that mapping actually looked like.</p>
+      </div>
+      <div class="process-list">
+        <div class="process-row">
+          <div class="proc-num">1</div>
+          <div>
+            <h3>Hero: "What is this place?"</h3>
+            <p>The first five seconds have to answer what the store is, what makes it different from a normal retailer, and why it's worth reading further.</p>
+          </div>
+        </div>
+        <div class="process-row">
+          <div class="proc-num">2</div>
+          <div>
+            <h3>Pricing System: "How does this pricing work?"</h3>
+            <p>The section customers needed most and got least anywhere else. Color-tag cards do in a glance what a paragraph never could.</p>
+          </div>
+        </div>
+        <div class="process-row">
+          <div class="proc-num">3</div>
+          <div>
+            <h3>Shelf Deals: "Wait, is everything in bins?"</h3>
+            <p>A real misconception: people assumed every item followed the color-tag system. Shelf items get their own explanation, priced individually and clearly marked.</p>
+          </div>
+        </div>
+        <div class="process-row">
+          <div class="proc-num">4</div>
+          <div>
+            <h3>Categories: "Will I actually find something I want?"</h3>
+            <p>Nobody needs a live inventory feed. They need enough confidence that the categories they care about show up regularly.</p>
+          </div>
+        </div>
+        <div class="process-row">
+          <div class="proc-num">5</div>
+          <div>
+            <h3>Claw Machine: "Why would I bring my kids?"</h3>
+            <p>A small, honest bonus, placed after the store already makes sense, not before.</p>
+          </div>
+        </div>
+        <div class="process-row">
+          <div class="proc-num">6</div>
+          <div>
+            <h3>Find Us Online + Hours &amp; Location: "How do I keep up, and can I go today?"</h3>
+            <p>Facebook and Marketplace links for ongoing inventory, plus the address, hours, and payment methods needed to actually make the trip.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. PROCESS -->
+  <section class="section-alt">
     <div class="container">
       <div class="section-head">
         <div class="eyebrow">Process</div>
@@ -224,7 +370,7 @@ img { max-width:100%; display:block; }
           <div class="proc-num">2</div>
           <div>
             <h3>Content Architecture</h3>
-            <p>I structured the site around what a first-timer needed to know: pricing model first, then inventory types, then hours and location, then social proof. Promotional features like the claw machine and weekly deals came in as secondary hooks, once the basics were covered.</p>
+            <p>I kept coming back to one question while structuring the site: if someone knows absolutely nothing about liquidation stores, what do they need to know before deciding to visit? Pricing model first, then inventory types, then hours and location, then social proof. Promotional features like the claw machine and weekly deals came in as secondary hooks, once the basics were covered.</p>
           </div>
         </div>
         <div class="process-row">
@@ -245,26 +391,108 @@ img { max-width:100%; display:block; }
     </div>
   </section>
 
-  <!-- 5. KEY DECISIONS -->
-  <section class="section-alt">
+  <!-- 7. KEY DECISIONS -->
+  <section class="section">
     <div class="container">
       <div class="section-head">
         <div class="eyebrow">Key Decisions</div>
-        <h2>How I resolved the main design tensions.</h2>
+        <h2>Six decisions the research forced.</h2>
       </div>
       <div class="decision-grid">
         <div class="card">
-          <strong>Pricing system before product catalog.</strong>
-          <p>Confusion about liquidation pricing was the number one reason people stayed away. So instead of opening with a typical product grid, I led with the color-tag pricing explainer. You need to get the model before you'll even want to shop.</p>
+          <div class="decision-num">01</div>
+          <h3>Explain pricing before showing anything else</h3>
+          <p>Most retail sites open with a hero, then featured products, then categories. That order backfires here. Showing $2 items before explaining why they're $2 makes people assume the worst: everything's broken, everything's fake, everything's picked over. So pricing comes first, right after the hero.</p>
         </div>
         <div class="card">
-          <strong>React + Tailwind over a CMS platform.</strong>
-          <p>The owner needed direct control over promotional content and SEO, without paying for a CMS subscription or dealing with its overhead. A static React build gave him that control, plus fast load times and no platform lock-in.</p>
+          <div class="decision-num">02</div>
+          <h3>Structure the homepage around questions, not company sections</h3>
+          <p>A typical small business site is organized around the business: About, Services, Gallery, Contact. Customers don't think that way. They show up with a specific question, usually about pricing, hours, or what's in stock. Every section on the homepage maps to one of those questions instead of a generic sitemap.</p>
         </div>
         <div class="card">
-          <strong>Facebook and Marketplace funnels on the homepage.</strong>
-          <p>Talking with the owner confirmed social media drove most first-time visits. So I put those referral paths right in the site's primary section instead of tucking them into a contact page somewhere.</p>
+          <div class="decision-num">03</div>
+          <h3>Treat Facebook as the start of the trip, not the competition</h3>
+          <p>Most first-time visitors found the store through a Facebook post or a Marketplace listing before they ever hit the website. The site isn't trying to replace that. It picks up where Facebook leaves off, then hands people back to Facebook for what's new that week.</p>
         </div>
+        <div class="card">
+          <div class="decision-num">04</div>
+          <h3>Mobile-first wasn't a checkbox, it was the actual brief</h3>
+          <p>If most people are opening this from a Facebook link on their phone, "responsive" isn't enough on its own. Every section had to work as a single vertical scroll: big type, short paragraphs, a pricing system built to be scanned in three seconds, not read like a table.</p>
+        </div>
+        <div class="card">
+          <div class="decision-num">05</div>
+          <h3>Keep the visual design out of the way of the information</h3>
+          <p>It would've been easy to lean on gradients, animation, and a busier layout to make the site feel more polished. All of that competes with the one thing people actually need. Typography carries the hierarchy. Color shows up only where it means something, on the pricing cards and the primary buttons.</p>
+        </div>
+        <div class="card">
+          <div class="decision-num">06</div>
+          <h3>Answer every practical question before asking for the visit</h3>
+          <p>Driving to a store and finding it closed, or in a part of town you don't recognize, kills trust fast. Hours, address, nearby landmarks, accepted payment methods, and the shelf-versus-bin pricing distinction all needed to be obvious, not buried in a footer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7b. DESIGN EVOLUTION -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Design Evolution</div>
+        <h2>The pricing section, lo-fi to final.</h2>
+        <p class="lede">This is the one section that had to work before anything else did. The lo-fi pass already had the shape right: a stacked list of tag rows, one price each, easier to scan on a phone than a card grid would've been. What changed on the way to final was adding the branded poster graphic next to it, so the colors carry over to something people actually recognize once they're standing in the store.</p>
+      </div>
+      <div class="evolution-grid">
+        <div class="evolution-step">
+          <div class="evolution-label"><span class="dot"></span>Lo-Fi</div>
+          <div class="frame"><img src="img/wireframe-pricing.svg" alt="Lo-fi wireframe of the pricing section: five stacked tag rows on the left, a placeholder poster graphic on the right" loading="lazy" /></div>
+          <p>Five rows, one price per row, no color yet. The only thing being tested here was whether a vertical list would read faster than a card grid, especially on a phone.</p>
+        </div>
+        <div class="evolution-step">
+          <div class="evolution-label"><span class="dot"></span>Final UI</div>
+          <div class="frame"><img src="../assets/projects/bins-and-deals/bins-2.png" alt="Final color-tag pricing system: Red $9, Purple $7, Blue $5, Green $3, Yellow $2, with a branded poster graphic beside the list" loading="lazy" /></div>
+          <p>Same five-row list, now with real tag colors and a store-branded poster next to it. The poster does double duty: it repeats the pricing in a format the owner could also print and hang in the store.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7c. RESEARCH ON THE SCREEN -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Research, On the Screen</div>
+        <h2>The one section with the most riding on it.</h2>
+        <p class="lede">The pricing section carries more research than anywhere else on the site. Each callout below points to a specific decision, and the insight that drove it.</p>
+      </div>
+      <div class="anno-block">
+        <div class="anno-wrap">
+          <img src="../assets/projects/bins-and-deals/bins-2.png" alt="Bins and Deals pricing section annotated with three research-driven decisions" loading="lazy" />
+          <span class="anno-dot" style="left:15%; top:40%" aria-hidden="true">1</span>
+          <span class="anno-dot" style="left:33%; top:40%" aria-hidden="true">2</span>
+          <span class="anno-dot" style="left:74%; top:50%" aria-hidden="true">3</span>
+        </div>
+        <div class="anno-legend two-col">
+          <div class="anno-legend-item"><span class="anno-legend-num">1</span><p><strong>A list, not a grid.</strong> Ties back to mobile being the primary entry point. Five stacked rows scroll cleanly on a phone, where a five-column card grid would've forced horizontal scrolling or tiny type.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">2</span><p><strong>Price sits opposite the label, not underneath it.</strong> Scanning left to right, tag color to price, took less effort in testing than reading top to bottom through a stacked card.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">3</span><p><strong>The poster carries the color language into the store.</strong> Same five colors, same order, so the online explainer and the in-store tags reinforce each other instead of being two different systems to learn.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7d. ACCESSIBILITY -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-head prose">
+        <div class="eyebrow">Accessibility</div>
+        <h2>Clear enough for anyone who walks up to it.</h2>
+        <p class="lede">The audience here isn't a trained user base. It's teenagers, retirees, parents on a lunch break, whoever clicks a Facebook link. Every decision below was about lowering the effort it takes to understand the page, not about checking a compliance box.</p>
+      </div>
+      <div class="card-grid">
+        <div class="card"><h3>Readability before branding</h3><p>Large headings do the section breaks. Prices, hours, and phone numbers sit out in the open instead of buried in a paragraph. Nobody should have to hunt for the one number they came for.</p></div>
+        <div class="card"><h3>Color plus a label, always</h3><p>The pricing rows use color because it matches the physical tags in the store, but every row also carries the price as text. Nobody has to guess a color to know what something costs.</p></div>
+        <div class="card"><h3>Built for a thumb, not a cursor</h3><p>Touch targets sized for a thumb, generous spacing between tappable elements, no accidental taps between sections while scrolling one-handed.</p></div>
+        <div class="card"><h3>Semantic HTML, on purpose</h3><p>Real headings, real buttons, real links, not styled divs pretending to be them. It reads correctly for a screen reader, and it happens to help local search results too.</p></div>
       </div>
     </div>
   </section>
@@ -281,7 +509,7 @@ img { max-width:100%; display:block; }
         <div class="shot-item"><div class="frame"><img src="../assets/projects/bins-and-deals/bins-2.png" alt="Color-tag pricing system: Red $9, Purple $7, Blue $5, Green $3, Yellow $2" loading="lazy" /></div><span class="shot-cap">Pricing System</span></div>
         <div class="shot-item"><div class="frame"><img src="../assets/projects/bins-and-deals/bins-3.png" alt="In-store claw machine promotional feature" loading="lazy" /></div><span class="shot-cap">Claw Machine</span></div>
         <div class="shot-item"><div class="frame"><img src="../assets/projects/bins-and-deals/bins-4.png" alt="Store hours, weekly schedule, and contact details module" loading="lazy" /></div><span class="shot-cap">Hours &amp; Location</span></div>
-        <div class="shot-item"><div class="frame"><img src="../assets/projects/bins-and-deals/bins-5.png" alt="Find us online — Facebook and Marketplace referral funnels" loading="lazy" /></div><span class="shot-cap">Find Us Online</span></div>
+        <div class="shot-item"><div class="frame"><img src="../assets/projects/bins-and-deals/bins-5.png" alt="Find us online, Facebook and Marketplace referral funnels" loading="lazy" /></div><span class="shot-cap">Find Us Online</span></div>
       </div>
     </div>
   </section>
@@ -291,7 +519,7 @@ img { max-width:100%; display:block; }
     <div class="container">
       <div class="quote-block">
         <p>"This project was not about adding more features. It was about reducing confusion. Most design decisions focused on helping new customers quickly understand how liquidation pricing works before they visit the store."</p>
-        <p class="quote-source">Client — Bins &amp; Deals owner</p>
+        <p class="quote-source">Client, Bins &amp; Deals owner</p>
       </div>
     </div>
   </section>
@@ -303,12 +531,14 @@ img { max-width:100%; display:block; }
         <div class="eyebrow">Outcome</div>
         <h2>Live, shipped, and in front of customers.</h2>
         <p class="lede" style="font-size:1.05rem">The site launched at <a href="https://binsanddeals.com" target="_blank" rel="noopener" style="color:var(--accent)">binsanddeals.com</a> and is now the store's main digital presence. Customers coming in from Facebook or Marketplace can check the pricing model, hours, and location before they ever visit. The color-tag pricing system took care of the most common source of pre-visit confusion.</p>
+        <p class="lede" style="font-size:1.05rem">Facebook still does what it always did: showing new stock and pulling in curiosity. Marketplace still moves individual items. The site's job was narrower than either of those, filling in the pricing model, the categories, the hours, the actual address. Facebook creates the interest. The site turns that interest into someone who already knows what to expect before they open the door.</p>
         <p class="lede" style="font-size:1.05rem">There was no analytics budget for a single-location store, so I tracked what the owner and staff could see with their own eyes: repeat questions at the counter and over the phone, and where new customers said they'd heard about the store in that first month.</p>
       </div>
       <div class="metric-row">
         <div class="metric"><span class="metric-value">-78%</span><span class="metric-label">Pre-visit confusion calls (14–16/wk → 2–4/wk)</span></div>
         <div class="metric"><span class="metric-value">+22%</span><span class="metric-label">New-customer foot traffic (~190/mo → ~230/mo)</span></div>
       </div>
+      <p style="margin-top:var(--sp-5); font-size:.92rem">Staff noticed the shift too. The same three questions that used to open every conversation at the counter mostly stopped needing to be asked.</p>
       <div class="btn-row">
         <a class="btn btn-primary" href="https://binsanddeals.com" target="_blank" rel="noopener">Visit live site ↗</a>
         <a class="btn btn-ghost" href="../index.html#work">← All work</a>
@@ -323,18 +553,18 @@ img { max-width:100%; display:block; }
         <div class="eyebrow">Reflection</div>
         <h2>What I'd do differently.</h2>
       </div>
-      <div class="process-list">
-        <div class="process-row">
-          <div class="proc-num">1</div>
-          <div>
-            <p>I'd wire up basic analytics before launch, not after. Call counts and staff-reported foot traffic are honest numbers, but they don't give you a real trend line. A lightweight pageview and referral setup from day one would let me show the trend instead of just describing it.</p>
-          </div>
+      <div class="reflection-list">
+        <div class="reflection-item">
+          <div class="reflection-num">1</div>
+          <p>I'd wire up basic analytics before launch, not after. Call counts and staff-reported foot traffic are honest numbers, but they don't give you a real trend line. A lightweight pageview and referral setup from day one would let me show the trend instead of just describing it.</p>
         </div>
-        <div class="process-row">
-          <div class="proc-num">2</div>
-          <div>
-            <p>I'd also test the pricing explainer on a few real first-time customers before shipping it, not just the owner and staff. Internal feedback caught the obvious gaps, but the person the whole site was built for, someone who's never set foot in a liquidation store, never actually saw it before launch.</p>
-          </div>
+        <div class="reflection-item">
+          <div class="reflection-num">2</div>
+          <p>I'd also test the pricing explainer on a few real first-time customers before shipping it, not just the owner and staff. Internal feedback caught the obvious gaps, but the person the whole site was built for, someone who's never set foot in a liquidation store, never actually saw it before launch.</p>
+        </div>
+        <div class="reflection-item">
+          <div class="reflection-num">3</div>
+          <p>The site hasn't changed much since launch, and small business sites usually don't. I'd push for that to be different: a weekly featured-inventory callout, a couple of real customer quotes, more local SEO content. None of that needs to compromise how simple the site currently is.</p>
         </div>
       </div>
     </div>

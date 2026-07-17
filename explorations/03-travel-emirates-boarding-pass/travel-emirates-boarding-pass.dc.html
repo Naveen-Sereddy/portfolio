@@ -32,10 +32,24 @@
     }
     * { box-sizing: border-box; }
     body { margin: 0; }
+    @media (max-width: 760px) {
+      .epb-card { width: 100vw !important; height: 100dvh !important; border-radius: 0 !important; }
+      .epb-pad { padding: 24px 20px 100px !important; }
+      .epb-row { flex-direction: column !important; }
+      .epb-row > div { width: auto !important; }
+      .epb-masthead { font-size: 26px !important; letter-spacing: 4px !important; }
+      .epb-welcome-card { width: calc(100% - 40px) !important; }
+      .epb-h1 { font-size: 24px !important; }
+      .epb-grid3 { grid-template-columns: repeat(2,1fr) !important; }
+      .epb-boarding-card { width: calc(100vw - 40px) !important; height: 340px !important; }
+      .epb-seat-side { width: 100% !important; }
+      .epb-dock { gap: 4px !important; padding: 10px !important; bottom: 12px !important; max-width: calc(100vw - 24px); overflow-x: auto; }
+      .epb-dock > div { padding: 10px 12px !important; font-size: 12px !important; white-space: nowrap; }
+    }
   </style>
 </helmet>
 <div style="width:100vw;height:100vh;background:radial-gradient(ellipse at 50% 40%, #14102a 0%, #050510 70%, #000000 100%);display:flex;align-items:center;justify-content:center;font-family:'Inter',system-ui,sans-serif;">
-  <div style="width:1400px;height:880px;border-radius:36px;overflow:hidden;position:relative;box-shadow:0 60px 140px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.06);perspective:1800px;transform:scale({{ scale }});transition:transform 0.15s ease;">
+  <div class="epb-card" style="width:1400px;height:880px;border-radius:36px;overflow:hidden;position:relative;box-shadow:0 60px 140px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.06);perspective:1800px;transform:scale({{ scale }});transition:transform 0.15s ease;">
 
     <!-- animated spatial background -->
     <div style="position:absolute;inset:0;background:linear-gradient(120deg,#0A0E27,#1A0B3C,#880E4F,#1A0B3C,#0F8B8D,#0A0E27);background-size:300% 300%;animation:driftGradient 26s ease-in-out infinite;"></div>
@@ -50,9 +64,9 @@
     <!-- ============ SCREEN 1: WELCOME ============ -->
     <sc-if value="{{ isWelcome }}" hint-placeholder-val="{{ true }}">
       <div data-screen-label="01 Welcome" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:40px 0;">
-        <div style="font-size:44px;letter-spacing:8px;color:#fff;font-weight:600;text-shadow:0 0 8px rgba(212,175,55,0.5),0 0 2px rgba(255,255,255,0.5);line-height:1.2;">EMIRATES</div>
+        <div class="epb-masthead" style="font-size:44px;letter-spacing:8px;color:#fff;font-weight:600;text-shadow:0 0 8px rgba(212,175,55,0.5),0 0 2px rgba(255,255,255,0.5);line-height:1.2;">EMIRATES</div>
 
-        <div style="width:480px;padding:28px 34px;border-radius:28px;background:rgba(255,255,255,0.12);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(255,255,255,0.25);box-shadow:0 30px 70px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.3);transform:perspective(1200px) rotateX(4deg);animation:floatY 6s ease-in-out infinite;">
+        <div class="epb-welcome-card" style="width:480px;padding:28px 34px;border-radius:28px;background:rgba(255,255,255,0.12);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(255,255,255,0.25);box-shadow:0 30px 70px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.3);transform:perspective(1200px) rotateX(4deg);animation:floatY 6s ease-in-out infinite;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
             <div style="padding:6px 16px;border-radius:999px;background:rgba(212,175,55,0.18);border:1px solid rgba(212,175,55,0.55);color:#F0D889;font-size:13px;letter-spacing:1.5px;font-weight:600;">SKYWARDS PLATINUM</div>
             <div style="width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#D4AF37,#fff8dc,#D4AF37);opacity:0.9;"></div>
@@ -76,13 +90,13 @@
 
     <!-- ============ SCREEN 2: TRIP DASHBOARD ============ -->
     <sc-if value="{{ isTrip }}" hint-placeholder-val="{{ false }}">
-      <div data-screen-label="02 Trip" style="position:absolute;inset:0;padding:64px 64px 96px;display:flex;flex-direction:column;">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px;">
-          <div style="color:#fff;font-size:36px;font-weight:600;">My Trip</div>
+      <div class="epb-pad" data-screen-label="02 Trip" style="position:absolute;inset:0;padding:64px 64px 96px;display:flex;flex-direction:column;overflow-y:auto;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px;flex-wrap:wrap;gap:8px;">
+          <div class="epb-h1" style="color:#fff;font-size:36px;font-weight:600;">My Trip</div>
           <div style="color:#F0D889;font-size:18px;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;">2:47 PM SFO</div>
         </div>
 
-        <div style="display:flex;gap:24px;margin-bottom:32px;">
+        <div class="epb-row" style="display:flex;gap:24px;margin-bottom:32px;">
           <div style="flex:1;padding:24px;border-radius:20px;background:rgba(255,255,255,0.07);backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,0.18);transform:translateZ(20px) rotateX(2deg);box-shadow:0 20px 40px rgba(0,0,0,0.35);">
             <div style="color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:1.2px;margin-bottom:8px;">FLIGHT STATUS</div>
             <div style="color:#8FD9A8;font-size:19px;font-weight:600;">On Time — Departs 11:30 PM</div>
@@ -111,11 +125,11 @@
 
     <!-- ============ SCREEN 3: BOARDING PASS DETAIL ============ -->
     <sc-if value="{{ isBoarding }}" hint-placeholder-val="{{ false }}">
-      <div data-screen-label="03 Boarding Pass" style="position:absolute;inset:0;padding:64px 64px 96px;display:flex;flex-direction:column;align-items:center;">
+      <div class="epb-pad" data-screen-label="03 Boarding Pass" style="position:absolute;inset:0;padding:64px 64px 96px;display:flex;flex-direction:column;align-items:center;overflow-y:auto;">
         <div style="color:#fff;font-size:28px;font-weight:600;margin-bottom:32px;align-self:flex-start;">Boarding Pass</div>
 
         <div style="perspective:1600px;">
-          <div onClick="{{ flipCard }}" style="width:560px;height:400px;position:relative;transform-style:preserve-3d;transition:transform 0.5s ease;cursor:pointer;transform:{{ flipTransform }};">
+          <div class="epb-boarding-card" onClick="{{ flipCard }}" style="width:560px;height:400px;position:relative;transform-style:preserve-3d;transition:transform 0.5s ease;cursor:pointer;transform:{{ flipTransform }};">
 
             <!-- FRONT -->
             <div style="position:absolute;inset:0;backface-visibility:hidden;border-radius:26px;padding:34px 38px;background:rgba(255,255,255,0.12);backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(255,255,255,0.25);box-shadow:0 30px 70px rgba(0,0,0,0.4);display:flex;flex-direction:column;justify-content:space-between;">
@@ -169,9 +183,9 @@
 
     <!-- ============ SCREEN 4: IFE ============ -->
     <sc-if value="{{ isIfe }}" hint-placeholder-val="{{ false }}">
-      <div data-screen-label="04 IFE" style="position:absolute;inset:0;padding:64px 64px 96px;overflow-y:auto;">
+      <div class="epb-pad" data-screen-label="04 IFE" style="position:absolute;inset:0;padding:64px 64px 96px;overflow-y:auto;">
         <div style="color:#fff;font-size:24px;font-weight:600;margin-bottom:32px;">IFE — Your Personal Screen</div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+        <div class="epb-grid3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
           <div onClick="{{ toggleMovies }}" style="grid-column:span 1;padding:24px;border-radius:20px;background:rgba(255,255,255,0.10);backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,0.2);cursor:pointer;transform:translateZ(18px);" style-hover="background:rgba(255,255,255,0.16);">
             <div style="font-size:26px;margin-bottom:8px;">🎬</div>
             <div style="color:#fff;font-size:17px;font-weight:600;">Movies</div>
@@ -220,7 +234,7 @@
 
     <!-- ============ SCREEN 5: SEAT & SERVICES ============ -->
     <sc-if value="{{ isSeat }}" hint-placeholder-val="{{ false }}">
-      <div data-screen-label="05 Seat and Services" style="position:absolute;inset:0;padding:64px 64px 96px;display:flex;gap:40px;">
+      <div class="epb-pad epb-row" data-screen-label="05 Seat and Services" style="position:absolute;inset:0;padding:64px 64px 96px;display:flex;gap:40px;overflow-y:auto;">
         <div style="flex:1;">
           <div style="color:#fff;font-size:24px;font-weight:600;margin-bottom:24px;">Enhance Your Journey</div>
           <div style="padding:28px;border-radius:20px;background:rgba(255,255,255,0.08);backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,0.18);">
@@ -228,7 +242,7 @@
             <sc-for list="{{ seatRows }}" as="row" hint-placeholder-count="3">
               <div style="display:flex;gap:16px;margin-bottom:16px;">
                 <sc-for list="{{ row.seats }}" as="seat" hint-placeholder-count="4">
-                  <div onClick="{{ seat.select }}" style="width:64px;height:64px;border-radius:16px;background:{{ seat.bg }};border:{{ seat.border }};display:flex;align-items:center;justify-content:center;color:{{ seat.color }};font-size:14px;font-family:'JetBrains Mono',monospace;cursor:pointer;transition:all 0.2s ease;">{{ seat.id }}</div>
+                  <div onClick="{{ seat.select }}" style="width:64px;height:64px;border-radius:16px;background:{{ seat.bg }};border:{{ seat.border }};display:flex;align-items:center;justify-content:center;color:{{ seat.color }};font-size:14px;font-family:'JetBrains Mono',monospace;cursor:pointer;transition:all 0.2s ease;flex-shrink:0;">{{ seat.id }}</div>
                 </sc-for>
               </div>
             </sc-for>
@@ -236,7 +250,7 @@
           </div>
         </div>
 
-        <div style="width:400px;display:flex;flex-direction:column;gap:16px;">
+        <div class="epb-seat-side" style="width:400px;display:flex;flex-direction:column;gap:16px;">
           <div style="color:#fff;font-size:18px;font-weight:600;margin-bottom:4px;">Services</div>
 
           <div onClick="{{ toggleChauffeur }}" style="padding:16px 24px;border-radius:20px;background:rgba(255,255,255,0.09);backdrop-filter:blur(18px) saturate(180%);border:1px solid rgba(255,255,255,0.18);display:flex;justify-content:space-between;align-items:center;cursor:pointer;">
@@ -271,7 +285,7 @@
 
     <!-- ============ SCREEN 6: TRACKING ============ -->
     <sc-if value="{{ isTrack }}" hint-placeholder-val="{{ false }}">
-      <div data-screen-label="06 Live Tracking" style="position:absolute;inset:0;padding:64px 64px 96px;display:flex;flex-direction:column;">
+      <div class="epb-pad" data-screen-label="06 Live Tracking" style="position:absolute;inset:0;padding:64px 64px 96px;display:flex;flex-direction:column;overflow-y:auto;">
         <div style="color:rgba(255,255,255,0.92);font-size:22px;font-weight:600;letter-spacing:1.5px;margin-bottom:24px;">LIVE TRACKING</div>
 
         <div style="padding:32px;border-radius:20px;background:rgba(255,255,255,0.08);backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.12);margin-bottom:16px;">
@@ -295,7 +309,7 @@
           </svg>
         </div>
 
-        <div style="display:flex;gap:16px;margin-bottom:16px;">
+        <div class="epb-row" style="display:flex;gap:16px;margin-bottom:16px;">
           <div style="flex:1;padding:24px;border-radius:20px;background:rgba(255,255,255,0.08);backdrop-filter:blur(18px) saturate(180%);border:1px solid rgba(255,255,255,0.16);">
             <div style="color:rgba(255,255,255,0.45);font-size:11px;letter-spacing:1.2px;margin-bottom:8px;">ALTITUDE</div>
             <div style="color:#fff;font-size:21px;font-weight:500;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;">38,000 ft</div>
@@ -314,7 +328,7 @@
           <div style="color:rgba(255,255,255,0.82);font-size:15px;letter-spacing:0.2px;">Clear skies — <span style="color:#9fdfe0;font-variant-numeric:tabular-nums;">−56°C outside</span> · <span style="color:#8FD9A8;font-variant-numeric:tabular-nums;">24°C cabin</span></div>
         </div>
 
-        <div style="display:flex;gap:16px;">
+        <div class="epb-row" style="display:flex;gap:16px;">
           <div style="flex:1;padding:24px;border-radius:20px;background:rgba(255,255,255,0.07);backdrop-filter:blur(18px) saturate(180%);border:1px solid rgba(255,255,255,0.14);display:flex;justify-content:space-between;align-items:baseline;">
             <div style="color:rgba(255,255,255,0.9);font-size:15px;">San Francisco</div>
             <div style="color:rgba(255,255,255,0.55);font-size:14px;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;">2:47 PM</div>
@@ -329,10 +343,10 @@
 
     <!-- ============ SCREEN 7: PROFILE ============ -->
     <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
-      <div data-screen-label="07 Profile" style="position:absolute;inset:0;padding:64px 64px 96px;">
+      <div class="epb-pad" data-screen-label="07 Profile" style="position:absolute;inset:0;padding:64px 64px 96px;overflow-y:auto;">
         <div style="color:#fff;font-size:24px;font-weight:600;letter-spacing:2px;margin-bottom:24px;">SKYWARDS PLATINUM</div>
 
-        <div style="padding:32px 36px;border-radius:24px;background:rgba(255,255,255,0.12);backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(212,175,55,0.5);box-shadow:0 30px 60px rgba(0,0,0,0.35);margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;">
+        <div style="padding:32px 36px;border-radius:24px;background:rgba(255,255,255,0.12);backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(212,175,55,0.5);box-shadow:0 30px 60px rgba(0,0,0,0.35);margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
           <div>
             <div style="color:#fff;font-size:24px;font-weight:600;letter-spacing:1px;">JORDAN ELLIS</div>
             <div style="color:#F0D889;font-size:15px;margin-top:6px;">Platinum</div>
@@ -343,7 +357,7 @@
           </div>
         </div>
 
-        <div style="display:flex;gap:16px;margin-bottom:24px;">
+        <div class="epb-row" style="display:flex;gap:16px;margin-bottom:24px;">
           <div style="flex:1;padding:24px;border-radius:20px;background:rgba(255,255,255,0.08);backdrop-filter:blur(18px) saturate(180%);border:1px solid rgba(255,255,255,0.16);text-align:center;">
             <div style="font-size:22px;margin-bottom:8px;">🛋️</div>
             <div style="color:#fff;font-size:14px;">Lounge Access</div>
@@ -377,7 +391,7 @@
 
     <!-- ============ BOTTOM DOCK ============ -->
     <sc-if value="{{ showDock }}" hint-placeholder-val="{{ false }}">
-      <div style="position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;gap:14px;padding:14px 18px;border-radius:999px;background:rgba(255,255,255,0.10);backdrop-filter:blur(26px) saturate(180%);border:1px solid rgba(255,255,255,0.22);box-shadow:0 20px 50px rgba(0,0,0,0.4);">
+      <div class="epb-dock" style="position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;gap:14px;padding:14px 18px;border-radius:999px;background:rgba(255,255,255,0.10);backdrop-filter:blur(26px) saturate(180%);border:1px solid rgba(255,255,255,0.22);box-shadow:0 20px 50px rgba(0,0,0,0.4);">
         <div onClick="{{ goTrip }}" style="padding:12px 22px;border-radius:999px;cursor:pointer;color:#fff;font-size:14px;transition:all 0.2s ease;background:{{ dockTripBg }};transform:{{ dockTripScale }};">Trip</div>
         <div onClick="{{ goBoarding }}" style="padding:12px 22px;border-radius:999px;cursor:pointer;color:#fff;font-size:14px;transition:all 0.2s ease;background:{{ dockBoardBg }};transform:{{ dockBoardScale }};">Board</div>
         <div onClick="{{ goTrack }}" style="padding:12px 22px;border-radius:999px;cursor:pointer;color:#fff;font-size:14px;transition:all 0.2s ease;background:{{ dockMapBg }};transform:{{ dockMapScale }};">Map</div>
@@ -403,6 +417,10 @@ class Component extends DCLogic {
   };
 
   computeScale() {
+    if (window.innerWidth <= 760) {
+      this.setState({ scale: 1 });
+      return;
+    }
     const margin = 0.94;
     const s = Math.min(
       (window.innerWidth * margin) / 1400,
