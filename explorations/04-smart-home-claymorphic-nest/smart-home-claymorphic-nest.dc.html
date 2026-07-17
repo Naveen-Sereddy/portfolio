@@ -32,8 +32,8 @@
 </helmet>
 
 <div style="{{ pageWrapStyle }}">
- <div style="width:342px;height:743px;">
-  <div style="transform:scale(0.85);transform-origin:top left;width:402px;height:874px;">
+ <div style="{{ deviceOuterBoxStyle }}">
+  <div style="{{ deviceScaleStyle }}">
   <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402,874" hide-home-indicator="{{ true }}">
     <div style="{{ deviceContentStyle }}">
 
@@ -402,7 +402,24 @@ class Component extends DCLogic {
     notifOn: [true, true, false, true, true],
     shareOpen: false,
     toast: null,
+    frameScale: 0.85,
+    wrapPad: 20,
   };
+
+  computeFrameScale = () => {
+    const isMobile = window.innerWidth <= 760;
+    const pad = isMobile ? 12 : 20;
+    const s = isMobile
+      ? Math.min(((window.innerWidth - pad * 2) * 0.98) / 402, ((window.innerHeight - pad * 2) * 0.98) / 874, 1)
+      : 0.85;
+    this.setState({ frameScale: s, wrapPad: pad });
+  };
+
+  componentDidMount() {
+    this.computeFrameScale();
+    this._onResize = () => this.computeFrameScale();
+    window.addEventListener('resize', this._onResize);
+  }
 
   shade(hex, percent) {
     const num = parseInt(hex.slice(1), 16);
@@ -589,7 +606,9 @@ class Component extends DCLogic {
     const iconLockBig = icon('<svg width="64" height="64" viewBox="0 0 24 24" fill="none" color="#fff"><rect x="5" y="11" width="14" height="10" rx="3" fill="currentColor"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>');
 
     // ---------- layout base ----------
-    const pageWrapStyle = { height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(160deg,#EDEAE1,#DAD5C9)', padding: 20, boxSizing: 'border-box', fontFamily: nunito };
+    const pageWrapStyle = { height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(160deg,#EDEAE1,#DAD5C9)', padding: s.wrapPad, boxSizing: 'border-box', fontFamily: nunito };
+    const deviceOuterBoxStyle = { width: 402 * s.frameScale, height: 874 * s.frameScale };
+    const deviceScaleStyle = { transform: `scale(${s.frameScale})`, transformOrigin: 'top left', width: 402, height: 874 };
     const deviceContentStyle = { height: '100%', display: 'flex', flexDirection: 'column', background: 'linear-gradient(165deg,#F3F0E7,#E6E1D8)', paddingTop: 54 };
     const screenPadStyle = { flex: 1, padding: '18px 22px 20px', display: 'flex', flexDirection: 'column', gap: 18, color: ink };
     const settingsPadStyle = { ...screenPadStyle };
@@ -882,7 +901,7 @@ class Component extends DCLogic {
       toggleLockState: this.toggleLockState, generateTempCode: this.generateTempCode,
       openShare: this.openShare, closeShare: this.closeShare, copyLink: this.copyLink, stopProp: this.stopProp,
 
-      pageWrapStyle, deviceContentStyle, screenPadStyle, settingsPadStyle,
+      pageWrapStyle, deviceOuterBoxStyle, deviceScaleStyle, deviceContentStyle, screenPadStyle, settingsPadStyle,
       helloStyle, tempDisplay, modeDisplay,
       homeCardStyle, homeCardLabelStyle, homeCardTempStyle, homeCardModeStyle,
       pillRowStyle, pillDoorStyle, pillLightStyle, pillCamStyle, pillSpeakerStyle, pillIconWrapStyle, pillLabelStyle, pillStatusStyle,

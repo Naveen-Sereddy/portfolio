@@ -165,11 +165,11 @@
       outcome: { value: "4.2 min → 38 sec", label: "time to act on recommendation" },
       caseUrl: "case-navi/index.html",
       shots: [
-        { src: "case-navi/img/ui-web-dashboard.png",   cap: "NAVI dashboard — paycheck card, AI insights banner, spending breakdown" },
-        { src: "case-navi/img/ui-web-onboarding.png",  cap: "Onboarding — split-screen trust-first activation flow" },
-        { src: "case-navi/img/ui-web-alerts.png",        cap: "Alerts — anomaly detection with goal impact and three resolution paths" },
-        { src: "case-navi/img/ui-web-slack.png",         cap: "Slack embedded view — Block Kit simulation under platform constraints" },
-        { src: "case-navi/img/ui-web-ai-analysis.png",   cap: "NAVI AI Analysis card — confidence score, data source, and override action" },
+        { src: "case-navi/img/ui-web-dashboard.png",   cap: "NAVI dashboard, paycheck card, AI insights banner, spending breakdown" },
+        { src: "case-navi/img/ui-web-onboarding.png",  cap: "Onboarding, split-screen trust-first activation flow" },
+        { src: "case-navi/img/ui-web-alerts.png",        cap: "Alerts, anomaly detection with goal impact and three resolution paths" },
+        { src: "case-navi/img/ui-web-slack.png",         cap: "Slack embedded view, Block Kit simulation under platform constraints" },
+        { src: "case-navi/img/ui-web-ai-analysis.png",   cap: "NAVI AI Analysis card, confidence score, data source, and override action" },
       ],
     },
     {

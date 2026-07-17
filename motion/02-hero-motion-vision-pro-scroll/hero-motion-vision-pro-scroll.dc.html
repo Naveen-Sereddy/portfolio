@@ -27,6 +27,12 @@
       0%, 100% { opacity:0.35; }
       50% { opacity:0.9; }
     }
+    @media (max-width: 480px) {
+      .vp-icon-grid { grid-template-columns: repeat(2, minmax(80px, 140px)) !important; }
+    }
+    @media (max-width: 700px) {
+      .vp-dots { display: none !important; }
+    }
   </style>
 </helmet>
 
@@ -38,7 +44,7 @@
     <div style="font-size:15px;font-weight:600;letter-spacing:0.02em;color:{{ navTextColor }};transition:color 0.3s ease;">Vision Pro</div>
   </div>
 
-  <div style="position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:14px;">
+  <div class="vp-dots" style="position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:14px;">
     <sc-for list="{{ dots }}" as="dot" hint-placeholder-count="6">
       <div style="width:{{ dot.size }}px;height:{{ dot.size }}px;border-radius:50%;background:{{ dot.color }};transition:all 0.3s ease;"></div>
     </sc-for>
@@ -107,7 +113,7 @@
       <div style="font-size:13px;letter-spacing:0.25em;text-transform:uppercase;color:#0A84FF;margin-bottom:10px;">Ecosystem</div>
       <div style="font-size:clamp(28px,4vw,46px);font-weight:600;letter-spacing:-0.01em;">Every app you love, all around you.</div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,minmax(100px,140px));gap:22px;max-width:700px;">
+    <div class="vp-icon-grid" style="display:grid;grid-template-columns:repeat(4,minmax(100px,140px));gap:22px;max-width:700px;">
       <sc-for list="{{ icons }}" as="icon" hint-placeholder-count="8">
         <div style="aspect-ratio:1;border-radius:26px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;background:{{ icon.bg }};opacity:{{ icon.opacity }};transform:translate3d(0,{{ icon.translate }}px,0) scale({{ icon.scale }});will-change:transform,opacity;box-shadow:0 12px 30px rgba(0,0,0,0.5);">
           <span style="font-size:13px;font-weight:600;color:#fff;">{{ icon.label }}</span>
