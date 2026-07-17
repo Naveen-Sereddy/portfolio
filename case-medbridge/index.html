@@ -268,7 +268,7 @@ img { max-width:100%; display:block; }
       <div class="section-head prose">
         <div class="eyebrow">Research</div>
         <h2>Three patterns that shaped every decision that followed.</h2>
-        <p class="lede">I ran user interviews, dug through support-call logs, and reviewed five competing healthcare portals. Two personas anchored the whole thing: Sarah, a mobile-first patient, and Robert, an older caregiver who's far less comfortable with tech.</p>
+        <p class="lede">I ran user interviews, dug through support-call logs, and reviewed five competing healthcare portals. Two personas anchored the whole thing: Beth, a mobile-first patient, and Mitchell, an older caregiver who's far less comfortable with tech.</p>
       </div>
       <div class="insight-grid">
         <div class="insight-card">
@@ -296,14 +296,14 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Design Decisions</div>
         <h2>Six decisions the journey map forced.</h2>
-        <p class="lede">Mapping Sarah's path from "I should see my cardiologist" to an actual confirmed visit turned up two clear friction points. Every decision below traces back to a moment where the old portal made an already-anxious task harder than it needed to be.</p>
+        <p class="lede">Mapping Beth's path from "I should see my cardiologist" to an actual confirmed visit turned up two clear friction points. Every decision below traces back to a moment where the old portal made an already-anxious task harder than it needed to be.</p>
       </div>
       <div class="decision-grid">
 
         <div class="decision-card">
           <div class="decision-num">01</div>
           <h3>In-network by default, sorted by fit</h3>
-          <p>Sarah's real problem was too many results, unclear in-network status, and choice paralysis. So the redesign defaults every search to in-network providers and sorts by soonest availability and best match, instead of just dumping an alphabetical list on her.</p>
+          <p>Beth's real problem was too many results, unclear in-network status, and choice paralysis. So the redesign defaults every search to in-network providers and sorts by soonest availability and best match, instead of just dumping an alphabetical list on her.</p>
         </div>
 
         <div class="decision-card">
@@ -315,7 +315,7 @@ img { max-width:100%; display:block; }
         <div class="decision-card">
           <div class="decision-num">03</div>
           <h3>Plain language, not clinical jargon</h3>
-          <p>Sarah put it plainly: she wanted to understand lab results without needing a translator. So test results now carry a "Reviewed" status in plain English instead of raw lab codes. Same information, no medical degree required to read it.</p>
+          <p>Beth put it plainly: she wanted to understand lab results without needing a translator. So test results now carry a "Reviewed" status in plain English instead of raw lab codes. Same information, no medical degree required to read it.</p>
         </div>
 
         <div class="decision-card">
@@ -327,7 +327,7 @@ img { max-width:100%; display:block; }
         <div class="decision-card">
           <div class="decision-num">05</div>
           <h3>44px targets, built for shaky hands</h3>
-          <p>Robert told us he was afraid of clicking the wrong button and breaking something. Every interactive control now spans at least a 44×44px hit area with 8px of clear space around it. That's comfortable for older caregivers, and honestly for anyone whose motor precision isn't perfect.</p>
+          <p>Mitchell told us he was afraid of clicking the wrong button and breaking something. Every interactive control now spans at least a 44×44px hit area with 8px of clear space around it. That's comfortable for older caregivers, and honestly for anyone whose motor precision isn't perfect.</p>
         </div>
 
         <div class="decision-card">
@@ -345,12 +345,12 @@ img { max-width:100%; display:block; }
     <div class="container">
       <div class="section-head">
         <div class="eyebrow">Scoped Out, On Purpose</div>
-        <h2>Robert needed two accounts. He got one.</h2>
+        <h2>Mitchell needed two accounts. He got one.</h2>
         <p class="lede">Not everything from the research made it into this version, and that's worth being upfront about.</p>
       </div>
       <div class="pivot-box">
         <h3>The caregiver dual-account gap</h3>
-        <p>Robert's goal was explicit: keep his and Elena's appointments in one organized place. His actual pain point was just as direct: switching between his own account and hers was confusing, on top of an interface he already found dense and hard to read.</p>
+        <p>Mitchell's goal was explicit: keep his and Nicola's appointments in one organized place. His actual pain point was just as direct: switching between his own account and hers was confusing, on top of an interface he already found dense and hard to read.</p>
         <p>Real caregiver access means a second identity with permissioned visibility into a spouse's records, not just a shared login. Building that would have changed several information-architecture decisions in this project: how the dashboard greets the user, how appointments get attributed, how billing splits across two people. That's a redesign of the account model, not a feature bolted onto one.</p>
         <p>So I scoped this version around a single-patient account and wrote the gap down instead of forcing in a shortcut that would've undermined the "one calm, organized place" goal for everyone else. It's the first thing I mention in the reflection below, and it's the most consequential thing I'd build next.</p>
       </div>
@@ -397,7 +397,7 @@ img { max-width:100%; display:block; }
           <span class="anno-dot" style="left:83%; top:45%" aria-hidden="true">3</span>
         </div>
         <div class="anno-legend two-col">
-          <div class="anno-legend-item"><span class="anno-legend-num">1</span><p><strong>Pending balance sits beside unread messages, not buried in Billing.</strong> This is Insight 02: appointments and money are both front-door tasks. Sarah shouldn't have to leave the dashboard just to find out she owes $248.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">1</span><p><strong>Pending balance sits beside unread messages, not buried in Billing.</strong> This is Insight 02: appointments and money are both front-door tasks. Beth shouldn't have to leave the dashboard just to find out she owes $248.</p></div>
           <div class="anno-legend-item"><span class="anno-legend-num">2</span><p><strong>Confirmed, Telehealth, and Pending are visible without opening a row.</strong> This ties to Insight 03: stress makes friction worse. Someone scanning for "what do I need to do next" gets the answer right in the list, no click required.</p></div>
           <div class="anno-legend-item"><span class="anno-legend-num">3</span><p><strong>Vitals carry a "Confirmed" status, the same pattern as appointments.</strong> One visual language for "this is settled" means a stressed patient has fewer things to learn just to read the screen.</p></div>
         </div>
@@ -413,7 +413,7 @@ img { max-width:100%; display:block; }
         <div class="anno-legend two-col" style="margin-top:0">
           <div class="anno-legend-item"><span class="anno-legend-num">4</span><p><strong>Insurance filter defaults to a live decision, not a dead-end dropdown.</strong> This is Decision 01. The journey map's biggest friction was unclear in-network status, so filtering by insurance is now a first-class control instead of something buried in Advanced Search.</p></div>
           <div class="anno-legend-item"><span class="anno-legend-num">5</span><p><strong>Rating and years of experience sit directly under the name.</strong> Choice paralysis came from too many undifferentiated results. A trust signal at a glance narrows the decision without making someone open every profile.</p></div>
-          <div class="anno-legend-item"><span class="anno-legend-num">6</span><p><strong>Book is one tap from the search results, not three screens deep.</strong> This is Decision 02. Showing real availability up front means Sarah commits to a slot without a separate "check availability" round trip.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">6</span><p><strong>Book is one tap from the search results, not three screens deep.</strong> This is Decision 02. Showing real availability up front means Beth commits to a slot without a separate "check availability" round trip.</p></div>
         </div>
       </div>
     </div>
@@ -443,7 +443,7 @@ img { max-width:100%; display:block; }
       <div class="section-head">
         <div class="eyebrow">Accessibility</div>
         <h2>Audited, not assumed.</h2>
-        <p class="lede">The "AA WCAG 2.1" tag in the hero is a measured result, not a checkbox I ticked. I evaluated the dashboard specifically against Robert: 68 years old, low-to-moderate tech comfort, the least confident user in the research, not just against AA compliance as an abstract standard.</p>
+        <p class="lede">The "AA WCAG 2.1" tag in the hero is a measured result, not a checkbox I ticked. I evaluated the dashboard specifically against Mitchell: 68 years old, low-to-moderate tech comfort, the least confident user in the research, not just against AA compliance as an abstract standard.</p>
       </div>
       <div class="access-grid">
         <div class="frame" style="--ar:1760/1100">
@@ -518,10 +518,10 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Personas</div>
               <h2>Two archetypes, opposite ends of tech literacy.</h2>
-              <p class="lede">Sarah (36, mobile-first, high tech literacy) and Robert (68, caregiver, low-to-moderate tech literacy) anchor every design decision here. Together they span the widest gap in tech comfort MedBridge needs to serve.</p>
+              <p class="lede">Beth (36, mobile-first, high tech literacy) and Mitchell (68, caregiver, low-to-moderate tech literacy) anchor every design decision here. Together they span the widest gap in tech comfort MedBridge needs to serve.</p>
             </div>
             <div class="frame" style="--ar:1760/1100;max-width:1000px;margin-inline:auto">
-              <img src="img/01.png" alt="Two MedBridge personas, Sarah Johnson (a mobile-first patient) and Robert Alvarez (an older caregiver), with goals, pain points, and behaviors" loading="lazy" />
+              <img src="img/01.png" alt="Two MedBridge personas, Beth Mooney (a mobile-first patient) and Mitchell Owen (an older caregiver), with goals, pain points, and behaviors" loading="lazy" />
             </div>
           </div>
 
@@ -529,7 +529,7 @@ img { max-width:100%; display:block; }
             <div class="section-head">
               <div class="eyebrow">Journey Map</div>
               <h2>Realize, find, choose, confirm, done.</h2>
-              <p class="lede">Sarah's path from realizing she needs care to an actual confirmed visit. Two friction points drove the redesign priorities: finding an in-network doctor, and finding a slot that fits her schedule.</p>
+              <p class="lede">Beth's path from realizing she needs care to an actual confirmed visit. Two friction points drove the redesign priorities: finding an in-network doctor, and finding a slot that fits her schedule.</p>
             </div>
             <div class="frame" style="--ar:1760/1100;max-width:1000px;margin-inline:auto">
               <img src="img/02.png" alt="MedBridge user journey map for booking an appointment, from realize and decide through post-booking, with emotion curve and two highlighted friction points" loading="lazy" />
