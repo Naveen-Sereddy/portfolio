@@ -10,7 +10,7 @@
 | `--bg-4` | `#24180d` | Hover states |
 | `--text` | `#f0e4d3` | Primary text |
 | `--text-2` | `#b8a58f` | Secondary / body copy |
-| `--text-3` | `#7c6a5a` | Tertiary / labels |
+| `--text-3` | `#96826d` | Tertiary / labels |
 | `--text-4` | `#5a4d40` | Disabled / very faint |
 | `--accent` | `#d0923a` | Gold amber — primary accent |
 | `--accent-soft` | `#b57d2b` | Hover state of accent |
@@ -146,7 +146,7 @@ Hover: `translateY(-4px)` + stronger shadow + border-color shifts toward accent.
 
 Shared shell: `case-studies.css` — nav, hero, meta, buttons, next-case, footer.
 
-React/Babel artifact sections rendered inside `#root` — personas, journey maps, sitemaps, wireframes, design system, accessibility, final UI.
+Static HTML sections, no client-side rendering — personas, journey maps, sitemaps, wireframes, design system, and accessibility artifacts are plain image frames with copy, collapsed into a `<details>` "full process archive" per page. (The React/Babel JSX artifacts under each project's own `case-study/` folder in `Projects/` are separate, earlier-stage exploration files — they aren't what's built into these pages.)
 
 Each case study adapts section weight to its story:
 - **FinFlow:** metric-led hero, deep process (10 sections), defend the 73→89 lift

@@ -8,25 +8,11 @@
    ========================================================================= */
 
 /* ---------------------------------------------------------------- tokens */
+@import url("tokens.css");
 :root {
-  --bg:            #0d0404;
-  --bg-2:          #120806;
-  --bg-3:          #1a0f0a;
-  --bg-4:          #24180d;
-  --text:          #f0e4d3;
-  --text-2:        #b8a58f;
-  --text-3:        #96826d;
-  --accent:        #d0923a;
-  --accent-soft:   #b57d2b;
-  --accent-muted:  rgba(208,146,58,0.09);
-  --accent-mid:    rgba(208,146,58,0.14);
-  --border:        rgba(255,255,255,0.06);
-  --border-strong: rgba(255,255,255,0.10);
+  /* brand colors, spacing scale, and fonts live in tokens.css, shared with every case study */
   --success:       #5a9e6f;
   --danger:        #c45b5b;
-  --font-display:  'Cormorant Garamond', Georgia, serif;
-  --font-body:     'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono:     'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
   --text-xs:       0.75rem;
   --text-sm:       0.8125rem;
   --text-base:     1rem;
@@ -57,16 +43,7 @@
   --sb-thumb:      #2E2E2E;
   --sb-thumb-hover:#3D3D3D;
   --grain-opacity: 0.022;
-
-  /* spacing — 4px baseline grid */
-  --sp-1:  0.25rem;  /* 4px */
-  --sp-2:  0.5rem;   /* 8px */
-  --sp-3:  0.75rem;  /* 12px */
-  --sp-4:  1rem;     /* 16px */
-  --sp-5:  1.5rem;   /* 24px */
-  --sp-6:  2rem;     /* 32px */
-  --sp-7:  3rem;     /* 48px */
-  --sp-8:  4rem;     /* 64px */
+  /* spacing scale (--sp-1 .. --sp-8) lives in tokens.css */
 
   /* border width */
   --border-w-sm: 1px;
