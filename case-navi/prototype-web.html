@@ -7,13 +7,13 @@
 </head>
 <body>
 <x-app>
-<template id="__bundler_thumbnail"><svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="80" fill="#DFF0FF"/><rect x="10" y="10" width="100" height="60" rx="10" fill="#FFFFFF"/><rect x="20" y="20" width="30" height="30" rx="6" fill="#E8F3FF"/><rect x="56" y="20" width="54" height="8" rx="3" fill="#E8F3FF"/><rect x="56" y="32" width="38" height="6" rx="3" fill="#E8F3FF"/><rect x="20" y="54" width="80" height="8" rx="4" fill="#3D96F0" opacity="0.75"/><text x="33" y="40" font-family="sans-serif" font-weight="800" font-size="14" fill="#3D96F0">N</text></svg></template>
+<template id="__bundler_thumbnail"><svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="80" fill="#DFF0FF"/><rect x="10" y="10" width="100" height="60" rx="10" fill="#FFFFFF"/><rect x="20" y="20" width="30" height="30" rx="6" fill="#E8F3FF"/><rect x="56" y="20" width="54" height="8" rx="3" fill="#E8F3FF"/><rect x="56" y="32" width="38" height="6" rx="3" fill="#E8F3FF"/><rect x="20" y="54" width="80" height="8" rx="4" fill="#3078C0" opacity="0.75"/><text x="33" y="40" font-family="sans-serif" font-weight="800" font-size="14" fill="#3078C0">N</text></svg></template>
 <helmet>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #DFF0FF; }
-  ::placeholder { color: #7A9BB5; }
+  ::placeholder { color: #556C7E; }
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-thumb { background: #A8C8E8; border-radius: 2px; }
   @keyframes typingDot {
@@ -21,8 +21,8 @@
     30% { opacity:1; transform:translateY(-4px); }
   }
   @keyframes bluePulse {
-    0%,100% { box-shadow:0 0 0 0 rgba(61,150,240,.4); }
-    50% { box-shadow:0 0 0 6px rgba(61,150,240,0); }
+    0%,100% { box-shadow:0 0 0 0 rgba(48,120,192,.4); }
+    50% { box-shadow:0 0 0 6px rgba(48,120,192,0); }
   }
   @keyframes analysisBar { from { width:0 } to { width:100% } }
   @keyframes fadeUp { from { opacity:0; transform:translateY(8px) } to { opacity:1; transform:translateY(0) } }
@@ -37,22 +37,22 @@
 
       <!-- Left: Brand panel -->
       <div style="width:38%;height:100%;background:#DFF0FF;border-right:1px solid #BDD8F5;display:flex;flex-direction:column;justify-content:space-between;padding:48px;position:relative;overflow:hidden;">
-        <div style="position:absolute;width:480px;height:480px;border-radius:50%;border:1px solid rgba(61,150,240,0.1);top:15%;left:-18%;pointer-events:none;"></div>
-        <div style="position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid rgba(61,150,240,0.06);top:32%;left:8%;pointer-events:none;"></div>
+        <div style="position:absolute;width:480px;height:480px;border-radius:50%;border:1px solid rgba(48,120,192,0.1);top:15%;left:-18%;pointer-events:none;"></div>
+        <div style="position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid rgba(48,120,192,0.06);top:32%;left:8%;pointer-events:none;"></div>
 
         <!-- Logo -->
         <div style="display:flex;align-items:center;gap:10px;position:relative;z-index:2;">
           <div style="width:32px;height:32px;background:#FFFFFF;border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:4px 4px 10px rgba(0,0,0,0.14),-2px -2px 7px rgba(255,255,255,0.85),inset -2px -2px 5px rgba(0,0,0,0.07),inset 2px 2px 5px rgba(255,255,255,0.6);">
-            <svg width="20" height="20" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="2.5" r="1.2" fill="#3D96F0"/><line x1="11" y1="3.7" x2="11" y2="5.2" stroke="#3D96F0" stroke-width="1.4" stroke-linecap="round"/><path d="M7 5.2h8l1.2 2.3H5.8z" fill="#3D96F0"/><rect x="5.5" y="7.5" width="11" height="8.5" rx="3" fill="#3D96F0" opacity="0.88"/><ellipse cx="11" cy="11.7" rx="2.5" ry="3" fill="rgba(180,220,255,0.7)"/><path d="M8.5 16c.7.9 1.5 1.4 2.5 1.4s1.8-.5 2.5-1.4" stroke="#3D96F0" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <svg width="20" height="20" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="2.5" r="1.2" fill="#3078C0"/><line x1="11" y1="3.7" x2="11" y2="5.2" stroke="#3078C0" stroke-width="1.4" stroke-linecap="round"/><path d="M7 5.2h8l1.2 2.3H5.8z" fill="#3078C0"/><rect x="5.5" y="7.5" width="11" height="8.5" rx="3" fill="#3078C0" opacity="0.88"/><ellipse cx="11" cy="11.7" rx="2.5" ry="3" fill="rgba(180,220,255,0.7)"/><path d="M8.5 16c.7.9 1.5 1.4 2.5 1.4s1.8-.5 2.5-1.4" stroke="#3078C0" stroke-width="1.2" stroke-linecap="round"/></svg>
           </div>
           <span style="color:#0D2137;font-size:18px;font-weight:700;letter-spacing:-0.02em;">NAVI</span>
         </div>
 
         <!-- Tagline -->
         <div style="position:relative;z-index:2;">
-          <p style="color:#3D96F0;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">Financial Wellness for Work</p>
+          <p style="color:#3078C0;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">Financial Wellness for Work</p>
           <h1 style="color:#0D2137;font-size:36px;font-weight:800;line-height:1.18;letter-spacing:-0.03em;margin-bottom:14px;">Your money,<br/>finally making<br/>sense.</h1>
-          <p style="color:#7A9BB5;font-size:14px;line-height:1.65;">NAVI is your AI financial wellness benefit. It connects to your payroll, understands your patterns, and surfaces insights — privately, on your terms.</p>
+          <p style="color:#556C7E;font-size:14px;line-height:1.65;">NAVI is your AI financial wellness benefit. It connects to your payroll, understands your patterns, and surfaces insights — privately, on your terms.</p>
           <div style="display:flex;align-items:center;gap:8px;margin-top:32px;">
             <div style="{{ dot0 }}"></div>
             <div style="{{ dot1 }}"></div>
@@ -69,92 +69,92 @@
           <!-- Step 0: Welcome -->
           <sc-if value="{{ isStep0 }}" hint-placeholder-val="{{ true }}">
             <div>
-              <p style="font-size:10px;font-weight:700;color:#3D96F0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;">Welcome, Allen</p>
+              <p style="font-size:10px;font-weight:700;color:#3078C0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;">Welcome, Allen</p>
               <h2 style="font-size:30px;font-weight:800;color:#0D2137;letter-spacing:-0.02em;margin-bottom:10px;">Your finances, finally clear.</h2>
               <p style="font-size:15px;color:#3D5E7A;line-height:1.65;margin-bottom:28px;">NAVI watches your cash flow so you don't have to. No spreadsheets, no budgeting homework — just timely nudges when something needs your attention.</p>
               <div style="background:#FFFFFF;border-radius:20px;padding:18px 20px;margin-bottom:28px;box-shadow:8px 8px 20px rgba(0,0,0,0.16),-4px -4px 12px rgba(255,255,255,0.82),inset -3px -3px 8px rgba(0,0,0,0.07),inset 3px 3px 8px rgba(255,255,255,0.62);">
                 <p style="font-size:12px;font-weight:700;color:#3D5E7A;margin-bottom:12px;">What NAVI does for you</p>
                 <div style="display:flex;flex-direction:column;gap:10px;">
                   <div style="display:flex;align-items:center;gap:10px;">
-                    <div style="width:6px;height:6px;border-radius:50%;background:#3D96F0;flex-shrink:0;"></div>
-                    <span style="font-size:13px;color:#7A9BB5;">Reads your payroll deposits and spending patterns</span>
+                    <div style="width:6px;height:6px;border-radius:50%;background:#3078C0;flex-shrink:0;"></div>
+                    <span style="font-size:13px;color:#556C7E;">Reads your payroll deposits and spending patterns</span>
                   </div>
                   <div style="display:flex;align-items:center;gap:10px;">
-                    <div style="width:6px;height:6px;border-radius:50%;background:#3D96F0;flex-shrink:0;"></div>
-                    <span style="font-size:13px;color:#7A9BB5;">Surfaces proactive, actionable financial insights</span>
+                    <div style="width:6px;height:6px;border-radius:50%;background:#3078C0;flex-shrink:0;"></div>
+                    <span style="font-size:13px;color:#556C7E;">Surfaces proactive, actionable financial insights</span>
                   </div>
                   <div style="display:flex;align-items:center;gap:10px;">
-                    <div style="width:6px;height:6px;border-radius:50%;background:#3D96F0;flex-shrink:0;"></div>
-                    <span style="font-size:13px;color:#7A9BB5;">Never shares your personal data with TechCorp HR</span>
+                    <div style="width:6px;height:6px;border-radius:50%;background:#3078C0;flex-shrink:0;"></div>
+                    <span style="font-size:13px;color:#556C7E;">Never shares your personal data with TechCorp HR</span>
                   </div>
                 </div>
                 <div style="margin-top:14px;padding-top:13px;border-top:1px solid #BDD8F5;display:flex;align-items:center;justify-content:space-between;">
                   <div style="display:flex;flex-direction:column;gap:2px;">
-                    <span style="font-size:10px;font-weight:700;color:#7A9BB5;letter-spacing:0.07em;text-transform:uppercase;">Avg. time to act on a recommendation</span>
+                    <span style="font-size:10px;font-weight:700;color:#556C7E;letter-spacing:0.07em;text-transform:uppercase;">Avg. time to act on a recommendation</span>
                     <div style="display:flex;align-items:center;gap:8px;">
-                      <span style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;color:#7A9BB5;text-decoration:line-through;opacity:0.6;">4.2 min</span>
-                      <span style="font-size:11px;color:#7A9BB5;">→</span>
-                      <span style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;color:#22A55A;">38 sec</span>
+                      <span style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;color:#556C7E;text-decoration:line-through;opacity:0.6;">4.2 min</span>
+                      <span style="font-size:11px;color:#556C7E;">→</span>
+                      <span style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;color:#1B8448;">38 sec</span>
                     </div>
                   </div>
-                  <span style="font-size:10px;color:#7A9BB5;text-align:right;line-height:1.4;">Usability study<br/>8 participants</span>
+                  <span style="font-size:10px;color:#556C7E;text-align:right;line-height:1.4;">Usability study<br/>8 participants</span>
                 </div>
               </div>
-              <button onClick="{{ nextStep }}" style="width:100%;background:#3D96F0;color:#EEF7FF;border:none;border-radius:16px;padding:14px 20px;font-size:15px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;letter-spacing:-0.01em;box-shadow:4px 4px 12px rgba(61,150,240,0.4),-2px -2px 8px rgba(255,255,255,0.5);">Activate my benefit →</button>
+              <button onClick="{{ nextStep }}" style="width:100%;background:#3078C0;color:#EEF7FF;border:none;border-radius:16px;padding:14px 20px;font-size:15px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;letter-spacing:-0.01em;box-shadow:4px 4px 12px rgba(48,120,192,0.4),-2px -2px 8px rgba(255,255,255,0.5);">Activate my benefit →</button>
             </div>
           </sc-if>
 
           <!-- Step 1: Connect payroll + accounts -->
           <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ false }}">
             <div>
-              <p style="font-size:10px;font-weight:700;color:#3D96F0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;">Step 1 of 3 — Data Sources</p>
+              <p style="font-size:10px;font-weight:700;color:#3078C0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;">Step 1 of 3 — Data Sources</p>
               <h2 style="font-size:28px;font-weight:800;color:#0D2137;letter-spacing:-0.02em;margin-bottom:10px;">Connect your accounts</h2>
               <p style="font-size:14px;color:#3D5E7A;margin-bottom:24px;">NAVI reads your data to build a complete financial picture. Read-only — it never initiates transfers or shares your data.</p>
               <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
                 <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-radius:16px;background:#FFFFFF;box-shadow:6px 6px 14px rgba(0,0,0,0.13),-3px -3px 9px rgba(255,255,255,0.75),inset -2px -2px 6px rgba(0,0,0,0.06),inset 2px 2px 6px rgba(255,255,255,0.55);">
                   <div style="display:flex;align-items:center;gap:12px;">
-                    <div style="width:32px;height:32px;border-radius:10px;background:#3D96F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:3px 3px 7px rgba(61,150,240,0.4);"><span style="color:#EEF7FF;font-size:10px;font-weight:800;">TC</span></div>
-                    <div><p style="font-size:13px;font-weight:600;color:#0D2137;">TechCorp Payroll</p><p style="font-size:11px;color:#7A9BB5;">Direct Deposit · Bi-weekly</p></div>
+                    <div style="width:32px;height:32px;border-radius:10px;background:#3078C0;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:3px 3px 7px rgba(48,120,192,0.4);"><span style="color:#EEF7FF;font-size:10px;font-weight:800;">TC</span></div>
+                    <div><p style="font-size:13px;font-weight:600;color:#0D2137;">TechCorp Payroll</p><p style="font-size:11px;color:#556C7E;">Direct Deposit · Bi-weekly</p></div>
                   </div>
                   <div style="display:flex;align-items:center;gap:5px;">
-                    <div style="width:14px;height:14px;border-radius:50%;background:rgba(34,165,90,0.15);display:flex;align-items:center;justify-content:center;">
-                      <svg width="8" height="8" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#22A55A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <div style="width:14px;height:14px;border-radius:50%;background:rgba(27,132,72,0.15);display:flex;align-items:center;justify-content:center;">
+                      <svg width="8" height="8" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#1B8448" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </div>
-                    <span style="font-size:12px;color:#22A55A;font-weight:700;">Connected</span>
+                    <span style="font-size:12px;color:#1B8448;font-weight:700;">Connected</span>
                   </div>
                 </div>
                 <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-radius:16px;background:#FFFFFF;box-shadow:6px 6px 14px rgba(0,0,0,0.13),-3px -3px 9px rgba(255,255,255,0.75),inset -2px -2px 6px rgba(0,0,0,0.06),inset 2px 2px 6px rgba(255,255,255,0.55);">
                   <div style="display:flex;align-items:center;gap:12px;">
                     <div style="width:32px;height:32px;border-radius:10px;background:#003087;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:white;font-size:10px;font-weight:700;">CH</span></div>
-                    <div><p style="font-size:13px;font-weight:600;color:#0D2137;">Chase Checking</p><p style="font-size:11px;color:#7A9BB5;font-family:'DM Mono',monospace;">···· 4821</p></div>
+                    <div><p style="font-size:13px;font-weight:600;color:#0D2137;">Chase Checking</p><p style="font-size:11px;color:#556C7E;font-family:'DM Mono',monospace;">···· 4821</p></div>
                   </div>
                   <div style="display:flex;align-items:center;gap:5px;">
-                    <div style="width:14px;height:14px;border-radius:50%;background:rgba(34,165,90,0.15);display:flex;align-items:center;justify-content:center;">
-                      <svg width="8" height="8" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#22A55A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <div style="width:14px;height:14px;border-radius:50%;background:rgba(27,132,72,0.15);display:flex;align-items:center;justify-content:center;">
+                      <svg width="8" height="8" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#1B8448" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </div>
-                    <span style="font-size:12px;color:#22A55A;font-weight:700;">Connected</span>
+                    <span style="font-size:12px;color:#1B8448;font-weight:700;">Connected</span>
                   </div>
                 </div>
                 <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-radius:16px;background:#FFFFFF;box-shadow:6px 6px 14px rgba(0,0,0,0.13),-3px -3px 9px rgba(255,255,255,0.75),inset -2px -2px 6px rgba(0,0,0,0.06),inset 2px 2px 6px rgba(255,255,255,0.55);">
                   <div style="display:flex;align-items:center;gap:12px;">
                     <div style="width:32px;height:32px;border-radius:10px;background:#006CB7;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:white;font-size:10px;font-weight:700;">AX</span></div>
-                    <div><p style="font-size:13px;font-weight:600;color:#0D2137;">Amex Platinum</p><p style="font-size:11px;color:#7A9BB5;font-family:'DM Mono',monospace;">···· 2847</p></div>
+                    <div><p style="font-size:13px;font-weight:600;color:#0D2137;">Amex Platinum</p><p style="font-size:11px;color:#556C7E;font-family:'DM Mono',monospace;">···· 2847</p></div>
                   </div>
                   <div style="display:flex;align-items:center;gap:5px;">
-                    <div style="width:14px;height:14px;border-radius:50%;background:rgba(34,165,90,0.15);display:flex;align-items:center;justify-content:center;">
-                      <svg width="8" height="8" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#22A55A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <div style="width:14px;height:14px;border-radius:50%;background:rgba(27,132,72,0.15);display:flex;align-items:center;justify-content:center;">
+                      <svg width="8" height="8" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#1B8448" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </div>
-                    <span style="font-size:12px;color:#22A55A;font-weight:700;">Connected</span>
+                    <span style="font-size:12px;color:#1B8448;font-weight:700;">Connected</span>
                   </div>
                 </div>
               </div>
               <div style="display:flex;align-items:center;gap:6px;margin-bottom:20px;">
-                <svg width="12" height="12" fill="none" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#7A9BB5" stroke-width="1.75"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#7A9BB5" stroke-width="1.75" stroke-linecap="round"/></svg>
-                <span style="font-size:11px;color:#7A9BB5;">Read-only · 256-bit encrypted · HR cannot see your personal data</span>
+                <svg width="12" height="12" fill="none" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#556C7E" stroke-width="1.75"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#556C7E" stroke-width="1.75" stroke-linecap="round"/></svg>
+                <span style="font-size:11px;color:#556C7E;">Read-only · 256-bit encrypted · HR cannot see your personal data</span>
               </div>
               <div style="display:flex;gap:8px;">
                 <button onClick="{{ prevStep }}" style="flex:1;background:#FFFFFF;border:none;color:#3D5E7A;border-radius:14px;padding:13px;font-size:14px;font-weight:600;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:4px 4px 10px rgba(0,0,0,0.12),-2px -2px 7px rgba(255,255,255,0.75);">Back</button>
-                <button onClick="{{ nextStep }}" style="flex:2;background:#3D96F0;color:#EEF7FF;border:none;border-radius:14px;padding:13px;font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:4px 4px 12px rgba(61,150,240,0.4),-2px -2px 8px rgba(255,255,255,0.5);">Continue →</button>
+                <button onClick="{{ nextStep }}" style="flex:2;background:#3078C0;color:#EEF7FF;border:none;border-radius:14px;padding:13px;font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:4px 4px 12px rgba(48,120,192,0.4),-2px -2px 8px rgba(255,255,255,0.5);">Continue →</button>
               </div>
             </div>
           </sc-if>
@@ -162,31 +162,31 @@
           <!-- Step 2: Goal -->
           <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
             <div>
-              <p style="font-size:10px;font-weight:700;color:#3D96F0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;">Step 2 of 3 — Your Goal</p>
+              <p style="font-size:10px;font-weight:700;color:#3078C0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;">Step 2 of 3 — Your Goal</p>
               <h2 style="font-size:28px;font-weight:800;color:#0D2137;letter-spacing:-0.02em;margin-bottom:10px;">What's your primary financial goal?</h2>
               <p style="font-size:14px;color:#3D5E7A;margin-bottom:24px;">NAVI will validate this against your payroll and spending data before committing to a timeline.</p>
-              <div style="border:2px solid #3D96F0;border-radius:20px;padding:20px;background:rgba(61,150,240,0.05);margin-bottom:14px;box-shadow:6px 6px 16px rgba(0,0,0,0.12),-3px -3px 10px rgba(255,255,255,0.7);">
+              <div style="border:2px solid #3078C0;border-radius:20px;padding:20px;background:rgba(48,120,192,0.05);margin-bottom:14px;box-shadow:6px 6px 16px rgba(0,0,0,0.12),-3px -3px 10px rgba(255,255,255,0.7);">
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;">
                   <div>
-                    <p style="font-size:10px;font-weight:700;color:#3D96F0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">Selected</p>
+                    <p style="font-size:10px;font-weight:700;color:#3078C0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">Selected</p>
                     <h3 style="font-size:18px;font-weight:700;color:#0D2137;letter-spacing:-0.01em;margin-bottom:3px;">Emergency Fund</h3>
                     <p style="font-size:12px;color:#3D5E7A;">3–6 months of living expenses, liquid and accessible</p>
                   </div>
-                  <div style="width:24px;height:24px;border-radius:50%;background:rgba(34,165,90,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:12px;">
-                    <svg width="12" height="12" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#22A55A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <div style="width:24px;height:24px;border-radius:50%;background:rgba(27,132,72,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:12px;">
+                    <svg width="12" height="12" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#1B8448" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   </div>
                 </div>
                 <div style="display:flex;gap:28px;">
-                  <div><p style="font-size:10px;color:#7A9BB5;margin-bottom:2px;">Target</p><p style="font-size:20px;font-weight:700;font-family:'DM Mono',monospace;color:#0D2137;letter-spacing:-0.02em;">$10,000</p></div>
-                  <div><p style="font-size:10px;color:#7A9BB5;margin-bottom:2px;">Proposed timeline</p><p style="font-size:20px;font-weight:700;font-family:'DM Mono',monospace;color:#0D2137;letter-spacing:-0.02em;">12 months</p></div>
+                  <div><p style="font-size:10px;color:#556C7E;margin-bottom:2px;">Target</p><p style="font-size:20px;font-weight:700;font-family:'DM Mono',monospace;color:#0D2137;letter-spacing:-0.02em;">$10,000</p></div>
+                  <div><p style="font-size:10px;color:#556C7E;margin-bottom:2px;">Proposed timeline</p><p style="font-size:20px;font-weight:700;font-family:'DM Mono',monospace;color:#0D2137;letter-spacing:-0.02em;">12 months</p></div>
                 </div>
               </div>
-              <div style="background:rgba(61,150,240,0.07);border:1px solid rgba(61,150,240,0.18);border-radius:14px;padding:12px 14px;margin-bottom:22px;">
-                <p style="font-size:12px;color:#3D5E7A;line-height:1.55;"><strong style="font-weight:700;color:#3D96F0;">NAVI will validate this.</strong> Based on your payroll and spending data, the actual timeline may differ — you'll see the full reasoning before we confirm.</p>
+              <div style="background:rgba(48,120,192,0.07);border:1px solid rgba(48,120,192,0.18);border-radius:14px;padding:12px 14px;margin-bottom:22px;">
+                <p style="font-size:12px;color:#3D5E7A;line-height:1.55;"><strong style="font-weight:700;color:#3078C0;">NAVI will validate this.</strong> Based on your payroll and spending data, the actual timeline may differ — you'll see the full reasoning before we confirm.</p>
               </div>
               <div style="display:flex;gap:8px;">
                 <button onClick="{{ prevStep }}" style="flex:1;background:#FFFFFF;border:none;color:#3D5E7A;border-radius:14px;padding:13px;font-size:14px;font-weight:600;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:4px 4px 10px rgba(0,0,0,0.12),-2px -2px 7px rgba(255,255,255,0.75);">Back</button>
-                <button onClick="{{ nextStep }}" style="flex:2;background:#3D96F0;color:#EEF7FF;border:none;border-radius:14px;padding:13px;font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:4px 4px 12px rgba(61,150,240,0.4),-2px -2px 8px rgba(255,255,255,0.5);">Confirm goal →</button>
+                <button onClick="{{ nextStep }}" style="flex:2;background:#3078C0;color:#EEF7FF;border:none;border-radius:14px;padding:13px;font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:4px 4px 12px rgba(48,120,192,0.4),-2px -2px 8px rgba(255,255,255,0.5);">Confirm goal →</button>
               </div>
             </div>
           </sc-if>
@@ -194,33 +194,33 @@
           <!-- Step 3: Analyzing -->
           <sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
             <div>
-              <p style="font-size:10px;font-weight:700;color:#3D96F0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;">Step 3 of 3 — Analysis</p>
+              <p style="font-size:10px;font-weight:700;color:#3078C0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;">Step 3 of 3 — Analysis</p>
               <h2 style="font-size:28px;font-weight:800;color:#0D2137;letter-spacing:-0.02em;margin-bottom:10px;">Building your financial profile...</h2>
               <p style="font-size:14px;color:#3D5E7A;margin-bottom:24px;">NAVI is analyzing your payroll history, spending patterns, and financial position.</p>
               <div style="height:6px;background:#E8F3FF;border-radius:3px;margin-bottom:24px;overflow:hidden;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.12),inset -2px -2px 4px rgba(255,255,255,0.55);">
-                <div style="height:100%;width:100%;background:#3D96F0;border-radius:3px;box-shadow:2px 1px 5px rgba(61,150,240,0.35);"></div>
+                <div style="height:100%;width:100%;background:#3078C0;border-radius:3px;box-shadow:2px 1px 5px rgba(48,120,192,0.35);"></div>
               </div>
               <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:28px;">
                 <div style="display:flex;align-items:center;gap:12px;">
-                  <div style="width:20px;height:20px;border-radius:50%;background:rgba(34,165,90,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                    <svg width="9" height="9" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#22A55A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <div style="width:20px;height:20px;border-radius:50%;background:rgba(27,132,72,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <svg width="9" height="9" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#1B8448" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   </div>
                   <span style="font-size:13px;color:#3D5E7A;">847 transactions across 4 accounts · 90-day window</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:12px;">
-                  <div style="width:20px;height:20px;border-radius:50%;background:rgba(34,165,90,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                    <svg width="9" height="9" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#22A55A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <div style="width:20px;height:20px;border-radius:50%;background:rgba(27,132,72,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <svg width="9" height="9" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#1B8448" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   </div>
                   <span style="font-size:13px;color:#3D5E7A;">Bi-weekly payroll cadence identified · $3,250 net/cycle</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:12px;">
-                  <div style="width:20px;height:20px;border-radius:50%;background:rgba(34,165,90,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                    <svg width="9" height="9" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#22A55A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <div style="width:20px;height:20px;border-radius:50%;background:rgba(27,132,72,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <svg width="9" height="9" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#1B8448" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   </div>
                   <span style="font-size:13px;color:#3D5E7A;">4 optimizations found to reach your goal faster</span>
                 </div>
               </div>
-              <button onClick="{{ finishOnboarding }}" style="width:100%;background:#3D96F0;color:#EEF7FF;border:none;border-radius:16px;padding:14px;font-size:15px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:4px 4px 12px rgba(61,150,240,0.4),-2px -2px 8px rgba(255,255,255,0.5);">View my financial pulse →</button>
+              <button onClick="{{ finishOnboarding }}" style="width:100%;background:#3078C0;color:#EEF7FF;border:none;border-radius:16px;padding:14px;font-size:15px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:4px 4px 12px rgba(48,120,192,0.4),-2px -2px 8px rgba(255,255,255,0.5);">View my financial pulse →</button>
             </div>
           </sc-if>
 
@@ -239,11 +239,11 @@
         <!-- Logo -->
         <div style="padding:18px 16px 14px;border-bottom:1px solid #BDD8F5;display:flex;align-items:center;gap:8px;">
           <div style="width:28px;height:28px;background:#FFFFFF;border-radius:9px;display:flex;align-items:center;justify-content:center;box-shadow:3px 3px 8px rgba(0,0,0,0.13),-2px -2px 6px rgba(255,255,255,0.8),inset -1px -1px 4px rgba(0,0,0,0.06),inset 1px 1px 4px rgba(255,255,255,0.55);">
-            <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="2.5" r="1.2" fill="#3D96F0"/><line x1="11" y1="3.7" x2="11" y2="5.2" stroke="#3D96F0" stroke-width="1.4" stroke-linecap="round"/><path d="M7 5.2h8l1.2 2.3H5.8z" fill="#3D96F0"/><rect x="5.5" y="7.5" width="11" height="8.5" rx="3" fill="#3D96F0" opacity="0.88"/><ellipse cx="11" cy="11.7" rx="2.5" ry="3" fill="rgba(180,220,255,0.7)"/><path d="M8.5 16c.7.9 1.5 1.4 2.5 1.4s1.8-.5 2.5-1.4" stroke="#3D96F0" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="2.5" r="1.2" fill="#3078C0"/><line x1="11" y1="3.7" x2="11" y2="5.2" stroke="#3078C0" stroke-width="1.4" stroke-linecap="round"/><path d="M7 5.2h8l1.2 2.3H5.8z" fill="#3078C0"/><rect x="5.5" y="7.5" width="11" height="8.5" rx="3" fill="#3078C0" opacity="0.88"/><ellipse cx="11" cy="11.7" rx="2.5" ry="3" fill="rgba(180,220,255,0.7)"/><path d="M8.5 16c.7.9 1.5 1.4 2.5 1.4s1.8-.5 2.5-1.4" stroke="#3078C0" stroke-width="1.2" stroke-linecap="round"/></svg>
           </div>
           <div style="flex:1;min-width:0;">
             <p style="font-size:15px;font-weight:700;color:#0D2137;letter-spacing:-0.02em;">NAVI</p>
-            <p style="font-size:10px;color:#7A9BB5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">via TechCorp Benefits</p>
+            <p style="font-size:10px;color:#556C7E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">via TechCorp Benefits</p>
           </div>
         </div>
 
@@ -257,7 +257,7 @@
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.75"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M8 15l2.5 2.5L16 13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Weekly Check-in
             <sc-if value="{{ showCheckinBadge }}" hint-placeholder-val="{{ false }}">
-              <span style="margin-left:auto;background:rgba(61,150,240,0.15);color:#3D96F0;font-size:10px;font-weight:700;padding:1px 6px;border-radius:20px;">New</span>
+              <span style="margin-left:auto;background:rgba(48,120,192,0.15);color:#3078C0;font-size:10px;font-weight:700;padding:1px 6px;border-radius:20px;">New</span>
             </sc-if>
           </button>
           <button style="{{ navGoalsStyle }}" onClick="{{ goToGoals }}">
@@ -272,7 +272,7 @@
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/><path d="M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="1.75"/></svg>
             Alerts
             <sc-if value="{{ hasAlert }}" hint-placeholder-val="{{ false }}">
-              <span style="margin-left:auto;background:#DC4545;color:white;font-size:10px;font-weight:700;padding:1px 6px;border-radius:20px;">1</span>
+              <span style="margin-left:auto;background:#C63E3E;color:white;font-size:10px;font-weight:700;padding:1px 6px;border-radius:20px;">1</span>
             </sc-if>
           </button>
           <button style="{{ navSlackStyle }}" onClick="{{ goToSlack }}">
@@ -286,7 +286,7 @@
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></svg>
             Privacy &amp; Data
           </button>
-          <button style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;cursor:pointer;background:transparent;color:#7A9BB5;font-family:'Nunito',sans-serif;font-size:13px;border:none;width:100%;text-align:left;">
+          <button style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;cursor:pointer;background:transparent;color:#556C7E;font-family:'Nunito',sans-serif;font-size:13px;border:none;width:100%;text-align:left;">
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.75"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" stroke-width="1.75"/></svg>
             Settings
           </button>
@@ -294,12 +294,12 @@
 
         <!-- User profile -->
         <div style="padding:14px 16px 16px;border-top:1px solid #BDD8F5;display:flex;align-items:center;gap:10px;">
-          <div style="width:32px;height:32px;border-radius:50%;background:#3D96F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:3px 3px 7px rgba(61,150,240,0.35),-1px -1px 4px rgba(255,255,255,0.5);">
+          <div style="width:32px;height:32px;border-radius:50%;background:#3078C0;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:3px 3px 7px rgba(48,120,192,0.35),-1px -1px 4px rgba(255,255,255,0.5);">
             <span style="color:#EEF7FF;font-size:12px;font-weight:700;">AS</span>
           </div>
           <div style="min-width:0;">
             <p style="font-size:12px;font-weight:700;color:#0D2137;">Allen Smith</p>
-            <p style="font-size:11px;color:#7A9BB5;">Month 3 · Emergency Fund</p>
+            <p style="font-size:11px;color:#556C7E;">Month 3 · Emergency Fund</p>
           </div>
         </div>
       </div>
@@ -312,64 +312,64 @@
           <div style="position:absolute;inset:0;overflow-y:auto;padding:32px 36px;animation:fadeUp 0.25s ease;">
             <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;">
               <div>
-                <p style="font-size:10px;font-weight:700;color:#7A9BB5;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:5px;">June 27, 2026 · Payday in 6 days</p>
+                <p style="font-size:10px;font-weight:700;color:#556C7E;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:5px;">June 27, 2026 · Payday in 6 days</p>
                 <h1 style="font-size:26px;font-weight:800;color:#0D2137;letter-spacing:-0.02em;margin-bottom:3px;">Good morning, Allen.</h1>
                 <p style="font-size:14px;color:#3D5E7A;">Here's your financial pulse.</p>
               </div>
               <button onClick="{{ goToAlert }}" style="position:relative;background:#FFFFFF;border:none;border-radius:12px;width:38px;height:38px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:4px;box-shadow:4px 4px 10px rgba(0,0,0,0.12),-2px -2px 7px rgba(255,255,255,0.8);">
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="#3D5E7A" stroke-width="1.75" stroke-linejoin="round"/><path d="M13.73 21a2 2 0 01-3.46 0" stroke="#3D5E7A" stroke-width="1.75"/></svg>
                 <sc-if value="{{ hasAlert }}" hint-placeholder-val="{{ false }}">
-                  <span style="position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;background:#DC4545;border:1.5px solid #DFF0FF;"></span>
+                  <span style="position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;background:#C63E3E;border:1.5px solid #DFF0FF;"></span>
                 </sc-if>
               </button>
             </div>
 
             <!-- Proactive notification toast -->
             <sc-if value="{{ showProactiveToast }}" hint-placeholder-val="{{ false }}">
-              <div style="background:rgba(61,150,240,0.07);border:1px solid rgba(61,150,240,0.2);border-radius:16px;padding:11px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+              <div style="background:rgba(48,120,192,0.07);border:1px solid rgba(48,120,192,0.2);border-radius:16px;padding:11px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:16px;">
                 <div style="display:flex;align-items:center;gap:10px;">
-                  <div style="width:7px;height:7px;border-radius:50%;background:#3D96F0;flex-shrink:0;animation:bluePulse 2s ease infinite;"></div>
+                  <div style="width:7px;height:7px;border-radius:50%;background:#3078C0;flex-shrink:0;animation:bluePulse 2s ease infinite;"></div>
                   <div>
-                    <span style="font-size:10px;font-weight:700;color:#3D96F0;letter-spacing:0.08em;text-transform:uppercase;">NAVI · Just now</span>
+                    <span style="font-size:10px;font-weight:700;color:#3078C0;letter-spacing:0.08em;text-transform:uppercase;">NAVI · Just now</span>
                     <p style="font-size:13px;color:#3D5E7A;margin-top:1px;">Your weekly briefing is ready. 2 items to review before your July 3 paycheck.</p>
                   </div>
                 </div>
                 <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-                  <button onClick="{{ goToCheckin }}" style="background:#3D96F0;color:#EEF7FF;border:none;border-radius:10px;padding:7px 13px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;white-space:nowrap;box-shadow:3px 3px 8px rgba(61,150,240,0.35);">View check-in →</button>
-                  <button onClick="{{ dismissToast }}" style="background:transparent;border:none;cursor:pointer;color:#7A9BB5;font-size:18px;line-height:1;padding:2px 6px;">×</button>
+                  <button onClick="{{ goToCheckin }}" style="background:#3078C0;color:#EEF7FF;border:none;border-radius:10px;padding:7px 13px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;white-space:nowrap;box-shadow:3px 3px 8px rgba(48,120,192,0.35);">View check-in →</button>
+                  <button onClick="{{ dismissToast }}" style="background:transparent;border:none;cursor:pointer;color:#556C7E;font-size:18px;line-height:1;padding:2px 6px;">×</button>
                 </div>
               </div>
             </sc-if>
 
             <!-- Payroll context bar -->
-            <div style="background:rgba(61,150,240,0.06);border:1px solid rgba(61,150,240,0.14);border-radius:14px;padding:10px 16px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;">
+            <div style="background:rgba(48,120,192,0.06);border:1px solid rgba(48,120,192,0.14);border-radius:14px;padding:10px 16px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;">
               <div style="display:flex;align-items:center;gap:10px;">
-                <div style="width:6px;height:6px;border-radius:50%;background:#3D96F0;animation:bluePulse 2.5s ease infinite;"></div>
+                <div style="width:6px;height:6px;border-radius:50%;background:#3078C0;animation:bluePulse 2.5s ease infinite;"></div>
                 <span style="font-size:12px;color:#3D5E7A;">Next paycheck: <strong style="color:#0D2137;font-family:'DM Mono',monospace;"> July 3 · $3,250</strong></span>
               </div>
-              <span style="font-size:11px;color:#7A9BB5;">TechCorp Payroll · Direct Deposit · 6 days</span>
+              <span style="font-size:11px;color:#556C7E;">TechCorp Payroll · Direct Deposit · 6 days</span>
             </div>
 
             <!-- 3 Stat cards -->
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:16px;">
               <div style="background:#FFFFFF;border-radius:20px;padding:20px;box-shadow:8px 8px 20px rgba(0,0,0,0.15),-4px -4px 12px rgba(255,255,255,0.82),inset -3px -3px 8px rgba(0,0,0,0.07),inset 3px 3px 8px rgba(255,255,255,0.62);">
-                <p style="font-size:10px;font-weight:700;color:#7A9BB5;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Monthly Take-Home</p>
+                <p style="font-size:10px;font-weight:700;color:#556C7E;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Monthly Take-Home</p>
                 <p style="font-size:26px;font-weight:700;font-family:'DM Mono',monospace;color:#0D2137;margin-bottom:4px;letter-spacing:-0.02em;">$6,500</p>
-                <p style="font-size:11px;color:#7A9BB5;">$3,250 · bi-weekly</p>
+                <p style="font-size:11px;color:#556C7E;">$3,250 · bi-weekly</p>
               </div>
               <div style="background:#FFFFFF;border-radius:20px;padding:20px;box-shadow:8px 8px 20px rgba(0,0,0,0.15),-4px -4px 12px rgba(255,255,255,0.82),inset -3px -3px 8px rgba(0,0,0,0.07),inset 3px 3px 8px rgba(255,255,255,0.62);">
-                <p style="font-size:10px;font-weight:700;color:#7A9BB5;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Flexible Spent</p>
+                <p style="font-size:10px;font-weight:700;color:#556C7E;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Flexible Spent</p>
                 <div style="display:flex;align-items:baseline;gap:5px;margin-bottom:9px;">
                   <p style="font-size:26px;font-weight:700;font-family:'DM Mono',monospace;color:#0D2137;letter-spacing:-0.02em;">$1,720</p>
-                  <p style="font-size:12px;color:#7A9BB5;">/ $2,000</p>
+                  <p style="font-size:12px;color:#556C7E;">/ $2,000</p>
                 </div>
                 <div style="height:5px;background:#E8F3FF;border-radius:3px;margin-bottom:6px;overflow:hidden;box-shadow:inset 2px 2px 4px rgba(0,0,0,0.12),inset -1px -1px 3px rgba(255,255,255,0.5);">
-                  <div style="height:100%;width:86%;background:#3D96F0;border-radius:3px;box-shadow:2px 1px 4px rgba(61,150,240,0.3);"></div>
+                  <div style="height:100%;width:86%;background:#3078C0;border-radius:3px;box-shadow:2px 1px 4px rgba(48,120,192,0.3);"></div>
                 </div>
-                <p style="font-size:11px;color:#3D96F0;font-weight:600;">$280 left · 3 days remaining</p>
+                <p style="font-size:11px;color:#3078C0;font-weight:600;">$280 left · 3 days remaining</p>
               </div>
               <div style="{{ juneSavingsCardStyle }}">
-                <p style="font-size:10px;font-weight:700;color:#7A9BB5;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">June Savings</p>
+                <p style="font-size:10px;font-weight:700;color:#556C7E;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">June Savings</p>
                 <p style="font-size:26px;font-weight:700;font-family:'DM Mono',monospace;color:#0D2137;margin-bottom:4px;letter-spacing:-0.02em;">{{ juneSavingsLabel }}</p>
                 <p style="{{ juneSavingsStatusStyle }}">{{ juneSavingsSubLabel }}</p>
               </div>
@@ -380,26 +380,26 @@
               <div style="background:#FFFFFF;border-radius:20px;padding:20px;box-shadow:8px 8px 20px rgba(0,0,0,0.15),-4px -4px 12px rgba(255,255,255,0.82),inset -3px -3px 8px rgba(0,0,0,0.07),inset 3px 3px 8px rgba(255,255,255,0.62);">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
                   <p style="font-size:13px;font-weight:700;color:#0D2137;">NAVI Insights</p>
-                  <p style="font-size:10px;color:#7A9BB5;">Jun 27</p>
+                  <p style="font-size:10px;color:#556C7E;">Jun 27</p>
                 </div>
                 <div style="display:flex;flex-direction:column;gap:8px;">
-                  <div style="padding:12px 13px;background:rgba(220,69,69,0.06);border-radius:12px;border-left:3px solid #DC4545;">
+                  <div style="padding:12px 13px;background:rgba(198,62,62,0.06);border-radius:12px;border-left:3px solid #C63E3E;">
                     <p style="font-size:13px;color:#3D5E7A;line-height:1.5;margin-bottom:5px;">June dining ($487) is 50% above your $325 average.</p>
-                    <button onClick="{{ goToAlert }}" style="font-size:11px;color:#DC4545;font-weight:700;background:none;border:none;cursor:pointer;padding:0;font-family:'Nunito',sans-serif;">View alert →</button>
+                    <button onClick="{{ goToAlert }}" style="font-size:11px;color:#C63E3E;font-weight:700;background:none;border:none;cursor:pointer;padding:0;font-family:'Nunito',sans-serif;">View alert →</button>
                   </div>
-                  <div style="padding:12px 13px;background:rgba(34,165,90,0.06);border-radius:12px;border-left:3px solid #22A55A;">
+                  <div style="padding:12px 13px;background:rgba(27,132,72,0.06);border-radius:12px;border-left:3px solid #1B8448;">
                     <p style="font-size:13px;color:#3D5E7A;line-height:1.5;">On track for June — $3 under your flexible budget, your best month since April.</p>
                   </div>
-                  <div style="padding:12px 13px;background:rgba(61,150,240,0.06);border-radius:12px;border-left:3px solid #3D96F0;">
+                  <div style="padding:12px 13px;background:rgba(48,120,192,0.06);border-radius:12px;border-left:3px solid #3078C0;">
                     <p style="font-size:13px;color:#3D5E7A;line-height:1.5;margin-bottom:5px;">4 unused subscriptions total $72.97/month.</p>
-                    <button onClick="{{ goToCoach }}" style="font-size:11px;color:#3D96F0;font-weight:700;background:none;border:none;cursor:pointer;padding:0;font-family:'Nunito',sans-serif;">Run analysis →</button>
+                    <button onClick="{{ goToCoach }}" style="font-size:11px;color:#3078C0;font-weight:700;background:none;border:none;cursor:pointer;padding:0;font-family:'Nunito',sans-serif;">Run analysis →</button>
                   </div>
                 </div>
               </div>
               <div style="background:#FFFFFF;border-radius:20px;padding:20px;box-shadow:8px 8px 20px rgba(0,0,0,0.15),-4px -4px 12px rgba(255,255,255,0.82),inset -3px -3px 8px rgba(0,0,0,0.07),inset 3px 3px 8px rgba(255,255,255,0.62);">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
                   <p style="font-size:13px;font-weight:700;color:#0D2137;">Flexible Spending</p>
-                  <p style="font-size:10px;color:#7A9BB5;">Jun · $1,720 tracked</p>
+                  <p style="font-size:10px;color:#556C7E;">Jun · $1,720 tracked</p>
                 </div>
                 <div style="display:flex;flex-direction:column;gap:12px;">
                   <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="5">
@@ -421,17 +421,17 @@
             <div style="background:#FFFFFF;border-radius:20px;overflow:hidden;box-shadow:8px 8px 20px rgba(0,0,0,0.15),-4px -4px 12px rgba(255,255,255,0.82),inset -3px -3px 8px rgba(0,0,0,0.07),inset 3px 3px 8px rgba(255,255,255,0.62);">
               <div style="padding:14px 18px;border-bottom:1px solid #BDD8F5;display:flex;align-items:center;justify-content:space-between;">
                 <p style="font-size:13px;font-weight:700;color:#0D2137;">Recent Transactions</p>
-                <p style="font-size:10px;color:#7A9BB5;">Last 5</p>
+                <p style="font-size:10px;color:#556C7E;">Last 5</p>
               </div>
               <sc-for list="{{ transactions }}" as="tx" hint-placeholder-count="5">
                 <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid #BDD8F5;">
                   <div style="display:flex;align-items:center;gap:10px;">
                     <div style="width:34px;height:34px;border-radius:10px;background:#E8F3FF;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.1),inset -2px -2px 4px rgba(255,255,255,0.55);">
-                      <span style="font-size:10px;font-weight:700;color:#7A9BB5;">{{ tx.initials }}</span>
+                      <span style="font-size:10px;font-weight:700;color:#556C7E;">{{ tx.initials }}</span>
                     </div>
                     <div>
                       <p style="font-size:13px;font-weight:600;color:#0D2137;">{{ tx.merchant }}</p>
-                      <p style="font-size:11px;color:#7A9BB5;">{{ tx.category }} · {{ tx.date }}</p>
+                      <p style="font-size:11px;color:#556C7E;">{{ tx.category }} · {{ tx.date }}</p>
                     </div>
                   </div>
                   <p style="font-size:13px;font-weight:500;color:#3D5E7A;font-family:'DM Mono',monospace;letter-spacing:-0.01em;">{{ tx.amount }}</p>
@@ -445,7 +445,7 @@
         <sc-if value="{{ isCheckin }}" hint-placeholder-val="{{ false }}">
           <div style="position:absolute;inset:0;overflow-y:auto;padding:32px 36px;animation:fadeUp 0.25s ease;">
             <div style="margin-bottom:28px;">
-              <p style="font-size:10px;font-weight:700;color:#3D96F0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;">Weekly Check-In · Jun 27, 2026</p>
+              <p style="font-size:10px;font-weight:700;color:#3078C0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;">Weekly Check-In · Jun 27, 2026</p>
               <h1 style="font-size:26px;font-weight:800;color:#0D2137;letter-spacing:-0.02em;margin-bottom:3px;">This pay period is on track.</h1>
               <p style="font-size:14px;color:#3D5E7A;">NAVI reviewed your payroll, upcoming bills, and spending. Here's what matters this week.</p>
             </div>
@@ -453,38 +453,38 @@
             <!-- NAVI briefing card -->
             <div style="background:#FFFFFF;border-radius:20px;padding:22px;margin-bottom:14px;box-shadow:8px 8px 20px rgba(0,0,0,0.15),-4px -4px 12px rgba(255,255,255,0.82),inset -3px -3px 8px rgba(0,0,0,0.07),inset 3px 3px 8px rgba(255,255,255,0.62);">
               <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid #BDD8F5;">
-                <div style="width:30px;height:30px;border-radius:50%;background:#3D96F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:bluePulse 3s ease infinite;box-shadow:3px 3px 7px rgba(61,150,240,0.4);">
+                <div style="width:30px;height:30px;border-radius:50%;background:#3078C0;display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:bluePulse 3s ease infinite;box-shadow:3px 3px 7px rgba(48,120,192,0.4);">
                   <span style="color:#EEF7FF;font-size:11px;font-weight:800;">N</span>
                 </div>
                 <div>
                   <p style="font-size:12px;font-weight:700;color:#0D2137;">NAVI BRIEFING</p>
-                  <p style="font-size:10px;color:#7A9BB5;">Automated · Jun 27, 9:00 AM · Source: TechCorp Payroll, Chase ····4821</p>
+                  <p style="font-size:10px;color:#556C7E;">Automated · Jun 27, 9:00 AM · Source: TechCorp Payroll, Chase ····4821</p>
                 </div>
-                <div style="margin-left:auto;background:rgba(34,165,90,0.1);border:1px solid rgba(34,165,90,0.2);border-radius:20px;padding:4px 10px;">
-                  <span style="font-size:11px;font-weight:700;color:#22A55A;">On Track</span>
+                <div style="margin-left:auto;background:rgba(27,132,72,0.1);border:1px solid rgba(27,132,72,0.2);border-radius:20px;padding:4px 10px;">
+                  <span style="font-size:11px;font-weight:700;color:#1B8448;">On Track</span>
                 </div>
               </div>
 
               <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:18px;">
                 <div style="background:#E8F3FF;border-radius:14px;padding:14px;box-shadow:inset 3px 3px 7px rgba(0,0,0,0.12),inset -2px -2px 6px rgba(255,255,255,0.55);">
-                  <p style="font-size:10px;color:#7A9BB5;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">Next Paycheck</p>
-                  <p style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;color:#3D96F0;letter-spacing:-0.02em;">$3,250</p>
-                  <p style="font-size:10px;color:#7A9BB5;margin-top:2px;">Jul 3 · 6 days</p>
+                  <p style="font-size:10px;color:#556C7E;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">Next Paycheck</p>
+                  <p style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;color:#3078C0;letter-spacing:-0.02em;">$3,250</p>
+                  <p style="font-size:10px;color:#556C7E;margin-top:2px;">Jul 3 · 6 days</p>
                 </div>
                 <div style="background:#E8F3FF;border-radius:14px;padding:14px;box-shadow:inset 3px 3px 7px rgba(0,0,0,0.12),inset -2px -2px 6px rgba(255,255,255,0.55);">
-                  <p style="font-size:10px;color:#7A9BB5;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">Bills This Week</p>
+                  <p style="font-size:10px;color:#556C7E;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">Bills This Week</p>
                   <p style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;color:#0D2137;letter-spacing:-0.02em;">$100.49</p>
-                  <p style="font-size:10px;color:#7A9BB5;margin-top:2px;">Netflix + Phone</p>
+                  <p style="font-size:10px;color:#556C7E;margin-top:2px;">Netflix + Phone</p>
                 </div>
                 <div style="background:#E8F3FF;border-radius:14px;padding:14px;box-shadow:inset 3px 3px 7px rgba(0,0,0,0.12),inset -2px -2px 6px rgba(255,255,255,0.55);">
-                  <p style="font-size:10px;color:#7A9BB5;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">Checking Balance</p>
-                  <p style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;color:#22A55A;letter-spacing:-0.02em;">$847</p>
-                  <p style="font-size:10px;color:#7A9BB5;margin-top:2px;">After bills: $746</p>
+                  <p style="font-size:10px;color:#556C7E;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">Checking Balance</p>
+                  <p style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;color:#1B8448;letter-spacing:-0.02em;">$847</p>
+                  <p style="font-size:10px;color:#556C7E;margin-top:2px;">After bills: $746</p>
                 </div>
                 <div style="background:#E8F3FF;border-radius:14px;padding:14px;box-shadow:inset 3px 3px 7px rgba(0,0,0,0.12),inset -2px -2px 6px rgba(255,255,255,0.55);">
-                  <p style="font-size:10px;color:#7A9BB5;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">Amex Balance</p>
-                  <p style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;color:#D97706;letter-spacing:-0.02em;">$1,200</p>
-                  <p style="font-size:10px;color:#7A9BB5;margin-top:2px;">Due Jul 15</p>
+                  <p style="font-size:10px;color:#556C7E;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">Amex Balance</p>
+                  <p style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;color:#AD5F04;letter-spacing:-0.02em;">$1,200</p>
+                  <p style="font-size:10px;color:#556C7E;margin-top:2px;">Due Jul 15</p>
                 </div>
               </div>
 
@@ -492,7 +492,7 @@
             </div>
 
             <!-- Insight actions -->
-            <p style="font-size:12px;font-weight:700;color:#7A9BB5;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em;">NAVI Recommendations</p>
+            <p style="font-size:12px;font-weight:700;color:#556C7E;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em;">NAVI Recommendations</p>
 
             <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
               <!-- Insight 1 -->
@@ -500,22 +500,22 @@
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
                   <div style="flex:1;margin-right:16px;">
                     <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-                      <span style="font-size:10px;font-weight:700;color:#3D96F0;letter-spacing:0.06em;">INSIGHT 01</span>
-                      <span style="font-size:10px;color:#7A9BB5;">94% confidence · TechCorp Payroll, Chase ····4821</span>
+                      <span style="font-size:10px;font-weight:700;color:#3078C0;letter-spacing:0.06em;">INSIGHT 01</span>
+                      <span style="font-size:10px;color:#556C7E;">94% confidence · TechCorp Payroll, Chase ····4821</span>
                     </div>
                     <p style="font-size:13px;color:#0D2137;line-height:1.55;">Pay your Amex balance in full on July 3 — your paycheck covers it without affecting your emergency fund contribution.</p>
                   </div>
                 </div>
                 <sc-if value="{{ i1Pending }}" hint-placeholder-val="{{ true }}">
                   <div style="display:flex;gap:8px;">
-                    <button onClick="{{ i1Accept }}" style="background:#3D96F0;color:#EEF7FF;border:none;border-radius:10px;padding:7px 14px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:3px 3px 8px rgba(61,150,240,0.35);">Accept</button>
+                    <button onClick="{{ i1Accept }}" style="background:#3078C0;color:#EEF7FF;border:none;border-radius:10px;padding:7px 14px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:3px 3px 8px rgba(48,120,192,0.35);">Accept</button>
                     <button onClick="{{ i1StartOverride }}" style="background:#FFFFFF;border:none;color:#3D5E7A;border-radius:10px;padding:7px 14px;font-size:12px;font-weight:600;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:3px 3px 7px rgba(0,0,0,0.1),-2px -2px 5px rgba(255,255,255,0.7);">⊘ Override</button>
-                    <button onClick="{{ openExplainer }}" style="background:transparent;border:none;color:#3D96F0;border-radius:10px;padding:7px 10px;font-size:12px;font-weight:600;font-family:'Nunito',sans-serif;cursor:pointer;">Ask why ↗</button>
+                    <button onClick="{{ openExplainer }}" style="background:transparent;border:none;color:#3078C0;border-radius:10px;padding:7px 10px;font-size:12px;font-weight:600;font-family:'Nunito',sans-serif;cursor:pointer;">Ask why ↗</button>
                   </div>
                 </sc-if>
                 <sc-if value="{{ i1Picking }}" hint-placeholder-val="{{ false }}">
                   <div>
-                    <p style="font-size:11px;color:#7A9BB5;margin-bottom:8px;">Why are you overriding this?</p>
+                    <p style="font-size:11px;color:#556C7E;margin-bottom:8px;">Why are you overriding this?</p>
                     <div style="display:flex;gap:6px;flex-wrap:wrap;">
                       <button onClick="{{ i1Reason1 }}" style="background:#E8F3FF;border:none;color:#3D5E7A;border-radius:10px;padding:6px 12px;font-size:11px;font-family:'Nunito',sans-serif;cursor:pointer;">Doesn't apply right now</button>
                       <button onClick="{{ i1Reason2 }}" style="background:#E8F3FF;border:none;color:#3D5E7A;border-radius:10px;padding:6px 12px;font-size:11px;font-family:'Nunito',sans-serif;cursor:pointer;">I already knew this</button>
@@ -536,22 +536,22 @@
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
                   <div style="flex:1;margin-right:16px;">
                     <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-                      <span style="font-size:10px;font-weight:700;color:#3D96F0;letter-spacing:0.06em;">INSIGHT 02</span>
-                      <span style="font-size:10px;color:#7A9BB5;">79% confidence · Subscription analysis</span>
+                      <span style="font-size:10px;font-weight:700;color:#3078C0;letter-spacing:0.06em;">INSIGHT 02</span>
+                      <span style="font-size:10px;color:#556C7E;">79% confidence · Subscription analysis</span>
                     </div>
                     <p style="font-size:13px;color:#0D2137;line-height:1.55;">4 subscriptions (Hulu, Headspace, Duolingo, Gym) haven't been used in 30+ days. Cancelling saves $72.97/month — $875.64 annually.</p>
                   </div>
                 </div>
                 <sc-if value="{{ i2Pending }}" hint-placeholder-val="{{ true }}">
                   <div style="display:flex;gap:8px;">
-                    <button onClick="{{ i2Accept }}" style="background:#3D96F0;color:#EEF7FF;border:none;border-radius:10px;padding:7px 14px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:3px 3px 8px rgba(61,150,240,0.35);">Review</button>
+                    <button onClick="{{ i2Accept }}" style="background:#3078C0;color:#EEF7FF;border:none;border-radius:10px;padding:7px 14px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:3px 3px 8px rgba(48,120,192,0.35);">Review</button>
                     <button onClick="{{ i2StartOverride }}" style="background:#FFFFFF;border:none;color:#3D5E7A;border-radius:10px;padding:7px 14px;font-size:12px;font-weight:600;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:3px 3px 7px rgba(0,0,0,0.1),-2px -2px 5px rgba(255,255,255,0.7);">⊘ Override</button>
-                    <button onClick="{{ openExplainer }}" style="background:transparent;border:none;color:#3D96F0;border-radius:10px;padding:7px 10px;font-size:12px;font-weight:600;font-family:'Nunito',sans-serif;cursor:pointer;">Ask why ↗</button>
+                    <button onClick="{{ openExplainer }}" style="background:transparent;border:none;color:#3078C0;border-radius:10px;padding:7px 10px;font-size:12px;font-weight:600;font-family:'Nunito',sans-serif;cursor:pointer;">Ask why ↗</button>
                   </div>
                 </sc-if>
                 <sc-if value="{{ i2Picking }}" hint-placeholder-val="{{ false }}">
                   <div>
-                    <p style="font-size:11px;color:#7A9BB5;margin-bottom:8px;">Why are you overriding this?</p>
+                    <p style="font-size:11px;color:#556C7E;margin-bottom:8px;">Why are you overriding this?</p>
                     <div style="display:flex;gap:6px;flex-wrap:wrap;">
                       <button onClick="{{ i2Reason1 }}" style="background:#E8F3FF;border:none;color:#3D5E7A;border-radius:10px;padding:6px 12px;font-size:11px;font-family:'Nunito',sans-serif;cursor:pointer;">Doesn't apply right now</button>
                       <button onClick="{{ i2Reason2 }}" style="background:#E8F3FF;border:none;color:#3D5E7A;border-radius:10px;padding:6px 12px;font-size:11px;font-family:'Nunito',sans-serif;cursor:pointer;">I already knew this</button>
@@ -569,8 +569,8 @@
             </div>
 
             <sc-if value="{{ checkinReviewed }}" hint-placeholder-val="{{ false }}">
-              <div style="background:rgba(34,165,90,0.07);border:1px solid rgba(34,165,90,0.15);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:8px;">
-                <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#22A55A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="background:rgba(27,132,72,0.07);border:1px solid rgba(27,132,72,0.15);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:8px;">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#1B8448" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 <p style="font-size:12px;color:#3D5E7A;">Check-in reviewed. NAVI will follow up next week.</p>
               </div>
             </sc-if>
@@ -585,13 +585,13 @@
           <div style="position:absolute;inset:0;overflow-y:auto;padding:32px 36px;animation:fadeUp 0.25s ease;">
             <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;">
               <div>
-                <p style="font-size:10px;font-weight:700;color:#7A9BB5;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:5px;">Active Goal · Started April 2026</p>
+                <p style="font-size:10px;font-weight:700;color:#556C7E;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:5px;">Active Goal · Started April 2026</p>
                 <h1 style="font-size:26px;font-weight:800;color:#0D2137;letter-spacing:-0.02em;margin-bottom:3px;">Emergency Fund</h1>
                 <p style="font-size:14px;color:#3D5E7A;">$10,000 target · Auto-transfer on payroll deposit</p>
               </div>
-              <div style="display:flex;align-items:center;gap:7px;background:rgba(61,150,240,0.08);border:1px solid rgba(61,150,240,0.18);border-radius:20px;padding:5px 12px;flex-shrink:0;margin-top:4px;">
-                <div style="width:5px;height:5px;border-radius:50%;background:#3D96F0;"></div>
-                <span style="font-size:11px;font-weight:700;color:#3D96F0;">{{ goalConfidenceLabel }}</span>
+              <div style="display:flex;align-items:center;gap:7px;background:rgba(48,120,192,0.08);border:1px solid rgba(48,120,192,0.18);border-radius:20px;padding:5px 12px;flex-shrink:0;margin-top:4px;">
+                <div style="width:5px;height:5px;border-radius:50%;background:#3078C0;"></div>
+                <span style="font-size:11px;font-weight:700;color:#3078C0;">{{ goalConfidenceLabel }}</span>
               </div>
             </div>
 
@@ -601,30 +601,30 @@
                 <div style="position:relative;width:148px;height:148px;">
                   <svg width="148" height="148" viewBox="0 0 148 148" style="transform:rotate(-90deg);">
                     <circle cx="74" cy="74" r="64" fill="none" stroke="#E8F3FF" stroke-width="8"></circle>
-                    <circle cx="74" cy="74" r="64" fill="none" stroke="#3D96F0" stroke-width="8" stroke-dasharray="{{ ringCircumference }}" stroke-dashoffset="{{ progressOffset }}" stroke-linecap="round" style="transition:stroke-dashoffset 0.8s ease;filter:drop-shadow(0 0 4px rgba(61,150,240,0.4));"></circle>
+                    <circle cx="74" cy="74" r="64" fill="none" stroke="#3078C0" stroke-width="8" stroke-dasharray="{{ ringCircumference }}" stroke-dashoffset="{{ progressOffset }}" stroke-linecap="round" style="transition:stroke-dashoffset 0.8s ease;filter:drop-shadow(0 0 4px rgba(48,120,192,0.4));"></circle>
                   </svg>
                   <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
                     <p style="font-family:'DM Mono',monospace;font-size:24px;font-weight:700;color:#0D2137;line-height:1;letter-spacing:-0.02em;">{{ goalPct }}%</p>
-                    <p style="font-size:10px;color:#7A9BB5;margin-top:3px;letter-spacing:0.05em;text-transform:uppercase;">Saved</p>
+                    <p style="font-size:10px;color:#556C7E;margin-top:3px;letter-spacing:0.05em;text-transform:uppercase;">Saved</p>
                   </div>
                 </div>
                 <div style="text-align:center;">
                   <p style="font-size:20px;font-weight:700;font-family:'DM Mono',monospace;color:#0D2137;letter-spacing:-0.02em;">{{ totalSavedDisplay }}</p>
-                  <p style="font-size:11px;color:#7A9BB5;">of $10,000</p>
+                  <p style="font-size:11px;color:#556C7E;">of $10,000</p>
                 </div>
               </div>
               <div>
                 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:22px;">
                   <div style="background:#E8F3FF;border-radius:14px;padding:13px;box-shadow:inset 3px 3px 7px rgba(0,0,0,0.12),inset -2px -2px 6px rgba(255,255,255,0.55);">
-                    <p style="font-size:10px;color:#7A9BB5;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.05em;">Monthly Save</p>
+                    <p style="font-size:10px;color:#556C7E;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.05em;">Monthly Save</p>
                     <p style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;color:#0D2137;letter-spacing:-0.02em;">$748</p>
                   </div>
                   <div style="background:#E8F3FF;border-radius:14px;padding:13px;box-shadow:inset 3px 3px 7px rgba(0,0,0,0.12),inset -2px -2px 6px rgba(255,255,255,0.55);">
-                    <p style="font-size:10px;color:#7A9BB5;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.05em;">Timeline</p>
+                    <p style="font-size:10px;color:#556C7E;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.05em;">Timeline</p>
                     <p style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;color:#0D2137;letter-spacing:-0.02em;">{{ goalMonths }} mo</p>
                   </div>
                   <div style="background:#E8F3FF;border-radius:14px;padding:13px;box-shadow:inset 3px 3px 7px rgba(0,0,0,0.12),inset -2px -2px 6px rgba(255,255,255,0.55);">
-                    <p style="font-size:10px;color:#7A9BB5;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.05em;">Goal Date</p>
+                    <p style="font-size:10px;color:#556C7E;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.05em;">Goal Date</p>
                     <p style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;color:#0D2137;letter-spacing:-0.02em;">{{ goalMonthLabel }}</p>
                   </div>
                 </div>
@@ -632,18 +632,18 @@
                 <div style="display:flex;align-items:flex-end;gap:8px;height:64px;">
                   <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;justify-content:flex-end;">
                     <span style="font-size:9px;font-family:'DM Mono',monospace;color:#3D5E7A;">$400</span>
-                    <div style="width:100%;height:27px;background:#3D96F0;border-radius:4px 4px 0 0;opacity:0.4;"></div>
-                    <span style="font-size:9px;color:#7A9BB5;">Apr</span>
+                    <div style="width:100%;height:27px;background:#3078C0;border-radius:4px 4px 0 0;opacity:0.4;"></div>
+                    <span style="font-size:9px;color:#556C7E;">Apr</span>
                   </div>
                   <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;justify-content:flex-end;">
                     <span style="font-size:9px;font-family:'DM Mono',monospace;color:#3D5E7A;">$630</span>
-                    <div style="width:100%;height:46px;background:#3D96F0;border-radius:4px 4px 0 0;opacity:0.65;"></div>
-                    <span style="font-size:9px;color:#7A9BB5;">May</span>
+                    <div style="width:100%;height:46px;background:#3078C0;border-radius:4px 4px 0 0;opacity:0.65;"></div>
+                    <span style="font-size:9px;color:#556C7E;">May</span>
                   </div>
                   <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;justify-content:flex-end;">
                     <span style="font-size:9px;font-family:'DM Mono',monospace;color:#3D5E7A;">{{ month3SavedDisplay }}</span>
                     <div style="{{ juneBarStyle }}"></div>
-                    <span style="font-size:9px;color:#7A9BB5;">Jun*</span>
+                    <span style="font-size:9px;color:#556C7E;">Jun*</span>
                   </div>
                   <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;justify-content:flex-end;">
                     <span style="font-size:9px;font-family:'DM Mono',monospace;color:#A8C8E8;">$748</span>
@@ -656,10 +656,10 @@
                     <span style="font-size:9px;color:#A8C8E8;">Aug</span>
                   </div>
                 </div>
-                <p style="font-size:10px;color:#7A9BB5;margin-top:6px;">* June in progress</p>
+                <p style="font-size:10px;color:#556C7E;margin-top:6px;">* June in progress</p>
                 <sc-if value="{{ showAlertImpact }}" hint-placeholder-val="{{ false }}">
-                  <div style="margin-top:12px;background:rgba(34,165,90,0.06);border:1px solid rgba(34,165,90,0.14);border-radius:12px;padding:10px 13px;display:flex;align-items:flex-start;gap:7px;">
-                    <svg width="12" height="12" fill="none" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:1px;"><path d="M20 6L9 17l-5-5" stroke="#22A55A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <div style="margin-top:12px;background:rgba(27,132,72,0.06);border:1px solid rgba(27,132,72,0.14);border-radius:12px;padding:10px 13px;display:flex;align-items:flex-start;gap:7px;">
+                    <svg width="12" height="12" fill="none" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:1px;"><path d="M20 6L9 17l-5-5" stroke="#1B8448" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     <p style="font-size:12px;color:#3D5E7A;line-height:1.5;">{{ alertImpact }}</p>
                   </div>
                 </sc-if>
@@ -669,34 +669,34 @@
             <!-- NAVI's Plan -->
             <div style="background:#FFFFFF;border-radius:20px;padding:22px;box-shadow:8px 8px 20px rgba(0,0,0,0.15),-4px -4px 12px rgba(255,255,255,0.82),inset -3px -3px 8px rgba(0,0,0,0.07),inset 3px 3px 8px rgba(255,255,255,0.62);">
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
-                <div><p style="font-size:13px;font-weight:700;color:#0D2137;margin-bottom:2px;">NAVI's Savings Plan</p><p style="font-size:11px;color:#7A9BB5;">$400 → $748/month</p></div>
-                <div style="background:rgba(61,150,240,0.08);border:1px solid rgba(61,150,240,0.18);border-radius:20px;padding:4px 11px;"><span style="font-size:11px;font-weight:700;color:#3D96F0;">82% confidence</span></div>
+                <div><p style="font-size:13px;font-weight:700;color:#0D2137;margin-bottom:2px;">NAVI's Savings Plan</p><p style="font-size:11px;color:#556C7E;">$400 → $748/month</p></div>
+                <div style="background:rgba(48,120,192,0.08);border:1px solid rgba(48,120,192,0.18);border-radius:20px;padding:4px 11px;"><span style="font-size:11px;font-weight:700;color:#3078C0;">82% confidence</span></div>
               </div>
               <div style="display:flex;flex-direction:column;gap:0;">
-                <div style="display:flex;align-items:center;padding:11px 0;border-bottom:1px solid #BDD8F5;"><div style="width:190px;font-size:12px;color:#7A9BB5;">Current baseline</div><div style="flex:1;"></div><div style="width:95px;text-align:right;font-size:13px;font-weight:700;font-family:'DM Mono',monospace;color:#7A9BB5;">$400 / mo</div></div>
+                <div style="display:flex;align-items:center;padding:11px 0;border-bottom:1px solid #BDD8F5;"><div style="width:190px;font-size:12px;color:#556C7E;">Current baseline</div><div style="flex:1;"></div><div style="width:95px;text-align:right;font-size:13px;font-weight:700;font-family:'DM Mono',monospace;color:#556C7E;">$400 / mo</div></div>
                 <div style="display:flex;align-items:center;padding:11px 0;border-bottom:1px solid #BDD8F5;">
-                  <div style="width:190px;"><p style="font-size:13px;font-weight:600;color:#3D5E7A;margin-bottom:1px;">Cancel 4 subscriptions</p><p style="font-size:10px;color:#7A9BB5;">Hulu · Headspace · Duolingo · Gym</p></div>
-                  <div style="flex:1;display:flex;align-items:center;padding:0 14px;"><div style="height:1px;flex:1;background:#BDD8F5;"></div><span style="font-size:11px;color:#22A55A;font-weight:700;margin-left:10px;white-space:nowrap;font-family:'DM Mono',monospace;">+ $72.97</span></div>
-                  <div style="width:95px;text-align:right;font-size:13px;font-weight:700;font-family:'DM Mono',monospace;color:#22A55A;">$473 / mo</div>
+                  <div style="width:190px;"><p style="font-size:13px;font-weight:600;color:#3D5E7A;margin-bottom:1px;">Cancel 4 subscriptions</p><p style="font-size:10px;color:#556C7E;">Hulu · Headspace · Duolingo · Gym</p></div>
+                  <div style="flex:1;display:flex;align-items:center;padding:0 14px;"><div style="height:1px;flex:1;background:#BDD8F5;"></div><span style="font-size:11px;color:#1B8448;font-weight:700;margin-left:10px;white-space:nowrap;font-family:'DM Mono',monospace;">+ $72.97</span></div>
+                  <div style="width:95px;text-align:right;font-size:13px;font-weight:700;font-family:'DM Mono',monospace;color:#1B8448;">$473 / mo</div>
                 </div>
                 <div style="display:flex;align-items:center;padding:11px 0;border-bottom:1px solid #BDD8F5;">
-                  <div style="width:190px;"><p style="font-size:13px;font-weight:600;color:#3D5E7A;margin-bottom:1px;">Reduce dining 31%</p><p style="font-size:10px;color:#7A9BB5;">$325 avg → $225 target</p></div>
-                  <div style="flex:1;display:flex;align-items:center;padding:0 14px;"><div style="height:1px;flex:1;background:#BDD8F5;"></div><span style="font-size:11px;color:#22A55A;font-weight:700;margin-left:10px;white-space:nowrap;font-family:'DM Mono',monospace;">+ $100.00</span></div>
-                  <div style="width:95px;text-align:right;font-size:13px;font-weight:700;font-family:'DM Mono',monospace;color:#22A55A;">$573 / mo</div>
+                  <div style="width:190px;"><p style="font-size:13px;font-weight:600;color:#3D5E7A;margin-bottom:1px;">Reduce dining 31%</p><p style="font-size:10px;color:#556C7E;">$325 avg → $225 target</p></div>
+                  <div style="flex:1;display:flex;align-items:center;padding:0 14px;"><div style="height:1px;flex:1;background:#BDD8F5;"></div><span style="font-size:11px;color:#1B8448;font-weight:700;margin-left:10px;white-space:nowrap;font-family:'DM Mono',monospace;">+ $100.00</span></div>
+                  <div style="width:95px;text-align:right;font-size:13px;font-weight:700;font-family:'DM Mono',monospace;color:#1B8448;">$573 / mo</div>
                 </div>
                 <div style="display:flex;align-items:center;padding:11px 0;border-bottom:1px solid #BDD8F5;">
-                  <div style="width:190px;"><p style="font-size:13px;font-weight:600;color:#3D5E7A;margin-bottom:1px;">Cap monthly shopping</p><p style="font-size:10px;color:#7A9BB5;">$480 avg → $360 target</p></div>
-                  <div style="flex:1;display:flex;align-items:center;padding:0 14px;"><div style="height:1px;flex:1;background:#BDD8F5;"></div><span style="font-size:11px;color:#22A55A;font-weight:700;margin-left:10px;white-space:nowrap;font-family:'DM Mono',monospace;">+ $120.00</span></div>
-                  <div style="width:95px;text-align:right;font-size:13px;font-weight:700;font-family:'DM Mono',monospace;color:#22A55A;">$693 / mo</div>
+                  <div style="width:190px;"><p style="font-size:13px;font-weight:600;color:#3D5E7A;margin-bottom:1px;">Cap monthly shopping</p><p style="font-size:10px;color:#556C7E;">$480 avg → $360 target</p></div>
+                  <div style="flex:1;display:flex;align-items:center;padding:0 14px;"><div style="height:1px;flex:1;background:#BDD8F5;"></div><span style="font-size:11px;color:#1B8448;font-weight:700;margin-left:10px;white-space:nowrap;font-family:'DM Mono',monospace;">+ $120.00</span></div>
+                  <div style="width:95px;text-align:right;font-size:13px;font-weight:700;font-family:'DM Mono',monospace;color:#1B8448;">$693 / mo</div>
                 </div>
                 <div style="display:flex;align-items:center;padding:11px 0;">
-                  <div style="width:190px;"><p style="font-size:13px;font-weight:600;color:#3D5E7A;margin-bottom:1px;">Reduce entertainment</p><p style="font-size:10px;color:#7A9BB5;">$185 avg → $130 target</p></div>
-                  <div style="flex:1;display:flex;align-items:center;padding:0 14px;"><div style="height:1px;flex:1;background:#BDD8F5;"></div><span style="font-size:11px;color:#22A55A;font-weight:700;margin-left:10px;white-space:nowrap;font-family:'DM Mono',monospace;">+ $55.00</span></div>
-                  <div style="width:95px;text-align:right;font-size:13px;font-weight:700;font-family:'DM Mono',monospace;color:#3D96F0;">$748 / mo</div>
+                  <div style="width:190px;"><p style="font-size:13px;font-weight:600;color:#3D5E7A;margin-bottom:1px;">Reduce entertainment</p><p style="font-size:10px;color:#556C7E;">$185 avg → $130 target</p></div>
+                  <div style="flex:1;display:flex;align-items:center;padding:0 14px;"><div style="height:1px;flex:1;background:#BDD8F5;"></div><span style="font-size:11px;color:#1B8448;font-weight:700;margin-left:10px;white-space:nowrap;font-family:'DM Mono',monospace;">+ $55.00</span></div>
+                  <div style="width:95px;text-align:right;font-size:13px;font-weight:700;font-family:'DM Mono',monospace;color:#3078C0;">$748 / mo</div>
                 </div>
               </div>
               <div style="margin-top:12px;background:#E8F3FF;border-radius:12px;padding:11px 13px;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.1),inset -2px -2px 4px rgba(255,255,255,0.5);">
-                <p style="font-size:11px;color:#7A9BB5;line-height:1.55;">NAVI never cancels anything or moves money without your confirmation. <span style="color:#3D96F0;font-weight:600;">Human override is always available.</span></p>
+                <p style="font-size:11px;color:#556C7E;line-height:1.55;">NAVI never cancels anything or moves money without your confirmation. <span style="color:#3078C0;font-weight:600;">Human override is always available.</span></p>
               </div>
             </div>
           </div>
@@ -708,14 +708,14 @@
             <!-- Header -->
             <div style="flex-shrink:0;padding:14px 22px;background:#FFFFFF;border-bottom:1px solid #BDD8F5;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
               <div style="display:flex;align-items:center;gap:10px;">
-                <div style="width:30px;height:30px;border-radius:10px;background:#3D96F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:3px 3px 7px rgba(61,150,240,0.35);">
+                <div style="width:30px;height:30px;border-radius:10px;background:#3078C0;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:3px 3px 7px rgba(48,120,192,0.35);">
                   <span style="color:#EEF7FF;font-size:11px;font-weight:800;">NA</span>
                 </div>
                 <div>
                   <p style="font-size:13px;font-weight:700;color:#0D2137;">NAVI AI Analysis</p>
                   <div style="display:flex;align-items:center;gap:5px;">
-                    <div style="width:5px;height:5px;border-radius:50%;background:#22A55A;"></div>
-                    <p style="font-size:10px;color:#7A9BB5;">Active · Month 3 context · TechCorp Payroll connected</p>
+                    <div style="width:5px;height:5px;border-radius:50%;background:#1B8448;"></div>
+                    <p style="font-size:10px;color:#556C7E;">Active · Month 3 context · TechCorp Payroll connected</p>
                   </div>
                 </div>
               </div>
@@ -731,14 +731,14 @@
                 <sc-if value="{{ msg.isNavi }}" hint-placeholder-val="{{ true }}">
                   <div style="background:#FFFFFF;border-radius:18px;padding:16px;box-shadow:6px 6px 16px rgba(0,0,0,0.13),-3px -3px 10px rgba(255,255,255,0.75),inset -2px -2px 6px rgba(0,0,0,0.06),inset 2px 2px 6px rgba(255,255,255,0.5);">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-                      <span style="font-size:10px;font-weight:700;color:#3D96F0;letter-spacing:0.08em;">NAVI ANALYSIS</span>
-                      <span style="font-size:10px;color:#7A9BB5;">{{ msg.time }}</span>
+                      <span style="font-size:10px;font-weight:700;color:#3078C0;letter-spacing:0.08em;">NAVI ANALYSIS</span>
+                      <span style="font-size:10px;color:#556C7E;">{{ msg.time }}</span>
                     </div>
                     <p style="font-size:13px;color:#3D5E7A;line-height:1.65;margin-bottom:12px;">{{ msg.text }}</p>
                     <sc-if value="{{ msg.hasConfidence }}" hint-placeholder-val="{{ false }}">
                       <div style="background:#E8F3FF;border-radius:10px;padding:8px 10px;margin-bottom:10px;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.1),inset -2px -2px 4px rgba(255,255,255,0.5);">
                         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;">
-                          <span style="font-size:10px;color:#7A9BB5;">Confidence</span>
+                          <span style="font-size:10px;color:#556C7E;">Confidence</span>
                           <span style="font-size:10px;color:#3D5E7A;">{{ msg.confidence }}% · {{ msg.source }}</span>
                         </div>
                         <div style="height:3px;background:#BDD8F5;border-radius:2px;overflow:hidden;box-shadow:inset 1px 1px 3px rgba(0,0,0,0.1);">
@@ -748,14 +748,14 @@
                     </sc-if>
                     <sc-if value="{{ msg.isPending }}" hint-placeholder-val="{{ true }}">
                       <div style="display:flex;gap:8px;">
-                        <button onClick="{{ msg.onAccept }}" style="background:#3D96F0;color:#EEF7FF;border:none;border-radius:10px;padding:6px 12px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:3px 3px 7px rgba(61,150,240,0.35);">Accept</button>
+                        <button onClick="{{ msg.onAccept }}" style="background:#3078C0;color:#EEF7FF;border:none;border-radius:10px;padding:6px 12px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:3px 3px 7px rgba(48,120,192,0.35);">Accept</button>
                         <button onClick="{{ msg.onStartOverride }}" style="background:#E8F3FF;border:none;color:#3D5E7A;border-radius:10px;padding:6px 12px;font-size:12px;font-weight:600;font-family:'Nunito',sans-serif;cursor:pointer;">⊘ Override</button>
-                        <button onClick="{{ openExplainer }}" style="background:transparent;border:none;color:#3D96F0;border-radius:10px;padding:6px 8px;font-size:12px;font-family:'Nunito',sans-serif;cursor:pointer;font-weight:600;">Ask why ↗</button>
+                        <button onClick="{{ openExplainer }}" style="background:transparent;border:none;color:#3078C0;border-radius:10px;padding:6px 8px;font-size:12px;font-family:'Nunito',sans-serif;cursor:pointer;font-weight:600;">Ask why ↗</button>
                       </div>
                     </sc-if>
                     <sc-if value="{{ msg.isPicking }}" hint-placeholder-val="{{ false }}">
                       <div>
-                        <p style="font-size:11px;color:#7A9BB5;margin-bottom:8px;">Why are you overriding this?</p>
+                        <p style="font-size:11px;color:#556C7E;margin-bottom:8px;">Why are you overriding this?</p>
                         <div style="display:flex;gap:6px;flex-wrap:wrap;">
                           <button onClick="{{ msg.onReason1 }}" style="background:#E8F3FF;border:none;color:#3D5E7A;border-radius:10px;padding:6px 12px;font-size:11px;font-family:'Nunito',sans-serif;cursor:pointer;">Doesn't apply right now</button>
                           <button onClick="{{ msg.onReason2 }}" style="background:#E8F3FF;border:none;color:#3D5E7A;border-radius:10px;padding:6px 12px;font-size:11px;font-family:'Nunito',sans-serif;cursor:pointer;">I already knew this</button>
@@ -769,7 +769,7 @@
                           <svg width="12" height="12" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="{{ msg.statusStroke }}"/></svg>
                           <p style="{{ msg.statusTextStyle }}">{{ msg.statusLabel }}</p>
                         </div>
-                        <button onClick="{{ openExplainer }}" style="background:transparent;border:none;color:#3D96F0;border-radius:10px;padding:6px 8px;font-size:12px;font-family:'Nunito',sans-serif;cursor:pointer;font-weight:600;">Ask why ↗</button>
+                        <button onClick="{{ openExplainer }}" style="background:transparent;border:none;color:#3078C0;border-radius:10px;padding:6px 8px;font-size:12px;font-family:'Nunito',sans-serif;cursor:pointer;font-weight:600;">Ask why ↗</button>
                       </div>
                     </sc-if>
                   </div>
@@ -779,7 +779,7 @@
                   <div style="display:flex;justify-content:flex-end;">
                     <div style="max-width:65%;border-radius:18px;padding:12px 14px;background:#E8F3FF;box-shadow:4px 4px 10px rgba(0,0,0,0.1),-2px -2px 7px rgba(255,255,255,0.65);">
                       <p style="font-size:13px;color:#0D2137;line-height:1.6;">{{ msg.text }}</p>
-                      <p style="font-size:10px;color:#7A9BB5;margin-top:5px;text-align:right;">{{ msg.time }}</p>
+                      <p style="font-size:10px;color:#556C7E;margin-top:5px;text-align:right;">{{ msg.time }}</p>
                     </div>
                   </div>
                 </sc-if>
@@ -788,10 +788,10 @@
 
               <sc-if value="{{ isTyping }}" hint-placeholder-val="{{ false }}">
                 <div style="background:#FFFFFF;border-radius:18px;padding:14px 16px;width:fit-content;display:flex;gap:4px;align-items:center;box-shadow:4px 4px 10px rgba(0,0,0,0.1),-2px -2px 7px rgba(255,255,255,0.65);">
-                  <span style="font-size:10px;font-weight:700;color:#3D96F0;letter-spacing:0.08em;margin-right:8px;">NAVI ANALYSIS</span>
-                  <span style="width:6px;height:6px;border-radius:50%;background:#3D96F0;display:inline-block;animation:typingDot 1.2s ease infinite;animation-delay:0s;"></span>
-                  <span style="width:6px;height:6px;border-radius:50%;background:#3D96F0;display:inline-block;animation:typingDot 1.2s ease infinite;animation-delay:0.2s;"></span>
-                  <span style="width:6px;height:6px;border-radius:50%;background:#3D96F0;display:inline-block;animation:typingDot 1.2s ease infinite;animation-delay:0.4s;"></span>
+                  <span style="font-size:10px;font-weight:700;color:#3078C0;letter-spacing:0.08em;margin-right:8px;">NAVI ANALYSIS</span>
+                  <span style="width:6px;height:6px;border-radius:50%;background:#3078C0;display:inline-block;animation:typingDot 1.2s ease infinite;animation-delay:0s;"></span>
+                  <span style="width:6px;height:6px;border-radius:50%;background:#3078C0;display:inline-block;animation:typingDot 1.2s ease infinite;animation-delay:0.2s;"></span>
+                  <span style="width:6px;height:6px;border-radius:50%;background:#3078C0;display:inline-block;animation:typingDot 1.2s ease infinite;animation-delay:0.4s;"></span>
                 </div>
               </sc-if>
             </div>
@@ -805,7 +805,7 @@
               </div>
               <div style="display:flex;align-items:center;gap:8px;background:#E8F3FF;border-radius:14px;padding:10px 13px;box-shadow:inset 3px 3px 7px rgba(0,0,0,0.12),inset -2px -2px 6px rgba(255,255,255,0.55);">
                 <input type="text" value="{{ coachInput }}" onChange="{{ onInputChange }}" onKeyDown="{{ onKeyDown }}" placeholder="Query NAVI analysis…" style="flex:1;border:none;background:transparent;font-family:'Nunito',sans-serif;font-size:13px;color:#0D2137;outline:none;" />
-                <button onClick="{{ onSend }}" style="background:#3D96F0;border:none;border-radius:8px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;box-shadow:2px 2px 5px rgba(61,150,240,0.4);">
+                <button onClick="{{ onSend }}" style="background:#3078C0;border:none;border-radius:8px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;box-shadow:2px 2px 5px rgba(48,120,192,0.4);">
                   <svg width="12" height="12" fill="none" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke="#EEF7FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
               </div>
@@ -820,10 +820,10 @@
             <!-- Context banner (clay) -->
             <div style="flex-shrink:0;background:#FFFFFF;border-bottom:1px solid #BDD8F5;padding:10px 22px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
               <div style="display:flex;align-items:center;gap:10px;">
-                <div style="width:20px;height:20px;background:#3D96F0;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:2px 2px 5px rgba(61,150,240,0.35);"><span style="color:#EEF7FF;font-size:9px;font-weight:800;">N</span></div>
+                <div style="width:20px;height:20px;background:#3078C0;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:2px 2px 5px rgba(48,120,192,0.35);"><span style="color:#EEF7FF;font-size:9px;font-weight:800;">N</span></div>
                 <span style="font-size:12px;font-weight:700;color:#3D5E7A;">Embedded Surface Preview — Slack DM</span>
               </div>
-              <span style="font-size:11px;color:#7A9BB5;">NAVI adapts to platform constraints: no charts · max 3 actions · text-first · Block Kit format</span>
+              <span style="font-size:11px;color:#556C7E;">NAVI adapts to platform constraints: no charts · max 3 actions · text-first · Block Kit format</span>
             </div>
 
             <!-- Simulated Slack (realistic light interior) -->
@@ -843,7 +843,7 @@
                 <div style="padding:4px 10px;margin-bottom:1px;border-radius:4px;"><span style="font-size:13px;color:#CFC3CF;">Sarah M.</span></div>
                 <!-- NAVI — active DM -->
                 <div style="padding:4px 10px;margin-bottom:1px;border-radius:4px;background:rgba(255,255,255,0.2);display:flex;align-items:center;gap:6px;">
-                  <div style="width:20px;height:20px;border-radius:5px;background:#3D96F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:#FFFFFF;font-size:9px;font-weight:800;">N</span></div>
+                  <div style="width:20px;height:20px;border-radius:5px;background:#3078C0;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:#FFFFFF;font-size:9px;font-weight:800;">N</span></div>
                   <span style="font-size:13px;color:#FFFFFF;font-weight:600;">NAVI</span>
                   <div style="width:6px;height:6px;border-radius:50%;background:#2BAC76;margin-left:auto;flex-shrink:0;"></div>
                 </div>
@@ -854,7 +854,7 @@
 
                 <!-- DM header -->
                 <div style="flex-shrink:0;padding:10px 18px;border-bottom:1px solid #E8E8E8;display:flex;align-items:center;gap:10px;">
-                  <div style="width:26px;height:26px;border-radius:6px;background:#3D96F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:#FFFFFF;font-size:11px;font-weight:800;">N</span></div>
+                  <div style="width:26px;height:26px;border-radius:6px;background:#3078C0;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:#FFFFFF;font-size:11px;font-weight:800;">N</span></div>
                   <div><p style="font-size:14px;font-weight:700;color:#1D1C1D;">NAVI</p><p style="font-size:11px;color:#616061;font-family:'Nunito',sans-serif;">App · TechCorp Financial Wellness</p></div>
                 </div>
 
@@ -863,7 +863,7 @@
 
                   <!-- Earlier message (dimmed) -->
                   <div style="display:flex;gap:10px;margin-bottom:24px;opacity:0.5;">
-                    <div style="width:26px;height:26px;border-radius:6px;background:#3D96F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;"><span style="color:#FFFFFF;font-size:10px;font-weight:800;">N</span></div>
+                    <div style="width:26px;height:26px;border-radius:6px;background:#3078C0;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;"><span style="color:#FFFFFF;font-size:10px;font-weight:800;">N</span></div>
                     <div>
                       <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px;">
                         <span style="font-size:13px;font-weight:700;color:#1D1C1D;">NAVI</span>
@@ -875,16 +875,16 @@
 
                   <!-- Proactive message (current) -->
                   <div style="display:flex;gap:10px;">
-                    <div style="width:26px;height:26px;border-radius:6px;background:#3D96F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;animation:bluePulse 3s ease infinite;"><span style="color:#FFFFFF;font-size:10px;font-weight:800;">N</span></div>
+                    <div style="width:26px;height:26px;border-radius:6px;background:#3078C0;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;animation:bluePulse 3s ease infinite;"><span style="color:#FFFFFF;font-size:10px;font-weight:800;">N</span></div>
                     <div style="flex:1;">
                       <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
                         <span style="font-size:13px;font-weight:700;color:#1D1C1D;">NAVI</span>
                         <span style="font-size:11px;color:#616061;font-family:'Nunito',sans-serif;">Today · 9:00 AM</span>
-                        <span style="font-size:10px;font-weight:700;color:#3D96F0;background:rgba(61,150,240,0.1);border-radius:3px;padding:1px 6px;letter-spacing:0.04em;">PROACTIVE</span>
+                        <span style="font-size:10px;font-weight:700;color:#3078C0;background:rgba(48,120,192,0.1);border-radius:3px;padding:1px 6px;letter-spacing:0.04em;">PROACTIVE</span>
                       </div>
 
                       <!-- Block Kit message card (flat/realistic Slack light style) -->
-                      <div style="background:#F8F8F8;border-radius:4px;border-left:3px solid #3D96F0;overflow:hidden;max-width:500px;">
+                      <div style="background:#F8F8F8;border-radius:4px;border-left:3px solid #3078C0;overflow:hidden;max-width:500px;">
                         <div style="padding:14px 16px;border-bottom:1px solid #E8E8E8;">
                           <p style="font-size:13px;font-weight:700;color:#1D1C1D;margin-bottom:3px;">Weekly Check-In · June 27</p>
                           <p style="font-size:12px;color:#616061;line-height:1.5;">Hey Allen — your pay period looks clean. One item for your review before July 3.</p>
@@ -892,7 +892,7 @@
                         <div style="padding:12px 16px;border-bottom:1px solid #E8E8E8;">
                           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
                             <span style="font-size:12px;color:#616061;font-family:'Nunito',sans-serif;">Next paycheck</span>
-                            <span style="font-size:12px;font-weight:600;font-family:'DM Mono',monospace;color:#3D96F0;">Jul 3 · $3,250</span>
+                            <span style="font-size:12px;font-weight:600;font-family:'DM Mono',monospace;color:#3078C0;">Jul 3 · $3,250</span>
                           </div>
                           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
                             <span style="font-size:12px;color:#616061;font-family:'Nunito',sans-serif;">Bills before payday</span>
@@ -904,12 +904,12 @@
                           </div>
                         </div>
                         <div style="padding:12px 16px;border-bottom:1px solid #E8E8E8;background:rgba(29,28,29,0.02);">
-                          <p style="font-size:10px;font-weight:700;color:#3D96F0;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;font-family:'Nunito',sans-serif;">NAVI recommendation</p>
+                          <p style="font-size:10px;font-weight:700;color:#3078C0;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;font-family:'Nunito',sans-serif;">NAVI recommendation</p>
                           <p style="font-size:12px;color:#616061;line-height:1.55;">Pay your Amex balance ($1,200) in full on July 3. Your paycheck covers it. Avoids ~$22 in interest charges.</p>
                         </div>
                         <!-- Action buttons (3 max per Slack Block Kit) -->
                         <div style="padding:10px 16px;display:flex;gap:8px;background:#FFFFFF;">
-                          <button style="background:#3D96F0;color:#FFFFFF;border:none;border-radius:4px;padding:7px 14px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;">✓ Accept</button>
+                          <button style="background:#3078C0;color:#FFFFFF;border:none;border-radius:4px;padding:7px 14px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;">✓ Accept</button>
                           <button style="background:#FFFFFF;border:1px solid rgba(29,28,29,0.24);color:#1D1C1D;border-radius:4px;padding:7px 14px;font-size:12px;font-family:'Nunito',sans-serif;cursor:pointer;">⊘ Override</button>
                           <button style="background:#FFFFFF;border:1px solid rgba(29,28,29,0.24);color:#1D1C1D;border-radius:4px;padding:7px 14px;font-size:12px;font-family:'Nunito',sans-serif;cursor:pointer;">? Why</button>
                         </div>
@@ -929,7 +929,7 @@
 
             <!-- Design constraints annotation (clay) -->
             <div style="flex-shrink:0;background:#FFFFFF;border-top:1px solid #BDD8F5;padding:11px 22px;display:flex;align-items:center;gap:16px;">
-              <span style="font-size:10px;font-weight:700;color:#7A9BB5;text-transform:uppercase;letter-spacing:0.07em;flex-shrink:0;">Platform constraints:</span>
+              <span style="font-size:10px;font-weight:700;color:#556C7E;text-transform:uppercase;letter-spacing:0.07em;flex-shrink:0;">Platform constraints:</span>
               <div style="display:flex;gap:8px;flex-wrap:wrap;">
                 <span style="font-size:11px;color:#3D5E7A;background:#E8F3FF;border-radius:8px;padding:3px 8px;">Max 3 actions per message</span>
                 <span style="font-size:11px;color:#3D5E7A;background:#E8F3FF;border-radius:8px;padding:3px 8px;">No custom data viz</span>
@@ -945,94 +945,94 @@
         <sc-if value="{{ isAlert }}" hint-placeholder-val="{{ false }}">
           <div style="position:absolute;inset:0;overflow-y:auto;padding:32px 36px;animation:fadeUp 0.25s ease;">
             <div style="margin-bottom:28px;">
-              <p style="font-size:10px;font-weight:700;color:#DC4545;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;">NAVI Flagged · Jun 27, 2026</p>
+              <p style="font-size:10px;font-weight:700;color:#C63E3E;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;">NAVI Flagged · Jun 27, 2026</p>
               <h1 style="font-size:26px;font-weight:800;color:#0D2137;letter-spacing:-0.02em;margin-bottom:3px;">Unusual dining spend in June</h1>
               <p style="font-size:14px;color:#3D5E7A;">Significant deviation from your 3-month baseline detected. Review and respond to keep your goal on track.</p>
             </div>
 
             <div style="background:#FFFFFF;border-radius:20px;padding:22px;margin-bottom:12px;box-shadow:8px 8px 20px rgba(0,0,0,0.15),-4px -4px 12px rgba(255,255,255,0.82),inset -3px -3px 8px rgba(0,0,0,0.07),inset 3px 3px 8px rgba(255,255,255,0.62);">
               <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
-                <div style="width:7px;height:7px;border-radius:50%;background:#DC4545;"></div>
-                <p style="font-size:12px;font-weight:700;color:#DC4545;">Dining &amp; Drinks — June 2026</p>
+                <div style="width:7px;height:7px;border-radius:50%;background:#C63E3E;"></div>
+                <p style="font-size:12px;font-weight:700;color:#C63E3E;">Dining &amp; Drinks — June 2026</p>
               </div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;">
-                <div style="background:rgba(220,69,69,0.07);border:1px solid rgba(220,69,69,0.14);border-radius:16px;padding:16px;">
-                  <p style="font-size:10px;color:#DC4545;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;">June spend so far</p>
-                  <p style="font-size:26px;font-weight:700;font-family:'DM Mono',monospace;color:#DC4545;letter-spacing:-0.02em;">$487</p>
-                  <p style="font-size:11px;color:#DC4545;margin-top:3px;opacity:0.7;">26 of 30 days · +50% above avg</p>
+                <div style="background:rgba(198,62,62,0.07);border:1px solid rgba(198,62,62,0.14);border-radius:16px;padding:16px;">
+                  <p style="font-size:10px;color:#C63E3E;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;">June spend so far</p>
+                  <p style="font-size:26px;font-weight:700;font-family:'DM Mono',monospace;color:#C63E3E;letter-spacing:-0.02em;">$487</p>
+                  <p style="font-size:11px;color:#C63E3E;margin-top:3px;opacity:0.7;">26 of 30 days · +50% above avg</p>
                 </div>
                 <div style="background:#E8F3FF;border-radius:16px;padding:16px;box-shadow:inset 3px 3px 7px rgba(0,0,0,0.12),inset -2px -2px 6px rgba(255,255,255,0.55);">
-                  <p style="font-size:10px;color:#7A9BB5;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;">3-month average</p>
+                  <p style="font-size:10px;color:#556C7E;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;">3-month average</p>
                   <p style="font-size:26px;font-weight:700;font-family:'DM Mono',monospace;color:#0D2137;letter-spacing:-0.02em;">$325</p>
-                  <p style="font-size:11px;color:#7A9BB5;margin-top:3px;">Apr · May · Jun baseline</p>
+                  <p style="font-size:11px;color:#556C7E;margin-top:3px;">Apr · May · Jun baseline</p>
                 </div>
               </div>
               <div style="margin-bottom:14px;">
                 <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
-                  <span style="font-size:10px;color:#7A9BB5;width:28px;text-align:right;">Avg</span>
-                  <div style="flex:1;height:6px;background:#E8F3FF;border-radius:3px;overflow:hidden;box-shadow:inset 2px 2px 4px rgba(0,0,0,0.12),inset -1px -1px 3px rgba(255,255,255,0.5);"><div style="height:100%;width:66.7%;background:#22A55A;border-radius:3px;opacity:0.7;"></div></div>
+                  <span style="font-size:10px;color:#556C7E;width:28px;text-align:right;">Avg</span>
+                  <div style="flex:1;height:6px;background:#E8F3FF;border-radius:3px;overflow:hidden;box-shadow:inset 2px 2px 4px rgba(0,0,0,0.12),inset -1px -1px 3px rgba(255,255,255,0.5);"><div style="height:100%;width:66.7%;background:#1B8448;border-radius:3px;opacity:0.7;"></div></div>
                   <span style="font-size:10px;font-family:'DM Mono',monospace;color:#3D5E7A;width:32px;">$325</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:8px;">
-                  <span style="font-size:10px;color:#DC4545;width:28px;text-align:right;">Jun</span>
-                  <div style="flex:1;height:6px;background:#E8F3FF;border-radius:3px;overflow:hidden;box-shadow:inset 2px 2px 4px rgba(0,0,0,0.12),inset -1px -1px 3px rgba(255,255,255,0.5);"><div style="height:100%;width:100%;background:#DC4545;border-radius:3px;opacity:0.75;"></div></div>
-                  <span style="font-size:10px;font-family:'DM Mono',monospace;color:#DC4545;width:32px;">$487</span>
+                  <span style="font-size:10px;color:#C63E3E;width:28px;text-align:right;">Jun</span>
+                  <div style="flex:1;height:6px;background:#E8F3FF;border-radius:3px;overflow:hidden;box-shadow:inset 2px 2px 4px rgba(0,0,0,0.12),inset -1px -1px 3px rgba(255,255,255,0.5);"><div style="height:100%;width:100%;background:#C63E3E;border-radius:3px;opacity:0.75;"></div></div>
+                  <span style="font-size:10px;font-family:'DM Mono',monospace;color:#C63E3E;width:32px;">$487</span>
                 </div>
               </div>
-              <div style="background:rgba(220,69,69,0.05);border:1px solid rgba(220,69,69,0.12);border-radius:12px;padding:11px 13px;">
-                <p style="font-size:12px;color:#3D5E7A;line-height:1.6;"><strong style="font-weight:700;color:#DC4545;">NAVI analysis:</strong> Two high-value charges: $127.50 at Nobu (Jun 20), $68.40 at Clio Wine Bar (Jun 18). At current pace, June dining ends at ~$524 — $199 above baseline.</p>
+              <div style="background:rgba(198,62,62,0.05);border:1px solid rgba(198,62,62,0.12);border-radius:12px;padding:11px 13px;">
+                <p style="font-size:12px;color:#3D5E7A;line-height:1.6;"><strong style="font-weight:700;color:#C63E3E;">NAVI analysis:</strong> Two high-value charges: $127.50 at Nobu (Jun 20), $68.40 at Clio Wine Bar (Jun 18). At current pace, June dining ends at ~$524 — $199 above baseline.</p>
               </div>
             </div>
 
             <div style="background:#FFFFFF;border-radius:20px;padding:18px;margin-bottom:12px;box-shadow:8px 8px 20px rgba(0,0,0,0.15),-4px -4px 12px rgba(255,255,255,0.82),inset -3px -3px 8px rgba(0,0,0,0.07),inset 3px 3px 8px rgba(255,255,255,0.62);">
               <p style="font-size:12px;font-weight:700;color:#0D2137;margin-bottom:12px;">{{ alertPanelTitle }}</p>
               <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
-                <div style="text-align:center;padding:12px;background:#E8F3FF;border-radius:14px;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.1),inset -2px -2px 4px rgba(255,255,255,0.5);"><p style="font-size:10px;color:#7A9BB5;margin-bottom:3px;">June savings</p><p style="{{ alertSavingsStyle }}">{{ month3SavedDisplay }}</p><p style="font-size:10px;color:#7A9BB5;">vs $748 target</p></div>
-                <div style="text-align:center;padding:12px;background:#E8F3FF;border-radius:14px;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.1),inset -2px -2px 4px rgba(255,255,255,0.5);"><p style="font-size:10px;color:#7A9BB5;margin-bottom:3px;">Timeline shift</p><p style="{{ alertShiftStyle }}">{{ shiftLabel }}</p><p style="font-size:10px;color:#7A9BB5;">13 → {{ goalMonths }} months</p></div>
-                <div style="text-align:center;padding:12px;background:#E8F3FF;border-radius:14px;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.1),inset -2px -2px 4px rgba(255,255,255,0.5);"><p style="font-size:10px;color:#7A9BB5;margin-bottom:3px;">New goal date</p><p style="{{ alertDateStyle }}">{{ goalMonthLabel }}</p><p style="font-size:10px;color:#7A9BB5;">was Mar 2027</p></div>
+                <div style="text-align:center;padding:12px;background:#E8F3FF;border-radius:14px;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.1),inset -2px -2px 4px rgba(255,255,255,0.5);"><p style="font-size:10px;color:#556C7E;margin-bottom:3px;">June savings</p><p style="{{ alertSavingsStyle }}">{{ month3SavedDisplay }}</p><p style="font-size:10px;color:#556C7E;">vs $748 target</p></div>
+                <div style="text-align:center;padding:12px;background:#E8F3FF;border-radius:14px;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.1),inset -2px -2px 4px rgba(255,255,255,0.5);"><p style="font-size:10px;color:#556C7E;margin-bottom:3px;">Timeline shift</p><p style="{{ alertShiftStyle }}">{{ shiftLabel }}</p><p style="font-size:10px;color:#556C7E;">13 → {{ goalMonths }} months</p></div>
+                <div style="text-align:center;padding:12px;background:#E8F3FF;border-radius:14px;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.1),inset -2px -2px 4px rgba(255,255,255,0.5);"><p style="font-size:10px;color:#556C7E;margin-bottom:3px;">New goal date</p><p style="{{ alertDateStyle }}">{{ goalMonthLabel }}</p><p style="font-size:10px;color:#556C7E;">was Mar 2027</p></div>
               </div>
             </div>
 
-            <p style="font-size:12px;font-weight:700;color:#7A9BB5;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em;">Respond to this alert</p>
+            <p style="font-size:12px;font-weight:700;color:#556C7E;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em;">Respond to this alert</p>
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px;">
               <div style="{{ expenseCardStyle }}" onClick="{{ setAlertExpense }}">
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;">
                   <p style="font-size:13px;font-weight:700;color:#0D2137;line-height:1.4;">Work expenses — I'll submit a claim</p>
                   <sc-if value="{{ alertExpenseSelected }}" hint-placeholder-val="{{ false }}">
-                    <div style="width:16px;height:16px;border-radius:50%;background:rgba(34,165,90,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:8px;"><svg width="9" height="9" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#22A55A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    <div style="width:16px;height:16px;border-radius:50%;background:rgba(27,132,72,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:8px;"><svg width="9" height="9" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#1B8448" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                   </sc-if>
                 </div>
-                <p style="font-size:11px;color:#7A9BB5;line-height:1.5;margin-bottom:8px;">Reimbursed meals won't count against budget.</p>
-                <p style="font-size:11px;font-weight:700;color:#22A55A;">Goal: 13 months → Mar 2027</p>
+                <p style="font-size:11px;color:#556C7E;line-height:1.5;margin-bottom:8px;">Reimbursed meals won't count against budget.</p>
+                <p style="font-size:11px;font-weight:700;color:#1B8448;">Goal: 13 months → Mar 2027</p>
               </div>
               <div style="{{ cutbackCardStyle }}" onClick="{{ setAlertCutback }}">
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;">
                   <p style="font-size:13px;font-weight:700;color:#0D2137;line-height:1.4;">I'll cut back the next 3 days</p>
                   <sc-if value="{{ alertCutbackSelected }}" hint-placeholder-val="{{ false }}">
-                    <div style="width:16px;height:16px;border-radius:50%;background:rgba(34,165,90,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:8px;"><svg width="9" height="9" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#22A55A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    <div style="width:16px;height:16px;border-radius:50%;background:rgba(27,132,72,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:8px;"><svg width="9" height="9" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#1B8448" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                   </sc-if>
                 </div>
-                <p style="font-size:11px;color:#7A9BB5;line-height:1.5;margin-bottom:8px;">Keep remaining dining under $30 for rest of June.</p>
-                <p style="font-size:11px;font-weight:700;color:#22A55A;">Goal: 13 months → Apr 2027</p>
+                <p style="font-size:11px;color:#556C7E;line-height:1.5;margin-bottom:8px;">Keep remaining dining under $30 for rest of June.</p>
+                <p style="font-size:11px;font-weight:700;color:#1B8448;">Goal: 13 months → Apr 2027</p>
               </div>
               <div style="{{ ignoreCardStyle }}" onClick="{{ setAlertIgnore }}">
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;">
                   <p style="font-size:13px;font-weight:700;color:#0D2137;line-height:1.4;">Not concerned — adjust the plan</p>
                   <sc-if value="{{ alertIgnoreSelected }}" hint-placeholder-val="{{ false }}">
-                    <div style="width:16px;height:16px;border-radius:50%;background:rgba(61,150,240,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:8px;"><svg width="9" height="9" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#3D96F0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    <div style="width:16px;height:16px;border-radius:50%;background:rgba(48,120,192,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:8px;"><svg width="9" height="9" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#3078C0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                   </sc-if>
                 </div>
-                <p style="font-size:11px;color:#7A9BB5;line-height:1.5;margin-bottom:8px;">NAVI will factor this into next month's baseline.</p>
-                <p style="font-size:11px;font-weight:700;color:#3D96F0;">Goal: 14 months → Aug 2027</p>
+                <p style="font-size:11px;color:#556C7E;line-height:1.5;margin-bottom:8px;">NAVI will factor this into next month's baseline.</p>
+                <p style="font-size:11px;font-weight:700;color:#3078C0;">Goal: 14 months → Aug 2027</p>
               </div>
             </div>
             <sc-if value="{{ alertResolved }}" hint-placeholder-val="{{ false }}">
-              <div style="background:rgba(34,165,90,0.06);border:1px solid rgba(34,165,90,0.14);border-radius:16px;padding:14px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;">
+              <div style="background:rgba(27,132,72,0.06);border:1px solid rgba(27,132,72,0.14);border-radius:16px;padding:14px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;">
                 <div style="display:flex;align-items:flex-start;gap:8px;">
-                  <svg width="13" height="13" fill="none" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:1px;"><path d="M20 6L9 17l-5-5" stroke="#22A55A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg width="13" height="13" fill="none" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:1px;"><path d="M20 6L9 17l-5-5" stroke="#1B8448" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   <p style="font-size:12px;color:#3D5E7A;line-height:1.55;">{{ alertImpact }}</p>
                 </div>
-                <button onClick="{{ goToGoals }}" style="background:#3D96F0;color:#EEF7FF;border:none;border-radius:12px;padding:8px 13px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;white-space:nowrap;flex-shrink:0;box-shadow:3px 3px 7px rgba(61,150,240,0.35);">See goal →</button>
+                <button onClick="{{ goToGoals }}" style="background:#3078C0;color:#EEF7FF;border:none;border-radius:12px;padding:8px 13px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;white-space:nowrap;flex-shrink:0;box-shadow:3px 3px 7px rgba(48,120,192,0.35);">See goal →</button>
               </div>
             </sc-if>
           </div>
@@ -1042,53 +1042,53 @@
         <sc-if value="{{ isPrivacy }}" hint-placeholder-val="{{ false }}">
           <div style="position:absolute;inset:0;overflow-y:auto;padding:32px 36px;animation:fadeUp 0.25s ease;">
             <div style="margin-bottom:28px;">
-              <p style="font-size:10px;font-weight:700;color:#3D96F0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;">Privacy &amp; Data Controls</p>
+              <p style="font-size:10px;font-weight:700;color:#3078C0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;">Privacy &amp; Data Controls</p>
               <h1 style="font-size:26px;font-weight:800;color:#0D2137;letter-spacing:-0.02em;margin-bottom:3px;">Your data, your rules.</h1>
               <p style="font-size:14px;color:#3D5E7A;">NAVI shows you exactly what data it uses and gives you full control. HR at TechCorp cannot see your personal financial data.</p>
             </div>
 
             <!-- Connected sources -->
             <div style="background:#FFFFFF;border-radius:20px;padding:20px;margin-bottom:12px;box-shadow:8px 8px 20px rgba(0,0,0,0.15),-4px -4px 12px rgba(255,255,255,0.82),inset -3px -3px 8px rgba(0,0,0,0.07),inset 3px 3px 8px rgba(255,255,255,0.62);">
-              <p style="font-size:12px;font-weight:700;color:#7A9BB5;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.06em;">Connected Data Sources</p>
+              <p style="font-size:12px;font-weight:700;color:#556C7E;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.06em;">Connected Data Sources</p>
               <div style="display:flex;flex-direction:column;gap:0;">
                 <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #BDD8F5;">
                   <div style="display:flex;align-items:center;gap:10px;">
-                    <div style="width:32px;height:32px;border-radius:10px;background:#3D96F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:3px 3px 7px rgba(61,150,240,0.35);"><span style="color:#EEF7FF;font-size:9px;font-weight:800;">TC</span></div>
-                    <div><p style="font-size:13px;font-weight:600;color:#0D2137;">TechCorp Payroll</p><p style="font-size:11px;color:#7A9BB5;">Direct Deposit · Last synced: Today, 6:00 AM</p></div>
+                    <div style="width:32px;height:32px;border-radius:10px;background:#3078C0;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:3px 3px 7px rgba(48,120,192,0.35);"><span style="color:#EEF7FF;font-size:9px;font-weight:800;">TC</span></div>
+                    <div><p style="font-size:13px;font-weight:600;color:#0D2137;">TechCorp Payroll</p><p style="font-size:11px;color:#556C7E;">Direct Deposit · Last synced: Today, 6:00 AM</p></div>
                   </div>
                   <div style="display:flex;align-items:center;gap:8px;">
-                    <div style="width:7px;height:7px;border-radius:50%;background:#22A55A;"></div>
-                    <span style="font-size:11px;color:#22A55A;font-weight:700;">Active</span>
+                    <div style="width:7px;height:7px;border-radius:50%;background:#1B8448;"></div>
+                    <span style="font-size:11px;color:#1B8448;font-weight:700;">Active</span>
                   </div>
                 </div>
                 <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #BDD8F5;">
                   <div style="display:flex;align-items:center;gap:10px;">
                     <div style="width:32px;height:32px;border-radius:10px;background:#003087;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:white;font-size:9px;font-weight:700;">CH</span></div>
-                    <div><p style="font-size:13px;font-weight:600;color:#0D2137;">Chase Checking ····4821</p><p style="font-size:11px;color:#7A9BB5;">Last synced: Today, 11:24 AM</p></div>
+                    <div><p style="font-size:13px;font-weight:600;color:#0D2137;">Chase Checking ····4821</p><p style="font-size:11px;color:#556C7E;">Last synced: Today, 11:24 AM</p></div>
                   </div>
                   <div style="display:flex;align-items:center;gap:8px;">
-                    <div style="width:7px;height:7px;border-radius:50%;background:#22A55A;"></div>
-                    <span style="font-size:11px;color:#22A55A;font-weight:700;">Active</span>
+                    <div style="width:7px;height:7px;border-radius:50%;background:#1B8448;"></div>
+                    <span style="font-size:11px;color:#1B8448;font-weight:700;">Active</span>
                   </div>
                 </div>
                 <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #BDD8F5;">
                   <div style="display:flex;align-items:center;gap:10px;">
                     <div style="width:32px;height:32px;border-radius:10px;background:#003087;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:white;font-size:9px;font-weight:700;">CH</span></div>
-                    <div><p style="font-size:13px;font-weight:600;color:#0D2137;">Chase Savings ····9203</p><p style="font-size:11px;color:#7A9BB5;">Last synced: Today, 11:24 AM</p></div>
+                    <div><p style="font-size:13px;font-weight:600;color:#0D2137;">Chase Savings ····9203</p><p style="font-size:11px;color:#556C7E;">Last synced: Today, 11:24 AM</p></div>
                   </div>
                   <div style="display:flex;align-items:center;gap:8px;">
-                    <div style="width:7px;height:7px;border-radius:50%;background:#22A55A;"></div>
-                    <span style="font-size:11px;color:#22A55A;font-weight:700;">Active</span>
+                    <div style="width:7px;height:7px;border-radius:50%;background:#1B8448;"></div>
+                    <span style="font-size:11px;color:#1B8448;font-weight:700;">Active</span>
                   </div>
                 </div>
                 <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;">
                   <div style="display:flex;align-items:center;gap:10px;">
                     <div style="width:32px;height:32px;border-radius:10px;background:#006CB7;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:white;font-size:9px;font-weight:700;">AX</span></div>
-                    <div><p style="font-size:13px;font-weight:600;color:#0D2137;">Amex Platinum ····2847</p><p style="font-size:11px;color:#7A9BB5;">Last synced: Today, 9:15 AM</p></div>
+                    <div><p style="font-size:13px;font-weight:600;color:#0D2137;">Amex Platinum ····2847</p><p style="font-size:11px;color:#556C7E;">Last synced: Today, 9:15 AM</p></div>
                   </div>
                   <div style="display:flex;align-items:center;gap:8px;">
-                    <div style="width:7px;height:7px;border-radius:50%;background:#22A55A;"></div>
-                    <span style="font-size:11px;color:#22A55A;font-weight:700;">Active</span>
+                    <div style="width:7px;height:7px;border-radius:50%;background:#1B8448;"></div>
+                    <span style="font-size:11px;color:#1B8448;font-weight:700;">Active</span>
                   </div>
                 </div>
               </div>
@@ -1096,12 +1096,12 @@
 
             <!-- AI behavior toggles -->
             <div style="background:#FFFFFF;border-radius:20px;padding:20px;margin-bottom:12px;box-shadow:8px 8px 20px rgba(0,0,0,0.15),-4px -4px 12px rgba(255,255,255,0.82),inset -3px -3px 8px rgba(0,0,0,0.07),inset 3px 3px 8px rgba(255,255,255,0.62);">
-              <p style="font-size:12px;font-weight:700;color:#7A9BB5;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.06em;">AI Behavior Controls</p>
+              <p style="font-size:12px;font-weight:700;color:#556C7E;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.06em;">AI Behavior Controls</p>
               <div style="display:flex;flex-direction:column;gap:0;">
                 <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid #BDD8F5;">
                   <div style="flex:1;margin-right:20px;">
                     <p style="font-size:13px;font-weight:600;color:#0D2137;margin-bottom:3px;">Analyze spending patterns</p>
-                    <p style="font-size:11px;color:#7A9BB5;">Allow NAVI to categorize and analyze your transactions to generate insights.</p>
+                    <p style="font-size:11px;color:#556C7E;">Allow NAVI to categorize and analyze your transactions to generate insights.</p>
                   </div>
                   <button onClick="{{ toggleAllowAnalysis }}" style="{{ privacyToggle1Btn }}">
                     <div style="{{ privacyToggle1Knob }}"></div>
@@ -1111,9 +1111,9 @@
                   <div style="flex:1;margin-right:20px;">
                     <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px;">
                       <p style="font-size:13px;font-weight:600;color:#0D2137;">Share aggregate data with TechCorp HR</p>
-                      <span style="font-size:10px;font-weight:600;color:#7A9BB5;background:#E8F3FF;border-radius:4px;padding:1px 6px;">Optional</span>
+                      <span style="font-size:10px;font-weight:600;color:#556C7E;background:#E8F3FF;border-radius:4px;padding:1px 6px;">Optional</span>
                     </div>
-                    <p style="font-size:11px;color:#7A9BB5;">HR sees only anonymized, aggregated wellness scores. Your personal finances are never shared.</p>
+                    <p style="font-size:11px;color:#556C7E;">HR sees only anonymized, aggregated wellness scores. Your personal finances are never shared.</p>
                   </div>
                   <button onClick="{{ toggleHRSharing }}" style="{{ privacyToggle2Btn }}">
                     <div style="{{ privacyToggle2Knob }}"></div>
@@ -1122,7 +1122,7 @@
                 <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid #BDD8F5;">
                   <div style="flex:1;margin-right:20px;">
                     <p style="font-size:13px;font-weight:600;color:#0D2137;margin-bottom:3px;">Show confidence scores on all suggestions</p>
-                    <p style="font-size:11px;color:#7A9BB5;">Display NAVI's certainty level and data sources for every recommendation.</p>
+                    <p style="font-size:11px;color:#556C7E;">Display NAVI's certainty level and data sources for every recommendation.</p>
                   </div>
                   <button onClick="{{ toggleShowConfidence }}" style="{{ privacyToggle3Btn }}">
                     <div style="{{ privacyToggle3Knob }}"></div>
@@ -1131,7 +1131,7 @@
                 <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;">
                   <div style="flex:1;margin-right:20px;">
                     <p style="font-size:13px;font-weight:600;color:#0D2137;margin-bottom:3px;">Require confirmation before any NAVI action</p>
-                    <p style="font-size:11px;color:#7A9BB5;">NAVI will always ask before it acts — it cannot move money or cancel subscriptions without explicit approval.</p>
+                    <p style="font-size:11px;color:#556C7E;">NAVI will always ask before it acts — it cannot move money or cancel subscriptions without explicit approval.</p>
                   </div>
                   <button onClick="{{ toggleRequireConfirmation }}" style="{{ privacyToggle4Btn }}">
                     <div style="{{ privacyToggle4Knob }}"></div>
@@ -1142,27 +1142,27 @@
 
             <!-- Data actions -->
             <div style="background:#FFFFFF;border-radius:20px;padding:20px;margin-bottom:12px;box-shadow:8px 8px 20px rgba(0,0,0,0.15),-4px -4px 12px rgba(255,255,255,0.82),inset -3px -3px 8px rgba(0,0,0,0.07),inset 3px 3px 8px rgba(255,255,255,0.62);">
-              <p style="font-size:12px;font-weight:700;color:#7A9BB5;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.06em;">Data Management</p>
+              <p style="font-size:12px;font-weight:700;color:#556C7E;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.06em;">Data Management</p>
               <div style="display:flex;flex-direction:column;gap:8px;">
                 <button style="display:flex;align-items:center;justify-content:space-between;background:#E8F3FF;border:none;border-radius:14px;padding:12px 14px;cursor:pointer;width:100%;text-align:left;box-shadow:3px 3px 7px rgba(0,0,0,0.09),-2px -2px 5px rgba(255,255,255,0.65);">
-                  <div><p style="font-size:13px;font-weight:600;color:#0D2137;margin-bottom:2px;">Redact specific transactions</p><p style="font-size:11px;color:#7A9BB5;font-family:'Nunito',sans-serif;">Remove individual transactions from NAVI's memory</p></div>
-                  <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="#7A9BB5" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <div><p style="font-size:13px;font-weight:600;color:#0D2137;margin-bottom:2px;">Redact specific transactions</p><p style="font-size:11px;color:#556C7E;font-family:'Nunito',sans-serif;">Remove individual transactions from NAVI's memory</p></div>
+                  <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="#556C7E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
                 <button style="display:flex;align-items:center;justify-content:space-between;background:#E8F3FF;border:none;border-radius:14px;padding:12px 14px;cursor:pointer;width:100%;text-align:left;box-shadow:3px 3px 7px rgba(0,0,0,0.09),-2px -2px 5px rgba(255,255,255,0.65);">
-                  <div><p style="font-size:13px;font-weight:600;color:#0D2137;margin-bottom:2px;">Export my data</p><p style="font-size:11px;color:#7A9BB5;font-family:'Nunito',sans-serif;">Download everything NAVI knows about you as a JSON file</p></div>
-                  <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="#7A9BB5" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <div><p style="font-size:13px;font-weight:600;color:#0D2137;margin-bottom:2px;">Export my data</p><p style="font-size:11px;color:#556C7E;font-family:'Nunito',sans-serif;">Download everything NAVI knows about you as a JSON file</p></div>
+                  <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="#556C7E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
-                <button style="display:flex;align-items:center;justify-content:space-between;background:rgba(220,69,69,0.06);border:1px solid rgba(220,69,69,0.15);border-radius:14px;padding:12px 14px;cursor:pointer;width:100%;text-align:left;">
-                  <div><p style="font-size:13px;font-weight:600;color:#DC4545;margin-bottom:2px;">Delete all NAVI data</p><p style="font-size:11px;color:#7A9BB5;font-family:'Nunito',sans-serif;">Permanently removes all your financial history from NAVI. This cannot be undone.</p></div>
-                  <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="#DC4545" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <button style="display:flex;align-items:center;justify-content:space-between;background:rgba(198,62,62,0.06);border:1px solid rgba(198,62,62,0.15);border-radius:14px;padding:12px 14px;cursor:pointer;width:100%;text-align:left;">
+                  <div><p style="font-size:13px;font-weight:600;color:#C63E3E;margin-bottom:2px;">Delete all NAVI data</p><p style="font-size:11px;color:#556C7E;font-family:'Nunito',sans-serif;">Permanently removes all your financial history from NAVI. This cannot be undone.</p></div>
+                  <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="#C63E3E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
               </div>
             </div>
 
             <!-- Footer note -->
             <div style="background:#FFFFFF;border-radius:16px;padding:14px 16px;display:flex;align-items:flex-start;gap:10px;box-shadow:5px 5px 12px rgba(0,0,0,0.1),-3px -3px 8px rgba(255,255,255,0.75);">
-              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:1px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#7A9BB5" stroke-width="1.75" stroke-linejoin="round"/></svg>
-              <p style="font-size:12px;color:#7A9BB5;line-height:1.6;">Your financial data is processed on-device and encrypted in transit. TechCorp does not have access to your personal account details, transaction history, or individual financial data. Aggregate wellness metrics, if you opt in, contain no personally identifiable information.</p>
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:1px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#556C7E" stroke-width="1.75" stroke-linejoin="round"/></svg>
+              <p style="font-size:12px;color:#556C7E;line-height:1.6;">Your financial data is processed on-device and encrypted in transit. TechCorp does not have access to your personal account details, transaction history, or individual financial data. Aggregate wellness metrics, if you opt in, contain no personally identifiable information.</p>
             </div>
           </div>
         </sc-if>
@@ -1174,10 +1174,10 @@
             <!-- Header -->
             <div style="padding:16px 20px;border-bottom:1px solid #BDD8F5;display:flex;align-items:flex-start;justify-content:space-between;flex-shrink:0;">
               <div>
-                <p style="font-size:10px;font-weight:700;color:#3D96F0;letter-spacing:0.08em;text-transform:uppercase;">Why NAVI Said This</p>
-                <p style="font-size:12px;color:#7A9BB5;margin-top:3px;">13-month plan · 87% confidence</p>
+                <p style="font-size:10px;font-weight:700;color:#3078C0;letter-spacing:0.08em;text-transform:uppercase;">Why NAVI Said This</p>
+                <p style="font-size:12px;color:#556C7E;margin-top:3px;">13-month plan · 87% confidence</p>
               </div>
-              <button onClick="{{ closeExplainer }}" style="background:transparent;border:none;cursor:pointer;color:#7A9BB5;font-size:20px;line-height:1;padding:0 2px;flex-shrink:0;">×</button>
+              <button onClick="{{ closeExplainer }}" style="background:transparent;border:none;cursor:pointer;color:#556C7E;font-size:20px;line-height:1;padding:0 2px;flex-shrink:0;">×</button>
             </div>
 
             <!-- Data used -->
@@ -1185,20 +1185,20 @@
               <p style="font-size:10px;font-weight:700;color:#3D5E7A;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px;">Data Used</p>
               <div style="display:flex;flex-direction:column;gap:7px;">
                 <div style="display:flex;align-items:flex-start;gap:8px;">
-                  <div style="width:4px;height:4px;border-radius:50%;background:#3D96F0;flex-shrink:0;margin-top:5px;"></div>
+                  <div style="width:4px;height:4px;border-radius:50%;background:#3078C0;flex-shrink:0;margin-top:5px;"></div>
                   <span style="font-size:12px;color:#3D5E7A;">90-day transaction history · 847 records</span>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:8px;">
-                  <div style="width:4px;height:4px;border-radius:50%;background:#3D96F0;flex-shrink:0;margin-top:5px;"></div>
+                  <div style="width:4px;height:4px;border-radius:50%;background:#3078C0;flex-shrink:0;margin-top:5px;"></div>
                   <span style="font-size:12px;color:#3D5E7A;">TechCorp payroll · bi-weekly cadence · Chase ····4821</span>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:8px;">
-                  <div style="width:4px;height:4px;border-radius:50%;background:#3D96F0;flex-shrink:0;margin-top:5px;"></div>
+                  <div style="width:4px;height:4px;border-radius:50%;background:#3078C0;flex-shrink:0;margin-top:5px;"></div>
                   <span style="font-size:12px;color:#3D5E7A;">Behavioral benchmarks · anonymized dataset</span>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:8px;">
                   <div style="width:4px;height:4px;border-radius:50%;background:#BDD8F5;flex-shrink:0;margin-top:5px;"></div>
-                  <span style="font-size:12px;color:#7A9BB5;">NOT used: HR salary band · credit score · tax records</span>
+                  <span style="font-size:12px;color:#556C7E;">NOT used: HR salary band · credit score · tax records</span>
                 </div>
               </div>
             </div>
@@ -1207,26 +1207,26 @@
             <div style="padding:16px 20px;border-bottom:1px solid #BDD8F5;">
               <p style="font-size:10px;font-weight:700;color:#3D5E7A;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px;">Alternatives Considered</p>
               <div style="display:flex;flex-direction:column;gap:7px;">
-                <div style="background:#E8F3FF;border-radius:12px;padding:10px 12px;border-left:3px solid #DC4545;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.1),inset -2px -2px 4px rgba(255,255,255,0.5);">
+                <div style="background:#E8F3FF;border-radius:12px;padding:10px 12px;border-left:3px solid #C63E3E;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.1),inset -2px -2px 4px rgba(255,255,255,0.5);">
                   <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
                     <span style="font-size:12px;font-weight:600;color:#0D2137;">11-month plan</span>
-                    <span style="font-size:11px;color:#DC4545;font-family:'DM Mono',monospace;">$910/mo</span>
+                    <span style="font-size:11px;color:#C63E3E;font-family:'DM Mono',monospace;">$910/mo</span>
                   </div>
-                  <p style="font-size:11px;color:#7A9BB5;">41% reduction required · 67% reversal rate before Month 5</p>
+                  <p style="font-size:11px;color:#556C7E;">41% reduction required · 67% reversal rate before Month 5</p>
                 </div>
-                <div style="background:#E8F3FF;border-radius:12px;padding:10px 12px;border-left:3px solid #D97706;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.1),inset -2px -2px 4px rgba(255,255,255,0.5);">
+                <div style="background:#E8F3FF;border-radius:12px;padding:10px 12px;border-left:3px solid #AD5F04;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.1),inset -2px -2px 4px rgba(255,255,255,0.5);">
                   <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
                     <span style="font-size:12px;font-weight:600;color:#0D2137;">12-month plan</span>
-                    <span style="font-size:11px;color:#D97706;font-family:'DM Mono',monospace;">$834/mo</span>
+                    <span style="font-size:11px;color:#AD5F04;font-family:'DM Mono',monospace;">$834/mo</span>
                   </div>
-                  <p style="font-size:11px;color:#7A9BB5;">34% reduction required · 61% reversal rate before Month 5</p>
+                  <p style="font-size:11px;color:#556C7E;">34% reduction required · 61% reversal rate before Month 5</p>
                 </div>
-                <div style="background:#E8F3FF;border-radius:12px;padding:10px 12px;border-left:3px solid #22A55A;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.1),inset -2px -2px 4px rgba(255,255,255,0.5);">
+                <div style="background:#E8F3FF;border-radius:12px;padding:10px 12px;border-left:3px solid #1B8448;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.1),inset -2px -2px 4px rgba(255,255,255,0.5);">
                   <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
                     <span style="font-size:12px;font-weight:600;color:#0D2137;">13-month ← chosen</span>
-                    <span style="font-size:11px;color:#22A55A;font-family:'DM Mono',monospace;">$748/mo</span>
+                    <span style="font-size:11px;color:#1B8448;font-family:'DM Mono',monospace;">$748/mo</span>
                   </div>
-                  <p style="font-size:11px;color:#7A9BB5;">23% reduction required · 19% reversal rate before Month 5</p>
+                  <p style="font-size:11px;color:#556C7E;">23% reduction required · 19% reversal rate before Month 5</p>
                 </div>
               </div>
             </div>
@@ -1235,33 +1235,33 @@
             <div style="padding:16px 20px;border-bottom:1px solid #BDD8F5;">
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
                 <p style="font-size:10px;font-weight:700;color:#3D5E7A;letter-spacing:0.07em;text-transform:uppercase;">Confidence Breakdown</p>
-                <span style="font-size:15px;font-weight:700;font-family:'DM Mono',monospace;color:#22A55A;">87%</span>
+                <span style="font-size:15px;font-weight:700;font-family:'DM Mono',monospace;color:#1B8448;">87%</span>
               </div>
               <div style="display:flex;flex-direction:column;gap:8px;">
                 <div>
                   <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
-                    <span style="font-size:11px;color:#7A9BB5;">Behavioral model</span>
+                    <span style="font-size:11px;color:#556C7E;">Behavioral model</span>
                     <span style="font-size:11px;color:#3D5E7A;font-family:'DM Mono',monospace;">94%</span>
                   </div>
-                  <div style="height:3px;background:#BDD8F5;border-radius:2px;overflow:hidden;box-shadow:inset 1px 1px 3px rgba(0,0,0,0.1);"><div style="height:100%;width:94%;background:#22A55A;border-radius:2px;"></div></div>
+                  <div style="height:3px;background:#BDD8F5;border-radius:2px;overflow:hidden;box-shadow:inset 1px 1px 3px rgba(0,0,0,0.1);"><div style="height:100%;width:94%;background:#1B8448;border-radius:2px;"></div></div>
                 </div>
                 <div>
                   <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
-                    <span style="font-size:11px;color:#7A9BB5;">Income stability</span>
+                    <span style="font-size:11px;color:#556C7E;">Income stability</span>
                     <span style="font-size:11px;color:#3D5E7A;font-family:'DM Mono',monospace;">91%</span>
                   </div>
-                  <div style="height:3px;background:#BDD8F5;border-radius:2px;overflow:hidden;box-shadow:inset 1px 1px 3px rgba(0,0,0,0.1);"><div style="height:100%;width:91%;background:#22A55A;border-radius:2px;"></div></div>
+                  <div style="height:3px;background:#BDD8F5;border-radius:2px;overflow:hidden;box-shadow:inset 1px 1px 3px rgba(0,0,0,0.1);"><div style="height:100%;width:91%;background:#1B8448;border-radius:2px;"></div></div>
                 </div>
                 <div>
                   <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
-                    <span style="font-size:11px;color:#7A9BB5;">Seasonal variance</span>
-                    <span style="font-size:11px;color:#D97706;font-family:'DM Mono',monospace;">67%</span>
+                    <span style="font-size:11px;color:#556C7E;">Seasonal variance</span>
+                    <span style="font-size:11px;color:#AD5F04;font-family:'DM Mono',monospace;">67%</span>
                   </div>
-                  <div style="height:3px;background:#BDD8F5;border-radius:2px;overflow:hidden;box-shadow:inset 1px 1px 3px rgba(0,0,0,0.1);"><div style="height:100%;width:67%;background:#D97706;border-radius:2px;"></div></div>
+                  <div style="height:3px;background:#BDD8F5;border-radius:2px;overflow:hidden;box-shadow:inset 1px 1px 3px rgba(0,0,0,0.1);"><div style="height:100%;width:67%;background:#AD5F04;border-radius:2px;"></div></div>
                 </div>
               </div>
               <div style="background:#E8F3FF;border-radius:10px;padding:9px 11px;margin-top:10px;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.1),inset -2px -2px 4px rgba(255,255,255,0.5);">
-                <p style="font-size:11px;color:#7A9BB5;line-height:1.55;">⚠ NAVI has only 90 days of data. Your Q4 spending (holidays, travel) is not captured and represents the largest source of uncertainty in this model.</p>
+                <p style="font-size:11px;color:#556C7E;line-height:1.55;">⚠ NAVI has only 90 days of data. Your Q4 spending (holidays, travel) is not captured and represents the largest source of uncertainty in this model.</p>
               </div>
             </div>
 
@@ -1270,19 +1270,19 @@
               <p style="font-size:10px;font-weight:700;color:#3D5E7A;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px;">What Would Change This</p>
               <div style="display:flex;flex-direction:column;gap:7px;">
                 <div style="display:flex;align-items:flex-start;gap:8px;">
-                  <div style="width:4px;height:4px;border-radius:50%;background:#22A55A;flex-shrink:0;margin-top:5px;"></div>
+                  <div style="width:4px;height:4px;border-radius:50%;background:#1B8448;flex-shrink:0;margin-top:5px;"></div>
                   <span style="font-size:12px;color:#3D5E7A;">Pay increase of $500+/month → timeline shortens 2–3 months</span>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:8px;">
-                  <div style="width:4px;height:4px;border-radius:50%;background:#22A55A;flex-shrink:0;margin-top:5px;"></div>
+                  <div style="width:4px;height:4px;border-radius:50%;background:#1B8448;flex-shrink:0;margin-top:5px;"></div>
                   <span style="font-size:12px;color:#3D5E7A;">2+ months of consistent over-saving → NAVI recalculates automatically</span>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:8px;">
-                  <div style="width:4px;height:4px;border-radius:50%;background:#DC4545;flex-shrink:0;margin-top:5px;"></div>
+                  <div style="width:4px;height:4px;border-radius:50%;background:#C63E3E;flex-shrink:0;margin-top:5px;"></div>
                   <span style="font-size:12px;color:#3D5E7A;">Missed payment or NSF event → model resets, confidence drops</span>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:8px;">
-                  <div style="width:4px;height:4px;border-radius:50%;background:#DC4545;flex-shrink:0;margin-top:5px;"></div>
+                  <div style="width:4px;height:4px;border-radius:50%;background:#C63E3E;flex-shrink:0;margin-top:5px;"></div>
                   <span style="font-size:12px;color:#3D5E7A;">If you override this recommendation → plan adjusts to your stated preference</span>
                 </div>
               </div>
@@ -1290,8 +1290,8 @@
 
             <!-- Dispute / redaction -->
             <div style="padding:16px 20px;">
-              <button style="width:100%;background:transparent;border:1.5px solid rgba(220,69,69,0.35);color:#DC4545;border-radius:12px;padding:10px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-bottom:8px;">Dispute this data or recommendation</button>
-              <p style="font-size:11px;color:#7A9BB5;text-align:center;line-height:1.5;">Disputing flags this data for review and removes it from NAVI's model. Your financial history remains intact.</p>
+              <button style="width:100%;background:transparent;border:1.5px solid rgba(198,62,62,0.35);color:#C63E3E;border-radius:12px;padding:10px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-bottom:8px;">Dispute this data or recommendation</button>
+              <p style="font-size:11px;color:#556C7E;text-align:center;line-height:1.5;">Disputing flags this data for review and removes it from NAVI's model. Your financial history remains intact.</p>
             </div>
           </div>
         </sc-if>
@@ -1322,14 +1322,14 @@ class Component extends NaviBase {
     coachMessages: [
       { isNavi:true, isUser:false, hasConfidence:true, confidence:91, status:'pending',
         source:'TechCorp Payroll · Chase ····4821',
-        confidenceBarStyle:{ height:'3px', background:'#22A55A', borderRadius:'2px', width:'91%', transition:'width 0.5s ease' },
+        confidenceBarStyle:{ height:'3px', background:'#1B8448', borderRadius:'2px', width:'91%', transition:'width 0.5s ease' },
         text:'Your payroll shows a bi-weekly net deposit of $3,250 (TechCorp, direct deposit). Based on 90 days of transaction history, your average monthly discretionary spend is $2,067. Emergency fund progress: 16.2% ($1,616 of $10,000). You are on track for a 13-month completion.',
         time:'9:41 AM' },
       { isNavi:false, isUser:true, hasConfidence:false, confidence:null, source:'', confidenceBarStyle:{}, status:'pending',
         text:'Why 13 months instead of 12?', time:'9:42 AM' },
       { isNavi:true, isUser:false, hasConfidence:true, confidence:87, status:'pending',
         source:'90-day transaction analysis · behavioral benchmarks',
-        confidenceBarStyle:{ height:'3px', background:'#22A55A', borderRadius:'2px', width:'87%', transition:'width 0.5s ease' },
+        confidenceBarStyle:{ height:'3px', background:'#1B8448', borderRadius:'2px', width:'87%', transition:'width 0.5s ease' },
         text:'Reaching $10,000 in 12 months requires $834/month — a 34% reduction in discretionary spending. Behavioral data shows reductions above 28% have a 61% reversal rate before Month 5. I targeted $748/month: a 23% reduction. One additional month, 41% higher completion probability. The goal is not the fastest plan. It is the one you complete.',
         time:'9:42 AM' },
     ],
@@ -1377,7 +1377,7 @@ class Component extends NaviBase {
 
   buildNaviMsg(text, confidence, source) {
     return { isNavi:true, isUser:false, hasConfidence:confidence!==null, confidence, source: source||'',
-      confidenceBarStyle: confidence!==null ? { height:'3px', background:'#22A55A', borderRadius:'2px', width:confidence+'%', transition:'width 0.5s ease' } : {},
+      confidenceBarStyle: confidence!==null ? { height:'3px', background:'#1B8448', borderRadius:'2px', width:confidence+'%', transition:'width 0.5s ease' } : {},
       text, time:this.getTime() };
   }
 
@@ -1418,7 +1418,7 @@ class Component extends NaviBase {
       const status = statusOverride || s.cardStatus[id] || 'pending';
       const picking = s.overridePicker === id;
       const label = status === 'accepted' ? 'Accepted — NAVI will act on this.' : 'Overridden — NAVI will note this and adjust future recommendations.';
-      const color = status === 'accepted' ? '#22A55A' : '#3D5E7A';
+      const color = status === 'accepted' ? '#1B8448' : '#3D5E7A';
       return {
         Pending: status === 'pending' && !picking,
         Picking: picking,
@@ -1446,20 +1446,20 @@ class Component extends NaviBase {
     const R=64, circ=(2*Math.PI*R).toFixed(1), offset=(2*Math.PI*R*(1-totalSaved/10000)).toFixed(1);
 
     const nb = { display:'flex', alignItems:'center', gap:'10px', padding:'9px 12px', borderRadius:'12px', cursor:'pointer', fontFamily:"'Nunito',sans-serif", fontSize:'13px', border:'none', width:'100%', textAlign:'left', letterSpacing:'-0.01em' };
-    const navActive   = { ...nb, background:'rgba(61,150,240,0.12)', color:'#8B6A08', fontWeight:'700', boxShadow:'inset 3px 3px 8px rgba(0,0,0,0.18),inset -3px -3px 8px rgba(255,255,255,0.5)' };
+    const navActive   = { ...nb, background:'rgba(48,120,192,0.12)', color:'#8B6A08', fontWeight:'700', boxShadow:'inset 3px 3px 8px rgba(0,0,0,0.18),inset -3px -3px 8px rgba(255,255,255,0.5)' };
     const navInactive = { ...nb, background:'transparent', color:'#3D5E7A', fontWeight:'500' };
 
     const dot = n => ({ width:'6px', height:'6px', borderRadius:'50%', flexShrink:0,
-      background: s.onboardingStep>=n ? '#3D96F0' : 'rgba(44,36,33,0.15)',
-      boxShadow: s.onboardingStep>=n ? '0 0 5px rgba(61,150,240,0.5)' : 'none',
+      background: s.onboardingStep>=n ? '#3078C0' : 'rgba(44,36,33,0.15)',
+      boxShadow: s.onboardingStep>=n ? '0 0 5px rgba(48,120,192,0.5)' : 'none',
       transition:'background 0.3s ease' });
 
     const onTrack = ac==='expense' || ac==='cutback';
     const alertPanelTitle = ac===null ? 'Goal impact if unchanged' : 'Goal impact';
     const shiftLabel = goalMonths>13 ? '+1 month' : 'No shift';
-    const tileGood = { fontSize:'16px', fontWeight:'700', fontFamily:"'DM Mono',monospace", color:'#22A55A' };
-    const tileWarn = { fontSize:'16px', fontWeight:'700', fontFamily:"'DM Mono',monospace", color:'#D97706' };
-    const tileBad  = { fontSize:'16px', fontWeight:'700', fontFamily:"'DM Mono',monospace", color:'#DC4545' };
+    const tileGood = { fontSize:'16px', fontWeight:'700', fontFamily:"'DM Mono',monospace", color:'#1B8448' };
+    const tileWarn = { fontSize:'16px', fontWeight:'700', fontFamily:"'DM Mono',monospace", color:'#AD5F04' };
+    const tileBad  = { fontSize:'16px', fontWeight:'700', fontFamily:"'DM Mono',monospace", color:'#C63E3E' };
     const alertSavingsStyle  = onTrack ? tileGood : tileBad;
     const alertShiftStyle    = goalMonths>13 ? tileWarn : tileGood;
     const alertDateStyle     = goalMonths>13 ? tileWarn : tileGood;
@@ -1467,21 +1467,21 @@ class Component extends NaviBase {
     const jsl    = ac==='expense' ? '$748' : ac==='cutback' ? '$660' : '$586';
     const jsub   = ac===null ? 'At risk · dining overage' : ac==='expense' ? 'On track · alert resolved' : ac==='cutback' ? 'Adjusted · cutting back' : 'Accepted · plan extended';
     const jsCard = ac===null
-      ? { background:'rgba(220,69,69,0.06)', borderRadius:'20px', padding:'20px', border:'1px solid rgba(220,69,69,0.14)', boxShadow:'6px 6px 16px rgba(0,0,0,0.13),-3px -3px 10px rgba(255,255,255,0.7)' }
+      ? { background:'rgba(198,62,62,0.06)', borderRadius:'20px', padding:'20px', border:'1px solid rgba(198,62,62,0.14)', boxShadow:'6px 6px 16px rgba(0,0,0,0.13),-3px -3px 10px rgba(255,255,255,0.7)' }
       : { background:'#FFFFFF', borderRadius:'20px', padding:'20px', boxShadow:'8px 8px 20px rgba(0,0,0,0.15),-4px -4px 12px rgba(255,255,255,0.82),inset -3px -3px 8px rgba(0,0,0,0.07),inset 3px 3px 8px rgba(255,255,255,0.62)' };
     const jsStat = ac===null
-      ? { fontSize:'11px', color:'#DC4545', fontWeight:'600', fontFamily:"'Nunito',sans-serif" }
-      : { fontSize:'11px', color:'#22A55A', fontWeight:'600', fontFamily:"'Nunito',sans-serif" };
+      ? { fontSize:'11px', color:'#C63E3E', fontWeight:'600', fontFamily:"'Nunito',sans-serif" }
+      : { fontSize:'11px', color:'#1B8448', fontWeight:'600', fontFamily:"'Nunito',sans-serif" };
 
     const selCard = (sel, warn) => sel
-      ? { border:`2px solid ${warn?'#3D96F0':'#22A55A'}`, background:warn?'rgba(61,150,240,0.06)':'rgba(34,165,90,0.06)', borderRadius:'16px', padding:'16px', cursor:'pointer', boxShadow:'4px 4px 12px rgba(0,0,0,0.1),-2px -2px 8px rgba(255,255,255,0.7)' }
+      ? { border:`2px solid ${warn?'#3078C0':'#1B8448'}`, background:warn?'rgba(48,120,192,0.06)':'rgba(27,132,72,0.06)', borderRadius:'16px', padding:'16px', cursor:'pointer', boxShadow:'4px 4px 12px rgba(0,0,0,0.1),-2px -2px 8px rgba(255,255,255,0.7)' }
       : { border:'none', background:'#FFFFFF', borderRadius:'16px', padding:'16px', cursor:'pointer', boxShadow:'6px 6px 14px rgba(0,0,0,0.13),-3px -3px 9px rgba(255,255,255,0.75),inset -2px -2px 6px rgba(0,0,0,0.06),inset 2px 2px 6px rgba(255,255,255,0.55)' };
 
     const jBar = ac==='expense'
-      ? { width:'100%', height:'54px', background:'#3D96F0', borderRadius:'4px 4px 0 0', opacity:'0.85', boxShadow:'0 -2px 8px rgba(61,150,240,0.3)' }
+      ? { width:'100%', height:'54px', background:'#3078C0', borderRadius:'4px 4px 0 0', opacity:'0.85', boxShadow:'0 -2px 8px rgba(48,120,192,0.3)' }
       : ac==='cutback'
-      ? { width:'100%', height:'48px', background:'#3D96F0', borderRadius:'4px 4px 0 0', opacity:'0.6' }
-      : { width:'100%', height:'42px', background:'#DC4545', borderRadius:'4px 4px 0 0', opacity:'0.7' };
+      ? { width:'100%', height:'48px', background:'#3078C0', borderRadius:'4px 4px 0 0', opacity:'0.6' }
+      : { width:'100%', height:'42px', background:'#C63E3E', borderRadius:'4px 4px 0 0', opacity:'0.7' };
 
     const alertImpact = ac==='expense' ? 'Goal restores to 13 months (March 2027). NAVI will log the expense claim and adjust the June savings calculation.'
       : ac==='cutback' ? 'Goal adjusts to 13 months (April 2027). NAVI will monitor dining for the remaining 3 days of June.'
@@ -1489,12 +1489,12 @@ class Component extends NaviBase {
       : null;
 
     const tog = (on) => ({ display:'flex', alignItems:'center', width:'40px', height:'22px', borderRadius:'11px',
-      background:on?'#3D96F0':'#BDD8F5',
+      background:on?'#3078C0':'#BDD8F5',
       border:'none',
       boxShadow:on?'inset 2px 2px 5px rgba(0,0,0,0.2),inset -2px -2px 4px rgba(255,200,100,0.2)':'inset 2px 2px 5px rgba(0,0,0,0.14),inset -2px -2px 4px rgba(255,255,255,0.55)',
       cursor:'pointer', padding:'3px', transition:'background 0.2s ease', flexShrink:0 });
     const knob = (on) => ({ width:'14px', height:'14px', borderRadius:'50%',
-      background:on?'#EEF7FF':'#7A9BB5',
+      background:on?'#EEF7FF':'#556C7E',
       marginLeft:on?'auto':'0', transition:'margin-left 0.2s ease', flexShrink:0,
       boxShadow:'2px 2px 4px rgba(0,0,0,0.15),-1px -1px 3px rgba(255,255,255,0.5)' });
 
@@ -1560,11 +1560,11 @@ class Component extends NaviBase {
       goalPct, ringCircumference:circ, progressOffset:offset, goalMonths, goalMonthLabel, goalConfidenceLabel, juneBarStyle:jBar,
       juneSavingsLabel:jsl, juneSavingsSubLabel:jsub, juneSavingsCardStyle:jsCard, juneSavingsStatusStyle:jsStat,
       categories:[
-        {name:'Dining & Drinks',amount:'$487',nameStyle:{fontSize:'13px',color:'#DC4545',fontWeight:'600'},amountStyle:{fontSize:'13px',fontWeight:'700',color:'#DC4545',fontFamily:"'DM Mono',monospace",letterSpacing:'-0.01em'},barStyle:{height:'5px',background:'#DC4545',borderRadius:'3px',width:'100%',opacity:'0.75',boxShadow:'2px 1px 4px rgba(220,69,69,0.3)'}},
-        {name:'Shopping',amount:'$480',nameStyle:{fontSize:'13px',color:'#3D5E7A',fontWeight:'500'},amountStyle:{fontSize:'13px',fontWeight:'500',color:'#3D5E7A',fontFamily:"'DM Mono',monospace",letterSpacing:'-0.01em'},barStyle:{height:'5px',background:'#3D96F0',borderRadius:'3px',width:'98%',opacity:'0.55'}},
-        {name:'Groceries',amount:'$380',nameStyle:{fontSize:'13px',color:'#3D5E7A',fontWeight:'500'},amountStyle:{fontSize:'13px',fontWeight:'500',color:'#3D5E7A',fontFamily:"'DM Mono',monospace",letterSpacing:'-0.01em'},barStyle:{height:'5px',background:'#22A55A',borderRadius:'3px',width:'78%',opacity:'0.5'}},
-        {name:'Entertainment',amount:'$210',nameStyle:{fontSize:'13px',color:'#3D5E7A',fontWeight:'500'},amountStyle:{fontSize:'13px',fontWeight:'500',color:'#3D5E7A',fontFamily:"'DM Mono',monospace",letterSpacing:'-0.01em'},barStyle:{height:'5px',background:'#22A55A',borderRadius:'3px',width:'43%',opacity:'0.4'}},
-        {name:'Other / Misc',amount:'$163',nameStyle:{fontSize:'13px',color:'#7A9BB5'},amountStyle:{fontSize:'13px',fontWeight:'400',color:'#7A9BB5',fontFamily:"'DM Mono',monospace",letterSpacing:'-0.01em'},barStyle:{height:'5px',background:'#A8C8E8',borderRadius:'3px',width:'33%'}},
+        {name:'Dining & Drinks',amount:'$487',nameStyle:{fontSize:'13px',color:'#C63E3E',fontWeight:'600'},amountStyle:{fontSize:'13px',fontWeight:'700',color:'#C63E3E',fontFamily:"'DM Mono',monospace",letterSpacing:'-0.01em'},barStyle:{height:'5px',background:'#C63E3E',borderRadius:'3px',width:'100%',opacity:'0.75',boxShadow:'2px 1px 4px rgba(198,62,62,0.3)'}},
+        {name:'Shopping',amount:'$480',nameStyle:{fontSize:'13px',color:'#3D5E7A',fontWeight:'500'},amountStyle:{fontSize:'13px',fontWeight:'500',color:'#3D5E7A',fontFamily:"'DM Mono',monospace",letterSpacing:'-0.01em'},barStyle:{height:'5px',background:'#3078C0',borderRadius:'3px',width:'98%',opacity:'0.55'}},
+        {name:'Groceries',amount:'$380',nameStyle:{fontSize:'13px',color:'#3D5E7A',fontWeight:'500'},amountStyle:{fontSize:'13px',fontWeight:'500',color:'#3D5E7A',fontFamily:"'DM Mono',monospace",letterSpacing:'-0.01em'},barStyle:{height:'5px',background:'#1B8448',borderRadius:'3px',width:'78%',opacity:'0.5'}},
+        {name:'Entertainment',amount:'$210',nameStyle:{fontSize:'13px',color:'#3D5E7A',fontWeight:'500'},amountStyle:{fontSize:'13px',fontWeight:'500',color:'#3D5E7A',fontFamily:"'DM Mono',monospace",letterSpacing:'-0.01em'},barStyle:{height:'5px',background:'#1B8448',borderRadius:'3px',width:'43%',opacity:'0.4'}},
+        {name:'Other / Misc',amount:'$163',nameStyle:{fontSize:'13px',color:'#556C7E'},amountStyle:{fontSize:'13px',fontWeight:'400',color:'#556C7E',fontFamily:"'DM Mono',monospace",letterSpacing:'-0.01em'},barStyle:{height:'5px',background:'#A8C8E8',borderRadius:'3px',width:'33%'}},
       ],
       transactions:[
         {merchant:'Whole Foods Market',initials:'WF',category:'Groceries',date:'Today',amount:'-$67.40'},

@@ -556,6 +556,50 @@
     });
   });
 
+  /* ------------------------------------------------------------ land on the section named in the URL hash */
+  // Every case study's "All work" link points to "/#work". Lenis takes over
+  // scroll on init and never learns about an incoming hash on its own, so
+  // without this the browser's native hash-jump gets silently overridden and
+  // every visitor returning from a case study lands back at the very top.
+  // html has `scroll-behavior: smooth`, which intercepts even a plain
+  // window.scrollTo() and animates it - so this jump has to force `auto`
+  // for the moment it runs, otherwise it's competing with an animation
+  // instead of just placing the user where they asked to go.
+  const hashTarget = window.location.hash ? document.querySelector(window.location.hash) : null;
+  const landOnHash = () => {
+    const y = Math.max(0, hashTarget.getBoundingClientRect().top + window.scrollY - 84);
+    const root = document.documentElement;
+    const prevBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(0, y);
+    root.style.scrollBehavior = prevBehavior;
+    // keep Lenis's internal state in sync so its next tick doesn't
+    // animate back over the jump we just made
+    if (lenis) lenis.scrollTo(hashTarget, { offset: -84, immediate: true });
+    // An instant jump skips every scroll position between 0 and y, so
+    // IntersectionObserver never gets the gradual pass it relies on to
+    // reveal what the user scrolled through. Anything above or inside
+    // the landing viewport has effectively already been "scrolled past" -
+    // reveal it directly instead of leaving it stuck at opacity 0 forever.
+    const landingBottom = y + window.innerHeight;
+    revealEls.forEach((el) => {
+      if (!el.classList.contains("is-in") && el.getBoundingClientRect().top + y <= landingBottom) {
+        el.classList.add("is-in");
+      }
+    });
+  };
+  if (hashTarget) {
+    landOnHash();
+    // Web fonts load with `display=swap`: the page first paints in a fallback
+    // font, then swaps to Cormorant Garamond/Inter once downloaded, which
+    // reflows text and shifts every section's height. Landing before that
+    // swap finishes measures a target position that's already stale by the
+    // time it settles, so redo the jump once fonts are actually ready.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(landOnHash);
+    }
+  }
+
   /* ------------------------------------------------------------ nav active-section */
   const navLinks = $$("#nav a.link-underline");
   if ("IntersectionObserver" in window && navLinks.length) {
