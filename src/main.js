@@ -643,4 +643,27 @@
       btn.addEventListener("pointerleave", () => { btn.style.transform = ""; pressed = false; });
     });
   }
+
+  /* ------------------------------------------------------------ dock-style icon magnify */
+  if (!reduceMotion && finePointer) {
+    const maxScale = 1.35;
+    const radius = 80;
+    [".nav-right", ".social-icons"].forEach((containerSel) => {
+      const container = $(containerSel);
+      if (!container) return;
+      const icons = $$(".nav-icon-btn, .social-icon", container);
+      if (!icons.length) return;
+      container.addEventListener("pointermove", (e) => {
+        icons.forEach((icon) => {
+          const r = icon.getBoundingClientRect();
+          const dist = Math.abs(e.clientX - (r.left + r.width / 2));
+          const scale = 1 + Math.max(0, 1 - dist / radius) * (maxScale - 1);
+          icon.style.transform = `scale(${scale})`;
+        });
+      });
+      container.addEventListener("pointerleave", () => {
+        icons.forEach((icon) => { icon.style.transform = ""; });
+      });
+    });
+  }
 })();

@@ -10,7 +10,7 @@
 <meta name="robots" content="noindex" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <style>
 :root {
   --bg:#0d0404; --bg-2:#120806; --bg-3:#1a0f0a;
@@ -25,8 +25,8 @@
 }
 * { box-sizing:border-box; }
 html,body { margin:0; padding:0; height:100%; overflow:hidden; background:var(--bg); }
-body { font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
-h1,h2,h3 { font-family:'Cormorant Garamond',Georgia,serif; line-height:1.15; margin:0; letter-spacing:-.01em; }
+body { font-family:'Outfit',Arial,sans-serif; -webkit-font-smoothing:antialiased; }
+h1,h2,h3 { font-family:'Outfit',Arial,sans-serif; line-height:1.15; margin:0; letter-spacing:-.01em; }
 
 /* ---------- top toolbar ---------- */
 .toolbar {
@@ -36,18 +36,18 @@ h1,h2,h3 { font-family:'Cormorant Garamond',Georgia,serif; line-height:1.15; mar
   border-bottom:1px solid var(--border); color:var(--text);
 }
 .toolbar-left { display:flex; align-items:center; gap:.9rem; min-width:0; }
-.tb-back { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--text-3); text-decoration:none; white-space:nowrap; transition:color 200ms var(--ease); }
+.tb-back { font-family:'Outfit',Arial,sans-serif; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--text-3); text-decoration:none; white-space:nowrap; transition:color 200ms var(--ease); }
 .tb-back:hover { color:var(--accent); }
 .tb-title { font-size:1rem; font-weight:500; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.tb-sub { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.68rem; color:var(--text-3); letter-spacing:.06em; white-space:nowrap; }
+.tb-sub { font-family:'Outfit',Arial,sans-serif; font-size:.68rem; color:var(--text-3); letter-spacing:.06em; white-space:nowrap; }
 .toolbar-right { display:flex; align-items:center; gap:.6rem; }
 .tb-btn {
-  font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase;
+  font-family:'Outfit',Arial,sans-serif; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase;
   color:var(--accent); background:transparent; border:1px solid rgba(208,146,58,0.35); border-radius:.5rem;
   padding:.4rem .75rem; cursor:pointer; transition:all 200ms var(--ease); white-space:nowrap;
 }
 .tb-btn:hover { background:var(--accent-muted); border-color:rgba(208,146,58,0.65); }
-.tb-hint { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.65rem; color:var(--text-3); display:none; }
+.tb-hint { font-family:'Outfit',Arial,sans-serif; font-size:.65rem; color:var(--text-3); display:none; }
 @media (min-width:860px) { .tb-hint { display:inline; } }
 
 /* ---------- pan/zoom viewport ---------- */
@@ -69,19 +69,19 @@ h1,h2,h3 { font-family:'Cormorant Garamond',Georgia,serif; line-height:1.15; mar
   width:1040px; margin-bottom:100px; background:var(--card-bg); border:1px solid var(--card-border);
   border-radius:1.25rem; padding:3.5rem 4rem; box-shadow:0 30px 70px rgba(20,10,0,0.18);
 }
-.cover-eyebrow { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; color:var(--accent-soft); text-transform:uppercase; letter-spacing:.14em; margin-bottom:.9rem; }
+.cover-eyebrow { font-family:'Outfit',Arial,sans-serif; font-size:.72rem; color:var(--accent-soft); text-transform:uppercase; letter-spacing:.14em; margin-bottom:.9rem; }
 .cover-frame h1 { font-size:2.6rem; color:#1b1310; max-width:20ch; margin-bottom:.6rem; }
-.cover-frame .cover-count { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.85rem; color:#7a6a58; margin-bottom:2rem; }
+.cover-frame .cover-count { font-family:'Outfit',Arial,sans-serif; font-size:.85rem; color:#7a6a58; margin-bottom:2rem; }
 .cover-frame p { color:#4a3d32; font-size:.98rem; line-height:1.6; max-width:70ch; margin:0 0 1.1rem; }
 .cover-goals { list-style:none; margin:1.6rem 0 0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:.6rem 2rem; }
 .cover-goals li { font-size:.85rem; color:#5a4c3e; padding-left:1.1rem; position:relative; }
 .cover-goals li::before { content:'—'; position:absolute; left:0; color:var(--accent-soft); }
-.cover-note { margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--card-border); font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; color:#8a7a68; letter-spacing:.02em; }
+.cover-note { margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--card-border); font-family:'Outfit',Arial,sans-serif; font-size:.72rem; color:#8a7a68; letter-spacing:.02em; }
 
 /* ---------- role sections ---------- */
 .role-section { margin-bottom:110px; }
 .role-head { max-width:1040px; margin-bottom:2rem; }
-.role-eyebrow { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.7rem; color:var(--accent-soft); text-transform:uppercase; letter-spacing:.12em; margin-bottom:.4rem; }
+.role-eyebrow { font-family:'Outfit',Arial,sans-serif; font-size:.7rem; color:var(--accent-soft); text-transform:uppercase; letter-spacing:.12em; margin-bottom:.4rem; }
 .role-head h2 { font-size:1.8rem; color:#1b1310; margin-bottom:.4rem; }
 .role-head p { font-size:.88rem; color:#5a4c3e; max-width:62ch; margin:0; }
 
@@ -94,7 +94,7 @@ h1,h2,h3 { font-family:'Cormorant Garamond',Georgia,serif; line-height:1.15; mar
 }
 .card-frame img { width:100%; height:auto; display:block; }
 .card-label {
-  font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.08em;
+  font-family:'Outfit',Arial,sans-serif; font-size:.68rem; text-transform:uppercase; letter-spacing:.08em;
   color:var(--accent-soft); margin:.85rem 0 .3rem;
 }
 .card-note-box {
@@ -107,7 +107,7 @@ h1,h2,h3 { font-family:'Cormorant Garamond',Georgia,serif; line-height:1.15; mar
 /* ---------- zoom controls hint ---------- */
 .zoom-pill {
   position:fixed; bottom:1.25rem; right:1.25rem; z-index:40;
-  font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.72rem; color:var(--text-2);
+  font-family:'Outfit',Arial,sans-serif; font-size:.72rem; color:var(--text-2);
   background:rgba(13,4,4,0.85); backdrop-filter:blur(14px); border:1px solid var(--border-strong);
   border-radius:999px; padding:.5rem 1rem; pointer-events:none;
 }

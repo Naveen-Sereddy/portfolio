@@ -8,7 +8,7 @@
   --accent-muted:rgba(208,146,58,0.09); --accent-mid:rgba(208,146,58,0.14);
   --border:rgba(255,255,255,0.06); --border-strong:rgba(255,255,255,0.10);
   --sp-1:.25rem; --sp-2:.5rem; --sp-3:.75rem; --sp-4:1rem; --sp-5:1.5rem; --sp-6:2rem; --sp-7:3rem; --sp-8:4rem;
-  --font-display:'Cormorant Garamond',Georgia,serif;
-  --font-body:'Inter',system-ui,sans-serif;
-  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+  --font-display:'Outfit',Arial,sans-serif;
+  --font-body:'Outfit',Arial,sans-serif;
+  --font-mono:'Outfit',Arial,sans-serif;
 }
