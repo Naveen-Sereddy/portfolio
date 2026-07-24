@@ -1,4 +1,4 @@
-# Naveen Sereddy — Portfolio
+# Naveen Sereddy Portfolio
 
 **Live site:** [naveensereddy.com](https://naveensereddy.com)
 
@@ -6,13 +6,13 @@ Dark, elegant, motion-driven personal portfolio. Static **HTML + Tailwind CSS** 
 
 ## Stack
 - HTML + Tailwind CSS (compiled to `dist/styles.css`)
-- Vanilla JS (`src/main.js`) — scroll reveals, count-up, lightbox, parallax, mobile menu
-- tsParticles (vanilla, via CDN) — gold sparkle field behind the hero portrait
+- Vanilla JS (`src/main.js`): scroll reveals, count-up, lightbox, parallax, mobile menu
+- tsParticles (vanilla, via CDN): gold sparkle field behind the hero portrait
 - Fonts: Fraunces (display) · Inter (body) · JetBrains Mono (labels)
 
 ## Run locally
 ```bash
-npm install            # one time — installs Tailwind
+npm install            # one time, installs Tailwind
 npm run build          # compile CSS once
 npm run serve          # serve at http://localhost:8080
 ```
@@ -25,11 +25,11 @@ Editing styles? Run `npm run dev` to rebuild CSS on save.
 - **Colors / fonts / animation timings** → `tailwind.config.js` (rebuild CSS after changes)
 
 ## Deploy
-It's fully static — drag the folder to **Netlify**, **Vercel**, or **GitHub Pages**.
+It's fully static. Drag the folder to **Netlify**, **Vercel**, or **GitHub Pages**.
 Make sure `dist/styles.css` is built first (`npm run build`).
 
 ### Note on the sparkles
-The hero sparkle field loads tsParticles from a CDN and is non-blocking — if the CDN is
+The hero sparkle field loads tsParticles from a CDN and is non-blocking. If the CDN is
 unreachable the portrait simply keeps its static glow. To make the site 100% offline/self-contained,
 download `tsparticles.slim.bundle.min.js` into `assets/` and point the script tag in `index.html` at it.
 
