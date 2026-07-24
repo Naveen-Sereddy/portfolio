@@ -1783,6 +1783,18 @@ textarea.input { min-height: 8.75rem; resize: vertical; }
   border-color: rgba(208,146,58,0.7);
   transform: translateY(-2px);
 }
+.btn-ghost svg {
+  display: inline-flex;
+  width: 1.6rem;
+  height: 1.6rem;
+  padding: 0.4rem;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 1px solid rgba(208,146,58,0.4);
+  color: var(--accent);
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+.btn-ghost:hover svg { border-color: rgba(208,146,58,0.7); }
 .btn-ghost:active { transform: scale(0.98) translateY(0); }
 
 /* compact variant: nav CTA + project card actions */
