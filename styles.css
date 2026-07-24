@@ -373,11 +373,11 @@ html { scrollbar-color: var(--sb-thumb) var(--sb-track); }
 }
 @media (min-width: 640px) { .nav-divider { display: block; } }
 
-.nav-cta {
+.nav-right .nav-cta {
   display: none;
   margin-left: 0.25rem;
 }
-@media (min-width: 1024px) { .nav-cta { display: inline-flex; } }
+@media (min-width: 1024px) { .nav-right .nav-cta { display: inline-flex; } }
 
 .nav-hamburger {
   display: grid;
@@ -649,6 +649,7 @@ html { scrollbar-color: var(--sb-thumb) var(--sb-track); }
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-end;
+  min-width: 0;
 }
 
 .stat-value {
