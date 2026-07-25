@@ -49,8 +49,8 @@
         <span class="tag">Personal · Working Prototype</span>
         <span class="tag">Product Design · Frontend Engineering</span>
       </div>
-      <h1>Precision Cab: a console built for gloves, glare, and split-second decisions.</h1>
-      <p class="lede" style="font-size:1.15rem;max-width:56ch">An in-cab console for GPS-guided spray application, designed around the one constraint most agtech interfaces ignore: the operator is wearing gloves, fighting sun glare, and can't afford to hunt through a menu when a boom fault fires mid-pass.</p>
+      <h1>Precision Cab: designing for real operators in real conditions.</h1>
+      <p class="lede" style="font-size:1.15rem;max-width:56ch">Sprayer operators spend 12 to 14 hours behind glass that's vibrating, dusty, and half-obscured by sun glare, wearing gloves, watching GPS, and running tank math by hand, all while rolling through a field worth $156,000. Most in-cab interfaces treat that as a UX nitpick. I treated it as a safety problem.</p>
       <div class="metric-row">
         <div class="metric"><span class="metric-value">11</span><span class="metric-label">Screens shipped</span></div>
         <div class="metric"><span class="metric-value">64px</span><span class="metric-label">Min. touch target, verified</span></div>
@@ -76,10 +76,10 @@
     <div class="container prose">
       <div class="section-head">
         <div class="eyebrow">The Problem</div>
-        <h2>A cab is a brutal place to put a screen.</h2>
-        <p class="lede" style="font-size:1.05rem">Farm equipment cabins vibrate constantly, fight direct sun glare most of the day, and get operated by gloved hands making split-second calls. Most agtech interfaces still look like a web app that got bolted onto a windshield mount. When a boom fault fires mid-pass, the operator needs one action, not a menu to hunt through.</p>
+        <h2>These aren't usability failures. They're safety failures.</h2>
+        <p class="lede" style="font-size:1.05rem">Farm equipment cabins vibrate constantly, fight direct sun glare most of the day, and get operated by gloved hands making split-second calls at 11 mph through six-figure fields. Most agtech interfaces still look like a web app bolted onto a windshield mount: tiny buttons, alerts that need multiple dismissals before you can stop a boom, a map that vanishes behind a menu right when you need it most.</p>
       </div>
-      <p>The problem was never "make a nicer dashboard." It was making a console that respects the physics of the cab it lives in.</p>
+      <p>The problem was never a nicer dashboard. It was a console that respects the actual conditions of the job, not the clean demo an OEM shows at a trade show.</p>
     </div>
   </section>
 
@@ -300,13 +300,22 @@
       <div class="reflection-list">
         <div class="reflection-item">
           <div class="reflection-num">1</div>
-          <p>I built this on proxy research: spec sheets and forum threads, not a single actual operator. It got the constraints right, but I'd trade a week of building for two or three real cab-side interviews if I had access to them. Forum complaints tell you what people are frustrated by. They don't tell you what they'd trust.</p>
+          <p>I went in expecting to invent a restrained industrial look. What actually happened: aviation cockpits, audio racks, and surgical displays had already solved this class of problem, high-contrast borders, one status-color system, oversized hit targets. The best move here wasn't invention. It was recognition.</p>
         </div>
         <div class="reflection-item">
           <div class="reflection-num">2</div>
+          <p>The color constraint was the hardest call. I wanted more visual hierarchy: subtle panel backgrounds, section dividers. Holding an iPad next to a sprayer-cab photo at noon killed that idea fast, anything under 4:1 contrast washed out completely. The four-color system wasn't a lazy default. It was the only one that survived actual sunlight.</p>
+        </div>
+        <div class="reflection-item">
+          <div class="reflection-num">3</div>
+          <p>I built this on proxy research: spec sheets and forum threads, not a single actual operator. It got the constraints right, but forum complaints tell you what people are frustrated by, not what they'd trust. If I keep going, the next step is a short ride-along with a commercial applicator and paper-prototype testing in the actual seat.</p>
+        </div>
+        <div class="reflection-item">
+          <div class="reflection-num">4</div>
           <p>The sync queue and telemetry are simulated in memory, not wired to real GPS hardware or persistent storage. That was the right scope for four weeks, but it's the first thing that would need to change before this could run in an actual cab.</p>
         </div>
       </div>
+      <p style="margin-top:2rem;font-style:italic;color:var(--text-3)">Precision Cab is a concept project exploring industrial design systems: constraint-first design, component-level thinking, interface architecture. It isn't a commercial product, and it hasn't been used by a real operator yet.</p>
     </div>
   </section>
 
