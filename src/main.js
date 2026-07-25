@@ -224,6 +224,24 @@
         { src: "case-medbridge/img/ui-signin.png",    cap: "Secure sign-in to the patient portal" },
       ],
     },
+    {
+      id: "precisioncab",
+      index: "05",
+      title: "Precision Cab",
+      meta: "Product Design & Frontend · AgTech · 2026",
+      kind: "Personal · Working Prototype",
+      desc: "An in-cab console for GPS-guided spray application, designed around gloves, sun glare, and split-second decisions instead of a generic dashboard.",
+      roles: ["Product Design", "Frontend Engineering", "Design System", "Industrial UX"],
+      outcome: { value: "11 screens", label: "shipped as working code" },
+      caseUrl: "case-precisioncab/index.html",
+      shots: [
+        { src: "case-precisioncab/img/hero-cab-home.png",    cap: "Cab home, live telemetry, boom status, and field map" },
+        { src: "case-precisioncab/img/hero-field-select.png", cap: "Field select, satellite and NDVI map modes" },
+        { src: "case-precisioncab/img/hero-active-pass.png",  cap: "Active pass, guidance overlay and boom diagram" },
+        { src: "case-precisioncab/img/hero-rate-change.png",  cap: "Rate change keypad with live tank-mix math" },
+        { src: "case-precisioncab/img/hero-boom-fault.png",   cap: "Boom fault alert, single action, no menu" },
+      ],
+    },
   ];
 
   const galleries = {};

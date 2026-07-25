@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0d0404" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230d0404'/%3E%3Ctext x='16' y='21' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23d0923a' text-anchor='middle'%3ENS%3C/text%3E%3C/svg%3E" />
+<title>Precision Cab · Product Design Case Study · Naveen Sereddy</title>
+<meta name="description" content="Precision Cab: an in-cab console for GPS-guided spray application, designed and built solo for gloves, glare, and split-second decisions. Case study by Naveen Sereddy." />
+<link rel="canonical" href="https://naveensereddy.com/case-precisioncab/" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Precision Cab · Product Design Case Study · Naveen Sereddy" />
+<meta property="og:description" content="Precision Cab: an in-cab console for GPS-guided spray application, designed and built solo for gloves, glare, and split-second decisions. Case study by Naveen Sereddy." />
+<meta property="og:image" content="https://naveensereddy.com/case-precisioncab/img/hero-cab-home.png" />
+<meta property="og:url" content="https://naveensereddy.com/case-precisioncab/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://naveensereddy.com/case-precisioncab/img/hero-cab-home.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script>
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  window.addEventListener("pageshow", function () { window.scrollTo(0, 0); });
+</script>
+<link rel="stylesheet" href="../case-studies.css?v=4" />
+<style>
+  .swatch-row { display:flex; gap:.4rem; margin-top:.75rem; }
+  .swatch { width:22px; height:22px; border-radius:.35rem; display:inline-block; }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<nav class="cs-nav" aria-label="Site navigation">
+  <div class="cs-nav-inner">
+    <a class="cs-logo" href="/">Naveen Sereddy</a>
+    <a class="cs-back" href="/#work">← All work</a>
+  </div>
+</nav>
+
+<main id="main" tabindex="-1">
+
+  <!-- 1. HERO -->
+  <section class="section" style="padding-top:7.5rem">
+    <div class="container">
+      <div class="tag-row">
+        <span class="tag">AgTech</span>
+        <span class="tag">2026</span>
+        <span class="tag">Personal · Working Prototype</span>
+        <span class="tag">Product Design · Frontend Engineering</span>
+      </div>
+      <h1>Precision Cab: designing for real operators in real conditions.</h1>
+      <p class="lede" style="font-size:1.15rem;max-width:56ch">Sprayer operators spend 12 to 14 hours behind glass that's vibrating, dusty, and half-obscured by sun glare, wearing gloves, watching GPS, and running tank math by hand, all while rolling through a field worth $156,000. Most in-cab interfaces treat that as a UX nitpick. I treated it as a safety problem.</p>
+      <div class="metric-row">
+        <div class="metric"><span class="metric-value">11</span><span class="metric-label">Screens shipped</span></div>
+        <div class="metric"><span class="metric-value">64px</span><span class="metric-label">Min. touch target, verified</span></div>
+        <div class="metric"><span class="metric-value">3</span><span class="metric-label">Breakpoints, one codebase</span></div>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://precision-cab.vercel.app" target="_blank" rel="noopener">Open prototype <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a class="btn btn-ghost" href="https://github.com/Naveen-Sereddy/Precision-Cab-Precision-Agriculture-Spray-Console" target="_blank" rel="noopener">View code</a>
+        <a class="btn btn-ghost" href="/#work"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg> All work</a>
+      </div>
+      <div class="meta-strip">
+        <span class="meta-item">Role: <strong>Product Designer & Frontend Engineer, Solo</strong></span>
+        <span class="meta-item">Duration: <strong>4 weeks</strong></span>
+        <span class="meta-item">Tools: <strong>Figma, React, Vite, Tailwind CSS</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="container"><div class="divider"></div></div>
+
+  <!-- 2. PROBLEM -->
+  <section class="section">
+    <div class="container prose">
+      <div class="section-head">
+        <div class="eyebrow">The Problem</div>
+        <h2>These aren't usability failures. They're safety failures.</h2>
+        <p class="lede" style="font-size:1.05rem">Farm equipment cabins vibrate constantly, fight direct sun glare most of the day, and get operated by gloved hands making split-second calls at 11 mph through six-figure fields. Most agtech interfaces still look like a web app bolted onto a windshield mount: tiny buttons, alerts that need multiple dismissals before you can stop a boom, a map that vanishes behind a menu right when you need it most.</p>
+      </div>
+      <p>The problem was never a nicer dashboard. It was a console that respects the actual conditions of the job, not the clean demo an OEM shows at a trade show.</p>
+    </div>
+  </section>
+
+  <!-- 3. DISCOVERY -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-head prose">
+        <div class="eyebrow">Discovery</div>
+        <h2>Four constraints that weren't negotiable.</h2>
+        <p class="lede">I don't have access to an actual cab or an operator panel, so I proxied research with OEM spec sheets, industrial console guidelines, and ag operator forum threads. Four constraints kept showing up no matter which source I pulled from.</p>
+      </div>
+      <div class="insight-grid">
+        <div class="insight-card">
+          <div class="insight-num">01</div>
+          <h3>64px minimum touch target</h3>
+          <p>Anything smaller is unreliable with gloves on. This wasn't a nice-to-have, it set the floor for every button, row, and control in the system.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">02</div>
+          <h3>No hover, no mouse</h3>
+          <p>Every flow has to work left-thumb first, on a touchscreen mounted at an angle. Hover states are dead weight in a cab.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">03</div>
+          <h3>One accent color, maximum</h3>
+          <p>Color gradients wash out completely in brightfield sun glare. A single accent color, spent only where it matters, was the only thing that stayed legible.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">04</div>
+          <h3>Fixed grids, not fluid ones</h3>
+          <p>A vibrating cab can't rely on layout that reflows or shifts. Structure has to hold, not adapt on the fly.</p>
+        </div>
+      </div>
+      <p class="lede" style="margin-top:2rem">What operators complained about online wasn't missing features. It was trust: not knowing whether the machine had actually stopped spraying, whether a sync had gone through, or whether a fault was new or already handled. The interface had to answer three questions at all times: where am I, what's happening, and what do I do.</p>
+    </div>
+  </section>
+
+  <!-- 4. DESIGN DECISIONS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Design Decisions</div>
+        <h2>Six decisions the constraints forced.</h2>
+        <p class="lede">Every decision below traces back to one of the four constraints above, or to the trust problem operators kept describing.</p>
+      </div>
+      <div class="decision-grid">
+
+        <div class="decision-card">
+          <div class="decision-num">01</div>
+          <h3>Warm ink palette, zero decoration</h3>
+          <p>Cream background, ink-black structural borders, green for healthy status, orange strictly for immediate alerts. No drop shadows, no gradients, no glassmorphism. In a sun-glare cab, subtlety kills legibility. Every screen reads like an OEM spec, because that's what builds trust.</p>
+          <div class="swatch-row" aria-hidden="true">
+            <span class="swatch" style="background:#F4F1EA;border:1px solid #1C1B19" title="#F4F1EA"></span>
+            <span class="swatch" style="background:#1C1B19" title="#1C1B19"></span>
+            <span class="swatch" style="background:#3D5A45" title="#3D5A45"></span>
+            <span class="swatch" style="background:#FF6B00" title="#FF6B00"></span>
+          </div>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-num">02</div>
+          <h3>Single source of boom truth</h3>
+          <p>The 9-section boom diagram appears on three screens: cab home, active pass, and the boom fault alert. Instead of three separate patterns, I built one <code>BoomDiagram</code> component with two booleans, <code>stopped</code> and <code>fault</code>. A flagged section lights up with identical shape, position, and color everywhere it appears, so the operator never has to relearn a symbol under stress.</p>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-num">03</div>
+          <h3>Map as context, not content</h3>
+          <p>The field map is inline SVG: satellite view, NDVI toggle, guidance lines, applied/overlap/skip overlays, compass. It sits on every primary screen because the operator's first question is always where. Switching modes doesn't swap components, it swaps a single <code>mode</code> prop and the SVG redraws.</p>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-num">04</div>
+          <h3>Rate change with live math</h3>
+          <p>Operators adjust rates mid-field, then do the tank math by hand. I built a keypad with live tank-mix math built in: current gallons needed, new gallons needed, the difference, and reserve left in the tank after the pass. The mental math stays inside the tool instead of sending someone to a phone calculator.</p>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-num">05</div>
+          <h3>Offline is a state, not an error</h3>
+          <p>Rural connectivity drops constantly. The sync queue is a docked banner with an explicit waiting → syncing → synced progression and a last-connection timestamp. It surfaces automatically when connectivity returns, no scheduler or polling required.</p>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-num">06</div>
+          <h3>Container queries over media queries</h3>
+          <p>I added a device switcher (console / tablet / handheld) so anyone previewing the app can check breakpoints without resizing the browser. The catch: media queries key off viewport width, so shrinking a container wouldn't trigger mobile layout on its own. I scoped the breakpoints to CSS container queries instead, so the switcher and an actual resized window trigger identical layouts.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4b. THE PIVOT -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">The Pivot</div>
+        <h2>From "show everything" to "show what matters, permanently."</h2>
+        <p class="lede">The first concept looked like most telemetry dashboards: multiple panels, expandable cards, information you'd click into.</p>
+      </div>
+      <div class="pivot-box">
+        <h3>Discoverable information doesn't work under stress</h3>
+        <p>Once I sat with the operator constraints, that first concept fell apart fast. Expandable cards assume someone has a free hand and a moment to explore. A cab operator has neither. The map can't hide behind a tab. Boom status can't require a tap to check. The sync queue can't be a modal that interrupts the one thing the operator is actually doing, which is driving a straight line through a field.</p>
+        <p>So the design shifted from showing everything to showing what matters, always. The field map is inline on every primary screen. The boom status is always in view. The sync queue is docked at the bottom, visible but never blocking. Nothing the operator needs to trust the machine is more than a glance away.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. THE PRODUCT -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">The Product</div>
+        <h2>11 screens across one operator flow.</h2>
+        <p class="lede">Grouped the way an operator actually moves through a pass: get set up, run the pass, close it out, and handle whatever the system needs in the background.</p>
+      </div>
+
+      <div class="note-grid" style="margin-top:2rem">
+        <div class="note-card">
+          <h3>Pre-flight</h3>
+          <p><strong>Cab home:</strong> live telemetry plus an expandable bottom sheet on handheld, GPS status, boom health, field map.<br/><strong>Field select:</strong> satellite / NDVI toggle, field list with status rings, load action.<br/><strong>Empty state:</strong> no boundary loaded, explicit draw-or-import instruction.<br/><strong>Permission denied:</strong> unauthorized field boundary, with a back action.</p>
+        </div>
+        <div class="note-card">
+          <h3>Active operation</h3>
+          <p><strong>Active pass:</strong> pass counter, heading, left/right offset, speed, applied acres, tank level.<br/><strong>Rate change:</strong> 12-key keypad with live gallon math and tank reserve.<br/><strong>Boom fault alert:</strong> full-screen, single action, STOP or RESUME.</p>
+        </div>
+        <div class="note-card">
+          <h3>Post-pass</h3>
+          <p><strong>Pass summary:</strong> coverage percentage, applied acres, overlap/skip breakdown, export action.<br/><strong>Scouting capture:</strong> camera frame with GPS chip, shutter, voice-note toggle.</p>
+        </div>
+        <div class="note-card">
+          <h3>System states</h3>
+          <p><strong>Offline sync queue:</strong> waiting/syncing/synced progression, manual sync button.<br/><strong>Settings:</strong> glove-mode toggle, night-dim slider, operator profile readout.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. DESIGN EVOLUTION -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Design Evolution</div>
+        <h2>From lo-fi to final, cab home.</h2>
+        <p class="lede">I didn't sketch this project in Figma first. I built straight into the constraints in code, so these lo-fi passes are the structure stripped back down, not a phase I actually shipped through. Cab home carries the most weight of any screen, since it's the one the operator sees the moment they start a pass.</p>
+      </div>
+      <div class="evolution-grid">
+        <div class="evolution-step">
+          <div class="evolution-label"><span class="dot"></span>Lo-Fi</div>
+          <div class="frame"><img src="img/lofi-cab-home.png" alt="Lo-fi cab home wireframe with sidebar nav, field map, telemetry panel, and docked sync queue" loading="lazy" /></div>
+          <p>Map on the left, telemetry on the right, sync queue docked at the bottom. That three-zone split held from the first pass and never changed, because it's the only layout where all three trust questions stay visible at once.</p>
+        </div>
+        <div class="evolution-step">
+          <div class="evolution-label"><span class="dot"></span>Final UI</div>
+          <div class="frame"><img src="img/hero-cab-home.png" alt="Final cab home screen with live field map, telemetry panel, and boom diagram" loading="lazy" /></div>
+          <p>The ink-and-cream visual system went on top: structural borders, mono telemetry type, the boom diagram. The zones stayed exactly where the wireframe put them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. KEY SCREENS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Key Screens</div>
+        <h2>Six screens from the working prototype.</h2>
+        <p class="lede">Every screen below is a real screenshot of running code, not a static mockup. The full 11-screen flow is in the repo.</p>
+      </div>
+      <div class="shot-grid">
+        <div class="shot-item"><div class="frame"><img src="img/hero-cab-home.png" alt="Cab home with live telemetry, boom status, and field map" loading="lazy" /></div><span class="shot-cap">Cab Home</span></div>
+        <div class="shot-item"><div class="frame"><img src="img/hero-field-select.png" alt="Field select with satellite and NDVI map modes" loading="lazy" /></div><span class="shot-cap">Field Select</span></div>
+        <div class="shot-item"><div class="frame"><img src="img/hero-active-pass.png" alt="Active pass with guidance overlay, boom diagram, and pass metrics" loading="lazy" /></div><span class="shot-cap">Active Pass</span></div>
+        <div class="shot-item"><div class="frame"><img src="img/hero-rate-change.png" alt="Rate change keypad with live tank-mix math" loading="lazy" /></div><span class="shot-cap">Rate Change</span></div>
+        <div class="shot-item"><div class="frame"><img src="img/hero-boom-fault.png" alt="Boom fault alert with single stop action" loading="lazy" /></div><span class="shot-cap">Boom Fault</span></div>
+        <div class="shot-item"><div class="frame"><img src="img/hero-pass-summary.png" alt="Pass summary with coverage, overlap, and skip breakdown" loading="lazy" /></div><span class="shot-cap">Pass Summary</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. QUOTE -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="quote-block">
+        <p>"The best console interface isn't the one that impresses a designer. It's the one the operator trusts when things go wrong."</p>
+        <p class="quote-source">Design principle · Precision Cab</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. OUTCOME -->
+  <section class="section">
+    <div class="container prose">
+      <div class="section-head">
+        <div class="eyebrow">Outcome</div>
+        <h2>Verified, not assumed.</h2>
+        <p class="lede" style="font-size:1.05rem">These are facts I checked against the running code, not a self-reported summary.</p>
+      </div>
+      <div class="access-grid">
+        <div class="access-stats" style="grid-column:1/-1">
+          <div class="access-stat"><b>64px</b><span>Min. touch target, every primary action, all 3 breakpoints</span></div>
+          <div class="access-stat"><b>1 / 3</b><span>One <code>BoomDiagram</code> component governs 3 screens, zero duplicated logic</span></div>
+          <div class="access-stat"><b>Auto</b><span>Sync queue re-opens on reconnect, no user prompt required</span></div>
+          <div class="access-stat"><b>2</b><span>Preview modes (device switcher, real viewport) render identical breakpoints</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. REFLECTION -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Reflection</div>
+        <h2>What I'd do differently.</h2>
+      </div>
+      <div class="reflection-list">
+        <div class="reflection-item">
+          <div class="reflection-num">1</div>
+          <p>I went in expecting to invent a restrained industrial look. What actually happened: aviation cockpits, audio racks, and surgical displays had already solved this class of problem, high-contrast borders, one status-color system, oversized hit targets. The best move here wasn't invention. It was recognition.</p>
+        </div>
+        <div class="reflection-item">
+          <div class="reflection-num">2</div>
+          <p>The color constraint was the hardest call. I wanted more visual hierarchy: subtle panel backgrounds, section dividers. Holding an iPad next to a sprayer-cab photo at noon killed that idea fast, anything under 4:1 contrast washed out completely. The four-color system wasn't a lazy default. It was the only one that survived actual sunlight.</p>
+        </div>
+        <div class="reflection-item">
+          <div class="reflection-num">3</div>
+          <p>I built this on proxy research: spec sheets and forum threads, not a single actual operator. It got the constraints right, but forum complaints tell you what people are frustrated by, not what they'd trust. If I keep going, the next step is a short ride-along with a commercial applicator and paper-prototype testing in the actual seat.</p>
+        </div>
+        <div class="reflection-item">
+          <div class="reflection-num">4</div>
+          <p>The sync queue and telemetry are simulated in memory, not wired to real GPS hardware or persistent storage. That was the right scope for four weeks, but it's the first thing that would need to change before this could run in an actual cab.</p>
+        </div>
+      </div>
+      <p style="margin-top:2rem;font-style:italic;color:var(--text-3)">Precision Cab is a concept project exploring industrial design systems: constraint-first design, component-level thinking, interface architecture. It isn't a commercial product, and it hasn't been used by a real operator yet.</p>
+    </div>
+  </section>
+
+  <!-- 11. ARCHIVE -->
+  <section class="section">
+    <div class="container">
+      <details class="archive-details">
+        <summary class="archive-summary">
+          <span>Full process archive (constraint notes and lo-fi wireframes)</span>
+          <span class="archive-toggle-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="archive-body">
+
+          <div class="archive-block">
+            <div class="section-head">
+              <div class="eyebrow">Constraint Notes</div>
+              <h2>Four screens that carried the most structural risk.</h2>
+              <p class="lede">I worked through the four screens most likely to break under the cab constraints before touching any of the other seven. Each one answered a specific layout question before I trusted the pattern anywhere else.</p>
+            </div>
+            <div class="note-grid">
+              <div class="note-card">
+                <h3>Cab home</h3>
+                <p>Could a three-zone layout, map, telemetry, sync queue, actually fit at 64px touch targets without feeling cramped on a handheld? This screen set the grid every other screen inherited.</p>
+              </div>
+              <div class="note-card">
+                <h3>Active pass</h3>
+                <p>The guidance overlay had a hardcoded pixel offset that only lined up by coincidence on desktop. Getting this screen right meant fixing that coupling, not just resizing boxes.</p>
+              </div>
+              <div class="note-card">
+                <h3>Rate change</h3>
+                <p>Could an operator do tank math on a keypad without a second screen or a mental detour to a calculator? This screen tested whether "respect the constraint" could also mean "save the operator a step."</p>
+              </div>
+              <div class="note-card">
+                <h3>Boom fault</h3>
+                <p>The single highest-stakes screen in the app. One glance, one action, no ambiguity about whether the boom had actually stopped. Everything about the visual system got pressure-tested here first.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="archive-block">
+            <div class="section-head">
+              <div class="eyebrow">Lo-Fi Wireframes</div>
+              <h2>Structure first, visual system after.</h2>
+              <p class="lede">These are lo-fi passes on the four highest-risk screens, stripped back to boxes and labels so the layout logic is visible on its own, separate from the ink-and-cream visual system on top of it.</p>
+            </div>
+            <div class="note-media-grid">
+              <div class="note-media-item">
+                <div class="frame"><img src="img/lofi-cab-home.png" alt="Lo-fi cab home wireframe" loading="lazy" /></div>
+                <div class="note-rationale">
+                  <div class="rationale-bar"></div>
+                  <div class="rationale-text"><strong>Three zones, always visible</strong>Map, telemetry, and sync queue never compete for space. Nothing that answers "what's happening" requires a tap to reveal.</div>
+                </div>
+              </div>
+              <div class="note-media-item">
+                <div class="frame"><img src="img/lofi-active-pass.png" alt="Lo-fi active pass wireframe" loading="lazy" /></div>
+                <div class="note-rationale">
+                  <div class="rationale-bar"></div>
+                  <div class="rationale-text"><strong>Guidance docked, not floating</strong>Left/right and heading sit in a fixed panel instead of an overlay with a magic-number offset. The map stays full width and full attention.</div>
+                </div>
+              </div>
+              <div class="note-media-item">
+                <div class="frame"><img src="img/lofi-rate-change.png" alt="Lo-fi rate change wireframe" loading="lazy" /></div>
+                <div class="note-rationale">
+                  <div class="rationale-bar"></div>
+                  <div class="rationale-text"><strong>Keypad and math, side by side</strong>The operator never loses sight of the number they're keying in while reading what it changes downstream in the tank.</div>
+                </div>
+              </div>
+              <div class="note-media-item">
+                <div class="frame"><img src="img/lofi-boom-fault.png" alt="Lo-fi boom fault wireframe" loading="lazy" /></div>
+                <div class="note-rationale">
+                  <div class="rationale-bar"></div>
+                  <div class="rationale-text"><strong>One action, centered, unmissable</strong>No secondary buttons, no settings icon, nothing to misclick under stress. Stop is the only decision on the screen.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <div class="container"><div class="divider"></div></div>
+
+  <!-- 12. NEXT PROJECT -->
+  <section class="next-section">
+    <div class="container">
+      <p class="next-label">Next case study</p>
+      <a class="next-link" href="/case-finflow/index.html">FinFlow <span aria-hidden="true">→</span></a>
+      <p class="next-sub">Role-based B2B expense management, designed from research through usability testing for admin, manager, and employee, with a measurable task completion lift.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="cs-footer">
+  <div class="container">
+    <div class="footer-row">
+      <span>Naveen Sereddy · Product Design</span>
+      <div class="footer-links">
+        <a href="https://github.com/Naveen-Sereddy" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/naveensereddy" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
