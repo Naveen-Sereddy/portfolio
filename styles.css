@@ -1273,11 +1273,11 @@ html { scrollbar-color: var(--sb-thumb) var(--sb-track); }
 
 /* ---------------------------------------------------------------- CONTACT */
 .section-contact {
-  padding: 9rem 0;
+  padding: 4rem 0;
   position: relative;
   overflow: hidden;
 }
-@media (min-width: 640px) { .section-contact { padding: 14rem 0; } }
+@media (min-width: 640px) { .section-contact { padding: 5rem 0; } }
 
 .contact-glow {
   pointer-events: none;
@@ -1294,16 +1294,16 @@ html { scrollbar-color: var(--sb-thumb) var(--sb-track); }
 
 .contact-header { max-width: 32rem; margin: 0 auto; text-align: center; }
 .contact-header h2 {
-  margin-top: 1.5rem;
-  font-size: clamp(2.4rem, 6.4vw, 4.4rem);
+  margin-top: 0.75rem;
+  font-size: clamp(2rem, 5vw, 3.25rem);
   font-weight: 400;
   line-height: 1.04;
 }
 .contact-header p {
-  margin: 1.75rem auto 0;
+  margin: 1rem auto 0;
   max-width: 28rem;
   font-size: 1.02rem;
-  line-height: 1.7;
+  line-height: 1.6;
   color: var(--text-2);
 }
 
@@ -1312,16 +1312,44 @@ html { scrollbar-color: var(--sb-thumb) var(--sb-track); }
   gap: 1.5rem;
   grid-template-columns: 1fr;
   max-width: 62rem;
-  margin: 4rem auto 0;
+  margin: 2rem auto 0;
 }
 @media (min-width: 1024px) { .contact-grid { grid-template-columns: 2fr 3fr; } }
 
-/* contact details card */
-.contact-details {
+/* contact photo */
+.card.contact-photo {
+  padding: 0;
+  overflow: hidden;
+  min-height: 0;
+}
+.contact-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* contact form + details card */
+.contact-form {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 1rem;
+  padding: 1.5rem;
 }
+
+.contact-form-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  justify-content: space-between;
+}
+
+.contact-form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 480px) { .contact-form-row { grid-template-columns: 1fr 1fr; } }
 
 .field-group-label {
   font-family: var(--font-mono);
@@ -1450,7 +1478,7 @@ html { scrollbar-color: var(--sb-thumb) var(--sb-track); }
   border-color: #E08763;
   box-shadow: 0 0 0 3px rgba(224,135,99,0.18);
 }
-textarea.input { min-height: 8.75rem; resize: vertical; }
+textarea.input { min-height: 5.5rem; resize: vertical; }
 
 .field-error {
   margin-top: 0.375rem;
