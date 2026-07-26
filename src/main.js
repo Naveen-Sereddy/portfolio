@@ -142,7 +142,7 @@
       title: "FinFlow",
       meta: "UX Case Study · B2B Fintech · 2025",
       kind: "Client · NDA",
-      desc: "A B2B expense-management platform I designed from research all the way through usability testing, for three roles: admin, manager, and employee.",
+      desc: "B2B expense platform, redesigned end to end — task completion jumped 73% → 89%.",
       roles: ["User Research", "Usability Testing", "Data Visualization", "Design System"],
       outcome: { value: "73% → 89%", label: "task completion · real internal result" },
       caseUrl: "case-finflow/index.html",
@@ -160,7 +160,7 @@
       title: "NAVI",
       meta: "UX Case Study · AI Fintech · Enterprise B2B · 2026",
       kind: "Concept",
-      desc: "An AI financial wellness benefit embedded in Slack and HR tools. Not a new app to check, but an agent that meets employees where their attention already is.",
+      desc: "AI financial coach embedded in Slack — cuts decision time from 4.2 min to 38 sec.",
       roles: ["User Research", "AI Product Design", "Interaction Design", "Design System"],
       outcome: { value: "4.2 min → 38 sec", label: "time to act on recommendation" },
       caseUrl: "case-navi/index.html",
@@ -178,7 +178,7 @@
       title: "Bins & Deals",
       meta: "Design & Development · Live Site · 2024–25",
       kind: "Live · Client",
-      desc: "Brand, design, and front-end build for a real retail liquidation store. I took it from a blank canvas to a live marketing site that actually drives store visits.",
+      desc: "Brand, design, and a live marketing site built from scratch for a retail liquidation store.",
       roles: ["Web Design", "Front-End Dev", "React", "Tailwind CSS"],
       outcome: { value: "Live", label: "shipped to production" },
       caseUrl: "case-bins/index.html",
@@ -212,7 +212,7 @@
       title: "MedBridge",
       meta: "UX Case Study · Healthcare · 2024",
       kind: "Concept",
-      desc: "An end-to-end redesign of a patient portal. Appointments, prescriptions, records, and billing, all pulled into one calm, secure experience.",
+      desc: "Patient portal unifying appointments, prescriptions, billing, and records into one calm flow.",
       roles: ["Product Design", "Information Architecture", "Design System", "WCAG 2.1"],
       outcome: { value: "5 core flows", label: "redesigned & unified" },
       caseUrl: "case-medbridge/index.html",
@@ -230,7 +230,7 @@
       title: "Precision Cab",
       meta: "Product Design & Frontend · AgTech · 2026",
       kind: "Personal · Working Prototype",
-      desc: "An in-cab console for GPS-guided spray application, designed around gloves, sun glare, and split-second decisions instead of a generic dashboard.",
+      desc: "In-cab console for GPS spray guidance, built glove-friendly for split-second decisions.",
       roles: ["Product Design", "Frontend Engineering", "Design System", "Industrial UX"],
       outcome: { value: "11 screens", label: "shipped as working code" },
       caseUrl: "case-precisioncab/index.html",
@@ -258,40 +258,17 @@
   /* ------------------------------------------------------------ render projects */
   const wrap = $("#projects");
   if (wrap) {
-    projects.forEach((p, i) => {
+    projects.forEach((p) => {
       galleries[p.id] = p.shots;
-      const flip = i % 2 === 1;
 
-      /* thumbnail strip (slots 1–4) */
-      const thumbs = p.shots.slice(1).map((s, k) =>
-        p.caseUrl
-          ? `<a href="${p.caseUrl}" class="thumb" aria-label="${p.title} case study: ${s.cap.replace(/"/g, "")}">
-               <img src="${s.src}" alt="${s.cap.replace(/"/g, "")}" loading="lazy" decoding="async" width="1760" height="1100" />
-             </a>`
-          : `<button class="thumb" data-gallery="${p.id}" data-idx="${k + 1}" aria-label="View: ${s.cap.replace(/"/g, "")}">
-               <img src="${s.src}" alt="${s.cap.replace(/"/g, "")}" loading="lazy" decoding="async" width="1760" height="1100" />
-             </button>`
+      const stackImgs = p.shots.map((s) =>
+        `<img src="${s.src}" alt="${s.cap.replace(/"/g, "")}" loading="lazy" decoding="async" width="1760" height="1100" />`
       ).join("");
 
-      /* primary image side */
-      const imgSide = p.caseUrl
-        ? `<a href="${p.caseUrl}" class="project-img-side" aria-label="Open ${p.title} case study">
-             <img src="${p.shots[0].src}" alt="${p.shots[0].cap.replace(/"/g, "")}" loading="lazy" decoding="async" width="1760" height="1100" />
-           </a>`
-        : `<div class="project-img-side" data-gallery="${p.id}" data-idx="0" role="button" tabindex="0" aria-label="View ${p.title} gallery" style="cursor:pointer;">
-             <img src="${p.shots[0].src}" alt="${p.shots[0].cap.replace(/"/g, "")}" loading="lazy" decoding="async" width="1760" height="1100" />
-           </div>`;
-
-      /* action buttons */
-      const primaryBtn = p.caseUrl
-        ? `<a href="${p.caseUrl}" class="btn-primary btn-sm">
+      const primaryBtn = `<a href="${p.caseUrl}" class="btn-primary btn-sm">
              View case study
              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-           </a>`
-        : `<button class="btn-ghost btn-sm" data-gallery="${p.id}" data-idx="0">
-             View gallery
-             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-           </button>`;
+           </a>`;
 
       const liveBtn = p.url
         ? `<a href="${p.url}" target="_blank" rel="noopener" class="btn-ghost btn-sm">
@@ -300,75 +277,39 @@
            </a>`
         : "";
 
-      /* WCAG badge (case study only) */
-      const wcagBadge = p.caseUrl
-        ? `<span class="project-wcag">
+      const wcagBadge = `<span class="project-wcag">
              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
              WCAG 2.1 AA
-           </span>`
-        : "";
-
-      /* inline case study (Bins & Deals) */
-      const inlineStudy = (p.study && !p.caseUrl)
-        ? `<div class="case-study">
-             <div class="case-study-grid">
-               <div>
-                 <p class="case-study-label">The problem</p>
-                 <p>${p.study.problem}</p>
-               </div>
-               <div>
-                 <p class="case-study-label">My role</p>
-                 <p>${p.study.role}</p>
-               </div>
-               <div>
-                 <p class="case-study-label">Process</p>
-                 <ol class="case-study-process">
-                   ${p.study.process.map((s, idx) =>
-                     `<li><span class="step-num">${String(idx + 1).padStart(2, "0")}</span><span>${s}</span></li>`
-                   ).join("")}
-                 </ol>
-               </div>
-               <div>
-                 <p class="case-study-label">Outcome</p>
-                 <p>${p.study.result}</p>
-               </div>
-             </div>
-             <div class="case-study-pullquote">
-               <p class="eyebrow eyebrow-accent">What made it hard</p>
-               <blockquote>${p.study.credibility}</blockquote>
-             </div>
-           </div>`
-        : "";
+           </span>`;
 
       const block = document.createElement("article");
-      block.className = "reveal project";
+      block.className = "reveal project-card";
       block.innerHTML = `
-        <div class="project-split${flip ? " flip" : ""}">
-          ${imgSide}
-          <div class="project-info-side">
-            <div class="project-meta-row">
-              <span class="project-index">${p.index}</span>
-              ${p.kind ? `<span class="project-kind">${p.kind}</span>` : ""}
-              <span class="project-meta">${p.meta}</span>
-            </div>
-            <h3 class="project-title">${p.title}</h3>
-            <p class="project-desc">${p.desc}</p>
-            <div class="project-roles">
-              ${p.roles.map((r) => `<span class="chip">${r}</span>`).join("")}
-            </div>
-            <div class="project-outcome">
-              <span class="project-outcome-value">${p.outcome.value}</span>
-              <span class="project-outcome-label">${p.outcome.label}</span>
-            </div>
-            <div class="project-actions">
-              ${primaryBtn}
-              ${liveBtn}
-              ${wcagBadge}
-            </div>
+        <div class="project-card-frame" style="position:relative;">
+          <div class="stack" style="--shots:${p.shots.length}">${stackImgs}</div>
+          <a href="${p.caseUrl}" style="position:absolute;inset:0;" aria-label="Open ${p.title} case study"></a>
+        </div>
+        <div class="project-card-body">
+          <div class="project-meta-row">
+            <span class="project-index">${p.index}</span>
+            ${p.kind ? `<span class="project-kind">${p.kind}</span>` : ""}
+            <span class="project-meta">${p.meta}</span>
+          </div>
+          <h3 class="project-title">${p.title}</h3>
+          <p class="project-tagline">${p.desc}</p>
+          <div class="project-roles">
+            ${p.roles.map((r) => `<span class="chip">${r}</span>`).join("")}
+          </div>
+          <div class="project-outcome">
+            <span class="project-outcome-value">${p.outcome.value}</span>
+            <span class="project-outcome-label">${p.outcome.label}</span>
+          </div>
+          <div class="project-actions">
+            ${primaryBtn}
+            ${liveBtn}
+            ${wcagBadge}
           </div>
         </div>
-        <div class="project-thumbs">${thumbs}</div>
-        ${inlineStudy}
       `;
       wrap.appendChild(block);
     });
