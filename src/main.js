@@ -246,6 +246,15 @@
 
   const galleries = {};
 
+  /* ------------------------------------------------------------ project count word */
+  const countWords = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+  const workCountEl = $("#workCount");
+  if (workCountEl) {
+    const n = projects.length;
+    const word = countWords[n] || String(n);
+    workCountEl.textContent = word.charAt(0).toUpperCase() + word.slice(1);
+  }
+
   /* ------------------------------------------------------------ render projects */
   const wrap = $("#projects");
   if (wrap) {
@@ -280,8 +289,8 @@
              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
            </a>`
         : `<button class="btn-ghost btn-sm" data-gallery="${p.id}" data-idx="0">
-             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 5h18v14H3zM3 9h18"/></svg>
              View gallery
+             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
            </button>`;
 
       const liveBtn = p.url
