@@ -137,8 +137,28 @@
   /* ------------------------------------------------------------ project data */
   const projects = [
     {
-      id: "finflow",
+      id: "testimonium",
       index: "01",
+      title: "Testimonium",
+      meta: "AI RAG Case Study · Fintech · 2026",
+      kind: "Client · NDA",
+      desc: "AI research assistant for SEC filings, shipped to production — every answer cites its exact page.",
+      roles: ["RAG Pipeline", "AI Engineering", "Full-Stack Dev", "Product Design"],
+      outcome: { value: "100%", label: "citation accuracy · verified with analysts" },
+      caseUrl: "case-testimonium/index.html",
+      url: "https://testimonium.vercel.app",
+      urlLabel: "testimonium.vercel.app",
+      shots: [
+        { src: "case-testimonium/img/01-empty-upload.png",      cap: "Document ready, suggested questions after a real upload" },
+        { src: "case-testimonium/img/03-conversation-answer.png", cap: "A real Gemini answer with inline citation chips" },
+        { src: "case-testimonium/img/04-citation-expanded.png",  cap: "Citation expanded, exact page and source excerpt" },
+        { src: "case-testimonium/img/05-settings-panel.png",     cap: "Settings panel, theme and confidence display controls" },
+        { src: "case-testimonium/img/07-light-theme.png",        cap: "The same conversation in light theme" },
+      ],
+    },
+    {
+      id: "finflow",
+      index: "02",
       title: "FinFlow",
       meta: "UX Case Study · B2B Fintech · 2025",
       kind: "Client · NDA",
@@ -156,7 +176,7 @@
     },
     {
       id: "navi",
-      index: "02",
+      index: "03",
       title: "NAVI",
       meta: "UX Case Study · AI Fintech · Enterprise B2B · 2026",
       kind: "Concept",
@@ -174,7 +194,7 @@
     },
     {
       id: "bins",
-      index: "03",
+      index: "04",
       title: "Bins & Deals",
       meta: "Design & Development · Live Site · 2024–25",
       kind: "Live · Client",
@@ -208,7 +228,7 @@
     },
     {
       id: "medbridge",
-      index: "04",
+      index: "05",
       title: "MedBridge",
       meta: "UX Case Study · Healthcare · 2024",
       kind: "Concept",
@@ -226,7 +246,7 @@
     },
     {
       id: "precisioncab",
-      index: "05",
+      index: "06",
       title: "Precision Cab",
       meta: "Product Design & Frontend · AgTech · 2026",
       kind: "Personal · Working Prototype",

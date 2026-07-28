@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0d0404" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230d0404'/%3E%3Ctext x='16' y='21' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23d0923a' text-anchor='middle'%3ENS%3C/text%3E%3C/svg%3E" />
+<title>Testimonium — AI RAG Case Study · Naveen Sereddy</title>
+<meta name="description" content="Testimonium: a RAG-powered research assistant that answers questions about SEC filings with page-cited evidence. Built end to end, from client discovery through a shipped Next.js and Gemini production app. Case study by Naveen Sereddy." />
+<link rel="canonical" href="https://naveensereddy.com/case-testimonium/" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Testimonium — AI RAG Case Study · Naveen Sereddy" />
+<meta property="og:description" content="A RAG-powered research assistant that answers questions about SEC filings with page-cited evidence. Discovery through a shipped production app." />
+<meta property="og:image" content="https://naveensereddy.com/case-testimonium/img/03-conversation-answer.png" />
+<meta property="og:url" content="https://naveensereddy.com/case-testimonium/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://naveensereddy.com/case-testimonium/img/03-conversation-answer.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script>
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  window.addEventListener("pageshow", function () { window.scrollTo(0, 0); });
+</script>
+<link rel="stylesheet" href="../case-studies.css?v=4" />
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<nav class="cs-nav" aria-label="Site navigation">
+  <div class="cs-nav-inner">
+    <a class="cs-logo" href="/">Naveen Sereddy</a>
+    <a class="cs-back" href="/#work">← All work</a>
+  </div>
+</nav>
+
+<main id="main" tabindex="-1">
+
+  <!-- 1. HERO -->
+  <section class="section" style="padding-top:7.5rem">
+    <div class="container">
+      <div class="tag-row">
+        <span class="tag">Fintech · Asset Management</span>
+        <span class="tag">2026</span>
+        <span class="tag">Client · NDA</span>
+        <span class="tag">RAG Pipeline · Full-Stack · AI Engineering</span>
+      </div>
+      <h1>Testimonium — ask a 10-K a question, get an answer with a page number attached.</h1>
+      <p class="lede" style="font-size:1.15rem;max-width:56ch">An equity research team was burning six to eight hours a week per analyst just hunting for a sentence buried in a 200-page filing. I built them something that reads the filing first, so they don't have to, and shows its work on every answer.</p>
+      <p class="lede">This one isn't a Figma file. It's a live Next.js app running a real Gemini RAG pipeline in production, and I built the research, the design, and every line of the pipeline myself.</p>
+      <div class="metric-row">
+        <div class="metric"><span class="metric-value">100%</span><span class="metric-label">citation accuracy, verified</span></div>
+        <div class="metric"><span class="metric-value">&lt;30s</span><span class="metric-label">time to first answer</span></div>
+        <div class="metric"><span class="metric-value">AA</span><span class="metric-label">WCAG 2.1</span></div>
+      </div>
+      <p style="margin-top:.85rem;font-size:.8rem;color:var(--text-3)">This documents a real discovery and build engagement with an asset manager's equity research team. The firm's name is withheld under NDA; the research, the pipeline, and the outcomes are unchanged.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://testimonium.vercel.app" target="_blank" rel="noopener">Open live app <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a class="btn btn-ghost" href="https://github.com/Naveen-Sereddy/Testimonium-SEC-Filing-Research-Tool" target="_blank" rel="noopener">View source <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a class="btn btn-ghost" href="/#work"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg> All work</a>
+      </div>
+      <div class="meta-strip">
+        <span class="meta-item">Role: <strong>Product Designer &amp; AI/Full-Stack Engineer</strong></span>
+        <span class="meta-item">Duration: <strong>6 weeks</strong></span>
+        <span class="meta-item">Scope: <strong>Discovery → shipped production app</strong></span>
+        <span class="meta-item">NDA: <strong>Firm name withheld</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="container"><div class="divider"></div></div>
+
+  <!-- 2. PROBLEM -->
+  <section class="section">
+    <div class="container prose">
+      <div class="section-head">
+        <div class="eyebrow">The Problem</div>
+        <h2>Twelve analysts, one keyboard shortcut, no way to prove an answer was right.</h2>
+        <p class="lede" style="font-size:1.05rem">Every earnings season, this research team lost roughly six to eight hours a week per analyst just locating things: a risk-factor sentence, a revenue-segment number, a line in the legal proceedings section. The workflow was Cmd+F, hope the PDF was formatted well, copy the snippet into an email, and type the page number in from memory.</p>
+      </div>
+      <p>They already had access to expensive enterprise research tools. Almost nobody used them. Those tools were built for power users running full terminals, not for someone who needs one answer in the next two minutes and needs to trust it enough to forward it to a portfolio manager. There was skimming on one end and a steep, unused enterprise tool on the other, and nothing in between.</p>
+      <p>I was brought in to build the thing that sits in that gap. It had to be fast enough for daily use, trustworthy enough to actually cite in client research, and simple enough that nobody needed a training session to start.</p>
+    </div>
+  </section>
+
+  <!-- 3. DISCOVERY -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-head prose">
+        <div class="eyebrow">Discovery</div>
+        <h2>Two days of watching before a single screen got designed.</h2>
+        <p class="lede">I met the head of research at a fintech meetup, where the team's earnings-season bottleneck came up in conversation. I followed up with one message: a hypothesis, a rough timeline, and a request to shadow the team for two days before I designed anything. No deck. Just a problem statement and an ask to watch.</p>
+        <p class="lede">They said yes. I interviewed five analysts and mapped the actual workflow end to end. Seven steps, and three of them, the actual hunting, were eating twelve to eighteen minutes each.</p>
+      </div>
+      <div class="insight-grid">
+        <div class="insight-card">
+          <div class="insight-num">01</div>
+          <h3>Nobody wanted a summary</h3>
+          <p>Every analyst said some version of the same thing: they didn't want the tool's opinion, they wanted evidence with a chain of custody back to the actual document.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">02</div>
+          <h3>No page number, no deal</h3>
+          <p>A page citation wasn't a nice-to-have. If a tool couldn't point to the exact page a claim came from, it was dead on arrival, no matter how good the answer read.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">03</div>
+          <h3>Tables were a separate problem</h3>
+          <p>The team wanted prose sections done well first, MD&amp;A, risk factors, legal proceedings, and explicitly did not want structured table parsing rushed into version one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. PIVOT -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">The Pivot</div>
+        <h2>I almost built a smarter Cmd+F. That would have missed the point.</h2>
+        <p class="lede">My first instinct after the shadowing sessions was a search overlay for PDFs, basically Cmd+F with better ranking. It felt wrong within a day. The real problem wasn't weak search. It was that one question usually needed three or four scattered sections stitched together, and nobody wanted to do that stitching by hand anymore.</p>
+      </div>
+      <div class="pivot-box">
+        <p>The tool shouldn't search for keywords. It should answer the question and show its work, the same way an analyst would if you asked them directly.</p>
+        <p class="quote-source">Reframed from "better search" to "answer with receipts," after two days of shadowing</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. DESIGN DECISIONS -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Design Decisions</div>
+        <h2>Trust was the actual UX problem, not a backend detail.</h2>
+        <p class="lede">Every decision below traces back to one thing: an analyst needs to know, at a glance, whether to believe what's on the screen.</p>
+      </div>
+      <div class="decision-grid">
+
+        <div class="decision-card">
+          <div class="decision-num">01</div>
+          <h3>A confidence gauge, right in the answer</h3>
+          <p>High, Medium, or Low, calculated from the retrieval scores, sitting at the top of the answer card before a single word of the response streams in. The reader calibrates their own skepticism before they start reading, not after.</p>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-num">02</div>
+          <h3>Citations you can actually click</h3>
+          <p>Every claim in an answer carries a numbered chip. Click it and the exact excerpt, page number, and section heading expand right there, inline. No separate tab, no trusting the model's word for it.</p>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-num">03</div>
+          <h3>Serif answers, sans everything else</h3>
+          <p>Answer text runs in a serif face, the interface chrome around it in a plain sans. That typographic split is doing real work: it tells the reader "this part is content to actually read" versus "this part is just controls."</p>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-num">04</div>
+          <h3>An in-memory vector store, on purpose</h3>
+          <p>No database. SQLite doesn't deploy cleanly on Vercel, and at the scale of one document and a few hundred chunks, a database round-trip only adds latency without adding anything the team needed. In-memory retrieval answered in under 200 milliseconds; I showed the team that number before they ever asked about architecture.</p>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-num">05</div>
+          <h3>Table parsing, deliberately cut</h3>
+          <p>The team wanted financial statements. I said no to that for version one, because mixing table data with prose answers muddies the trust story: was that number from a table on page 42, or a sentence on page 38? Keeping v1 to MD&amp;A, risk factors, and legal proceedings kept the citation model honest.</p>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-num">06</div>
+          <h3>Dark mode as the default, not an afterthought</h3>
+          <p>The team worked dark-room, multi-monitor setups almost universally. Every color token in the system got built and checked dark-first, with light mode derived and separately audited afterward, not the other way around.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5b. THE IDEA THAT GOT KILLED -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Killed in Review</div>
+        <h2>The search overlay I sketched, then talked myself out of.</h2>
+        <p class="lede">This is the actual concept the shadowing sessions killed. It looks reasonable on its own. It just isn't the thing that would have helped anyone.</p>
+      </div>
+      <div class="killed-grid image-lead">
+        <div style="position:relative">
+          <span class="killed-tag">Rejected before build</span>
+          <div class="frame ar-killed">
+            <img src="img/lofi-search-overlay-killed.svg" alt="Rejected search-overlay concept, a Cmd+F style panel floating over a raw PDF page with fourteen scattered keyword matches" loading="lazy" />
+          </div>
+        </div>
+        <div class="killed-copy">
+          <p>Fourteen keyword matches for "risk factors," scattered across six sections of a 214-page filing, each one a fragment with a page number and nothing else. It's a better Cmd+F. It is not a better answer.</p>
+          <div class="killed-reason">
+            <h3>It handed the synthesis work right back to the analyst</h3>
+            <p>The actual bottleneck was never finding text, it was stitching three or four scattered mentions into one coherent answer. A ranked list of matches still leaves that stitching to the person who has the least time to do it.</p>
+          </div>
+          <p style="margin-top:var(--sp-5)">What replaced it: one answer, generated from the same retrieved passages this overlay would have surfaced, with the citations attached to the claims instead of floating next to a keyword.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. DESIGN EVOLUTION -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Design Evolution</div>
+        <h2>Low-fidelity wireframes, then the real, shipped screens.</h2>
+        <p class="lede">The layout got locked at wireframe stage: doc-info bar up top, a centered prompt when there's nothing to answer yet, one answer card per turn. Everything after that was typography, color, and motion, not structure.</p>
+      </div>
+
+      <div class="pair-block">
+        <p class="pair-label">Document workspace</p>
+        <div class="evolution-grid">
+          <div class="evolution-step">
+            <div class="evolution-label"><span class="dot"></span>Lo-Fi</div>
+            <div class="frame" style="--ar:800/500"><img src="img/lofi-empty-state.svg" alt="Lo-fi wireframe of the document-ready empty state, with suggested question pills and a bottom composer" loading="lazy" /></div>
+            <p>Doc-info bar, three suggested questions sized to the actual analyst workflows, and a composer that's always in reach. No modal, no separate "start" screen.</p>
+          </div>
+          <div class="evolution-step">
+            <div class="evolution-label"><span class="dot"></span>Final UI</div>
+            <div class="frame" style="--ar:2400/1238"><img src="img/01-empty-upload.png" alt="Final document-ready empty state, real screenshot from the live app after uploading sample-10k.pdf" loading="lazy" /></div>
+            <p>Same structure, real data: sample-10k.pdf, 112 pages, ~118K tokens. The suggested questions are the exact three the shadowing sessions surfaced as the most common asks.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pair-block" style="margin-top:var(--sp-8)">
+        <p class="pair-label">Conversation &amp; citations</p>
+        <div class="evolution-grid">
+          <div class="evolution-step">
+            <div class="evolution-label"><span class="dot"></span>Lo-Fi</div>
+            <div class="frame" style="--ar:800/500"><img src="img/lofi-conversation.svg" alt="Lo-fi wireframe of a question and answer, with a confidence badge and numbered citation markers inline" loading="lazy" /></div>
+            <p>Confidence badge top-right of the card, before the answer. Citation markers sit inline with the claim they support, not bundled in a footnote list at the bottom.</p>
+          </div>
+          <div class="evolution-step">
+            <div class="evolution-label"><span class="dot"></span>Final UI</div>
+            <div class="frame" style="--ar:2400/1238"><img src="img/03-conversation-answer.png" alt="Final answer screenshot, real Gemini response to a risk-factors question with five inline citation chips" loading="lazy" /></div>
+            <p>A real question, a real Gemini answer, five real citation chips. Same card shape as the wireframe, now carrying serif body text and the amber confidence token.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6b. RESEARCH ON THE SCREEN -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Research, On the Screen</div>
+        <h2>Every part of this answer traces back to something an analyst said.</h2>
+        <p class="lede">This is the same live answer from above, annotated against the findings and decisions that actually produced it.</p>
+      </div>
+      <div class="anno-block">
+        <div class="anno-wrap">
+          <img src="img/03-conversation-answer.png" alt="Testimonium answer annotated with three research-driven design decisions" loading="lazy" />
+          <span class="anno-dot" style="left:79%; top:19%" aria-hidden="true">1</span>
+          <span class="anno-dot" style="left:57%; top:38%" aria-hidden="true">2</span>
+          <span class="anno-dot" style="left:47%; top:80%" aria-hidden="true">3</span>
+        </div>
+        <div class="anno-legend two-col">
+          <div class="anno-legend-item"><span class="anno-legend-num">1</span><p><strong>Confidence label, not a percentage.</strong> Testing early versions with a raw score (like "0.83") meant nothing to an analyst. High, Medium, Low reads instantly, and it's the first thing rendered, before the answer text streams in.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">2</span><p><strong>Citation chips sit inside the sentence.</strong> This is insight 02 directly: a claim without a page number is dead on arrival. Putting the chip right after the clause it supports means there's never a moment where a claim is floating unsupported.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">3</span><p><strong>Copy and regenerate, not a full re-ask.</strong> Analysts wanted to sanity-check a specific answer without retyping the question. Both actions live in the same footer row as the timestamp, not buried in a menu.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. RAG ARCHITECTURE & AI ENGINEERING -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">RAG Architecture &amp; AI Engineering</div>
+        <h2>The part where the design has to actually work under the hood.</h2>
+        <p class="lede">Everything above is the interface. None of it means anything if the pipeline underneath can't back it up, so here's what's actually running in production.</p>
+      </div>
+      <div class="evolution-grid">
+        <div class="evolution-step">
+          <div class="evolution-label"><span class="dot"></span>Ingestion → Retrieval</div>
+          <div class="frame" style="--ar:2400/1238"><img src="img/02-upload-progress.png" alt="Testimonium upload in progress, ingesting and chunking a real 10-K filing" loading="lazy" /></div>
+          <p>A PDF gets parsed, section-tagged, and chunked with overlap so a claim near a section boundary doesn't lose its context. Each chunk gets embedded with Gemini's <code>gemini-embedding-001</code>, and a question retrieves its top matches by cosine similarity against an in-memory index, scored and threshold-filtered before anything reaches the model.</p>
+        </div>
+        <div class="evolution-step">
+          <div class="evolution-label"><span class="dot"></span>Generation → Citation</div>
+          <div class="frame" style="--ar:2400/1238"><img src="img/04-citation-expanded.png" alt="Testimonium citation expanded inline, showing the exact page number and source excerpt behind an answer" loading="lazy" /></div>
+          <p>Retrieved chunks go to <code>gemini-flash-latest</code> through Gemini's OpenAI-compatible endpoint, prompted specifically for citation accuracy and to refuse when the evidence underneath is too thin. A parser then maps every <code>[n]</code> the model outputs back to the exact chunk it came from, which is what makes the citation chips clickable and correct rather than decorative.</p>
+        </div>
+      </div>
+      <p style="margin-top:var(--sp-6)">One real story from getting this to production: the model I'd built and tested against, <code>gemini-2.5-flash</code>, got retired mid-project and started returning 404s on the chat endpoint. The error the SDK surfaced wasn't useful, so I wrote a throwaway route that hit the raw endpoint directly with <code>fetch</code> and read Google's actual error body, which said plainly that the model was gone. The fix was switching to the <code>-latest</code> alias instead of pinning a dated model name, specifically so the next retirement doesn't take the app down with it. That's the kind of bug that only shows up once something is actually deployed and staying deployed, not sitting in a design file.</p>
+    </div>
+  </section>
+
+  <!-- 8. PRODUCTION ENGINEERING -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Production Engineering</div>
+        <h2>Bugs I found by actually running the thing, not by reading the code.</h2>
+        <p class="lede">Every one of these came from watching the deployed app fail in a real environment, then tracing it back to a root cause instead of patching around the symptom.</p>
+      </div>
+      <div class="decision-grid">
+        <div class="decision-card">
+          <div class="decision-num">A</div>
+          <h3>A DOMMatrix crash on Vercel, nowhere else</h3>
+          <p>The PDF parser depended on a browser API that doesn't exist in Vercel's serverless Node runtime. Fixed with a polyfill, but only after ordering the dynamic imports so the polyfill actually loads before anything that needs it. Static imports get hoisted ahead of your own code, so this had to be deliberate, not incidental.</p>
+        </div>
+        <div class="decision-card">
+          <div class="decision-num">B</div>
+          <h3>A worker file Vercel's tracer couldn't see</h3>
+          <p>The PDF library needed a worker file whose path gets computed at runtime, which Vercel's dependency tracer can't follow statically. It built fine locally and 500'd in production until I force-included the file explicitly in the Next.js config.</p>
+        </div>
+        <div class="decision-card">
+          <div class="decision-num">C</div>
+          <h3>Errors that failed silently</h3>
+          <p>One API route had a catch block with no logging in it at all, so a real failure just looked like nothing happened. Added proper error logging there, matching what the rest of the app already did.</p>
+        </div>
+        <div class="decision-card">
+          <div class="decision-num">D</div>
+          <h3>Shipped on a CI pipeline, not a manual upload</h3>
+          <p>The repo is wired to Vercel through GitHub, so a push to main is what actually goes to production now. Vitest covers every pure-logic module: chunking, embeddings, similarity scoring, citation parsing, and section detection.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. ACCESSIBILITY -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Accessibility</div>
+        <h2>The amber token failed at 1.55:1. I found that before launch, not after.</h2>
+        <p class="lede">WCAG 2.1 AA wasn't a checklist item at the end. I tested every color token against both themes as I built them, and the confidence-gauge amber failed contrast badly in light mode: 1.55:1 against a 4.5:1 target for text. I split the token, a darker amber in light mode, the original in dark mode, same hue, different values, both passing.</p>
+      </div>
+      <div class="access-grid">
+        <div class="frame" style="--ar:2400/1238">
+          <img src="img/05-settings-panel.png" alt="Testimonium settings panel, theme toggle and confidence display controls" loading="lazy" />
+        </div>
+        <div class="access-stats">
+          <div class="access-stat"><b>AA</b><span>WCAG 2.1 target, both themes</span></div>
+          <div class="access-stat"><b>1.55:1 → 4.5:1</b><span>Amber contrast, before and after the fix</span></div>
+          <div class="access-stat"><b>0</b><span>False citations across verification testing</span></div>
+          <div class="access-stat"><b>3</b><span>Real production bugs, root-caused and shipped</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. PRODUCT / FINAL UI -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Product</div>
+        <h2>Upload a filing. Ask it something. Check the receipt.</h2>
+        <p class="lede">These are screenshots from the live app, not mockups: real uploads, real questions sent to the real Gemini pipeline, both themes, and the one thing every AI tool should show more often, a real refusal when the document doesn't back up the question.</p>
+      </div>
+      <div class="shot-grid">
+        <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/01-empty-upload.png" alt="Document ready, three suggested questions after a real upload" loading="lazy" /></div><span class="shot-cap">Document ready, suggested questions</span></div>
+        <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/02-upload-progress.png" alt="Upload zone mid-processing, showing real progress" loading="lazy" /></div><span class="shot-cap">Upload in progress</span></div>
+        <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/03-conversation-answer.png" alt="A real answer with confidence gauge and inline citation chips" loading="lazy" /></div><span class="shot-cap">A real answer, live citations</span></div>
+        <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/04-citation-expanded.png" alt="Citation expanded to show source page and excerpt" loading="lazy" /></div><span class="shot-cap">Citation expanded, page and excerpt</span></div>
+        <div class="shot-item"><div class="frame" style="--ar:2400/1350"><img src="img/07-light-theme.png" alt="The same conversation in light theme" loading="lazy" /></div><span class="shot-cap">Light theme</span></div>
+        <div class="shot-item"><div class="frame" style="--ar:2400/1350"><img src="img/08-low-confidence.png" alt="A genuine refusal: the model declining to answer a question the filing doesn't cover" loading="lazy" /></div><span class="shot-cap">Refusing to guess</span></div>
+      </div>
+      <div style="max-width:220px;margin:var(--sp-7) auto 0">
+        <div class="frame" style="--ar:390/844"><img src="img/06-mobile-conversation.png" alt="The same conversation view on a mobile viewport" loading="lazy" /></div>
+        <p style="text-align:center;font-size:.78rem;color:var(--text-3);margin-top:var(--sp-3)">Mobile conversation view</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. QUOTE -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="quote-block">
+        <p>"Every cited page contained the quoted text. No false citations, across every question we tried."</p>
+        <p class="quote-source">Final verification session, two hours, real analysts on their own filings</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. OUTCOME -->
+  <section class="section">
+    <div class="container prose">
+      <div class="section-head">
+        <div class="eyebrow">Outcome</div>
+        <h2>Verified by the people who'd actually have to trust it.</h2>
+        <p class="lede" style="font-size:1.05rem">I closed the engagement with a two-hour verification session. Each analyst uploaded a 10-K from their own coverage, asked three questions from their real recent work, and checked the answers against what they already knew about the document. Two of three questions hit full task completion live; the third needed a follow-up because that particular filing was missing a narrative section entirely, which the tool surfaced cleanly as an error rather than guessing. Time to first answer stayed under thirty seconds on pre-processed documents. Analysts checked the source drawer on the first answer, and mostly stopped checking by the third, which is about as clear a trust signal as an unscripted usability session gets.</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://testimonium.vercel.app" target="_blank" rel="noopener">Open live app <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a class="btn btn-ghost" href="https://github.com/Naveen-Sereddy/Testimonium-SEC-Filing-Research-Tool" target="_blank" rel="noopener">View source <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a class="btn btn-ghost" href="/#work"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg> All work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. REFLECTION -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Reflection</div>
+        <h2>What I'd do differently.</h2>
+      </div>
+      <div class="reflection-list">
+        <div class="reflection-item">
+          <div class="reflection-num">1</div>
+          <p>I pushed back on what the team first asked for. They wanted better search. I spent the shadowing time proving that "answer with receipts" was the actual shape of the problem, and that argument only worked because I had two days of watching real analysts behind it, not a hunch.</p>
+        </div>
+        <div class="reflection-item">
+          <div class="reflection-num">2</div>
+          <p>Accessibility got tested while I was building, not after launch. The amber contrast failure would have shipped invisibly otherwise, since it only fails in one specific theme against one specific background.</p>
+        </div>
+        <div class="reflection-item">
+          <div class="reflection-num">3</div>
+          <p>It's live. Not a prototype sitting behind a login only I have, an actual URL running a real Gemini pipeline against real uploaded filings right now. If I had more runway, the next step would be a moderated test with analysts from a firm that didn't sponsor the build, to see if the trust model holds with people who never watched it get made.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14. FULL PROCESS ARCHIVE (collapsed) -->
+  <section class="section">
+    <div class="container">
+      <details class="archive-details">
+        <summary class="archive-summary">
+          <span>Full process archive: workflow map, personas, design tokens, pipeline internals, and the bug log</span>
+          <span class="archive-toggle-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="archive-body">
+
+          <div class="archive-block">
+            <div class="section-head">
+              <div class="eyebrow">Workflow, Mapped</div>
+              <h2>Seven steps, and three of them were the actual tax.</h2>
+              <p class="lede">This is the workflow I watched during shadowing, step by step, with the three bottleneck steps highlighted. That block, twelve to eighteen minutes each, is what Testimonium collapses into one query.</p>
+            </div>
+            <div class="frame" style="--ar:800/420;max-width:820px;margin-inline:auto;background:#fff">
+              <img src="img/workflow-map.svg" alt="Seven-step analyst workflow diagram, with steps three through five highlighted as the main time cost" loading="lazy" />
+            </div>
+          </div>
+
+          <div class="archive-block">
+            <div class="section-head">
+              <div class="eyebrow">Who I Was Designing For</div>
+              <h2>Three roles, one document, very different patience levels.</h2>
+              <p class="lede">Five analysts, three recurring roles. None of this is one person's account, it's the pattern across all five interviews.</p>
+            </div>
+            <div class="note-grid">
+              <div class="note-card">
+                <h3>The junior analyst</h3>
+                <p>Handles the highest volume of one-off questions from PMs and has the least patience for a tool with a learning curve. Wants an answer in under a minute or they'll just skim it themselves.</p>
+              </div>
+              <div class="note-card">
+                <h3>The senior analyst</h3>
+                <p>Writes client-facing research and won't cite anything they can't personally verify. The page number and exact excerpt matter more to this role than speed does.</p>
+              </div>
+              <div class="note-card">
+                <h3>The head of research</h3>
+                <p>Cares about whether the whole team trusts the tool enough to actually adopt it, not just whether it works in a demo. This is the role that greenlit shadowing in the first place.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="archive-block">
+            <div class="section-head">
+              <div class="eyebrow">RAG Pipeline, In Full</div>
+              <h2>Everything between an upload and an answer.</h2>
+              <p class="lede">PDF ingestion through <code>pdf-parse</code>, with a section-detection fallback for filings whose headings don't parse cleanly. Chunking by section and page with overlap at the boundaries. Embeddings via <code>gemini-embedding-001</code>. Similarity search against an in-memory store, score-thresholded, top-k scoped to narrative sections only. Generation via <code>gemini-flash-latest</code>, prompted for citation accuracy and refusal on weak evidence. A citation parser mapping model output back to chunk metadata. Confidence scoring derived from retrieval score thresholds, not a separate model call.</p>
+            </div>
+          </div>
+
+          <div class="archive-block">
+            <div class="section-head">
+              <div class="eyebrow">Bug-Driven Refinement</div>
+              <h2>Three bugs that changed how I think about the interaction design.</h2>
+              <p class="lede">The citation drawer's outside-click listener fired on <code>mousedown</code>, before the chip's own <code>click</code> handler ever ran, so clicking a citation would close it in the same gesture that opened it. Fixed with a time-bounded ref tracking what had just closed. A Tailwind nesting error was silently hiding color utilities because a token got nested under a <code>text</code> key, colliding with Tailwind's own <code>text-</code> prefix; I only caught it by grepping the compiled CSS output, not by reading the source. And the installed <code>pdf-parse</code> version turned out to be a full rewrite with a different API than the one documented anywhere online, which meant reading the installed source directly to find the real method names. Each one reinforced something specific: predictable interaction patterns, auditing build output instead of trusting class names, and pinning to an actual API contract instead of a library name.</p>
+            </div>
+          </div>
+
+          <div class="archive-block">
+            <div class="section-head">
+              <div class="eyebrow">Design System</div>
+              <h2>A small system, checked dark-first.</h2>
+              <p class="lede">One accent, an amber that had to be split into two values to pass contrast in both themes, a neutral graphite scale, and a two-typeface split: serif for answers, sans for everything else.</p>
+            </div>
+            <div class="note-grid">
+              <div class="note-card">
+                <h3>Color</h3>
+                <p>One accent token per semantic role: accent, error, warning, success. Each one carries a muted and a border variant derived from the same base, so a whole card can share one hue without ever needing a second color decision.</p>
+              </div>
+              <div class="note-card">
+                <h3>Type</h3>
+                <p>Source Serif 4 for answer text, a plain sans for every button, label, and piece of chrome around it. 14px UI base, larger and looser for anything meant to be read closely.</p>
+              </div>
+              <div class="note-card">
+                <h3>Motion</h3>
+                <p>A fade-and-rise on new messages, a growing progress bar on upload that tracks real elapsed time instead of guessing, and nothing animated purely for decoration.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="archive-block">
+            <div class="section-head">
+              <div class="eyebrow">Tests</div>
+              <h2>Unit-tested where it's deterministic, browser-verified where it isn't.</h2>
+              <p class="lede">Vitest covers chunking, embeddings, similarity scoring, PDF parsing, citation parsing, section detection, chat logic, and store state, every module where the input and expected output are both known ahead of time. The frontend components got verified by hand in the browser against the real deployed app, since that's where layout and interaction actually live or die.</p>
+            </div>
+          </div>
+
+          <div class="archive-block">
+            <div class="section-head">
+              <div class="eyebrow">Before the Redesign</div>
+              <h2>The first working version, before the interface pass.</h2>
+              <p class="lede">This is the actual pre-redesign UI, pulled from an earlier commit, not a recreation. Functionally complete, but plain: dashed drop-zone, text-only buttons, no visual hierarchy beyond spacing. The redesign kept every piece of underlying logic and rebuilt the interface layer on top of it.</p>
+            </div>
+            <div class="frame" style="--ar:1280/800;max-width:1000px;margin-inline:auto">
+              <img src="img/00-before-redesign.png" alt="Testimonium's original pre-redesign interface, a plain dashed upload dropzone with text-only buttons" loading="lazy" />
+            </div>
+          </div>
+
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <div class="container"><div class="divider"></div></div>
+
+  <!-- 15. NEXT PROJECT -->
+  <section class="next-section">
+    <div class="container">
+      <p class="next-label">Next case study</p>
+      <a class="next-link" href="/case-finflow/index.html">FinFlow <span aria-hidden="true">→</span></a>
+      <p class="next-sub">A role-based B2B expense platform, designed from research through usability testing, with a measured 73% to 89% task completion lift.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="cs-footer">
+  <div class="container">
+    <div class="footer-row">
+      <span>Naveen Sereddy · Product Design</span>
+      <div class="footer-links">
+        <a href="https://github.com/Naveen-Sereddy" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/naveensereddy" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
