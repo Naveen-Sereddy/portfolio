@@ -1,0 +1,66 @@
+<svg viewBox="0 0 800 420" width="800" height="420" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<rect width="800" height="420" fill="#FFFFFF"/>
+
+<!-- row 1: steps 1-4 -->
+<g font-family="Helvetica, Arial, sans-serif">
+  <rect x="24" y="40" width="164" height="88" rx="8" fill="#FFFFFF" stroke="#E5E5E5"/>
+  <text x="36" y="62" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="#B0B0B0">STEP 1</text>
+  <text x="36" y="86" font-size="11" font-weight="700" fill="#4A4A4A">Receive question</text>
+  <text x="36" y="102" font-size="9" fill="#8A8A8A">from a PM</text>
+
+  <path d="M188 84 h28" stroke="#C9C9C9" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <rect x="216" y="40" width="164" height="88" rx="8" fill="#FFFFFF" stroke="#E5E5E5"/>
+  <text x="228" y="62" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="#B0B0B0">STEP 2</text>
+  <text x="228" y="86" font-size="11" font-weight="700" fill="#4A4A4A">Open the filing</text>
+  <text x="228" y="102" font-size="9" fill="#8A8A8A">150&#8211;250 pages</text>
+
+  <path d="M380 84 h28" stroke="#C9C9C9" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <rect x="408" y="34" width="176" height="100" rx="8" fill="#FDF6EA" stroke="#D0923A" stroke-width="1.4"/>
+  <text x="420" y="56" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="#B08328">STEP 3</text>
+  <text x="420" y="80" font-size="11" font-weight="700" fill="#4A4A4A">Skim the table</text>
+  <text x="420" y="94" font-size="11" font-weight="700" fill="#4A4A4A">of contents</text>
+  <text x="420" y="114" font-size="9" fill="#B08328">12&#8211;18 min</text>
+
+  <path d="M584 84 h28" stroke="#C9C9C9" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <rect x="612" y="34" width="164" height="100" rx="8" fill="#FDF6EA" stroke="#D0923A" stroke-width="1.4"/>
+  <text x="624" y="56" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="#B08328">STEP 4</text>
+  <text x="624" y="80" font-size="11" font-weight="700" fill="#4A4A4A">Read the</text>
+  <text x="624" y="94" font-size="11" font-weight="700" fill="#4A4A4A">relevant section</text>
+  <text x="624" y="114" font-size="9" fill="#B08328">12&#8211;18 min</text>
+
+  <path d="M694 134 v96" stroke="#C9C9C9" stroke-width="1.4" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- row 2: steps 5-7, right to left -->
+  <rect x="612" y="230" width="164" height="100" rx="8" fill="#FDF6EA" stroke="#D0923A" stroke-width="1.4"/>
+  <text x="624" y="252" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="#B08328">STEP 5</text>
+  <text x="624" y="276" font-size="11" font-weight="700" fill="#4A4A4A">Find the exact</text>
+  <text x="624" y="290" font-size="11" font-weight="700" fill="#4A4A4A">quote</text>
+  <text x="624" y="310" font-size="9" fill="#B08328">12&#8211;18 min</text>
+
+  <path d="M612 280 h-28" stroke="#C9C9C9" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <rect x="420" y="236" width="164" height="88" rx="8" fill="#FFFFFF" stroke="#E5E5E5"/>
+  <text x="432" y="258" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="#B0B0B0">STEP 6</text>
+  <text x="432" y="282" font-size="11" font-weight="700" fill="#4A4A4A">Cite the page</text>
+  <text x="432" y="298" font-size="9" fill="#8A8A8A">number, from memory</text>
+
+  <path d="M420 280 h-28" stroke="#C9C9C9" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <rect x="228" y="236" width="164" height="88" rx="8" fill="#FFFFFF" stroke="#E5E5E5"/>
+  <text x="240" y="258" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="#B0B0B0">STEP 7</text>
+  <text x="240" y="282" font-size="11" font-weight="700" fill="#4A4A4A">Draft the answer</text>
+  <text x="240" y="298" font-size="9" fill="#8A8A8A">and send it back</text>
+</g>
+
+<rect x="24" y="360" width="14" height="14" rx="3" fill="#FDF6EA" stroke="#D0923A"/>
+<text x="46" y="372" font-size="10" fill="#8A8A8A">Steps 3&#8211;5: the actual tax, 12&#8211;18 minutes each, collapsed by Testimonium into one query</text>
+
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0 L10 5 L0 10 z" fill="#C9C9C9"/>
+  </marker>
+</defs>
+</svg>
