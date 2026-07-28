@@ -324,6 +324,16 @@
           <h3>Shipped on a CI pipeline, not a manual upload</h3>
           <p>The repo is wired to Vercel through GitHub, so a push to main is what actually goes to production now. Vitest covers every pure-logic module: chunking, embeddings, similarity scoring, citation parsing, and section detection.</p>
         </div>
+        <div class="decision-card">
+          <div class="decision-num">E</div>
+          <h3>Every question got the same answer, and it wasn't the question's fault</h3>
+          <p>A real user reported it: no matter what they asked, they got the identical "I don't know." The chunk store was a plain array in module memory, scoped to one serverless instance. A query landing on a different instance than the upload found an empty store and returned the fallback immediately, before it ever looked at the question. It read like a document limitation. It was actually Vercel routing two requests to two different processes.</p>
+        </div>
+        <div class="decision-card">
+          <div class="decision-num">F</div>
+          <h3>Redis wasn't one fix, it was two</h3>
+          <p>Moving the store to Redis fixed the cross-instance problem and immediately hit a new ceiling: 471 chunks with embeddings serialize to over 30MB, and Upstash caps a single request at 10MB. Writing one key per chunk instead of one blob solved the write. Reading it all back with one <code>mget</code> across every key hit the identical limit from the other direction, the full response bundled into one round trip. Batching both the writes and the reads into groups of 30 keys was what actually closed it, verified live afterward with concurrent requests against a fresh upload.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -344,7 +354,7 @@
           <div class="access-stat"><b>AA</b><span>WCAG 2.1 target, both themes</span></div>
           <div class="access-stat"><b>1.55:1 → 4.5:1</b><span>Amber contrast, before and after the fix</span></div>
           <div class="access-stat"><b>0</b><span>False citations across verification testing</span></div>
-          <div class="access-stat"><b>3</b><span>Real production bugs, root-caused and shipped</span></div>
+          <div class="access-stat"><b>5</b><span>Real production bugs, root-caused and shipped</span></div>
         </div>
       </div>
     </div>
