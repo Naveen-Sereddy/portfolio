@@ -140,7 +140,7 @@
         <div class="decision-card">
           <div class="decision-num">01</div>
           <h3>A confidence gauge, right in the answer</h3>
-          <p>High, Medium, or Low, calculated from the retrieval scores, sitting at the top of the answer card before a single word of the response streams in. The reader calibrates their own skepticism before they start reading, not after.</p>
+          <p>High, Medium, or Low, calculated from the retrieval scores, sitting at the top of the answer card before the answer text reveals. The reader calibrates their own skepticism before they start reading, not after. And it's decoupled from retrieval geometry alone: if the model refuses to answer, the badge always drops to Low with no citations attached, regardless of how strong the underlying retrieval scores were, so a refusal never gets dressed up as a confident answer.</p>
         </div>
 
         <div class="decision-card">
@@ -157,8 +157,8 @@
 
         <div class="decision-card">
           <div class="decision-num">04</div>
-          <h3>An in-memory vector store, on purpose</h3>
-          <p>No database. SQLite doesn't deploy cleanly on Vercel, and at the scale of one document and a few hundred chunks, a database round-trip only adds latency without adding anything the team needed. In-memory retrieval answered in under 200 milliseconds; I showed the team that number before they ever asked about architecture.</p>
+          <h3>No SQL database, on purpose</h3>
+          <p>SQLite doesn't deploy cleanly on Vercel, it's a native module the serverless build can't compile, and at the scale of one document and a few hundred chunks, a full SQL database round-trip only adds latency without adding anything the team needed. This started as a plain in-memory array. It didn't survive contact with production, see bug E below, and now lives in Redis, but the original reasoning against SQLite specifically still holds.</p>
         </div>
 
         <div class="decision-card">
@@ -263,7 +263,7 @@
           <span class="anno-dot" style="left:47%; top:80%" aria-hidden="true">3</span>
         </div>
         <div class="anno-legend two-col">
-          <div class="anno-legend-item"><span class="anno-legend-num">1</span><p><strong>Confidence label, not a percentage.</strong> Testing early versions with a raw score (like "0.83") meant nothing to an analyst. High, Medium, Low reads instantly, and it's the first thing rendered, before the answer text streams in.</p></div>
+          <div class="anno-legend-item"><span class="anno-legend-num">1</span><p><strong>Confidence label, not a percentage.</strong> Testing early versions with a raw score (like "0.83") meant nothing to an analyst. High, Medium, Low reads instantly, and it's the first thing rendered, before the answer text reveals.</p></div>
           <div class="anno-legend-item"><span class="anno-legend-num">2</span><p><strong>Citation chips sit inside the sentence.</strong> This is insight 02 directly: a claim without a page number is dead on arrival. Putting the chip right after the clause it supports means there's never a moment where a claim is floating unsupported.</p></div>
           <div class="anno-legend-item"><span class="anno-legend-num">3</span><p><strong>Copy and regenerate, not a full re-ask.</strong> Analysts wanted to sanity-check a specific answer without retyping the question. Both actions live in the same footer row as the timestamp, not buried in a menu.</p></div>
         </div>
@@ -283,7 +283,7 @@
         <div class="evolution-step">
           <div class="evolution-label"><span class="dot"></span>Ingestion → Retrieval</div>
           <div class="frame" style="--ar:2400/1238"><img src="img/02-upload-progress.png" alt="Testimonium upload in progress, ingesting and chunking a real 10-K filing" loading="lazy" /></div>
-          <p>A PDF gets parsed, section-tagged, and chunked with overlap so a claim near a section boundary doesn't lose its context. Each chunk gets embedded with Gemini's <code>gemini-embedding-001</code>, and a question retrieves its top matches by cosine similarity against an in-memory index, scored and threshold-filtered before anything reaches the model.</p>
+          <p>A PDF gets parsed, section-tagged, and chunked with overlap within each page so a claim near a page boundary doesn't lose its context. Each chunk gets embedded with Gemini's <code>gemini-embedding-001</code>, and a question retrieves its top-k matches by cosine similarity (k is adjustable, 3/5/8, via the citation depth setting) against a Redis-backed session store, scored for a confidence label after the fact rather than filtered beforehand.</p>
         </div>
         <div class="evolution-step">
           <div class="evolution-label"><span class="dot"></span>Generation → Citation</div>
@@ -291,7 +291,8 @@
           <p>Retrieved chunks go to <code>gemini-flash-latest</code> through Gemini's OpenAI-compatible endpoint, prompted specifically for citation accuracy and to refuse when the evidence underneath is too thin. A parser then maps every <code>[n]</code> the model outputs back to the exact chunk it came from, which is what makes the citation chips clickable and correct rather than decorative.</p>
         </div>
       </div>
-      <p style="margin-top:var(--sp-6)">One real story from getting this to production: the model I'd built and tested against, <code>gemini-2.5-flash</code>, got retired mid-project and started returning 404s on the chat endpoint. The error the SDK surfaced wasn't useful, so I wrote a throwaway route that hit the raw endpoint directly with <code>fetch</code> and read Google's actual error body, which said plainly that the model was gone. The fix was switching to the <code>-latest</code> alias instead of pinning a dated model name, specifically so the next retirement doesn't take the app down with it. That's the kind of bug that only shows up once something is actually deployed and staying deployed, not sitting in a design file.</p>
+      <p style="margin-top:var(--sp-6)">One real story from getting this to production: the model I'd built and tested against, <code>gemini-2.5-flash</code>, got retired mid-project and started returning 404s on the chat endpoint. The error the SDK surfaced wasn't useful, so I wrote a throwaway route that hit the raw endpoint directly with <code>fetch</code> and read Google's actual error body, which said plainly that the model was gone. The fix was switching to the <code>-latest</code> alias instead of pinning a dated model name, specifically so the next retirement doesn't take the app down with it. That's a real tradeoff, not a clean win: a <code>-latest</code> alias can also change quality under me with zero warning, and there's no regression eval in place yet to catch that if it happens.</p>
+      <p style="margin-top:var(--sp-5)">There's a small real eval too, not just a claim: <code>npm run eval</code> hits the live deployed API directly, no mocks, with a golden set of six questions, four that should get answered with citations, two genuinely out-of-scope ones that should get a clean refusal, plus a check that Citation Depth actually changes retrieval count. Last run: 6/6 passed, and citation depth returned 3/5/8 as expected. It's honest about its limits: this validates retrieval-and-refusal behavior against one bundled document, it doesn't grade whether the prose itself is a good summary, and the confidence thresholds are still hand-picked, not statistically calibrated. Real evidence for what it checks, not a claim of formal calibration.</p>
     </div>
   </section>
 
@@ -308,31 +309,36 @@
           <div class="decision-num">A</div>
           <h3>A DOMMatrix crash on Vercel, nowhere else</h3>
           <p>The PDF parser depended on a browser API that doesn't exist in Vercel's serverless Node runtime. Fixed with a polyfill, but only after ordering the dynamic imports so the polyfill actually loads before anything that needs it. Static imports get hoisted ahead of your own code, so this had to be deliberate, not incidental.</p>
+          <p style="margin-top:.5rem;font-size:.78rem"><a href="https://github.com/Naveen-Sereddy/Testimonium-SEC-Filing-Research-Tool/commit/8e8a3fa" target="_blank" rel="noopener" style="color:var(--text-3)">commit 8e8a3fa</a></p>
         </div>
         <div class="decision-card">
           <div class="decision-num">B</div>
           <h3>A worker file Vercel's tracer couldn't see</h3>
           <p>The PDF library needed a worker file whose path gets computed at runtime, which Vercel's dependency tracer can't follow statically. It built fine locally and 500'd in production until I force-included the file explicitly in the Next.js config.</p>
+          <p style="margin-top:.5rem;font-size:.78rem"><a href="https://github.com/Naveen-Sereddy/Testimonium-SEC-Filing-Research-Tool/commit/8e8a3fa" target="_blank" rel="noopener" style="color:var(--text-3)">commit 8e8a3fa</a></p>
         </div>
         <div class="decision-card">
           <div class="decision-num">C</div>
           <h3>Errors that failed silently</h3>
           <p>One API route had a catch block with no logging in it at all, so a real failure just looked like nothing happened. Added proper error logging there, matching what the rest of the app already did.</p>
+          <p style="margin-top:.5rem;font-size:.78rem"><a href="https://github.com/Naveen-Sereddy/Testimonium-SEC-Filing-Research-Tool/commit/8e8a3fa" target="_blank" rel="noopener" style="color:var(--text-3)">commit 8e8a3fa</a></p>
         </div>
         <div class="decision-card">
           <div class="decision-num">D</div>
-          <h3>Shipped on a CI pipeline, not a manual upload</h3>
-          <p>The repo is wired to Vercel through GitHub, so a push to main is what actually goes to production now. Vitest covers every pure-logic module: chunking, embeddings, similarity scoring, citation parsing, and section detection.</p>
+          <h3>Continuous deployment, not a manual upload</h3>
+          <p>The repo is wired to Vercel through GitHub, so a push to main builds and deploys automatically. That's continuous deployment, not CI in the strict sense: there's no GitHub Actions workflow running the test suite before a deploy goes out, tests are run locally by hand. Vitest covers every pure-logic module: chunking, embeddings, similarity scoring, citation parsing, and section detection.</p>
         </div>
         <div class="decision-card">
           <div class="decision-num">E</div>
           <h3>Every question got the same answer, and it wasn't the question's fault</h3>
           <p>A real user reported it: no matter what they asked, they got the identical "I don't know." The chunk store was a plain array in module memory, scoped to one serverless instance. A query landing on a different instance than the upload found an empty store and returned the fallback immediately, before it ever looked at the question. It read like a document limitation. It was actually Vercel routing two requests to two different processes.</p>
+          <p style="margin-top:.5rem;font-size:.78rem"><a href="https://github.com/Naveen-Sereddy/Testimonium-SEC-Filing-Research-Tool/commit/67de4d8" target="_blank" rel="noopener" style="color:var(--text-3)">commit 67de4d8</a></p>
         </div>
         <div class="decision-card">
           <div class="decision-num">F</div>
           <h3>Redis wasn't one fix, it was two</h3>
           <p>Moving the store to Redis fixed the cross-instance problem and immediately hit a new ceiling: 471 chunks with embeddings serialize to over 30MB, and Upstash caps a single request at 10MB. Writing one key per chunk instead of one blob solved the write. Reading it all back with one <code>mget</code> across every key hit the identical limit from the other direction, the full response bundled into one round trip. Batching both the writes and the reads into groups of 30 keys was what actually closed it, verified live afterward with concurrent requests against a fresh upload.</p>
+          <p style="margin-top:.5rem;font-size:.78rem"><a href="https://github.com/Naveen-Sereddy/Testimonium-SEC-Filing-Research-Tool/commit/4cbb8b9" target="_blank" rel="noopener" style="color:var(--text-3)">commit 4cbb8b9</a> · <a href="https://github.com/Naveen-Sereddy/Testimonium-SEC-Filing-Research-Tool/commit/06cd767" target="_blank" rel="noopener" style="color:var(--text-3)">06cd767</a></p>
         </div>
       </div>
     </div>
@@ -370,7 +376,7 @@
       </div>
       <div class="shot-grid">
         <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/01-empty-upload.png" alt="Document ready, three suggested questions after a real upload" loading="lazy" /></div><span class="shot-cap">Document ready, suggested questions</span></div>
-        <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/02-upload-progress.png" alt="Upload zone mid-processing, showing real progress" loading="lazy" /></div><span class="shot-cap">Upload in progress</span></div>
+        <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/02-upload-progress.png" alt="Upload zone mid-processing" loading="lazy" /></div><span class="shot-cap">Upload in progress</span></div>
         <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/03-conversation-answer.png" alt="A real answer with confidence gauge and inline citation chips" loading="lazy" /></div><span class="shot-cap">A real answer, live citations</span></div>
         <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/04-citation-expanded.png" alt="Citation expanded to show source page and excerpt" loading="lazy" /></div><span class="shot-cap">Citation expanded, page and excerpt</span></div>
         <div class="shot-item"><div class="frame" style="--ar:2400/1350"><img src="img/07-light-theme.png" alt="The same conversation in light theme" loading="lazy" /></div><span class="shot-cap">Light theme</span></div>
@@ -480,7 +486,7 @@
             <div class="section-head">
               <div class="eyebrow">RAG Pipeline, In Full</div>
               <h2>Everything between an upload and an answer.</h2>
-              <p class="lede">PDF ingestion through <code>pdf-parse</code>, with a section-detection fallback for filings whose headings don't parse cleanly. Chunking by section and page with overlap at the boundaries. Embeddings via <code>gemini-embedding-001</code>. Similarity search against an in-memory store, score-thresholded, top-k scoped to narrative sections only. Generation via <code>gemini-flash-latest</code>, prompted for citation accuracy and refusal on weak evidence. A citation parser mapping model output back to chunk metadata. Confidence scoring derived from retrieval score thresholds, not a separate model call.</p>
+              <p class="lede">PDF ingestion through <code>pdf-parse</code>, with a section-detection fallback for filings whose headings don't parse cleanly. Chunking by section and page, with overlap within each page (not across page boundaries). Embeddings via <code>gemini-embedding-001</code>. Similarity search against a Redis-backed session store, top-k scoped to narrative sections only (k = 3/5/8, user-adjustable). Generation via <code>gemini-flash-latest</code>, prompted for citation accuracy and refusal on weak evidence. A citation parser mapping model output back to chunk metadata. Confidence scoring derived from retrieval score thresholds after generation, not used to filter what reaches the model, and forced to Low with no citations whenever the model actually refuses.</p>
             </div>
           </div>
 
@@ -509,7 +515,7 @@
               </div>
               <div class="note-card">
                 <h3>Motion</h3>
-                <p>A fade-and-rise on new messages, a growing progress bar on upload that tracks real elapsed time instead of guessing, and nothing animated purely for decoration.</p>
+                <p>A fade-and-rise on new messages, a fixed-duration progress bar during upload processing (not tied to byte-level progress, which fetch doesn't expose without extra plumbing), and nothing animated purely for decoration.</p>
               </div>
             </div>
           </div>
