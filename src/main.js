@@ -152,7 +152,7 @@
         { src: "case-testimonium/img/01-empty-upload.png",      cap: "Document ready, suggested questions after a real upload" },
         { src: "case-testimonium/img/03-conversation-answer.png", cap: "A real Gemini answer with inline citation chips" },
         { src: "case-testimonium/img/04-citation-expanded.png",  cap: "Citation expanded, exact page and source excerpt" },
-        { src: "case-testimonium/img/05-settings-panel.png",     cap: "Settings panel, theme and confidence display controls" },
+        { src: "case-testimonium/img/09-evidence-panel.png",     cap: "Persistent evidence panel, always visible on desktop" },
         { src: "case-testimonium/img/07-light-theme.png",        cap: "The same conversation in light theme" },
       ],
     },
