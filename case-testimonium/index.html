@@ -229,7 +229,7 @@
           </div>
           <div class="evolution-step">
             <div class="evolution-label"><span class="dot"></span>Final UI</div>
-            <div class="frame" style="--ar:2400/1238"><img src="img/01-empty-upload.png" alt="Final document-ready empty state, real screenshot from the live app after uploading sample-10k.pdf" loading="lazy" /></div>
+            <div class="frame" style="--ar:2400/1350"><img src="img/01-empty-upload.png" alt="Final document-ready empty state, real screenshot from the live app after uploading sample-10k.pdf" loading="lazy" /></div>
             <p>Same structure, real data: sample-10k.pdf, 112 pages, and the exact sections that got indexed (Risk Factors, Legal Proceedings, MD&amp;A) shown right in the doc bar instead of an abstract token count. The suggested questions are the exact three the shadowing sessions surfaced as the most common asks.</p>
           </div>
         </div>
@@ -245,7 +245,7 @@
           </div>
           <div class="evolution-step">
             <div class="evolution-label"><span class="dot"></span>Final UI</div>
-            <div class="frame" style="--ar:2400/1238"><img src="img/03-conversation-answer.png" alt="Final answer screenshot, real Gemini response to a risk-factors question with five inline citation chips" loading="lazy" /></div>
+            <div class="frame" style="--ar:1280/800"><img src="img/03-conversation-answer.png" alt="Final answer screenshot, real Gemini response to a risk-factors question with five inline citation chips" loading="lazy" /></div>
             <p>A real question, a real Gemini answer, five real citation chips. Same card shape as the wireframe, now carrying serif body text and the amber confidence token.</p>
           </div>
         </div>
@@ -288,12 +288,12 @@
       <div class="evolution-grid">
         <div class="evolution-step">
           <div class="evolution-label"><span class="dot"></span>Ingestion → Retrieval</div>
-          <div class="frame" style="--ar:2400/1238"><img src="img/02-upload-progress.png" alt="Testimonium upload in progress, ingesting and chunking a real 10-K filing" loading="lazy" /></div>
+          <div class="frame" style="--ar:1280/800"><img src="img/02-upload-progress.png" alt="Testimonium upload in progress, ingesting and chunking a real 10-K filing" loading="lazy" /></div>
           <p>A PDF gets parsed, section-tagged, and chunked with overlap within each page so a claim near a page boundary doesn't lose its context. Each chunk gets embedded with Gemini's <code>gemini-embedding-001</code>, and a question retrieves its top-k matches by cosine similarity (k is adjustable, 3/5/8, via the citation depth setting) against a Redis-backed session store, scored for a confidence label after the fact rather than filtered beforehand.</p>
         </div>
         <div class="evolution-step">
           <div class="evolution-label"><span class="dot"></span>Generation → Citation</div>
-          <div class="frame" style="--ar:2400/1238"><img src="img/04-citation-expanded.png" alt="Testimonium citation expanded inline, showing the exact page number and source excerpt behind an answer" loading="lazy" /></div>
+          <div class="frame" style="--ar:1280/800"><img src="img/04-citation-expanded.png" alt="Testimonium citation expanded inline, showing the exact page number and source excerpt behind an answer" loading="lazy" /></div>
           <p>Retrieved chunks go to <code>gemini-flash-latest</code> through Gemini's OpenAI-compatible endpoint, prompted specifically for citation accuracy and to refuse when the evidence underneath is too thin. A parser then maps every <code>[n]</code> the model outputs back to the exact chunk it came from, which is what makes the citation chips clickable and correct rather than decorative.</p>
         </div>
       </div>
@@ -360,7 +360,7 @@
         <p class="lede">A second accessibility pass after launch went past color: every clickable control that was smaller than 44px, citation chips, icon buttons, the retry link, got bumped to a real 44px touch target (citation chips keep their small visual size and get an invisible expanded hit area instead, so the inline typography doesn't change). The help modal got a real focus trap, Tab can't escape it and Escape closes it, replacing a dialog that previously let focus leak to the page behind it.</p>
       </div>
       <div class="access-grid">
-        <div class="frame" style="--ar:2400/1238">
+        <div class="frame" style="--ar:1280/800">
           <img src="img/05-help-panel.png" alt="Testimonium's How this works modal, a focus-trapped panel explaining supported documents, confidence, and citations" loading="lazy" />
         </div>
         <div class="access-stats">
@@ -382,13 +382,13 @@
         <p class="lede">These are screenshots from the live app, not mockups: real uploads, real questions sent to the real Gemini pipeline, both themes, and the one thing every AI tool should show more often, a real refusal when the document doesn't back up the question. The sidebar in every shot nests each question under the one document it belongs to, since v1 is deliberately single-document per session, not a fabricated multi-doc switcher.</p>
       </div>
       <div class="shot-grid">
-        <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/01-empty-upload.png" alt="Document ready, three suggested questions after a real upload" loading="lazy" /></div><span class="shot-cap">Document ready, suggested questions</span></div>
-        <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/02-upload-progress.png" alt="Upload zone mid-processing" loading="lazy" /></div><span class="shot-cap">Upload in progress</span></div>
-        <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/03-conversation-answer.png" alt="A real answer with confidence gauge and inline citation chips" loading="lazy" /></div><span class="shot-cap">A real answer, live citations</span></div>
-        <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/04-citation-expanded.png" alt="Citation expanded to show source page and excerpt" loading="lazy" /></div><span class="shot-cap">Citation expanded, page and excerpt</span></div>
-        <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/09-evidence-panel.png" alt="The persistent evidence panel on desktop, populated with a real citation and a link into the uploaded PDF" loading="lazy" /></div><span class="shot-cap">Evidence panel, always visible on desktop</span></div>
-        <div class="shot-item"><div class="frame" style="--ar:2400/1350"><img src="img/07-light-theme.png" alt="The same conversation in light theme" loading="lazy" /></div><span class="shot-cap">Light theme</span></div>
-        <div class="shot-item"><div class="frame" style="--ar:2400/1350"><img src="img/08-low-confidence.png" alt="A genuine refusal: the model declining to answer a question the filing doesn't cover" loading="lazy" /></div><span class="shot-cap">Refusing to guess</span></div>
+        <div class="shot-item"><div class="frame" style="--ar:2400/1350"><img src="img/01-empty-upload.png" alt="Document ready, three suggested questions after a real upload" loading="lazy" /></div><span class="shot-cap">Document ready, suggested questions</span></div>
+        <div class="shot-item"><div class="frame" style="--ar:1280/800"><img src="img/02-upload-progress.png" alt="Upload zone mid-processing" loading="lazy" /></div><span class="shot-cap">Upload in progress</span></div>
+        <div class="shot-item"><div class="frame" style="--ar:1280/800"><img src="img/03-conversation-answer.png" alt="A real answer with confidence gauge and inline citation chips" loading="lazy" /></div><span class="shot-cap">A real answer, live citations</span></div>
+        <div class="shot-item"><div class="frame" style="--ar:1280/800"><img src="img/04-citation-expanded.png" alt="Citation expanded to show source page and excerpt" loading="lazy" /></div><span class="shot-cap">Citation expanded, page and excerpt</span></div>
+        <div class="shot-item"><div class="frame" style="--ar:1280/800"><img src="img/09-evidence-panel.png" alt="The persistent evidence panel on desktop, populated with a real citation and a link into the uploaded PDF" loading="lazy" /></div><span class="shot-cap">Evidence panel, always visible on desktop</span></div>
+        <div class="shot-item"><div class="frame" style="--ar:1280/800"><img src="img/07-light-theme.png" alt="The same conversation in light theme" loading="lazy" /></div><span class="shot-cap">Light theme</span></div>
+        <div class="shot-item"><div class="frame" style="--ar:1280/800"><img src="img/08-low-confidence.png" alt="A genuine refusal: the model declining to answer a question the filing doesn't cover" loading="lazy" /></div><span class="shot-cap">Refusing to guess</span></div>
       </div>
       <div style="max-width:220px;margin:var(--sp-7) auto 0">
         <div class="frame" style="--ar:390/844"><img src="img/06-mobile-conversation.png" alt="The same conversation view on a mobile viewport" loading="lazy" /></div>
