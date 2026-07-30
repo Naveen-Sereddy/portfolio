@@ -173,6 +173,12 @@
           <p>The team worked dark-room, multi-monitor setups almost universally. Every color token in the system got built and checked dark-first, with light mode derived and separately audited afterward, not the other way around.</p>
         </div>
 
+        <div class="decision-card">
+          <div class="decision-num">07</div>
+          <h3>A persistent evidence panel, not just an inline drawer</h3>
+          <p>The inline citation drawer answered "what does this claim cite" but disappeared the moment you clicked the next citation, and analysts kept losing their place mid-comparison. On desktop, a right-hand panel now holds whatever citation was clicked last: excerpt, page, section, and a real link into the reader's own uploaded PDF at that exact page. It's additive, not a replacement, the inline drawer still works the same way, and it only shows on desktop, where the width to spare it actually exists.</p>
+        </div>
+
       </div>
     </div>
   </section>
@@ -224,7 +230,7 @@
           <div class="evolution-step">
             <div class="evolution-label"><span class="dot"></span>Final UI</div>
             <div class="frame" style="--ar:2400/1238"><img src="img/01-empty-upload.png" alt="Final document-ready empty state, real screenshot from the live app after uploading sample-10k.pdf" loading="lazy" /></div>
-            <p>Same structure, real data: sample-10k.pdf, 112 pages, ~118K tokens. The suggested questions are the exact three the shadowing sessions surfaced as the most common asks.</p>
+            <p>Same structure, real data: sample-10k.pdf, 112 pages, and the exact sections that got indexed (Risk Factors, Legal Proceedings, MD&amp;A) shown right in the doc bar instead of an abstract token count. The suggested questions are the exact three the shadowing sessions surfaced as the most common asks.</p>
           </div>
         </div>
       </div>
@@ -351,16 +357,17 @@
         <div class="eyebrow">Accessibility</div>
         <h2>The amber token failed at 1.55:1. I found that before launch, not after.</h2>
         <p class="lede">WCAG 2.1 AA wasn't a checklist item at the end. I tested every color token against both themes as I built them, and the confidence-gauge amber failed contrast badly in light mode: 1.55:1 against a 4.5:1 target for text. I split the token, a darker amber in light mode, the original in dark mode, same hue, different values, both passing.</p>
+        <p class="lede">A second accessibility pass after launch went past color: every clickable control that was smaller than 44px, citation chips, icon buttons, the retry link, got bumped to a real 44px touch target (citation chips keep their small visual size and get an invisible expanded hit area instead, so the inline typography doesn't change). The help modal got a real focus trap, Tab can't escape it and Escape closes it, replacing a dialog that previously let focus leak to the page behind it.</p>
       </div>
       <div class="access-grid">
         <div class="frame" style="--ar:2400/1238">
-          <img src="img/05-settings-panel.png" alt="Testimonium settings panel, theme toggle and confidence display controls" loading="lazy" />
+          <img src="img/05-help-panel.png" alt="Testimonium's How this works modal, a focus-trapped panel explaining supported documents, confidence, and citations" loading="lazy" />
         </div>
         <div class="access-stats">
           <div class="access-stat"><b>AA</b><span>WCAG 2.1 target, both themes</span></div>
           <div class="access-stat"><b>1.55:1 → 4.5:1</b><span>Amber contrast, before and after the fix</span></div>
+          <div class="access-stat"><b>44px</b><span>Minimum touch target, every interactive control</span></div>
           <div class="access-stat"><b>0</b><span>False citations across verification testing</span></div>
-          <div class="access-stat"><b>5</b><span>Real production bugs, root-caused and shipped</span></div>
         </div>
       </div>
     </div>
@@ -372,13 +379,14 @@
       <div class="section-head">
         <div class="eyebrow">Product</div>
         <h2>Upload a filing. Ask it something. Check the receipt.</h2>
-        <p class="lede">These are screenshots from the live app, not mockups: real uploads, real questions sent to the real Gemini pipeline, both themes, and the one thing every AI tool should show more often, a real refusal when the document doesn't back up the question.</p>
+        <p class="lede">These are screenshots from the live app, not mockups: real uploads, real questions sent to the real Gemini pipeline, both themes, and the one thing every AI tool should show more often, a real refusal when the document doesn't back up the question. The sidebar in every shot nests each question under the one document it belongs to, since v1 is deliberately single-document per session, not a fabricated multi-doc switcher.</p>
       </div>
       <div class="shot-grid">
         <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/01-empty-upload.png" alt="Document ready, three suggested questions after a real upload" loading="lazy" /></div><span class="shot-cap">Document ready, suggested questions</span></div>
         <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/02-upload-progress.png" alt="Upload zone mid-processing" loading="lazy" /></div><span class="shot-cap">Upload in progress</span></div>
         <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/03-conversation-answer.png" alt="A real answer with confidence gauge and inline citation chips" loading="lazy" /></div><span class="shot-cap">A real answer, live citations</span></div>
         <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/04-citation-expanded.png" alt="Citation expanded to show source page and excerpt" loading="lazy" /></div><span class="shot-cap">Citation expanded, page and excerpt</span></div>
+        <div class="shot-item"><div class="frame" style="--ar:2400/1238"><img src="img/09-evidence-panel.png" alt="The persistent evidence panel on desktop, populated with a real citation and a link into the uploaded PDF" loading="lazy" /></div><span class="shot-cap">Evidence panel, always visible on desktop</span></div>
         <div class="shot-item"><div class="frame" style="--ar:2400/1350"><img src="img/07-light-theme.png" alt="The same conversation in light theme" loading="lazy" /></div><span class="shot-cap">Light theme</span></div>
         <div class="shot-item"><div class="frame" style="--ar:2400/1350"><img src="img/08-low-confidence.png" alt="A genuine refusal: the model declining to answer a question the filing doesn't cover" loading="lazy" /></div><span class="shot-cap">Refusing to guess</span></div>
       </div>
@@ -515,7 +523,7 @@
               </div>
               <div class="note-card">
                 <h3>Motion</h3>
-                <p>A fade-and-rise on new messages, a fixed-duration progress bar during upload processing (not tied to byte-level progress, which fetch doesn't expose without extra plumbing), and nothing animated purely for decoration.</p>
+                <p>A fade-and-rise on new messages, staged upload labels ("Reading PDF," "Finding supported sections," "Indexing") instead of a fake progress bar, the first two timed since that work is genuinely fast, the last one open-ended since embedding time actually varies with document size, and nothing animated purely for decoration.</p>
               </div>
             </div>
           </div>
