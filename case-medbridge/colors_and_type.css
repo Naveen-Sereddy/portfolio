@@ -67,6 +67,10 @@
   --accent-hover:   var(--brand-700);
   --focus-ring:     #2E80E6;        /* 3px outline for keyboard focus */
 
+  /* ---- LOGO (surface-aware) ------------------------------------------- */
+  --logo-on-light:  var(--brand-600);  /* white/cream cards, light page bg */
+  --logo-on-dark:   var(--white);      /* sidebar, colored brand panels, dark headers */
+
   /* ---- TYPOGRAPHY -------------------------------------------------------- */
   --font-sans: "Hanken Grotesk", "Inter", -apple-system, BlinkMacSystemFont,
                "Segoe UI", Roboto, sans-serif;
