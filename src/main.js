@@ -162,7 +162,7 @@
       title: "FinFlow",
       meta: "UX Case Study · B2B Fintech · 2025",
       kind: "Client · NDA",
-      desc: "B2B expense platform, redesigned end to end — task completion jumped 73% → 89%.",
+      desc: "B2B expense platform, redesigned end to end. Task completion jumped 73% → 89%.",
       roles: ["User Research", "Usability Testing", "Data Visualization", "Design System"],
       outcome: { value: "73% → 89%", label: "task completion · real internal result" },
       caseUrl: "case-finflow/index.html",

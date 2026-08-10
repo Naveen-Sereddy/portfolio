@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#0d0404" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230d0404'/%3E%3Ctext x='16' y='21' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23d0923a' text-anchor='middle'%3ENS%3C/text%3E%3C/svg%3E" />
-<title>FinFlow — Full Screen Board · Naveen Sereddy</title>
+<title>FinFlow: Full Screen Board · Naveen Sereddy</title>
 <meta name="description" content="Every real screen from the FinFlow prototype, laid out as one Figma-style board with grounded design notes." />
 <meta name="robots" content="noindex" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -118,8 +118,8 @@ h1,h2,h3 { font-family:'Outfit',Arial,sans-serif; line-height:1.15; margin:0; le
 <div class="toolbar">
   <div class="toolbar-left">
     <a class="tb-back" href="index.html">← Case study</a>
-    <span class="tb-title">FinFlow — Full Screen Board</span>
-    <span class="tb-sub" id="screenCount">48 screens</span>
+    <span class="tb-title">FinFlow: Full Screen Board</span>
+    <span class="tb-sub" id="screenCount">47 screens</span>
   </div>
   <div class="toolbar-right">
     <span class="tb-hint">drag to pan · scroll / pinch to zoom</span>
@@ -133,8 +133,8 @@ h1,h2,h3 { font-family:'Outfit',Arial,sans-serif; line-height:1.15; margin:0; le
     <div class="cover-frame">
       <div class="cover-eyebrow">FinFlow · Design board</div>
       <h1>The whole company's spend, in flow.</h1>
-      <div class="cover-count">48 screens · 3 roles · 1 shared workspace</div>
-      <p>FinFlow is the expense-management workspace built for Reyonal — a growing SaaS company (100–500 employees) that had outgrown receipt-by-Slack but wasn't ready for an enterprise ERP. Teams in this band lose 6–10 finance hours a month to receipt chasing, plus another 4–6 hours per monthly close — and often don't catch policy violations until quarterly review. Personas and workflows here were derived from stakeholder interviews across Reyonal's finance, sales, and marketing teams.</p>
+      <div class="cover-count">47 screens · 3 roles · 1 shared workspace</div>
+      <p>FinFlow is the expense-management workspace built for Reyonal, a growing SaaS company (100 to 500 employees) that had outgrown receipt-by-Slack but wasn't ready for an enterprise ERP. Teams in this band lose 6 to 10 finance hours a month to receipt chasing, plus another 4 to 6 hours per monthly close, and often don't catch policy violations until quarterly review. Personas and workflows here were derived from stakeholder interviews across Reyonal's finance, sales, and marketing teams.</p>
       <p>Product vision: <em>"The whole company's spend, in flow."</em> One workspace where a Finance Admin can see, decide, and close the month without leaving for QuickBooks, Slack, or Excel. Employees submit in 30 seconds on mobile. Managers approve in 2 clicks. Auditors get an immutable trail.</p>
       <ul class="cover-goals">
         <li>30+ desktop screens across submission, approval, cards, reimbursements, reports, settings, and audit</li>
@@ -142,7 +142,7 @@ h1,h2,h3 { font-family:'Outfit',Arial,sans-serif; line-height:1.15; margin:0; le
         <li>Light + dark themes defined as tokens from day one</li>
         <li>WCAG 2.1 AA across every surface</li>
       </ul>
-      <div class="cover-note">Drag to pan, scroll or pinch to zoom. Every screen below is a real state captured from the working prototype — grouped by the role that owns it, plus one shared section for auth, system states, and mobile.</div>
+      <div class="cover-note">Drag to pan, scroll or pinch to zoom. Every screen below is a real state captured from the working prototype, grouped by the role that owns it, plus one shared section for auth, system states, and mobile.</div>
     </div>
 
     <div id="sections"></div>
@@ -155,67 +155,66 @@ h1,h2,h3 { font-family:'Outfit',Arial,sans-serif; line-height:1.15; margin:0; le
 <script>
 const SCREENS = [
   // ---------------- Finance Admin (Marcus Stoinis, Head of Finance) ----------------
-  { id:'dashboard', label:'Finance Admin overview', section:'admin', note:"KPI strip + two-column hero (Option 2 of 3 considered). Marcus has ~6 seconds each morning to read spend, approvals, risk, and cash — a configurable card-grid tested lower on that scan." },
-  { id:'expenses', label:'Expenses — list', section:'admin', note:"Chips + dense table beat Kanban in testing: bulk actions matter more than visual status columns on a 5K+ row workspace." },
-  { id:'expense-detail', label:'Expense detail', section:'admin', note:"The page every expense list links to — deep-links back to vendor, cardholder, and approval chain per the IA's cross-entity-link rule." },
-  { id:'flagged', label:'Policy flagged', section:'admin', note:"Inline policy result shown per row, not buried in audit — catching violations before close, not during quarterly review." },
+  { id:'onb-workspace', label:'Onboarding · Welcome & workspace', section:'admin', note:"The single entry point for the whole product now. Round 2 dropped separate sign-in/SSO screens in favor of one workspace-creation step, since every account here starts life as a fresh company signup, not an invite to an existing one." },
+  { id:'onb-company', label:'Onboarding · Company details', section:'admin', note:"Sets currency, fiscal calendar, and tax handling before Marcus sees a single dollar figure. Those defaults touch every report and close packet downstream, so they're collected once, up front." },
+  { id:'onb-connect', label:'Onboarding · Connect financial systems', section:'admin', note:"Wires FinFlow to the company's real card processor and accounting stack before any data flows. QuickBooks ships in v1 per the project's explicit scope; NetSuite was deliberately deferred to v1.1." },
+  { id:'onb-invite', label:'Onboarding · Invite team', section:'admin', note:"Brings Managers and Employees into the workspace Marcus just set up. The same RBAC model referenced later across audit log and approvals starts here." },
+  { id:'onb-policy', label:'Onboarding · Expense policy', section:'admin', note:"The spend rules configured here drive every inline policy flag seen later on Approvals and Expenses, set once during setup instead of re-declared screen by screen." },
+  { id:'onb-success', label:'Onboarding · Success & launch', section:'admin', note:"Closes the setup loop before handing Marcus into the real dashboard, confirming what's connected and what's still pending instead of dropping him into an empty workspace with no context." },
+  { id:'dashboard', label:'Finance Admin overview', section:'admin', note:"KPI strip + two-column hero (Option 2 of 3 considered). Marcus has ~6 seconds each morning to read spend, approvals, risk, and cash, and a configurable card-grid tested lower on that scan." },
+  { id:'expenses', label:'Expenses list', section:'admin', note:"Chips + dense table beat Kanban in testing: bulk actions matter more than visual status columns on a 5K+ row workspace." },
+  { id:'expense-detail', label:'Expense detail', section:'admin', note:"The page every expense list links to, deep-linking back to vendor, cardholder, and approval chain per the IA's cross-entity-link rule." },
+  { id:'flagged', label:'Policy flagged', section:'admin', note:"Inline policy result shown per row, not buried in audit, catching violations before close instead of during quarterly review." },
   { id:'import', label:'Bulk import CSV', section:'admin', note:"Power-user escape hatch for entering a batch of expenses at once, outside the one-at-a-time submission flow." },
-  { id:'reimburse', label:'Payouts list', section:'admin', note:"Replaces a manually-built ACH file uploaded to a bank portal — now a schedulable list inside the same workspace." },
+  { id:'reimburse', label:'Payouts list', section:'admin', note:"Replaces a manually-built ACH file uploaded to a bank portal, now a schedulable list inside the same workspace." },
   { id:'schedule-payout', label:'Schedule payout', section:'admin', note:"3 clicks to schedule one ACH batch, with a 2-hour cancel window before it's final." },
-  { id:'reports', label:'Reports home', section:'admin', note:"Leads with KPI tiles + a saved-reports table (Option 2 of 3). Marcus's monthly close packet is the same template every month — the builder stays out of that daily path." },
-  { id:'report-build', label:'Report builder', section:'admin', note:"A dedicated route reachable from the primary action, not the default landing — built for the 1-in-8 sessions that need a custom pull." },
-  { id:'saved-report', label:'Saved report', section:'admin', note:"The close-packet template itself — projected to cut Marcus's close time from 4+ hours to 22 minutes." },
-  { id:'export-report', label:'Export', section:'admin', note:"PDF / CSV / QuickBooks export of a saved report — the last step in closing the month and emailing the board packet." },
-  { id:'cards', label:'Cards list', section:'admin', note:"Replaces the separate vendor portal Marcus used to issue cards — balance vs. limit is now visible inline instead of in another tab." },
+  { id:'reports', label:'Reports home', section:'admin', note:"Leads with KPI tiles + a saved-reports table (Option 2 of 3). Marcus's monthly close packet is the same template every month, so the builder stays out of that daily path." },
+  { id:'report-build', label:'Report builder', section:'admin', note:"A dedicated route reachable from the primary action, not the default landing, built for the 1-in-8 sessions that need a custom pull." },
+  { id:'saved-report', label:'Saved report', section:'admin', note:"The close-packet template itself, projected to cut Marcus's close time from 4+ hours to 22 minutes." },
+  { id:'export-report', label:'Export', section:'admin', note:"PDF / CSV / QuickBooks export of a saved report, the last step in closing the month and emailing the board packet." },
+  { id:'cards', label:'Cards list', section:'admin', note:"Replaces the separate vendor portal Marcus used to issue cards. Balance vs. limit is now visible inline instead of in another tab." },
   { id:'card-detail', label:'Card detail', section:'admin', note:"Per-card spend and limit history, linked from every expense that card touches." },
   { id:'issue-card', label:'Issue new card', section:'admin', note:"Virtual card issuance in under 60 seconds, versus a 1–2 day turnaround through the old vendor portal." },
   { id:'vendors', label:'Vendor directory', section:'admin', note:"Spend-by-vendor visibility that used to live in a filtered spreadsheet." },
   { id:'vendor-detail', label:'Vendor detail', section:'admin', note:"Spend-over-time for a single vendor, linked from every expense and report that touches them." },
   { id:'audit', label:'Audit log', section:'admin', note:"The single highest-impact IA decision in round-2 testing: promoting this out of Settings took “find the audit log” completion from 50% to 92%." },
-  { id:'settings-profile', label:'Settings · Profile', section:'admin', note:"First of 7 left-tab settings areas — the shell pattern (Stripe / GitHub / Linear-style) was chosen so Settings stops being “a graveyard.”" },
-  { id:'settings-security', label:'Settings · Security & 2FA', section:'admin', note:"SOC 2 is table-stakes for this segment — audit log, RBAC, and 2FA are expected from day one, not bolted on later." },
+  { id:'settings-profile', label:'Settings · Profile', section:'admin', note:"First of 7 left-tab settings areas. The shell pattern (Stripe / GitHub / Linear-style) was chosen so Settings stops being “a graveyard.”" },
+  { id:'settings-security', label:'Settings · Security & 2FA', section:'admin', note:"SOC 2 is table-stakes for this segment. Audit log, RBAC, and 2FA are expected from day one, not bolted on later." },
   { id:'settings-team', label:'Settings · Team & roles', section:'admin', note:"Where Marcus manages who has access to what, feeding the RBAC model referenced across audit log and approvals." },
-  { id:'settings-policies', label:'Settings · Policies', section:'admin', note:"The same policy engine configured during onboarding — edits here later show up as an “Edited Policy” row in the audit log." },
+  { id:'settings-policies', label:'Settings · Policies', section:'admin', note:"The same policy engine configured during onboarding. Edits here later show up as an “Edited Policy” row in the audit log." },
   { id:'settings-integrations', label:'Settings · Integrations', section:'admin', note:"QuickBooks ships in v1 per the project's explicit scope; NetSuite was deliberately deferred to v1.1." },
   { id:'settings-billing', label:'Settings · Billing', section:'admin', note:"FinFlow's own subscription/billing management, kept separate from the company's actual expense and card data." },
   { id:'settings-notif', label:'Settings · Notification prefs', section:'admin', note:"Controls the push/email alerts both Corey and Xavier rely on instead of checking email or Slack." },
-  { id:'onb-bank', label:'Onboarding · Connect bank / cards', section:'admin', note:"First-run setup step for the Finance Admin — wires FinFlow to the company's real card processor before any data flows." },
-  { id:'onb-team', label:'Onboarding · Invite team', section:'admin', note:"Second onboarding step — brings Managers and Employees into the workspace Marcus just set up." },
-  { id:'onb-policy', label:'Onboarding · Set policy', section:'admin', note:"Third onboarding step — the spend rules configured here drive every inline policy flag seen later on Approvals and Expenses." },
 
   // ---------------- Manager (Xavier Bartlett, VP Sales) ----------------
-  { id:'dashboard-mgr', label:'Manager dashboard', section:'manager', note:"Xavier's role-aware landing — same KPI grammar as the Admin dashboard, re-scoped to his team's budget and queue so switching roles doesn't mean relearning the layout." },
-  { id:'approvals', label:'Approvals queue', section:'manager', note:"Dense list + persistent bulk-action bar (Option 2 of 3). Manager testing named bulk-approve the single most-loved feature — 3+ minutes saved per session." },
+  { id:'dashboard-mgr', label:'Manager dashboard', section:'manager', note:"Xavier's role-aware landing, same KPI grammar as the Admin dashboard, re-scoped to his team's budget and queue so switching roles doesn't mean relearning the layout." },
+  { id:'approvals', label:'Approvals queue', section:'manager', note:"Dense list + persistent bulk-action bar (Option 2 of 3). Manager testing named bulk-approve the single most-loved feature, saving 3+ minutes per session." },
   { id:'approval-detail', label:'Approval detail', section:'manager', note:"Where Xavier reviews the ~20% of items that need a real look, with an override note as a first-class field, not a disappearing Slack comment." },
-  { id:'approval-bulk', label:'Bulk approve (queue)', section:'manager', note:"The one-click “approve all in-policy under $X” macro — took clicks-per-decision from 7 down to 2 average." },
+  { id:'approval-bulk', label:'Bulk approve (queue)', section:'manager', note:"The one-click “approve all in-policy under $X” macro, taking clicks-per-decision from 7 down to 2 average." },
   { id:'approval-history', label:'Approval history', section:'manager', note:"Audit trail of past decisions, so “why was this approved” never requires asking Xavier directly." },
 
   // ---------------- Employee (Corey Anderson, Product Marketing) ----------------
-  { id:'dashboard-emp', label:'Employee dashboard', section:'employee', note:"Corey's landing screen — stripped to spend-to-date and recent activity. They never see approvals, cards, or reports here; those aren't their job." },
-  { id:'new-expense', label:'New expense (desktop)', section:'employee', note:"The rarely-used desktop counterpart — persona research found Corey “almost never uses the desktop product,” so this mainly covers edge cases mobile can't." },
-  { id:'ocr', label:'Receipt OCR review', section:'employee', note:"The step right after Corey snaps a photo — OCR fills the form but they can correct misreads, directly addressing a named pain point (“photo-only OCR often misread amounts”)." },
-  { id:'payout-detail', label:'Payout detail', section:'employee', note:"Answers the exact confidence anchor persona research called out: “when will I get paid” — without a Slack message to Finance." },
+  { id:'dashboard-emp', label:'Employee dashboard', section:'employee', note:"Corey's landing screen, stripped to spend-to-date and recent activity. They never see approvals, cards, or reports here; those aren't their job." },
+  { id:'new-expense', label:'New expense (desktop)', section:'employee', note:"The rarely-used desktop counterpart. Persona research found Corey “almost never uses the desktop product,” so this mainly covers edge cases mobile can't." },
+  { id:'ocr', label:'Receipt OCR review', section:'employee', note:"The step right after Corey snaps a photo. OCR fills the form but they can correct misreads, directly addressing a named pain point (“photo-only OCR often misread amounts”)." },
+  { id:'payout-detail', label:'Payout detail', section:'employee', note:"Answers the exact confidence anchor persona research called out: “when will I get paid,” without a Slack message to Finance." },
   { id:'notif', label:'Notifications center', section:'employee', note:"The in-product home for the alerts Corey relies on: one push when approved, one when paid." },
   { id:'help', label:'Help / Support', section:'employee', note:"Kept out of Corey's “My work” nav group so it doesn't compete with the two things they actually do daily." },
-  { id:'mobile-flow', label:'Employee mobile flow (8 screens)', section:'employee', note:"A deliberately separate, employee-only experience (Option 2 of 3): Sign in, Home, Snap receipt, New expense, Submit success, Status timeline, My expenses, My card. Full desktop parity was rejected as wasteful; the mobile build only covers what actually happens on a phone. Corey never approves, builds reports, or sees other people's spend here — checking their own expense history and managing their own card made the cut, batch approvals and audit logs didn't." },
+  { id:'mobile-flow', label:'Employee mobile flow (8 screens)', section:'employee', note:"A deliberately separate, employee-only experience (Option 2 of 3): Sign in, Home, Snap receipt, New expense, Submit success, Status timeline, My expenses, My card. Full desktop parity was rejected as wasteful; the mobile build only covers what actually happens on a phone. Corey never approves, builds reports, or sees other people's spend here. Checking their own expense history and managing their own card made the cut; batch approvals and audit logs didn't." },
 
   // ---------------- Shared / System ----------------
-  { id:'signin', label:'Sign in', section:'shared', note:"Shared auth surface for all three roles — Okta SSO listed above email/password for the keyboard-first power users." },
-  { id:'sso', label:'SSO / Workspace', section:'shared', note:"Auth is shared across all three roles — one login surface regardless of what a person does inside FinFlow." },
-  { id:'forgot', label:'Forgot password', section:'shared', note:"Standard recovery step in the shared auth shell." },
-  { id:'reset', label:'Reset password', section:'shared', note:"Completes the shared auth flow — same visual system as sign-in, no separate design language." },
   { id:'state-loading', label:'Loading dashboard', section:'shared', note:"One of 5 explicit states scoped into v1 (loading / empty / error / success / confirmation) so no surface ships with an undefined in-between." },
-  { id:'state-empty', label:'Empty expenses', section:'shared', note:"The zero-state for a fresh workspace or a fully-cleared filter — same system as every other state, no special-cased design." },
+  { id:'state-empty', label:'Empty expenses', section:'shared', note:"The zero-state for a fresh workspace or a fully-cleared filter, same system as every other state, no special-cased design." },
   { id:'state-error', label:'Error', section:'shared', note:"A recoverable failure with a status-page link and a support escape hatch, not a dead end." },
-  { id:'state-success', label:'Success — approval', section:'shared', note:"The confirmation moment after an approval decision — small, but part of never leaving a decision ambiguous." },
-  { id:'state-confirm', label:'Confirmation — payout scheduled', section:'shared', note:"Closes the loop on Schedule payout, pairing with the 2-hour cancel window before the batch is final." },
+  { id:'state-success', label:'Success, approval', section:'shared', note:"The confirmation moment after an approval decision, small, but part of never leaving a decision ambiguous." },
+  { id:'state-confirm', label:'Confirmation: payout scheduled', section:'shared', note:"Closes the loop on Schedule payout, pairing with the 2-hour cancel window before the batch is final." },
 ];
 
 const SECTIONS = [
-  { key:'admin', eyebrow:'Role · Finance Admin', title:'Marcus Stoinis — Head of Finance', desc:'Owns close, audit, policy, cards, and reporting. Approvals also reach his queue, but Xavier is the dedicated approver below.' },
-  { key:'manager', eyebrow:'Role · Manager', title:'Xavier Bartlett — VP Sales', desc:'Runs the approvals queue for his 12-person team. Also uses Reports and Settings, which share the same surfaces shown under Finance Admin.' },
-  { key:'employee', eyebrow:'Role · Employee', title:'Corey Anderson — Product Marketing', desc:'Submits, tracks, and gets paid — almost entirely from their phone. Rarely touches the desktop product.' },
-  { key:'shared', eyebrow:'Cross-role', title:'Shared / System', desc:'Auth and system states that sit outside any single role — the same shell every persona above passes through.' },
+  { key:'admin', eyebrow:'Role · Finance Admin', title:'Marcus Stoinis, Head of Finance', desc:'Owns close, audit, policy, cards, and reporting. Approvals also reach his queue, but Xavier is the dedicated approver below.' },
+  { key:'manager', eyebrow:'Role · Manager', title:'Xavier Bartlett, VP Sales', desc:'Runs the approvals queue for his 12-person team. Also uses Reports and Settings, which share the same surfaces shown under Finance Admin.' },
+  { key:'employee', eyebrow:'Role · Employee', title:'Corey Anderson, Product Marketing', desc:'Submits, tracks, and gets paid, almost entirely from their phone. Rarely touches the desktop product.' },
+  { key:'shared', eyebrow:'Cross-role', title:'Shared / System', desc:'Auth and system states that sit outside any single role, the same shell every persona above passes through.' },
 ];
 
 const sectionsEl = document.getElementById('sections');

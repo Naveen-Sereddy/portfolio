@@ -30,15 +30,15 @@ window.FF_DATA = (() => {
 
   const vendors = [
     { id: "v1", name: "Figma",            cat: "sw", spend: 18420, change:  4.2 },
-    { id: "v2", name: "AWS",              cat: "sw", spend: 41280, change:  9.1 },
+    { id: "v2", name: "Google Cloud",     cat: "sw", spend: 41280, change:  9.1 },
     { id: "v3", name: "United Airlines",  cat: "tr", spend: 23715, change: -2.4 },
     { id: "v4", name: "Notion",           cat: "sw", spend:  3960, change:  0.8 },
-    { id: "v5", name: "Blue Bottle",      cat: "me", spend:  1820, change: 12.0 },
-    { id: "v6", name: "Reforge",          cat: "sw", spend:  8400, change:  0.0 },
+    { id: "v5", name: "Starbucks",        cat: "me", spend:  1820, change: 12.0 },
+    { id: "v6", name: "Udemy",            cat: "sw", spend:  8400, change:  0.0 },
     { id: "v7", name: "Marriott",         cat: "tr", spend: 14280, change: -5.5 },
     { id: "v8", name: "Lyft",             cat: "tr", spend:  4810, change:  3.1 },
     { id: "v9", name: "Webflow",          cat: "sw", spend:  2940, change:  6.7 },
-    { id: "v10",name: "Eventbrite",       cat: "ad", spend:  6420, change: -1.2 }
+    { id: "v10",name: "Ticketmaster",     cat: "ad", spend:  6420, change: -1.2 }
   ];
 
   const employees = [
@@ -57,17 +57,17 @@ window.FF_DATA = (() => {
     { id: "EXP-2841", date: "2026-05-22", merchant: "United Airlines",  amount:  842.50, cat: "tr", who: "Jordan Lee",      status: "pending",  policy: "ok",      cardLast4: "4112", memo: "SF → Austin (sales kickoff)" },
     { id: "EXP-2840", date: "2026-05-22", merchant: "Figma",             amount:  180.00, cat: "sw", who: "James Taylor",   status: "approved", policy: "ok",      cardLast4: "9032", memo: "Pro seats × 2" },
     { id: "EXP-2839", date: "2026-05-21", merchant: "Marriott Austin",   amount: 1240.00, cat: "tr", who: "Jordan Lee",      status: "flagged",  policy: "over",    cardLast4: "4112", memo: "3 nights — exceeds $300/night cap" },
-    { id: "EXP-2838", date: "2026-05-21", merchant: "Blue Bottle",       amount:   42.80, cat: "me", who: "Corey Anderson",  status: "approved", policy: "ok",      cardLast4: "9032", memo: "Team coffee, Q2 review" },
-    { id: "EXP-2837", date: "2026-05-20", merchant: "AWS",               amount: 3204.18, cat: "sw", who: "Sam Richardson",  status: "approved", policy: "ok",      cardLast4: "4112", memo: "Monthly infra" },
+    { id: "EXP-2838", date: "2026-05-21", merchant: "Starbucks",         amount:   42.80, cat: "me", who: "Corey Anderson",  status: "approved", policy: "ok",      cardLast4: "9032", memo: "Team coffee, Q2 review" },
+    { id: "EXP-2837", date: "2026-05-20", merchant: "Google Cloud",      amount: 3204.18, cat: "sw", who: "Sam Richardson",  status: "approved", policy: "ok",      cardLast4: "4112", memo: "Monthly infra" },
     { id: "EXP-2836", date: "2026-05-20", merchant: "Lyft",              amount:   38.60, cat: "tr", who: "Jamie Smith",     status: "pending",  policy: "ok",      cardLast4: "4112", memo: "Client visit" },
     { id: "EXP-2835", date: "2026-05-19", merchant: "Webflow",           amount:  290.00, cat: "sw", who: "James Taylor",   status: "pending",  policy: "needs",   cardLast4: "9032", memo: "Missing receipt" },
-    { id: "EXP-2834", date: "2026-05-19", merchant: "Reforge",           amount:  995.00, cat: "sw", who: "Corey Anderson",  status: "approved", policy: "ok",      cardLast4: "9032", memo: "PMM intensive course" },
+    { id: "EXP-2834", date: "2026-05-19", merchant: "Udemy",             amount:  995.00, cat: "sw", who: "Corey Anderson",  status: "approved", policy: "ok",      cardLast4: "9032", memo: "PMM intensive course" },
     { id: "EXP-2833", date: "2026-05-18", merchant: "Notion",            amount:   88.00, cat: "sw", who: "Riley Meredith",  status: "approved", policy: "ok",      cardLast4: "4112", memo: "Plus seat" },
-    { id: "EXP-2832", date: "2026-05-18", merchant: "Eventbrite",        amount:  640.00, cat: "ad", who: "Corey Anderson",  status: "rejected", policy: "violate", cardLast4: "9032", memo: "Sponsorship — needs CMO sign-off" },
+    { id: "EXP-2832", date: "2026-05-18", merchant: "Ticketmaster",      amount:  640.00, cat: "ad", who: "Corey Anderson",  status: "rejected", policy: "violate", cardLast4: "9032", memo: "Sponsorship — needs CMO sign-off" },
     { id: "EXP-2831", date: "2026-05-17", merchant: "United Airlines",   amount:  516.00, cat: "tr", who: "Sam Curran",      status: "approved", policy: "ok",      cardLast4: "4112", memo: "Client onsite — Seattle" },
-    { id: "EXP-2830", date: "2026-05-17", merchant: "WeWork",            amount:  220.00, cat: "of", who: "Alex Morgan",     status: "approved", policy: "ok",      cardLast4: "4112", memo: "Day pass, NY office" },
+    { id: "EXP-2830", date: "2026-05-17", merchant: "ADP",               amount:  220.00, cat: "sw", who: "Alex Morgan",     status: "approved", policy: "ok",      cardLast4: "4112", memo: "Payroll processing — May run" },
     { id: "EXP-2829", date: "2026-05-16", merchant: "Marriott SF",       amount:  389.00, cat: "tr", who: "Xavier Bartlett", status: "pending",  policy: "ok",      cardLast4: "4112", memo: "Customer summit overflow" },
-    { id: "EXP-2828", date: "2026-05-16", merchant: "Slack",             amount:  149.00, cat: "sw", who: "Sam Richardson",  status: "approved", policy: "ok",      cardLast4: "4112", memo: "Pro plan add-on" }
+    { id: "EXP-2828", date: "2026-05-16", merchant: "Google Chat",       amount:  149.00, cat: "sw", who: "Sam Richardson",  status: "approved", policy: "ok",      cardLast4: "4112", memo: "Pro plan add-on" }
   ];
 
   // Spend over time — last 12 weeks (in thousands)
@@ -106,7 +106,7 @@ window.FF_DATA = (() => {
     { id: "c1", holder: "Marcus Stoinis", last4: "0021", limit: 25000, spent:  8420, status: "active",  type: "physical" },
     { id: "c2", holder: "Corey Anderson", last4: "9032", limit:  5000, spent:  2310, status: "active",  type: "virtual"  },
     { id: "c3", holder: "Jordan Lee",     last4: "4112", limit: 10000, spent:  7780, status: "active",  type: "physical" },
-    { id: "c4", holder: "Vendor: AWS",    last4: "7710", limit:  8000, spent:  3204, status: "active",  type: "virtual"  },
+    { id: "c4", holder: "Vendor: Google Cloud", last4: "7710", limit:  8000, spent:  3204, status: "active",  type: "virtual"  },
     { id: "c5", holder: "Sam Richardson", last4: "1145", limit:  4000, spent:    62, status: "frozen",  type: "virtual"  },
     { id: "c6", holder: "James Taylor",   last4: "6628", limit:  3000, spent:  1820, status: "active",  type: "virtual"  }
   ];
@@ -149,19 +149,19 @@ window.FF_DATA = (() => {
   ];
 
   const integrations = [
-    { name: "QuickBooks",  status: "connected", lastSync: "12 min ago", icon: "stack" },
-    { name: "Mercury",     status: "connected", lastSync: "Just now",   icon: "bank"  },
-    { name: "Brex",        status: "available", lastSync: "—",          icon: "credit-card" },
-    { name: "NetSuite",    status: "available", lastSync: "—",          icon: "buildings" },
-    { name: "Slack",       status: "connected", lastSync: "8 min ago",  icon: "chats" },
-    { name: "Okta SSO",    status: "connected", lastSync: "2 hr ago",   icon: "shield-check" }
+    { name: "QuickBooks",  status: "connected", lastSync: "12 min ago", icon: "stack", brand: "quickbooks" },
+    { name: "Wise",        status: "connected", lastSync: "Just now",   icon: "bank", brand: "wise"  },
+    { name: "Brex",        status: "available", lastSync: "—",          icon: "credit-card", brand: "brex" },
+    { name: "Xero",        status: "available", lastSync: "—",          icon: "buildings", brand: "xero" },
+    { name: "Google Chat", status: "connected", lastSync: "8 min ago",  icon: "chats", brand: "googlechat" },
+    { name: "Okta SSO",    status: "connected", lastSync: "2 hr ago",   icon: "shield-check", brand: "okta" }
   ];
 
   const auditEntries = [
     { ts: "2026-05-22 14:22", actor: "Marcus Stoinis",  action: "Approved",        target: "EXP-2840 · Figma · $180.00" },
     { ts: "2026-05-22 14:18", actor: "Xavier Bartlett",  action: "Flagged",         target: "EXP-2839 · Marriott Austin · $1,240.00" },
     { ts: "2026-05-22 11:02", actor: "System",        action: "Policy Check",    target: "EXP-2835 · Webflow — receipt missing" },
-    { ts: "2026-05-22 09:47", actor: "Corey Anderson",     action: "Submitted",       target: "EXP-2838 · Blue Bottle · $42.80" },
+    { ts: "2026-05-22 09:47", actor: "Corey Anderson",     action: "Submitted",       target: "EXP-2838 · Starbucks · $42.80" },
     { ts: "2026-05-21 17:33", actor: "Marcus Stoinis",  action: "Edited Policy",   target: "Advertising sponsorships → $500 → CMO sign-off" },
     { ts: "2026-05-21 16:09", actor: "Marcus Stoinis",  action: "Issued Card",     target: "Virtual card · James Taylor · $3,000 limit" },
     { ts: "2026-05-21 10:14", actor: "Okta SSO",      action: "Sign-in",         target: "Marcus Stoinis (SSO)" }
@@ -171,7 +171,7 @@ window.FF_DATA = (() => {
     { ts: "12m", kind: "approval",   text: "Jordan Lee submitted EXP-2841 — $842.50 (Travel)" },
     { ts: "1h",  kind: "policy",     text: "EXP-2839 over hotel cap — Marriott Austin, $1,240" },
     { ts: "3h",  kind: "payout",     text: "Reimbursement RB-104 scheduled for May 30" },
-    { ts: "1d",  kind: "card",       text: "AWS virtual card auto-renewed for May" },
+    { ts: "1d",  kind: "card",       text: "Google Cloud virtual card auto-renewed for May" },
     { ts: "2d",  kind: "report",     text: "Monthly close packet ready — April FY26" }
   ];
 

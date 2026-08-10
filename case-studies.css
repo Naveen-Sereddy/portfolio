@@ -249,6 +249,20 @@ img { max-width:100%; display:block; }
 .skip-link { position:fixed; top:-40px; left:1rem; z-index:200; background:var(--accent); color:#110500; padding:.55rem 1rem; border-radius:.5rem; font-family:var(--font-body); font-size:.85rem; font-weight:600; transition:top 200ms var(--ease); }
 .skip-link:focus { top:.75rem; }
 
+/* image lightbox — full-screen, native-resolution zoom for case study screenshots */
+.frame.zoomable { cursor:zoom-in; }
+.cs-lightbox { position:fixed; inset:0; z-index:999; display:none; align-items:center; justify-content:center; padding:5vh 5vw; background:rgba(6,2,1,0.94); cursor:zoom-out; }
+.cs-lightbox.open { display:flex; }
+.cs-lightbox img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; border-radius:.6rem; box-shadow:0 40px 100px rgba(0,0,0,.55); cursor:default; }
+.cs-lightbox-close, .cs-lightbox-nav { position:fixed; background:var(--bg-3); border:1px solid var(--border-strong); color:var(--text); border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 200ms var(--ease), color 200ms var(--ease); z-index:1000; }
+.cs-lightbox-close:hover, .cs-lightbox-nav:hover { background:var(--bg-4); color:var(--accent); }
+.cs-lightbox-close { top:1.25rem; right:1.5rem; width:2.75rem; height:2.75rem; font-size:1.15rem; }
+.cs-lightbox-nav { top:50%; transform:translateY(-50%); width:3rem; height:3rem; }
+.cs-lightbox-prev { left:1.25rem; }
+.cs-lightbox-next { right:1.25rem; }
+.cs-lightbox-count { position:fixed; bottom:1.5rem; left:50%; transform:translateX(-50%); font-family:var(--font-mono); font-size:.72rem; letter-spacing:.08em; color:rgba(255,255,255,.65); z-index:1000; }
+@media (max-width:640px) { .cs-lightbox-nav { width:2.5rem; height:2.5rem; } .cs-lightbox-prev { left:.5rem; } .cs-lightbox-next { right:.5rem; } }
+
 :focus-visible { outline:2px solid rgba(208,146,58,0.55); outline-offset:3px; border-radius:.35rem; }
 @media (prefers-reduced-motion:reduce) { * { animation-duration:.01ms!important; transition-duration:.01ms!important; scroll-behavior:auto!important; } }
 ::selection { background:rgba(208,146,58,0.25); color:var(--text); }

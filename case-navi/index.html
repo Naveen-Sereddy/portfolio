@@ -22,7 +22,7 @@
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
   window.addEventListener("pageshow", function () { window.scrollTo(0, 0); });
 </script>
-<link rel="stylesheet" href="../case-studies.css?v=4" />
+<link rel="stylesheet" href="../case-studies.css?v=5" />
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
@@ -607,6 +607,82 @@
     </div>
   </div>
 </footer>
+
+<div id="cs-lightbox" class="cs-lightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+  <button type="button" id="cs-lb-close" class="cs-lightbox-close" aria-label="Close">✕</button>
+  <button type="button" id="cs-lb-prev" class="cs-lightbox-nav cs-lightbox-prev" aria-label="Previous screenshot">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <button type="button" id="cs-lb-next" class="cs-lightbox-nav cs-lightbox-next" aria-label="Next screenshot">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+  <img id="cs-lb-img" src="" alt="" />
+  <div id="cs-lb-count" class="cs-lightbox-count"></div>
+</div>
+<script>
+(function () {
+  var lb = document.getElementById("cs-lightbox");
+  var lbImg = document.getElementById("cs-lb-img");
+  var lbCount = document.getElementById("cs-lb-count");
+  var frames = Array.prototype.filter.call(
+    document.querySelectorAll(".frame"),
+    function (f) { return f.querySelector("img"); }
+  );
+  var idx = 0;
+  var returnFocus = null;
+
+  frames.forEach(function (frame, i) {
+    frame.classList.add("zoomable");
+    frame.setAttribute("tabindex", "0");
+    frame.setAttribute("role", "button");
+    var img = frame.querySelector("img");
+    frame.setAttribute("aria-label", "View full screen: " + (img.alt || "screenshot"));
+    frame.addEventListener("click", function () { open(i); });
+    frame.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(i); }
+    });
+  });
+
+  function render() {
+    var img = frames[idx].querySelector("img");
+    lbImg.src = img.currentSrc || img.src;
+    lbImg.alt = img.alt || "";
+    lbCount.textContent = (idx + 1) + " / " + frames.length;
+  }
+
+  function open(i) {
+    idx = i;
+    render();
+    returnFocus = document.activeElement;
+    lb.classList.add("open");
+    document.body.style.overflow = "hidden";
+    document.getElementById("cs-lb-close").focus();
+  }
+
+  function close() {
+    lb.classList.remove("open");
+    document.body.style.overflow = "";
+    if (returnFocus) returnFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + frames.length) % frames.length;
+    render();
+  }
+
+  document.getElementById("cs-lb-close").addEventListener("click", close);
+  document.getElementById("cs-lb-prev").addEventListener("click", function () { step(-1); });
+  document.getElementById("cs-lb-next").addEventListener("click", function () { step(1); });
+  lb.addEventListener("click", function (e) { if (e.target === lb) close(); });
+
+  document.addEventListener("keydown", function (e) {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowRight") step(1);
+    if (e.key === "ArrowLeft") step(-1);
+  });
+})();
+</script>
 
 </body>
 </html>

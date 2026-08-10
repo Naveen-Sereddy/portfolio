@@ -33,6 +33,7 @@
   box-shadow: var(--ff-shadow-xs);
 }
 .ff-btn--primary:hover { background: var(--ff-primary-hover); border-color: var(--ff-primary-hover); }
+.ff-btn--primary:active { background: var(--ff-primary-pressed); border-color: var(--ff-primary-pressed); }
 
 .ff-btn--ghost { background: transparent; border-color: transparent; }
 .ff-btn--ghost:hover { background: var(--ff-hover); }
@@ -56,47 +57,66 @@
 .ff-btn--icon { width: 36px; padding: 0; }
 .ff-btn--sm.ff-btn--icon { width: 28px; }
 
-/* ----------- Badges / Status pills -------------------------------------- */
-.ff-badge {
-  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-  height: 22px; padding: 0 8px;
-  font-size: var(--ff-text-xs); font-weight: 500;
-  border-radius: var(--ff-radius-pill);
-  background: var(--ff-ink-100);
-  color: var(--ff-ink-800);
-  border: 1px solid transparent;
-  white-space: nowrap;
-}
-.ff-badge--status { min-width: 104px; }
-[data-theme="dark"] .ff-badge { background: var(--ff-ink-800); color: var(--ff-fg); }
+/* ----------- Badges / Status pills --------------------------------------
+   One badge system, seven semantic groups (StatusBadge in layout.jsx maps
+   every status string in the app to one of these). Colors come entirely
+   from --ff-status-* tokens (colors_and_type.css) — light/dark handled by
+   the tokens themselves, no per-modifier dark overrides needed here.
 
-.ff-badge::before {
-  content: ""; width: 6px; height: 6px; border-radius: 999px;
-  background: currentColor; opacity: 0.85;
+   Every badge — status, role, category-scope, action, payment method, or
+   any other label pill — shares one fixed geometry app-wide: same width,
+   same height, same radius, same border, text centered. Width is sized to
+   comfortably fit the longest real label in use ("Policy violation" /
+   "Missing receipt" / "Requires action"), so a pill's box never grows or
+   shrinks with its own text. This lives on the base class, not a modifier,
+   so every call site gets it automatically — no per-screen fixed-width
+   opt-in to forget. */
+.ff-badge {
+  display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+  width: 136px; height: 24px; padding: 0 10px;
+  font-size: 12px; font-weight: 500; line-height: 1;
+  border-radius: var(--ff-radius-badge);
+  background: var(--ff-status-neutral-bg);
+  color: var(--ff-status-neutral-fg);
+  border: 1px solid var(--ff-status-neutral-border);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.ff-badge--approved { background: var(--ff-approved-bg); color: var(--ff-approved); }
-.ff-badge--pending  { background: var(--ff-pending-bg);  color: var(--ff-pending); }
-.ff-badge--rejected { background: var(--ff-rejected-bg); color: var(--ff-rejected); }
-.ff-badge--flagged  { background: var(--ff-flagged-bg);  color: var(--ff-flagged); }
-.ff-badge--neutral  { /* default */ }
-.ff-badge--primary  { background: var(--ff-teal-100); color: var(--ff-teal-700); }
-[data-theme="dark"] .ff-badge--primary { background: var(--ff-teal-800); color: var(--ff-teal-200); }
-.ff-badge--no-dot::before { display: none; }
+.ff-badge__icon { display: flex; flex-shrink: 0; font-size: 12px; }
+
+.ff-badge--success { background: var(--ff-status-success-bg); color: var(--ff-status-success-fg); border-color: var(--ff-status-success-border); }
+.ff-badge--warning  { background: var(--ff-status-warning-bg);  color: var(--ff-status-warning-fg);  border-color: var(--ff-status-warning-border); }
+.ff-badge--info    { background: var(--ff-status-info-bg);    color: var(--ff-status-info-fg);    border-color: var(--ff-status-info-border); }
+.ff-badge--review  { background: var(--ff-status-review-bg);  color: var(--ff-status-review-fg);  border-color: var(--ff-status-review-border); }
+.ff-badge--action  { background: var(--ff-status-action-bg);  color: var(--ff-status-action-fg);  border-color: var(--ff-status-action-border); }
+.ff-badge--danger  { background: var(--ff-status-danger-bg);  color: var(--ff-status-danger-fg);  border-color: var(--ff-status-danger-border); }
+.ff-badge--neutral { background: var(--ff-status-neutral-bg); color: var(--ff-status-neutral-fg); border-color: var(--ff-status-neutral-border); }
+/* Legacy modifier names — old call sites still using these keep working,
+   pointed at the new token-backed classes instead of their own colors. */
+.ff-badge--approved { background: var(--ff-status-success-bg); color: var(--ff-status-success-fg); border-color: var(--ff-status-success-border); }
+.ff-badge--pending   { background: var(--ff-status-warning-bg);  color: var(--ff-status-warning-fg);  border-color: var(--ff-status-warning-border); }
+.ff-badge--rejected  { background: var(--ff-status-danger-bg);  color: var(--ff-status-danger-fg);  border-color: var(--ff-status-danger-border); }
+.ff-badge--flagged   { background: var(--ff-status-review-bg);  color: var(--ff-status-review-fg);  border-color: var(--ff-status-review-border); }
+.ff-badge--primary  { background: var(--ff-status-neutral-bg); color: var(--ff-status-neutral-fg); border-color: var(--ff-status-neutral-border); }
+.ff-badge--no-dot::before, .ff-badge::before { content: none; }
+/* Sits directly on a colored card-art gradient (virtual/physical card
+   graphics), not the page surface — needs its own on-dark treatment rather
+   than the pastel-on-white token set, which would be illegible there. */
+.ff-badge--on-dark { background: oklch(1 0 0 / 0.16); color: #fff; border-color: oklch(1 0 0 / 0.28); }
 
 /* ----------- Chips (filter chips) --------------------------------------- */
 .ff-chip {
   display: inline-flex; align-items: center; gap: 6px;
-  height: 28px; padding: 0 10px;
-  font-size: var(--ff-text-xs); font-weight: 500;
+  height: 24px; padding: 0 10px;
+  font-size: var(--ff-text-xs); font-weight: 500; line-height: 1;
   color: var(--ff-fg);
   background: var(--ff-card);
   border: 1px solid var(--ff-border);
-  border-radius: var(--ff-radius-pill);
+  border-radius: var(--ff-radius-badge);
   cursor: pointer;
 }
 .ff-chip:hover { background: var(--ff-hover); }
-.ff-chip[aria-pressed="true"] { background: var(--ff-teal-100); color: var(--ff-teal-700); border-color: var(--ff-teal-300); }
-[data-theme="dark"] .ff-chip[aria-pressed="true"] { background: var(--ff-teal-800); color: var(--ff-teal-100); border-color: var(--ff-teal-600); }
+.ff-chip[aria-pressed="true"] { background: var(--ff-blue-100); color: var(--ff-blue-700); border-color: var(--ff-blue-300); }
+[data-theme="dark"] .ff-chip[aria-pressed="true"] { background: var(--ff-blue-800); color: var(--ff-blue-100); border-color: var(--ff-blue-600); }
 
 /* ----------- Cards ------------------------------------------------------ */
 .ff-card {
@@ -104,6 +124,7 @@
   border: 1px solid var(--ff-border);
   border-radius: var(--ff-radius-lg);
   box-shadow: var(--ff-shadow-xs);
+  overflow: hidden;
 }
 .ff-card--flat { box-shadow: none; }
 .ff-card--lift { box-shadow: var(--ff-shadow-sm); }
@@ -126,13 +147,23 @@
 }
 .ff-kpi__label { color: var(--ff-fg-muted); font-size: var(--ff-text-xs); text-transform: uppercase; letter-spacing: var(--ff-tracking-ucase); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ff-kpi__value {
-  font-family: var(--ff-font-sans); font-size: 30px; line-height: 1.1;
+  font-family: var(--ff-font-display); font-size: 30px; line-height: 1.1;
   font-weight: 600;
   font-variant-numeric: tabular-nums lining-nums;
   color: var(--ff-fg);
   margin-top: 6px;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.015em;
 }
+/* Hero variant — one KPI that outweighs the rest (e.g. cash available).
+   Redesign pattern: not every number is equally important, one card should
+   say so at a glance instead of matching its three siblings. */
+.ff-kpi--hero {
+  background: var(--ff-ink-950); border-color: var(--ff-ink-950);
+}
+.ff-kpi--hero .ff-kpi__label { color: oklch(1 0 0 / 0.55); }
+.ff-kpi--hero .ff-kpi__value { color: #fff; }
+.ff-kpi--hero .ff-kpi__delta { color: oklch(1 0 0 / 0.7); }
+[data-theme="dark"] .ff-kpi--hero { background: var(--ff-blue-600); border-color: var(--ff-blue-600); }
 .ff-kpi__delta { font-size: var(--ff-text-xs); display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
 .ff-kpi__delta--up   { color: var(--ff-approved); }
 .ff-kpi__delta--down { color: var(--ff-rejected); }
@@ -155,8 +186,15 @@
   padding: 10px 14px;
   background: var(--ff-card-2);
   border-bottom: 1px solid var(--ff-border);
-  position: sticky; top: 0; z-index: 1;
 }
+/* A table is usually the only child of a padded={false} Card, sitting flush
+   against its rounded edges — the header's opaque square corners otherwise
+   cover the card's rounded ones. Round the table's own outer corners to
+   match so they read as one continuous rounded container. */
+.ff-table thead tr:first-child th:first-child { border-top-left-radius: var(--ff-radius-lg); }
+.ff-table thead tr:first-child th:last-child { border-top-right-radius: var(--ff-radius-lg); }
+.ff-table tbody tr:last-child td:first-child { border-bottom-left-radius: var(--ff-radius-lg); }
+.ff-table tbody tr:last-child td:last-child { border-bottom-right-radius: var(--ff-radius-lg); }
 .ff-table td {
   padding: 12px 14px;
   border-bottom: 1px solid var(--ff-border);
@@ -183,7 +221,10 @@
   transition: border-color var(--ff-dur-2) var(--ff-ease), box-shadow var(--ff-dur-2) var(--ff-ease);
 }
 .ff-input::placeholder, .ff-textarea::placeholder { color: var(--ff-fg-subtle); }
-.ff-input:focus, .ff-select:focus, .ff-textarea:focus { border-color: var(--ff-teal-500); box-shadow: 0 0 0 3px oklch(0.45 0.14 165 / 0.18); }
+/* :focus-visible, not :focus — a mouse click into a field shouldn't draw the
+   keyboard ring, matching every other focusable element in the system. Same
+   --ff-focus-ring token as the global rule, not a one-off color. */
+.ff-input:focus-visible, .ff-select:focus-visible, .ff-textarea:focus-visible { border-color: var(--ff-blue-500); box-shadow: var(--ff-focus-ring); }
 .ff-textarea { height: auto; min-height: 84px; padding: 10px 12px; resize: vertical; }
 .ff-input--lg { height: 44px; font-size: var(--ff-text-md); }
 
@@ -271,10 +312,10 @@
 .ff-alert__icon { flex-shrink: 0; margin-top: 1px; font-size: 18px; }
 .ff-alert__body { flex: 1; }
 .ff-alert__title { font-weight: 600; margin-bottom: 2px; }
-.ff-alert--info { background: var(--ff-flagged-bg); color: var(--ff-flagged); border-color: transparent; }
-.ff-alert--success { background: var(--ff-approved-bg); color: var(--ff-approved); border-color: transparent; }
-.ff-alert--warn { background: var(--ff-pending-bg); color: var(--ff-pending); border-color: transparent; }
-.ff-alert--error { background: var(--ff-rejected-bg); color: var(--ff-rejected); border-color: transparent; }
+.ff-alert--info { background: var(--ff-flagged-bg); color: var(--ff-flagged); border-color: color-mix(in srgb, currentColor 25%, transparent); }
+.ff-alert--success { background: var(--ff-approved-bg); color: var(--ff-approved); border-color: color-mix(in srgb, currentColor 25%, transparent); }
+.ff-alert--warn { background: var(--ff-pending-bg); color: var(--ff-pending); border-color: color-mix(in srgb, currentColor 25%, transparent); }
+.ff-alert--error { background: var(--ff-rejected-bg); color: var(--ff-rejected); border-color: color-mix(in srgb, currentColor 25%, transparent); }
 .ff-alert--info .ff-alert__title,
 .ff-alert--success .ff-alert__title,
 .ff-alert--warn .ff-alert__title,
@@ -339,7 +380,7 @@
   white-space: nowrap; pointer-events: none; opacity: 0;
   transition: opacity var(--ff-dur-2) var(--ff-ease);
 }
-.ff-tooltip:hover > [data-tip] { opacity: 1; }
+.ff-tooltip:hover > [data-tip], .ff-tooltip:focus-within > [data-tip] { opacity: 1; }
 [data-theme="dark"] .ff-tooltip > [data-tip] { background: oklch(0.96 0.005 80); color: var(--ff-ink-950); }
 
 /* ----------- Kbd ------------------------------------------------------- */
@@ -358,11 +399,11 @@
 .ff-avatar {
   display: inline-flex; align-items: center; justify-content: center;
   width: 28px; height: 28px; border-radius: 999px;
-  background: var(--ff-teal-100); color: var(--ff-teal-700);
+  background: var(--ff-blue-100); color: var(--ff-blue-700);
   font-size: 11px; font-weight: 600;
   border: 1px solid var(--ff-border);
 }
-[data-theme="dark"] .ff-avatar { background: var(--ff-teal-800); color: var(--ff-teal-100); }
+[data-theme="dark"] .ff-avatar { background: var(--ff-blue-800); color: var(--ff-blue-100); }
 .ff-avatar--lg { width: 40px; height: 40px; font-size: 14px; }
 .ff-avatar--xl { width: 64px; height: 64px; font-size: 22px; }
 
@@ -373,25 +414,78 @@
 .ff-banner {
   display: flex; align-items: center; gap: 12px;
   padding: 10px 16px;
-  background: var(--ff-teal-800); color: var(--ff-teal-100);
+  background: var(--ff-blue-800); color: var(--ff-blue-100);
   font-size: var(--ff-text-sm);
 }
 .ff-banner__cta { margin-left: auto; }
 
-/* ----------- Sidebar / topbar ----------------------------------------- */
-.ff-sidebar {
-  width: var(--ff-sidebar-w);
+/* ----------- Attention strip -------------------------------------------
+   Redesign pattern for Dashboard: the 3 things needing a decision today,
+   separated from passive KPIs entirely rather than mixed in as more tiles. */
+.ff-attention {
+  border: 1px solid var(--ff-border-strong);
+  border-radius: var(--ff-radius-lg);
+  background: var(--ff-card);
+  padding: 16px;
+}
+.ff-attention__head {
+  display: flex; align-items: center; gap: 8px;
+  font-size: var(--ff-text-xs); font-weight: 600;
+  text-transform: uppercase; letter-spacing: var(--ff-tracking-ucase);
+  color: var(--ff-fg-muted);
+  margin-bottom: 12px;
+}
+.ff-attention__dot { width: 6px; height: 6px; border-radius: 999px; background: var(--ff-rejected); }
+.ff-attention__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.ff-attention__item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px; border-radius: var(--ff-radius-md);
   background: var(--ff-card-2);
-  border-right: 1px solid var(--ff-border);
-  display: flex; flex-direction: column;
-  height: 100%;
+  text-decoration: none; color: inherit;
 }
-.ff-sidebar__brand { padding: 16px 18px; display: flex; align-items: center; gap: 10px; }
-.ff-sidebar__group { padding: 8px 10px; }
-.ff-sidebar__label {
-  font-size: var(--ff-text-2xs); text-transform: uppercase; letter-spacing: var(--ff-tracking-ucase);
-  color: var(--ff-fg-subtle); padding: 8px 10px 4px; font-weight: 500;
+.ff-attention__item:hover { background: var(--ff-hover); text-decoration: none; }
+.ff-attention__icon {
+  width: 28px; height: 28px; border-radius: 999px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
 }
+.ff-attention__title { font-size: var(--ff-text-sm); font-weight: 500; color: var(--ff-fg); line-height: 1.3; }
+.ff-attention__sub { font-size: var(--ff-text-xs); color: var(--ff-fg-muted); margin-top: 2px; }
+
+/* ----------- Top nav (pilot redesign — no sidebar) ----------------------
+   Single horizontal row: logo, primary destinations, role switch, utility
+   icons, profile block. Frees the full page width for asymmetric content
+   below instead of losing a fixed column to a rail. */
+.ff-topnav {
+  height: 60px; flex-shrink: 0;
+  display: flex; align-items: center; gap: 4px;
+  padding: 0 24px;
+  background: var(--ff-card);
+  border-bottom: 1px solid var(--ff-border);
+}
+.ff-topnav__brand { display: flex; align-items: center; gap: 8px; margin-right: 28px; flex-shrink: 0; text-decoration: none; }
+.ff-topnav__items { display: flex; align-items: center; gap: 2px; height: 100%; }
+.ff-topnav__items a {
+  display: flex; align-items: center; gap: 6px; height: 100%;
+  padding: 0 12px;
+  font-size: 13.5px; font-weight: 500; color: var(--ff-fg-muted);
+  text-decoration: none; white-space: nowrap;
+  border-bottom: 2px solid transparent;
+}
+.ff-topnav__items a:hover { color: var(--ff-fg); text-decoration: none; }
+.ff-topnav__items a[aria-current="page"] { color: var(--ff-fg); border-bottom-color: var(--ff-primary); font-weight: 600; }
+.ff-topnav__count {
+  min-width: 17px; height: 17px; padding: 0 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; color: var(--ff-primary-fg);
+  background: var(--ff-primary); border-radius: 999px;
+}
+.ff-topnav__more { color: var(--ff-fg-subtle) !important; font-weight: 500 !important; }
+.ff-topnav__profile { display: flex; align-items: center; gap: 8px; margin-left: 12px; padding-left: 12px; border-left: 1px solid var(--ff-border); cursor: pointer; }
+.ff-topnav__profile-name { font-size: 12.5px; font-weight: 600; white-space: nowrap; }
+.ff-topnav__profile-title { font-size: 11px; color: var(--ff-fg-muted); white-space: nowrap; }
+.ff-segmented--sm { padding: 2px; margin-right: 4px; }
+.ff-segmented--sm button { height: 24px; padding: 0 9px; font-size: 11px; }
+
 .ff-nav-item {
   display: flex; align-items: center; gap: 10px;
   padding: 7px 10px; border-radius: var(--ff-radius-sm);
@@ -402,45 +496,75 @@
 .ff-nav-item > span:not(.ff-nav-item__count) { overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 1; }
 .ff-nav-item:hover { background: var(--ff-hover); text-decoration: none; }
 .ff-nav-item[aria-current="page"], .ff-nav-item--active {
-  background: var(--ff-teal-100); color: var(--ff-teal-700); font-weight: 500;
+  background: var(--ff-blue-100); color: var(--ff-blue-700); font-weight: 500;
 }
 [data-theme="dark"] .ff-nav-item[aria-current="page"],
-[data-theme="dark"] .ff-nav-item--active { background: var(--ff-teal-800); color: var(--ff-teal-100); }
+[data-theme="dark"] .ff-nav-item--active { background: var(--ff-blue-800); color: var(--ff-blue-100); }
 .ff-nav-item__icon { font-size: 16px; opacity: 0.8; flex-shrink: 0; }
 .ff-nav-item__count { margin-left: auto; font-size: var(--ff-text-xs); color: var(--ff-fg-muted); }
 
-.ff-topbar {
-  height: var(--ff-topbar-h);
-  display: flex; align-items: center; gap: 12px;
-  padding: 0 20px;
-  background: var(--ff-card);
-  border-bottom: 1px solid var(--ff-border);
-}
-
 /* ----------- Page layouts ---------------------------------------------- */
 .ff-app {
-  display: grid;
-  grid-template-columns: var(--ff-sidebar-w) 1fr;
-  grid-template-rows: 1fr;
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  min-width: 1280px;
+  min-width: 1180px;
   background: var(--ff-bg);
 }
-.ff-main { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+.ff-main { display: flex; flex-direction: column; min-width: 0; min-height: 0; flex: 1; }
 .ff-page { flex: 1; overflow: auto; padding: 24px 28px; }
 .ff-page__head {
   display: flex; align-items: flex-end; justify-content: space-between;
   gap: 24px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--ff-border);
 }
 .ff-page__head > div:first-child { flex: 1; min-width: 0; }
-.ff-page__title { font-family: var(--ff-font-sans); font-weight: 700; font-size: 32px; line-height: 1.15; letter-spacing: -0.025em; max-width: 720px; }
+.ff-page__title { font-family: var(--ff-font-display); font-weight: 600; font-size: 34px; line-height: 1.1; letter-spacing: -0.015em; max-width: 720px; }
 .ff-page__sub { color: var(--ff-fg-muted); font-size: var(--ff-text-sm); margin-top: 6px; }
+
+/* ----------- Briefing narrative (Dashboard "Today" pattern) ------------
+   The status of the business stated as a sentence, not inferred from a
+   grid of tiles. Numbers embedded inline stay tabular; the sentence itself
+   runs in the display serif so it reads as a considered statement, not
+   another UI label. */
+.ff-briefing {
+  font-family: var(--ff-font-display);
+  font-size: 22px; line-height: 1.45;
+  color: var(--ff-fg);
+  max-width: 66ch;
+  margin: 4px 0 22px;
+}
+.ff-briefing strong { font-weight: 600; }
+.ff-briefing .ff-tnum { font-family: var(--ff-font-display); font-variant-numeric: tabular-nums lining-nums; }
+
+/* ----------- KPI ribbon --------------------------------------------------
+   Round 3: numbers below the briefing sentence don't need to be cards —
+   the briefing already carries the headline story. A compact, scannable
+   inline ribbon (label/value/delta, hairline dividers) replaces the 4-card
+   grid, freeing the card treatment for the one number that still deserves
+   its own surface (see .ff-kpi--hero, used standalone now, not in a grid). */
+.ff-ribbon {
+  display: flex; flex-wrap: wrap;
+  border: 1px solid var(--ff-border); border-radius: var(--ff-radius-lg);
+  background: var(--ff-card);
+  overflow: hidden;
+}
+.ff-ribbon__item {
+  flex: 1; min-width: 150px;
+  padding: 14px 18px;
+  border-right: 1px solid var(--ff-border);
+}
+.ff-ribbon__item:last-child { border-right: 0; }
+.ff-ribbon__label { font-size: var(--ff-text-xs); color: var(--ff-fg-muted); }
+.ff-ribbon__value { font-family: var(--ff-font-display); font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin-top: 2px; }
+.ff-ribbon__delta { font-size: var(--ff-text-xs); margin-top: 3px; display: inline-flex; align-items: center; gap: 4px; }
+.ff-ribbon__delta--up { color: var(--ff-approved); }
+.ff-ribbon__delta--down { color: var(--ff-rejected); }
 
 /* ----------- Grid helpers --------------------------------------------- */
 .ff-row { display: flex; gap: 12px; align-items: center; }
 .ff-col { display: flex; flex-direction: column; gap: 8px; }
 .ff-grid { display: grid; gap: 16px; }
-.ff-grid--kpis { grid-template-columns: repeat(4, 1fr); }
+.ff-grid--4 { grid-template-columns: repeat(4, 1fr); }
 .ff-grid--3 { grid-template-columns: repeat(3, 1fr); }
 .ff-grid--2 { grid-template-columns: repeat(2, 1fr); }
 .ff-stack > * + * { margin-top: var(--ff-stack-gap, 12px); }
