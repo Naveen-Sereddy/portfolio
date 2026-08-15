@@ -320,7 +320,7 @@ html { scrollbar-color: var(--sb-thumb) var(--sb-track); }
   text-decoration: none;
   flex-shrink: 0;
 }
-.nav-logo-mark .logo-svg { height: 20px; width: auto; display: block; }
+.nav-logo-mark .logo-svg { height: 26px; width: auto; display: block; }
 
 .nav-center {
   position: absolute;
