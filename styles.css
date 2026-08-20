@@ -721,11 +721,11 @@ html { scrollbar-color: var(--sb-thumb) var(--sb-track); }
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 6rem;
+  width: 8rem;
   z-index: 1;
 }
-.marquee-fade-l { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
-.marquee-fade-r { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+.marquee-fade-l { left: 0; background: linear-gradient(to right, var(--bg) 0%, var(--bg) 20%, transparent 100%); }
+.marquee-fade-r { right: 0; background: linear-gradient(to left, var(--bg) 0%, var(--bg) 20%, transparent 100%); }
 
 /* ---------------------------------------------------------------- WORK */
 .section-work { padding: 8rem 0; }
@@ -975,8 +975,8 @@ html { scrollbar-color: var(--sb-thumb) var(--sb-track); }
 }
 
 /* ---------------------------------------------------------------- EXPLORATIONS TEASER */
-.section-explorations { padding: 0 0 8rem; }
-@media (min-width: 640px) { .section-explorations { padding: 0 0 11rem; } }
+.section-explorations { padding: 0 0 5rem; }
+@media (min-width: 640px) { .section-explorations { padding: 0 0 6rem; } }
 
 .explorations-grid {
   display: grid;
@@ -1018,8 +1018,8 @@ html { scrollbar-color: var(--sb-thumb) var(--sb-track); }
 }
 
 /* ---------------------------------------------------------------- ABOUT */
-.section-about { padding: 7rem 0; }
-@media (min-width: 640px) { .section-about { padding: 10rem 0; } }
+.section-about { padding: 5rem 0; }
+@media (min-width: 640px) { .section-about { padding: 7rem 0; } }
 
 .about-grid {
   display: grid;
@@ -1110,8 +1110,8 @@ html { scrollbar-color: var(--sb-thumb) var(--sb-track); }
 .skill-chips { display: flex; flex-wrap: wrap; gap: 0.5rem 0.5rem; }
 
 /* ---------------------------------------------------------------- EXPERIENCE */
-.section-experience { padding: 7rem 0; }
-@media (min-width: 640px) { .section-experience { padding: 10rem 0; } }
+.section-experience { padding: 5rem 0 7rem; }
+@media (min-width: 640px) { .section-experience { padding: 6rem 0 10rem; } }
 
 .experience-header {
   display: flex;

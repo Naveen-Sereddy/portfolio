@@ -143,6 +143,11 @@ img { max-width:100%; display:block; }
 /* ── comparison frame: forces identical width+height for paired/grid screenshots ── */
 .frame { position:relative; width:100%; aspect-ratio:var(--ar,8/5); background:var(--bg-4); border-radius:.75rem; border:1px solid var(--border-strong); overflow:hidden; }
 .frame img, .frame video { width:100%; height:100%; object-fit:contain; display:block; }
+
+/* lazy images fade in on load instead of popping in mid-scroll */
+img[loading="lazy"] { opacity:0; transition:opacity .35s ease; }
+img[loading="lazy"].is-loaded { opacity:1; }
+@media (prefers-reduced-motion:reduce) { img[loading="lazy"] { transition:none; } }
 .frame.ar-portrait { --ar:1/2; }
 .frame.ar-killed { --ar:8/5; }
 

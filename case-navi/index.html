@@ -264,9 +264,9 @@
         <div class="anno-wrap">
           <img src="img/ui-web-dashboard.png" alt="NAVI web dashboard annotated with four research-driven design decisions" loading="lazy" />
           <span class="anno-dot" style="left:60%; top:18.5%" aria-hidden="true">1</span>
-          <span class="anno-dot" style="left:28%; top:26%" aria-hidden="true">2</span>
-          <span class="anno-dot" style="left:21%; top:50%" aria-hidden="true">3</span>
-          <span class="anno-dot" style="left:76%; top:33%" aria-hidden="true">4</span>
+          <span class="anno-dot" style="left:56%; top:26%" aria-hidden="true">2</span>
+          <span class="anno-dot" style="left:21%; top:46%" aria-hidden="true">3</span>
+          <span class="anno-dot" style="left:76%; top:31%" aria-hidden="true">4</span>
         </div>
         <div class="anno-legend two-col">
           <div class="anno-legend-item"><span class="anno-legend-num">1</span><p><strong>The briefing banner speaks first.</strong> Insight 03: "if it just pinged me when I was off track, I'd trust it more than any dashboard." NAVI opens the conversation; the user never has to go looking.</p></div>
@@ -680,6 +680,15 @@
     if (e.key === "Escape") close();
     if (e.key === "ArrowRight") step(1);
     if (e.key === "ArrowLeft") step(-1);
+  });
+})();
+</script>
+
+<script>
+(function () {
+  document.querySelectorAll('img[loading="lazy"]').forEach(function (img) {
+    if (img.complete) { img.classList.add('is-loaded'); }
+    else { img.addEventListener('load', function () { img.classList.add('is-loaded'); }, { once: true }); }
   });
 })();
 </script>

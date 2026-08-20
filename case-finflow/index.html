@@ -47,7 +47,7 @@
       </div>
       <h1>FinFlow: expense management that teams actually finish.</h1>
       <p class="lede" style="font-size:1.15rem;max-width:56ch">I designed this from research all the way through usability testing, for the admin, manager, and employee roles, and the task completion numbers moved because of it.</p>
-      <p class="lede">It's a role-aware expense workspace built for Reyonal: 47 screens across 3 roles, WCAG 2.1 AA accessible, built on a design system I built from scratch for this product.</p>
+      <p class="lede">It's a role-aware expense workspace built for a mid-market SaaS company, anonymized here as "Reyonal": 47 screens across 3 roles, WCAG 2.1 AA accessible, built on a design system I built from scratch for this product.</p>
       <div class="metric-row">
         <div class="metric"><span class="metric-value">73% → 89%</span><span class="metric-label">Task completion</span></div>
         <div class="metric"><span class="metric-value">3</span><span class="metric-label">Roles designed for</span></div>
@@ -64,6 +64,9 @@
         <span class="meta-item">Duration: <strong>6–8 weeks</strong></span>
         <span class="meta-item">Scope: <strong>Research → hi-fi prototype</strong></span>
         <span class="meta-item">NDA: <strong>Company name and screens anonymized</strong></span>
+      </div>
+      <div class="frame" style="--ar:1440/900;margin-top:2.5rem">
+        <img src="img/ui-dashboard.png" alt="FinFlow finance admin dashboard showing spend, approvals and cash at a glance" loading="eager" decoding="async" />
       </div>
     </div>
   </section>
@@ -569,6 +572,15 @@
     if (e.key === "Escape") close();
     if (e.key === "ArrowRight") step(1);
     if (e.key === "ArrowLeft") step(-1);
+  });
+})();
+</script>
+
+<script>
+(function () {
+  document.querySelectorAll('img[loading="lazy"]').forEach(function (img) {
+    if (img.complete) { img.classList.add('is-loaded'); }
+    else { img.addEventListener('load', function () { img.classList.add('is-loaded'); }, { once: true }); }
   });
 })();
 </script>

@@ -65,6 +65,9 @@
         <span class="meta-item">Scope: <strong>Discovery → shipped production app</strong></span>
         <span class="meta-item">NDA: <strong>Firm name withheld</strong></span>
       </div>
+      <div class="frame" style="--ar:1280/800;margin-top:2.5rem">
+        <img src="img/03-conversation-answer.png" alt="Testimonium answer screen, a real Gemini response to a risk-factors question with five inline citation chips" loading="eager" decoding="async" />
+      </div>
     </div>
   </section>
 
@@ -270,8 +273,8 @@
       <div class="anno-block">
         <div class="anno-wrap">
           <img src="img/03-conversation-answer.png" alt="Testimonium answer annotated with three research-driven design decisions" loading="lazy" />
-          <span class="anno-dot" style="left:79%; top:19%" aria-hidden="true">1</span>
-          <span class="anno-dot" style="left:57%; top:38%" aria-hidden="true">2</span>
+          <span class="anno-dot" style="left:79%; top:15%" aria-hidden="true">1</span>
+          <span class="anno-dot" style="left:60%; top:42%" aria-hidden="true">2</span>
           <span class="anno-dot" style="left:47%; top:80%" aria-hidden="true">3</span>
         </div>
         <div class="anno-legend two-col">
@@ -655,6 +658,15 @@
     if (e.key === "Escape") close();
     if (e.key === "ArrowRight") step(1);
     if (e.key === "ArrowLeft") step(-1);
+  });
+})();
+</script>
+
+<script>
+(function () {
+  document.querySelectorAll('img[loading="lazy"]').forEach(function (img) {
+    if (img.complete) { img.classList.add('is-loaded'); }
+    else { img.addEventListener('load', function () { img.classList.add('is-loaded'); }, { once: true }); }
   });
 })();
 </script>
