@@ -150,6 +150,7 @@
       urlLabel: "testimonium.vercel.app",
       shots: [
         { src: "case-testimonium/img/01-empty-upload.png",      cap: "Document ready, suggested questions after a real upload" },
+        // STALE (2026-08-20): pre-fix artifact, see case-testimonium/index.html for detail.
         { src: "case-testimonium/img/03-conversation-answer.png", cap: "A real Gemini answer with inline citation chips" },
         { src: "case-testimonium/img/04-citation-expanded.png",  cap: "Citation expanded, exact page and source excerpt" },
         { src: "case-testimonium/img/09-evidence-panel.png",     cap: "Persistent evidence panel, always visible on desktop" },
@@ -265,6 +266,7 @@
       shots: [
         { src: "case-precisioncab/img/hero-cab-home.png",    cap: "Cab home, live telemetry, boom status, and field map" },
         { src: "case-precisioncab/img/hero-field-select.png", cap: "Field select, satellite and NDVI map modes" },
+        // STALE (2026-08-20): pre-fix artifact, see case-precisioncab/index.html for detail.
         { src: "case-precisioncab/img/hero-active-pass.png",  cap: "Active pass, guidance overlay and boom diagram" },
         { src: "case-precisioncab/img/hero-rate-change.png",  cap: "Rate change keypad with live tank-mix math" },
         { src: "case-precisioncab/img/hero-boom-fault.png",   cap: "Boom fault alert, single action, no menu" },

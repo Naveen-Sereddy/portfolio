@@ -157,6 +157,11 @@
           <p>NAVI never acts. It proposes and waits. Every recommendation card has an Override button, a non-negotiable design rule. Financial anxiety peaks when people feel out of control. The override button is a design promise: the human is always in charge. Removing it in one test iteration caused a measurable drop in trust ratings.</p>
         </div>
 
+        <!-- FLAG (2026-08-20): this copy names 13 months as NAVI's recommendation. The
+             shipped prototype's default Emergency Fund state is 14 months (13 is only
+             reached after the user resolves the alert via "Work expenses"). Product-spec
+             contradiction, not silently resolved either direction — confirm which is
+             correct before editing this copy or the prototype's default state. -->
         <div class="decision-card">
           <div class="decision-num">04</div>
           <h3>13-month plan, not 12</h3>
@@ -306,6 +311,9 @@
         <div class="shot-grid">
           <div class="shot-item"><div class="frame"><img src="img/ui-web-dashboard.png" alt="NAVI dashboard, paycheck summary, AI insights banner, spending breakdown" loading="lazy" /></div><span class="shot-cap">Dashboard</span></div>
           <div class="shot-item"><div class="frame"><img src="img/ui-web-checkin.png" alt="NAVI weekly check-in, automated briefing with two ranked recommendations" loading="lazy" /></div><span class="shot-cap">Weekly Check-in</span></div>
+          <!-- FLAG (2026-08-20): alt text says 14-month plan, the mobile goals shot
+               below says 13-month plan for the same feature — see 13-vs-14-month
+               contradiction flagged near the "13-month plan, not 12" decision card. -->
           <div class="shot-item"><div class="frame"><img src="img/ui-web-goals.png" alt="NAVI goals, emergency fund progress ring, 14-month plan, and savings plan breakdown" loading="lazy" /></div><span class="shot-cap">My Goals</span></div>
           <div class="shot-item"><div class="frame"><img src="img/ui-web-ai-analysis.png" alt="NAVI AI analysis, conversational financial coaching interface" loading="lazy" /></div><span class="shot-cap">AI Analysis</span></div>
           <div class="shot-item"><div class="frame"><img src="img/ui-web-alerts.png" alt="NAVI alerts, anomaly detection with goal impact and three resolution paths" loading="lazy" /></div><span class="shot-cap">Alerts</span></div>
@@ -341,6 +349,9 @@
       <div class="shot-grid four-col">
         <div class="shot-item"><div class="frame ar-portrait"><img src="img/hifi-mobile-onboarding.png?v=2" alt="Mobile onboarding, claymorphism, sky-blue background, benefit checklist card" loading="lazy" /></div><span class="shot-cap">Onboarding</span></div>
         <div class="shot-item"><div class="frame ar-portrait"><img src="img/hifi-mobile-dashboard.png?v=2" alt="Mobile dashboard, paycheck card, NAVI Analysis badge, accept/override actions" loading="lazy" /></div><span class="shot-cap">Dashboard</span></div>
+        <!-- FLAG (2026-08-20): alt text says 13-month plan, the web goals shot above
+             says 14-month plan for the same feature — see 13-vs-14-month contradiction
+             flagged near the "13-month plan, not 12" decision card. -->
         <div class="shot-item"><div class="frame ar-portrait"><img src="img/hifi-mobile-goals.png?v=2" alt="Mobile goals, progress ring, 13-month plan, next actions list" loading="lazy" /></div><span class="shot-cap">My Goals</span></div>
         <div class="shot-item"><div class="frame ar-portrait"><img src="img/hifi-mobile-coach.png?v=2" alt="Mobile coach, conversational AI with NAVI Analysis card and confidence score" loading="lazy" /></div><span class="shot-cap">Coach</span></div>
       </div>
@@ -402,6 +413,8 @@
         </div>
         <div class="reflection-item">
           <div class="reflection-num">2</div>
+          <!-- FLAG (2026-08-20): same 13-vs-14-month contradiction as the decision card
+               above, see that comment. -->
           <p>The 13-month plan detail is a strong behavioral UX insight, but it's currently buried in the My Goals screen. It deserves a dedicated moment during onboarding: a short explanation of why the odd timeline is intentional. Users who understood it trusted NAVI more; users who didn't asked if it was a bug.</p>
         </div>
         <div class="reflection-item">
