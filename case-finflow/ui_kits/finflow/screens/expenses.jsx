@@ -146,7 +146,7 @@ const ExpenseDetail = () => {
         sub={`${e.id} · Submitted by ${e.who} on ${fmtDate(e.date)}`}
         actions={<>
           <button className="ff-btn"><Icon name="chat-text" size={14}/> Comment</button>
-          <button className="ff-btn"><Icon name="x" size={14}/> Reject</button>
+          <button className="ff-btn" onClick={()=>ffGo('state-rejected')}><Icon name="x" size={14}/> Reject</button>
           <button className="ff-btn ff-btn--primary" onClick={()=>ffGo('state-success')}><Icon name="check" size={14}/> Approve</button>
         </>}
       />
@@ -260,24 +260,31 @@ const NewExpense = () => {
         <Card>
           <div className="ff-stack" style={{'--ff-stack-gap':'18px'}}>
             <div className="ff-grid ff-grid--2">
-              <div className="ff-field"><label className="ff-label">Merchant</label><input className="ff-input" defaultValue="United Airlines"/></div>
-              <div className="ff-field"><label className="ff-label">Date</label><input className="ff-input" type="text" defaultValue="2026-05-22"/></div>
+              <div className="ff-field"><label className="ff-label">Merchant</label><input className="ff-input" placeholder="e.g. United Airlines"/></div>
+              <div className="ff-field"><label className="ff-label">Date</label><input className="ff-input" type="text" placeholder="YYYY-MM-DD"/></div>
             </div>
             <div className="ff-grid ff-grid--2">
-              <div className="ff-field"><label className="ff-label">Amount (USD)</label><input className="ff-input ff-tnum" defaultValue="842.50"/></div>
+              <div className="ff-field"><label className="ff-label">Amount (USD)</label><input className="ff-input ff-tnum" placeholder="0.00"/></div>
               <div className="ff-field"><label className="ff-label">Category</label>
-                <select className="ff-select" defaultValue="tr">
+                <select className="ff-select" defaultValue="">
+                  <option value="" disabled>Select a category</option>
                   {d.categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                 </select>
               </div>
             </div>
-            <div className="ff-field"><label className="ff-label">Memo</label><textarea className="ff-textarea" defaultValue="SF → Austin (sales kickoff)"/></div>
+            <div className="ff-field"><label className="ff-label">Memo</label><textarea className="ff-textarea" placeholder="What was this for?"/></div>
             <div className="ff-grid ff-grid--2">
               <div className="ff-field"><label className="ff-label">Project / cost center</label>
-                <select className="ff-select"><option>Sales — FY26</option><option>Marketing</option><option>R&amp;D</option></select>
+                <select className="ff-select" defaultValue="">
+                  <option value="" disabled>Select a project</option>
+                  <option>Sales — FY26</option><option>Marketing</option><option>R&amp;D</option>
+                </select>
               </div>
               <div className="ff-field"><label className="ff-label">Payment</label>
-                <select className="ff-select"><option>FinFlow Card · •••• 4112</option><option>Personal — request reimbursement</option></select>
+                <select className="ff-select" defaultValue="">
+                  <option value="" disabled>Select a payment method</option>
+                  <option>FinFlow Card · •••• 4112</option><option>Personal — request reimbursement</option>
+                </select>
               </div>
             </div>
           </div>
@@ -378,8 +385,8 @@ const FlaggedExpense = () => {
         sub="EXP-2839 · Jordan Lee · May 21, 2026"
         actions={<>
           <button className="ff-btn"><Icon name="chat-text" size={14}/> Ask for info</button>
-          <button className="ff-btn ff-btn--danger"><Icon name="x" size={14}/> Reject</button>
-          <button className="ff-btn ff-btn--primary"><Icon name="check" size={14}/> Approve override</button>
+          <button className="ff-btn ff-btn--danger" onClick={()=>ffGo('state-rejected')}><Icon name="x" size={14}/> Reject</button>
+          <button className="ff-btn ff-btn--primary" onClick={()=>ffGo('state-success')}><Icon name="check" size={14}/> Approve override</button>
         </>}
       />
       <div className="ff-alert ff-alert--error" style={{marginBottom:16}}>

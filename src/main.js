@@ -166,6 +166,8 @@
       roles: ["User Research", "Usability Testing", "Data Visualization", "Design System"],
       outcome: { value: "73% → 89%", label: "task completion · real internal result" },
       caseUrl: "case-finflow/index.html",
+      url: "case-finflow/prototype.html",
+      urlLabel: "Live prototype",
       shots: [
         { src: "case-finflow/img/ui-dashboard.png", cap: "Finance admin dashboard, spend, approvals and cash at a glance" },
         { src: "case-finflow/img/ui-manager.png",   cap: "Manager view, team spend and the approvals queue" },
@@ -184,6 +186,8 @@
       roles: ["User Research", "AI Product Design", "Interaction Design", "Design System"],
       outcome: { value: "4.2 min → 38 sec", label: "time to act on recommendation" },
       caseUrl: "case-navi/index.html",
+      url: "case-navi/prototype.html",
+      urlLabel: "Live prototype",
       shots: [
         { src: "case-navi/img/ui-web-dashboard.png",   cap: "NAVI dashboard, paycheck card, AI insights banner, spending breakdown" },
         { src: "case-navi/img/ui-web-onboarding.png",  cap: "Onboarding, a distinct workspace composition per step" },
@@ -236,6 +240,8 @@
       roles: ["Product Design", "Information Architecture", "Design System", "WCAG 2.1"],
       outcome: { value: "5 core flows", label: "redesigned & unified" },
       caseUrl: "case-medbridge/index.html",
+      url: "case-medbridge/ui_kits/portal/index.html",
+      urlLabel: "Live prototype",
       shots: [
         { src: "case-medbridge/img/ui-dashboard.png", cap: "Patient dashboard, appointments, prescriptions and health summary" },
         { src: "case-medbridge/img/ui-doctors.png",   cap: "Find a doctor, search and book providers" },
@@ -254,6 +260,8 @@
       roles: ["Product Design", "Frontend Engineering", "Design System", "Industrial UX"],
       outcome: { value: "11 screens", label: "shipped as working code" },
       caseUrl: "case-precisioncab/index.html",
+      url: "https://precision-cab.vercel.app",
+      urlLabel: "precision-cab.vercel.app",
       shots: [
         { src: "case-precisioncab/img/hero-cab-home.png",    cap: "Cab home, live telemetry, boom status, and field map" },
         { src: "case-precisioncab/img/hero-field-select.png", cap: "Field select, satellite and NDVI map modes" },
